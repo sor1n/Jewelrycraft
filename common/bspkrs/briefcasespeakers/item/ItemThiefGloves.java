@@ -1,12 +1,14 @@
 package bspkrs.briefcasespeakers.item;
 
+import java.util.Iterator;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Tuple;
+import net.minecraft.village.MerchantRecipe;
 
 public class ItemThiefGloves extends Item
 {
@@ -21,8 +23,8 @@ public class ItemThiefGloves extends Item
         if (par3EntityLivingBase instanceof EntityVillager)
         {
             EntityVillager entityliving = (EntityVillager)par3EntityLivingBase;
-            Tuple tuple = (Tuple)entityliving.villagerStockList.get(Integer.valueOf(1));
-            entityliving.dropItem(((Integer)tuple.getFirst()).intValue(), 1);
+            MerchantRecipe recipe = null;            
+            entityliving.dropItem(recipe.getItemToSell().itemID, recipe.getItemToSell().stackSize);
             return true;
         }
         else
