@@ -57,44 +57,44 @@ public class BriefcaseSpeakersMod implements IConnectionHandler
     }
     
     @Override
+    // 2) Called when a player logs into the server SERVER SIDE
     public void playerLoggedIn(Player player, NetHandler netHandler, INetworkManager manager)
-    {
-        // TODO Auto-generated method stub
+    {   
         
     }
     
     @Override
+    // If you don't want the connection to continue, return a non-empty string here SERVER SIDE
     public String connectionReceived(NetLoginHandler netHandler, INetworkManager manager)
     {
-        // TODO Auto-generated method stub
         return null;
     }
     
     @Override
+    // 1) Fired when a remote connection is opened CLIENT SIDE
     public void connectionOpened(NetHandler netClientHandler, String server, int port, INetworkManager manager)
-    {
-        // TODO Auto-generated method stub
+    {   
         
     }
     
     @Override
+    // 1) Fired when a local connection is opened CLIENT SIDE
     public void connectionOpened(NetHandler netClientHandler, MinecraftServer server, INetworkManager manager)
-    {
-        // TODO Auto-generated method stub
+    {   
         
     }
     
     @Override
+    // Fired when a connection closes ALL SIDES
     public void connectionClosed(INetworkManager manager)
-    {
-        // TODO Auto-generated method stub
+    {   
         
     }
     
     @Override
+    // 3) Fired when the client established the connection to the server CLIENT SIDE
     public void clientLoggedIn(NetHandler clientHandler, INetworkManager manager, Packet1Login login)
-    {
-        // TODO Auto-generated method stub
+    {   
         
     }
 }
