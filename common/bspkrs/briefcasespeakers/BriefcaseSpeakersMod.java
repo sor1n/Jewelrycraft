@@ -23,8 +23,8 @@ import cpw.mods.fml.common.network.Player;
 
 @Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION)
 @NetworkMod(clientSideRequired = false, serverSideRequired = false,
-        clientPacketHandlerSpec = @SidedPacketHandler(channels = { Reference.MODID }, packetHandler = BriefcaseSpeakersClient.class),
-        serverPacketHandlerSpec = @SidedPacketHandler(channels = { Reference.MODID }, packetHandler = BriefcaseSpeakersServer.class),
+        clientPacketHandlerSpec = @SidedPacketHandler(channels = { Reference.PACKET_CHANNEL }, packetHandler = BriefcaseSpeakersClient.class),
+        serverPacketHandlerSpec = @SidedPacketHandler(channels = { Reference.PACKET_CHANNEL }, packetHandler = BriefcaseSpeakersServer.class),
         connectionHandler = BriefcaseSpeakersMod.class)
 public class BriefcaseSpeakersMod implements IConnectionHandler
 {
@@ -34,7 +34,7 @@ public class BriefcaseSpeakersMod implements IConnectionHandler
     @Metadata(Reference.MODID)
     public Metadata                    metadata;
     
-    @SidedProxy(clientSide = "bspkrs.treecapitator.fml.ClientProxy", serverSide = "bspkrs.treecapitator.fml.CommonProxy")
+    @SidedProxy(clientSide = "bspkrs.briefcasespeakers.client.ClientProxy", serverSide = "bspkrs.briefcasespeakers.CommonProxy")
     public CommonProxy                 proxy;
     
     @EventHandler

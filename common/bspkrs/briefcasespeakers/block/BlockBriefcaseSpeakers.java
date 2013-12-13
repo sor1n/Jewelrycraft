@@ -18,4 +18,10 @@ public class BlockBriefcaseSpeakers extends BlockContainer
     {
         return new TileEntityBriefcaseSpeakers();
     }
+    
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
 }
