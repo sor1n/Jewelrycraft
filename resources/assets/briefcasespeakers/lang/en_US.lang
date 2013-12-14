@@ -1,5 +1,5 @@
-item.briefcasespeakers.briefcaseSpeakers=Briefcase Speakers
-item.briefcasespeakers.remote=Audio Remote
-item.briefcasespeakers.speaker=Speaker
-item.briefcasespeakers.thiefGloves=Thiefing Gloves
-item.briefcasespeakers.ingotShadow=Shadow Ingot
+block.briefcasespeakers.briefcaseSpeakers.name=Briefcase Speakers
+item.briefcasespeakers.remote.name=Audio Remote
+item.briefcasespeakers.speaker.name=Speaker
+item.briefcasespeakers.thiefGloves.name=Thiefing Gloves
+item.briefcasespeakers.ingotShadow.name=Shadow Ingot
