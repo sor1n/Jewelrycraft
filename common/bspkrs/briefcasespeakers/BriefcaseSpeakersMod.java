@@ -45,7 +45,6 @@ public class BriefcaseSpeakersMod implements IConnectionHandler
     {
         ConfigHandler.preInit(e);
         ItemList.preInit(e);
-        
     }
     
     @EventHandler
