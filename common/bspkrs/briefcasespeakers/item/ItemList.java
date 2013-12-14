@@ -23,6 +23,7 @@ public class ItemList
             speaker = new ItemBase(ConfigHandler.idSpeaker).setUnlocalizedName("briefcasespeakers.speakers").setCreativeTab(CreativeTabs.tabMisc);
             remote = new ItemRemote(ConfigHandler.idRemote).setUnlocalizedName("briefcasespeakers.remote").setCreativeTab(CreativeTabs.tabMisc);
             shadowIngot = new ItemBase(ConfigHandler.idShadowIngot).setUnlocalizedName("briefcasespeakers.ingotShadow").setCreativeTab(CreativeTabs.tabMaterials);
+
         }
     }
 }

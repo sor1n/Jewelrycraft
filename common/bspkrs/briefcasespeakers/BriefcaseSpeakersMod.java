@@ -5,10 +5,12 @@ import net.minecraft.network.NetLoginHandler;
 import net.minecraft.network.packet.NetHandler;
 import net.minecraft.network.packet.Packet1Login;
 import net.minecraft.server.MinecraftServer;
+import bspkrs.briefcasespeakers.block.BlockList;
 import bspkrs.briefcasespeakers.client.BriefcaseSpeakersClient;
 import bspkrs.briefcasespeakers.config.ConfigHandler;
 import bspkrs.briefcasespeakers.item.ItemList;
 import bspkrs.briefcasespeakers.lib.Reference;
+import bspkrs.briefcasespeakers.recipes.CraftingRecipes;
 import bspkrs.briefcasespeakers.server.BriefcaseSpeakersServer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -45,6 +47,8 @@ public class BriefcaseSpeakersMod implements IConnectionHandler
     {
         ConfigHandler.preInit(e);
         ItemList.preInit(e);
+        CraftingRecipes.preInit(e);
+        BlockList.preInit(e);
     }
     
     @EventHandler
