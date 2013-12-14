@@ -19,11 +19,11 @@ public class ItemList
     {
         if (!isInitialized)
         {
-            thiefGloves = new ItemThiefGloves(ConfigHandler.idThiefGloves).setUnlocalizedName("briefcasespeakers.thiefGloves");
-            briefcaseSpeakers = new ItemBriefcaseSpeakers(ConfigHandler.idBriefcaseSpeakers).setUnlocalizedName("briefcasespeakers.briefcaseSpeakers");
-            speaker = new ItemSpeaker(ConfigHandler.idSpeaker).setUnlocalizedName("briefcasespeakers.speakers");
-            remote = new ItemRemote(ConfigHandler.idRemote).setUnlocalizedName("briefcasespeakers.remote");
-            shadowIngot = new Item(ConfigHandler.idShadowIngot).setUnlocalizedName("briefcasespeakers.ingotShadow").setCreativeTab(CreativeTabs.tabMaterials).setTextureName("briefcasespeakers:shadowIngot");
+            thiefGloves = new ItemThiefGloves(ConfigHandler.idThiefGloves).setUnlocalizedName("briefcasespeakers.thiefGloves").setCreativeTab(CreativeTabs.tabCombat);
+            speaker = new ItemBase(ConfigHandler.idSpeaker).setUnlocalizedName("briefcasespeakers.speakers").setCreativeTab(CreativeTabs.tabMisc);
+            remote = new ItemRemote(ConfigHandler.idRemote).setUnlocalizedName("briefcasespeakers.remote").setCreativeTab(CreativeTabs.tabMisc);
+            shadowIngot = new ItemBase(ConfigHandler.idShadowIngot).setUnlocalizedName("briefcasespeakers.ingotShadow").setCreativeTab(CreativeTabs.tabMaterials);
+
         }
     }
 }

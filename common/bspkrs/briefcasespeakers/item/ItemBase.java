@@ -2,7 +2,7 @@ package bspkrs.briefcasespeakers.item;
 
 import net.minecraft.item.Item;
 
-public abstract class ItemBase extends Item
+public class ItemBase extends Item
 {
     public ItemBase(int par1)
     {
