@@ -1,8 +1,5 @@
 package bspkrs.briefcasespeakers.item;
 
-import java.lang.reflect.Field;
-import java.util.Iterator;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityVillager;
