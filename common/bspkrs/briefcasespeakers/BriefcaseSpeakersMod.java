@@ -1,14 +1,13 @@
 package bspkrs.briefcasespeakers;
 
-import net.minecraft.item.Item;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.NetLoginHandler;
 import net.minecraft.network.packet.NetHandler;
 import net.minecraft.network.packet.Packet1Login;
 import net.minecraft.server.MinecraftServer;
 import bspkrs.briefcasespeakers.client.BriefcaseSpeakersClient;
-import bspkrs.briefcasespeakers.item.ItemBriefcaseSpeakers;
-import bspkrs.briefcasespeakers.item.ItemThiefGloves;
+import bspkrs.briefcasespeakers.config.ConfigHandler;
+import bspkrs.briefcasespeakers.item.ItemList;
 import bspkrs.briefcasespeakers.lib.Reference;
 import bspkrs.briefcasespeakers.server.BriefcaseSpeakersServer;
 import cpw.mods.fml.common.Mod;
@@ -24,7 +23,6 @@ import cpw.mods.fml.common.network.IConnectionHandler;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.Player;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION)
 @NetworkMod(clientSideRequired = false, serverSideRequired = false,
@@ -42,20 +40,17 @@ public class BriefcaseSpeakersMod implements IConnectionHandler
     @SidedProxy(clientSide = "bspkrs.briefcasespeakers.client.ClientProxy", serverSide = "bspkrs.briefcasespeakers.CommonProxy")
     public static CommonProxy          proxy;
     
-    public static Item bspkrs = new ItemBriefcaseSpeakers(1000).setUnlocalizedName("BriefcaseSpeakers");
-    public static Item thief = new ItemThiefGloves(1001).setUnlocalizedName("ThiefGloves");    
-    
     @EventHandler
     public void preInit(FMLPreInitializationEvent e)
-    {   
-        
+    {
+        ConfigHandler.preInit(e);
+        ItemList.preInit(e);
     }
     
     @EventHandler
     public void init(FMLInitializationEvent e)
     {   
-        LanguageRegistry.addName(bspkrs, "Briefcase Speakers");
-        LanguageRegistry.addName(thief, "Thiefing Gloves");
+        
     }
     
     @EventHandler
