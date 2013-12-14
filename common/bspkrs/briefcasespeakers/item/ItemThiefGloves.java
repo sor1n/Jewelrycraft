@@ -3,7 +3,6 @@ package bspkrs.briefcasespeakers.item;
 import java.util.Iterator;
 import java.util.Random;
 
-import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -31,6 +30,8 @@ public class ItemThiefGloves extends ItemBase
         {
             EntityVillager villager = (EntityVillager) par3EntityLivingBase;
             int wealth = (Integer) ReflectionHelper.getPrivateValue(EntityVillager.class, villager, "wealth", "field_70956_bz");
+            boolean needsInitilization = (Boolean) ReflectionHelper.getPrivateValue(EntityVillager.class, villager, "needsInitilization", "field_70959_by");
+            int timeUntilReset = (Integer) ReflectionHelper.getPrivateValue(EntityVillager.class, villager, "timeUntilReset", "field_70961_j");
             MerchantRecipeList buyingList = (MerchantRecipeList) ReflectionHelper.getPrivateValue(EntityVillager.class, villager, "buyingList", "field_70963_i");
             if(buyingList!=null)
             {
@@ -40,11 +41,16 @@ public class ItemThiefGloves extends ItemBase
                     MerchantRecipe recipe = (MerchantRecipe)iterator.next();
                     while(!recipe.func_82784_g())
                     {
-                        villager.dropItem(recipe.getItemToSell().itemID, recipe.getItemToSell().stackSize);
-                        recipe.incrementToolUses();                        
-                    }                    
+                        par2EntityPlayer.inventory.addItemStackToInventory(recipe.getItemToSell());
+                        //villager.entityDropItem(recipe.getItemToSell(), 0);
+                        //villager.dropItem(recipe.getItemToSell().itemID, recipe.getItemToSell().stackSize);
+                        recipe.incrementToolUses();                         
+                    }
+                    //villager.useRecipe(recipe);
+                    ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 10, "timeUntilReset", "field_70961_j");
+                    ReflectionHelper.setPrivateValue(EntityVillager.class, villager, true, "needsInitilization", "field_70959_by");
                 }    
-            }
+            }         
             villager.dropItem(Item.emerald.itemID, wealth);
             ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 0, "wealth", "field_70956_bz");
             return true;
