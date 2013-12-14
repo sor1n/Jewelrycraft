@@ -7,6 +7,7 @@ import net.minecraft.network.NetLoginHandler;
 import net.minecraft.network.packet.NetHandler;
 import net.minecraft.network.packet.Packet1Login;
 import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.oredict.OreDictionary;
 import bspkrs.briefcasespeakers.block.BlockList;
 import bspkrs.briefcasespeakers.client.BriefcaseSpeakersClient;
 import bspkrs.briefcasespeakers.config.ConfigHandler;
@@ -14,6 +15,7 @@ import bspkrs.briefcasespeakers.item.ItemList;
 import bspkrs.briefcasespeakers.lib.Reference;
 import bspkrs.briefcasespeakers.recipes.CraftingRecipes;
 import bspkrs.briefcasespeakers.server.BriefcaseSpeakersServer;
+import bspkrs.briefcasespeakers.worldGen.Generation;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -27,6 +29,7 @@ import cpw.mods.fml.common.network.IConnectionHandler;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION)
 @NetworkMod(clientSideRequired = false, serverSideRequired = false,
@@ -51,14 +54,15 @@ public class BriefcaseSpeakersMod implements IConnectionHandler
     {
         ConfigHandler.preInit(e);
         ItemList.preInit(e);
-        CraftingRecipes.preInit(e);
         BlockList.preInit(e);
+        CraftingRecipes.preInit(e);
     }
     
     @EventHandler
     public void init(FMLInitializationEvent e)
     {   
-        
+        OreDictionary.registerOre("ingotShadow", new ItemStack(ItemList.shadowIngot));
+        GameRegistry.registerWorldGenerator(new Generation());
     }
     
     @EventHandler

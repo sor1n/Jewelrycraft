@@ -27,18 +27,24 @@ public class BlockSmelter extends BlockContainer
         return false;
     }
     
+    @Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
     {
         TileEntitySmelter te = (TileEntitySmelter)world.getBlockTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if(te != null)
         {
-            if(!te.hasMetal)
+            if(!te.hasMetal && item != null && item.getDisplayName().contains("Ingot"))
             {
                 te.metalID = item.getItem().itemID;
                 te.hasMetal = true;
+                --item.stackSize;
             }
-            if(te.hasMetal && entityPlayer.isSneaking()){ entityPlayer.dropItem(te.metalID, 1); te.hasMetal = false;}            
+            if(te.hasMetal && entityPlayer.isSneaking())
+            { 
+                entityPlayer.dropItem(te.metalID, 1); 
+                te.hasMetal = false;
+            }            
             world.setBlockTileEntity(i, j, k, te);
         }
         return true;
