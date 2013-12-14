@@ -32,17 +32,22 @@ public class BlockSmelter extends BlockContainer
     {
         TileEntitySmelter te = (TileEntitySmelter)world.getBlockTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
-        if(te != null)
+        if(te != null && !world.isRemote)
         {
-            if(!te.hasMetal && item != null && item.getDisplayName().contains("Ingot"))
+            if(!te.hasMetal && !te.hasMoltenMetal && item != null && item.getDisplayName().contains("Ingot"))
             {
                 te.metalID = item.getItem().itemID;
                 te.hasMetal = true;
+                te.melting = 200000;
                 --item.stackSize;
             }
+            else if(te.hasMetal && !te.hasMoltenMetal && item != null && item.getDisplayName().contains("Ingot")) entityPlayer.addChatMessage("The Smelter already contains a " + new ItemStack(te.metalID, 1, 0).getDisplayName());
+            else if(te.hasMoltenMetal && item != null && item.getDisplayName().contains("Ingot")) entityPlayer.addChatMessage("The Smelter contains molten " + new ItemStack(te.moltenMetalID, 1, 0).getDisplayName().toLowerCase().replace("ingot", ""));
+            else if(item != null && !item.getDisplayName().contains("Ingot")) entityPlayer.addChatMessage("The item needs to be an ingot!");
+            
             if(te.hasMetal && entityPlayer.isSneaking())
             { 
-                entityPlayer.dropItem(te.metalID, 1); 
+                entityPlayer.dropPlayerItem(new ItemStack(te.metalID, 1, 0)); 
                 te.hasMetal = false;
             }            
             world.setBlockTileEntity(i, j, k, te);
