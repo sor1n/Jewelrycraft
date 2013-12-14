@@ -15,6 +15,9 @@ public class ConfigHandler
     public static int            idBriefcaseSpeakers = 1749;
     
     public static int            idShadowOre         = 200;
+    public static int            idSmelter           = 201;
+    public static int            idMolder            = 202;
+    public static int            idJewelCraftingTable= 203;
     
     private static boolean       isInitialized       = false;
     
@@ -35,6 +38,9 @@ public class ConfigHandler
             idRemote = config.getItem("id.Remote", idRemote).getInt();
             idShadowIngot = config.getItem("id.ShadowIngot", idShadowIngot).getInt();
             idShadowOre = config.getBlock("id.ShadowOre", idShadowOre).getInt();
+            idSmelter = config.getBlock("id.Smelter", idSmelter).getInt();
+            idMolder = config.getBlock("id.Molder", idMolder).getInt();
+            idJewelCraftingTable = config.getBlock("id.JewelCraftingTable", idJewelCraftingTable).getInt();
             
             config.save();
             

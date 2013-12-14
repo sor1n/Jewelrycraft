@@ -37,11 +37,15 @@ public class ItemThiefGloves extends ItemBase
                 while(iterator.hasNext())
                 {
                     MerchantRecipe recipe = (MerchantRecipe)iterator.next();
-                    ItemStack s = new ItemStack(recipe.getItemToSell().itemID, recipe.getItemToSell().stackSize * 7, recipe.getItemToSell().getItemDamage());
+                    int quantity;
+                    String multiple; 
+                    if(recipe.getItemToSell().isStackable()){ quantity = recipe.getItemToSell().stackSize * 7; multiple = "s.";}
+                    else {quantity = 1; multiple = ".";}
+                    ItemStack s = new ItemStack(recipe.getItemToSell().itemID, quantity, recipe.getItemToSell().getItemDamage());
                     s.setTagCompound(recipe.getItemToSell().getTagCompound());
                     if(par2EntityPlayer.inventory.addItemStackToInventory(s));
                     else villager.entityDropItem(s, 0);
-                    par2EntityPlayer.addChatMessage("Villager #" + villager.getProfession() + ": Hmmm... I seem to have lost my " + s.getDisplayName() + "s.");
+                    par2EntityPlayer.addChatMessage("Villager #" + villager.getProfession() + ": Hmmm... I seem to have lost my " + s.getDisplayName() + multiple);
                 }    
                 buyingList.clear();
                 ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 300, "timeUntilReset", "field_70961_j");

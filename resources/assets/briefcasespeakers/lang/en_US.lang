@@ -1,6 +1,10 @@
 item.briefcasespeakers.briefcaseSpeakers=Briefcase Speakers
 item.briefcasespeakers.remote=Audio Remote
-item.briefcasespeakers.speaker=Speaker
+item.briefcasespeakers.speakers=Speakers
 item.briefcasespeakers.thiefGloves=Thiefing Gloves
 item.briefcasespeakers.ingotShadow=Shadow Ingot
-block.briefcasespeakers.oreShadow=Shadow Ore
+tile.briefcasespeakers.oreShadow=Shadow Ore
+tile.briefcasespeakers.smelter=Smelter
+tile.briefcasespeakers.molder=Molder
+tile.briefcasespeakers.jewelCraftingTable=Jewelers Crafting Table
+itemGroup.shadowspkrs=Jewelcraft/Randomcraft

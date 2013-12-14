@@ -1,5 +1,7 @@
 package bspkrs.briefcasespeakers;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.NetLoginHandler;
 import net.minecraft.network.packet.NetHandler;
@@ -41,6 +43,8 @@ public class BriefcaseSpeakersMod implements IConnectionHandler
     
     @SidedProxy(clientSide = "bspkrs.briefcasespeakers.client.ClientProxy", serverSide = "bspkrs.briefcasespeakers.CommonProxy")
     public static CommonProxy          proxy;
+    
+    public static CreativeTabs shadowspkrs = new CreativeTabs("shadowspkrs") {public ItemStack getIconItemStack() {return new ItemStack(ItemList.shadowIngot, 1, 0);}};
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent e)
