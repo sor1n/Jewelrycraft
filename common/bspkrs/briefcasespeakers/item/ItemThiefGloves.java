@@ -41,13 +41,13 @@ public class ItemThiefGloves extends ItemBase
                     MerchantRecipe recipe = (MerchantRecipe)iterator.next();
                     while(!recipe.func_82784_g())
                     {
-                        par2EntityPlayer.inventory.addItemStackToInventory(recipe.getItemToSell());
+                        //par2EntityPlayer.inventory.addItemStackToInventory(recipe.getItemToSell());
                         //villager.entityDropItem(recipe.getItemToSell(), 0);
-                        //villager.dropItem(recipe.getItemToSell().itemID, recipe.getItemToSell().stackSize);
+                        villager.dropItem(recipe.getItemToSell().itemID, recipe.getItemToSell().stackSize);
                         recipe.incrementToolUses();                         
                     }
                     //villager.useRecipe(recipe);
-                    ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 10, "timeUntilReset", "field_70961_j");
+                    ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 300, "timeUntilReset", "field_70961_j");
                     ReflectionHelper.setPrivateValue(EntityVillager.class, villager, true, "needsInitilization", "field_70959_by");
                 }    
             }         
