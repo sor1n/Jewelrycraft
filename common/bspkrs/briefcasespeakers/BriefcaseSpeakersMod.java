@@ -6,6 +6,8 @@ import net.minecraft.network.packet.NetHandler;
 import net.minecraft.network.packet.Packet1Login;
 import net.minecraft.server.MinecraftServer;
 import bspkrs.briefcasespeakers.client.BriefcaseSpeakersClient;
+import bspkrs.briefcasespeakers.config.ConfigHandler;
+import bspkrs.briefcasespeakers.item.ItemList;
 import bspkrs.briefcasespeakers.lib.Reference;
 import bspkrs.briefcasespeakers.server.BriefcaseSpeakersServer;
 import cpw.mods.fml.common.Mod;
@@ -40,7 +42,9 @@ public class BriefcaseSpeakersMod implements IConnectionHandler
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent e)
-    {   
+    {
+        ConfigHandler.preInit(e);
+        ItemList.preInit(e);
         
     }
     

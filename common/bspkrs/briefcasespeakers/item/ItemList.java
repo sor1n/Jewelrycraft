@@ -13,13 +13,14 @@ public class ItemList
     
     private static boolean isInitialized = false;
     
-    public void preInit(FMLPreInitializationEvent e)
+    public static void preInit(FMLPreInitializationEvent e)
     {
         if (!isInitialized)
         {
             thiefGloves = new ItemThiefGloves(ConfigHandler.idThiefGloves).setUnlocalizedName("briefcasespeakers.thiefGloves");
             briefcaseSpeakers = new ItemBriefcaseSpeakers(ConfigHandler.idBriefcaseSpeakers).setUnlocalizedName("briefcasespeakers.briefcaseSpeakers");
             speaker = new ItemSpeaker(ConfigHandler.idSpeaker).setUnlocalizedName("briefcasespeakers.speakers");
+            remote = new ItemRemote(ConfigHandler.idRemote).setUnlocalizedName("briefcasespeakers.remote");
         }
     }
 }
