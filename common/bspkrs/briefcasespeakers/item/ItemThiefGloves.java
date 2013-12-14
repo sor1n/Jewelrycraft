@@ -30,26 +30,24 @@ public class ItemThiefGloves extends ItemBase
         {
             EntityVillager villager = (EntityVillager) par3EntityLivingBase;
             int wealth = (Integer) ReflectionHelper.getPrivateValue(EntityVillager.class, villager, "wealth", "field_70956_bz");
-            boolean needsInitilization = (Boolean) ReflectionHelper.getPrivateValue(EntityVillager.class, villager, "needsInitilization", "field_70959_by");
-            int timeUntilReset = (Integer) ReflectionHelper.getPrivateValue(EntityVillager.class, villager, "timeUntilReset", "field_70961_j");
             MerchantRecipeList buyingList = (MerchantRecipeList) ReflectionHelper.getPrivateValue(EntityVillager.class, villager, "buyingList", "field_70963_i");
             if(buyingList!=null)
             {
-                Iterator iterator = buyingList.iterator();
+                Iterator<?> iterator = buyingList.iterator();
                 while(iterator.hasNext())
                 {
                     MerchantRecipe recipe = (MerchantRecipe)iterator.next();
                     ItemStack s = new ItemStack(recipe.getItemToSell().itemID, recipe.getItemToSell().stackSize * 7, recipe.getItemToSell().getItemDamage());
                     s.setTagCompound(recipe.getItemToSell().getTagCompound());
                     if(par2EntityPlayer.inventory.addItemStackToInventory(s));
-                    villager.entityDropItem(s, 0);
-                    String professions[] = {"Farmer", "Librarian", "Priest", "Blacksmith", "Butcher"};
-                    par2EntityPlayer.addChatMessage(professions[villager.getProfession()] + ": Hmmm... I seem to have lost my " + s.getDisplayName() + "s.");
+                    else villager.entityDropItem(s, 0);
+                    par2EntityPlayer.addChatMessage("Villager #" + villager.getProfession() + ": Hmmm... I seem to have lost my " + s.getDisplayName() + "s.");
                 }    
                 buyingList.clear();
                 ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 300, "timeUntilReset", "field_70961_j");
                 ReflectionHelper.setPrivateValue(EntityVillager.class, villager, true, "needsInitilization", "field_70959_by");
-            }         
+            } 
+
             villager.dropItem(Item.emerald.itemID, wealth);
             ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 0, "wealth", "field_70956_bz");
             return true;
