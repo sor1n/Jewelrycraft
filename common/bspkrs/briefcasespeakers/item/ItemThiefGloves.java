@@ -41,12 +41,12 @@ public class ItemThiefGloves extends ItemBase
                     while(!recipe.func_82784_g())
                     {
                         villager.dropItem(recipe.getItemToSell().itemID, recipe.getItemToSell().stackSize);
-                        villager.dropItem(Item.emerald.itemID, wealth);
-                        ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 0, wealth);
                         recipe.incrementToolUses();                        
                     }                    
                 }    
             }
+            villager.dropItem(Item.emerald.itemID, wealth);
+            ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 0, "wealth", "field_70956_bz");
             return true;
         }
         else
