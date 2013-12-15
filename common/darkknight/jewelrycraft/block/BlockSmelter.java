@@ -115,6 +115,7 @@ public class BlockSmelter extends BlockContainer
             {
                 me.moltenMetal = te.moltenMetal;
                 me.hasMoltenMetal = true;
+                me.cooling = 2000;
                 te.moltenMetal = new ItemStack(0, 0, 0);
                 te.hasMoltenMetal = false;
             }

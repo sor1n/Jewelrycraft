@@ -34,30 +34,65 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
         GL11.glPushMatrix();
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);        
         modelMolder.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);     
-        if(me != null && me.hasMold)
+        if(me != null)
         {
-            ResourceLocation lava = new ResourceLocation("jewelrycraft", "textures/items/ingotMold.png");
-            Minecraft.getMinecraft().renderEngine.bindTexture(lava);
-            me.mold.getIconIndex().getInterpolatedU(0);
-            double minu = me.mold.getIconIndex().getInterpolatedU(0);
-            double minv = me.mold.getIconIndex().getInterpolatedV(0);
-            double maxu = me.mold.getIconIndex().getInterpolatedU(256);
-            double maxv = me.mold.getIconIndex().getInterpolatedV(256);
-            GL11.glPushMatrix();
-            GL11.glScalef(1f/16f, 1f/16f, 1f/16f);
-            GL11.glDisable(GL11.GL_LIGHTING);
-       
-            for(float f = 0; f <= 1; f+=0.05)
+            if(me.hasJewelBase)
             {
-                tessellator.startDrawingQuads(); 
-                tessellator.addVertexWithUV(5, 21+f, 5, minu, minv);
-                tessellator.addVertexWithUV(-5, 21+f, 5, maxu, minv);
-                tessellator.addVertexWithUV(-5, 21+f, -5, maxu, maxv);
-                tessellator.addVertexWithUV(5, 21+f, -5, minu, maxv);
-                tessellator.draw();
+                String texture = "textures/items/" + me.jewelBase.getDisplayName() + ".png";
+                ResourceLocation lava = new ResourceLocation(null, "textures/items/iron_ingot.png");
+                Minecraft.getMinecraft().renderEngine.bindTexture(lava);
+                me.jewelBase.getIconIndex().getInterpolatedU(0);
+                int decal = 32;
+                double minu = me.jewelBase.getIconIndex().getInterpolatedU(0);
+                double minv = me.jewelBase.getIconIndex().getInterpolatedV(0);
+                double maxu = me.jewelBase.getIconIndex().getInterpolatedU(16);
+                double maxv = me.jewelBase.getIconIndex().getInterpolatedV(16);
+                GL11.glPushMatrix();
+                GL11.glScalef(1f/16f, 1f/16f, 1f/16f);
+                GL11.glDisable(GL11.GL_LIGHTING);
+
+                for(float f = 0; f <= 1; f+=0.05)
+                {
+                    tessellator.startDrawingQuads(); 
+                    tessellator.addVertexWithUV(5, 21+f, 5, minu, minv);
+                    tessellator.addVertexWithUV(-5, 21+f, 5, maxu, minv);
+                    tessellator.addVertexWithUV(-5, 21+f, -5, maxu, maxv);
+                    tessellator.addVertexWithUV(5, 21+f, -5, minu, maxv);
+                    tessellator.draw();
+                }
+                GL11.glEnable(GL11.GL_LIGHTING);   
+                GL11.glPopMatrix();
             }
-            GL11.glEnable(GL11.GL_LIGHTING);   
-            GL11.glPopMatrix();
+            if(me.hasMold)
+            {
+                String name = me.mold.getDisplayName().substring(0, 1).toLowerCase() + me.mold.getDisplayName().trim().substring(1).replace(" M", "M");
+                String texture = "textures/items/" + name + ".png";
+                ResourceLocation lava = new ResourceLocation("jewelrycraft", texture);
+                Minecraft.getMinecraft().renderEngine.bindTexture(lava);
+                me.mold.getIconIndex().getInterpolatedU(0);
+                int decal = 0;
+                if(me.mold.getItemDamage() == 0) decal = 32;
+                else if(me.mold.getItemDamage() > 0) decal = 64;
+                double minu = me.mold.getIconIndex().getInterpolatedU(16);
+                double minv = me.mold.getIconIndex().getInterpolatedV(-decal);
+                double maxu = me.mold.getIconIndex().getInterpolatedU(256+16);
+                double maxv = me.mold.getIconIndex().getInterpolatedV(256-decal);
+                GL11.glPushMatrix();
+                GL11.glScalef(1f/16f, 1f/16f, 1f/16f);
+                GL11.glDisable(GL11.GL_LIGHTING);
+
+                for(float f = 0; f <= 1; f+=0.05)
+                {
+                    tessellator.startDrawingQuads(); 
+                    tessellator.addVertexWithUV(5, 21+f, 5, minu, minv);
+                    tessellator.addVertexWithUV(-5, 21+f, 5, maxu, minv);
+                    tessellator.addVertexWithUV(-5, 21+f, -5, maxu, maxv);
+                    tessellator.addVertexWithUV(5, 21+f, -5, minu, maxv);
+                    tessellator.draw();
+                }
+                GL11.glEnable(GL11.GL_LIGHTING);   
+                GL11.glPopMatrix();
+            }
         }
         GL11.glPopMatrix();
         GL11.glPopMatrix();

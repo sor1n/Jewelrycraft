@@ -78,6 +78,7 @@ public class TileEntityMolder extends TileEntity
                 this.hasJewelBase = true;
             }
         }
+        System.out.print(hasJewelBase);
     }
     
     public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)

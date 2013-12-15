@@ -48,6 +48,12 @@ public class BlockMolder extends BlockContainer
             te.hasMold = true;
             --item.stackSize;
         }
+        if(te != null && te.hasMold && entityPlayer.isSneaking())
+        {
+            entityPlayer.inventory.addItemStackToInventory(new ItemStack(te.mold.itemID, 1, te.mold.getItemDamage()));
+            te.mold = new ItemStack(0, 0, 0);
+            te.hasMold = false;
+        }   
         return true;
     }
 
@@ -99,19 +105,12 @@ public class BlockMolder extends BlockContainer
 
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player) 
     {
-        TileEntityMolder me = (TileEntityMolder) world.getBlockTileEntity(i, j, k);    
+        TileEntityMolder me = (TileEntityMolder) world.getBlockTileEntity(i, j, k); 
         if(me != null && me.hasJewelBase)
         {
             player.inventory.addItemStackToInventory(new ItemStack(me.jewelBase.itemID, 1, me.jewelBase.getItemDamage()));
             me.jewelBase = new ItemStack(0, 0, 0);
             me.hasJewelBase = false;            
-        }
-        if(me != null && me.hasMold)
-        {
-            player.addChatMessage(me.mold.getDisplayName());
-            player.inventory.addItemStackToInventory(new ItemStack(me.mold.itemID, 1, me.mold.getItemDamage()));
-            me.mold = new ItemStack(0, 0, 0);
-            me.hasMold = false;
         }        
     }
 
