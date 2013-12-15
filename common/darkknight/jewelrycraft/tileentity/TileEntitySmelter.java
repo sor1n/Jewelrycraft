@@ -8,39 +8,45 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntitySmelter extends TileEntity
 {
-    public int moltenMetalID, metalID, melting;
+    public int melting;
     public boolean hasMetal, hasMoltenMetal;
-    public ItemStack metal;
+    public ItemStack metal, moltenMetal;
 
     public TileEntitySmelter()
     {
-        this.moltenMetalID = 0;
-        this.metalID = 0;
         this.melting = 0;
         this.hasMetal = false;
         this.hasMoltenMetal= false;
+        this.metal = new ItemStack(0, 0, 0);
+        this.moltenMetal = new ItemStack(0, 0, 0);
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound par1)
+    public void writeToNBT(NBTTagCompound nbt)
     {
-        super.writeToNBT(par1);
-        par1.setInteger("moltenMetalID", moltenMetalID);
-        par1.setInteger("metalID", metalID);
-        par1.setInteger("melting", melting);
-        par1.setBoolean("hasMetal", hasMetal);
-        par1.setBoolean("hasMoltenMetal", hasMoltenMetal);
+        super.writeToNBT(nbt);
+        nbt.setInteger("melting", melting);
+        nbt.setBoolean("hasMetal", hasMetal);
+        nbt.setBoolean("hasMoltenMetal", hasMoltenMetal);
+        NBTTagCompound tag = new NBTTagCompound();
+        NBTTagCompound tag1 = new NBTTagCompound();
+        this.metal.writeToNBT(tag);
+        nbt.setCompoundTag("metal", tag);
+        this.moltenMetal.writeToNBT(tag1);
+        nbt.setCompoundTag("moltenMetal", tag1);
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound par1)
+    public void readFromNBT(NBTTagCompound nbt)
     {
-        super.readFromNBT(par1);
-        this.moltenMetalID = par1.getInteger("moltenMetalID");
-        this.metalID = par1.getInteger("metalID");
-        this.melting = par1.getInteger("melting");
-        this.hasMetal = par1.getBoolean("hasMetal");
-        this.hasMoltenMetal = par1.getBoolean("hasMoltenMetal");
+        super.readFromNBT(nbt);
+        this.melting = nbt.getInteger("melting");
+        this.hasMetal = nbt.getBoolean("hasMetal");
+        this.hasMoltenMetal = nbt.getBoolean("hasMoltenMetal");
+        this.metal = new ItemStack(0, 0, 0);
+        this.metal.readFromNBT(nbt.getCompoundTag("metal"));
+        this.moltenMetal = new ItemStack(0, 0, 0);
+        this.moltenMetal.readFromNBT(nbt.getCompoundTag("moltenMetal"));
     }
 
     public void updateEntity()
@@ -56,8 +62,8 @@ public class TileEntitySmelter extends TileEntity
             if(melting == 0)
             {
                 this.hasMetal = false;
-                this.moltenMetalID = metalID;
-                this.metalID = 0;
+                this.moltenMetal = metal;
+                this.metal = new ItemStack(0, 0, 0);
                 this.hasMoltenMetal = true;
             }
         }

@@ -3,6 +3,7 @@ package darkknight.jewelrycraft.renders;
 import org.lwjgl.opengl.GL11;
 
 import darkknight.jewelrycraft.model.ModelMolder;
+import darkknight.jewelrycraft.tileentity.TileEntityMolder;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -24,13 +25,40 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+        TileEntityMolder me = (TileEntityMolder)te;
 
         ResourceLocation blockTexture = new ResourceLocation("jewelrycraft", texture);
         Minecraft.getMinecraft().renderEngine.bindTexture(blockTexture);
+        Tessellator tessellator = Tessellator.instance;
 
         GL11.glPushMatrix();
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);        
-        modelMolder.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);        
+        modelMolder.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);     
+        if(me != null && me.hasMold)
+        {
+            ResourceLocation lava = new ResourceLocation("jewelrycraft", "textures/items/ingotMold.png");
+            Minecraft.getMinecraft().renderEngine.bindTexture(lava);
+            me.mold.getIconIndex().getInterpolatedU(0);
+            double minu = me.mold.getIconIndex().getInterpolatedU(0);
+            double minv = me.mold.getIconIndex().getInterpolatedV(0);
+            double maxu = me.mold.getIconIndex().getInterpolatedU(256);
+            double maxv = me.mold.getIconIndex().getInterpolatedV(256);
+            GL11.glPushMatrix();
+            GL11.glScalef(1f/16f, 1f/16f, 1f/16f);
+            GL11.glDisable(GL11.GL_LIGHTING);
+       
+            for(float f = 0; f <= 1; f+=0.05)
+            {
+                tessellator.startDrawingQuads(); 
+                tessellator.addVertexWithUV(5, 21+f, 5, minu, minv);
+                tessellator.addVertexWithUV(-5, 21+f, 5, maxu, minv);
+                tessellator.addVertexWithUV(-5, 21+f, -5, maxu, maxv);
+                tessellator.addVertexWithUV(5, 21+f, -5, minu, maxv);
+                tessellator.draw();
+            }
+            GL11.glEnable(GL11.GL_LIGHTING);   
+            GL11.glPopMatrix();
+        }
         GL11.glPopMatrix();
         GL11.glPopMatrix();
     }

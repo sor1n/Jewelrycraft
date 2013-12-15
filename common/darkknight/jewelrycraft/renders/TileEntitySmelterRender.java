@@ -39,21 +39,20 @@ public class TileEntitySmelterRender extends TileEntitySpecialRenderer
         
         modelSmelter.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         
-        //Mrkol's liquid render code base - thank you man for the help :) I used only the top
         Minecraft.getMinecraft().renderEngine.bindTexture(lava);
-        Block.lavaStill.getIcon(3, 0).getInterpolatedU(0);
-        double minu = Block.lavaStill.getIcon(0, 0).getInterpolatedU(0);
-        double minv = Block.lavaStill.getIcon(0, 0).getInterpolatedV(0);
-        double maxu = Block.lavaStill.getIcon(0, 0).getInterpolatedU(16);
-        double maxv = Block.lavaStill.getIcon(0, 0).getInterpolatedV(16);
+        Block.lavaStill.getIcon(0, 0).getInterpolatedU(0);
+        double minu = Block.lavaStill.getIcon(2, 0).getInterpolatedU(0);
+        double minv = Block.lavaStill.getIcon(2, 0).getInterpolatedV(0);
+        double maxu = Block.lavaStill.getIcon(2, 0).getInterpolatedU(256);
+        double maxv = Block.lavaStill.getIcon(2, 0).getInterpolatedV(256);
         GL11.glPushMatrix();
         GL11.glScalef(1f/16f, 1f/16f, 1f/16f);
         GL11.glDisable(GL11.GL_LIGHTING);
-        // without F it scales it down to 0, 0, 0. That's because it is trying to make 0.0625 an integer, and 0.0625 without .0625 is 0.
+        
         tessellator.startDrawingQuads();        
-        tessellator.addVertexWithUV(5, 20, 6, maxu, maxv);
+        tessellator.addVertexWithUV(5, 20, 6, minu, minv);
         tessellator.addVertexWithUV(-5, 20, 6, maxu, minv);
-        tessellator.addVertexWithUV(-5, 20, -6, minu, minv);
+        tessellator.addVertexWithUV(-5, 20, -6, maxu, maxv);
         tessellator.addVertexWithUV(5, 20, -6, minu, maxv);
 
         tessellator.addVertexWithUV(4, 20, -6, maxu, maxv);

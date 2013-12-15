@@ -1,5 +1,8 @@
 item.jewelrycraft.thiefGloves.name=Thiefing Gloves
 item.jewelrycraft.ingotShadow.name=Shadow Ingot
+item.jewelrycraft.mold.ingot.name=Ingot Mold
+item.jewelrycraft.mold.ring.name=Ring Mold
+item.jewelrycraft.mold.necklace.name=Necklace Mold
 tile.jewelrycraft.oreShadow.name=Shadow Ore
 tile.jewelrycraft.smelter.name=Smelter
 tile.jewelrycraft.molder.name=Molder
