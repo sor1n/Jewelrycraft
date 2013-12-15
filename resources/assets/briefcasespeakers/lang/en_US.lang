@@ -7,4 +7,4 @@ tile.briefcasespeakers.oreShadow.name=Shadow Ore
 tile.briefcasespeakers.smelter.name=Smelter
 tile.briefcasespeakers.molder.name=Molder
 tile.briefcasespeakers.jewelCraftingTable.name=Jewelers Crafting Table
-itemGroup.shadowspkrs.name=Jewelcraft/Randomcraft
+itemGroup.shadowspkrs=Jewelcraft/Randomcraft

@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockSmelter extends BlockContainer
@@ -53,5 +54,15 @@ public class BlockSmelter extends BlockContainer
             world.setBlockTileEntity(i, j, k, te);
         }
         return true;
+    }
+    
+    public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
+    {
+       return false;
+    }
+
+    public boolean isOpaqueCube()
+    {
+       return false;
     }
 }

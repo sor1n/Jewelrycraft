@@ -12,12 +12,11 @@ public class ConfigHandler
     public static int            idRemote            = 17496;
     public static int            idShadowIngot       = 17497;
     
-    public static int            idBriefcaseSpeakers = 1749;
-    
-    public static int            idShadowOre         = 200;
-    public static int            idSmelter           = 201;
-    public static int            idMolder            = 202;
-    public static int            idJewelCraftingTable= 203;
+    public static int            idBriefcaseSpeakers = 1749;    
+    public static int            idShadowOre         = 1750;
+    public static int            idSmelter           = 1751;
+    public static int            idMolder            = 1752;
+    public static int            idJewelCraftingTable= 1753;
     
     private static boolean       isInitialized       = false;
     
