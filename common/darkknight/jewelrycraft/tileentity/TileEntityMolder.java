@@ -12,14 +12,15 @@ public class TileEntityMolder extends TileEntity
 {
     public int cooling;
     public boolean hasMoltenMetal, hasJewelBase, hasMold;
-    public ItemStack mold, jewelBase, moltenMetal, ringMetal;
+    public ItemStack mold, jewelBase, moltenMetal;
+    public String ringMetal;
 
     public TileEntityMolder()
     {
         this.moltenMetal = new ItemStack(0, 0, 0);
         this.jewelBase = new ItemStack(0, 0, 0);
         this.mold = new ItemStack(0, 0, 0);
-        this.ringMetal = new ItemStack(0, 0, 0);
+        this.ringMetal = "";
         this.cooling = 0;
         this.hasJewelBase = false;
         this.hasMoltenMetal = false;
@@ -34,18 +35,16 @@ public class TileEntityMolder extends TileEntity
         nbt.setBoolean("hasJewelBase", hasJewelBase);
         nbt.setBoolean("hasMoltenMetal", hasMoltenMetal);
         nbt.setBoolean("hasMold", hasMold);
+        nbt.setString("ringMetal", ringMetal);
         NBTTagCompound tag = new NBTTagCompound();
         NBTTagCompound tag1 = new NBTTagCompound();
         NBTTagCompound tag2 = new NBTTagCompound();
-        NBTTagCompound tag3 = new NBTTagCompound();
         this.mold.writeToNBT(tag);
         nbt.setCompoundTag("mold", tag);
         this.jewelBase.writeToNBT(tag1);
         nbt.setCompoundTag("jewelBase", tag1);
         this.moltenMetal.writeToNBT(tag2);
         nbt.setCompoundTag("moltenMetal", tag2);
-        this.ringMetal.writeToNBT(tag2);
-        nbt.setCompoundTag("ringMetal", tag3);
     }
 
     @Override
@@ -55,6 +54,7 @@ public class TileEntityMolder extends TileEntity
         this.cooling = nbt.getInteger("cooling");
         this.hasJewelBase = nbt.getBoolean("hasJewelBase");
         this.hasMoltenMetal = nbt.getBoolean("hasMoltenMetal");
+        this.ringMetal = nbt.getString("ringMetal");
         this.hasMold = nbt.getBoolean("hasMold");
         this.mold = new ItemStack(0, 0, 0);
         this.mold.readFromNBT(nbt.getCompoundTag("mold"));
@@ -62,8 +62,6 @@ public class TileEntityMolder extends TileEntity
         this.jewelBase.readFromNBT(nbt.getCompoundTag("jewelBase"));
         this.moltenMetal = new ItemStack(0, 0, 0);
         this.moltenMetal.readFromNBT(nbt.getCompoundTag("moltenMetal"));
-        this.ringMetal = new ItemStack(0, 0, 0);
-        this.ringMetal.readFromNBT(nbt.getCompoundTag("ringMetal"));
     }
 
     public void updateEntity()
@@ -80,7 +78,7 @@ public class TileEntityMolder extends TileEntity
         }
         if(this.hasMoltenMetal && !this.hasJewelBase)
         {            
-            ringMetal = moltenMetal;
+            ringMetal = moltenMetal.getDisplayName();
             if(cooling > 0) this.cooling--;
             if(cooling == 0)
             {

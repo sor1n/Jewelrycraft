@@ -1,15 +1,16 @@
 package darkknight.jewelrycraft.item;
 
 import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.world.World;
 
 public class ItemRing extends ItemBase
 {
-    public ItemStack ingot;
+    public static String ingot;
     public PotionEffect effect;
 
     public ItemRing(int par1)
@@ -18,26 +19,23 @@ public class ItemRing extends ItemBase
         this.setMaxStackSize(1);
     }
 
-    public ItemRing(int par1, ItemStack ingot)
+    public ItemRing(int par1, String ingot)
     {
         this(par1);
         this.ingot = ingot;
     }
 
-    public ItemRing(int par1, ItemStack ingot, PotionEffect effect)
+    public ItemRing(int par1, String ingot, PotionEffect effect)
     {
         this(par1, ingot);
         this.effect = effect;
     }
     
-    public int getColor(ItemStack par1ItemStack)
+    public static void addMetal(ItemStack item, String metal)
     {
-        return 65535;
-    }
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
-    {
-        par2EntityPlayer.addChatMessage("Hello");
-        return true;
+        NBTTagCompound tag = new NBTTagCompound();
+        item.setTagCompound(tag);
+        tag.setString("ingot", metal);
     }
     
     /**
@@ -46,7 +44,7 @@ public class ItemRing extends ItemBase
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
     {
-        if(ingot != null) list.add(EnumChatFormatting.GRAY + ingot.getDisplayName());
+        if(ingot != null) list.add(EnumChatFormatting.GRAY + ingot);
         if(effect != null) list.add(EnumChatFormatting.GREEN + effect.getEffectName());
     }
 }

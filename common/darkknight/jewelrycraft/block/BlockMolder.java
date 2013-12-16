@@ -5,9 +5,10 @@ import java.util.Random;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -108,18 +109,15 @@ public class BlockMolder extends BlockContainer
         onBlockDestroyedByPlayer(world, i, j, k, 0);
     }
     
-    public void giveJewelToPlayer(TileEntityMolder md, EntityPlayer player, ItemStack item, ItemStack metal)
+    public void giveJewelToPlayer(TileEntityMolder md, EntityPlayer player, ItemStack item, String metal)
     {
         if (item != null)
         {
-            ItemStack copy = null;
             if (item.itemID == ItemList.ring.itemID && metal != null)
             {
-                Item r = new ItemRing(ItemList.ring.itemID, metal).setUnlocalizedName("jewelrycraft.ring");
-                copy = new ItemStack(r);
+                ItemRing.addMetal(item, metal);
             }
-            else copy = item;
-            player.inventory.addItemStackToInventory(copy);
+            player.inventory.addItemStackToInventory(item);
         }
     }
     
