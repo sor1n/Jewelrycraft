@@ -51,7 +51,7 @@ public class BlockMolder extends BlockContainer
             te.hasMold = true;
             --item.stackSize;
         }
-        if (te != null && te.hasMold && entityPlayer.isSneaking())
+        if (te.hasMold && entityPlayer.isSneaking())
         {
             entityPlayer.inventory.addItemStackToInventory(new ItemStack(te.mold.itemID, 1, te.mold.getItemDamage()));
             te.mold = new ItemStack(0, 0, 0);
@@ -62,8 +62,7 @@ public class BlockMolder extends BlockContainer
     
     @Override
     public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int par5)
-    {
-        
+    {        
         TileEntityMolder te = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
         if (te != null)
         {
@@ -119,6 +118,7 @@ public class BlockMolder extends BlockContainer
                 Item r = new ItemRing(ItemList.ring.itemID, metal).setUnlocalizedName("jewelrycraft.ring");
                 copy = new ItemStack(r);
             }
+            else copy = item;
             player.inventory.addItemStackToInventory(copy);
         }
     }

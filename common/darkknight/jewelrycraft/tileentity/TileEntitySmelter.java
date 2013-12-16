@@ -71,7 +71,7 @@ public class TileEntitySmelter extends TileEntity
             for (int l = 0; l < 5; ++l)
             {
                 //EntityFX entityfx = new EntityReddustFX(this.worldObj, (double)xCoord + Math.random(), (double)yCoord + 0.2D, (double)zCoord + Math.random(), 0.0F, 0.0F, 0.0F);
-                this.worldObj.spawnParticle("flame", (double)xCoord + Math.random(), (double)yCoord + 0.5F, (double)zCoord + Math.random(), 0.0D, 0.0D, 0.0D);
+                this.worldObj.spawnParticle("flame", (double)xCoord, (double)yCoord + 1.5F, (double)zCoord, 0.0D, 0.0D, 0.0D);
             }
         }
         if(rand.nextInt(65) == 0){
