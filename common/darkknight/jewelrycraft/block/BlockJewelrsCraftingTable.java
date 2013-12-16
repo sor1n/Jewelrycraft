@@ -6,19 +6,25 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.item.ItemRing;
 import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
+import darkknight.jewelrycraft.tileentity.TileEntityMolder;
 import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
 
 public class BlockJewelrsCraftingTable extends BlockContainer
 {
     Random rand = new Random();
+    int modifiers[] = new int[] {Item.blazePowder.itemID};
+    int effects[] = new int[] {12};
     
     protected BlockJewelrsCraftingTable(int par1, Material par2Material)
     {
@@ -51,7 +57,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 te.hasJewel = true;
                 --item.stackSize;
             }
-            if (!te.hasModifier && item != null && item.getItem().itemID == ItemList.ring.itemID)
+            if (!te.hasModifier && item != null && item.getItem().itemID == modifiers[0])
             {
                 te.modifier = item;
                 te.hasModifier = true;
@@ -84,9 +90,30 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         onBlockDestroyedByPlayer(world, i, j, k, 0);
     }
     
+    public void giveJewelToPlayer(TileEntityJewelrsCraftingTable cf, EntityPlayer player, ItemStack item)
+    {
+        if (item != null)
+        {
+            if (cf.modifier.itemID == Item.blazePowder.itemID)
+            {
+                ItemRing.addEffect(item, new PotionEffect(12, 12));
+            }
+            player.inventory.addItemStackToInventory(item);
+        }
+    }
+    
     @Override
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
     {
+        TileEntityJewelrsCraftingTable te = (TileEntityJewelrsCraftingTable) world.getBlockTileEntity(i, j, k);
+        if(te.hasJewel && te.hasModifier)
+        {
+            giveJewelToPlayer(te, player, te.jewel);
+            te.jewel = new ItemStack(0, 0, 0);
+            te.hasJewel = false;
+            te.modifier = new ItemStack(0, 0, 0);
+            te.hasModifier = false;
+        }
     }
     
     @Override
@@ -110,6 +137,6 @@ public class BlockJewelrsCraftingTable extends BlockContainer
     @Override
     public void registerIcons(IconRegister icon)
     {
-        this.blockIcon = icon.registerIcon("jewelrycraft:jewelrCraftingTable");
+        this.blockIcon = icon.registerIcon("jewelrycraft:jewelrsCraftingTable");
     }
 }

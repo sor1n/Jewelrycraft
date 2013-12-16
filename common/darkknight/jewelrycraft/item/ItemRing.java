@@ -2,11 +2,13 @@ package darkknight.jewelrycraft.item;
 
 import java.util.List;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
 
 public class ItemRing extends ItemBase
 {
@@ -70,6 +72,18 @@ public class ItemRing extends ItemBase
                 effect.readCustomPotionEffectFromNBT(effectNBT);
                 list.add(EnumChatFormatting.GREEN + effect.getEffectName());
             }
+        }
+    }
+    
+    public void onUpdate(ItemStack stack, World par2World, Entity par3Entity, int par4, boolean par5) 
+    {
+        if(stack.getTagCompound().hasKey("effect"))
+        {
+            NBTTagCompound effectNBT = (NBTTagCompound) stack.getTagCompound().getTag("effect");
+            PotionEffect effect = new PotionEffect(0, 0);
+            effect.readCustomPotionEffectFromNBT(effectNBT);
+            ((EntityPlayer)par3Entity).addPotionEffect(effect);
+            
         }
     }
 }
