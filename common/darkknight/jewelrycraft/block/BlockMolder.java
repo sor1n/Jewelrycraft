@@ -5,6 +5,8 @@ import java.util.Random;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -41,7 +43,7 @@ public class BlockMolder extends BlockContainer
     
     @Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
-    {
+    {        
         TileEntityMolder te = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && item != null && !te.hasMold && item.itemID == ItemList.molds.itemID)
@@ -61,7 +63,7 @@ public class BlockMolder extends BlockContainer
     
     @Override
     public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int par5)
-    {
+    {        
         TileEntityMolder te = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
         if (te != null)
         {
@@ -103,29 +105,25 @@ public class BlockMolder extends BlockContainer
     
     @Override
     public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion par5Explosion)
-    {
+    {        
         onBlockDestroyedByPlayer(world, i, j, k, 0);
     }
     
-    public void giveJewelToPlayer(TileEntityMolder md, EntityPlayer player, ItemStack item, ItemStack metal)
+    public void giveJewelToPlayer(TileEntityMolder md, EntityPlayer player, ItemStack item, String metal)
     {
         if (item != null)
         {
-            ItemStack copy = null;
             if (item.itemID == ItemList.ring.itemID && metal != null)
             {
-                ItemRing r = (ItemRing) new ItemRing(ItemList.ring.itemID, metal).setUnlocalizedName("jewelrycraft.ring");
-                copy = new ItemStack(r);
+                ItemRing.addMetal(item, metal);
             }
-            else
-                copy = item;
-            player.inventory.addItemStackToInventory(copy);
+            player.inventory.addItemStackToInventory(item);
         }
     }
     
     @Override
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
-    {
+    {        
         TileEntityMolder me = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
         if (me != null && me.hasJewelBase)
         {
