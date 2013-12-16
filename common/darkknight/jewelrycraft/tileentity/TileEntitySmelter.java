@@ -52,6 +52,7 @@ public class TileEntitySmelter extends TileEntity
         this.moltenMetal.readFromNBT(nbt.getCompoundTag("moltenMetal"));
     }
     
+    @Override
     public void updateEntity()
     {
         super.updateEntity();
@@ -77,14 +78,14 @@ public class TileEntitySmelter extends TileEntity
             for (int l = 0; l < 5; ++l)
             {
                 //EntityFX entityfx = new EntityReddustFX(this.worldObj, (double)xCoord + Math.random(), (double)yCoord + 0.2D, (double)zCoord + Math.random(), 0.0F, 0.0F, 0.0F);
-                this.worldObj.spawnParticle("flame", (double) xCoord, (double) yCoord + 1.5F, (double) zCoord, 0.0D, 0.0D, 0.0D);
+                this.worldObj.spawnParticle("flame", xCoord, yCoord + 1.1D, zCoord, 0.0D, 0.5D, 0.0D);
             }
         }
         if (rand.nextInt(65) == 0)
         {
-            double d5 = (double) ((float) this.xCoord + rand.nextFloat());
-            double d7 = (double) this.yCoord;
-            double d6 = (double) ((float) this.zCoord + rand.nextFloat());
+            double d5 = this.xCoord + rand.nextFloat();
+            double d7 = this.yCoord;
+            double d6 = this.zCoord + rand.nextFloat();
             //this.worldObj.spawnParticle("lava", d5, d7, d6, 0.0D, 0.0D, 0.0D);
             this.worldObj.playSound(d5, d7, d6, "liquid.lavapop", 0.2F + rand.nextFloat() * 0.2F, 0.9F + rand.nextFloat() * 0.15F, false);
         }
@@ -102,6 +103,7 @@ public class TileEntitySmelter extends TileEntity
         }
     }
     
+    @Override
     public Packet getDescriptionPacket()
     {
         NBTTagCompound nbtTag = new NBTTagCompound();

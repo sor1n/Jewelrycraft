@@ -1,12 +1,12 @@
 package darkknight.jewelrycraft.tileentity;
 
-import darkknight.jewelrycraft.item.ItemList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
+import darkknight.jewelrycraft.item.ItemList;
 
 public class TileEntityMolder extends TileEntity
 {
@@ -44,7 +44,7 @@ public class TileEntityMolder extends TileEntity
         nbt.setCompoundTag("jewelBase", tag1);
         this.moltenMetal.writeToNBT(tag2);
         nbt.setCompoundTag("moltenMetal", tag2);
-        this.ringMetal.writeToNBT(tag2);
+        this.ringMetal.writeToNBT(tag3);
         nbt.setCompoundTag("ringMetal", tag3);
     }
     
@@ -66,16 +66,17 @@ public class TileEntityMolder extends TileEntity
         this.ringMetal.readFromNBT(nbt.getCompoundTag("ringMetal"));
     }
     
+    @Override
     public void updateEntity()
     {
         super.updateEntity();
         if (moltenMetal.itemID != 0)
         {
-            this.worldObj.playSoundEffect((double) ((float) xCoord + 0.5F), (double) ((float) yCoord + 0.5F), (double) ((float) zCoord + 0.5F), "random.fizz", 0.5F, 2.6F + 0.2F * 0.8F);
+            this.worldObj.playSoundEffect(xCoord + 0.5F, yCoord + 0.5F, zCoord + 0.5F, "random.fizz", 0.5F, 2.6F + 0.2F * 0.8F);
             for (int l = 0; l < 2; ++l)
             {
                 //EntityFX entityfx = new EntityReddustFX(this.worldObj, (double)xCoord + Math.random(), (double)yCoord + 0.2D, (double)zCoord + Math.random(), 0.0F, 0.0F, 0.0F);
-                this.worldObj.spawnParticle("reddust", (double) xCoord + Math.random(), (double) yCoord + 0.2F, (double) zCoord + Math.random(), 0.0D, 1.0D, 1.0D);
+                this.worldObj.spawnParticle("reddust", xCoord + Math.random(), (double) yCoord + 0.2F, zCoord + Math.random(), 0.0D, 1.0D, 1.0D);
             }
         }
         if (this.hasMoltenMetal && !this.hasJewelBase)
@@ -96,11 +97,13 @@ public class TileEntityMolder extends TileEntity
         }
     }
     
+    @Override
     public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)
     {
         readFromNBT(pkt.data);
     }
     
+    @Override
     public Packet getDescriptionPacket()
     {
         NBTTagCompound nbtTag = new NBTTagCompound();
