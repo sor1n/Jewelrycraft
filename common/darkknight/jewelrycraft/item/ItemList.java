@@ -22,6 +22,8 @@ public class ItemList
             shadowIngot = new ItemBase(ConfigHandler.idShadowIngot).setUnlocalizedName("jewelrycraft.ingotShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
             molds = new ItemMolds(ConfigHandler.idMolds).setUnlocalizedName("jewelrycraft.mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
             ring = new ItemRing(ConfigHandler.idRing).setUnlocalizedName("jewelrycraft.ring").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            
+            isInitialized = true;
         }
     }
 }
