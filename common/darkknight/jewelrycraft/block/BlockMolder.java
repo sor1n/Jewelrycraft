@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -46,6 +47,7 @@ public class BlockMolder extends BlockContainer
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && item != null && !te.hasMold && item.itemID == ItemList.molds.itemID)
         {
+            entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.molder.addedmold", te.mold.getDisplayName()));
             te.mold = item;
             te.hasMold = true;
             --item.stackSize;
@@ -123,11 +125,20 @@ public class BlockMolder extends BlockContainer
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
     {
         TileEntityMolder me = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
-        if (me != null && me.hasJewelBase)
+        if (me != null)
         {
-            giveJewelToPlayer(me, player, me.jewelBase, me.ringMetal);
-            me.jewelBase = new ItemStack(0, 0, 0);
-            me.hasJewelBase = false;
+            if (me.hasJewelBase)
+            {
+                giveJewelToPlayer(me, player, me.jewelBase, me.ringMetal);
+                me.jewelBase = new ItemStack(0, 0, 0);
+                me.hasJewelBase = false;
+            }
+            else if (me.hasMoltenMetal && me.cooling > 0)
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.metaliscooling"));
+            else if (me.hasMold && !me.hasMoltenMetal)
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.moldisempty"));
+            else if (!me.hasMold)
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.moldismissing"));
         }
     }
     

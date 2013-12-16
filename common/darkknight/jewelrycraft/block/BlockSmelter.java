@@ -82,6 +82,7 @@ public class BlockSmelter extends BlockContainer
         {
             if (!te.hasMetal && !te.hasMoltenMetal && item != null && item.getDisplayName().contains("Ingot") && !item.getDisplayName().contains("Mold"))
             {
+                entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.nowsmeltingingot", item.getDisplayName()));
                 te.metal = new ItemStack(item.itemID, 1, item.getItemDamage());
                 te.hasMetal = true;
                 te.melting = 2000;
