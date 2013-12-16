@@ -77,7 +77,7 @@ public class ItemRing extends ItemBase
     
     public void onUpdate(ItemStack stack, World par2World, Entity par3Entity, int par4, boolean par5) 
     {
-        if(stack.getTagCompound().hasKey("effect"))
+        if(stack.hasTagCompound() && stack.getTagCompound().hasKey("effect"))
         {
             NBTTagCompound effectNBT = (NBTTagCompound) stack.getTagCompound().getTag("effect");
             PotionEffect effect = new PotionEffect(0, 0);

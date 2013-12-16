@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -81,25 +82,12 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         return true;
     }
 
-    @Override
-    public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int par5)
-    {
-    }
-
-    @Override
-    public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion par5Explosion)
-    {
-        onBlockDestroyedByPlayer(world, i, j, k, 0);
-    }
-
     public void giveJewelToPlayer(TileEntityJewelrsCraftingTable cf, EntityPlayer player, ItemStack item, ItemStack modifier)
     {
         if (item != null)
         {
-            if (modifier.itemID == Item.blazePowder.itemID)
-            {
-                ItemRing.addEffect(item, new PotionEffect(12, 12));
-            }
+            //ItemRing.addEffect(item, new PotionEffect(12, 12));
+            //player.inventory.addItemStackToInventory(item);
             player.inventory.addItemStackToInventory(item);
         }
     }
@@ -108,20 +96,21 @@ public class BlockJewelrsCraftingTable extends BlockContainer
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
     {
         TileEntityJewelrsCraftingTable te = (TileEntityJewelrsCraftingTable) world.getBlockTileEntity(i, j, k);
-        if(te != null && !world.isRemote)
+        if(te != null)
         {
-            if(te.hasJewel && te.hasModifier)
+            if(te.hasEndItem)
             {
-                giveJewelToPlayer(te, player, te.jewel, te.modifier);
-                te.jewel = new ItemStack(0, 0, 0);
-                te.hasJewel = false;
-                te.modifier = new ItemStack(0, 0, 0);
-                te.hasModifier = false;
+                giveJewelToPlayer(te, player, te.endItem, te.modifier);
+                te.endItem = new ItemStack(0, 0, 0);
+                te.hasEndItem = false;
             }
+            else if(!te.hasModifier && !te.hasJewel)
+                player.addChatMessage("You need a ring and a modifier");
             else if(!te.hasJewel)
                 player.addChatMessage("You're missing a ring");
             else if(!te.hasModifier)
                 player.addChatMessage("You need a modifier");
+            te.timer = 5;
         }
     }
 
