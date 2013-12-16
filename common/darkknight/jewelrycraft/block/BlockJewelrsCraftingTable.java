@@ -25,31 +25,31 @@ public class BlockJewelrsCraftingTable extends BlockContainer
     Random rand = new Random();
     int modifiers[] = new int[] {Item.blazePowder.itemID};
     int effects[] = new int[] {12};
-    
+
     protected BlockJewelrsCraftingTable(int par1, Material par2Material)
     {
         super(par1, par2Material);
         this.setBlockBounds(0.0F, 0F, 0.0F, 1.0F, 0.8F, 1.0F);
     }
-    
+
     @Override
     public TileEntity createNewTileEntity(World world)
     {
         return new TileEntityJewelrsCraftingTable();
     }
-    
+
     @Override
     public boolean renderAsNormalBlock()
     {
         return false;
     }
-    
+
     @Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
     {
         TileEntityJewelrsCraftingTable te = (TileEntityJewelrsCraftingTable) world.getBlockTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
-        if (te != null && !world.isRemote)
+        if (te != null)
         {
             if (!te.hasJewel && item != null && item.getItem().itemID == ItemList.ring.itemID)
             {
@@ -63,77 +63,86 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 te.hasModifier = true;
                 --item.stackSize;
             }   
-            
+
             if (te.hasModifier && entityPlayer.isSneaking())
             {
-                entityPlayer.dropPlayerItem(te.modifier);
+                entityPlayer.inventory.addItemStackToInventory(new ItemStack(te.modifier.itemID, 1, te.modifier.getItemDamage()));
+                te.modifier = new ItemStack(0, 0, 0);
                 te.hasModifier = false;
             }            
             if (te.hasJewel && entityPlayer.isSneaking())
             {
-                entityPlayer.dropPlayerItem(te.jewel);
+                entityPlayer.inventory.addItemStackToInventory(new ItemStack(te.jewel.itemID, 1, te.jewel.getItemDamage()));
+                te.jewel = new ItemStack(0, 0, 0);
                 te.hasJewel = false;
             }
             world.setBlockTileEntity(i, j, k, te);
         }
         return true;
     }
-    
+
     @Override
     public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int par5)
     {
     }
-    
+
     @Override
     public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion par5Explosion)
     {
         onBlockDestroyedByPlayer(world, i, j, k, 0);
     }
-    
-    public void giveJewelToPlayer(TileEntityJewelrsCraftingTable cf, EntityPlayer player, ItemStack item)
+
+    public void giveJewelToPlayer(TileEntityJewelrsCraftingTable cf, EntityPlayer player, ItemStack item, ItemStack modifier)
     {
         if (item != null)
         {
-            if (cf.modifier.itemID == Item.blazePowder.itemID)
+            if (modifier.itemID == Item.blazePowder.itemID)
             {
                 ItemRing.addEffect(item, new PotionEffect(12, 12));
             }
             player.inventory.addItemStackToInventory(item);
         }
     }
-    
+
     @Override
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
     {
         TileEntityJewelrsCraftingTable te = (TileEntityJewelrsCraftingTable) world.getBlockTileEntity(i, j, k);
-        if(te.hasJewel && te.hasModifier)
+        if(te != null && !world.isRemote)
         {
-            giveJewelToPlayer(te, player, te.jewel);
-            te.jewel = new ItemStack(0, 0, 0);
-            te.hasJewel = false;
-            te.modifier = new ItemStack(0, 0, 0);
-            te.hasModifier = false;
+            if(te.hasJewel && te.hasModifier)
+            {
+                giveJewelToPlayer(te, player, te.jewel, te.modifier);
+                te.jewel = new ItemStack(0, 0, 0);
+                te.hasJewel = false;
+                te.modifier = new ItemStack(0, 0, 0);
+                te.hasModifier = false;
+            }
+            else if(!te.hasJewel)
+                player.addChatMessage("You're missing a ring");
+            else if(!te.hasModifier)
+                player.addChatMessage("You need a modifier");
         }
     }
-    
+
     @Override
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         return false;
     }
-    
+
     @Override
     public boolean isOpaqueCube()
     {
         return false;
     }
-    
+
     @Override
     public int getRenderType()
     {
         return -1;
     }
-    
+
     @Override
     public void registerIcons(IconRegister icon)
     {
