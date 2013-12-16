@@ -2,13 +2,10 @@ package darkknight.jewelrycraft.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.renders.TileEntityMolderRender;
-import darkknight.jewelrycraft.renders.TileEntitySmelterRender;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
 import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
 
@@ -37,9 +34,6 @@ public class BlockList
             
             GameRegistry.registerTileEntity(TileEntitySmelter.class, "30");
             GameRegistry.registerTileEntity(TileEntityMolder.class, "31");
-            
-            ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySmelter.class, new TileEntitySmelterRender());
-            ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMolder.class, new TileEntityMolderRender());
         }
     }
 }
