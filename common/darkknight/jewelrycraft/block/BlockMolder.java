@@ -43,6 +43,9 @@ public class BlockMolder extends BlockContainer
     @Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
     {
+        if (world.isRemote)
+            return true;
+        
         TileEntityMolder te = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && item != null && !te.hasMold && item.itemID == ItemList.molds.itemID)
@@ -61,9 +64,12 @@ public class BlockMolder extends BlockContainer
     }
     
     @Override
-    public void onBlockDestroyedByPlayer(World par1World, int i, int j, int k, int par5)
+    public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int par5)
     {
-        TileEntityMolder te = (TileEntityMolder) par1World.getBlockTileEntity(i, j, k);
+        if (world.isRemote)
+            return;
+        
+        TileEntityMolder te = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
         if (te != null)
         {
             float f = this.rand.nextFloat() * 0.8F + 0.1F;
@@ -71,7 +77,7 @@ public class BlockMolder extends BlockContainer
             float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
             if (te.hasMold)
             {
-                EntityItem entityitem = new EntityItem(par1World, i + f, j + f1, k + f2, new ItemStack(te.mold.itemID, 1, te.mold.getItemDamage()));
+                EntityItem entityitem = new EntityItem(world, i + f, j + f1, k + f2, new ItemStack(te.mold.itemID, 1, te.mold.getItemDamage()));
                 
                 if (te.mold.hasTagCompound())
                 {
@@ -82,11 +88,11 @@ public class BlockMolder extends BlockContainer
                 entityitem.motionX = (float) this.rand.nextGaussian() * f3;
                 entityitem.motionY = (float) this.rand.nextGaussian() * f3 + 0.2F;
                 entityitem.motionZ = (float) this.rand.nextGaussian() * f3;
-                par1World.spawnEntityInWorld(entityitem);
+                world.spawnEntityInWorld(entityitem);
             }
             if (te.hasJewelBase)
             {
-                EntityItem entityitem = new EntityItem(par1World, i + f, j + f1, k + f2, new ItemStack(te.jewelBase.itemID, 1, te.jewelBase.getItemDamage()));
+                EntityItem entityitem = new EntityItem(world, i + f, j + f1, k + f2, new ItemStack(te.jewelBase.itemID, 1, te.jewelBase.getItemDamage()));
                 
                 if (te.jewelBase.hasTagCompound())
                 {
@@ -97,7 +103,7 @@ public class BlockMolder extends BlockContainer
                 entityitem.motionX = (float) this.rand.nextGaussian() * f3;
                 entityitem.motionY = (float) this.rand.nextGaussian() * f3 + 0.2F;
                 entityitem.motionZ = (float) this.rand.nextGaussian() * f3;
-                par1World.spawnEntityInWorld(entityitem);
+                world.spawnEntityInWorld(entityitem);
             }
         }
     }
@@ -105,6 +111,9 @@ public class BlockMolder extends BlockContainer
     @Override
     public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion par5Explosion)
     {
+        if (world.isRemote)
+            return;
+        
         onBlockDestroyedByPlayer(world, i, j, k, 0);
     }
     
@@ -124,6 +133,9 @@ public class BlockMolder extends BlockContainer
     @Override
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
     {
+        if (world.isRemote)
+            return;
+        
         TileEntityMolder me = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
         if (me != null && me.hasJewelBase)
         {
