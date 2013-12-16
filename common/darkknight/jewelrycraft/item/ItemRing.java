@@ -10,26 +10,12 @@ import net.minecraft.util.EnumChatFormatting;
 
 public class ItemRing extends ItemBase
 {
-    public static String ingot;
-    public PotionEffect effect;
-
     public ItemRing(int par1)
     {
         super(par1);
         this.setMaxStackSize(1);
     }
-
-    public ItemRing(int par1, String ingot)
-    {
-        this(par1);
-        this.ingot = ingot;
-    }
-
-    public ItemRing(int par1, String ingot, PotionEffect effect)
-    {
-        this(par1, ingot);
-        this.effect = effect;
-    }
+    
     NBTTagCompound tag = new NBTTagCompound();
     
     public String getMetal(ItemStack stack)
@@ -37,21 +23,60 @@ public class ItemRing extends ItemBase
         return tag.getString("ingot");
     }
     
-    public static void addMetal(ItemStack item, String metal)
+    public static void addMetal(ItemStack item, ItemStack metal)
     {
-        NBTTagCompound tag = new NBTTagCompound();
-        item.setTagCompound(tag);
-        tag.setString("ingot", metal);
-        ingot = metal;
+        NBTTagCompound itemStackData;
+        if (item.hasTagCompound())
+            itemStackData = item.getTagCompound();
+        else
+        {
+            itemStackData = new NBTTagCompound();
+            item.setTagCompound(itemStackData);
+        }
+        NBTTagCompound ingotNBT = new NBTTagCompound();
+        metal.writeToNBT(ingotNBT);
+        itemStackData.setTag("ingot", ingotNBT);
+    }
+    
+    public static void addEffect(ItemStack item, PotionEffect effect)
+    {
+        NBTTagCompound itemStackData;
+        if (item.hasTagCompound())
+            itemStackData = item.getTagCompound();
+        else
+        {
+            itemStackData = new NBTTagCompound();
+            item.setTagCompound(itemStackData);
+        }
+        NBTTagCompound effectNBT = new NBTTagCompound();
+        effect.writeCustomPotionEffectToNBT(effectNBT);
+        itemStackData.setTag("effect", effectNBT);
     }
     
     /**
      * allows items to add custom lines of information to the mouseover description
      */
+    @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
     {
-        if(ingot != null) list.add(EnumChatFormatting.GRAY + ingot);
-        if(effect != null) list.add(EnumChatFormatting.GREEN + effect.getEffectName());
+        if (stack.hasTagCompound())
+        {
+            if (stack.getTagCompound().hasKey("ingot"))
+            {
+                NBTTagCompound ingotNBT = (NBTTagCompound) stack.getTagCompound().getTag("ingot");
+                ItemStack ingotStack = new ItemStack(0, 0, 0);
+                ingotStack.readFromNBT(ingotNBT);
+                list.add(EnumChatFormatting.GRAY + ingotStack.getDisplayName());
+            }
+            
+            if (stack.getTagCompound().hasKey("effect"))
+            {
+                NBTTagCompound effectNBT = (NBTTagCompound) stack.getTagCompound().getTag("effect");
+                PotionEffect effect = new PotionEffect(0, 0);
+                effect.readCustomPotionEffectFromNBT(effectNBT);
+                list.add(EnumChatFormatting.GREEN + effect.getEffectName());
+            }
+        }
     }
 }
