@@ -2,6 +2,7 @@ package darkknight.jewelrycraft.block;
 
 import java.util.Random;
 
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.item.ItemRing;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
@@ -103,6 +104,11 @@ public class BlockMolder extends BlockContainer
     {
         onBlockDestroyedByPlayer(world, i, j, k, 0);
     }
+    
+    public void giveJewelToPlayer(TileEntityMolder md, EntityPlayer player, ItemStack item, ItemStack metal)
+    {
+        player.inventory.addItemStackToInventory(item);
+    }
 
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player) 
     {
@@ -113,15 +119,6 @@ public class BlockMolder extends BlockContainer
             me.jewelBase = new ItemStack(0, 0, 0);
             me.hasJewelBase = false;            
         }        
-    }
-    
-    public void giveJewelToPlayer(TileEntityMolder md, EntityPlayer player, ItemStack item, ItemStack metal)
-    {
-        if(item.getItem() == ItemList.ring){
-            ItemRing ring = new ItemRing(item.itemID, metal);  
-            player.inventory.addItemStackToInventory(new ItemStack(ring));
-        }
-        else player.inventory.addItemStackToInventory(item);
     }
 
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
