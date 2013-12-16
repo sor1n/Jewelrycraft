@@ -30,12 +30,19 @@ public class ItemRing extends ItemBase
         this(par1, ingot);
         this.effect = effect;
     }
+    NBTTagCompound tag = new NBTTagCompound();
+    
+    public String getMetal(ItemStack stack)
+    {
+        return tag.getString("ingot");
+    }
     
     public static void addMetal(ItemStack item, String metal)
     {
         NBTTagCompound tag = new NBTTagCompound();
         item.setTagCompound(tag);
         tag.setString("ingot", metal);
+        ingot = metal;
     }
     
     /**
