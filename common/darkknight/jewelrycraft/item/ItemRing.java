@@ -16,13 +16,6 @@ public class ItemRing extends ItemBase
         this.setMaxStackSize(1);
     }
     
-    NBTTagCompound tag = new NBTTagCompound();
-    
-    public String getMetal(ItemStack stack)
-    {
-        return tag.getString("ingot");
-    }
-    
     public static void addMetal(ItemStack item, ItemStack metal)
     {
         NBTTagCompound itemStackData;

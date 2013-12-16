@@ -47,10 +47,10 @@ public class BlockMolder extends BlockContainer
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && item != null && !te.hasMold && item.itemID == ItemList.molds.itemID)
         {
-            entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.molder.addedmold", te.mold.getDisplayName()));
             te.mold = item;
             te.hasMold = true;
             --item.stackSize;
+            entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.molder.addedmold", te.mold.getDisplayName()));
         }
         if (te.hasMold && entityPlayer.isSneaking())
         {
@@ -125,7 +125,7 @@ public class BlockMolder extends BlockContainer
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
     {
         TileEntityMolder me = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
-        if (me != null)
+        if (me != null && !world.isRemote)
         {
             if (me.hasJewelBase)
             {
@@ -135,9 +135,9 @@ public class BlockMolder extends BlockContainer
             }
             else if (me.hasMoltenMetal && me.cooling > 0)
                 player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.metaliscooling"));
-            else if (me.hasMold && !me.hasMoltenMetal)
+            else if (me.mold.itemID == ItemList.molds.itemID && !me.hasMoltenMetal)
                 player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.moldisempty"));
-            else if (!me.hasMold)
+            else if (me.mold.itemID != ItemList.molds.itemID)
                 player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.moldismissing"));
         }
     }

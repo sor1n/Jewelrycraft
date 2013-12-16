@@ -119,7 +119,7 @@ public class BlockSmelter extends BlockContainer
         else if (world.getBlockMetadata(i, j, k) == 3)
             me = (TileEntityMolder) world.getBlockTileEntity(i - 1, j, k);
         
-        if (te.hasMoltenMetal && me != null)
+        if (te.hasMoltenMetal && me != null && !world.isRemote)
         {
             if (isConnectedToMolder(world, i, j, k) && me.hasMold && !me.hasMoltenMetal && !me.hasJewelBase)
             {
