@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -87,11 +88,11 @@ public class BlockSmelter extends BlockContainer
                 --item.stackSize;
             }
             else if (te.hasMetal && !te.hasMoltenMetal && item != null && item.getDisplayName().contains("Ingot") && !item.getDisplayName().contains("Mold"))
-                entityPlayer.addChatMessage("The Smelter already contains a " + te.metal.getDisplayName());
+                entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.alreadyhasingot", te.metal.getDisplayName()));
             else if (te.hasMoltenMetal)
-                entityPlayer.addChatMessage("The Smelter contains molten " + te.moltenMetal.getDisplayName().toLowerCase().replace("ingot", ""));
+                entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.hasmolteningot", te.moltenMetal.getDisplayName()));
             else if (item != null && !item.getDisplayName().contains("Ingot"))
-                entityPlayer.addChatMessage("The item needs to be an ingot!");
+                entityPlayer.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.itemneedstobeingot"));
             
             if (te.hasMetal && entityPlayer.isSneaking())
             {
@@ -128,13 +129,13 @@ public class BlockSmelter extends BlockContainer
                 te.hasMoltenMetal = false;
             }
             else if (me.hasMoltenMetal)
-                player.addChatMessage("The Molder already has molten metal in it!");
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.molderhasmoltenmetal"));
             else if (!me.hasMold)
-                player.addChatMessage("The Molder doesn't have a mold in it! You might as well pour this stuff on the ground, won't you?");
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.molderhasnomold"));
             else if (me.hasJewelBase)
-                player.addChatMessage("The Molder contains an item in it. Now you wouldn't want it to be destroyed, would you?");
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.modlerhasitem"));
             else
-                player.addChatMessage("You need a Molder in front of this block in order to pour the molten metal!");
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.molderismissing"));
         }
         
     }
