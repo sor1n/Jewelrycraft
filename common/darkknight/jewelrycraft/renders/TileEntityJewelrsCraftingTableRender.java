@@ -2,25 +2,30 @@ package darkknight.jewelrycraft.renders;
 
 import org.lwjgl.opengl.GL11;
 
-import darkknight.jewelrycraft.model.ModelMolder;
+import darkknight.jewelrycraft.model.ModelJewlersCraftingBench;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRenderer
 {
-    ModelMolder modelTable = new ModelMolder();
-    String      texture     = "textures/tileentities/JewelrsCraftingTable.png";
+    ModelJewlersCraftingBench modelTable = new ModelJewlersCraftingBench();
+    String      texture     = "textures/tileentities/JewelrsCraftingBench.png";
     
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale)
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+        
+        ResourceLocation blockTexture = new ResourceLocation("jewelrycraft", texture);
+        Minecraft.getMinecraft().renderEngine.bindTexture(blockTexture);
         
         GL11.glPushMatrix();
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
