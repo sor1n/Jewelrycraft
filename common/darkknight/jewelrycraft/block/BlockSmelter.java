@@ -80,7 +80,7 @@ public class BlockSmelter extends BlockContainer
             {
                 te.metal = new ItemStack(item.itemID, 1, item.getItemDamage());
                 te.hasMetal = true;
-                te.melting = 200000;
+                te.melting = 2000;
                 --item.stackSize;
             }
             else if (te.hasMetal && !te.hasMoltenMetal && item != null && item.getDisplayName().contains("Ingot") && !item.getDisplayName().contains("Mold"))
@@ -115,7 +115,7 @@ public class BlockSmelter extends BlockContainer
             {
                 me.moltenMetal = te.moltenMetal;
                 me.hasMoltenMetal = true;
-                me.cooling = 2000;
+                me.cooling = 200;
                 te.moltenMetal = new ItemStack(0, 0, 0);
                 te.hasMoltenMetal = false;
             }
@@ -141,7 +141,6 @@ public class BlockSmelter extends BlockContainer
     {
         int rotation = MathHelper.floor_double((double)(entityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
         world.setBlockMetadataWithNotify(i, j, k, rotation, 2);
-        System.out.println(world.getBlockMetadata(i, j, k));
     }
 
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)

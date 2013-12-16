@@ -14,7 +14,7 @@ import net.minecraft.util.MathHelper;
 public class ItemMolds extends Item
 {
     /** List of molds color names */
-    public static final String[] moldsItemNames = new String[] {"ingot", "ring", "necklace"};
+    public static final String[] moldsItemNames = new String[] {"ingot", "ring"};
     @SideOnly(Side.CLIENT)
     private Icon[] moldsIcons;
 
@@ -24,7 +24,6 @@ public class ItemMolds extends Item
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         this.setMaxStackSize(1);
-        this.setCreativeTab(CreativeTabs.tabMaterials);
     }
 
     @SideOnly(Side.CLIENT)
@@ -34,7 +33,7 @@ public class ItemMolds extends Item
      */
     public Icon getIconFromDamage(int par1)
     {
-        int j = MathHelper.clamp_int(par1, 0, 2);
+        int j = MathHelper.clamp_int(par1, 0, moldsItemNames.length - 1);
         return this.moldsIcons[j];
     }
 
@@ -44,7 +43,7 @@ public class ItemMolds extends Item
      */
     public String getUnlocalizedName(ItemStack par1ItemStack)
     {
-        int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 2);
+        int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, moldsItemNames.length - 1);
         return super.getUnlocalizedName() + "." + moldsItemNames[i];
     }
 
@@ -56,7 +55,7 @@ public class ItemMolds extends Item
      */
     public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
-        for (int j = 0; j < 3; ++j)
+        for (int j = 0; j < moldsItemNames.length; ++j)
         {
             par3List.add(new ItemStack(par1, 1, j));
         }

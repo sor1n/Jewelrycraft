@@ -3,6 +3,7 @@ package darkknight.jewelrycraft.block;
 import java.util.Random;
 
 import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.item.ItemRing;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -108,10 +109,19 @@ public class BlockMolder extends BlockContainer
         TileEntityMolder me = (TileEntityMolder) world.getBlockTileEntity(i, j, k); 
         if(me != null && me.hasJewelBase)
         {
-            player.inventory.addItemStackToInventory(new ItemStack(me.jewelBase.itemID, 1, me.jewelBase.getItemDamage()));
+            giveJewelToPlayer(me, player, me.jewelBase, me.ringMetal);
             me.jewelBase = new ItemStack(0, 0, 0);
             me.hasJewelBase = false;            
         }        
+    }
+    
+    public void giveJewelToPlayer(TileEntityMolder md, EntityPlayer player, ItemStack item, ItemStack metal)
+    {
+        if(item.getItem() == ItemList.ring){
+            ItemRing ring = new ItemRing(item.itemID, metal);  
+            player.inventory.addItemStackToInventory(new ItemStack(ring));
+        }
+        else player.inventory.addItemStackToInventory(item);
     }
 
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)

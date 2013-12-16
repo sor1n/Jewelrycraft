@@ -36,33 +36,6 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
         modelMolder.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);     
         if(me != null)
         {
-            if(me.hasJewelBase)
-            {
-                String texture = "textures/items/" + me.jewelBase.getDisplayName() + ".png";
-                ResourceLocation lava = new ResourceLocation(null, "textures/items/iron_ingot.png");
-                Minecraft.getMinecraft().renderEngine.bindTexture(lava);
-                me.jewelBase.getIconIndex().getInterpolatedU(0);
-                int decal = 32;
-                double minu = me.jewelBase.getIconIndex().getInterpolatedU(0);
-                double minv = me.jewelBase.getIconIndex().getInterpolatedV(0);
-                double maxu = me.jewelBase.getIconIndex().getInterpolatedU(16);
-                double maxv = me.jewelBase.getIconIndex().getInterpolatedV(16);
-                GL11.glPushMatrix();
-                GL11.glScalef(1f/16f, 1f/16f, 1f/16f);
-                GL11.glDisable(GL11.GL_LIGHTING);
-
-                for(float f = 0; f <= 1; f+=0.05)
-                {
-                    tessellator.startDrawingQuads(); 
-                    tessellator.addVertexWithUV(5, 21+f, 5, minu, minv);
-                    tessellator.addVertexWithUV(-5, 21+f, 5, maxu, minv);
-                    tessellator.addVertexWithUV(-5, 21+f, -5, maxu, maxv);
-                    tessellator.addVertexWithUV(5, 21+f, -5, minu, maxv);
-                    tessellator.draw();
-                }
-                GL11.glEnable(GL11.GL_LIGHTING);   
-                GL11.glPopMatrix();
-            }
             if(me.hasMold)
             {
                 String name = me.mold.getDisplayName().substring(0, 1).toLowerCase() + me.mold.getDisplayName().trim().substring(1).replace(" M", "M");
@@ -81,7 +54,7 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                 GL11.glScalef(1f/16f, 1f/16f, 1f/16f);
                 GL11.glDisable(GL11.GL_LIGHTING);
 
-                for(float f = 0; f <= 1; f+=0.05)
+                for(float f = 0; f <= 2; f+=0.01)
                 {
                     tessellator.startDrawingQuads(); 
                     tessellator.addVertexWithUV(5, 21+f, 5, minu, minv);
