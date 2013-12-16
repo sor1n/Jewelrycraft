@@ -41,10 +41,7 @@ public class BlockSmelter extends BlockContainer
     
     @Override
     public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int par5)
-    {
-        if (world.isRemote)
-            return;
-        
+    {        
         TileEntitySmelter te = (TileEntitySmelter) world.getBlockTileEntity(i, j, k);
         if (te != null)
         {
@@ -77,10 +74,7 @@ public class BlockSmelter extends BlockContainer
     
     @Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
-    {
-        if (world.isRemote)
-            return true;
-        
+    {        
         TileEntitySmelter te = (TileEntitySmelter) world.getBlockTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && !world.isRemote)
@@ -111,10 +105,7 @@ public class BlockSmelter extends BlockContainer
     
     @Override
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
-    {
-        if (world.isRemote)
-            return;
-        
+    {        
         TileEntitySmelter te = (TileEntitySmelter) world.getBlockTileEntity(i, j, k);
         TileEntityMolder me = null;
         if (world.getBlockMetadata(i, j, k) == 0)
@@ -164,10 +155,7 @@ public class BlockSmelter extends BlockContainer
     
     @Override
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityLiving, ItemStack par6ItemStack)
-    {
-        if (world.isRemote)
-            return;
-        
+    {        
         int rotation = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         world.setBlockMetadataWithNotify(i, j, k, rotation, 2);
     }

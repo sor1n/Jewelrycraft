@@ -74,7 +74,7 @@ public class TileEntitySmelter extends TileEntity
                 this.worldObj.spawnParticle("flame", (double)xCoord + Math.random(), (double)yCoord + 0.5F, (double)zCoord + Math.random(), 0.0D, 0.0D, 0.0D);
             }
         }
-        if(rand.nextInt(15) == 0){
+        if(rand.nextInt(65) == 0){
             double d5 = (double)((float)this.xCoord + rand.nextFloat());
             double d7 = (double)this.yCoord;
             double d6 = (double)((float)this.zCoord + rand.nextFloat());

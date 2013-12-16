@@ -42,10 +42,7 @@ public class BlockMolder extends BlockContainer
     
     @Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
-    {
-        if (world.isRemote)
-            return true;
-        
+    {        
         TileEntityMolder te = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && item != null && !te.hasMold && item.itemID == ItemList.molds.itemID)
@@ -66,8 +63,6 @@ public class BlockMolder extends BlockContainer
     @Override
     public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int par5)
     {
-        if (world.isRemote)
-            return;
         
         TileEntityMolder te = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
         if (te != null)
@@ -110,10 +105,7 @@ public class BlockMolder extends BlockContainer
     
     @Override
     public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion par5Explosion)
-    {
-        if (world.isRemote)
-            return;
-        
+    {        
         onBlockDestroyedByPlayer(world, i, j, k, 0);
     }
     
@@ -121,21 +113,19 @@ public class BlockMolder extends BlockContainer
     {
         if (item != null)
         {
+            ItemStack copy = null;
             if (item.itemID == ItemList.ring.itemID && metal != null)
             {
-                Item r = new ItemRing(ItemList.ring.itemID, metal);
-                item = new ItemStack(r);
+                Item r = new ItemRing(ItemList.ring.itemID, metal).setUnlocalizedName("jewelrycraft.ring");
+                copy = new ItemStack(r);
             }
-            player.inventory.addItemStackToInventory(item);
+            player.inventory.addItemStackToInventory(copy);
         }
     }
     
     @Override
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
-    {
-        if (world.isRemote)
-            return;
-        
+    {        
         TileEntityMolder me = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
         if (me != null && me.hasJewelBase)
         {

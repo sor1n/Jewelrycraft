@@ -8,4 +8,4 @@ tile.jewelrycraft.oreShadow.name=Shadow Ore
 tile.jewelrycraft.smelter.name=Smelter
 tile.jewelrycraft.molder.name=Molder
 tile.jewelrycraft.jewelCraftingTable.name=Jeweler's Crafting Table
-itemGroup.JewelryCraft.name=Jewelrycraft
+itemGroup.JewelryCraft=Jewelrycraft

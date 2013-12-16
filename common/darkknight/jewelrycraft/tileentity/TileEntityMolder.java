@@ -87,7 +87,7 @@ public class TileEntityMolder extends TileEntity
             for (int l = 0; l < 4; ++l)
             {
                 //EntityFX entityfx = new EntityReddustFX(this.worldObj, (double)xCoord + Math.random(), (double)yCoord + 0.2D, (double)zCoord + Math.random(), 0.0F, 0.0F, 0.0F);
-                this.worldObj.spawnParticle("reddust", (double)xCoord + Math.random(), (double)yCoord + 0.2F, (double)zCoord + Math.random(), 0.0D, 1.0D, 0.0D);
+                this.worldObj.spawnParticle("reddust", (double)xCoord, (double)yCoord + 0.2F, (double)zCoord, 0.0D, 1.0D, 0.0D);
             }
         }
     }

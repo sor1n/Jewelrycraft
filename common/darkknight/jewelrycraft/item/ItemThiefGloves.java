@@ -37,8 +37,9 @@ public class ItemThiefGloves extends ItemBase
                 while(iterator.hasNext())
                 {
                     MerchantRecipe recipe = (MerchantRecipe)iterator.next();
+                    int toolUses = (Integer) ReflectionHelper.getPrivateValue(MerchantRecipe.class, recipe, "toolUses", "field_77400_d");
                     int quantity;
-                    if(recipe.getItemToSell().isStackable()) quantity = recipe.getItemToSell().stackSize * 7;
+                    if(recipe.getItemToSell().isStackable()) quantity = recipe.getItemToSell().stackSize * (7 - toolUses);
                     else quantity = 1;
                     ItemStack s = new ItemStack(recipe.getItemToSell().itemID, quantity, recipe.getItemToSell().getItemDamage());
                     s.setTagCompound(recipe.getItemToSell().getTagCompound());
