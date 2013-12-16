@@ -50,7 +50,8 @@ public class BlockMolder extends BlockContainer
             te.mold = item;
             te.hasMold = true;
             --item.stackSize;
-            entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.molder.addedmold", te.mold.getDisplayName()));
+            if (world.isRemote)
+                entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.molder.addedmold", te.mold.getDisplayName()));
         }
         if (te.hasMold && entityPlayer.isSneaking())
         {
