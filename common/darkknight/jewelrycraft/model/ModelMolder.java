@@ -12,12 +12,12 @@ public class ModelMolder extends ModelBase
     ModelRenderer Side1;
     ModelRenderer Side2;
     ModelRenderer Side3;
-
+    
     public ModelMolder()
     {
         textureWidth = 64;
         textureHeight = 32;
-
+        
         Base = new ModelRenderer(this, 0, 0);
         Base.addBox(0F, 0F, 0F, 10, 1, 10);
         Base.setRotationPoint(-5F, 23F, -5F);
@@ -49,7 +49,7 @@ public class ModelMolder extends ModelBase
         Side3.mirror = true;
         setRotation(Side3, 0F, 0F, 0F);
     }
-
+    
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         super.render(entity, f, f1, f2, f3, f4, f5);
@@ -60,17 +60,17 @@ public class ModelMolder extends ModelBase
         Side2.render(f5);
         Side3.render(f5);
     }
-
+    
     private void setRotation(ModelRenderer model, float x, float y, float z)
     {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
+    
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
     {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
     }
-
+    
 }

@@ -13,7 +13,7 @@ public class TileEntityMolder extends TileEntity
     public int cooling;
     public boolean hasMoltenMetal, hasJewelBase, hasMold;
     public ItemStack mold, jewelBase, moltenMetal, ringMetal;
-
+    
     public TileEntityMolder()
     {
         this.moltenMetal = new ItemStack(0, 0, 0);
@@ -25,7 +25,7 @@ public class TileEntityMolder extends TileEntity
         this.hasMoltenMetal = false;
         this.hasMold = false;
     }
-
+    
     @Override
     public void writeToNBT(NBTTagCompound nbt)
     {
@@ -47,7 +47,7 @@ public class TileEntityMolder extends TileEntity
         this.ringMetal.writeToNBT(tag2);
         nbt.setCompoundTag("ringMetal", tag3);
     }
-
+    
     @Override
     public void readFromNBT(NBTTagCompound nbt)
     {
@@ -65,40 +65,43 @@ public class TileEntityMolder extends TileEntity
         this.ringMetal = new ItemStack(0, 0, 0);
         this.ringMetal.readFromNBT(nbt.getCompoundTag("ringMetal"));
     }
-
+    
     public void updateEntity()
     {
         super.updateEntity();
-        if(moltenMetal.itemID != 0)
-        {            
-            this.worldObj.playSoundEffect((double)((float)xCoord + 0.5F), (double)((float)yCoord + 0.5F), (double)((float)zCoord + 0.5F), "random.fizz", 0.5F, 2.6F + 0.2F * 0.8F);
+        if (moltenMetal.itemID != 0)
+        {
+            this.worldObj.playSoundEffect((double) ((float) xCoord + 0.5F), (double) ((float) yCoord + 0.5F), (double) ((float) zCoord + 0.5F), "random.fizz", 0.5F, 2.6F + 0.2F * 0.8F);
             for (int l = 0; l < 2; ++l)
             {
                 //EntityFX entityfx = new EntityReddustFX(this.worldObj, (double)xCoord + Math.random(), (double)yCoord + 0.2D, (double)zCoord + Math.random(), 0.0F, 0.0F, 0.0F);
-                this.worldObj.spawnParticle("reddust", (double)xCoord + Math.random(), (double)yCoord + 0.2F, (double)zCoord + Math.random(), 0.0D, 1.0D, 1.0D);
+                this.worldObj.spawnParticle("reddust", (double) xCoord + Math.random(), (double) yCoord + 0.2F, (double) zCoord + Math.random(), 0.0D, 1.0D, 1.0D);
             }
         }
-        if(this.hasMoltenMetal && !this.hasJewelBase)
-        {            
+        if (this.hasMoltenMetal && !this.hasJewelBase)
+        {
             ringMetal = moltenMetal;
-            if(cooling > 0) this.cooling--;
-            if(cooling == 0)
+            if (cooling > 0)
+                this.cooling--;
+            if (cooling == 0)
             {
                 this.hasMoltenMetal = false;
-                if(mold.getItemDamage() == 0) this.jewelBase = moltenMetal;
-                else this.jewelBase = new ItemStack(ItemList.ring);
+                if (mold.getItemDamage() == 0)
+                    this.jewelBase = moltenMetal;
+                else
+                    this.jewelBase = new ItemStack(ItemList.ring);
                 this.moltenMetal = new ItemStack(0, 0, 0);
                 this.hasJewelBase = true;
             }
         }
     }
-
+    
     public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)
     {
         readFromNBT(pkt.data);
     }
-
-    public Packet getDescriptionPacket() 
+    
+    public Packet getDescriptionPacket()
     {
         NBTTagCompound nbtTag = new NBTTagCompound();
         this.writeToNBT(nbtTag);

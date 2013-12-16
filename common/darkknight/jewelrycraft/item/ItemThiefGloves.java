@@ -23,6 +23,7 @@ import net.minecraft.village.MerchantRecipeList;
 public class ItemThiefGloves extends ItemBase
 {
     public Random rand;
+    
     public ItemThiefGloves(int par1)
     {
         super(par1);
@@ -38,27 +39,31 @@ public class ItemThiefGloves extends ItemBase
             EntityVillager villager = (EntityVillager) par3EntityLivingBase;
             int wealth = (Integer) ReflectionHelper.getPrivateValue(EntityVillager.class, villager, "wealth", "field_70956_bz");
             MerchantRecipeList buyingList = (MerchantRecipeList) ReflectionHelper.getPrivateValue(EntityVillager.class, villager, "buyingList", "field_70963_i");
-            if(buyingList!=null)
+            if (buyingList != null)
             {
                 Iterator<?> iterator = buyingList.iterator();
-                while(iterator.hasNext())
+                while (iterator.hasNext())
                 {
-                    MerchantRecipe recipe = (MerchantRecipe)iterator.next();
+                    MerchantRecipe recipe = (MerchantRecipe) iterator.next();
                     int toolUses = (Integer) ReflectionHelper.getPrivateValue(MerchantRecipe.class, recipe, "toolUses", "field_77400_d");
                     int quantity;
-                    if(recipe.getItemToSell().isStackable()) quantity = recipe.getItemToSell().stackSize * (7 - toolUses);
-                    else quantity = 1;
+                    if (recipe.getItemToSell().isStackable())
+                        quantity = recipe.getItemToSell().stackSize * (7 - toolUses);
+                    else
+                        quantity = 1;
                     ItemStack s = new ItemStack(recipe.getItemToSell().itemID, quantity, recipe.getItemToSell().getItemDamage());
                     s.setTagCompound(recipe.getItemToSell().getTagCompound());
-                    if(par2EntityPlayer.inventory.addItemStackToInventory(s));
-                    else villager.entityDropItem(s, 0);
+                    if (par2EntityPlayer.inventory.addItemStackToInventory(s))
+                        ;
+                    else
+                        villager.entityDropItem(s, 0);
                     par2EntityPlayer.addChatMessage("Villager #" + villager.getProfession() + ": Hmmm... I seem to have lost my " + s.getDisplayName() + "!");
-                }    
+                }
                 buyingList.clear();
                 ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 300, "timeUntilReset", "field_70961_j");
                 ReflectionHelper.setPrivateValue(EntityVillager.class, villager, true, "needsInitilization", "field_70959_by");
-            } 
-
+            }
+            
             villager.dropItem(Item.emerald.itemID, wealth);
             ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 0, "wealth", "field_70956_bz");
             return true;
@@ -68,11 +73,14 @@ public class ItemThiefGloves extends ItemBase
             return super.itemInteractionForEntity(par1ItemStack, par2EntityPlayer, par3EntityLivingBase);
         }
     }
+    
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
     {
-        if(!shouldAddAdditionalInfo()) list.add(EnumChatFormatting.GRAY + additionalInfoInstructions());
-        else{
+        if (!shouldAddAdditionalInfo())
+            list.add(EnumChatFormatting.GRAY + additionalInfoInstructions());
+        else
+        {
             list.add(EnumChatFormatting.GRAY + "Right click with the gloves,");
             list.add(EnumChatFormatting.GRAY + "while sneaking, on a villager");
             list.add(EnumChatFormatting.GRAY + "to steal his stuff.");
@@ -90,8 +98,7 @@ public class ItemThiefGloves extends ItemBase
         }
         return false;
     }
-
-
+    
     public static String additionalInfoInstructions()
     {
         String message = "§oPress §b<SHIFT>§7§o for more information.";
