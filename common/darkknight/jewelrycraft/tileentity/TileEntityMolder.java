@@ -69,11 +69,19 @@ public class TileEntityMolder extends TileEntity
     public void updateEntity()
     {
         super.updateEntity();
+        if(moltenMetal.itemID != 0)
+        {            
+            this.worldObj.playSoundEffect((double)((float)xCoord + 0.5F), (double)((float)yCoord + 0.5F), (double)((float)zCoord + 0.5F), "random.fizz", 0.5F, 2.6F + 0.2F * 0.8F);
+            for (int l = 0; l < 2; ++l)
+            {
+                //EntityFX entityfx = new EntityReddustFX(this.worldObj, (double)xCoord + Math.random(), (double)yCoord + 0.2D, (double)zCoord + Math.random(), 0.0F, 0.0F, 0.0F);
+                this.worldObj.spawnParticle("reddust", (double)xCoord + Math.random(), (double)yCoord + 0.2F, (double)zCoord + Math.random(), 0.0D, 1.0D, 1.0D);
+            }
+        }
         if(this.hasMoltenMetal && !this.hasJewelBase)
         {            
             ringMetal = moltenMetal;
             if(cooling > 0) this.cooling--;
-            System.out.println(mold.getItemDamage());
             if(cooling == 0)
             {
                 this.hasMoltenMetal = false;
@@ -81,13 +89,6 @@ public class TileEntityMolder extends TileEntity
                 else this.jewelBase = new ItemStack(ItemList.ring);
                 this.moltenMetal = new ItemStack(0, 0, 0);
                 this.hasJewelBase = true;
-            }
-            
-            this.worldObj.playSoundEffect((double)((float)xCoord + 0.5F), (double)((float)yCoord + 0.5F), (double)((float)zCoord + 0.5F), "random.fizz", 0.5F, 2.6F + 0.2F * 0.8F);
-            for (int l = 0; l < 4; ++l)
-            {
-                //EntityFX entityfx = new EntityReddustFX(this.worldObj, (double)xCoord + Math.random(), (double)yCoord + 0.2D, (double)zCoord + Math.random(), 0.0F, 0.0F, 0.0F);
-                this.worldObj.spawnParticle("reddust", (double)xCoord, (double)yCoord + 0.2F, (double)zCoord, 0.0D, 1.0D, 0.0D);
             }
         }
     }

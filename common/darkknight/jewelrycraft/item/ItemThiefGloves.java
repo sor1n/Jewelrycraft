@@ -1,9 +1,14 @@
 package darkknight.jewelrycraft.item;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
+import org.lwjgl.input.Keyboard;
+
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,6 +16,7 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 
@@ -21,6 +27,7 @@ public class ItemThiefGloves extends ItemBase
     {
         super(par1);
         this.setCreativeTab(CreativeTabs.tabTools);
+        this.setMaxStackSize(1);
     }
     
     @Override
@@ -60,6 +67,35 @@ public class ItemThiefGloves extends ItemBase
         {
             return super.itemInteractionForEntity(par1ItemStack, par2EntityPlayer, par3EntityLivingBase);
         }
+    }
+    @SuppressWarnings("unchecked")
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
+    {
+        if(!shouldAddAdditionalInfo()) list.add(EnumChatFormatting.GRAY + additionalInfoInstructions());
+        else{
+            list.add(EnumChatFormatting.GRAY + "Right click with the gloves,");
+            list.add(EnumChatFormatting.GRAY + "while sneaking, on a villager");
+            list.add(EnumChatFormatting.GRAY + "to steal his stuff.");
+        }
+    }
+    
+    public static boolean shouldAddAdditionalInfo()
+    {
+        if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+        {
+            if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public static String additionalInfoInstructions()
+    {
+        String message = "§oPress §b<SHIFT>§7§o for more information.";
+        return message;
     }
     
 }
