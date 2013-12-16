@@ -34,6 +34,8 @@ public class BlockList
             
             GameRegistry.registerTileEntity(TileEntitySmelter.class, "30");
             GameRegistry.registerTileEntity(TileEntityMolder.class, "31");
+            
+            isInitialized = true;
         }
     }
 }
