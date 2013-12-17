@@ -11,7 +11,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
 {
     public boolean hasJewel, hasModifier, hasEndItem;
     public ItemStack jewel, modifier, endItem;
-    public int timer;
+    public int       timer;
     
     public TileEntityJewelrsCraftingTable()
     {
@@ -59,30 +59,34 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
         this.endItem.readFromNBT(nbt.getCompoundTag("endItem"));
     }
     
+    @Override
     public void updateEntity()
     {
         super.updateEntity();
-        if(this.hasJewel && this.hasEndItem)
+        if (this.hasJewel && this.hasModifier && !this.hasEndItem)
         {
-            if(timer > 0) timer--;
+            if (timer > 0)
+                timer--;
             System.out.println(timer);
-            if(timer == 0)
+            if (timer == 0)
             {
                 this.hasEndItem = true;
-                this.endItem = jewel;
+                this.endItem = jewel.copy();
                 this.hasJewel = false;
-                this.jewel = new ItemStack(0, 0, 0);
+                //                this.jewel = new ItemStack(0, 0, 0);
                 this.hasModifier = false;
-                this.modifier = new ItemStack(0, 0, 0);
+                //                this.modifier = new ItemStack(0, 0, 0);
             }
         }
     }
     
+    @Override
     public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)
     {
         readFromNBT(pkt.data);
     }
     
+    @Override
     public Packet getDescriptionPacket()
     {
         NBTTagCompound nbtTag = new NBTTagCompound();

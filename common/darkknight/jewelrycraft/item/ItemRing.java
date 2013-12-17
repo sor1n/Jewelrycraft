@@ -75,14 +75,15 @@ public class ItemRing extends ItemBase
         }
     }
     
-    public void onUpdate(ItemStack stack, World par2World, Entity par3Entity, int par4, boolean par5) 
+    @Override
+    public void onUpdate(ItemStack stack, World par2World, Entity par3Entity, int par4, boolean par5)
     {
-        if(stack.hasTagCompound() && stack.getTagCompound().hasKey("effect"))
+        if (stack.hasTagCompound() && stack.getTagCompound().hasKey("effect") && !par2World.isRemote)
         {
-            NBTTagCompound effectNBT = (NBTTagCompound) stack.getTagCompound().getTag("effect");
-            PotionEffect effect = new PotionEffect(0, 0);
-            effect.readCustomPotionEffectFromNBT(effectNBT);
-            ((EntityPlayer)par3Entity).addPotionEffect(effect);
+            //            NBTTagCompound effectNBT = (NBTTagCompound) stack.getTagCompound().getTag("effect");
+            //            PotionEffect effect = new PotionEffect(0, 0);
+            //            effect.readCustomPotionEffectFromNBT(effectNBT);
+            //            ((EntityPlayer) par3Entity).addPotionEffect(effect);
             
         }
     }
