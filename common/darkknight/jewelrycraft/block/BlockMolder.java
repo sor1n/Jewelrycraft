@@ -45,19 +45,21 @@ public class BlockMolder extends BlockContainer
     {
         TileEntityMolder te = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
-        if (te != null && item != null && !te.hasMold && item.itemID == ItemList.molds.itemID)
+        if (te != null && item != null && !te.hasMold && item.itemID == ItemList.molds.itemID && !world.isRemote)
         {
             te.mold = item;
             te.hasMold = true;
             --item.stackSize;
             if (world.isRemote)
                 entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.molder.addedmold", te.mold.getDisplayName()));
+            te.isDirty = true;
         }
-        if (te.hasMold && entityPlayer.isSneaking())
+        if (te.hasMold && entityPlayer.isSneaking() && !world.isRemote)
         {
             entityPlayer.inventory.addItemStackToInventory(new ItemStack(te.mold.itemID, 1, te.mold.getItemDamage()));
             te.mold = new ItemStack(0, 0, 0);
             te.hasMold = false;
+            te.isDirty = true;
         }
         return true;
     }
@@ -140,6 +142,7 @@ public class BlockMolder extends BlockContainer
                 player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.moldisempty"));
             else if (me.mold.itemID != ItemList.molds.itemID)
                 player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.moldismissing"));
+            me.isDirty = true;
         }
     }
     

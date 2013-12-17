@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntitySmelter extends TileEntity
 {
     public int melting, flow, n = 0, p = 0;
-    public boolean hasMetal, hasMoltenMetal;
+    public boolean hasMetal, hasMoltenMetal, isDirty;
     public ItemStack metal, moltenMetal;
     
     public TileEntitySmelter()
@@ -22,6 +22,7 @@ public class TileEntitySmelter extends TileEntity
         this.hasMoltenMetal = false;
         this.metal = new ItemStack(0, 0, 0);
         this.moltenMetal = new ItemStack(0, 0, 0);
+        this.isDirty = false;
     }
     
     @Override
@@ -57,6 +58,10 @@ public class TileEntitySmelter extends TileEntity
     {
         super.updateEntity();
         Random rand = new Random();
+        if(isDirty){
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            isDirty = true;
+        }
         if (p > 0)
             --p;
         else
@@ -73,12 +78,12 @@ public class TileEntitySmelter extends TileEntity
             if (flow <= 0)
                 n = 0;
         }
-        if (this.melting > 0)
+        if (metal.itemID != 0)
         {
             for (int l = 0; l < 5; ++l)
             {
                 //EntityFX entityfx = new EntityReddustFX(this.worldObj, (double)xCoord + Math.random(), (double)yCoord + 0.2D, (double)zCoord + Math.random(), 0.0F, 0.0F, 0.0F);
-                this.worldObj.spawnParticle("flame", xCoord, yCoord + 1.1D, zCoord, 0.0D, 0.5D, 0.0D);
+                this.worldObj.spawnParticle("flame", xCoord, (double) yCoord + 0.6F, zCoord, 0.0D, 0.0D, 0.0D);
             }
         }
         if (rand.nextInt(65) == 0)

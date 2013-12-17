@@ -35,8 +35,10 @@ public class TileEntitySmelterRender extends TileEntitySpecialRenderer
         GL11.glPushMatrix();
         if (block == 0)
             GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-        else if (block == 1)
-            GL11.glRotatef(180F, 1F, 0.0F, 1F);
+        else if (block == 1){
+            GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(90F, 0.0F, 1.0F, 0.0F);
+        }
         else if (block == 2)
             GL11.glRotatef(180F, 1.0F, 0.0F, 0.0F);
         else if (block == 3)

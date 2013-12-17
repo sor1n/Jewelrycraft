@@ -11,7 +11,7 @@ import darkknight.jewelrycraft.item.ItemList;
 public class TileEntityMolder extends TileEntity
 {
     public int cooling;
-    public boolean hasMoltenMetal, hasJewelBase, hasMold;
+    public boolean hasMoltenMetal, hasJewelBase, hasMold, isDirty;
     public ItemStack mold, jewelBase, moltenMetal, ringMetal;
     
     public TileEntityMolder()
@@ -24,6 +24,7 @@ public class TileEntityMolder extends TileEntity
         this.hasJewelBase = false;
         this.hasMoltenMetal = false;
         this.hasMold = false;
+        this.isDirty = false;
     }
     
     @Override
@@ -70,9 +71,13 @@ public class TileEntityMolder extends TileEntity
     public void updateEntity()
     {
         super.updateEntity();
+        if(isDirty){
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            isDirty = true;
+        }
         if (moltenMetal.itemID != 0)
         {
-            this.worldObj.playSoundEffect(xCoord + 0.5F, yCoord + 0.5F, zCoord + 0.5F, "random.fizz", 0.5F, 2.6F + 0.2F * 0.8F);
+            this.worldObj.playSoundEffect(xCoord, yCoord + 0.5F, zCoord, "random.fizz", 0.5F, 1F);
             for (int l = 0; l < 2; ++l)
             {
                 //EntityFX entityfx = new EntityReddustFX(this.worldObj, (double)xCoord + Math.random(), (double)yCoord + 0.2D, (double)zCoord + Math.random(), 0.0F, 0.0F, 0.0F);

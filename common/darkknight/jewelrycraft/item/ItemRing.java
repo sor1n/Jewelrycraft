@@ -17,7 +17,7 @@ public class ItemRing extends ItemBase
         super(par1);
         this.setMaxStackSize(1);
     }
-    
+
     public static void addMetal(ItemStack item, ItemStack metal)
     {
         NBTTagCompound itemStackData;
@@ -32,8 +32,8 @@ public class ItemRing extends ItemBase
         metal.writeToNBT(ingotNBT);
         itemStackData.setTag("ingot", ingotNBT);
     }
-    
-    public static void addEffect(ItemStack item, PotionEffect effect)
+
+    public static void addEffect(ItemStack item, int potion)
     {
         NBTTagCompound itemStackData;
         if (item.hasTagCompound())
@@ -43,16 +43,15 @@ public class ItemRing extends ItemBase
             itemStackData = new NBTTagCompound();
             item.setTagCompound(itemStackData);
         }
-        NBTTagCompound effectNBT = new NBTTagCompound();
-        effect.writeCustomPotionEffectToNBT(effectNBT);
-        itemStackData.setTag("effect", effectNBT);
+        NBTTagCompound potionNBT = new NBTTagCompound();
+        potionNBT.setInteger("potion", potion);
     }
-    
+
     /**
      * allows items to add custom lines of information to the mouseover description
      */
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({ "rawtypes", "unchecked", "static-access" })
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
     {
         if (stack.hasTagCompound())
@@ -64,27 +63,33 @@ public class ItemRing extends ItemBase
                 ingotStack.readFromNBT(ingotNBT);
                 list.add(EnumChatFormatting.GRAY + ingotStack.getDisplayName());
             }
-            
-            if (stack.getTagCompound().hasKey("effect"))
+
+            if (stack.getTagCompound().hasKey("potion"))
             {
-                NBTTagCompound effectNBT = (NBTTagCompound) stack.getTagCompound().getTag("effect");
-                PotionEffect effect = new PotionEffect(0, 0);
-                effect.readCustomPotionEffectFromNBT(effectNBT);
-                list.add(EnumChatFormatting.GREEN + effect.getEffectName());
+                NBTTagCompound potionNBT = new NBTTagCompound();;
+                int potion = 0;
+                potion = potionNBT.getInteger("potion");
+                list.add(EnumChatFormatting.GREEN + Integer.toString(potion));
             }
         }
     }
-    
+
     @Override
     public void onUpdate(ItemStack stack, World par2World, Entity par3Entity, int par4, boolean par5)
     {
-        if (stack.hasTagCompound() && stack.getTagCompound().hasKey("effect") && !par2World.isRemote)
+        if (stack.hasTagCompound())
         {
-            //            NBTTagCompound effectNBT = (NBTTagCompound) stack.getTagCompound().getTag("effect");
-            //            PotionEffect effect = new PotionEffect(0, 0);
-            //            effect.readCustomPotionEffectFromNBT(effectNBT);
-            //            ((EntityPlayer) par3Entity).addPotionEffect(effect);
-            
+            if(stack.getTagCompound().hasKey("effect"))
+            {
+                if (par3Entity instanceof EntityPlayer)
+                {
+                    EntityPlayer entityplayer = (EntityPlayer)par3Entity;
+                    NBTTagCompound potionNBT = new NBTTagCompound();
+                    int potion = 0;
+                    potion = potionNBT.getInteger("potion");
+                    if(potion != 0 && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(potion, 4));
+                }
+            }
         }
     }
 }

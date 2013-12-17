@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityJewelrsCraftingTable extends TileEntity
 {
-    public boolean hasJewel, hasModifier, hasEndItem;
+    public boolean hasJewel, hasModifier, hasEndItem, isDirty;
     public ItemStack jewel, modifier, endItem;
     public int       timer;
     
@@ -22,6 +22,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
         this.hasModifier = false;
         this.hasEndItem = false;
         this.timer = 0;
+        this.isDirty = false;
     }
     
     @Override
@@ -63,6 +64,10 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
     public void updateEntity()
     {
         super.updateEntity();
+        if(isDirty){
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            isDirty = true;
+        }
         if (this.hasJewel && this.hasModifier && !this.hasEndItem)
         {
             if (timer > 0)

@@ -26,10 +26,22 @@ public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRende
         
         ResourceLocation blockTexture = new ResourceLocation("jewelrycraft", texture);
         Minecraft.getMinecraft().renderEngine.bindTexture(blockTexture);
+        int block = te.getBlockMetadata();        
         
         GL11.glPushMatrix();
-        GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-        modelTable.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);        
+        if (block == 0)
+            GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+        else if (block == 1){
+            GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(90F, 0.0F, 1.0F, 0.0F);
+        }
+        else if (block == 2)
+            GL11.glRotatef(180F, 1.0F, 0.0F, 0.0F);
+        else if (block == 3)
+            GL11.glRotatef(180F, 1.0F, 0.0F, 1.0F);
+        
+        modelTable.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);  
+        
         GL11.glPopMatrix();
         GL11.glPopMatrix();
     }

@@ -101,6 +101,7 @@ public class BlockSmelter extends BlockContainer
                 te.hasMetal = false;
             }
             world.setBlockTileEntity(i, j, k, te);
+            te.isDirty = true;
         }
         return true;
     }
@@ -137,6 +138,7 @@ public class BlockSmelter extends BlockContainer
                 player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.modlerhasitem"));
             else
                 player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.molderismissing"));
+            te.isDirty = true;
         }
         
     }
