@@ -4,12 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import org.lwjgl.input.Keyboard;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.ReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityVillager;
@@ -19,6 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
+
+import org.lwjgl.input.Keyboard;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
 
 public class ItemThiefGloves extends ItemBase
 {
@@ -74,6 +74,7 @@ public class ItemThiefGloves extends ItemBase
         }
     }
     
+    @Override
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
     {
@@ -101,7 +102,7 @@ public class ItemThiefGloves extends ItemBase
     
     public static String additionalInfoInstructions()
     {
-        String message = "§oPress §b<SHIFT>§7§o for more information.";
+        String message = "\247oPress \247b<SHIFT>\2477\247o for more information.";
         return message;
     }
     
