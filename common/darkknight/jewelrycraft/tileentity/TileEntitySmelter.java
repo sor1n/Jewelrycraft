@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
@@ -80,10 +81,10 @@ public class TileEntitySmelter extends TileEntity
         }
         if (metal.itemID != 0)
         {
-            for (int l = 0; l < 5; ++l)
+            for (int l = 0; l < 2; ++l)
             {
                 //EntityFX entityfx = new EntityReddustFX(this.worldObj, (double)xCoord + Math.random(), (double)yCoord + 0.2D, (double)zCoord + Math.random(), 0.0F, 0.0F, 0.0F);
-                this.worldObj.spawnParticle("flame", xCoord, (double) yCoord + 0.6F, zCoord, 0.0D, 0.0D, 0.0D);
+                this.worldObj.spawnParticle("flame", xCoord + rand.nextFloat(), (double) yCoord + 0.3F, zCoord + rand.nextFloat(), 0.0D, 0.0D, 0.0D);
             }
         }
         if (rand.nextInt(65) == 0)
@@ -109,10 +110,19 @@ public class TileEntitySmelter extends TileEntity
     }
     
     @Override
-    public Packet getDescriptionPacket()
+    public Packet getDescriptionPacket() 
     {
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        this.writeToNBT(nbtTag);
-        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+        Packet132TileEntityData packet = (Packet132TileEntityData) super.getDescriptionPacket();
+        NBTTagCompound dataTag = packet != null ? packet.data : new NBTTagCompound();
+        writeToNBT(dataTag);
+        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 1, dataTag);
+    }
+
+    @Override
+    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) 
+    {
+        super.onDataPacket(net, pkt);
+        NBTTagCompound tag = pkt != null ? pkt.data : new NBTTagCompound();
+        readFromNBT(tag);
     }
 }

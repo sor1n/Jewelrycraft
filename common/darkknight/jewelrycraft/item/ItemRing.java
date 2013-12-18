@@ -1,13 +1,23 @@
 package darkknight.jewelrycraft.item;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.ResourceManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class ItemRing extends ItemBase
@@ -16,6 +26,47 @@ public class ItemRing extends ItemBase
     {
         super(par1);
         this.setMaxStackSize(1);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
+    {
+        try
+        {
+            return color(par1ItemStack);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int color(ItemStack stack) throws IOException
+    {
+        if (stack.hasTagCompound())
+        {
+            if (stack.getTagCompound().hasKey("ingot"))
+            {
+                NBTTagCompound ingotNBT = (NBTTagCompound) stack.getTagCompound().getTag("ingot");
+                ItemStack ingotStack = new ItemStack(0, 0, 0);
+                ingotStack.readFromNBT(ingotNBT);
+                if(ingotStack.getIconIndex().getIconName() != "")
+                {
+                    String domain = "";
+                    if(ingotStack.getIconIndex().getIconName().substring(0, ingotStack.getIconIndex().getIconName().indexOf(":") + 1) != "")
+                        domain = ingotStack.getIconIndex().getIconName().substring(0, ingotStack.getIconIndex().getIconName().indexOf(":") + 1).replace(":", " ").trim();
+                    else
+                        domain = "minecraft";
+                    String texture = ingotStack.getIconIndex().getIconName().substring(ingotStack.getIconIndex().getIconName().lastIndexOf(":") + 1) + ".png";
+                    ResourceLocation lava = new ResourceLocation(domain, "textures/items/" + texture);
+                    ResourceManager rm = Minecraft.getMinecraft().getResourceManager();
+                    BufferedImage bufferedimage = ImageIO.read(rm.getResource(lava).getInputStream());
+                    return bufferedimage.getRGB(8, 8);   
+                }
+            }
+        }
+        return 0;
     }
 
     public static void addMetal(ItemStack item, ItemStack metal)
@@ -51,7 +102,7 @@ public class ItemRing extends ItemBase
      * allows items to add custom lines of information to the mouseover description
      */
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked", "static-access" })
+    @SuppressWarnings({ "rawtypes", "unchecked"})
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
     {
         if (stack.hasTagCompound())

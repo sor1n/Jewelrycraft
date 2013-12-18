@@ -85,7 +85,7 @@ public class BlockSmelter extends BlockContainer
                 entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.nowsmeltingingot", item.getDisplayName()));
                 te.metal = new ItemStack(item.itemID, 1, item.getItemDamage());
                 te.hasMetal = true;
-                te.melting = 2000;
+                te.melting = 1500;
                 --item.stackSize;
             }
             else if (te.hasMetal && !te.hasMoltenMetal && item != null && item.getDisplayName().contains("Ingot") && !item.getDisplayName().contains("Mold"))
@@ -129,6 +129,7 @@ public class BlockSmelter extends BlockContainer
                 me.cooling = 200;
                 te.moltenMetal = new ItemStack(0, 0, 0);
                 te.hasMoltenMetal = false;
+                me.isDirty = true;
             }
             else if (me.hasMoltenMetal)
                 player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.molderhasmoltenmetal"));

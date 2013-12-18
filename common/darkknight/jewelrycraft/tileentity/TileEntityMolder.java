@@ -103,16 +103,19 @@ public class TileEntityMolder extends TileEntity
     }
     
     @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)
+    public Packet getDescriptionPacket() 
     {
-        readFromNBT(pkt.data);
+        Packet132TileEntityData packet = (Packet132TileEntityData) super.getDescriptionPacket();
+        NBTTagCompound dataTag = packet != null ? packet.data : new NBTTagCompound();
+        writeToNBT(dataTag);
+        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 1, dataTag);
     }
-    
+
     @Override
-    public Packet getDescriptionPacket()
+    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) 
     {
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        this.writeToNBT(nbtTag);
-        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+        super.onDataPacket(net, pkt);
+        NBTTagCompound tag = pkt != null ? pkt.data : new NBTTagCompound();
+        readFromNBT(tag);
     }
 }
