@@ -35,7 +35,7 @@ public class Generation implements IWorldGenerator
         for (int k = 1; k < 2; k++)
         {
             int x = i + random.nextInt(16);
-            int y = random.nextInt(7);
+            int y = 5 + random.nextInt(4);
             int z = j + random.nextInt(16);
             (new WorldGenMinable(BlockList.shadowOre.blockID, 1)).generate(world, random, x, y, z);
         }
