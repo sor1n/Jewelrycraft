@@ -43,14 +43,15 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                 ResourceLocation lava = new ResourceLocation("jewelrycraft", texture);
                 Minecraft.getMinecraft().renderEngine.bindTexture(lava);
                 me.mold.getIconIndex().getInterpolatedU(0);
-                int decal = 16;
+                int decal = 0;
+                int decal2 = 0;
 //                if (me.mold.getItemDamage() == 0)
 //                    decal = 32;
 //                else if (me.mold.getItemDamage() > 0)
 //                    decal = 64;
-                double minu = me.mold.getIconIndex().getInterpolatedU(16);
+                double minu = me.mold.getIconIndex().getInterpolatedU(decal2);
                 double minv = me.mold.getIconIndex().getInterpolatedV(-decal);
-                double maxu = me.mold.getIconIndex().getInterpolatedU(256 + 16);
+                double maxu = me.mold.getIconIndex().getInterpolatedU(256 + decal2);
                 double maxv = me.mold.getIconIndex().getInterpolatedV(256 - decal);
                 GL11.glPushMatrix();
                 GL11.glScalef(1f / 16f, 1f / 16f, 1f / 16f);

@@ -32,10 +32,10 @@ public class Generation implements IWorldGenerator
     
     private void generateSurface(World world, Random random, int i, int j)
     {
-        for (int k = 0; k < 1; k++)
+        for (int k = 1; k < 2; k++)
         {
             int x = i + random.nextInt(16);
-            int y = random.nextInt(5);
+            int y = random.nextInt(7);
             int z = j + random.nextInt(16);
             (new WorldGenMinable(BlockList.shadowOre.blockID, 1)).generate(world, random, x, y, z);
         }
