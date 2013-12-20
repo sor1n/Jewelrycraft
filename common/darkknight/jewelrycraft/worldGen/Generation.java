@@ -7,6 +7,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import cpw.mods.fml.common.IWorldGenerator;
 import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.config.ConfigHandler;
 
 public class Generation implements IWorldGenerator
 {
@@ -32,12 +33,13 @@ public class Generation implements IWorldGenerator
     
     private void generateSurface(World world, Random random, int i, int j)
     {
-        for (int k = 1; k < 2; k++)
+        for (int k = 1; k < 4; k++)
         {
             int x = i + random.nextInt(16);
             int y = 5 + random.nextInt(4);
             int z = j + random.nextInt(16);
-            (new WorldGenMinable(BlockList.shadowOre.blockID, 1)).generate(world, random, x, y, z);
+            world.setBlock(x, y, z, ConfigHandler.idShadowOre);
+            System.out.println(x + " " + y + " " + z);
         }
     }
     
