@@ -10,7 +10,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
@@ -65,14 +64,14 @@ public class BlockJewelrsCraftingTable extends BlockContainer
 
             if (te.hasModifier && entityPlayer.isSneaking())
             {
-                entityPlayer.inventory.addItemStackToInventory(new ItemStack(te.modifier.itemID, 1, te.modifier.getItemDamage()));
+                entityPlayer.inventory.addItemStackToInventory(te.modifier);
                 entityPlayer.inventory.onInventoryChanged();
                 te.modifier = new ItemStack(0, 0, 0);
                 te.hasModifier = false;
             }
             if (te.hasJewel && entityPlayer.isSneaking())
             {
-                entityPlayer.inventory.addItemStackToInventory(new ItemStack(te.jewel.itemID, 1, te.jewel.getItemDamage()));
+                entityPlayer.inventory.addItemStackToInventory(te.jewel);
                 entityPlayer.inventory.onInventoryChanged();
                 te.jewel = new ItemStack(0, 0, 0);
                 te.hasJewel = false;

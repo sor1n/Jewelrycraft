@@ -79,7 +79,7 @@ public class TileEntitySmelter extends TileEntity
             if (flow <= 0)
                 n = 0;
         }
-        if (metal.itemID != 0)
+        if (this.hasMetal)
         {
             for (int l = 0; l < 2; ++l)
             {

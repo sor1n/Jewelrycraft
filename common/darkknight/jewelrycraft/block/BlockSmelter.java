@@ -92,7 +92,9 @@ public class BlockSmelter extends BlockContainer
                 entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.alreadyhasingot", te.metal.getDisplayName()));
             else if (te.hasMoltenMetal)
                 entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.hasmolteningot", te.moltenMetal.getDisplayName()));
-            else if (item != null && !item.getDisplayName().contains("Ingot"))
+            else if (item != null && !item.getUnlocalizedName().toLowerCase().contains("ingot") && item.getDisplayName().contains("Ingot"))
+                entityPlayer.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.itemrenamedtoingot"));
+            else if (item != null && !item.getUnlocalizedName().toLowerCase().contains("ingot"))
                 entityPlayer.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.itemneedstobeingot"));
             
             if (te.hasMetal && entityPlayer.isSneaking())

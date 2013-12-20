@@ -19,6 +19,7 @@ chatmessage.jewelrycraft.molder.moldismissing=Molder does not contain a mold.
 chatmessage.jewelrycraft.smelter.alreadyhasingot=The Smelter already contains a %s
 chatmessage.jewelrycraft.smelter.hasmolteningot=The Smelter contains a molten %s
 chatmessage.jewelrycraft.smelter.itemneedstobeingot=The item needs to be an ingot!
+chatmessage.jewelrycraft.smelter.itemrenamedtoingot=Nice try, but renaming it to an ingot doesn't make it an ingot :p You can't fool me player!
 chatmessage.jewelrycraft.smelter.molderhasmoltenmetal=The Molder already has molten metal in it!
 chatmessage.jewelrycraft.smelter.molderhasnomold=The Molder doesn't have a mold in it! You might as well pour this stuff on the ground, eh?
 chatmessage.jewelrycraft.smelter.modlerhasitem=The Molder contains an item in it. Now you wouldn't want it to be destroyed, would you?

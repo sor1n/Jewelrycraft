@@ -45,10 +45,10 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                 me.mold.getIconIndex().getInterpolatedU(0);
                 int decal = 0;
                 int decal2 = 0;
-//                if (me.mold.getItemDamage() == 0)
-//                    decal = 32;
-//                else if (me.mold.getItemDamage() > 0)
-//                    decal = 64;
+                if (me.mold.getItemDamage() == 0)
+                    decal = 32;
+                else if (me.mold.getItemDamage() > 0)
+                    decal = 64;
                 double minu = me.mold.getIconIndex().getInterpolatedU(decal2);
                 double minv = me.mold.getIconIndex().getInterpolatedV(-decal);
                 double maxu = me.mold.getIconIndex().getInterpolatedU(256 + decal2);
