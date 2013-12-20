@@ -112,6 +112,7 @@ public class ItemRing extends ItemBase
         }
         NBTTagCompound potionNBT = new NBTTagCompound();
         potionNBT.setInteger("potion", potion);
+        itemStackData.setTag("potion", potionNBT);
     }
 
     /**
@@ -133,10 +134,10 @@ public class ItemRing extends ItemBase
 
             if (stack.getTagCompound().hasKey("potion"))
             {
-                NBTTagCompound potionNBT = new NBTTagCompound();;
+                NBTTagCompound potionNBT = (NBTTagCompound) stack.getTagCompound().getTag("potion");
                 int potion = 0;
                 potion = potionNBT.getInteger("potion");
-                list.add(EnumChatFormatting.GREEN + Integer.toString(potion));
+                list.add(EnumChatFormatting.GREEN + StatCollector.translateToLocal(new PotionEffect(potion, 4).getEffectName()));
             }
         }
     }
@@ -146,12 +147,12 @@ public class ItemRing extends ItemBase
     {
         if (stack.hasTagCompound())
         {
-            if(stack.getTagCompound().hasKey("effect"))
+            if(stack.getTagCompound().hasKey("potion"))
             {
                 if (par3Entity instanceof EntityPlayer)
                 {
                     EntityPlayer entityplayer = (EntityPlayer)par3Entity;
-                    NBTTagCompound potionNBT = new NBTTagCompound();
+                    NBTTagCompound potionNBT = (NBTTagCompound) stack.getTagCompound().getTag("potion");
                     int potion = 0;
                     potion = potionNBT.getInteger("potion");
                     if(potion != 0 && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(potion, 4));

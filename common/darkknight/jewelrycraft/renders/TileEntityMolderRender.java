@@ -45,14 +45,10 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                 me.mold.getIconIndex().getInterpolatedU(0);
                 int decal = -4;
                 int decal2 = 4;
-//                if (me.mold.getItemDamage() == 0)
-//                    decal = 32;
-//                else if (me.mold.getItemDamage() > 0)
-//                    decal = 64;
-                double minu = me.mold.getIconIndex().getInterpolatedU(decal2);
-                double minv = me.mold.getIconIndex().getInterpolatedV(-decal);
-                double maxu = me.mold.getIconIndex().getInterpolatedU(256*decal2);
-                double maxv = me.mold.getIconIndex().getInterpolatedV(256*decal);
+                double minu = me.mold.getIconIndex().getInterpolatedU(decal2 + 48);
+                double minv = me.mold.getIconIndex().getInterpolatedV(-decal + 32);
+                double maxu = me.mold.getIconIndex().getInterpolatedU(256*decal2 + 48);
+                double maxv = me.mold.getIconIndex().getInterpolatedV(256*decal + 32);
                 GL11.glPushMatrix();
                 GL11.glScalef(1f / 16f, 1f / 16f, 1f / 16f);
                 GL11.glDisable(GL11.GL_LIGHTING);

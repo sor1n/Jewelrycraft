@@ -4,9 +4,7 @@ import java.util.Random;
 
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.feature.WorldGenMinable;
 import cpw.mods.fml.common.IWorldGenerator;
-import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.config.ConfigHandler;
 
 public class Generation implements IWorldGenerator
