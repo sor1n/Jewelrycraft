@@ -77,7 +77,7 @@ public class TileEntityMolder extends TileEntity
         }
         if (moltenMetal.itemID != 0)
         {
-            this.worldObj.playSoundEffect(xCoord, yCoord + 0.5F, zCoord, "random.fizz", 0.5F, 1F);
+            if(worldObj.rand.nextInt(20) == 0) this.worldObj.playSoundEffect(xCoord, yCoord + 0.5F, zCoord, "random.fizz", 0.5F, 1F);
             for (int l = 0; l < 2; ++l)
             {
                 //EntityFX entityfx = new EntityReddustFX(this.worldObj, (double)xCoord + Math.random(), (double)yCoord + 0.2D, (double)zCoord + Math.random(), 0.0F, 0.0F, 0.0F);

@@ -80,7 +80,7 @@ public class BlockSmelter extends BlockContainer
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && !world.isRemote)
         {
-            if (!te.hasMetal && !te.hasMoltenMetal && item != null && item.getDisplayName().contains("Ingot") && !item.getDisplayName().contains("Mold"))
+            if (!te.hasMetal && !te.hasMoltenMetal && item != null && item.getUnlocalizedName().toLowerCase().contains("ingot") && !item.getDisplayName().contains("Mold"))
             {
                 entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.nowsmeltingingot", item.getDisplayName()));
                 te.metal = new ItemStack(item.itemID, 1, item.getItemDamage());

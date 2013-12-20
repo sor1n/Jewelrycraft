@@ -57,6 +57,7 @@ public class BlockMolder extends BlockContainer
         if (te.hasMold && entityPlayer.isSneaking() && !world.isRemote)
         {
             entityPlayer.inventory.addItemStackToInventory(new ItemStack(te.mold.itemID, 1, te.mold.getItemDamage()));
+            entityPlayer.inventory.onInventoryChanged();
             te.mold = new ItemStack(0, 0, 0);
             te.hasMold = false;
             te.isDirty = true;
@@ -121,6 +122,7 @@ public class BlockMolder extends BlockContainer
                 ItemRing.addMetal(item, metal);
             }
             player.inventory.addItemStackToInventory(item);
+            player.inventory.onInventoryChanged();
         }
     }
     

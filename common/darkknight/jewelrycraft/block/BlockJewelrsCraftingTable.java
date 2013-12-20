@@ -66,12 +66,14 @@ public class BlockJewelrsCraftingTable extends BlockContainer
             if (te.hasModifier && entityPlayer.isSneaking())
             {
                 entityPlayer.inventory.addItemStackToInventory(new ItemStack(te.modifier.itemID, 1, te.modifier.getItemDamage()));
+                entityPlayer.inventory.onInventoryChanged();
                 te.modifier = new ItemStack(0, 0, 0);
                 te.hasModifier = false;
             }
             if (te.hasJewel && entityPlayer.isSneaking())
             {
                 entityPlayer.inventory.addItemStackToInventory(new ItemStack(te.jewel.itemID, 1, te.jewel.getItemDamage()));
+                entityPlayer.inventory.onInventoryChanged();
                 te.jewel = new ItemStack(0, 0, 0);
                 te.hasJewel = false;
             }
@@ -87,6 +89,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         {
             ItemRing.addEffect(item, Potion.fireResistance.id);
             player.inventory.addItemStackToInventory(item);
+            player.inventory.onInventoryChanged();
         }
     }
 

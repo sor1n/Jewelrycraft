@@ -18,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class ItemRing extends ItemBase
@@ -67,6 +68,21 @@ public class ItemRing extends ItemBase
             }
         }
         return 0;
+    }
+
+    public String getItemDisplayName(ItemStack stack)
+    {
+        if (stack.hasTagCompound())
+        {
+            if (stack.getTagCompound().hasKey("ingot"))
+            {
+                NBTTagCompound ingotNBT = (NBTTagCompound) stack.getTagCompound().getTag("ingot");
+                ItemStack ingotStack = new ItemStack(0, 0, 0);
+                ingotStack.readFromNBT(ingotNBT);
+                return ingotStack.getDisplayName().replace("Ingot", " ").trim() + " " + ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
+            }
+        }
+        return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
     }
 
     public static void addMetal(ItemStack item, ItemStack metal)
