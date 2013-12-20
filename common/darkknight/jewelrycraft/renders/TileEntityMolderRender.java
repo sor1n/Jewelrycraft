@@ -51,8 +51,8 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
 //                    decal = 64;
                 double minu = me.mold.getIconIndex().getInterpolatedU(decal2);
                 double minv = me.mold.getIconIndex().getInterpolatedV(-decal);
-                double maxu = me.mold.getIconIndex().getInterpolatedU(256 + decal2);
-                double maxv = me.mold.getIconIndex().getInterpolatedV(256 - decal);
+                double maxu = me.mold.getIconIndex().getInterpolatedU(256*decal2);
+                double maxv = me.mold.getIconIndex().getInterpolatedV(256*decal);
                 GL11.glPushMatrix();
                 GL11.glScalef(1f / 16f, 1f / 16f, 1f / 16f);
                 GL11.glDisable(GL11.GL_LIGHTING);
