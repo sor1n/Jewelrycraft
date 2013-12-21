@@ -37,7 +37,6 @@ public class Generation implements IWorldGenerator
             int y = 5 + random.nextInt(4);
             int z = j + random.nextInt(16);
             world.setBlock(x, y, z, ConfigHandler.idShadowOre);
-            System.out.println(x + " " + y + " " + z);
         }
     }
     

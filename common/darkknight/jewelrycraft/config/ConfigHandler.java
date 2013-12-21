@@ -18,7 +18,7 @@ public class ConfigHandler
     public static int            idJewelCraftingTable = 1753;
     
     public static int            ingotCoolingTime     = 200;
-    public static int            ingotMeltingTime    = 1500;
+    public static int            ingotMeltingTime     = 1500;
     public static int            jewelryCraftingTime  = 2000;
     
     private static boolean       isInitialized        = false;

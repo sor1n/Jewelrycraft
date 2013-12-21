@@ -76,7 +76,7 @@ public class ItemThiefGloves extends ItemBase
     
     @Override
     @SuppressWarnings("unchecked")
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
+    public void addInformation(ItemStack stack, EntityPlayer player, @SuppressWarnings("rawtypes") List list, boolean par4)
     {
         if (!shouldAddAdditionalInfo())
             list.add(EnumChatFormatting.GRAY + additionalInfoInstructions());

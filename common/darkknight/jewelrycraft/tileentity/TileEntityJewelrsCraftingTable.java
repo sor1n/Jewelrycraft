@@ -81,7 +81,6 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
                     if(this.getBlockMetadata() == 3) this.worldObj.spawnParticle("witchMagic", xCoord + 0.2F, (double) yCoord + 0.8F, zCoord + 0.5F, 0.0D, 0.0D, 0.0D);
                 }
             }
-            System.out.println(timer);
             if (timer == 0)
             {
                 this.hasEndItem = true;

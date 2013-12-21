@@ -68,6 +68,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
                 entityPlayer.inventory.onInventoryChanged();
             }
+            if(te.timer == 0 && !te.hasEndItem && te.hasJewel && te.hasModifier) te.timer = ConfigHandler.jewelryCraftingTime;
             if(te.hasEndItem && item != null) entityPlayer.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.table.hasenditem"));
 
             if (te.hasModifier && entityPlayer.isSneaking())
@@ -145,7 +146,6 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.table.misingjewelry"));
             else if (!te.hasModifier)
                 player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.table.missingmodifier"));
-            if(te.timer == 0 && !te.hasEndItem) te.timer = ConfigHandler.jewelryCraftingTime;
             te.isDirty = true;
         }
     }
