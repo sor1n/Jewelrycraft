@@ -43,7 +43,7 @@ public class ItemRing extends ItemBase
         return 0;
     }
 
-    public int color(ItemStack stack) throws IOException
+    public static int color(ItemStack stack) throws IOException
     {
         if (stack.hasTagCompound())
         {

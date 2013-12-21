@@ -12,7 +12,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
     public boolean hasJewel, hasModifier, hasEndItem, isDirty;
     public ItemStack jewel, modifier, endItem;
     public int       timer;
-    
+
     public TileEntityJewelrsCraftingTable()
     {
         this.jewel = new ItemStack(0, 0, 0);
@@ -24,7 +24,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
         this.timer = 0;
         this.isDirty = false;
     }
-    
+
     @Override
     public void writeToNBT(NBTTagCompound nbt)
     {
@@ -43,7 +43,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
         this.endItem.writeToNBT(tag2);
         nbt.setCompoundTag("endItem", tag2);
     }
-    
+
     @Override
     public void readFromNBT(NBTTagCompound nbt)
     {
@@ -59,7 +59,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
         this.endItem = new ItemStack(0, 0, 0);
         this.endItem.readFromNBT(nbt.getCompoundTag("endItem"));
     }
-    
+
     @Override
     public void updateEntity()
     {
@@ -71,20 +71,29 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
         if (this.hasJewel && this.hasModifier && !this.hasEndItem)
         {
             if (timer > 0)
+            {
                 timer--;
+                for (int l = 0; l < 2000/(timer + 2); ++l)
+                {
+                    if(this.getBlockMetadata() == 0) this.worldObj.spawnParticle("witchMagic", xCoord + 0.5F, (double) yCoord + 0.8F, zCoord + 0.2F, 0.0D, 0.0D, 0.0D);
+                    if(this.getBlockMetadata() == 1) this.worldObj.spawnParticle("witchMagic", xCoord + 0.8F, (double) yCoord + 0.8F, zCoord + 0.5F, 0.0D, 0.0D, 0.0D);
+                    if(this.getBlockMetadata() == 2) this.worldObj.spawnParticle("witchMagic", xCoord + 0.5F, (double) yCoord + 0.8F, zCoord + 0.8F, 0.0D, 0.0D, 0.0D);
+                    if(this.getBlockMetadata() == 3) this.worldObj.spawnParticle("witchMagic", xCoord + 0.2F, (double) yCoord + 0.8F, zCoord + 0.5F, 0.0D, 0.0D, 0.0D);
+                }
+            }
             System.out.println(timer);
             if (timer == 0)
             {
                 this.hasEndItem = true;
                 this.endItem = jewel.copy();
                 this.hasJewel = false;
-                //                this.jewel = new ItemStack(0, 0, 0);
+                                this.jewel = new ItemStack(0, 0, 0);
                 this.hasModifier = false;
-                //                this.modifier = new ItemStack(0, 0, 0);
+                                this.modifier = new ItemStack(0, 0, 0);
             }
         }
     }
-    
+
     @Override
     public Packet getDescriptionPacket() 
     {

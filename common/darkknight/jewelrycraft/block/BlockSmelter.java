@@ -9,11 +9,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
@@ -40,37 +38,20 @@ public class BlockSmelter extends BlockContainer
         return false;
     }
     
-    @Override
-    public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int par5)
+    public void dropItem(World world, double x, double y, double z, ItemStack stack)
     {
-        TileEntitySmelter te = (TileEntitySmelter) world.getBlockTileEntity(i, j, k);
-        if (te != null)
-        {
-            float f = this.rand.nextFloat() * 0.8F + 0.1F;
-            float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-            float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-            if (te.hasMetal)
-            {
-                EntityItem entityitem = new EntityItem(world, i + f, j + f1, k + f2, new ItemStack(te.metal.itemID, 1, te.metal.getItemDamage()));
-                
-                if (te.metal.hasTagCompound())
-                {
-                    entityitem.getEntityItem().setTagCompound((NBTTagCompound) te.metal.getTagCompound().copy());
-                }
-                
-                float f3 = 0.05F;
-                entityitem.motionX = (float) this.rand.nextGaussian() * f3;
-                entityitem.motionY = (float) this.rand.nextGaussian() * f3 + 0.2F;
-                entityitem.motionZ = (float) this.rand.nextGaussian() * f3;
-                world.spawnEntityInWorld(entityitem);
-            }
-        }
+        EntityItem entityitem = new EntityItem(world, x + 0.5D, y + 1.3D, z + 0.5D, stack);
+        entityitem.motionX = 0;
+        entityitem.motionZ = 0;
+        entityitem.motionY = 0.11000000298023224D;
+        world.spawnEntityInWorld(entityitem);
     }
     
-    @Override
-    public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion par5Explosion)
+    public void breakBlock(World world, int i, int j, int k, int par5, int par6)
     {
-        onBlockDestroyedByPlayer(world, i, j, k, 0);
+        TileEntitySmelter te = (TileEntitySmelter) world.getBlockTileEntity(i, j, k);
+        if (te != null && te.hasMetal) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.metal);
+        super.breakBlock(world, i, j, k, par5, par6);
     }
     
     @Override
@@ -99,7 +80,7 @@ public class BlockSmelter extends BlockContainer
             
             if (te.hasMetal && entityPlayer.isSneaking())
             {
-                entityPlayer.dropPlayerItem(te.metal);
+                dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.metal);
                 te.hasMetal = false;
             }
             world.setBlockTileEntity(i, j, k, te);

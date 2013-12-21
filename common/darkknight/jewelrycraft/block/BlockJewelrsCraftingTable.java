@@ -6,6 +6,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -49,30 +50,33 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && !world.isRemote)
         {
-            if (!te.hasJewel && item != null && item.getItem().itemID == ItemList.ring.itemID)
+            te.isDirty = true;
+            if (!te.hasEndItem && !te.hasJewel && item != null && item.getItem().itemID == ItemList.ring.itemID)
             {
                 te.jewel = item.copy();
                 te.hasJewel = true;
                 --item.stackSize;
+                entityPlayer.inventory.onInventoryChanged();
             }
-            if (!te.hasModifier && item != null && item.getItem().itemID == modifiers[0])
+            if (!te.hasEndItem && !te.hasModifier && item != null && item.getItem().itemID == modifiers[0])
             {
                 te.modifier = item.copy();
+                te.modifier.stackSize = 1;
                 te.hasModifier = true;
                 --item.stackSize;
+                entityPlayer.inventory.onInventoryChanged();
             }
+            if(te.hasEndItem && item != null) entityPlayer.addChatMessage("First take out the crafted jewel before inserting new stuff.");
 
             if (te.hasModifier && entityPlayer.isSneaking())
             {
-                entityPlayer.inventory.addItemStackToInventory(te.modifier);
-                entityPlayer.inventory.onInventoryChanged();
+                dropItem( world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.modifier);
                 te.modifier = new ItemStack(0, 0, 0);
                 te.hasModifier = false;
             }
             if (te.hasJewel && entityPlayer.isSneaking())
             {
-                entityPlayer.inventory.addItemStackToInventory(te.jewel);
-                entityPlayer.inventory.onInventoryChanged();
+                dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.jewel);
                 te.jewel = new ItemStack(0, 0, 0);
                 te.hasJewel = false;
             }
@@ -82,13 +86,33 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         return true;
     }
 
-    public void giveJewelToPlayer(TileEntityJewelrsCraftingTable cf, EntityPlayer player, ItemStack item, ItemStack modifier)
+    public void dropItem(World world, double x, double y, double z, ItemStack stack)
+    {
+        EntityItem entityitem = new EntityItem(world, x + 0.5D, y + 1D, z + 0.5D, stack);
+        entityitem.motionX = 0;
+        entityitem.motionZ = 0;
+        entityitem.motionY = 0.21000000298023224D;
+        world.spawnEntityInWorld(entityitem);
+    }
+
+    public void breakBlock(World world, int i, int j, int k, int par5, int par6)
+    {
+        TileEntityJewelrsCraftingTable te = (TileEntityJewelrsCraftingTable) world.getBlockTileEntity(i, j, k);
+        if (te != null)
+        {
+            if(te.hasModifier) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.modifier);
+            if(te.hasJewel) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.jewel);
+            if(te.hasEndItem) giveJewelToPlayer(te, te.endItem, te.modifier);
+        }
+        super.breakBlock(world, i, j, k, par5, par6);
+    }
+
+    public void giveJewelToPlayer(TileEntityJewelrsCraftingTable cf, ItemStack item, ItemStack modifier)
     {
         if (item != null)
         {
             ItemRing.addEffect(item, Potion.fireResistance.id);
-            player.inventory.addItemStackToInventory(item);
-            player.inventory.onInventoryChanged();
+            dropItem(cf.worldObj, (double)cf.xCoord, (double)cf.yCoord, (double)cf.zCoord, item);
         }
     }
 
@@ -107,7 +131,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         {
             if (te.hasEndItem)
             {
-                giveJewelToPlayer(te, player, te.endItem, te.modifier);
+                giveJewelToPlayer(te, te.endItem, te.modifier);
                 te.endItem = new ItemStack(0, 0, 0);
                 te.hasEndItem = false;
             }
@@ -117,7 +141,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 player.addChatMessage("You're missing a ring");
             else if (!te.hasModifier && !world.isRemote)
                 player.addChatMessage("You need a modifier");
-            te.timer = 5;
+            te.timer = 2000;
             te.isDirty = true;
         }
     }

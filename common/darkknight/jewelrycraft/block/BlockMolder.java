@@ -8,10 +8,8 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import darkknight.jewelrycraft.item.ItemList;
@@ -21,25 +19,25 @@ import darkknight.jewelrycraft.tileentity.TileEntityMolder;
 public class BlockMolder extends BlockContainer
 {
     Random rand = new Random();
-    
+
     protected BlockMolder(int par1, Material par2Material)
     {
         super(par1, par2Material);
         this.setBlockBounds(0.1F, 0F, 0.1F, 0.9F, 0.2F, 0.9F);
     }
-    
+
     @Override
     public TileEntity createNewTileEntity(World world)
     {
         return new TileEntityMolder();
     }
-    
+
     @Override
     public boolean renderAsNormalBlock()
     {
         return false;
     }
-    
+
     @Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
     {
@@ -56,64 +54,37 @@ public class BlockMolder extends BlockContainer
         }
         if (te.hasMold && entityPlayer.isSneaking() && !world.isRemote)
         {
-            entityPlayer.inventory.addItemStackToInventory(new ItemStack(te.mold.itemID, 1, te.mold.getItemDamage()));
-            entityPlayer.inventory.onInventoryChanged();
+            dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.mold);
             te.mold = new ItemStack(0, 0, 0);
             te.hasMold = false;
             te.isDirty = true;
         }
         return true;
     }
+
+    public void dropItem(World world, double x, double y, double z, ItemStack stack)
+    {
+        EntityItem entityitem = new EntityItem(world, x + 0.5D, y + 0.5D, z + 0.5D, stack);
+        entityitem.motionX = 0;
+        entityitem.motionZ = 0;
+        entityitem.motionY = 0.11000000298023224D;
+        world.spawnEntityInWorld(entityitem);
+    }
     
-    @Override
-    public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int par5)
+    public void breakBlock(World world, int i, int j, int k, int par5, int par6)
     {
         TileEntityMolder te = (TileEntityMolder) world.getBlockTileEntity(i, j, k);
+
         if (te != null)
         {
-            float f = this.rand.nextFloat() * 0.8F + 0.1F;
-            float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-            float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-            if (te.hasMold)
-            {
-                EntityItem entityitem = new EntityItem(world, i + f, j + f1, k + f2, new ItemStack(te.mold.itemID, 1, te.mold.getItemDamage()));
-                
-                if (te.mold.hasTagCompound())
-                {
-                    entityitem.getEntityItem().setTagCompound((NBTTagCompound) te.mold.getTagCompound().copy());
-                }
-                
-                float f3 = 0.05F;
-                entityitem.motionX = (float) this.rand.nextGaussian() * f3;
-                entityitem.motionY = (float) this.rand.nextGaussian() * f3 + 0.2F;
-                entityitem.motionZ = (float) this.rand.nextGaussian() * f3;
-                world.spawnEntityInWorld(entityitem);
-            }
-            if (te.hasJewelBase)
-            {
-                EntityItem entityitem = new EntityItem(world, i + f, j + f1, k + f2, new ItemStack(te.jewelBase.itemID, 1, te.jewelBase.getItemDamage()));
-                
-                if (te.jewelBase.hasTagCompound())
-                {
-                    entityitem.getEntityItem().setTagCompound((NBTTagCompound) te.jewelBase.getTagCompound().copy());
-                }
-                
-                float f3 = 0.05F;
-                entityitem.motionX = (float) this.rand.nextGaussian() * f3;
-                entityitem.motionY = (float) this.rand.nextGaussian() * f3 + 0.2F;
-                entityitem.motionZ = (float) this.rand.nextGaussian() * f3;
-                world.spawnEntityInWorld(entityitem);
-            }
+            if(te.hasJewelBase) giveJewelToPlayer(te, te.jewelBase, te.ringMetal);
+            if(te.hasMold) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.mold);
         }
+
+        super.breakBlock(world, i, j, k, par5, par6);
     }
-    
-    @Override
-    public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion par5Explosion)
-    {
-        onBlockDestroyedByPlayer(world, i, j, k, 0);
-    }
-    
-    public void giveJewelToPlayer(TileEntityMolder md, EntityPlayer player, ItemStack item, ItemStack metal)
+
+    public void giveJewelToPlayer(TileEntityMolder md, ItemStack item, ItemStack metal)
     {
         if (item != null)
         {
@@ -121,11 +92,11 @@ public class BlockMolder extends BlockContainer
             {
                 ItemRing.addMetal(item, metal);
             }
-            player.inventory.addItemStackToInventory(item);
-            player.inventory.onInventoryChanged();
+            dropItem(md.worldObj, (double)md.xCoord, (double)md.yCoord, (double)md.zCoord, item);
+            md.isDirty = true;
         }
     }
-    
+
     @Override
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
     {
@@ -134,7 +105,7 @@ public class BlockMolder extends BlockContainer
         {
             if (me.hasJewelBase)
             {
-                giveJewelToPlayer(me, player, me.jewelBase, me.ringMetal);
+                giveJewelToPlayer(me, me.jewelBase, me.ringMetal);
                 me.jewelBase = new ItemStack(0, 0, 0);
                 me.hasJewelBase = false;
             }
@@ -147,25 +118,25 @@ public class BlockMolder extends BlockContainer
             me.isDirty = true;
         }
     }
-    
+
     @Override
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         return false;
     }
-    
+
     @Override
     public boolean isOpaqueCube()
     {
         return false;
     }
-    
+
     @Override
     public int getRenderType()
     {
         return -1;
     }
-    
+
     @Override
     public void registerIcons(IconRegister icon)
     {
