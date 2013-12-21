@@ -87,9 +87,9 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
                 this.hasEndItem = true;
                 this.endItem = jewel.copy();
                 this.hasJewel = false;
-                                this.jewel = new ItemStack(0, 0, 0);
+                this.jewel = new ItemStack(0, 0, 0);
                 this.hasModifier = false;
-                                this.modifier = new ItemStack(0, 0, 0);
+                this.modifier = new ItemStack(0, 0, 0);
             }
         }
     }

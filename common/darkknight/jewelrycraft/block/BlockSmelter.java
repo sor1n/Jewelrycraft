@@ -14,6 +14,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
 import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
 
@@ -64,10 +65,11 @@ public class BlockSmelter extends BlockContainer
             if (!te.hasMetal && !te.hasMoltenMetal && item != null && item.getUnlocalizedName().toLowerCase().contains("ingot") && !item.getDisplayName().contains("Mold"))
             {
                 entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.nowsmeltingingot", item.getDisplayName()));
-                te.metal = new ItemStack(item.itemID, 1, item.getItemDamage());
+                te.metal = item.copy();
+                te.metal.stackSize = 1;
                 te.hasMetal = true;
-                te.melting = 1500;
-                --item.stackSize;
+                te.melting = ConfigHandler.ingotSmeltingTime;
+                if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
             }
             else if (te.hasMetal && !te.hasMoltenMetal && item != null && item.getDisplayName().contains("Ingot") && !item.getDisplayName().contains("Mold"))
                 entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.alreadyhasingot", te.metal.getDisplayName()));
@@ -109,7 +111,7 @@ public class BlockSmelter extends BlockContainer
             {
                 me.moltenMetal = te.moltenMetal;
                 me.hasMoltenMetal = true;
-                me.cooling = 200;
+                me.cooling = ConfigHandler.ingotCoolingTime;
                 te.moltenMetal = new ItemStack(0, 0, 0);
                 te.hasMoltenMetal = false;
                 me.isDirty = true;

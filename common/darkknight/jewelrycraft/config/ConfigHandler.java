@@ -17,6 +17,10 @@ public class ConfigHandler
     public static int            idMolder             = 1752;
     public static int            idJewelCraftingTable = 1753;
     
+    public static int            ingotCoolingTime     = 200;
+    public static int            ingotSmeltingTime    = 1500;
+    public static int            jewelryCraftingTime  = 2000;
+    
     private static boolean       isInitialized        = false;
     
     public static void preInit(FMLPreInitializationEvent e)
@@ -27,15 +31,20 @@ public class ConfigHandler
             
             config.load();
             
-            idThiefGloves = config.getItem("id.ThiefGloves", idThiefGloves).getInt();
-            idShadowIngot = config.getItem("id.ShadowIngot", idShadowIngot).getInt();
-            idMolds = config.getItem("id.Molds", idMolds).getInt();
-            idClayMolds = config.getItem("id.ClayMolds", idClayMolds).getInt();
-            idRing = config.getItem("id.Ring", idRing).getInt();
-            idShadowOre = config.getBlock("id.ShadowOre", idShadowOre).getInt();
-            idSmelter = config.getBlock("id.Smelter", idSmelter).getInt();
-            idMolder = config.getBlock("id.Molder", idMolder).getInt();
-            idJewelCraftingTable = config.getBlock("id.JewelCraftingTable", idJewelCraftingTable).getInt();
+            idThiefGloves = config.getItem("Thief Gloves", idThiefGloves).getInt();
+            idShadowIngot = config.getItem("Shadow Ingot", idShadowIngot).getInt();
+            idMolds = config.getItem("Molds", idMolds).getInt();
+            idClayMolds = config.getItem("Clay Molds", idClayMolds).getInt();
+            idRing = config.getItem("Ring", idRing).getInt();
+            
+            idShadowOre = config.getBlock("Shadow Ore", idShadowOre).getInt();
+            idSmelter = config.getBlock("Smelter", idSmelter).getInt();
+            idMolder = config.getBlock("Molder", idMolder).getInt();
+            idJewelCraftingTable = config.getBlock("Jeweler's Crafting Table", idJewelCraftingTable).getInt();
+            
+            ingotCoolingTime = config.get("timers", "Molder Ingot Cooling Time", ingotCoolingTime).getInt();
+            ingotSmeltingTime = config.get("timers", "Ingot Smelting Time", ingotSmeltingTime).getInt();
+            jewelryCraftingTime = config.get("timers", "Jewelry Crafting Time", jewelryCraftingTime).getInt();
             
             config.save();
             

@@ -13,8 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.item.ItemRing;
 import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
@@ -55,7 +57,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
             {
                 te.jewel = item.copy();
                 te.hasJewel = true;
-                --item.stackSize;
+                if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
                 entityPlayer.inventory.onInventoryChanged();
             }
             if (!te.hasEndItem && !te.hasModifier && item != null && item.getItem().itemID == modifiers[0])
@@ -63,10 +65,10 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 te.modifier = item.copy();
                 te.modifier.stackSize = 1;
                 te.hasModifier = true;
-                --item.stackSize;
+                if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
                 entityPlayer.inventory.onInventoryChanged();
             }
-            if(te.hasEndItem && item != null) entityPlayer.addChatMessage("First take out the crafted jewel before inserting new stuff.");
+            if(te.hasEndItem && item != null) entityPlayer.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.table.hasenditem"));
 
             if (te.hasModifier && entityPlayer.isSneaking())
             {
@@ -135,13 +137,15 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 te.endItem = new ItemStack(0, 0, 0);
                 te.hasEndItem = false;
             }
-            else if (!te.hasModifier && !te.hasJewel && !world.isRemote)
-                player.addChatMessage("You need a ring and a modifier");
-            else if (!te.hasJewel && !world.isRemote)
-                player.addChatMessage("You're missing a ring");
-            else if (!te.hasModifier && !world.isRemote)
-                player.addChatMessage("You need a modifier");
-            te.timer = 2000;
+            else if (te.hasJewel && te.hasModifier && te.timer > 0 && te.jewel != null)
+                player.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.table.iscrafting", te.jewel.getDisplayName()) + " (" + ((ConfigHandler.jewelryCraftingTime - te.timer)*100/ConfigHandler.jewelryCraftingTime) + "%)");
+            else if (!te.hasModifier && !te.hasJewel)
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.table.missingjewelryandmodifier"));
+            else if (!te.hasJewel)
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.table.misingjewelry"));
+            else if (!te.hasModifier)
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.table.missingmodifier"));
+            if(te.timer == 0 && !te.hasEndItem) te.timer = ConfigHandler.jewelryCraftingTime;
             te.isDirty = true;
         }
     }
