@@ -62,13 +62,13 @@ public class BlockSmelter extends BlockContainer
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && !world.isRemote)
         {
-            if (!te.hasMetal && !te.hasMoltenMetal && item != null && item.getUnlocalizedName().toLowerCase().contains("ingot") && !item.getDisplayName().contains("Mold"))
+            if (!te.hasMetal && !te.hasMoltenMetal && item != null && item.getUnlocalizedName().toLowerCase().contains("ingot") && !item.getUnlocalizedName().toLowerCase().contains("mold"))
             {
                 entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.nowsmeltingingot", item.getDisplayName()));
                 te.metal = item.copy();
                 te.metal.stackSize = 1;
                 te.hasMetal = true;
-                te.melting = ConfigHandler.ingotSmeltingTime;
+                te.melting = ConfigHandler.ingotMeltingTime;
                 if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
             }
             else if (te.hasMetal && !te.hasMoltenMetal && item != null && item.getDisplayName().contains("Ingot") && !item.getDisplayName().contains("Mold"))
@@ -77,7 +77,7 @@ public class BlockSmelter extends BlockContainer
                 entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.hasmolteningot", te.moltenMetal.getDisplayName()));
             else if (item != null && !item.getUnlocalizedName().toLowerCase().contains("ingot") && item.getDisplayName().contains("Ingot"))
                 entityPlayer.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.itemrenamedtoingot"));
-            else if (item != null && !item.getUnlocalizedName().toLowerCase().contains("ingot"))
+            else if (item != null && (!item.getUnlocalizedName().toLowerCase().contains("ingot") || item.getUnlocalizedName().toLowerCase().contains("mold")))
                 entityPlayer.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.itemneedstobeingot"));
             
             if (te.hasMetal && entityPlayer.isSneaking())
@@ -105,9 +105,9 @@ public class BlockSmelter extends BlockContainer
         else if (world.getBlockMetadata(i, j, k) == 3)
             me = (TileEntityMolder) world.getBlockTileEntity(i - 1, j, k);
         
-        if (te.hasMoltenMetal && me != null && !world.isRemote)
+        if (me != null && !world.isRemote)
         {
-            if (isConnectedToMolder(world, i, j, k) && me.hasMold && !me.hasMoltenMetal && !me.hasJewelBase)
+            if (te.hasMoltenMetal && isConnectedToMolder(world, i, j, k) && me != null && me.hasMold && !me.hasMoltenMetal && !me.hasJewelBase)
             {
                 me.moltenMetal = te.moltenMetal;
                 me.hasMoltenMetal = true;
@@ -116,14 +116,18 @@ public class BlockSmelter extends BlockContainer
                 te.hasMoltenMetal = false;
                 me.isDirty = true;
             }
-            else if (me.hasMoltenMetal)
-                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.molderhasmoltenmetal"));
-            else if (!me.hasMold)
-                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.molderhasnomold"));
-            else if (me.hasJewelBase)
-                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.modlerhasitem"));
-            else
+            else if (te.hasMetal && te.melting > 0)
+                player.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.metalismelting", te.metal.getDisplayName()) + " (" + ((ConfigHandler.ingotMeltingTime - te.melting)*100/ConfigHandler.ingotMeltingTime) + "%)");
+            else if (te.hasMoltenMetal && !isConnectedToMolder(world, i, j, k))
                 player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.molderismissing"));
+            else if (!me.hasMold && te.hasMoltenMetal)
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.molderhasnomold"));
+            else if (me.hasMoltenMetal && te.hasMoltenMetal)
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.molderhasmoltenmetal"));
+            else if (me.hasJewelBase && te.hasMoltenMetal)
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.modlerhasitem"));
+            else 
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.smelter.empty"));
             te.isDirty = true;
         }
         

@@ -49,15 +49,13 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                     String texture = me.jewelBase.getIconIndex().getIconName().substring(me.jewelBase.getIconIndex().getIconName().lastIndexOf(":") + 1) + ".png";
                     ResourceLocation lava = new ResourceLocation(domain, "textures/items/" + texture);
                     Minecraft.getMinecraft().renderEngine.bindTexture(lava);
-                    me.jewelBase.getIconIndex().getInterpolatedU(0);
-                    int decal = -4;
-                    int decal2 = 4;
-                    double minu = me.jewelBase.getIconIndex().getInterpolatedU(decal2 + 48);
-                    double minv = me.jewelBase.getIconIndex().getInterpolatedV(-decal + 48);
-                    double maxu = me.jewelBase.getIconIndex().getInterpolatedU(256*decal2 + 48);
-                    double maxv = me.jewelBase.getIconIndex().getInterpolatedV(256*decal + 48);
+                    double minu = me.jewelBase.getIconIndex().getMinU();
+                    double minv = me.jewelBase.getIconIndex().getMinV();
+                    double maxu = me.jewelBase.getIconIndex().getMaxU();
+                    double maxv = me.jewelBase.getIconIndex().getMaxV();
                     GL11.glPushMatrix();
                     GL11.glScalef(1f / 16f, 1f / 16f, 1f / 16f);
+                    GL11.glRotatef(180F, 0F, 1F, 0F);
                     GL11.glDisable(GL11.GL_LIGHTING);
                     ItemRing.addMetal(me.jewelBase, me.ringMetal);
                     int color = me.jewelBase.getItem().getColorFromItemStack(me.jewelBase, 0);
@@ -65,12 +63,15 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                     float green = (float)(color >> 8 & 255) / 255.0F;
                     float blue = (float)(color & 255) / 255.0F;
                     if(!me.jewelBase.getDisplayName().contains("Ingot")) GL11.glColor4f(red, green, blue, 1F);
-                    tessellator.startDrawingQuads();
-                    tessellator.addVertexWithUV(5, 21, 5, minu, minv);
-                    tessellator.addVertexWithUV(-5, 21, 5, maxu, minv);
-                    tessellator.addVertexWithUV(-5, 21, -5, maxu, maxv);
-                    tessellator.addVertexWithUV(5, 21, -5, minu, maxv);
-                    tessellator.draw();
+                    for(float f = 0; f <= 0.3; f+=0.01)
+                    {
+                        tessellator.startDrawingQuads();
+                        tessellator.addVertexWithUV(5, 20.8 + f, 5, minu, minv);
+                        tessellator.addVertexWithUV(-5, 20.8 + f, 5, maxu, minv);
+                        tessellator.addVertexWithUV(-5, 20.8 + f, -5, maxu, maxv);
+                        tessellator.addVertexWithUV(5, 20.8 + f, -5, minu, maxv);
+                        tessellator.draw();
+                    }
                     GL11.glColor4f(1, 1F, 1F, 1.0F);
                     GL11.glEnable(GL11.GL_LIGHTING);
                     GL11.glPopMatrix();
@@ -82,16 +83,14 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                 String texture = "textures/items/" + name + ".png";
                 ResourceLocation lava = new ResourceLocation("jewelrycraft", texture);
                 Minecraft.getMinecraft().renderEngine.bindTexture(lava);
-                me.mold.getIconIndex().getInterpolatedU(0);
-                int decal = -4;
-                int decal2 = 4;
-                double minu = me.mold.getIconIndex().getInterpolatedU(decal2 + 48);
-                double minv = me.mold.getIconIndex().getInterpolatedV(-decal + 32);
-                double maxu = me.mold.getIconIndex().getInterpolatedU(256*decal2 + 48);
-                double maxv = me.mold.getIconIndex().getInterpolatedV(256*decal + 32);
+                double minu = me.mold.getIconIndex().getMinU();
+                double minv = me.mold.getIconIndex().getMinV();
+                double maxu = me.mold.getIconIndex().getMaxU();
+                double maxv = me.mold.getIconIndex().getMaxV();
                 GL11.glPushMatrix();
-                GL11.glScalef(1f / 16f, 1f / 16f, 1f / 16f);
                 GL11.glDisable(GL11.GL_LIGHTING);
+                GL11.glScalef(1f / 16f, 1f / 16f, 1f / 16f);
+                GL11.glRotatef(180F, 0F, 1F, 0F);
 
                 for (float f = 0; f <= 2; f += 0.01)
                 {

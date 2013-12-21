@@ -18,7 +18,7 @@ public class ConfigHandler
     public static int            idJewelCraftingTable = 1753;
     
     public static int            ingotCoolingTime     = 200;
-    public static int            ingotSmeltingTime    = 1500;
+    public static int            ingotMeltingTime    = 1500;
     public static int            jewelryCraftingTime  = 2000;
     
     private static boolean       isInitialized        = false;
@@ -43,7 +43,7 @@ public class ConfigHandler
             idJewelCraftingTable = config.getBlock("Jeweler's Crafting Table", idJewelCraftingTable).getInt();
             
             ingotCoolingTime = config.get("timers", "Molder Ingot Cooling Time", ingotCoolingTime).getInt();
-            ingotSmeltingTime = config.get("timers", "Ingot Smelting Time", ingotSmeltingTime).getInt();
+            ingotMeltingTime = config.get("timers", "Ingot Melting Time", ingotMeltingTime).getInt();
             jewelryCraftingTime = config.get("timers", "Jewelry Crafting Time", jewelryCraftingTime).getInt();
             
             config.save();

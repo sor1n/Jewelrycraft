@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.item.ItemRing;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
@@ -112,7 +113,7 @@ public class BlockMolder extends BlockContainer
                 me.hasJewelBase = false;
             }
             else if (me.hasMoltenMetal && me.cooling > 0)
-                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.metaliscooling"));
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.metaliscooling") + " (" + ((ConfigHandler.ingotCoolingTime - me.cooling)*100/ConfigHandler.ingotCoolingTime) + "%)");
             else if (me.mold.itemID == ItemList.molds.itemID && !me.hasMoltenMetal)
                 player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.moldisempty"));
             else if (me.mold.itemID != ItemList.molds.itemID)

@@ -86,7 +86,7 @@ public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRende
                         }
                     }
                     tessellator.startDrawingQuads();
-                    for(float f=0; f<=1; f+=0.001){
+                    for(float f=0; f<=1; f+=0.1){
                         tessellator.addVertexWithUV(3, 9, -5+f, minu, minv);
                         tessellator.addVertexWithUV(-2.2, 9, -5+f, maxu, minv);
                         tessellator.addVertexWithUV(-2.2, 14, -5+f, maxu, maxv);
