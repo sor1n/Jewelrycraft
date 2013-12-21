@@ -56,7 +56,7 @@ public class BlockMolder extends BlockContainer
             }
             if (te.hasMold && entityPlayer.isSneaking())
             {
-                dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.mold);
+                dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.mold.copy());
                 te.mold = new ItemStack(0, 0, 0);
                 te.hasMold = false;
                 te.isDirty = true;
@@ -81,7 +81,7 @@ public class BlockMolder extends BlockContainer
         if (te != null)
         {
             if(te.hasJewelBase) giveJewelToPlayer(te, te.jewelBase, te.ringMetal);
-            if(te.hasMold) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.mold);
+            if(te.hasMold) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.mold.copy());
         }
 
         super.breakBlock(world, i, j, k, par5, par6);
@@ -95,7 +95,7 @@ public class BlockMolder extends BlockContainer
             {
                 ItemRing.addMetal(item, metal);
             }
-            dropItem(md.worldObj, (double)md.xCoord, (double)md.yCoord, (double)md.zCoord, item);
+            dropItem(md.worldObj, (double)md.xCoord, (double)md.yCoord, (double)md.zCoord, item.copy());
             md.isDirty = true;
         }
     }

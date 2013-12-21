@@ -51,7 +51,7 @@ public class BlockSmelter extends BlockContainer
     public void breakBlock(World world, int i, int j, int k, int par5, int par6)
     {
         TileEntitySmelter te = (TileEntitySmelter) world.getBlockTileEntity(i, j, k);
-        if (te != null && te.hasMetal) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.metal);
+        if (te != null && te.hasMetal) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.metal.copy());
         super.breakBlock(world, i, j, k, par5, par6);
     }
     
@@ -82,7 +82,7 @@ public class BlockSmelter extends BlockContainer
             
             if (te.hasMetal && entityPlayer.isSneaking())
             {
-                dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.metal);
+                dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.metal.copy());
                 te.hasMetal = false;
             }
             world.setBlockTileEntity(i, j, k, te);
@@ -115,6 +115,7 @@ public class BlockSmelter extends BlockContainer
                 te.moltenMetal = new ItemStack(0, 0, 0);
                 te.hasMoltenMetal = false;
                 me.isDirty = true;
+                te.isDirty = true;
             }
             else if (te.hasMetal && te.melting > 0)
                 player.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.smelter.metalismelting", te.metal.getDisplayName()) + " (" + ((ConfigHandler.ingotMeltingTime - te.melting)*100/ConfigHandler.ingotMeltingTime) + "%)");

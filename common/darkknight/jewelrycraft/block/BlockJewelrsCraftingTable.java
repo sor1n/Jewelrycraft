@@ -72,13 +72,13 @@ public class BlockJewelrsCraftingTable extends BlockContainer
 
             if (te.hasModifier && entityPlayer.isSneaking())
             {
-                dropItem( world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.modifier);
+                dropItem( world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.modifier.copy());
                 te.modifier = new ItemStack(0, 0, 0);
                 te.hasModifier = false;
             }
             if (te.hasJewel && entityPlayer.isSneaking())
             {
-                dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.jewel);
+                dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.jewel.copy());
                 te.jewel = new ItemStack(0, 0, 0);
                 te.hasJewel = false;
             }
@@ -102,8 +102,8 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         TileEntityJewelrsCraftingTable te = (TileEntityJewelrsCraftingTable) world.getBlockTileEntity(i, j, k);
         if (te != null)
         {
-            if(te.hasModifier) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.modifier);
-            if(te.hasJewel) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.jewel);
+            if(te.hasModifier) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.modifier.copy());
+            if(te.hasJewel) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.jewel.copy());
             if(te.hasEndItem) giveJewelToPlayer(te, te.endItem, te.modifier);
         }
         super.breakBlock(world, i, j, k, par5, par6);
@@ -114,7 +114,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         if (item != null)
         {
             ItemRing.addEffect(item, Potion.fireResistance.id);
-            dropItem(cf.worldObj, (double)cf.xCoord, (double)cf.yCoord, (double)cf.zCoord, item);
+            dropItem(cf.worldObj, (double)cf.xCoord, (double)cf.yCoord, (double)cf.zCoord, item.copy());
         }
     }
 
