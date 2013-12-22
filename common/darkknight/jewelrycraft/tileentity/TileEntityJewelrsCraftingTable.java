@@ -11,7 +11,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
 {
     public boolean hasJewel, hasModifier, hasEndItem, isDirty;
     public ItemStack jewel, modifier, endItem;
-    public int       timer;
+    public int       timer, effect;
 
     public TileEntityJewelrsCraftingTable()
     {
@@ -22,6 +22,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
         this.hasModifier = false;
         this.hasEndItem = false;
         this.timer = 0;
+        this.effect = 0;
         this.isDirty = false;
     }
 
@@ -33,6 +34,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
         nbt.setBoolean("hasModifier", hasModifier);
         nbt.setBoolean("hasEndItem", hasEndItem);
         nbt.setInteger("timer", timer);
+        nbt.setInteger("effect", effect);
         NBTTagCompound tag = new NBTTagCompound();
         NBTTagCompound tag1 = new NBTTagCompound();
         NBTTagCompound tag2 = new NBTTagCompound();
@@ -52,6 +54,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
         this.hasModifier = nbt.getBoolean("hasModifier");
         this.hasEndItem = nbt.getBoolean("hasEndItem");
         this.timer = nbt.getInteger("timer");
+        this.effect = nbt.getInteger("effect");
         this.jewel = new ItemStack(0, 0, 0);
         this.jewel.readFromNBT(nbt.getCompoundTag("jewel"));
         this.modifier = new ItemStack(0, 0, 0);

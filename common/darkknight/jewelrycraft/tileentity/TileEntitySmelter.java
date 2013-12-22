@@ -82,17 +82,13 @@ public class TileEntitySmelter extends TileEntity
         if (this.hasMetal)
         {
             for (int l = 0; l < 2; ++l)
-            {
-                //EntityFX entityfx = new EntityReddustFX(this.worldObj, (double)xCoord + Math.random(), (double)yCoord + 0.2D, (double)zCoord + Math.random(), 0.0F, 0.0F, 0.0F);
                 this.worldObj.spawnParticle("flame", xCoord + rand.nextFloat(), (double) yCoord + 0.3F, zCoord + rand.nextFloat(), 0.0D, 0.0D, 0.0D);
-            }
         }
         if (rand.nextInt(65) == 0)
         {
             double d5 = this.xCoord + rand.nextFloat();
             double d7 = this.yCoord;
             double d6 = this.zCoord + rand.nextFloat();
-            //this.worldObj.spawnParticle("lava", d5, d7, d6, 0.0D, 0.0D, 0.0D);
             this.worldObj.playSound(d5, d7, d6, "liquid.lavapop", 0.2F + rand.nextFloat() * 0.2F, 0.9F + rand.nextFloat() * 0.15F, false);
         }
         if (this.hasMetal)

@@ -24,8 +24,8 @@ import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
 public class BlockJewelrsCraftingTable extends BlockContainer
 {
     Random rand        = new Random();
-    int    modifiers[] = new int[] { Item.blazePowder.itemID };
-    int    effects[]   = new int[] { 12 };
+    ItemStack    modifiers[] = new ItemStack[] { new ItemStack(Item.blazePowder), new ItemStack(Item.diamond), new ItemStack(Item.sugar), new ItemStack(Item.slimeBall)};
+    int    effects[]   = new int[] { Potion.fireResistance.id, Potion.digSpeed.id, Potion.moveSpeed.id, Potion.jump.id};
 
     protected BlockJewelrsCraftingTable(int par1, Material par2Material)
     {
@@ -60,13 +60,21 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
                 entityPlayer.inventory.onInventoryChanged();
             }
-            if (!te.hasEndItem && !te.hasModifier && item != null && item.getItem().itemID == modifiers[0])
+            if (!te.hasEndItem && !te.hasModifier && item != null)
             {
-                te.modifier = item.copy();
-                te.modifier.stackSize = 1;
-                te.hasModifier = true;
-                if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
-                entityPlayer.inventory.onInventoryChanged();
+                int itemIndex = -1;
+                for(int q=0; q < modifiers.length; q++) 
+                    if (item.itemID == modifiers[q].itemID && item.getItemDamage() == modifiers[q].getItemDamage())
+                        itemIndex = q;
+                if(itemIndex != -1)
+                {
+                    te.modifier = item.copy();
+                    te.modifier.stackSize = 1;
+                    te.effect = effects[itemIndex];
+                    te.hasModifier = true;
+                    if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
+                    entityPlayer.inventory.onInventoryChanged();
+                }
             }
             if(te.timer == 0 && !te.hasEndItem && te.hasJewel && te.hasModifier) te.timer = ConfigHandler.jewelryCraftingTime;
             if(te.hasEndItem && item != null) entityPlayer.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.table.hasenditem"));
@@ -114,7 +122,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
     {
         if (item != null)
         {
-            ItemRing.addEffect(item, Potion.fireResistance.id);
+            ItemRing.addEffect(item, cf.effect);
             dropItem(cf.worldObj, (double)cf.xCoord, (double)cf.yCoord, (double)cf.zCoord, item.copy());
         }
     }

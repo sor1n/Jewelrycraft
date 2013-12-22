@@ -18,7 +18,7 @@ public class CraftingRecipes
         if (!isInitialized)
         {
             GameRegistry.addRecipe(new ItemStack(ItemList.thiefGloves), "x x", "yxy", "yxy", 'x', ItemList.shadowIngot, 'y', new ItemStack(Block.cloth, 1, 15));
-            GameRegistry.addRecipe(new ItemStack(ItemList.clayMolds, 1, 0), "xx", "xx", 'x', Item.clay);
+            GameRegistry.addRecipe(new ItemStack(ItemList.clayMolds, 1, 0), "xx", 'x', Item.clay);
             GameRegistry.addRecipe(new ItemStack(ItemList.clayMolds, 1, 1), " x ", "x x", " x ", 'x', Item.clay);
             GameRegistry.addRecipe(new ItemStack(BlockList.molder), "x x", "xxx", 'x', Block.cobblestone);
             GameRegistry.addRecipe(new ItemStack(BlockList.smelter), "xyx", "x x", "xzx", 'x', Block.cobblestone, 'y', Item.bucketEmpty, 'z', Item.bucketLava);
