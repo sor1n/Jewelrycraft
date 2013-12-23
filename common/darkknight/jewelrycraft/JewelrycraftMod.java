@@ -22,6 +22,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.GameRegistry;
+import darkknight.jewelrycraft.block.BlockJewelrsCraftingTable;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.JewelryCraftClient;
 import darkknight.jewelrycraft.config.ConfigHandler;
@@ -77,7 +78,7 @@ public class JewelrycraftMod implements IConnectionHandler
     @EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {   
-        
+        BlockJewelrsCraftingTable.addStuff();
     }
     
     @Override

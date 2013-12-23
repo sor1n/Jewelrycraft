@@ -5,16 +5,17 @@ import java.util.Random;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.item.ItemRing;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
 
 public class BlockMolder extends BlockContainer
@@ -54,13 +55,14 @@ public class BlockMolder extends BlockContainer
                 entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.molder.addedmold", te.mold.getDisplayName()));
                 te.isDirty = true;
             }
-            if (te.hasMold && entityPlayer.isSneaking())
+            if (te.hasMold && entityPlayer.isSneaking() && !te.hasMoltenMetal)
             {
                 dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.mold.copy());
                 te.mold = new ItemStack(0, 0, 0);
                 te.hasMold = false;
                 te.isDirty = true;
             }
+            else if(te.hasMoltenMetal) entityPlayer.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.hasmoltenmetal"));
         }
         return true;
     }
@@ -80,24 +82,18 @@ public class BlockMolder extends BlockContainer
 
         if (te != null)
         {
-            if(te.hasJewelBase) giveJewelToPlayer(te, te.jewelBase, te.ringMetal);
+            if(te.hasJewelBase) dropItem(te.worldObj, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.jewelBase.copy());
             if(te.hasMold) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.mold.copy());
         }
 
         super.breakBlock(world, i, j, k, par5, par6);
     }
-
-    public void giveJewelToPlayer(TileEntityMolder md, ItemStack item, ItemStack metal)
+    
+    @Override
+    public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityLiving, ItemStack par6ItemStack)
     {
-        if (item != null)
-        {
-            if (item.itemID == ItemList.ring.itemID && metal != null)
-            {
-                ItemRing.addMetal(item, metal);
-            }
-            dropItem(md.worldObj, (double)md.xCoord, (double)md.yCoord, (double)md.zCoord, item.copy());
-            md.isDirty = true;
-        }
+        int rotation = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        world.setBlockMetadataWithNotify(i, j, k, rotation, 2);
     }
 
     @Override
@@ -108,7 +104,7 @@ public class BlockMolder extends BlockContainer
         {
             if (me.hasJewelBase)
             {
-                giveJewelToPlayer(me, me.jewelBase, me.ringMetal);
+                dropItem(me.worldObj, (double)me.xCoord, (double)me.yCoord, (double)me.zCoord, me.jewelBase.copy());
                 me.jewelBase = new ItemStack(0, 0, 0);
                 me.hasJewelBase = false;
             }

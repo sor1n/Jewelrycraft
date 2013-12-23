@@ -84,6 +84,7 @@ public class BlockSmelter extends BlockContainer
             {
                 dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.metal.copy());
                 te.hasMetal = false;
+                te.melting = 0;
             }
             world.setBlockTileEntity(i, j, k, te);
             te.isDirty = true;

@@ -9,8 +9,12 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -18,20 +22,19 @@ import net.minecraft.world.World;
 public class TileEntitySmelterRender extends TileEntitySpecialRenderer
 {
     ModelSmelter modelSmelter = new ModelSmelter();
-    String       texture      = "textures/tileentities/Smelter.png", lava = "texture/blocks/lava_still.png";
-    
+    String       texture      = "textures/tileentities/Smelter.png";
+
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale)
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-        
+
         ResourceLocation blockTexture = new ResourceLocation("jewelrycraft", texture);
-        Tessellator tessellator = Tessellator.instance;
-        ResourceLocation lava = new ResourceLocation(null, "textures/blocks/lava_still.png");
         Minecraft.getMinecraft().renderEngine.bindTexture(blockTexture);
+        TileEntitySmelter st = (TileEntitySmelter)te;
         int block = te.getBlockMetadata();
-        
+
         GL11.glPushMatrix();
         if (block == 0)
             GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
@@ -43,42 +46,62 @@ public class TileEntitySmelterRender extends TileEntitySpecialRenderer
             GL11.glRotatef(180F, 1.0F, 0.0F, 0.0F);
         else if (block == 3)
             GL11.glRotatef(180F, 1.0F, 0.0F, 1.0F);
-        
+
         modelSmelter.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-        
-        Minecraft.getMinecraft().renderEngine.bindTexture(lava);
-        Block.lavaStill.getIcon(3, 0).getInterpolatedU(0);
-        double minu = Block.lavaStill.getIcon(3, 0).getInterpolatedU(0);
-        double minv = Block.lavaStill.getIcon(3, 0).getInterpolatedV(((TileEntitySmelter) te).flow);
-        double maxu = Block.lavaStill.getIcon(3, 0).getInterpolatedU(256);
-        double maxv = Block.lavaStill.getIcon(3, 0).getInterpolatedV(16 + ((TileEntitySmelter) te).flow);
+
         GL11.glPushMatrix();
-        GL11.glScalef(1f / 16f, 1f / 16f, 1f / 16f);
         GL11.glDisable(GL11.GL_LIGHTING);
-        
-        tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(5, 20, 6, minu, minv);
-        tessellator.addVertexWithUV(-5, 20, 6, maxu, minv);
-        tessellator.addVertexWithUV(-5, 20, -6, maxu, maxv);
-        tessellator.addVertexWithUV(5, 20, -6, minu, maxv);
-        
-        tessellator.addVertexWithUV(-4, 20, -7, maxu, maxv);
-        tessellator.addVertexWithUV(4, 20, -7, maxu, minv);
-        tessellator.addVertexWithUV(4, 20, -6, minu, minv);
-        tessellator.addVertexWithUV(-4, 20, -6, minu, maxv);
-        
-        tessellator.addVertexWithUV(4, 20, 7, maxu, maxv);
-        tessellator.addVertexWithUV(-4, 20, 7, maxu, minv);
-        tessellator.addVertexWithUV(-4, 20, 6, minu, minv);
-        tessellator.addVertexWithUV(4, 20, 6, minu, maxv);
-        tessellator.draw();
+        EntityItem entityitem = new EntityItem(te.worldObj, 0.0D, 0.0D, 0.0D, new ItemStack(Block.lavaStill));
+        entityitem.getEntityItem().stackSize = 1;
+        entityitem.hoverStart = 0.0F;
+
+        GL11.glTranslatef(-0F, 1.25F, -0.3F);
+        GL11.glScalef(1.25F, 1.0F, 1.47F);
+        GL11.glRotatef(90F, 1F, 0F, 0f);
+        RenderItem.renderInFrame = true;
+        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+        RenderItem.renderInFrame = false;
+
+        GL11.glTranslatef(0F, 0.46F, 0.0F);
+        GL11.glScalef(0.8F, 0.1F, 0F);
+        RenderItem.renderInFrame = true;
+        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+        RenderItem.renderInFrame = false;
+
+        GL11.glTranslatef(0F, -5.6F, 0.0F);
+        RenderItem.renderInFrame = true;
+        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+        RenderItem.renderInFrame = false;
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
-        
+        if (st != null)
+        {
+            if (st.hasMetal && st.metal.getIconIndex().getIconName() != "")
+            {
+                GL11.glPushMatrix();
+                GL11.glDisable(GL11.GL_LIGHTING);
+                EntityItem metal = new EntityItem(te.worldObj, 0.0D, 0.0D, 0.0D, st.metal);
+                metal.getEntityItem().stackSize = 1;
+                metal.hoverStart = 0.0F;
+
+                GL11.glRotatef(-50F, 1F, 0F, 0F);
+                GL11.glRotatef(-50F, 0F, 0F, 1F);
+                GL11.glRotatef(180F, 1F, 0F, 0F);
+                GL11.glScalef(0.5F, 0.5F, 0.5F);
+                GL11.glTranslatef(-0.9F, -0.9F, -1.6F);
+                RenderItem.renderInFrame = true;
+                for(double d=0; d<=0.05; d+=0.01)
+                    RenderManager.instance.renderEntityWithPosYaw(metal, 0.0D, 0.0D, 0.0D - d, 0.0F, 0.0F);
+                RenderItem.renderInFrame = false;
+                GL11.glEnable(GL11.GL_LIGHTING);
+                GL11.glPopMatrix();
+            }
+        }
+
         GL11.glPopMatrix();
         GL11.glPopMatrix();
     }
-    
+
     public void adjustLightFixture(World world, int i, int j, int k, Block block)
     {
         Tessellator tess = Tessellator.instance;
@@ -89,5 +112,5 @@ public class TileEntitySmelterRender extends TileEntitySpecialRenderer
         tess.setColorOpaque_F(brightness, brightness, brightness);
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) modulousModifier, divModifier);
     }
-    
+
 }

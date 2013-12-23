@@ -7,6 +7,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.util.JewelryNBT;
 
 public class TileEntityMolder extends TileEntity
 {
@@ -93,6 +94,8 @@ public class TileEntityMolder extends TileEntity
                     this.jewelBase = moltenMetal;
                 else
                     this.jewelBase = new ItemStack(ItemList.ring);
+                if(mold.getItemDamage() != 0 && jewelBase != new ItemStack(0, 0, 0))
+                    JewelryNBT.addMetal(jewelBase, ringMetal);
                 this.moltenMetal = new ItemStack(0, 0, 0);
                 this.hasJewelBase = true;
             }

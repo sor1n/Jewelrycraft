@@ -29,10 +29,11 @@ public class ItemThiefGloves extends ItemBase
         super(par1);
         this.setCreativeTab(CreativeTabs.tabTools);
         this.setMaxStackSize(1);
+        this.setMaxDamage(10);
     }
     
     @Override
-    public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
+    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
     {
         if (par3EntityLivingBase instanceof EntityVillager)
         {
@@ -58,6 +59,7 @@ public class ItemThiefGloves extends ItemBase
                     else
                         villager.entityDropItem(s, 0);
                     par2EntityPlayer.addChatMessage("Villager #" + villager.getProfession() + ": Hmmm... I seem to have lost my " + s.getDisplayName() + "!");
+                    stack.damageItem(1, par2EntityPlayer);
                 }
                 buyingList.clear();
                 ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 300, "timeUntilReset", "field_70961_j");
@@ -70,7 +72,7 @@ public class ItemThiefGloves extends ItemBase
         }
         else
         {
-            return super.itemInteractionForEntity(par1ItemStack, par2EntityPlayer, par3EntityLivingBase);
+            return super.itemInteractionForEntity(stack, par2EntityPlayer, par3EntityLivingBase);
         }
     }
     
