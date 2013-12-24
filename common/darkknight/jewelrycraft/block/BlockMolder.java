@@ -84,6 +84,7 @@ public class BlockMolder extends BlockContainer
         {
             if(te.hasJewelBase) dropItem(te.worldObj, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.jewelBase.copy());
             if(te.hasMold) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.mold.copy());
+            world.markTileEntityForDespawn(te);
         }
 
         super.breakBlock(world, i, j, k, par5, par6);

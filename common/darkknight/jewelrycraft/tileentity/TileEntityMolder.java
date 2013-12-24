@@ -98,6 +98,7 @@ public class TileEntityMolder extends TileEntity
                     JewelryNBT.addMetal(jewelBase, ringMetal);
                 this.moltenMetal = new ItemStack(0, 0, 0);
                 this.hasJewelBase = true;
+                cooling = -1;
             }
         }
     }

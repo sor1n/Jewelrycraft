@@ -116,6 +116,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
                 this.modifier = new ItemStack(0, 0, 0);
                 this.hasJewel = false;
                 this.jewel = new ItemStack(0, 0, 0);
+                timer = -1;
             }
         }
     }

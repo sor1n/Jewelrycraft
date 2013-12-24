@@ -43,12 +43,15 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         modifiers.add(new ItemStack(Item.sugar));
         modifiers.add(new ItemStack(Block.chest));
         modifiers.add(new ItemStack(Item.pickaxeIron));
+        modifiers.add(new ItemStack(Item.bed));
+        modifiers.add(new ItemStack(Item.eyeOfEnder));
 
         //Jewels
         jewel.add(new ItemStack(Item.enderPearl));
         jewel.add(new ItemStack(Item.diamond));
         jewel.add(new ItemStack(Item.emerald));
         jewel.add(new ItemStack(Block.obsidian));
+        jewel.add(new ItemStack(Item.netherStar));
 
         //Jewelry
         jewelry.add(new ItemStack(ItemList.ring));
@@ -73,7 +76,6 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && !world.isRemote)
         {
-            te.isDirty = true;
             if (!te.hasEndItem && !te.hasJewelry && item != null && isJewelry(item))
             {
                 if(te.hasModifier && te.hasJewel && item.hasTagCompound() && item.getTagCompound().hasKey("modifier") && item.getTagCompound().hasKey("jewel")) 
@@ -88,6 +90,8 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                     te.hasJewelry = true;
                     if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
                     entityPlayer.inventory.onInventoryChanged();
+                    world.setBlockTileEntity(i, j, k, te);
+                    te.isDirty = true;
                 }
             }
             if (!te.hasEndItem && !te.hasModifier && item != null && isModifier(item))
@@ -101,6 +105,8 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                     te.hasModifier = true;
                     if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
                     entityPlayer.inventory.onInventoryChanged();
+                    world.setBlockTileEntity(i, j, k, te);
+                    te.isDirty = true;
                 }
             }
             if (!te.hasEndItem && !te.hasJewel && item != null && isJewel(item))
@@ -114,6 +120,8 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                     te.hasJewel = true;
                     if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
                     entityPlayer.inventory.onInventoryChanged();
+                    world.setBlockTileEntity(i, j, k, te);
+                    te.isDirty = true;
                 }
             }
             if (te.timer <= 0 && !te.hasEndItem && te.hasJewelry && (te.hasModifier || te.hasJewel)){ te.timer = ConfigHandler.jewelryCraftingTime; te.angle = 0;}
@@ -126,6 +134,8 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 te.hasModifier = false;
                 te.timer = 0;
                 te.angle = 0F;
+                world.markTileEntityForDespawn(te);
+                world.setBlockTileEntity(i, j, k, te);
             }
             if (te.hasJewelry && entityPlayer.isSneaking())
             {
@@ -134,6 +144,8 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 te.hasJewelry = false;
                 te.timer = 0;
                 te.angle = 0F;
+                world.markTileEntityForDespawn(te);
+                world.setBlockTileEntity(i, j, k, te);
             }
             if (te.hasJewel && entityPlayer.isSneaking())
             {
@@ -142,9 +154,9 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 te.hasJewel = false;
                 te.timer = 0;
                 te.angle = 0F;
+                world.markTileEntityForDespawn(te);
+                world.setBlockTileEntity(i, j, k, te);
             }
-            te.isDirty = true;
-            world.setBlockTileEntity(i, j, k, te);
         }
         return true;
     }
@@ -206,6 +218,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
             if (te.hasJewelry) dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.jewelry.copy());
             if (te.hasJewel) dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.jewel.copy());
             if (te.hasEndItem) dropItem(te.worldObj, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.endItem.copy());
+            world.markTileEntityForDespawn(te);
         }
         super.breakBlock(world, i, j, k, par5, par6);
     }
@@ -228,12 +241,13 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 dropItem(te.worldObj, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.endItem.copy());
                 te.endItem = new ItemStack(0, 0, 0);
                 te.hasEndItem = false;
+                world.markTileEntityForDespawn(te);
+                world.setBlockTileEntity(i, j, k, te);
             }
             else if (te.hasJewelry && (te.hasModifier || te.hasJewel) && te.timer > 0 && te.jewelry != null) player.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.table.iscrafting", te.jewelry.getDisplayName()) + " (" + ((ConfigHandler.jewelryCraftingTime - te.timer) * 100 / ConfigHandler.jewelryCraftingTime) + "%)");
             else if ((!te.hasModifier || !te.hasJewel) && !te.hasJewelry) player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.table.missingjewelryandmodifierorjewel"));
             else if (!te.hasJewelry) player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.table.missingjewelry"));
             else if (!te.hasModifier || !te.hasJewel) player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.table.missingmodifierorjewel"));
-            te.isDirty = true;
         }
     }
 

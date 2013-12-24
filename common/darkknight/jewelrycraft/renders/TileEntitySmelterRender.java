@@ -89,10 +89,13 @@ public class TileEntitySmelterRender extends TileEntitySpecialRenderer
                 GL11.glRotatef(180F, 1F, 0F, 0F);
                 GL11.glScalef(0.5F, 0.5F, 0.5F);
                 GL11.glTranslatef(-0.9F, -0.9F, -1.6F);
-                RenderItem.renderInFrame = true;
-                for(double d=0; d<=0.05; d+=0.01)
-                    RenderManager.instance.renderEntityWithPosYaw(metal, 0.0D, 0.0D, 0.0D - d, 0.0F, 0.0F);
-                RenderItem.renderInFrame = false;
+                if(RenderManager.instance.options.fancyGraphics) RenderManager.instance.renderEntityWithPosYaw(metal, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+                else
+                {
+                    RenderManager.instance.options.fancyGraphics = true;
+                    RenderManager.instance.renderEntityWithPosYaw(metal, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+                    RenderManager.instance.options.fancyGraphics = false;
+                }
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glPopMatrix();
             }

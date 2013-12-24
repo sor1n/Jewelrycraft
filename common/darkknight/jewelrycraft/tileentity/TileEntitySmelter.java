@@ -101,6 +101,7 @@ public class TileEntitySmelter extends TileEntity
                 this.moltenMetal = metal;
                 this.metal = new ItemStack(0, 0, 0);
                 this.hasMoltenMetal = true;
+                melting = -1;
             }
         }
     }
