@@ -69,11 +69,4 @@ public class ItemMolds extends Item
             this.moldsIcons[i] = par1IconRegister.registerIcon("jewelrycraft:" + moldsItemNames[i] + this.getIconString());
         }
     }
-
-    @Override
-    public Item setUnlocalizedName(String name)
-    {
-        Item r = super.setUnlocalizedName(name);
-        return r.setTextureName(name.toLowerCase().replaceAll("\\.", ":"));
-    }
 }
