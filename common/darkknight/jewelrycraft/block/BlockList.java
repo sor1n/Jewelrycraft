@@ -23,10 +23,10 @@ public class BlockList
     {
         if (!isInitialized)
         {
-            shadowOre = new BlockBase(ConfigHandler.idShadowOre, Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("jewelrycraft.oreShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            smelter = new BlockSmelter(ConfigHandler.idSmelter, Material.iron).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("jewelrycraft.smelter").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            molder = new BlockMolder(ConfigHandler.idMolder, Material.iron).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("jewelrycraft.molder").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            jewelCraftingTable = new BlockJewelrsCraftingTable(ConfigHandler.idJewelCraftingTable, Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("jewelrycraft.jewelCraftingTable").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            shadowOre = new Block(ConfigHandler.idShadowOre, Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setTextureName("jewelrycraft:oreShadow").setUnlocalizedName("Jewelrycraft.oreShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            smelter = new BlockSmelter(ConfigHandler.idSmelter, Material.iron).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("Jewelrycraft.smelter").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            molder = new BlockMolder(ConfigHandler.idMolder, Material.iron).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("Jewelrycraft.molder").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            jewelCraftingTable = new BlockJewelrsCraftingTable(ConfigHandler.idJewelCraftingTable, Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("Jewelrycraft.jewelCraftingTable").setCreativeTab(JewelrycraftMod.jewelrycraft);
             
             GameRegistry.registerBlock(shadowOre, "shadowOre");
             GameRegistry.registerBlock(smelter, "Smelter");

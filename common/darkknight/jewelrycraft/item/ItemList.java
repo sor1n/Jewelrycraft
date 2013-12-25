@@ -19,11 +19,11 @@ public class ItemList
     {
         if (!isInitialized)
         {
-            thiefGloves = new ItemThiefGloves(ConfigHandler.idThiefGloves).setUnlocalizedName("jewelrycraft.thiefGloves").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            shadowIngot = new ItemBase(ConfigHandler.idShadowIngot).setUnlocalizedName("jewelrycraft.ingotShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            molds = new ItemMolds(ConfigHandler.idMolds).setUnlocalizedName("jewelrycraft.mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            clayMolds = new ItemClayMolds(ConfigHandler.idClayMolds).setUnlocalizedName("jewelrycraft.mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            ring = new ItemRing(ConfigHandler.idRing).setUnlocalizedName("jewelrycraft.ring").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            thiefGloves = new ItemThiefGloves(ConfigHandler.idThiefGloves - 256).setUnlocalizedName("Jewelrycraft.thiefGloves").setTextureName("jewelrycraft:thiefGloves").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            shadowIngot = new Item(ConfigHandler.idShadowIngot - 256).setUnlocalizedName("Jewelrycraft.ingotShadow").setTextureName("jewelrycraft:ingotShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            molds = new ItemMolds(ConfigHandler.idMolds - 256).setUnlocalizedName("Jewelrycraft.mold").setTextureName("mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            clayMolds = new ItemClayMolds(ConfigHandler.idClayMolds - 256).setUnlocalizedName("Jewelrycraft.mold").setTextureName("mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            ring = new ItemRing(ConfigHandler.idRing - 256).setUnlocalizedName("Jewelrycraft.ring").setTextureName("jewelrycraft:ring").setCreativeTab(JewelrycraftMod.jewelrycraft);
             
             isInitialized = true;
         }

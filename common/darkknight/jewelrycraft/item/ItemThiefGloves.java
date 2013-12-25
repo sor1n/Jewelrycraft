@@ -20,7 +20,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 
-public class ItemThiefGloves extends ItemBase
+public class ItemThiefGloves extends Item
 {
     public Random rand;
     

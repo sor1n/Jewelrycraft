@@ -57,7 +57,7 @@ public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRende
 
                 GL11.glRotatef(180F, 1F, 0F, 0F);
                 GL11.glScalef(0.5F, 0.5F, 0.5F);
-                GL11.glTranslatef(0.05F, -1.6F, 0.5F);
+                GL11.glTranslatef(0.0F, -1.6F, 0.6F);
                 GL11.glRotatef(jt.angle, 0F, 1F, 0F);
                 if(RenderManager.instance.options.fancyGraphics)
                     RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
@@ -82,7 +82,7 @@ public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRende
 
                 GL11.glRotatef(180F, 1F, 0F, 0F);
                 GL11.glScalef(0.5F, 0.5F, 0.5F);
-                GL11.glTranslatef(0.05F, -1.6F, 0.5F);
+                GL11.glTranslatef(0.0F, -1.6F, 0.6F);
                 GL11.glRotatef(jt.angle, 0F, 1F, 0F);
                 if(RenderManager.instance.options.fancyGraphics)
                     RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
@@ -107,7 +107,7 @@ public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRende
 
                 GL11.glRotatef(180F, 1F, 0F, 0F);
                 GL11.glScalef(0.5F, 0.5F, 0.5F);
-                GL11.glTranslatef(0.6F, -1.5F, -0.4F);
+                GL11.glTranslatef(0.55F, -1.5F, -0.45F);
                 GL11.glRotatef(jt.angle, 0F, 1F, 0F);
                 if(RenderManager.instance.options.fancyGraphics)
                     RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
@@ -131,7 +131,7 @@ public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRende
                 
                 GL11.glRotatef(180F, 1F, 0F, 0F);
                 GL11.glScalef(0.5F, 0.5F, 0.5F);
-                GL11.glTranslatef(-0.6F, -1.5F, -0.4F);
+                GL11.glTranslatef(-0.55F, -1.5F, -0.45F);
                 GL11.glRotatef(jt.angle, 0F, 1F, 0F);
                 if(RenderManager.instance.options.fancyGraphics)
                     RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);

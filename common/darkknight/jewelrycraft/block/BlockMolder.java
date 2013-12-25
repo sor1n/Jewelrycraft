@@ -52,7 +52,7 @@ public class BlockMolder extends BlockContainer
                 te.mold = item.copy();
                 te.hasMold = true;
                 if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
-                entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.jewelrycraft.molder.addedmold", te.mold.getDisplayName()));
+                entityPlayer.addChatMessage(StatCollector.translateToLocalFormatted("chatmessage.Jewelrycraft.molder.addedmold", te.mold.getDisplayName()));
                 te.isDirty = true;
             }
             if (te.hasMold && entityPlayer.isSneaking() && !te.hasMoltenMetal)
@@ -62,7 +62,7 @@ public class BlockMolder extends BlockContainer
                 te.hasMold = false;
                 te.isDirty = true;
             }
-            else if(te.hasMoltenMetal) entityPlayer.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.hasmoltenmetal"));
+            else if(te.hasMoltenMetal) entityPlayer.addChatMessage(StatCollector.translateToLocal("chatmessage.Jewelrycraft.molder.hasmoltenmetal"));
         }
         return true;
     }
@@ -110,11 +110,11 @@ public class BlockMolder extends BlockContainer
                 me.hasJewelBase = false;
             }
             else if (me.hasMoltenMetal && me.cooling > 0)
-                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.metaliscooling") + " (" + ((ConfigHandler.ingotCoolingTime - me.cooling)*100/ConfigHandler.ingotCoolingTime) + "%)");
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.Jewelrycraft.molder.metaliscooling") + " (" + ((ConfigHandler.ingotCoolingTime - me.cooling)*100/ConfigHandler.ingotCoolingTime) + "%)");
             else if (me.mold.itemID == ItemList.molds.itemID && !me.hasMoltenMetal)
-                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.moldisempty"));
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.Jewelrycraft.molder.moldisempty"));
             else if (me.mold.itemID != ItemList.molds.itemID)
-                player.addChatMessage(StatCollector.translateToLocal("chatmessage.jewelrycraft.molder.moldismissing"));
+                player.addChatMessage(StatCollector.translateToLocal("chatmessage.Jewelrycraft.molder.moldismissing"));
             me.isDirty = true;
         }
     }
