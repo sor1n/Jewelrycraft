@@ -196,6 +196,7 @@ public class ItemRing extends ItemBase
                         world.spawnParticle("largesmoke", player.posX - 0.5D + Math.random(), player.posY - 1.5D + Math.random(), player.posZ - 0.5D + Math.random(), 0.0D, 0.0D, 0.0D);
                     if(player.dimension != dimension) player.travelToDimension(dimension);
                     player.setPositionAndUpdate(posX, posY, posZ);
+                    player.fallDistance = 7;
                     for(int i = 1; i <= 300; i++)
                         world.spawnParticle("portal", posX - 0.5D + Math.random(), posY + Math.random(), posZ - 0.5D + Math.random(), 0.0D, 0.0D, 0.0D);
                 }
