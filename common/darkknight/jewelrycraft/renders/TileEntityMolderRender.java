@@ -59,7 +59,7 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                 GL11.glScalef(1.25F, 1.0F, 1.25F);
                 GL11.glRotatef(90F, 1F, 0F, 0f);
                 RenderItem.renderInFrame = true;
-                RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+                if(entityitem != null) RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
                 RenderItem.renderInFrame = false;
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glPopMatrix();
@@ -75,7 +75,7 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                 GL11.glScalef(1.25F, 1.0F, 1.25F);
                 GL11.glRotatef(90F, 1F, 0F, 0f);
                 RenderItem.renderInFrame = true;
-                RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+                if(entityitem != null) RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
                 RenderItem.renderInFrame = false;
                 GL11.glColor4f(1, 1F, 1F, 1.0F);
                 GL11.glEnable(GL11.GL_LIGHTING);
