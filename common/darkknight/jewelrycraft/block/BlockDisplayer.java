@@ -60,7 +60,7 @@ public class BlockDisplayer extends BlockContainer
     {
         TileEntityDisplayer te = (TileEntityDisplayer) world.getBlockTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
-        if (te != null && item != null && item != new ItemStack(0, 0, 0) && world.isRemote)
+        if (te != null && item != null && item != new ItemStack(0, 0, 0) && !world.isRemote)
         {
             if(!te.hasObject)
             {
@@ -71,7 +71,7 @@ public class BlockDisplayer extends BlockContainer
                 if (!entityPlayer.capabilities.isCreativeMode) item.stackSize = 0;
                 te.isDirty = true;
             }
-            else if(te.object.itemID == item.itemID && te.object.getItemDamage() == item.getItemDamage() && te.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).equals(item.getTooltip(new FakePlayer(te.worldObj, "Player"), true)))
+            else if(te.object.itemID == item.itemID && te.object.getItemDamage() == item.getItemDamage() && te.object.getTagCompound().equals(item.getTagCompound()))
             {
                 te.quantity += item.stackSize;
                 te.object.stackSize = 1;
