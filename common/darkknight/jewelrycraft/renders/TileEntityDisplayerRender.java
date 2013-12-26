@@ -49,7 +49,7 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
             renderLabel(Integer.toString(disp.quantity), 0F, (-0.16F)*ind, 0, block);
             GL11.glPopMatrix();
             ind++;
-            if(disp.object.itemID != Item.map.itemID && disp.object.getTooltip(null, true) != null)
+            if(disp.object.itemID != Item.map.itemID && disp.object != null && disp.object != new ItemStack(0, 0, 0) && disp.object.getTooltip(null, true) != null)
             {
                 for(int i = 1; i < disp.object.getTooltip(null, true).size(); i++)
                 {
