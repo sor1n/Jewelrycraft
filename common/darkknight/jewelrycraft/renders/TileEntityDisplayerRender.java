@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import darkknight.jewelrycraft.model.ModelDisplayer;
 import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
 import net.minecraft.tileentity.TileEntity;
@@ -37,7 +38,7 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
         GL11.glPushMatrix();
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
         displayer.render((Entity) null, disp.ringTranslation1, disp.ringTranslation2, disp.ringTranslation3, 0.0F, 0.0F, 0.0625F);
-        if(disp != null && disp.hasObject)
+        if(disp != null && disp.hasObject && disp.object != null && disp.object != new ItemStack(0, 0, 0))
         {
             int ind = -3;
             GL11.glPushMatrix();

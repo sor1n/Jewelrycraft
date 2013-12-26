@@ -59,7 +59,7 @@ public class BlockDisplayer extends BlockContainer
     {
         TileEntityDisplayer te = (TileEntityDisplayer) world.getBlockTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
-        if (te != null && item != null && !world.isRemote)
+        if (te != null && item != null && item != new ItemStack(0, 0, 0) && !world.isRemote)
         {
             if(!te.hasObject)
             {
@@ -87,7 +87,7 @@ public class BlockDisplayer extends BlockContainer
         TileEntityDisplayer te = (TileEntityDisplayer) world.getBlockTileEntity(i, j, k);
         if (te != null && !world.isRemote)
         {
-            if (te.hasObject && player.inventory.addItemStackToInventory(te.object))
+            if (te.hasObject && te.object != null && te.object != new ItemStack(0, 0, 0) && player.inventory.addItemStackToInventory(te.object))
             {
                 if(player.isSneaking())
                 {
