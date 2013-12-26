@@ -71,12 +71,22 @@ public class BlockDisplayer extends BlockContainer
                 if (!entityPlayer.capabilities.isCreativeMode) item.stackSize = 0;
                 te.isDirty = true;
             }
-            else if(te.object.itemID == item.itemID && te.object.getItemDamage() == item.getItemDamage() && te.object.getTagCompound().equals(item.getTagCompound()))
+            else if(te.object.itemID == item.itemID && te.object != null && te.object != new ItemStack(0, 0, 0) && te.object.getItemDamage() == item.getItemDamage())
             {
-                te.quantity += item.stackSize;
-                te.object.stackSize = 1;
-                if (!entityPlayer.capabilities.isCreativeMode) item.stackSize = 0;
-                te.isDirty = true;             
+                if(te.object.hasTagCompound() && item.hasTagCompound() && te.object.getTagCompound().equals(item.getTagCompound()))
+                {
+                    te.quantity += item.stackSize;
+                    te.object.stackSize = 1;
+                    if (!entityPlayer.capabilities.isCreativeMode) item.stackSize = 0;
+                    te.isDirty = true;
+                }
+                else if(!te.object.hasTagCompound() && !item.hasTagCompound())
+                {
+                    te.quantity += item.stackSize;
+                    te.object.stackSize = 1;
+                    if (!entityPlayer.capabilities.isCreativeMode) item.stackSize = 0;
+                    te.isDirty = true;                    
+                }
             }
         }
         return true;
