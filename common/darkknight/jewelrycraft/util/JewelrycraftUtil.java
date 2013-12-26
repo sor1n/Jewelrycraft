@@ -26,6 +26,8 @@ public class JewelrycraftUtil
         modifiers.add(new ItemStack(Item.pickaxeIron));
         modifiers.add(new ItemStack(Item.bed));
         modifiers.add(new ItemStack(Item.eyeOfEnder));
+        modifiers.add(new ItemStack(Item.feather));
+        modifiers.add(new ItemStack(Item.potion, 1, 8270));
 
         //Jewels
         jewel.add(new ItemStack(Item.enderPearl));
