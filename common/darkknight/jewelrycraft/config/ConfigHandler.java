@@ -14,7 +14,7 @@ public class ConfigHandler
     
     public static int            idShadowOre          = 1750;
     public static int            idSmelter            = 1751;
-    public static int            idMolder             = 1752;
+    public static int            idMolder             = 1754;
     public static int            idJewelCraftingTable = 1753;
     
     public static int            ingotCoolingTime     = 200;
