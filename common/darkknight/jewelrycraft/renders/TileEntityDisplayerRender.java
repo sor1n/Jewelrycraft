@@ -18,6 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.FakePlayer;
 
 public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
 {
@@ -51,12 +52,12 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
             ind++;
             if(disp.object.itemID != Item.map.itemID && disp.object != null && disp.object != new ItemStack(0, 0, 0) && disp.object.getTooltip(null, true) != null)
             {
-                for(int i = 1; i < disp.object.getTooltip(null, true).size(); i++)
+                for(int i = 1; i < disp.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).size(); i++)
                 {
-                    if(disp.object.getTooltip(null, true).get(i).toString() != "")
+                    if(disp.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).get(i).toString() != "")
                     {
                         GL11.glPushMatrix();
-                        renderLabel(disp.object.getTooltip(null, true).get(i).toString(), 0F, (-0.16F)*ind, 0, block);
+                        renderLabel(disp.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).get(i).toString(), 0F, (-0.16F)*ind, 0, block);
                         GL11.glPopMatrix();
                         ind++;
                     }
