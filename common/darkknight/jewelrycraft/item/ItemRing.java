@@ -128,18 +128,21 @@ public class ItemRing extends Item
         if (!world.isRemote){
             if (JewelryNBT.playerPosX(stack) != -1 && JewelryNBT.playerPosY(stack) != -1 && JewelryNBT.playerPosZ(stack) != -1){
                 double posX = JewelryNBT.playerPosX(stack), posY = JewelryNBT.playerPosY(stack), posZ = JewelryNBT.playerPosZ(stack);
-                if (JewelryNBT.dimension(stack) != -2 && JewelryNBT.dimName(stack) != null){
+                if (JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)) && JewelryNBT.isModifierX(stack, new ItemStack(Item.bed)) && JewelryNBT.dimension(stack) != -2 && JewelryNBT.dimName(stack) != null)
+                {
                     int dimension = JewelryNBT.dimension(stack);
                     for (int i = 1; i <= 20; i++) world.spawnParticle("largesmoke", player.posX - 0.5D + Math.random(), player.posY - 1.5D + Math.random(), player.posZ - 0.5D + Math.random(), 0.0D, 0.0D, 0.0D);
                     if (!JewelryNBT.isDimensionX(stack, player.dimension)) player.travelToDimension(dimension);
                     player.setPositionAndUpdate(posX, posY, posZ);
                     for (int i = 1; i <= 300; i++) world.spawnParticle("portal", posX - 0.5D + Math.random(), posY + Math.random(), posZ - 0.5D + Math.random(), 0.0D, 0.0D, 0.0D);
                 }
-                else{
+                else if(JewelryNBT.isDimensionX(stack, player.dimension))
+                {
                     for (int i = 1; i <= 20; i++) world.spawnParticle("largesmoke", player.posX - 0.5D + Math.random(), player.posY - 1.5D + Math.random(), player.posZ - 0.5D + Math.random(), 0.0D, 0.0D, 0.0D);
                     player.setPositionAndUpdate(posX, posY, posZ);
                     for (int i = 1; i <= 300; i++) world.spawnParticle("portal", posX - 0.5D + Math.random(), posY + Math.random(), posZ - 0.5D + Math.random(), 0.0D, 0.0D, 0.0D);
                 }
+                else player.addChatMessage("You can't teleport to these coordonates! You need to be in the same dimension they were set!");
             }
             else if(JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)) && JewelryNBT.isModifierX(stack, new ItemStack(Item.bed)) && JewelryNBT.dimension(stack) == -2 && JewelryNBT.playerPosX(stack) == -1 && JewelryNBT.playerPosY(stack) == -1 && JewelryNBT.playerPosZ(stack) == -1){
                 JewelryNBT.addCoordonatesAndDimension(stack, player.posX, player.posY, player.posZ, world.provider.dimensionId, world.provider.getDimensionName());
@@ -162,7 +165,7 @@ public class ItemRing extends Item
                 else player.addChatMessage("You need to link the ring with a chest first, before using it!");
             }
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)) && JewelryNBT.playerPosX(stack) == -1 && JewelryNBT.playerPosY(stack) == -1 && JewelryNBT.playerPosZ(stack) == -1){
-                JewelryNBT.addCoordonates(stack, player.posX, player.posY, player.posZ);
+                JewelryNBT.addCoordonatesAndDimension(stack, player.posX, player.posY, player.posZ, world.provider.dimensionId, world.provider.getDimensionName());
                 JewelryNBT.addEnchantment(stack);
             }
         }
