@@ -1,5 +1,7 @@
 package darkknight.jewelrycraft.renders;
 
+import java.awt.Color;
+
 import org.lwjgl.opengl.GL11;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -43,11 +45,11 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
         {
             int ind = -3;
             GL11.glPushMatrix();
-            renderLabel(EnumChatFormatting.YELLOW + disp.object.getDisplayName(), 0F, (-0.16F)*ind, 0, block);
+            renderLabel(EnumChatFormatting.YELLOW + disp.object.getDisplayName(), 0F, (-0.171F)*ind, 0, block, disp);
             GL11.glPopMatrix();
             ind++;
             GL11.glPushMatrix();
-            renderLabel(Integer.toString(disp.quantity), 0F, (-0.16F)*ind, 0, block);
+            renderLabel(Integer.toString(disp.quantity), 0F, (-0.171F)*ind, 0, block, disp);
             GL11.glPopMatrix();
             ind++;
             if(disp.object.itemID != Item.map.itemID && disp.object != null && disp.object != new ItemStack(0, 0, 0) && disp.object.getTooltip(null, true) != null)
@@ -57,7 +59,7 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
                     if(disp.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).get(i).toString() != "")
                     {
                         GL11.glPushMatrix();
-                        renderLabel(disp.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).get(i).toString(), 0F, (-0.16F)*ind, 0, block);
+                        renderLabel(disp.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).get(i).toString(), 0F, (-0.171F)*ind, 0, block, disp);
                         GL11.glPopMatrix();
                         ind++;
                     }
@@ -98,40 +100,45 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) modulousModifier, divModifier);
     }
 
-    protected void renderLabel(String par2Str, double x, double y, double z, int metadata)
+    protected void renderLabel(String par2Str, double x, double y, double z, int metadata, TileEntity te)
     {
         FontRenderer fontrenderer = RenderManager.instance.getFontRenderer();
-        float var14 = 0.01266667F * 1.5F;
-        float var17 = 0.015F;
-        GL11.glRotatef(180F, 0F, 0F, 1F);
-        if(metadata == 0) GL11.glRotatef(0F, 0F, 1F, 0F);
-        else if(metadata == 1) GL11.glRotatef(270F, 0F, 1F, 0F);
-        else if(metadata == 2) GL11.glRotatef(180F, 0F, 1F, 0F);
-        else if(metadata == 3) GL11.glRotatef(90F, 0F, 1F, 0F);
-        GL11.glTranslatef((float)x, (float)y, (float)z + 0.45F);
-        GL11.glScalef(-0.015F, -var14, 0.015F);
-        GL11.glPushMatrix();
-        GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        Tessellator tessellator = Tessellator.instance;
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
-        int j = fontrenderer.getStringWidth(par2Str) / 2;
-        tessellator.startDrawingQuads();
-        tessellator.setColorRGBA_F(0.2F, 0.2F, 0.2F, 0.8F);
-        tessellator.addVertex((double)(-33.333 - 0), -1D, 0.1D);
-        tessellator.addVertex((double)(-33.333 - 0), 8D, 0.1D);
-        tessellator.addVertex((double)(33.333 + 0), 8D, 0.1D);
-        tessellator.addVertex((double)(33.333 + 0), -1D, 0.1D);
-        tessellator.draw();
-        if ((fontrenderer.getStringWidth(par2Str)/2) > 30) var17 = 0.9F / fontrenderer.getStringWidth(par2Str); 
-        else var17 = var14;
-        GL11.glScalef(var17*70F, 1F, 0F);
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glDepthMask(true);
-        fontrenderer.drawString(par2Str, -j, 0, -1);
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glPopMatrix();
+        if(te.worldObj.getClosestPlayer((double)te.xCoord, (double)te.yCoord, (double)te.zCoord, 3D) != null)
+        {
+            float var14 = 0.01266667F * 1.5F;
+            float var17 = 0.015F;
+            GL11.glRotatef(180F, 0F, 0F, 1F);
+            if(metadata == 0) GL11.glRotatef(0F, 0F, 1F, 0F);
+            else if(metadata == 1) GL11.glRotatef(270F, 0F, 1F, 0F);
+            else if(metadata == 2) GL11.glRotatef(180F, 0F, 1F, 0F);
+            else if(metadata == 3) GL11.glRotatef(90F, 0F, 1F, 0F);
+            GL11.glTranslatef((float)x, (float)y, (float)z + 0.45F);
+            GL11.glScalef(-0.015F, -var14, 0.015F);
+            GL11.glPushMatrix();
+            GL11.glDisable(GL11.GL_LIGHTING);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            GL11.glDisable(GL11.GL_DEPTH_TEST);
+            GL11.glDepthMask(true);
+            Tessellator tessellator = Tessellator.instance;
+            GL11.glDisable(GL11.GL_TEXTURE_2D);
+            int j = fontrenderer.getStringWidth(par2Str) / 2;
+            tessellator.startDrawingQuads();
+            tessellator.setColorRGBA_F(0.2F, 0.2F, 0.2F, 0.8F);
+            tessellator.addVertex((double)(-33.333 - 0), -1D, 0.1D);
+            tessellator.addVertex((double)(-33.333 - 0), 8D, 0.1D);
+            tessellator.addVertex((double)(33.333 + 0), 8D, 0.1D);
+            tessellator.addVertex((double)(33.333 + 0), -1D, 0.1D);
+            tessellator.draw();
+            if ((fontrenderer.getStringWidth(par2Str)/2) > 30) var17 = 0.9F / fontrenderer.getStringWidth(par2Str); 
+            else var17 = var14;
+            GL11.glScalef(var17*70F, 1F, 0F);
+            GL11.glEnable(GL11.GL_TEXTURE_2D);
+            fontrenderer.drawStringWithShadow(par2Str, -j, 0, Color.GRAY.getRGB());
+            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            GL11.glEnable(GL11.GL_LIGHTING);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glPopMatrix();
+        }
     }
 }

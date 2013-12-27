@@ -229,6 +229,7 @@ public class ItemRing extends Item
                 JewelryNBT.removeEntity(stack);
             }
             if (JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)) && JewelryNBT.isModifierX(stack, new ItemStack(Block.chest)) && world.getBlockId(i, j, k) == Block.chest.blockID) JewelryNBT.addBlockCoordonates(stack, i, j, k);
+            onItemRightClick(stack, world, player);
         }
         return true;
     }
