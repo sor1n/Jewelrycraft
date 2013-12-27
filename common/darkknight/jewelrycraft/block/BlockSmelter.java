@@ -105,13 +105,13 @@ public class BlockSmelter extends BlockContainer
     {
         TileEntitySmelter te = (TileEntitySmelter) world.getBlockTileEntity(i, j, k);
         TileEntityMolder me = null;
-        if (world.getBlockMetadata(i, j, k) == 0)
+        if (world.getBlockMetadata(i, j, k) == 0 && world.getBlockTileEntity(i, j, k - 1) != null && world.getBlockTileEntity(i, j, k - 1) instanceof TileEntityMolder)
             me = (TileEntityMolder) world.getBlockTileEntity(i, j, k - 1);
-        else if (world.getBlockMetadata(i, j, k) == 1)
+        else if (world.getBlockMetadata(i, j, k) == 1 && world.getBlockTileEntity(i + 1, j, k) != null && world.getBlockTileEntity(i + 1, j, k) instanceof TileEntityMolder)
             me = (TileEntityMolder) world.getBlockTileEntity(i + 1, j, k);
-        else if (world.getBlockMetadata(i, j, k) == 2)
+        else if (world.getBlockMetadata(i, j, k) == 2 && world.getBlockTileEntity(i, j, k + 1) != null && world.getBlockTileEntity(i, j, k + 1) instanceof TileEntityMolder)
             me = (TileEntityMolder) world.getBlockTileEntity(i, j, k + 1);
-        else if (world.getBlockMetadata(i, j, k) == 3)
+        else if (world.getBlockMetadata(i, j, k) == 3 && world.getBlockTileEntity(i - 1, j, k) != null && world.getBlockTileEntity(i - 1, j, k) instanceof TileEntityMolder)
             me = (TileEntityMolder) world.getBlockTileEntity(i - 1, j, k);
         
         if (te != null && me != null && !world.isRemote)

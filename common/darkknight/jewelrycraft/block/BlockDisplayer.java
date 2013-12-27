@@ -101,12 +101,12 @@ public class BlockDisplayer extends BlockContainer
             {
                 if(player.isSneaking())
                 {
-                    if(te.quantity > 64)
+                    if(te.quantity > te.object.getMaxStackSize())
                     {
-                        te.object.stackSize = 63;
+                        te.object.stackSize = te.object.getMaxStackSize() - 1;
                         player.inventory.addItemStackToInventory(te.object);
                         te.object.stackSize = 1;
-                        te.quantity -= 64;
+                        te.quantity -= te.object.getMaxStackSize();
                     }
                     else
                     {
