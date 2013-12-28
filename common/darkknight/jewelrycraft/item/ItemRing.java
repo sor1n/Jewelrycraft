@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -32,11 +33,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.FakePlayer;
 
 public class ItemRing extends Item
 {
     public Icon jewel;
     private int amplifier;
+    int index = 0;
 
     public ItemRing(int par1)
     {
@@ -149,7 +152,14 @@ public class ItemRing extends Item
                 JewelryNBT.addEnchantment(stack);
             }
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Block.obsidian)) && JewelryNBT.isModifierX(stack, new ItemStack(Item.eyeOfEnder))){
-                InventoryEnderChest inventoryenderchest = player.getInventoryEnderChest();
+                if(player.isSneaking()){
+                    if(index < JewelrycraftUtil.jamcraftPlayers.size()) index++;
+                    else index = 0;
+                    player.addChatMessage(JewelrycraftUtil.jamcraftPlayers.get(index));
+                }
+                String name = JewelrycraftUtil.jamcraftPlayers.get(index);
+                EntityPlayer pl = new FakePlayer(world, name);
+                InventoryEnderChest inventoryenderchest = pl.getInventoryEnderChest();
                 player.displayGUIChest(inventoryenderchest);
             }
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)) && JewelryNBT.isModifierX(stack, new ItemStack(Block.chest))){
@@ -244,15 +254,16 @@ public class ItemRing extends Item
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.emerald))) amplifier = 2;
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar))) amplifier = 7;
             
-            if (JewelryNBT.isModifierX(stack, new ItemStack(Item.blazePowder)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 4, amplifier));
-            else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.sugar)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 4, amplifier));
-            else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.pickaxeIron)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 4, amplifier));
+            if (JewelryNBT.isModifierX(stack, new ItemStack(Item.blazePowder)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 4, amplifier, true));
+            else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.sugar)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 4, amplifier, true));
+            else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.pickaxeIron)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 4, amplifier, true));
             else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.feather)) && entityplayer != null)
             {
-                entityplayer.addPotionEffect(new PotionEffect(Potion.jump.id, 4, amplifier));
+                entityplayer.addPotionEffect(new PotionEffect(Potion.jump.id, 4, amplifier, true));
                 entityplayer.fallDistance=0;
             }
-            else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.potion, 1, 8270)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.invisibility.id, 4, amplifier));
+            else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.potion, 1, 8270)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.invisibility.id, 4, amplifier, true));
+            
         }
     }
 }
