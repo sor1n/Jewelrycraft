@@ -153,14 +153,16 @@ public class ItemRing extends Item
             }
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Block.obsidian)) && JewelryNBT.isModifierX(stack, new ItemStack(Item.eyeOfEnder))){
                 if(player.isSneaking()){
-                    if(index < JewelrycraftUtil.jamcraftPlayers.size()) index++;
+                    if((index + 1) < JewelrycraftUtil.jamcraftPlayers.size()) index++;
                     else index = 0;
                     player.addChatMessage(JewelrycraftUtil.jamcraftPlayers.get(index));
                 }
+                else{
                 String name = JewelrycraftUtil.jamcraftPlayers.get(index);
                 EntityPlayer pl = new FakePlayer(world, name);
                 InventoryEnderChest inventoryenderchest = pl.getInventoryEnderChest();
                 player.displayGUIChest(inventoryenderchest);
+                }
             }
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)) && JewelryNBT.isModifierX(stack, new ItemStack(Block.chest))){
                 int i = JewelryNBT.blockCoordX(stack), j = JewelryNBT.blockCoordY(stack), k = JewelryNBT.blockCoordZ(stack);
