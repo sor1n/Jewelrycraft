@@ -161,11 +161,12 @@ public class ItemRing extends Item
                         else index = 0;
                         player.addChatMessage(JewelrycraftUtil.jamcraftPlayers.get(index));
                     }
-                    else{
+                    else
+                    {
                         String name = JewelrycraftUtil.jamcraftPlayers.get(index);
                         EntityPlayer pl = new FakePlayer(world, name);
                         InventoryEnderChest inventoryenderchest = pl.getInventoryEnderChest();
-                        player.displayGUIChest(inventoryenderchest);
+                        pl.displayGUIChest(inventoryenderchest);
                     }
                 }
                 else
