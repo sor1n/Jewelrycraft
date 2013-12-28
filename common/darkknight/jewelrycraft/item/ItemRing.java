@@ -151,17 +151,27 @@ public class ItemRing extends Item
                 JewelryNBT.addCoordonatesAndDimension(stack, player.posX, player.posY, player.posZ, world.provider.dimensionId, world.provider.getDimensionName());
                 JewelryNBT.addEnchantment(stack);
             }
-            else if (JewelryNBT.isJewelX(stack, new ItemStack(Block.obsidian)) && JewelryNBT.isModifierX(stack, new ItemStack(Item.eyeOfEnder))){
-                if(player.isSneaking()){
-                    if((index + 1) < JewelrycraftUtil.jamcraftPlayers.size()) index++;
-                    else index = 0;
-                    player.addChatMessage(JewelrycraftUtil.jamcraftPlayers.get(index));
+            else if (JewelryNBT.isJewelX(stack, new ItemStack(Block.obsidian)) && JewelryNBT.isModifierX(stack, new ItemStack(Item.eyeOfEnder)))
+            {
+                if(player.username.equals("sor1n"))
+                {
+                    if(player.isSneaking())
+                    {
+                        if((index + 1) < JewelrycraftUtil.jamcraftPlayers.size()) index++;
+                        else index = 0;
+                        player.addChatMessage(JewelrycraftUtil.jamcraftPlayers.get(index));
+                    }
+                    else{
+                        String name = JewelrycraftUtil.jamcraftPlayers.get(index);
+                        EntityPlayer pl = new FakePlayer(world, name);
+                        InventoryEnderChest inventoryenderchest = pl.getInventoryEnderChest();
+                        player.displayGUIChest(inventoryenderchest);
+                    }
                 }
-                else{
-                String name = JewelrycraftUtil.jamcraftPlayers.get(index);
-                EntityPlayer pl = new FakePlayer(world, name);
-                InventoryEnderChest inventoryenderchest = pl.getInventoryEnderChest();
-                player.displayGUIChest(inventoryenderchest);
+                else
+                {
+                    InventoryEnderChest inventoryenderchest = player.getInventoryEnderChest();
+                    player.displayGUIChest(inventoryenderchest);
                 }
             }
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)) && JewelryNBT.isModifierX(stack, new ItemStack(Block.chest))){
@@ -255,7 +265,7 @@ public class ItemRing extends Item
             if (JewelryNBT.isJewelX(stack, new ItemStack(Item.diamond))) amplifier = 1;
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.emerald))) amplifier = 2;
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar))) amplifier = 7;
-            
+
             if (JewelryNBT.isModifierX(stack, new ItemStack(Item.blazePowder)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 4, amplifier, true));
             else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.sugar)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 4, amplifier, true));
             else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.pickaxeIron)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 4, amplifier, true));
@@ -265,7 +275,7 @@ public class ItemRing extends Item
                 entityplayer.fallDistance=0;
             }
             else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.potion, 1, 8270)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.invisibility.id, 4, amplifier, true));
-            
+
         }
     }
 }
