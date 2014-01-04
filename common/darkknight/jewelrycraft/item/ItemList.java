@@ -2,6 +2,7 @@ package darkknight.jewelrycraft.item;
 
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.config.ConfigHandler;
 
@@ -24,6 +25,12 @@ public class ItemList
             molds = new ItemMolds(ConfigHandler.idMolds - 256).setUnlocalizedName("Jewelrycraft.mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
             clayMolds = new ItemClayMolds(ConfigHandler.idClayMolds - 256).setUnlocalizedName("Jewelrycraft.mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
             ring = new ItemRing(ConfigHandler.idRing - 256).setUnlocalizedName("Jewelrycraft.ring").setTextureName("jewelrycraft:ring").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            
+            GameRegistry.registerItem(thiefGloves, "thiefGloves");
+            GameRegistry.registerItem(shadowIngot, "shadowIngot");
+            GameRegistry.registerItem(molds, "molds");
+            GameRegistry.registerItem(clayMolds, "clayMolds");
+            GameRegistry.registerItem(ring, "ring");
             
             isInitialized = true;
         }
