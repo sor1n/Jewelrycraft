@@ -11,7 +11,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -33,7 +32,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.FakePlayer;
 
 public class ItemRing extends Item
 {

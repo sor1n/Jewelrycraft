@@ -1,5 +1,7 @@
 package darkknight.jewelrycraft;
 
+import java.util.logging.Logger;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
@@ -7,6 +9,8 @@ import net.minecraft.network.NetLoginHandler;
 import net.minecraft.network.packet.NetHandler;
 import net.minecraft.network.packet.Packet1Login;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -22,6 +26,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.JewelryCraftClient;
 import darkknight.jewelrycraft.config.ConfigHandler;
@@ -32,6 +37,9 @@ import darkknight.jewelrycraft.recipes.CraftingRecipes;
 import darkknight.jewelrycraft.server.JewelryCraftServer;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.worldGen.Generation;
+import darkknight.jewelrycraft.worldGen.village.ComponentJewelry;
+import darkknight.jewelrycraft.worldGen.village.JCTrades;
+import darkknight.jewelrycraft.worldGen.village.VillageJewelryHandler;
 
 @Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION)
 @NetworkMod(clientSideRequired = false, serverSideRequired = false,
@@ -48,6 +56,8 @@ public class JewelrycraftMod implements IConnectionHandler
 
     @SidedProxy(clientSide = "darkknight.jewelrycraft.client.ClientProxy", serverSide = "darkknight.jewelrycraft.CommonProxy")
     public static CommonProxy proxy;
+    
+    public static final Logger logger = Logger.getLogger("Jewelrycraft");
 
     public static CreativeTabs jewelrycraft = new CreativeTabs("JewelryCraft")
     {
@@ -65,6 +75,20 @@ public class JewelrycraftMod implements IConnectionHandler
         ItemList.preInit(e);
         BlockList.preInit(e);
         CraftingRecipes.preInit(e);
+        JewelrycraftUtil.addMetals();
+        
+        VillagerRegistry.instance().registerVillagerId(3000);
+        VillagerRegistry.instance().registerVillageTradeHandler(3000, new JCTrades());
+        VillagerRegistry.instance().registerVillagerSkin(3000, new ResourceLocation("jewelrycraft", "textures/entities/jeweler.png"));
+        VillagerRegistry.instance().registerVillageCreationHandler(new VillageJewelryHandler());
+        try
+        {
+            MapGenStructureIO.func_143031_a(ComponentJewelry.class, "Jewelrycraft:Jewelry");
+        }
+        catch (Throwable e2)
+        {
+            logger.severe("Error registering Jewelrycraft Structures with Vanilla Minecraft: this is expected in versions earlier than 1.6.4");
+        }
         proxy.registerRenderers();
     }
 

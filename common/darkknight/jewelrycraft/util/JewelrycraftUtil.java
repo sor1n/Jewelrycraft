@@ -7,6 +7,7 @@ import java.util.Iterator;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import darkknight.jewelrycraft.item.ItemList;
 
 public class JewelrycraftUtil
@@ -14,26 +15,27 @@ public class JewelrycraftUtil
     public static ArrayList<ItemStack> modifiers = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> jewel = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> jewelry = new ArrayList<ItemStack>();
+    public static ArrayList<ItemStack> metal = new ArrayList<ItemStack>();
     public static ArrayList<String> jamcraftPlayers = new ArrayList<String>();
     public static HashMap<ItemStack, ItemStack> combinations = new HashMap<ItemStack, ItemStack>();
 
     public static void addStuff()
     {
         //Modifiers
-        modifiers.add(new ItemStack(Item.blazePowder));
-        modifiers.add(new ItemStack(Item.sugar));
         modifiers.add(new ItemStack(Block.chest));
-        modifiers.add(new ItemStack(Item.pickaxeIron));
-        modifiers.add(new ItemStack(Item.bed));
-        modifiers.add(new ItemStack(Item.eyeOfEnder));
+        modifiers.add(new ItemStack(Item.sugar));
         modifiers.add(new ItemStack(Item.feather));
+        modifiers.add(new ItemStack(Item.bed));
+        modifiers.add(new ItemStack(Item.pickaxeIron));
+        modifiers.add(new ItemStack(Item.blazePowder));
+        modifiers.add(new ItemStack(Item.eyeOfEnder));
         modifiers.add(new ItemStack(Item.potion, 1, 8270));
 
         //Jewels
-        jewel.add(new ItemStack(Item.enderPearl));
+        jewel.add(new ItemStack(Block.obsidian));
         jewel.add(new ItemStack(Item.diamond));
         jewel.add(new ItemStack(Item.emerald));
-        jewel.add(new ItemStack(Block.obsidian));
+        jewel.add(new ItemStack(Item.enderPearl));
         jewel.add(new ItemStack(Item.netherStar));
 
         //Jewelry
@@ -70,6 +72,24 @@ public class JewelrycraftUtil
         jamcraftPlayers.add("theminecoder");
         jamcraftPlayers.add("YSPilot");
         jamcraftPlayers.add("direwolf20");
+    }
+    
+    public static void addMetals()
+    {
+        int index = 0, index2 = 0;
+        while(index < OreDictionary.getOreNames().length)
+        {
+            while(index2 < OreDictionary.getOres(OreDictionary.getOreNames()[index]).size())
+            {
+                if(OreDictionary.getOres(OreDictionary.getOreNames()[index]).get(index2).getUnlocalizedName().contains("ingot"))
+                    metal.add(OreDictionary.getOres(OreDictionary.getOreNames()[index]).get(index2));
+                index2++;
+            }
+            index2 = 0;
+            index++;
+        }   
+        metal.add(new ItemStack(Item.ingotGold));
+        metal.add(new ItemStack(Item.ingotIron));
     }
 
     public static boolean isModifier(ItemStack item)

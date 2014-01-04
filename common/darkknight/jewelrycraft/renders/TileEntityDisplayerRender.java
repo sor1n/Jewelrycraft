@@ -103,7 +103,7 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
     protected void renderLabel(String par2Str, double x, double y, double z, int metadata, TileEntity te)
     {
         FontRenderer fontrenderer = RenderManager.instance.getFontRenderer();
-        if(te.worldObj.getClosestPlayer((double)te.xCoord, (double)te.yCoord, (double)te.zCoord, 3D) != null)
+        if(te.worldObj.getClosestPlayer((double)te.xCoord, (double)te.yCoord, (double)te.zCoord, 3.5D) != null)
         {
             float var14 = 0.01266667F * 1.5F;
             float var17 = 0.015F;
