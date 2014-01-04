@@ -1,6 +1,8 @@
 package darkknight.jewelrycraft.client;
 
+import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import darkknight.jewelrycraft.CommonProxy;
 import darkknight.jewelrycraft.renders.TileEntityDisplayerRender;
 import darkknight.jewelrycraft.renders.TileEntityJewelrsCraftingTableRender;
@@ -20,5 +22,6 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMolder.class, new TileEntityMolderRender());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJewelrsCraftingTable.class, new TileEntityJewelrsCraftingTableRender());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDisplayer.class, new TileEntityDisplayerRender());
+        VillagerRegistry.instance().registerVillagerSkin(3000, new ResourceLocation("jewelrycraft", "textures/entities/jeweler.png"));
     }
 }

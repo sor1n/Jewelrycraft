@@ -9,7 +9,6 @@ import net.minecraft.network.NetLoginHandler;
 import net.minecraft.network.packet.NetHandler;
 import net.minecraft.network.packet.Packet1Login;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
@@ -27,8 +26,6 @@ import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.JewelryCraftClient;
 import darkknight.jewelrycraft.config.ConfigHandler;
@@ -78,16 +75,9 @@ public class JewelrycraftMod implements IConnectionHandler
         BlockList.preInit(e);
         CraftingRecipes.preInit(e);
         JewelrycraftUtil.addMetals();
-        registerVillagers();
-        proxy.registerRenderers();
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void registerVillagers()
-    {        
+        
         VillagerRegistry.instance().registerVillagerId(3000);
         VillagerRegistry.instance().registerVillageTradeHandler(3000, new JCTrades());
-        VillagerRegistry.instance().registerVillagerSkin(3000, new ResourceLocation("jewelrycraft", "textures/entities/jeweler.png"));
         VillagerRegistry.instance().registerVillageCreationHandler(new VillageJewelryHandler());
         try
         {
@@ -98,6 +88,7 @@ public class JewelrycraftMod implements IConnectionHandler
             logger.severe("Error registering Jewelrycraft Structures with Vanilla Minecraft: this is expected in versions earlier than 1.6.4");
         }
         
+        proxy.registerRenderers();
     }
 
     @EventHandler
