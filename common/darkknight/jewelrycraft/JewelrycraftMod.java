@@ -27,6 +27,8 @@ import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.JewelryCraftClient;
 import darkknight.jewelrycraft.config.ConfigHandler;
@@ -76,7 +78,13 @@ public class JewelrycraftMod implements IConnectionHandler
         BlockList.preInit(e);
         CraftingRecipes.preInit(e);
         JewelrycraftUtil.addMetals();
-        
+        registerVillagers();
+        proxy.registerRenderers();
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerVillagers()
+    {        
         VillagerRegistry.instance().registerVillagerId(3000);
         VillagerRegistry.instance().registerVillageTradeHandler(3000, new JCTrades());
         VillagerRegistry.instance().registerVillagerSkin(3000, new ResourceLocation("jewelrycraft", "textures/entities/jeweler.png"));
@@ -89,7 +97,7 @@ public class JewelrycraftMod implements IConnectionHandler
         {
             logger.severe("Error registering Jewelrycraft Structures with Vanilla Minecraft: this is expected in versions earlier than 1.6.4");
         }
-        proxy.registerRenderers();
+        
     }
 
     @EventHandler
