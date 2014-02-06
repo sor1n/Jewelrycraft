@@ -23,6 +23,7 @@ public class JewelrycraftUtil
     {
         //Modifiers
         modifiers.add(new ItemStack(Block.chest));
+        modifiers.add(new ItemStack(Item.book));
         modifiers.add(new ItemStack(Item.sugar));
         modifiers.add(new ItemStack(Item.feather));
         modifiers.add(new ItemStack(Item.bed));

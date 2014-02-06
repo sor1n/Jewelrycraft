@@ -146,6 +146,21 @@ public class JewelryNBT
         itemStackData.setTag("dimension", coords);
         itemStackData.setTag("dimName", coords);
     }
+
+    public static void addMode(ItemStack item, String modeN)
+    {
+        NBTTagCompound itemStackData;
+        if (item.hasTagCompound())
+            itemStackData = item.getTagCompound();
+        else
+        {
+            itemStackData = new NBTTagCompound();
+            item.setTagCompound(itemStackData);
+        }
+        NBTTagCompound mode = new NBTTagCompound();
+        mode.setString("mode", modeN);
+        itemStackData.setTag("mode", mode);
+    }
     
     public static void removeNBT(ItemStack item, String tag)
     {
@@ -167,7 +182,7 @@ public class JewelryNBT
         JewelryNBT.removeNBT(item, "ench");
     }
 
-    public static void addEnchantment(ItemStack item)
+    public static void addFakeEnchantment(ItemStack item)
     {
         NBTTagCompound itemStackData;
         if (item.hasTagCompound())
@@ -234,6 +249,12 @@ public class JewelryNBT
         return false;
     }
 
+    public static boolean isModeX(ItemStack stack, String modeN)
+    {
+        if(modeName(stack) != null && modeName(stack).equals(modeN)) return true;
+        return false;
+    }
+
     public static EntityLivingBase entity(ItemStack stack, EntityPlayer player)
     {
         if (stack != null && stack != new ItemStack(0, 0, 0) && stack.getTagCompound().hasKey("entityID") && stack.getTagCompound().hasKey("entity"))
@@ -261,6 +282,17 @@ public class JewelryNBT
         {
             NBTTagCompound dim = (NBTTagCompound) stack.getTagCompound().getTag("dimName");
             String name = dim.getString("dimName");
+            return name;
+        }
+        return null;
+    }
+
+    public static String modeName(ItemStack stack)
+    {
+        if(stack != null && stack != new ItemStack(0, 0, 0) && stack.hasTagCompound() && stack.getTagCompound().hasKey("mode"))
+        {
+            NBTTagCompound dim = (NBTTagCompound) stack.getTagCompound().getTag("mode");
+            String name = dim.getString("mode");
             return name;
         }
         return null;

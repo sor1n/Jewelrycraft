@@ -2,6 +2,7 @@ package darkknight.jewelrycraft.tileentity;
 
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
@@ -110,6 +111,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
                 this.endItem = jewelry.copy();
                 if (hasModifier && modifier != new ItemStack(0, 0, 0)) JewelryNBT.addModifier(endItem, modifier);
                 if (hasJewel && jewel != new ItemStack(0, 0, 0)) JewelryNBT.addJewel(endItem, jewel);
+                if (hasJewel && hasModifier && JewelryNBT.isJewelX(endItem, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(endItem, new ItemStack(Item.book))) JewelryNBT.addMode(endItem, "Disenchant");
                 this.hasJewelry = false;
                 this.jewelry = new ItemStack(0, 0, 0);
                 this.hasModifier = false;

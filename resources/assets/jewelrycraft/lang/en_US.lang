@@ -8,6 +8,7 @@ item.Jewelrycraft.mold.clayRing.name=Clay Ring Mold
 item.Jewelrycraft.mold.clayNecklace.name=Clay Necklace Mold
 item.Jewelrycraft.ring.name=Ring
 tile.Jewelrycraft.oreShadow.name=Shadow Ore
+tile.Jewelrycraft.glow.name=Glow
 tile.Jewelrycraft.smelter.name=Smelter
 tile.Jewelrycraft.molder.name=Molder
 tile.Jewelrycraft.displayer.name=Storage Displayer

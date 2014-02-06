@@ -14,6 +14,7 @@ import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
 public class BlockList
 {
     public static Block    shadowOre;
+    public static Block    glow;
     public static Block    smelter;
     public static Block    molder;
     public static Block    displayer;
@@ -26,6 +27,7 @@ public class BlockList
         if (!isInitialized)
         {
             shadowOre = new Block(ConfigHandler.idShadowOre, Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setTextureName("jewelrycraft:oreShadow").setUnlocalizedName("Jewelrycraft.oreShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            glow = new BlockShadow(ConfigHandler.idGlow).setUnlocalizedName("Jewelrycraft.glow").setLightValue(1F);
             smelter = new BlockSmelter(ConfigHandler.idSmelter, Material.rock).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("Jewelrycraft.smelter").setCreativeTab(JewelrycraftMod.jewelrycraft);
             molder = new BlockMolder(ConfigHandler.idMolder, Material.rock).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("Jewelrycraft.molder").setCreativeTab(JewelrycraftMod.jewelrycraft);
             displayer = new BlockDisplayer(ConfigHandler.idDisplayer, Material.iron).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("Jewelrycraft.displayer").setCreativeTab(JewelrycraftMod.jewelrycraft);
