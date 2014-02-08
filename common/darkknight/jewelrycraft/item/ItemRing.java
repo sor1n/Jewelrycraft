@@ -195,8 +195,8 @@ public class ItemRing extends Item
                     player.addChatMessage("The Ring has been " + mode);
                     JewelryNBT.addMode(stack, mode);
                 }
-
             }
+            else if(JewelryNBT.hasTag(stack, "modifier") && JewelryNBT.isModifierEffectType(stack)) JewelryNBT.addMode(stack, "Activated");
         }
         return stack;
     }
