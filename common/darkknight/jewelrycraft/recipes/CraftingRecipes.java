@@ -24,6 +24,7 @@ public class CraftingRecipes
             GameRegistry.addRecipe(new ItemStack(BlockList.smelter), "xyx", "x x", "xzx", 'x', Block.cobblestone, 'y', Item.bucketEmpty, 'z', Item.bucketLava);
             GameRegistry.addRecipe(new ItemStack(BlockList.jewelCraftingTable), "xxx", "y y", "y y", 'x', Block.planks, 'y', Block.cobblestone);
             GameRegistry.addRecipe(new ItemStack(BlockList.displayer, 2), " x ", "xxx", "yyy", 'x', Item.ingotIron, 'y', Block.blockEmerald);
+            GameRegistry.addRecipe(new ItemStack(BlockList.shadowBlock, 1), "xxx", "xxx", "xxx", 'x', ItemList.shadowIngot);
             GameRegistry.addSmelting(BlockList.shadowOre.blockID, new ItemStack(ItemList.shadowIngot), 1.5f);
             FurnaceRecipes.smelting().addSmelting(ItemList.clayMolds.itemID, 0, new ItemStack(ItemList.molds, 1, 0), 0.85F);
             FurnaceRecipes.smelting().addSmelting(ItemList.clayMolds.itemID, 1, new ItemStack(ItemList.molds, 1, 1), 0.85F);

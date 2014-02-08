@@ -131,6 +131,9 @@ public class JCTrades implements IVillageTradeHandler
                     JewelryNBT.addMetal(result, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())));
                     JewelryNBT.addModifier(result, JewelrycraftUtil.modifiers.get(random.nextInt(JewelrycraftUtil.modifiers.size())));
                     JewelryNBT.addJewel(result, JewelrycraftUtil.jewel.get(random.nextInt(JewelrycraftUtil.jewel.size())));
+                    if(JewelryNBT.isModifierEffectType(result)) JewelryNBT.addMode(result, "Activated");
+                    if(JewelryNBT.isJewelX(result, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(result, new ItemStack(Item.book))) 
+                        JewelryNBT.addMode(result, "Disenchant");
                     ingredient = new ItemStack(Item.emerald, 16 + random.nextInt(20));
                     ingredient2 = new ItemStack(Block.blockEmerald, 5 + random.nextInt(5));
                 }

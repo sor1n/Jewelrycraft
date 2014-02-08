@@ -3,6 +3,7 @@ package darkknight.jewelrycraft.util;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -175,6 +176,20 @@ public class JewelryNBT
         itemStackData.removeTag(tag);
     }
     
+    public static boolean hasTag(ItemStack item, String tag)
+    {
+        NBTTagCompound itemStackData;
+        if (item.hasTagCompound())
+            itemStackData = item.getTagCompound();
+        else
+        {
+            itemStackData = new NBTTagCompound();
+            item.setTagCompound(itemStackData);
+        }
+        if(itemStackData.hasKey(tag)) return true;
+        return false;
+    }
+    
     public static void removeEntity(ItemStack item)
     {
         JewelryNBT.removeNBT(item, "entityID");
@@ -228,6 +243,14 @@ public class JewelryNBT
     public static boolean isModifierX(ItemStack stack, ItemStack modifier)
     {
         if(modifier(stack) != null && modifier(stack).itemID == modifier.itemID && modifier(stack).getItemDamage() == modifier.getItemDamage()) return true;
+        return false;
+    }
+
+    public static boolean isModifierEffectType(ItemStack stack)
+    {
+        if(modifier(stack) != null && (isModifierX(stack, new ItemStack(Item.blazePowder)) || isModifierX(stack, new ItemStack(Item.sugar))
+                || isModifierX(stack, new ItemStack(Item.pickaxeIron)) || isModifierX(stack, new ItemStack(Item.feather))
+                || isModifierX(stack, new ItemStack(Item.potion, 1, 8270)))) return true;
         return false;
     }
 

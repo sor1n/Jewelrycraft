@@ -176,14 +176,26 @@ public class ItemRing extends Item
                 JewelryNBT.addCoordonatesAndDimension(stack, player.posX, player.posY, player.posZ, world.provider.dimensionId, world.provider.getDimensionName());
                 JewelryNBT.addFakeEnchantment(stack);
             }
-            else if(player.inventory.getCurrentItem() != null && JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(stack, new ItemStack(Item.book)))
+
+            if(JewelryNBT.hasTag(stack, "mode"))
             {
                 String mode = "";
                 if(JewelryNBT.isModeX(stack, "Disenchant")) mode = "Transfer";
                 else if(JewelryNBT.isModeX(stack, "Transfer")) mode = "Enchant";
                 else if(JewelryNBT.isModeX(stack, "Enchant")) mode = "Disenchant";
-                player.addChatMessage("Switched to " + mode + " mode");
-                JewelryNBT.addMode(stack, mode);
+                if(mode != "")
+                {
+                    player.addChatMessage("Switched to " + mode + " mode");
+                    JewelryNBT.addMode(stack, mode);
+                }
+                if(JewelryNBT.isModeX(stack, "Activated")) mode = "Deactivated";
+                else if(JewelryNBT.isModeX(stack, "Deactivated")) mode = "Activated";
+                if(mode != "")
+                {
+                    player.addChatMessage("The Ring has been " + mode);
+                    JewelryNBT.addMode(stack, mode);
+                }
+
             }
         }
         return stack;
@@ -279,16 +291,30 @@ public class ItemRing extends Item
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.emerald))) amplifier = 2;
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar))) amplifier = 7;
 
-            if (JewelryNBT.isModifierX(stack, new ItemStack(Item.blazePowder)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 4, amplifier, true));
-            else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.sugar)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 4, amplifier, true));
-            else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.pickaxeIron)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 4, amplifier, true));
-            else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.feather)) && entityplayer != null)
+            if(JewelryNBT.isModeX(stack, "Activated"))
             {
-                entityplayer.addPotionEffect(new PotionEffect(Potion.jump.id, 4, amplifier, true));
-                entityplayer.fallDistance=0;
+                if (JewelryNBT.isModifierX(stack, new ItemStack(Item.blazePowder)) && entityplayer != null)
+                {
+                    entityplayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 4, amplifier, true));
+                    entityplayer.addPotionEffect(new PotionEffect(Potion.weakness.id, 4, amplifier, true));
+                }
+                else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.sugar)) && entityplayer != null)
+                {
+                    entityplayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 4, amplifier, true));
+                    entityplayer.addExhaustion(0.05f*amplifier);
+                }
+                else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.pickaxeIron)) && entityplayer != null)
+                {
+                    entityplayer.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 4, amplifier, true));
+                    entityplayer.addPotionEffect(new PotionEffect(Potion.resistance.id, 4, -2*amplifier, true));
+                }
+                else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.feather)) && entityplayer != null)
+                {
+                    entityplayer.addPotionEffect(new PotionEffect(Potion.jump.id, 4, amplifier, true));
+                    entityplayer.fallDistance=0;
+                }
+                else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.potion, 1, 8270)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.invisibility.id, 4, amplifier, true));
             }
-            else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.potion, 1, 8270)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.invisibility.id, 4, amplifier, true));
-
             if(entityplayer.inventory.getCurrentItem() != null && JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(stack, new ItemStack(Item.book)) && entityplayer.inventory.getCurrentItem().equals(stack))
             {
                 ItemStack item = null;

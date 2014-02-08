@@ -6,10 +6,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
-import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
-import darkknight.jewelrycraft.tileentity.TileEntityMolder;
-import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
+import darkknight.jewelrycraft.tileentity.*;
 
 public class BlockList
 {
@@ -19,6 +16,7 @@ public class BlockList
     public static Block    molder;
     public static Block    displayer;
     public static Block    jewelCraftingTable;
+    public static Block    shadowBlock;
     
     private static boolean isInitialized = false;
     
@@ -27,13 +25,15 @@ public class BlockList
         if (!isInitialized)
         {
             shadowOre = new Block(ConfigHandler.idShadowOre, Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setTextureName("jewelrycraft:oreShadow").setUnlocalizedName("Jewelrycraft.oreShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            glow = new BlockShadow(ConfigHandler.idGlow).setUnlocalizedName("Jewelrycraft.glow").setLightValue(1F);
+            glow = new BlockGlow(ConfigHandler.idGlow).setUnlocalizedName("Jewelrycraft.glow").setLightValue(1F);
             smelter = new BlockSmelter(ConfigHandler.idSmelter, Material.rock).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("Jewelrycraft.smelter").setCreativeTab(JewelrycraftMod.jewelrycraft);
             molder = new BlockMolder(ConfigHandler.idMolder, Material.rock).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("Jewelrycraft.molder").setCreativeTab(JewelrycraftMod.jewelrycraft);
             displayer = new BlockDisplayer(ConfigHandler.idDisplayer, Material.iron).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("Jewelrycraft.displayer").setCreativeTab(JewelrycraftMod.jewelrycraft);
             jewelCraftingTable = new BlockJewelrsCraftingTable(ConfigHandler.idJewelCraftingTable, Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("Jewelrycraft.jewelCraftingTable").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            shadowBlock = new BlockShadow(ConfigHandler.idShadowBlock).setHardness(5.0F).setResistance(7.0F).setStepSound(Block.soundMetalFootstep).setTextureName("jewelrycraft:blockShadow").setUnlocalizedName("Jewelrycraft.blockShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
             
             GameRegistry.registerBlock(shadowOre, "shadowOre");
+            GameRegistry.registerBlock(shadowBlock, "shadowBlock");
             GameRegistry.registerBlock(smelter, "Smelter");
             GameRegistry.registerBlock(molder, "Molder");
             GameRegistry.registerBlock(jewelCraftingTable, "jewelCraftingTable");
@@ -43,6 +43,7 @@ public class BlockList
             GameRegistry.registerTileEntity(TileEntityMolder.class, "31");
             GameRegistry.registerTileEntity(TileEntityJewelrsCraftingTable.class, "32");
             GameRegistry.registerTileEntity(TileEntityDisplayer.class, "33");
+            GameRegistry.registerTileEntity(TileEntityBlockShadow.class, "34");
             
             isInitialized = true;
         }

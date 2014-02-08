@@ -17,7 +17,8 @@ public class ConfigHandler
     public static int            idDisplayer          = 1752;
     public static int            idJewelCraftingTable = 1753;
     public static int            idMolder             = 1754;
-    public static int            idGlow             = 1755;
+    public static int            idGlow               = 1755;
+    public static int            idShadowBlock        = 1756;
     
     public static int            ingotCoolingTime     = 200;
     public static int            ingotMeltingTime     = 1500;
@@ -40,6 +41,7 @@ public class ConfigHandler
             idRing = config.getItem("Ring", idRing).getInt();
             
             idShadowOre = config.getBlock("Shadow Ore", idShadowOre).getInt();
+            idShadowBlock = config.getBlock("Shadow Block", idShadowBlock).getInt();
             idSmelter = config.getBlock("Smelter", idSmelter).getInt();
             idMolder = config.getBlock("Molder", idMolder).getInt();
             idDisplayer = config.getBlock("Displayer", idDisplayer).getInt();

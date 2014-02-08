@@ -112,6 +112,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
                 if (hasModifier && modifier != new ItemStack(0, 0, 0)) JewelryNBT.addModifier(endItem, modifier);
                 if (hasJewel && jewel != new ItemStack(0, 0, 0)) JewelryNBT.addJewel(endItem, jewel);
                 if (hasJewel && hasModifier && JewelryNBT.isJewelX(endItem, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(endItem, new ItemStack(Item.book))) JewelryNBT.addMode(endItem, "Disenchant");
+                if (hasModifier && JewelryNBT.isModifierEffectType(endItem)) JewelryNBT.addMode(endItem, "Activated");
                 this.hasJewelry = false;
                 this.jewelry = new ItemStack(0, 0, 0);
                 this.hasModifier = false;

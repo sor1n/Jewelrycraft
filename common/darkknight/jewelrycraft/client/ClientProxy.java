@@ -4,14 +4,8 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import darkknight.jewelrycraft.CommonProxy;
-import darkknight.jewelrycraft.renders.TileEntityDisplayerRender;
-import darkknight.jewelrycraft.renders.TileEntityJewelrsCraftingTableRender;
-import darkknight.jewelrycraft.renders.TileEntityMolderRender;
-import darkknight.jewelrycraft.renders.TileEntitySmelterRender;
-import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
-import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
-import darkknight.jewelrycraft.tileentity.TileEntityMolder;
-import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
+import darkknight.jewelrycraft.renders.*;
+import darkknight.jewelrycraft.tileentity.*;
 
 public class ClientProxy extends CommonProxy
 {

@@ -13,6 +13,7 @@ import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -67,7 +68,8 @@ public class ComponentJewelry extends ComponentVillage
          * arguments: (World worldObj, StructureBoundingBox structBB, int minX, int minY, int minZ, int maxX, int maxY, int
          * maxZ, int placeBlockId, int replaceBlockId, boolean alwaysreplace)
          */
-        this.fillWithBlocks(world, sbb, 0, 0, 0, 11, 5, 12, 0, 0, false);
+        this.fillWithBlocks(world, sbb, 0, 0, 6, 10, 5, 11, 0, 0, false);
+        this.fillWithBlocks(world, sbb, 2, 0, 0, 8, 5, 5, 0, 0, false);
         //Pillars
         this.fillWithBlocks(world, sbb, 2, 0, 0, 2, 3, 0, Block.wood.blockID, Block.wood.blockID, false);
         this.fillWithBlocks(world, sbb, 2, 0, 3, 2, 3, 3, Block.wood.blockID, Block.wood.blockID, false);
@@ -262,6 +264,9 @@ public class ComponentJewelry extends ComponentVillage
             JewelryNBT.addMetal(ring, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())));
             JewelryNBT.addModifier(ring, JewelrycraftUtil.modifiers.get(random.nextInt(JewelrycraftUtil.modifiers.size())));
             JewelryNBT.addJewel(ring, JewelrycraftUtil.jewel.get(random.nextInt(JewelrycraftUtil.jewel.size())));
+            if(JewelryNBT.isModifierEffectType(ring)) JewelryNBT.addMode(ring, "Activated");
+            if(JewelryNBT.isJewelX(ring, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(ring, new ItemStack(Item.book))) 
+                JewelryNBT.addMode(ring, "Disenchant");
             displayer.object = ring;
             displayer.quantity = 1;
             displayer.hasObject = true;

@@ -1,3 +1,9 @@
+/*
+ * Mod made by DarkKnight during the Modjam 3
+ * It's an awesome mod
+ * I love me! :D
+ */
+
 package darkknight.jewelrycraft;
 
 import java.util.logging.Logger;
