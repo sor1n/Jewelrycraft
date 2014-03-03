@@ -311,7 +311,19 @@ public class ItemRing extends Item
                 else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.feather)) && entityplayer != null)
                 {
                     entityplayer.addPotionEffect(new PotionEffect(Potion.jump.id, 4, amplifier, true));
-                    entityplayer.fallDistance=0;
+                    if(entityplayer.inventory.armorInventory[0] != null)
+                    {
+                        int damage = entityplayer.inventory.armorInventory[0].getMaxDamage() - entityplayer.inventory.armorInventory[0].getItemDamage();
+                        if(damage - entityplayer.fallDistance > 0){
+                            entityplayer.inventory.armorInventory[0].damageItem((int)entityplayer.fallDistance, entityplayer);
+                            entityplayer.fallDistance = 0;
+                        }
+                        else
+                        {
+                            --entityplayer.inventory.armorInventory[0].stackSize;
+                            entityplayer.fallDistance -= damage;
+                        }
+                    }
                 }
                 else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.potion, 1, 8270)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.invisibility.id, 4, amplifier, true));
             }
