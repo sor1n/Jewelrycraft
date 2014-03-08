@@ -175,12 +175,12 @@ public class ComponentJewelry extends ComponentVillage
         generateDisplayer(world, 3, 1, 4, (coordBaseMode == 0 || coordBaseMode == 2)?1:2, random, sbb);
         generateChest(world, 3, 1, 5, 0, random, sbb, 2, 6);
 
-        this.placeBlockAtCurrentPosition(world, Block.furnaceIdle.blockID, 0, 1, 1, 7, sbb);
-        this.placeBlockAtCurrentPosition(world, Block.furnaceIdle.blockID, 0, 1, 2, 7, sbb);
-        this.placeBlockAtCurrentPosition(world, Block.furnaceIdle.blockID, 0, 1, 3, 7, sbb);
-        this.placeBlockAtCurrentPosition(world, Block.furnaceIdle.blockID, 0, 1, 1, 10, sbb);
-        this.placeBlockAtCurrentPosition(world, Block.furnaceIdle.blockID, 0, 1, 2, 10, sbb);
-        this.placeBlockAtCurrentPosition(world, Block.furnaceIdle.blockID, 0, 1, 3, 10, sbb);
+        generateFurnace(world, 1, 1, 7, 0, random, sbb, 1, 2, true);
+        generateFurnace(world, 1, 2, 7, 0, random, sbb, 2, 3, true);
+        generateFurnace(world, 1, 3, 7, 0, random, sbb, 1, 3, true);
+        generateFurnace(world, 1, 1, 10, 0, random, sbb, 1, 2, true);
+        generateFurnace(world, 1, 2, 10, 0, random, sbb, 2, 3, true);
+        generateFurnace(world, 1, 3, 10, 0, random, sbb, 1, 3, true);
 
         generateSmelter(world, 1, 1, 8, (coordBaseMode == 0 || coordBaseMode == 2)?1:2, random, sbb, random.nextBoolean());
         generateSmelter(world, 1, 1, 9, (coordBaseMode == 0 || coordBaseMode == 2)?1:2, random, sbb, random.nextBoolean());
@@ -188,10 +188,10 @@ public class ComponentJewelry extends ComponentVillage
         generateMolder(world, 2, 1, 8, (coordBaseMode == 0 || coordBaseMode == 2)?1:2, random, sbb, random.nextBoolean(), random.nextBoolean());
         generateMolder(world, 2, 1, 9, (coordBaseMode == 0 || coordBaseMode == 2)?1:2, random, sbb, random.nextBoolean(), random.nextBoolean());
         
-        this.placeBlockAtCurrentPosition(world, Block.chest.blockID, 0, 9, 1, 7, sbb);
-        this.placeBlockAtCurrentPosition(world, Block.chest.blockID, 0, 9, 1, 8, sbb);
-        this.placeBlockAtCurrentPosition(world, Block.chestTrapped.blockID, 0, 9, 1, 9, sbb);
-        this.placeBlockAtCurrentPosition(world, Block.chestTrapped.blockID, 0, 9, 1, 10, sbb);
+        generateIngotChest(world, 9, 1, 7, 0, random, sbb, 3, 12, Block.chest, 5);
+        generateIngotChest(world, 9, 1, 8, 0, random, sbb, 5, 16, Block.chest, 3);
+        generateIngotChest(world, 9, 1, 9, 0, random, sbb, 3, 10, Block.chestTrapped, 2);
+        generateIngotChest(world, 9, 1, 10, 0, random, sbb, 3, 9, Block.chestTrapped, 6);
         
 
         for (int l = 0; l < 6; ++l)
@@ -230,6 +230,22 @@ public class ComponentJewelry extends ComponentVillage
             chest.setChestGuiName("Jeweler's Chest");
             if(random.nextBoolean()) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), JewelrycraftUtil.modifiers.get(random.nextInt(JewelrycraftUtil.modifiers.size())));
             else chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), JewelrycraftUtil.jewel.get(random.nextInt(JewelrycraftUtil.jewel.size())));
+            t--;
+        }
+    }
+
+    public void generateIngotChest(World world, int i, int j, int k, int metadata, Random random, StructureBoundingBox sbb, int min, int max, Block chestB, int randomAmount)
+    {
+        int i1 = this.getXWithOffset(i, k);
+        int j1 = this.getYWithOffset(j);
+        int k1 = this.getZWithOffset(i, k);
+        int t = random.nextInt(max - min + 1) + min;
+        this.placeBlockAtCurrentPosition(world, chestB.blockID, metadata, i, j, k, sbb);
+        TileEntityChest chest = (TileEntityChest)world.getBlockTileEntity(i1, j1, k1);
+        while(chest != null && t > 0)
+        {
+            chest.setChestGuiName("Ingot Chest");
+            if(random.nextBoolean()) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), new ItemStack(JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())).getItem(), 2 + random.nextInt(randomAmount)));
             t--;
         }
     }
@@ -320,12 +336,11 @@ public class ComponentJewelry extends ComponentVillage
         TileEntityFurnace furnace = (TileEntityFurnace)world.getBlockTileEntity(i1, j1, k1);
         if(furnace != null)
         {
-//            if(random.nextBoolean()) furnace.setInventorySlotContents(1, new ItemStack(Item.coal, random.nextInt(16)));
-//            if(hasMetal){
-//                ItemStack metal = JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size()));
-//                metal.stackSize = random.nextInt(max - min + 1) + min;
-//                furnace.setInventorySlotContents(2, metal);
-//            }
+            if(random.nextBoolean()) furnace.setInventorySlotContents(1, new ItemStack(Item.coal, 1 + random.nextInt(16)));
+            if(hasMetal){
+                ItemStack metal = JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size()));
+                furnace.setInventorySlotContents(2, new ItemStack(metal.getItem(), random.nextInt(max - min + 1) + min));
+            }
         }
     }
 

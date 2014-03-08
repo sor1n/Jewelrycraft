@@ -36,7 +36,8 @@ public class Generation implements IWorldGenerator
             int x = i + random.nextInt(16);
             int y = 5 + random.nextInt(4);
             int z = j + random.nextInt(16);
-            if(world.rand.nextInt(10) == 0) world.setBlock(x, y, z, BlockList.shadowOre.blockID);
+            world.setBlock(x, y, z, BlockList.shadowOre.blockID);
+            if(random.nextInt(3) == 0) world.setBlock(x + random.nextInt(2), y + random.nextInt(1), z + random.nextInt(2), BlockList.shadowOre.blockID);
         }
     }
     

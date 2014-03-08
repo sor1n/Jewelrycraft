@@ -11,6 +11,7 @@ public class ConfigHandler
     public static int            idMolds              = 17495;
     public static int            idRing               = 17496;
     public static int            idClayMolds          = 17497;
+    public static int            idCrystal          = 17498;
     
     public static int            idShadowOre          = 1750;
     public static int            idSmelter            = 1751;
@@ -39,6 +40,7 @@ public class ConfigHandler
             idMolds = config.getItem("Molds", idMolds).getInt();
             idClayMolds = config.getItem("Clay Molds", idClayMolds).getInt();
             idRing = config.getItem("Ring", idRing).getInt();
+            idCrystal = config.getItem("Crystal", idCrystal).getInt();
             
             idShadowOre = config.getBlock("Shadow Ore", idShadowOre).getInt();
             idShadowBlock = config.getBlock("Shadow Block", idShadowBlock).getInt();

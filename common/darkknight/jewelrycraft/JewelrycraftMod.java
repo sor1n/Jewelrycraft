@@ -69,9 +69,10 @@ public class JewelrycraftMod implements IConnectionHandler
         @Override
         public ItemStack getIconItemStack()
         {
-            return new ItemStack(ItemList.ring, 1, 0);
+            return new ItemStack(BlockList.jewelCraftingTable);
         }
     };
+    public static CreativeTabs rings = new CreativeTabRings("Rings");
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent e)
@@ -80,7 +81,8 @@ public class JewelrycraftMod implements IConnectionHandler
         ItemList.preInit(e);
         BlockList.preInit(e);
         CraftingRecipes.preInit(e);
-        JewelrycraftUtil.addMetals();
+        OreDictionary.registerOre("ingotShadow", new ItemStack(ItemList.shadowIngot));
+        OreDictionary.registerOre("oreShadow", new ItemStack(BlockList.shadowOre));
         
         VillagerRegistry.instance().registerVillagerId(3000);
         VillagerRegistry.instance().registerVillageTradeHandler(3000, new JCTrades());
@@ -100,8 +102,6 @@ public class JewelrycraftMod implements IConnectionHandler
     @EventHandler
     public void init(FMLInitializationEvent e)
     {
-        OreDictionary.registerOre("ingotShadow", new ItemStack(ItemList.shadowIngot));
-        OreDictionary.registerOre("oreShadow", new ItemStack(BlockList.shadowOre));
         GameRegistry.registerWorldGenerator(new Generation());
         new GuiHandler();
     }
@@ -109,6 +109,7 @@ public class JewelrycraftMod implements IConnectionHandler
     @EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {   
+        JewelrycraftUtil.addMetals();
         JewelrycraftUtil.addStuff();
         JewelrycraftUtil.jamcrafters();
     }

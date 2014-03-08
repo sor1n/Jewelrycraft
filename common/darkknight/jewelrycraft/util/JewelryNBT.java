@@ -287,15 +287,19 @@ public class JewelryNBT
             int entityID = 0;
             entityID = enID.getInteger("entityID");
             EntityLivingBase entity = (EntityLivingBase) EntityList.createEntityByID(entityID, player.worldObj);
-            entity.readFromNBT(en);
-            return entity;
+            if(entity != null && entity instanceof EntityLivingBase)
+            {
+                entity.readFromNBT(en);
+                return entity;
+            }
+            else return null;
         }
         return null;
     }
 
     public static boolean isEntityX(ItemStack stack, EntityPlayer player, EntityLivingBase entity)
     {
-        if(entity(stack, player) != null && entity(stack, player).equals(entity)) return true;
+        if(entity != null && entity instanceof EntityLivingBase && entity(stack, player) != null && entity(stack, player).equals(entity)) return true;
         return false;
     }
 
@@ -408,5 +412,57 @@ public class JewelryNBT
             return posZ;
         }
         return -1;
+    }
+
+    public static void addIngotColor(ItemStack item, int color)
+    {
+        NBTTagCompound itemStackData;
+        if (item.hasTagCompound())
+            itemStackData = item.getTagCompound();
+        else
+        {
+            itemStackData = new NBTTagCompound();
+            item.setTagCompound(itemStackData);
+        }
+        NBTTagCompound colors = new NBTTagCompound();
+        colors.setInteger("ingotColor", color);
+        itemStackData.setTag("ingotColor", colors);
+    }
+
+    public static int ingotColor(ItemStack stack)
+    {
+        if(stack != null && stack != new ItemStack(0, 0, 0) && stack.hasTagCompound() && stack.getTagCompound().hasKey("ingotColor"))
+        {
+            NBTTagCompound colors = (NBTTagCompound) stack.getTagCompound().getTag("ingotColor");
+            int color = colors.getInteger("ingotColor");
+            return color;
+        }
+        return 16777215;
+    }
+
+    public static void addJewelColor(ItemStack item, int color)
+    {
+        NBTTagCompound itemStackData;
+        if (item.hasTagCompound())
+            itemStackData = item.getTagCompound();
+        else
+        {
+            itemStackData = new NBTTagCompound();
+            item.setTagCompound(itemStackData);
+        }
+        NBTTagCompound colors = new NBTTagCompound();
+        colors.setInteger("jewelColor", color);
+        itemStackData.setTag("jewelColor", colors);
+    }
+
+    public static int jewelColor(ItemStack stack)
+    {
+        if(stack != null && stack != new ItemStack(0, 0, 0) && stack.hasTagCompound() && stack.getTagCompound().hasKey("jewelColor"))
+        {
+            NBTTagCompound colors = (NBTTagCompound) stack.getTagCompound().getTag("jewelColor");
+            int color = colors.getInteger("jewelColor");
+            return color;
+        }
+        return 16777215;
     }
 }

@@ -17,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import darkknight.jewelrycraft.model.ModelDisplayer;
 import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.FakePlayer;
@@ -45,11 +44,11 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
         {
             int ind = -3;
             GL11.glPushMatrix();
-            renderLabel(EnumChatFormatting.YELLOW + disp.object.getDisplayName(), 0F, (-0.171F)*ind, 0, block, disp);
+            renderLabel(disp.object.getDisplayName(), 0F, (-0.171F)*ind, 0F, block, disp, Color.YELLOW.getRGB());
             GL11.glPopMatrix();
             ind++;
             GL11.glPushMatrix();
-            renderLabel(Integer.toString(disp.quantity), 0F, (-0.171F)*ind, 0, block, disp);
+            renderLabel(Integer.toString(disp.quantity), 0F, (-0.171F)*ind, 0F, block, disp, Color.GRAY.getRGB());
             GL11.glPopMatrix();
             ind++;
             if(disp.object.itemID != Item.map.itemID && disp.object != null && disp.object != new ItemStack(0, 0, 0) && disp.object.getTooltip(null, true) != null)
@@ -59,7 +58,7 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
                     if(disp.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).get(i).toString() != "")
                     {
                         GL11.glPushMatrix();
-                        renderLabel(disp.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).get(i).toString(), 0F, (-0.171F)*ind, 0, block, disp);
+                        renderLabel(disp.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).get(i).toString(), 0F, (-0.171F)*ind, 0F, block, disp, Color.GRAY.getRGB());
                         GL11.glPopMatrix();
                         ind++;
                     }
@@ -100,45 +99,43 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) modulousModifier, divModifier);
     }
 
-    protected void renderLabel(String par2Str, double x, double y, double z, int metadata, TileEntity te)
+    protected void renderLabel(String par2Str, double x, double y, double z, int metadata, TileEntity te, int color)
     {
         FontRenderer fontrenderer = RenderManager.instance.getFontRenderer();
-        if(te.worldObj.getClosestPlayer((double)te.xCoord, (double)te.yCoord, (double)te.zCoord, 3.5D) != null)
-        {
-            float var14 = 0.01266667F * 1.5F;
-            float var17 = 0.015F;
-            GL11.glRotatef(180F, 0F, 0F, 1F);
-            if(metadata == 0) GL11.glRotatef(0F, 0F, 1F, 0F);
-            else if(metadata == 1) GL11.glRotatef(270F, 0F, 1F, 0F);
-            else if(metadata == 2) GL11.glRotatef(180F, 0F, 1F, 0F);
-            else if(metadata == 3) GL11.glRotatef(90F, 0F, 1F, 0F);
-            GL11.glTranslatef((float)x, (float)y, (float)z + 0.45F);
-            GL11.glScalef(-0.015F, -var14, 0.015F);
-            GL11.glPushMatrix();
-            GL11.glDisable(GL11.GL_LIGHTING);
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            GL11.glDisable(GL11.GL_DEPTH_TEST);
-            GL11.glDepthMask(true);
-            Tessellator tessellator = Tessellator.instance;
-            GL11.glDisable(GL11.GL_TEXTURE_2D);
-            int j = fontrenderer.getStringWidth(par2Str) / 2;
-            tessellator.startDrawingQuads();
-            tessellator.setColorRGBA_F(0.2F, 0.2F, 0.2F, 0.8F);
-            tessellator.addVertex((double)(-33.333 - 0), -1D, 0.1D);
-            tessellator.addVertex((double)(-33.333 - 0), 8D, 0.1D);
-            tessellator.addVertex((double)(33.333 + 0), 8D, 0.1D);
-            tessellator.addVertex((double)(33.333 + 0), -1D, 0.1D);
-            tessellator.draw();
-            if ((fontrenderer.getStringWidth(par2Str)/2) > 30) var17 = 0.9F / fontrenderer.getStringWidth(par2Str); 
-            else var17 = var14;
-            GL11.glScalef(var17*70F, 1F, 0F);
-            GL11.glEnable(GL11.GL_TEXTURE_2D);
-            fontrenderer.drawStringWithShadow(par2Str, -j, 0, Color.GRAY.getRGB());
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
-            GL11.glEnable(GL11.GL_LIGHTING);
-            GL11.glDisable(GL11.GL_BLEND);
-            GL11.glPopMatrix();
-        }
+        float var14 = 0.01266667F * 1.5F;
+//        float var17 = 0.015F;
+        GL11.glRotatef(180F, 0F, 0F, 1F);
+        if(metadata == 0) GL11.glRotatef(0F, 0F, 1F, 0F);
+        else if(metadata == 1) GL11.glRotatef(270F, 0F, 1F, 0F);
+        else if(metadata == 2) GL11.glRotatef(180F, 0F, 1F, 0F);
+        else if(metadata == 3) GL11.glRotatef(90F, 0F, 1F, 0F);
+        GL11.glTranslatef((float)x, (float)y, (float)z + 0.45F);
+        GL11.glScalef(-0.015F, -var14, 0.015F);
+        GL11.glPushMatrix();
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glDepthMask(true);
+        Tessellator tessellator = Tessellator.instance;
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        int j = fontrenderer.getStringWidth(par2Str) / 2;
+        tessellator.startDrawingQuads();
+        tessellator.setColorRGBA_F(0.2F, 0.2F, 0.2F, 0.8F);
+        tessellator.addVertex((double)(-33.333 - 0), -1D, 0.1D);
+        tessellator.addVertex((double)(-33.333 - 0), 8D, 0.1D);
+        tessellator.addVertex((double)(33.333 + 0), 8D, 0.1D);
+        tessellator.addVertex((double)(33.333 + 0), -1D, 0.1D);
+        tessellator.draw();
+//        if ((fontrenderer.getStringWidth(par2Str)/2) > 20) var17 = 0.9F / fontrenderer.getStringWidth(par2Str); 
+//        else var17 = var14;
+//        GL11.glScalef(var17*70F, 1F, 0F);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        int red = (color >> 16) & 0xFF;
+        int green = (color >> 8) & 0xFF;
+        int blue = color & 0xFF;
+        GL11.glTranslatef((float)x + 1f, (float)y + 1f, (float)z);
+        fontrenderer.drawString(par2Str, -j, 0, 65536 * (red/2) + 256 * (green/2) + blue/2);
+        GL11.glTranslatef((float)x - 1f, (float)y - 1f, (float)z - 1F);        
+        fontrenderer.drawString(par2Str, -j, 0, color);
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glPopMatrix();
     }
 }

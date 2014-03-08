@@ -64,11 +64,11 @@ public class ItemRing extends Item
     }
 
     @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack par1ItemStack, int pass)
+    public int getColorFromItemStack(ItemStack stack, int pass)
     {
         try
         {
-            return color(par1ItemStack, pass);
+            return color(stack, pass);
         }
         catch (IOException e)
         {
@@ -79,7 +79,8 @@ public class ItemRing extends Item
 
     public Icon getIcon(ItemStack stack, int pass)
     {
-        if (JewelryNBT.jewel(stack) != null) return pass == 0 ? itemIcon : jewel;
+        if(pass == 0) return itemIcon;
+        if(pass == 1 && JewelryNBT.jewel(stack) != null) return jewel;
         return itemIcon;
     }
 
@@ -87,7 +88,8 @@ public class ItemRing extends Item
     {
         String domain = "", texture;
         ResourceManager rm = Minecraft.getMinecraft().getResourceManager();
-        if (pass == 1 && JewelryNBT.ingot(stack) != null && JewelryNBT.jewel(stack) == null)
+        int x=0, y=0, ok = 0;
+        if (pass == 0 && JewelryNBT.ingot(stack) != null)
         {
             if (JewelryNBT.ingot(stack).getIconIndex().getIconName().substring(0, JewelryNBT.ingot(stack).getIconIndex().getIconName().indexOf(":") + 1) != "") domain = JewelryNBT.ingot(stack).getIconIndex().getIconName().substring(0, JewelryNBT.ingot(stack).getIconIndex().getIconName().indexOf(":") + 1).replace(":", " ").trim();
             else domain = "minecraft";
@@ -96,30 +98,52 @@ public class ItemRing extends Item
             if (JewelryNBT.ingot(stack).getUnlocalizedName().contains("item")) ingot = new ResourceLocation(domain, "textures/items/" + texture);
             else ingot = new ResourceLocation(domain, "textures/blocks/" + texture);
             BufferedImage bufferedimage = ImageIO.read(rm.getResource(ingot).getInputStream());
-            return bufferedimage.getRGB(9, 9);
-        }
-        else if (JewelryNBT.ingot(stack) != null && JewelryNBT.jewel(stack) != null)
-        {
-            if (pass == 1)
-            {
-                if (JewelryNBT.jewel(stack).getIconIndex().getIconName().substring(0, JewelryNBT.jewel(stack).getIconIndex().getIconName().indexOf(":") + 1) != "") domain = JewelryNBT.jewel(stack).getIconIndex().getIconName().substring(0, JewelryNBT.jewel(stack).getIconIndex().getIconName().indexOf(":") + 1).replace(":", " ").trim();
-                else domain = "minecraft";
-                texture = JewelryNBT.jewel(stack).getIconIndex().getIconName().substring(JewelryNBT.jewel(stack).getIconIndex().getIconName().lastIndexOf(":") + 1) + ".png";
-                ResourceLocation jewelLoc = null;
-                if (JewelryNBT.jewel(stack).getUnlocalizedName().contains("item")) jewelLoc = new ResourceLocation(domain, "textures/items/" + texture);
-                else jewelLoc = new ResourceLocation(domain, "textures/blocks/" + texture);
-                BufferedImage bufferedimage = ImageIO.read(rm.getResource(jewelLoc).getInputStream());
-                return bufferedimage.getRGB(9, 4);
+            while(ok == 0){
+                int red = (bufferedimage.getRGB(x, y) >> 16) & 0xFF;
+                int green = (bufferedimage.getRGB(x, y) >> 8) & 0xFF;
+                int blue = bufferedimage.getRGB(x, y) & 0xFF;
+                if((red <= 80 && green <=80 && blue <= 80) || (red >= 180 && green >= 180 && blue >= 180)){
+                    if(x<bufferedimage.getTileWidth()-1) x++;
+                    if(x>=bufferedimage.getTileWidth()-1 && y<bufferedimage.getTileWidth()-1){ 
+                        x=0; 
+                        y++;
+                    }
+                    if(x == bufferedimage.getTileWidth()-1 && y==bufferedimage.getTileWidth()-1)ok=1;
+                }
+                else ok=1;
             }
-            if (JewelryNBT.ingot(stack).getIconIndex().getIconName().substring(0, JewelryNBT.ingot(stack).getIconIndex().getIconName().indexOf(":") + 1) != "") domain = JewelryNBT.ingot(stack).getIconIndex().getIconName().substring(0, JewelryNBT.ingot(stack).getIconIndex().getIconName().indexOf(":") + 1).replace(":", " ").trim();
-            else domain = "minecraft";
-            texture = JewelryNBT.ingot(stack).getIconIndex().getIconName().substring(JewelryNBT.ingot(stack).getIconIndex().getIconName().lastIndexOf(":") + 1) + ".png";
-            ResourceLocation ingot = null;
-            if (JewelryNBT.ingot(stack).getUnlocalizedName().contains("item")) ingot = new ResourceLocation(domain, "textures/items/" + texture);
-            else ingot = new ResourceLocation(domain, "textures/blocks/" + texture);
-            BufferedImage bufferedimage = ImageIO.read(rm.getResource(ingot).getInputStream());
-            return bufferedimage.getRGB(9, 9);
+            JewelryNBT.addIngotColor(stack, bufferedimage.getRGB(x, y));
         }
+        else if (pass == 1 && JewelryNBT.jewel(stack) != null)
+        {
+            x = 0; y = 0; ok=0;
+            if (JewelryNBT.jewel(stack).getIconIndex().getIconName().substring(0, JewelryNBT.jewel(stack).getIconIndex().getIconName().indexOf(":") + 1) != "") domain = JewelryNBT.jewel(stack).getIconIndex().getIconName().substring(0, JewelryNBT.jewel(stack).getIconIndex().getIconName().indexOf(":") + 1).replace(":", " ").trim();
+            else domain = "minecraft";
+            texture = JewelryNBT.jewel(stack).getIconIndex().getIconName().substring(JewelryNBT.jewel(stack).getIconIndex().getIconName().lastIndexOf(":") + 1) + ".png";
+            ResourceLocation jewelLoc = null;
+            if (JewelryNBT.jewel(stack).getUnlocalizedName().contains("item")) jewelLoc = new ResourceLocation(domain, "textures/items/" + texture);
+            else jewelLoc = new ResourceLocation(domain, "textures/blocks/" + texture);
+            BufferedImage bufferedimage = ImageIO.read(rm.getResource(jewelLoc).getInputStream());
+            while(ok == 0){
+                int red = (bufferedimage.getRGB(x, y) >> 16) & 0xFF;
+                int green = (bufferedimage.getRGB(x, y) >> 8) & 0xFF;
+                int blue = bufferedimage.getRGB(x, y) & 0xFF;
+                if((red <= 80 && green <=80 && blue <= 80) || (red >= 180 && green >= 180 && blue >= 180)){
+                    if(x<bufferedimage.getTileWidth()-1) x++;
+                    if(x>=bufferedimage.getTileWidth()-1 && y<bufferedimage.getTileWidth()-1){ 
+                        x=0; 
+                        y++;
+                    }
+                    if(x == bufferedimage.getTileWidth()-1 && y==bufferedimage.getTileWidth()-1)ok=1;
+                }
+                else ok=1;
+            }
+            if(JewelryNBT.jewel(stack).getItem().getColorFromItemStack(JewelryNBT.jewel(stack), 1) == 16777215) JewelryNBT.addJewelColor(stack, bufferedimage.getRGB(x, y));
+            else JewelryNBT.addJewelColor(stack, JewelryNBT.jewel(stack).getItem().getColorFromItemStack(JewelryNBT.jewel(stack), 1));
+        }
+        if(pass == 0 && JewelryNBT.ingot(stack) != null) return JewelryNBT.ingotColor(stack);
+        if(pass == 1 && JewelryNBT.jewel(stack) != null) return JewelryNBT.jewelColor(stack);
+        else if(JewelryNBT.ingot(stack) != null) return JewelryNBT.ingotColor(stack);
         return 16777215;
     }
 
@@ -204,7 +228,7 @@ public class ItemRing extends Item
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entity)
     {
-        if (!player.worldObj.isRemote && JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(stack, new ItemStack(Block.chest)) && JewelryNBT.entity(stack, player) == null){
+        if (!player.worldObj.isRemote && entity instanceof EntityLivingBase && JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(stack, new ItemStack(Block.chest)) && JewelryNBT.entity(stack, player) == null){
             JewelryNBT.addEntity(stack, entity);
             JewelryNBT.addEntityID(stack, entity);
             entity.setDead();
@@ -247,6 +271,12 @@ public class ItemRing extends Item
 
             String modeN = JewelryNBT.modeName(stack);
             if(modeN != null) list.add("Mode: " + modeN);
+            
+//            int colorI = JewelryNBT.ingotColor(stack);
+//            if(colorI != -1) list.add("Ingot Color: " + colorI);
+//            
+//            int colorJ = JewelryNBT.jewelColor(stack);
+//            if(colorJ != -1) list.add("Jewel Color: " + colorJ);
         }
     }
 
@@ -255,7 +285,7 @@ public class ItemRing extends Item
         if (!world.isRemote)
         {
             EntityLivingBase entity = JewelryNBT.entity(stack, player);
-            if(entity != null){
+            if(entity != null && entity instanceof EntityLivingBase){
                 entity.setLocationAndAngles(i + 0.5D, j + 1D, k + 0.5D, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
                 world.spawnEntityInWorld(entity);
                 JewelryNBT.removeEntity(stack);
@@ -402,5 +432,17 @@ public class ItemRing extends Item
                 }
             }
         }
+    }
+
+    public ItemStack getModifiedItemStack(ItemStack ingot, ItemStack modifier, ItemStack jewel)
+    {
+        ItemStack itemstack = new ItemStack(this);
+        JewelryNBT.addMetal(itemstack, ingot);
+        JewelryNBT.addModifier(itemstack, modifier);
+        JewelryNBT.addJewel(itemstack, jewel);
+        if(JewelryNBT.isModifierEffectType(itemstack)) JewelryNBT.addMode(itemstack, "Activated");
+        if(JewelryNBT.isJewelX(itemstack, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(itemstack, new ItemStack(Item.book))) 
+            JewelryNBT.addMode(itemstack, "Disenchant");
+        return itemstack;
     }
 }

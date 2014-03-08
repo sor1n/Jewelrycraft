@@ -12,7 +12,8 @@ public class ItemList
     public static Item     shadowIngot;
     public static Item     molds;
     public static Item     clayMolds;
-    public static Item     ring;
+    public static Item     crystal;
+    public static ItemRing     ring;
     
     private static boolean isInitialized = false;
     
@@ -24,13 +25,15 @@ public class ItemList
             shadowIngot = new Item(ConfigHandler.idShadowIngot - 256).setUnlocalizedName("Jewelrycraft.ingotShadow").setTextureName("jewelrycraft:ingotShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
             molds = new ItemMolds(ConfigHandler.idMolds - 256).setUnlocalizedName("Jewelrycraft.mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
             clayMolds = new ItemClayMolds(ConfigHandler.idClayMolds - 256).setUnlocalizedName("Jewelrycraft.mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            ring = new ItemRing(ConfigHandler.idRing - 256).setUnlocalizedName("Jewelrycraft.ring").setTextureName("jewelrycraft:ring").setCreativeTab(JewelrycraftMod.jewelrycraft);
+            ring = (ItemRing) new ItemRing(ConfigHandler.idRing - 256).setUnlocalizedName("Jewelrycraft.ring").setTextureName("jewelrycraft:ring");
+            crystal = new ItemCrystal(ConfigHandler.idCrystal - 256).setUnlocalizedName("Jewelrycraft.crystal").setTextureName("jewelrycraft:crystal").setCreativeTab(JewelrycraftMod.jewelrycraft);
             
             GameRegistry.registerItem(thiefGloves, "thiefGloves");
             GameRegistry.registerItem(shadowIngot, "shadowIngot");
             GameRegistry.registerItem(molds, "molds");
             GameRegistry.registerItem(clayMolds, "clayMolds");
             GameRegistry.registerItem(ring, "ring");
+            GameRegistry.registerItem(crystal, "crystal");
             
             isInitialized = true;
         }

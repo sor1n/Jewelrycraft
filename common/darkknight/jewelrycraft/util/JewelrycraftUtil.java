@@ -34,6 +34,12 @@ public class JewelrycraftUtil
         modifiers.add(new ItemStack(Item.potion, 1, 8270));
 
         //Jewels
+        for(int i=0; i <= 16; i++)
+        jewel.add(new ItemStack(ItemList.crystal, 1, i));
+        jewel.add(new ItemStack(Item.redstone));
+        jewel.add(new ItemStack(Block.blockRedstone));
+        jewel.add(new ItemStack(Item.dyePowder, 1, 4));
+        jewel.add(new ItemStack(Block.blockLapis));
         jewel.add(new ItemStack(Block.obsidian));
         jewel.add(new ItemStack(Item.diamond));
         jewel.add(new ItemStack(Item.emerald));
@@ -83,15 +89,15 @@ public class JewelrycraftUtil
         {
             while(index2 < OreDictionary.getOres(OreDictionary.getOreNames()[index]).size())
             {
-                if(OreDictionary.getOres(OreDictionary.getOreNames()[index]).get(index2).getUnlocalizedName().contains("ingot"))
+                if(OreDictionary.getOres(OreDictionary.getOreNames()[index]).get(index2).getUnlocalizedName().toLowerCase().contains("ingot") && !JewelrycraftUtil.metal.contains(OreDictionary.getOres(OreDictionary.getOreNames()[index]).get(index2)))
                     metal.add(OreDictionary.getOres(OreDictionary.getOreNames()[index]).get(index2));
                 index2++;
             }
             index2 = 0;
             index++;
         }   
-        metal.add(new ItemStack(Item.ingotGold));
-        metal.add(new ItemStack(Item.ingotIron));
+        if(!metal.contains(new ItemStack(Item.ingotGold)))metal.add(new ItemStack(Item.ingotGold));
+        if(!metal.contains(new ItemStack(Item.ingotIron)))metal.add(new ItemStack(Item.ingotIron));
     }
 
     public static boolean isModifier(ItemStack item)
