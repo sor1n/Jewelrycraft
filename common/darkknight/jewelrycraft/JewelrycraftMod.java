@@ -16,6 +16,7 @@ import net.minecraft.network.packet.NetHandler;
 import net.minecraft.network.packet.Packet1Login;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -73,6 +74,7 @@ public class JewelrycraftMod implements IConnectionHandler
         }
     };
     public static CreativeTabs rings = new CreativeTabRings("Rings");
+    public static CreativeTabs necklaces = new CreativeTabNecklaces("Necklaces");
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent e)
@@ -83,6 +85,7 @@ public class JewelrycraftMod implements IConnectionHandler
         CraftingRecipes.preInit(e);
         OreDictionary.registerOre("ingotShadow", new ItemStack(ItemList.shadowIngot));
         OreDictionary.registerOre("oreShadow", new ItemStack(BlockList.shadowOre));
+        MinecraftForge.setBlockHarvestLevel(BlockList.shadowOre, 0, "pickaxe", 3);
         
         VillagerRegistry.instance().registerVillagerId(3000);
         VillagerRegistry.instance().registerVillageTradeHandler(3000, new JCTrades());

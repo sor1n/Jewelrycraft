@@ -11,7 +11,8 @@ public class ConfigHandler
     public static int            idMolds              = 17495;
     public static int            idRing               = 17496;
     public static int            idClayMolds          = 17497;
-    public static int            idCrystal          = 17498;
+    public static int            idCrystal            = 17498;
+    public static int            idNecklace           = 17499;
     
     public static int            idShadowOre          = 1750;
     public static int            idSmelter            = 1751;
@@ -20,6 +21,7 @@ public class ConfigHandler
     public static int            idMolder             = 1754;
     public static int            idGlow               = 1755;
     public static int            idShadowBlock        = 1756;
+    public static int            idAltar              = 1757;
     
     public static int            ingotCoolingTime     = 200;
     public static int            ingotMeltingTime     = 1500;
@@ -40,6 +42,7 @@ public class ConfigHandler
             idMolds = config.getItem("Molds", idMolds).getInt();
             idClayMolds = config.getItem("Clay Molds", idClayMolds).getInt();
             idRing = config.getItem("Ring", idRing).getInt();
+            idNecklace = config.getItem("Necklace", idNecklace).getInt();
             idCrystal = config.getItem("Crystal", idCrystal).getInt();
             
             idShadowOre = config.getBlock("Shadow Ore", idShadowOre).getInt();
@@ -49,6 +52,7 @@ public class ConfigHandler
             idDisplayer = config.getBlock("Displayer", idDisplayer).getInt();
             idJewelCraftingTable = config.getBlock("Jeweler's Crafting Table", idJewelCraftingTable).getInt();
             idGlow = config.getBlock("Glow", idGlow).getInt();
+            idAltar = config.getBlock("Jewel Altar", idAltar).getInt();
             
             ingotCoolingTime = config.get("timers", "Molder Ingot Cooling Time", ingotCoolingTime).getInt();
             ingotMeltingTime = config.get("timers", "Ingot Melting Time", ingotMeltingTime).getInt();

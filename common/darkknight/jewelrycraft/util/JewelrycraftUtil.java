@@ -3,6 +3,7 @@ package darkknight.jewelrycraft.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -18,6 +19,7 @@ public class JewelrycraftUtil
     public static ArrayList<ItemStack> metal = new ArrayList<ItemStack>();
     public static ArrayList<String> jamcraftPlayers = new ArrayList<String>();
     public static HashMap<ItemStack, ItemStack> combinations = new HashMap<ItemStack, ItemStack>();
+    public static Random rand = new Random();
 
     public static void addStuff()
     {
@@ -25,10 +27,14 @@ public class JewelrycraftUtil
         modifiers.add(new ItemStack(Block.chest));
         modifiers.add(new ItemStack(Block.torchWood));
         modifiers.add(new ItemStack(Item.book));
+        modifiers.add(new ItemStack(Item.dyePowder, 1, 15));
+        modifiers.add(new ItemStack(Item.bone));
         modifiers.add(new ItemStack(Item.sugar));
         modifiers.add(new ItemStack(Item.feather));
         modifiers.add(new ItemStack(Item.bed));
         modifiers.add(new ItemStack(Item.pickaxeIron));
+        modifiers.add(new ItemStack(Item.redstone));
+        modifiers.add(new ItemStack(Item.pickaxeDiamond));
         modifiers.add(new ItemStack(Item.blazePowder));
         modifiers.add(new ItemStack(Item.eyeOfEnder));
         modifiers.add(new ItemStack(Item.potion, 1, 8270));
@@ -36,9 +42,7 @@ public class JewelrycraftUtil
         //Jewels
         for(int i=0; i <= 16; i++)
         jewel.add(new ItemStack(ItemList.crystal, 1, i));
-        jewel.add(new ItemStack(Item.redstone));
         jewel.add(new ItemStack(Block.blockRedstone));
-        jewel.add(new ItemStack(Item.dyePowder, 1, 4));
         jewel.add(new ItemStack(Block.blockLapis));
         jewel.add(new ItemStack(Block.obsidian));
         jewel.add(new ItemStack(Item.diamond));
@@ -48,6 +52,7 @@ public class JewelrycraftUtil
 
         //Jewelry
         jewelry.add(new ItemStack(ItemList.ring));
+        jewelry.add(new ItemStack(ItemList.necklace));
     }
     
     public static void addSpecialCombinations()

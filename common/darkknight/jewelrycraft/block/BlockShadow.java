@@ -43,7 +43,7 @@ public class BlockShadow extends BlockContainer
     
     public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side)
     {
-        return true;
+        return false;
     }
     
     public static boolean isNormalCube(int par0)
@@ -78,9 +78,9 @@ public class BlockShadow extends BlockContainer
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
     
-    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    public boolean shouldSideBeRendered(IBlockAccess iBlockAccess, int par2, int par3, int par4, int par5)
     {
-        return true;
+        return iBlockAccess.isAirBlock(par2, par3, par4)?true:false;
     }
     
     public boolean hasComparatorInputOverride()

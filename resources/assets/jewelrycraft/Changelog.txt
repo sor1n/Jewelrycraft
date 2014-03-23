@@ -11,6 +11,8 @@
 - Removed animation from the Shadow Ore
 - Made Shadow Ore more common
 - Balanced Villager trades
+- Fixed Displayer text rendering in front of everything
+- Added the Jewel Altar
 
 TODO
 - Make it so you can smelt ores in the smelter

@@ -17,26 +17,20 @@ import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.util.JewelryNBT;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSkull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.client.resources.ResourceManager;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.enchantment.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryEnderChest;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.Icon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.item.*;
+import net.minecraft.potion.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 public class ItemRing extends Item
@@ -54,7 +48,7 @@ public class ItemRing extends Item
     public void registerIcons(IconRegister iconRegister)
     {
         itemIcon = iconRegister.registerIcon("jewelrycraft:ring");
-        jewel = iconRegister.registerIcon("jewelrycraft:jewel");
+        jewel = iconRegister.registerIcon("jewelrycraft:jewelRing");
     }
 
     @Override
@@ -88,57 +82,74 @@ public class ItemRing extends Item
     {
         String domain = "", texture;
         ResourceManager rm = Minecraft.getMinecraft().getResourceManager();
-        int x=0, y=0, ok = 0;
-        if (pass == 0 && JewelryNBT.ingot(stack) != null)
+        BufferedImage icon;
+        int x=0, y=0, ok = 0, red, green, blue;
+        if (pass == 0 && JewelryNBT.ingot(stack) != null && JewelryNBT.ingotColor(stack) == 16777215)
         {
-            if (JewelryNBT.ingot(stack).getIconIndex().getIconName().substring(0, JewelryNBT.ingot(stack).getIconIndex().getIconName().indexOf(":") + 1) != "") domain = JewelryNBT.ingot(stack).getIconIndex().getIconName().substring(0, JewelryNBT.ingot(stack).getIconIndex().getIconName().indexOf(":") + 1).replace(":", " ").trim();
+            String ingotIconName = JewelryNBT.ingot(stack).getIconIndex().getIconName(); 
+
+            if (ingotIconName.substring(0, ingotIconName.indexOf(":") + 1) != "") domain = ingotIconName.substring(0, ingotIconName.indexOf(":") + 1).replace(":", " ").trim();
             else domain = "minecraft";
-            texture = JewelryNBT.ingot(stack).getIconIndex().getIconName().substring(JewelryNBT.ingot(stack).getIconIndex().getIconName().lastIndexOf(":") + 1) + ".png";
+
+            texture = ingotIconName.substring(ingotIconName.lastIndexOf(":") + 1) + ".png";
             ResourceLocation ingot = null;
+
             if (JewelryNBT.ingot(stack).getUnlocalizedName().contains("item")) ingot = new ResourceLocation(domain, "textures/items/" + texture);
             else ingot = new ResourceLocation(domain, "textures/blocks/" + texture);
-            BufferedImage bufferedimage = ImageIO.read(rm.getResource(ingot).getInputStream());
-            while(ok == 0){
-                int red = (bufferedimage.getRGB(x, y) >> 16) & 0xFF;
-                int green = (bufferedimage.getRGB(x, y) >> 8) & 0xFF;
-                int blue = bufferedimage.getRGB(x, y) & 0xFF;
-                if((red <= 80 && green <=80 && blue <= 80) || (red >= 180 && green >= 180 && blue >= 180)){
-                    if(x<bufferedimage.getTileWidth()-1) x++;
-                    if(x>=bufferedimage.getTileWidth()-1 && y<bufferedimage.getTileWidth()-1){ 
+
+            icon = ImageIO.read(rm.getResource(ingot).getInputStream());
+            while(ok == 0)
+            {
+                red = (icon.getRGB(x, y) >> 16) & 0xFF;
+                green = (icon.getRGB(x, y) >> 8) & 0xFF;
+                blue = icon.getRGB(x, y) & 0xFF;
+                if((red <= 80 && green <=80 && blue <= 80) || (red >= 180 && green >= 180 && blue >= 180))
+                {
+                    if(x<icon.getTileWidth()-1) x++;
+                    if(x>=icon.getTileWidth()-1 && y<icon.getTileWidth()-1)
+                    { 
                         x=0; 
                         y++;
                     }
-                    if(x == bufferedimage.getTileWidth()-1 && y==bufferedimage.getTileWidth()-1)ok=1;
+                    if(x == icon.getTileWidth()-1 && y==icon.getTileWidth()-1) ok=1;
                 }
                 else ok=1;
             }
-            JewelryNBT.addIngotColor(stack, bufferedimage.getRGB(x, y));
+            JewelryNBT.addIngotColor(stack, icon.getRGB(x, y));
         }
-        else if (pass == 1 && JewelryNBT.jewel(stack) != null)
+        else if (pass == 1 && JewelryNBT.jewel(stack) != null && JewelryNBT.jewelColor(stack) == 16777215)
         {
             x = 0; y = 0; ok=0;
-            if (JewelryNBT.jewel(stack).getIconIndex().getIconName().substring(0, JewelryNBT.jewel(stack).getIconIndex().getIconName().indexOf(":") + 1) != "") domain = JewelryNBT.jewel(stack).getIconIndex().getIconName().substring(0, JewelryNBT.jewel(stack).getIconIndex().getIconName().indexOf(":") + 1).replace(":", " ").trim();
+            String jewelIconName = JewelryNBT.jewel(stack).getIconIndex().getIconName(); 
+
+            if (jewelIconName.substring(0, jewelIconName.indexOf(":") + 1) != "") domain = jewelIconName.substring(0, jewelIconName.indexOf(":") + 1).replace(":", " ").trim();
             else domain = "minecraft";
-            texture = JewelryNBT.jewel(stack).getIconIndex().getIconName().substring(JewelryNBT.jewel(stack).getIconIndex().getIconName().lastIndexOf(":") + 1) + ".png";
+
+            texture = jewelIconName.substring(jewelIconName.lastIndexOf(":") + 1) + ".png";
             ResourceLocation jewelLoc = null;
+
             if (JewelryNBT.jewel(stack).getUnlocalizedName().contains("item")) jewelLoc = new ResourceLocation(domain, "textures/items/" + texture);
             else jewelLoc = new ResourceLocation(domain, "textures/blocks/" + texture);
-            BufferedImage bufferedimage = ImageIO.read(rm.getResource(jewelLoc).getInputStream());
-            while(ok == 0){
-                int red = (bufferedimage.getRGB(x, y) >> 16) & 0xFF;
-                int green = (bufferedimage.getRGB(x, y) >> 8) & 0xFF;
-                int blue = bufferedimage.getRGB(x, y) & 0xFF;
-                if((red <= 80 && green <=80 && blue <= 80) || (red >= 180 && green >= 180 && blue >= 180)){
-                    if(x<bufferedimage.getTileWidth()-1) x++;
-                    if(x>=bufferedimage.getTileWidth()-1 && y<bufferedimage.getTileWidth()-1){ 
+
+            icon = ImageIO.read(rm.getResource(jewelLoc).getInputStream());
+            while(ok == 0)
+            {
+                red = (icon.getRGB(x, y) >> 16) & 0xFF;
+                green = (icon.getRGB(x, y) >> 8) & 0xFF;
+                blue = icon.getRGB(x, y) & 0xFF;
+                if((red <= 80 && green <=80 && blue <= 80) || (red >= 180 && green >= 180 && blue >= 180))
+                {
+                    if(x<icon.getTileWidth()-1) x++;
+                    if(x>=icon.getTileWidth()-1 && y<icon.getTileWidth()-1)
+                    { 
                         x=0; 
                         y++;
                     }
-                    if(x == bufferedimage.getTileWidth()-1 && y==bufferedimage.getTileWidth()-1)ok=1;
+                    if(x == icon.getTileWidth()-1 && y==icon.getTileWidth()-1) ok=1;
                 }
                 else ok=1;
             }
-            if(JewelryNBT.jewel(stack).getItem().getColorFromItemStack(JewelryNBT.jewel(stack), 1) == 16777215) JewelryNBT.addJewelColor(stack, bufferedimage.getRGB(x, y));
+            if(JewelryNBT.jewel(stack).getItem().getColorFromItemStack(JewelryNBT.jewel(stack), 1) == 16777215) JewelryNBT.addJewelColor(stack, icon.getRGB(x, y));
             else JewelryNBT.addJewelColor(stack, JewelryNBT.jewel(stack).getItem().getColorFromItemStack(JewelryNBT.jewel(stack), 1));
         }
         if(pass == 0 && JewelryNBT.ingot(stack) != null) return JewelryNBT.ingotColor(stack);
@@ -157,7 +168,8 @@ public class ItemRing extends Item
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
         if (!world.isRemote){
-            if (JewelryNBT.playerPosX(stack) != -1 && JewelryNBT.playerPosY(stack) != -1 && JewelryNBT.playerPosZ(stack) != -1){
+            if (JewelryNBT.playerPosX(stack) != -1 && JewelryNBT.playerPosY(stack) != -1 && JewelryNBT.playerPosZ(stack) != -1)
+            {
                 double posX = JewelryNBT.playerPosX(stack), posY = JewelryNBT.playerPosY(stack), posZ = JewelryNBT.playerPosZ(stack);
                 if (JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)) && JewelryNBT.isModifierX(stack, new ItemStack(Item.bed)) && JewelryNBT.dimension(stack) != -2 && JewelryNBT.dimName(stack) != null)
                 {
@@ -196,7 +208,7 @@ public class ItemRing extends Item
                 else if(i != -1 && j != -1 && k != -1) player.addChatMessage("Chest out of range! You need to be " + ((int)player.getDistance(i + 0.5F, j + 0.5F, k + 0.5F) - 127) + " blocks closer.");
                 else player.addChatMessage("You need to link the ring with a chest first, before using it!");
             }
-            else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)) && JewelryNBT.playerPosX(stack) == -1 && JewelryNBT.playerPosY(stack) == -1 && JewelryNBT.playerPosZ(stack) == -1){
+            else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)) && !JewelryNBT.hasTag(stack, "modifier") && JewelryNBT.playerPosX(stack) == -1 && JewelryNBT.playerPosY(stack) == -1 && JewelryNBT.playerPosZ(stack) == -1){
                 JewelryNBT.addCoordonatesAndDimension(stack, player.posX, player.posY, player.posZ, world.provider.dimensionId, world.provider.getDimensionName());
                 JewelryNBT.addFakeEnchantment(stack);
             }
@@ -220,7 +232,6 @@ public class ItemRing extends Item
                     JewelryNBT.addMode(stack, mode);
                 }
             }
-            else if(JewelryNBT.hasTag(stack, "modifier") && JewelryNBT.isModifierEffectType(stack)) JewelryNBT.addMode(stack, "Activated");
         }
         return stack;
     }
@@ -246,7 +257,7 @@ public class ItemRing extends Item
             { "rawtypes", "unchecked" })
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
     {
-        if (stack.hasTagCompound() && stack.getDisplayName() != "Wedding Ring")
+        if (stack.hasTagCompound() && stack.getDisplayName() != "Wedding Ring" && Minecraft.getMinecraft().gameSettings.advancedItemTooltips)
         {
             ItemStack ingot = JewelryNBT.ingot(stack);
             if (ingot != null) list.add("Ingot: " + EnumChatFormatting.YELLOW + ingot.getDisplayName());
@@ -271,20 +282,44 @@ public class ItemRing extends Item
 
             String modeN = JewelryNBT.modeName(stack);
             if(modeN != null) list.add("Mode: " + modeN);
-            
-//            int colorI = JewelryNBT.ingotColor(stack);
-//            if(colorI != -1) list.add("Ingot Color: " + colorI);
-//            
-//            int colorJ = JewelryNBT.jewelColor(stack);
-//            if(colorJ != -1) list.add("Jewel Color: " + colorJ);
+
+            int block = JewelryNBT.blockID(stack);
+            if(block != -1) list.add("Block: " + StatCollector.translateToLocalFormatted(Block.blocksList[block].getUnlocalizedName()));
+
+            int blockmeta = JewelryNBT.blockMetadata(stack);
+            if(blockmeta != -1) list.add("Block Metadata: " + blockmeta);
+
+            TileEntity tile = JewelryNBT.tileEntity(stack);
+            if(tile != null) list.add(EnumChatFormatting.RED + "Contains a tile entity");
+
+            int blockX = JewelryNBT.blockCoordX(stack);
+            if(blockX != -1) list.add("Block Coords X: " + blockX);
+
+            int blockY = JewelryNBT.blockCoordY(stack);
+            if(blockY != -1) list.add("Block Coords Y: " + blockY);
+
+            int blockZ = JewelryNBT.blockCoordZ(stack);
+            if(blockZ != -1) list.add("Block Coords Z: " + blockZ);
+
+            //            int colorI = JewelryNBT.ingotColor(stack);
+            //            if(colorI != -1) list.add("Ingot Color: " + colorI);
+            //            
+            //            int colorJ = JewelryNBT.jewelColor(stack);
+            //            if(colorJ != -1) list.add("Jewel Color: " + colorJ);
         }
     }
 
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int i, int j, int k, int side, float par8, float par9, float par10)
     {
+        amplifier = 0;
+        if (JewelryNBT.isJewelX(stack, new ItemStack(Item.diamond))) amplifier = 1;
+        else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.emerald))) amplifier = 2;
+        else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar))) amplifier = 7;
+
         if (!world.isRemote)
         {
             EntityLivingBase entity = JewelryNBT.entity(stack, player);
+            boolean used = false;
             if(entity != null && entity instanceof EntityLivingBase){
                 entity.setLocationAndAngles(i + 0.5D, j + 1D, k + 0.5D, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
                 world.spawnEntityInWorld(entity);
@@ -292,6 +327,40 @@ public class ItemRing extends Item
             }
             if (JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)) && JewelryNBT.isModifierX(stack, new ItemStack(Block.chest)) && world.getBlockId(i, j, k) == Block.chest.blockID) JewelryNBT.addBlockCoordonates(stack, i, j, k);
             onItemRightClick(stack, world, player);
+            if(JewelryNBT.isModifierX(stack, new ItemStack(Item.dyePowder, 1, 15))) world.scheduleBlockUpdate(i, j, k, world.getBlockId(i, j, k), 7 - amplifier); 
+            if(JewelryNBT.isModifierX(stack, new ItemStack(Item.pickaxeDiamond)) && JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)))
+            {
+                if(JewelryNBT.hasTag(stack, "blockID") && !used)
+                {
+                    int shiftX = 0, shiftY = 0, shiftZ = 0;
+                    if(side == 0) shiftY = -1;
+                    else if(side == 1) shiftY = 1;
+                    else if(side == 2) shiftZ = -1;
+                    else if(side == 3) shiftZ = 1;
+                    else if(side == 4) shiftX = -1;
+                    else if(side == 5) shiftX = 1;
+                    world.setBlock(i + shiftX, j + shiftY, k + shiftZ, JewelryNBT.blockID(stack));
+                    world.setBlockMetadataWithNotify(i + shiftX, j + shiftY, k + shiftZ, JewelryNBT.blockMetadata(stack), 2);
+                    if(JewelryNBT.hasTag(stack, "tile")) world.setBlockTileEntity(i + shiftX, j + shiftY, k + shiftZ, JewelryNBT.tileEntity(stack));
+                    if(JewelryNBT.tileEntity(stack) instanceof TileEntitySkull) ((BlockSkull)Block.skull).makeWither(world, i + shiftX, j + shiftY, k + shiftZ, (TileEntitySkull)JewelryNBT.tileEntity(stack));
+                    if(JewelryNBT.blockID(stack) == Block.pumpkin.blockID || JewelryNBT.blockID(stack) == Block.pumpkinLantern.blockID) createGolems(world, i + shiftX, j + shiftY, k + shiftZ);
+                    JewelryNBT.removeBlock(stack);
+                    used = true;
+                }
+
+                if(!JewelryNBT.hasTag(stack, "tile") && world.getBlockTileEntity(i, j, k) != null && !used){
+                    JewelryNBT.addTileEntityBlock(stack, world, i, j, k);
+                    world.removeBlockTileEntity(i, j, k);
+                    world.setBlock(i, j, k, 0);
+                }
+                else if(!JewelryNBT.hasTag(stack, "blockID") && !used){
+                    JewelryNBT.addBlock(stack, world.getBlockId(i, j, k), world.getBlockMetadata(i, j, k));
+                    JewelryNBT.addBlockCoordonates(stack, i, j, k);
+                    world.setBlock(i, j, k, 0);
+                }
+            }
+            if(JewelryNBT.isModifierX(stack, new ItemStack(Item.pickaxeDiamond)) && JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar)) && JewelryNBT.isIngotX(stack, new ItemStack(ItemList.shadowIngot)) && j > 0 && world.getBlockId(i, j, k) != Block.bedrock.blockID)
+                world.destroyBlock(i, j, k, true);
         }
         return true;
     }
@@ -317,27 +386,26 @@ public class ItemRing extends Item
         if(cooldown > 0) cooldown--;
         if (!world.isRemote){
             EntityPlayer entityplayer = (EntityPlayer) entity;
+            int posX = (int)Math.floor(entityplayer.posX), posY = (int)Math.floor(entityplayer.posY), posZ = (int)Math.floor(entityplayer.posZ);
+
             if (JewelryNBT.isJewelX(stack, new ItemStack(Item.diamond))) amplifier = 1;
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.emerald))) amplifier = 2;
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar))) amplifier = 7;
 
+            if(JewelryNBT.isModifierX(stack, new ItemStack(Item.dyePowder, 1, 15)) && world.getBlockId(posX, posY - 1, posZ) == Block.tilledField.blockID) 
+                world.setBlockMetadataWithNotify(posX, posY - 1, posZ, 1, 2);            
+
             if(JewelryNBT.isModeX(stack, "Activated"))
             {
                 if (JewelryNBT.isModifierX(stack, new ItemStack(Item.blazePowder)) && entityplayer != null)
-                {
                     entityplayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 4, amplifier, true));
-                    entityplayer.addPotionEffect(new PotionEffect(Potion.weakness.id, 4, amplifier, true));
-                }
                 else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.sugar)) && entityplayer != null)
                 {
                     entityplayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 4, amplifier, true));
                     entityplayer.addExhaustion(0.05f*amplifier);
                 }
-                else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.pickaxeIron)) && entityplayer != null)
-                {
+                else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.pickaxeIron)) && entityplayer != null && !JewelryNBT.isJewelX(stack, new ItemStack(Item.enderPearl)))
                     entityplayer.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 4, amplifier, true));
-                    entityplayer.addPotionEffect(new PotionEffect(Potion.resistance.id, 4, -2*amplifier, true));
-                }
                 else if (JewelryNBT.isModifierX(stack, new ItemStack(Item.feather)) && entityplayer != null)
                 {
                     entityplayer.addPotionEffect(new PotionEffect(Potion.jump.id, 4, amplifier, true));
@@ -440,9 +508,81 @@ public class ItemRing extends Item
         JewelryNBT.addMetal(itemstack, ingot);
         JewelryNBT.addModifier(itemstack, modifier);
         JewelryNBT.addJewel(itemstack, jewel);
-        if(JewelryNBT.isModifierEffectType(itemstack)) JewelryNBT.addMode(itemstack, "Activated");
+        if(JewelryNBT.isModifierEffectType(itemstack) && !(JewelryNBT.isJewelX(itemstack, new ItemStack(Item.enderPearl)) && JewelryNBT.isModifierX(itemstack, new ItemStack(Item.pickaxeIron)))) JewelryNBT.addMode(itemstack, "Activated");
         if(JewelryNBT.isJewelX(itemstack, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(itemstack, new ItemStack(Item.book))) 
             JewelryNBT.addMode(itemstack, "Disenchant");
         return itemstack;
+    }
+
+    public void createGolems(World world, int i, int j, int k)
+    {
+        if (world.getBlockId(i, j - 1, k) == Block.blockSnow.blockID && world.getBlockId(i, j - 2, k) == Block.blockSnow.blockID)
+        {
+            if (!world.isRemote)
+            {
+                world.setBlock(i, j, k, 0, 0, 2);
+                world.setBlock(i, j - 1, k, 0, 0, 2);
+                world.setBlock(i, j - 2, k, 0, 0, 2);
+                EntitySnowman entitysnowman = new EntitySnowman(world);
+                entitysnowman.setLocationAndAngles((double)i + 0.5D, (double)j - 1.95D, (double)k + 0.5D, 0.0F, 0.0F);
+                world.spawnEntityInWorld(entitysnowman);
+                world.notifyBlockChange(i, j, k, 0);
+                world.notifyBlockChange(i, j - 1, k, 0);
+                world.notifyBlockChange(i, j - 2, k, 0);
+            }
+
+            for (int l = 0; l < 120; ++l)
+            {
+                world.spawnParticle("snowshovel", (double)i + world.rand.nextDouble(), (double)(j - 2) + world.rand.nextDouble() * 2.5D, (double)k + world.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
+            }
+        }
+        else if (world.getBlockId(i, j - 1, k) == Block.blockIron.blockID && world.getBlockId(i, j - 2, k) == Block.blockIron.blockID)
+        {
+            boolean flag = world.getBlockId(i - 1, j - 1, k) == Block.blockIron.blockID && world.getBlockId(i + 1, j - 1, k) == Block.blockIron.blockID;
+            boolean flag1 = world.getBlockId(i, j - 1, k - 1) == Block.blockIron.blockID && world.getBlockId(i, j - 1, k + 1) == Block.blockIron.blockID;
+
+            if (flag || flag1)
+            {
+                world.setBlock(i, j, k, 0, 0, 2);
+                world.setBlock(i, j - 1, k, 0, 0, 2);
+                world.setBlock(i, j - 2, k, 0, 0, 2);
+
+                if (flag)
+                {
+                    world.setBlock(i - 1, j - 1, k, 0, 0, 2);
+                    world.setBlock(i + 1, j - 1, k, 0, 0, 2);
+                }
+                else
+                {
+                    world.setBlock(i, j - 1, k - 1, 0, 0, 2);
+                    world.setBlock(i, j - 1, k + 1, 0, 0, 2);
+                }
+
+                EntityIronGolem entityirongolem = new EntityIronGolem(world);
+                entityirongolem.setPlayerCreated(true);
+                entityirongolem.setLocationAndAngles((double)i + 0.5D, (double)j - 1.95D, (double)k + 0.5D, 0.0F, 0.0F);
+                world.spawnEntityInWorld(entityirongolem);
+
+                for (int i1 = 0; i1 < 120; ++i1)
+                {
+                    world.spawnParticle("snowballpoof", (double)i + world.rand.nextDouble(), (double)(j - 2) + world.rand.nextDouble() * 3.9D, (double)k + world.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
+                }
+
+                world.notifyBlockChange(i, j, k, 0);
+                world.notifyBlockChange(i, j - 1, k, 0);
+                world.notifyBlockChange(i, j - 2, k, 0);
+
+                if (flag)
+                {
+                    world.notifyBlockChange(i - 1, j - 1, k, 0);
+                    world.notifyBlockChange(i + 1, j - 1, k, 0);
+                }
+                else
+                {
+                    world.notifyBlockChange(i, j - 1, k - 1, 0);
+                    world.notifyBlockChange(i, j - 1, k + 1, 0);
+                }
+            }
+        }
     }
 }

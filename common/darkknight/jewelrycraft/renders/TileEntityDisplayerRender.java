@@ -103,7 +103,7 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
     {
         FontRenderer fontrenderer = RenderManager.instance.getFontRenderer();
         float var14 = 0.01266667F * 1.5F;
-//        float var17 = 0.015F;
+        float var17 = 0.015F;
         GL11.glRotatef(180F, 0F, 0F, 1F);
         if(metadata == 0) GL11.glRotatef(0F, 0F, 1F, 0F);
         else if(metadata == 1) GL11.glRotatef(270F, 0F, 1F, 0F);
@@ -113,29 +113,118 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
         GL11.glScalef(-0.015F, -var14, 0.015F);
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glDepthMask(true);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         Tessellator tessellator = Tessellator.instance;
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         int j = fontrenderer.getStringWidth(par2Str) / 2;
         tessellator.startDrawingQuads();
-        tessellator.setColorRGBA_F(0.2F, 0.2F, 0.2F, 0.8F);
+        tessellator.setColorRGBA_F(0.0F, 0.2F, 0.2F, 0.9F);
         tessellator.addVertex((double)(-33.333 - 0), -1D, 0.1D);
         tessellator.addVertex((double)(-33.333 - 0), 8D, 0.1D);
         tessellator.addVertex((double)(33.333 + 0), 8D, 0.1D);
         tessellator.addVertex((double)(33.333 + 0), -1D, 0.1D);
         tessellator.draw();
-//        if ((fontrenderer.getStringWidth(par2Str)/2) > 20) var17 = 0.9F / fontrenderer.getStringWidth(par2Str); 
-//        else var17 = var14;
-//        GL11.glScalef(var17*70F, 1F, 0F);
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        if ((fontrenderer.getStringWidth(par2Str)/2) > 20) var17 = 0.9F / fontrenderer.getStringWidth(par2Str); 
+        else var17 = var14;
         int red = (color >> 16) & 0xFF;
         int green = (color >> 8) & 0xFF;
         int blue = color & 0xFF;
         GL11.glTranslatef((float)x + 1f, (float)y + 1f, (float)z);
-        fontrenderer.drawString(par2Str, -j, 0, 65536 * (red/2) + 256 * (green/2) + blue/2);
-        GL11.glTranslatef((float)x - 1f, (float)y - 1f, (float)z - 1F);        
+        GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_TEXTURE_2D);     
+        GL11.glScalef(var17*70F, 1F, 0F);
+        fontrenderer.drawString(par2Str.replaceFirst("§0", "§r").replaceFirst("§1", "§r").replaceFirst("§2", "§r").replaceFirst("§3", "§r").replaceFirst("§4", "§r").replaceFirst("§5", "§r").replaceFirst("§6", "§r").replaceFirst("§7", "§r").replaceFirst("§8", "§r").replaceFirst("§9", "§r").replaceFirst("§a", "§r").replaceFirst("§b", "§r").replaceFirst("§c", "§r").replaceFirst("§d", "§r").replaceFirst("§e", "§r").replaceFirst("§f", "§r"), -j, 0, 65536 * (red/2) + 256 * (green/2) + blue/2);
+        GL11.glPopMatrix();
+        GL11.glTranslatef((float)x - 1f, (float)y - 1f, (float)z - 1F);   
+        GL11.glScalef(var17*70F, 1F, 0F);
         fontrenderer.drawString(par2Str, -j, 0, color);
         GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();
+    }
+    
+    public void replaceEnumEnchValues(String str, int color)
+    {
+        if(str.contains("§0"))
+        {
+            color = Color.BLACK.getRGB();
+            str.replace("§0", "");
+        }
+        if(str.contains("§1"))
+        {
+            color = 85;
+            str.replace("§1", "");
+        }
+        if(str.contains("§2"))
+        {
+            color = 17920;
+            str.replace("§2", "");
+        }
+        if(str.contains("§3"))
+        {
+            color = 1336183;
+            str.replace("§3", "");
+        }
+        if(str.contains("§4"))
+        {
+            color = 4587520;
+            str.replace("§4", "");
+        }
+        if(str.contains("§5"))
+        {
+            color = 5701759;
+            str.replace("§5", "");
+        }
+        if(str.contains("§6"))
+        {
+            color = 16762880;
+            str.replace("§6", "");
+        }
+        if(str.contains("§7"))
+        {
+            color = Color.GRAY.getRGB();
+            str.replace("§7", "");
+        }
+        if(str.contains("§8"))
+        {
+            color = Color.DARK_GRAY.getRGB();
+            str.replace("§8", "");
+        }
+        if(str.contains("§9"))
+        {
+            color = Color.BLUE.getRGB();
+            str.replace("§9", "");
+        }
+        if(str.contains("§a"))
+        {
+            color = Color.GREEN.getRGB();
+            str.replace("§a", "");
+        }
+        if(str.contains("§b"))
+        {
+            color = Color.CYAN.getRGB();
+            str.replace("§b", "");
+        }
+        if(str.contains("§c"))
+        {
+            color = Color.RED.getRGB();
+            str.replace("§c", "");
+        }
+        if(str.contains("§d"))
+        {
+            color = 11665663;
+            str.replace("§d", "");
+        }
+        if(str.contains("§e"))
+        {
+            color = Color.YELLOW.getRGB();
+            str.replace("§e", "");
+        }
+        if(str.contains("§f"))
+        {
+            color = Color.WHITE.getRGB();
+            str.replace("§f", "");
+        }
     }
 }

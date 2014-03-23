@@ -14,7 +14,7 @@ import net.minecraft.util.MathHelper;
 public class ItemClayMolds extends Item
 {
     /** List of molds color names */
-    public static final String[] moldsItemNames = new String[] { "clayIngot", "clayRing" };
+    public static final String[] moldsItemNames = new String[] { "clayIngot", "clayRing", "clayNecklace" };
     @SideOnly(Side.CLIENT)
     private Icon[]               moldsIcons;
     

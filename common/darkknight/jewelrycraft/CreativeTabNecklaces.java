@@ -10,11 +10,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class CreativeTabRings extends CreativeTabs
+public class CreativeTabNecklaces extends CreativeTabs
 {
     public static ArrayList<ItemStack> metal = new ArrayList<ItemStack>();
 
-    public CreativeTabRings(String par2Str) 
+    public CreativeTabNecklaces(String par2Str) 
     {
         super(par2Str);
         metal.add(new ItemStack(Item.ingotGold));
@@ -24,7 +24,7 @@ public class CreativeTabRings extends CreativeTabs
     @Override
     public ItemStack getIconItemStack()
     {
-        ItemStack ring = new ItemStack(ItemList.ring);
+        ItemStack ring = new ItemStack(ItemList.necklace);
         return ring;
     }
 
@@ -47,8 +47,8 @@ public class CreativeTabRings extends CreativeTabs
             for(int j = 0; j < JewelrycraftUtil.modifiers.size(); j++)
                 for(int k = 0; k < JewelrycraftUtil.jewel.size(); k++) 
                 {
-                    par1List.add(ItemList.ring.getModifiedItemStack(metal.get(i), null, JewelrycraftUtil.jewel.get(k)));
-                    par1List.add(ItemList.ring.getModifiedItemStack(metal.get(i), JewelrycraftUtil.modifiers.get(j), JewelrycraftUtil.jewel.get(k)));
+                    par1List.add(ItemList.necklace.getModifiedItemStack(metal.get(i), null, JewelrycraftUtil.jewel.get(k)));
+                    par1List.add(ItemList.necklace.getModifiedItemStack(metal.get(i), JewelrycraftUtil.modifiers.get(j), JewelrycraftUtil.jewel.get(k)));
                 }
     }
 

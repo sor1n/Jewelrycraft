@@ -14,9 +14,10 @@ public class ItemList
     public static Item     clayMolds;
     public static Item     crystal;
     public static ItemRing     ring;
-    
+    public static ItemNecklace     necklace;
+
     private static boolean isInitialized = false;
-    
+
     public static void preInit(FMLPreInitializationEvent e)
     {
         if (!isInitialized)
@@ -27,14 +28,16 @@ public class ItemList
             clayMolds = new ItemClayMolds(ConfigHandler.idClayMolds - 256).setUnlocalizedName("Jewelrycraft.mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
             ring = (ItemRing) new ItemRing(ConfigHandler.idRing - 256).setUnlocalizedName("Jewelrycraft.ring").setTextureName("jewelrycraft:ring");
             crystal = new ItemCrystal(ConfigHandler.idCrystal - 256).setUnlocalizedName("Jewelrycraft.crystal").setTextureName("jewelrycraft:crystal").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            
+            necklace = (ItemNecklace) new ItemNecklace(ConfigHandler.idNecklace - 256).setUnlocalizedName("Jewelrycraft.necklace").setTextureName("jewelrycraft:necklace");
+
             GameRegistry.registerItem(thiefGloves, "thiefGloves");
             GameRegistry.registerItem(shadowIngot, "shadowIngot");
             GameRegistry.registerItem(molds, "molds");
             GameRegistry.registerItem(clayMolds, "clayMolds");
             GameRegistry.registerItem(ring, "ring");
+            GameRegistry.registerItem(necklace, "necklace");
             GameRegistry.registerItem(crystal, "crystal");
-            
+
             isInitialized = true;
         }
     }

@@ -92,8 +92,10 @@ public class TileEntityMolder extends TileEntity
                 this.hasMoltenMetal = false;
                 if (mold.getItemDamage() == 0)
                     this.jewelBase = moltenMetal;
-                else
+                else if (mold.getItemDamage() == 1)
                     this.jewelBase = new ItemStack(ItemList.ring);
+                else
+                    this.jewelBase = new ItemStack(ItemList.necklace);
                 if(mold.getItemDamage() != 0 && jewelBase != new ItemStack(0, 0, 0))
                     JewelryNBT.addMetal(jewelBase, ringMetal);
                 this.moltenMetal = new ItemStack(0, 0, 0);
