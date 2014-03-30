@@ -37,6 +37,7 @@ import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.JewelryCraftClient;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.container.GuiHandler;
+import darkknight.jewelrycraft.events.EntityEventHandler;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.lib.Reference;
 import darkknight.jewelrycraft.recipes.CraftingRecipes;
@@ -98,6 +99,7 @@ public class JewelrycraftMod implements IConnectionHandler
         {
             logger.severe("Error registering Jewelrycraft Structures with Vanilla Minecraft: this is expected in versions earlier than 1.6.4");
         }
+        MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
         
         proxy.registerRenderers();
     }

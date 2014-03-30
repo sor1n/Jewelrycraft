@@ -40,7 +40,7 @@ public class JewelrycraftUtil
         modifiers.add(new ItemStack(Item.potion, 1, 8270));
 
         //Jewels
-        for(int i=0; i <= 16; i++)
+        for(int i=0; i < 16; i++)
         jewel.add(new ItemStack(ItemList.crystal, 1, i));
         jewel.add(new ItemStack(Block.blockRedstone));
         jewel.add(new ItemStack(Block.blockLapis));

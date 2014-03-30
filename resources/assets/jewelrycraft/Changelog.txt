@@ -13,6 +13,7 @@
 - Balanced Villager trades
 - Fixed Displayer text rendering in front of everything
 - Added the Jewel Altar
+- Added a guide
 
 TODO
 - Make it so you can smelt ores in the smelter

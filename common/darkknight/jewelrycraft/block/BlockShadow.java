@@ -80,7 +80,7 @@ public class BlockShadow extends BlockContainer
     
     public boolean shouldSideBeRendered(IBlockAccess iBlockAccess, int par2, int par3, int par4, int par5)
     {
-        return iBlockAccess.isAirBlock(par2, par3, par4)?true:false;
+        return iBlockAccess.isAirBlock(par2, par3, par4)?true:iBlockAccess.isBlockNormalCube(par2, par3, par4)?false:(iBlockAccess.getBlockId(par2, par3, par4) == BlockList.shadowBlock.blockID)?false:true;
     }
     
     public boolean hasComparatorInputOverride()
