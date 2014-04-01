@@ -1,5 +1,7 @@
 package darkknight.jewelrycraft.container;
 
+import java.awt.Desktop;
+import java.net.URL;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
@@ -16,7 +18,7 @@ public class GuiTabItems extends GuiTab
     {
         super("Items", id);
     }
-    
+
     public ItemStack getIcon()
     {        
         return new ItemStack(ItemList.thiefGloves);
@@ -210,13 +212,61 @@ public class GuiTabItems extends GuiTab
                 items.add(new ItemStack(ItemList.crystal, 1, values));
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop() + 60, true, text, items, x, y);
                 break;
+            case 13: 
+                if(del == 0) values++;
+                del++;
+                if(del >= 300) del = 0;
+                if(values >= 3) values = 0;
+                text.add("  It's this exact guide.");
+                text.add("I don't even know why");
+                text.add("you're reading this.");
+                text.add("I added this recipe in");
+                text.add("case you lose the");
+                text.add("original. In case you");
+                text.add("don't have it, I suggest");
+                text.add("adding NEI so you can");
+                items.add(new ItemStack(ItemList.guide));
+                items.add(new ItemStack(ItemList.molds, 1, values));
+                items.add(new ItemStack(Item.book));
+                Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), true, text, items, x, y);
+                break;
+            case 14: 
+                String link = "HERE";
+                if(x >= gui.getLeft() + 138 && x <= gui.getLeft() + 168 && y >= gui.getTop() + 98 && y <= gui.getTop() + 108) link = "§1HERE§0";
+                text.add("see all the recipes.");
+                text.add("Since you are reading");
+                text.add("this, how about making");
+                text.add("a youtube video");
+                text.add("spotlighting this mod.");
+                text.add("I'd really appreciate it.");
+                text.add("After that you can");
+                text.add("share it in the main");
+                text.add("thread " + link + ".");
+                text.add("  This mod was made by");
+                text.add("DarkKnight (or sor1n");
+                text.add("depending from where");
+                text.add("you got this)");
+                Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
+                break;
             default:;
         }
     }
 
     public int getMaxPages()
     {
-        return 11;
+        return 13;
+    }
+
+    public void mouseClick(GuiGuide gui, int x, int y, int button) 
+    {
+        if(gui.page == 13 && x >= gui.getLeft() + 138 && x <= gui.getLeft() + 168 && y >= gui.getTop() + 98 && y <= gui.getTop() + 108)
+        {
+            try 
+            {
+                Desktop.getDesktop().browse(new URL("http://www.minecraftforum.net/topic/2210959-164smp-ssp-jewelrycraft-version-12/").toURI());
+            }           
+            catch (Exception e) {}
+        }
     }
 
     @Override

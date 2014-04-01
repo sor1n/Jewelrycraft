@@ -161,7 +161,7 @@ public class ItemRing extends Item
 
     public String getItemDisplayName(ItemStack stack)
     {
-        if (JewelryNBT.ingot(stack) != null && JewelryNBT.jewel(stack) != null && JewelryNBT.isJewelX(stack, new ItemStack(Item.diamond)) && JewelryNBT.isIngotX(stack, new ItemStack(Item.ingotGold))) return "Wedding Ring";
+        if (JewelryNBT.ingot(stack) != null && JewelryNBT.jewel(stack) != null && JewelryNBT.modifier(stack) == null && JewelryNBT.isJewelX(stack, new ItemStack(Item.diamond)) && JewelryNBT.isIngotX(stack, new ItemStack(Item.ingotGold))) return "Wedding Ring";
         else if(JewelryNBT.ingot(stack) != null) return JewelryNBT.ingot(stack).getDisplayName().replace("Ingot", " ").trim() + " " + ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
         return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
     }
@@ -394,7 +394,7 @@ public class ItemRing extends Item
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar))) amplifier = 7;
 
             if(JewelryNBT.isModifierX(stack, new ItemStack(Item.dyePowder, 1, 15)) && world.getBlockId(posX, posY - 1, posZ) == Block.tilledField.blockID) 
-                world.setBlockMetadataWithNotify(posX, posY - 1, posZ, 1, 2);            
+                world.setBlockMetadataWithNotify(posX, posY - 1, posZ, 1, 7);            
 
             if(JewelryNBT.isModeX(stack, "Activated"))
             {
@@ -429,8 +429,8 @@ public class ItemRing extends Item
             if(entityplayer.inventory.getCurrentItem() != null && JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(stack, new ItemStack(Item.book)) && entityplayer.inventory.getCurrentItem().equals(stack))
             {
                 ItemStack item = null;
-                if(entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1) != null && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1).isItemEnchanted()) item = entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1);
-                if(entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1) != null && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1).isItemEnchanted()) item = entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1);
+                if(entityplayer.inventory.currentItem + 1 <= 8 && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1) != null && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1).isItemEnchanted()) item = entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1);
+                if(entityplayer.inventory.currentItem - 1 >= 0 && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1) != null && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1).isItemEnchanted()) item = entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1);
                 if(item != null && JewelryNBT.isModeX(stack, "Disenchant"))
                 {
                     ItemStack enchBook = new ItemStack(Item.enchantedBook);
@@ -457,9 +457,9 @@ public class ItemRing extends Item
                         }
                     }
                 }
-                if(entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1) != null && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1) != null && JewelryNBT.isModeX(stack, "Transfer"))
+                if(entityplayer.inventory.currentItem + 1 <= 8 && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1) != null && entityplayer.inventory.currentItem - 1 >= 0 && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1) != null && JewelryNBT.isModeX(stack, "Transfer"))
                 {
-                    if(cooldown > 0) entityplayer.addChatMessage("Ring is currently cooling down (" + cooldown + ")");
+                    if(cooldown > 0) entityplayer.addChatMessage("Ring is currently cooling down!");
                     ItemStack enchantedItem = null, enchantableItem = null;
                     if(entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1).isItemEnchanted() && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1) != null)
                     {
@@ -483,13 +483,13 @@ public class ItemRing extends Item
                                 EnchantmentHelper.setEnchantments(resultItem, enchantableItem);
                                 enchItem.remove(Integer.valueOf(e));
                                 EnchantmentHelper.setEnchantments(enchItem, enchantedItem);
-                                cooldown = 1000;
+                                cooldown = 50000;
                             }
                         }
                     }
                 }
-                if(entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1) != null) item = entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1);
-                else if(entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1) != null) item = entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1);
+                if(entityplayer.inventory.currentItem + 1 <= 8 && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1) != null) item = entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1);
+                else if(entityplayer.inventory.currentItem - 1 >= 0 && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1) != null) item = entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem - 1);
                 if(item != null && !item.isItemEnchanted() && item.isItemEnchantable() && entityplayer.experienceLevel > 0 && JewelryNBT.isModeX(stack, "Enchant"))
                 {
                     Map enchItem = EnchantmentHelper.getEnchantments(item);

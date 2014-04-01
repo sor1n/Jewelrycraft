@@ -118,17 +118,17 @@ public class ItemNecklace extends Item
         return stack;
     }
 
-    @Override
-    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entity)
-    {
-        if (!player.worldObj.isRemote && entity instanceof EntityLivingBase && JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(stack, new ItemStack(Block.chest)) && JewelryNBT.entity(stack, player) == null){
-            JewelryNBT.addEntity(stack, entity);
-            JewelryNBT.addEntityID(stack, entity);
-            entity.setDead();
-            JewelryNBT.addFakeEnchantment(stack);
-        }
-        return true;
-    }
+//    @Override
+//    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entity)
+//    {
+//        if (!player.worldObj.isRemote && entity instanceof EntityLivingBase && JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar)) && JewelryNBT.isModifierX(stack, new ItemStack(Block.chest)) && JewelryNBT.entity(stack, player) == null){
+//            JewelryNBT.addEntity(stack, entity);
+//            JewelryNBT.addEntityID(stack, entity);
+//            entity.setDead();
+//            JewelryNBT.addFakeEnchantment(stack);
+//        }
+//        return true;
+//    }
 
     /**
      * allows items to add custom lines of information to the mouseover
@@ -220,14 +220,14 @@ public class ItemNecklace extends Item
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5)
     {
-        amplifier = 1D;
+        amplifier = 0D;
         if (!world.isRemote)
         {
             EntityPlayer entityplayer = (EntityPlayer) entity;
             int posX = (int)Math.floor(entityplayer.posX), posY = (int)Math.floor(entityplayer.posY), posZ = (int)Math.floor(entityplayer.posZ);
 
-            if (JewelryNBT.isJewelX(stack, new ItemStack(Item.diamond))) amplifier = 2D;
-            else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.emerald))) amplifier = 3D;
+            if (JewelryNBT.isJewelX(stack, new ItemStack(Item.diamond))) amplifier = 1D;
+            else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.emerald))) amplifier = 2D;
             else if (JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar))) amplifier = 5D;            
 
             if(JewelryNBT.isModifierX(stack, new ItemStack(Item.dyePowder, 1, 15)) && world.getBlockId(posX, posY - 1, posZ) == Block.tilledField.blockID) 

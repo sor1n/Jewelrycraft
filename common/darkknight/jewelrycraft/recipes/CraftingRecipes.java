@@ -28,6 +28,10 @@ public class CraftingRecipes
                 GameRegistry.addShapelessRecipe(new ItemStack(ItemList.crystal, 1, i), new Object[]{new ItemStack(ItemList.crystal, 1, 15), new ItemStack(Item.dyePowder, 1, i)});
                 GameRegistry.addShapelessRecipe(new ItemStack(ItemList.crystal, 1, 15), new Object[]{new ItemStack(ItemList.crystal, 1, i), new ItemStack(Item.dyePowder, 1, 15)});
             }
+            GameRegistry.addShapelessRecipe(new ItemStack(ItemList.shadowIngot, 9), new Object[]{new ItemStack(BlockList.shadowBlock)});
+            GameRegistry.addShapelessRecipe(new ItemStack(ItemList.guide), new Object[]{new ItemStack(Item.book), new ItemStack(ItemList.molds, 1, 0)});
+            GameRegistry.addShapelessRecipe(new ItemStack(ItemList.guide), new Object[]{new ItemStack(Item.book), new ItemStack(ItemList.molds, 1, 1)});
+            GameRegistry.addShapelessRecipe(new ItemStack(ItemList.guide), new Object[]{new ItemStack(Item.book), new ItemStack(ItemList.molds, 1, 2)});
             
             //Blocks
             GameRegistry.addRecipe(new ItemStack(BlockList.molder), "x x", "xxx", 'x', Block.cobblestone);
