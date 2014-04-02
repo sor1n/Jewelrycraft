@@ -14,7 +14,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.block.BlockList;
-import darkknight.jewelrycraft.container.GuiHandler;
 import darkknight.jewelrycraft.util.JewelryNBT;
 
 import net.minecraft.block.Block;
@@ -203,7 +202,7 @@ public class ItemRing extends Item
                     int id = world.getBlockId(i, j, k);
                     if (id != 0 && Block.blocksList[id] != null && Block.blocksList[id].blockID == Block.chest.blockID){
                         TileEntity tile = world.getBlockTileEntity(i, j, k);
-                        if (tile != null && tile instanceof TileEntityChest) FMLNetworkHandler.openGui(player, JewelrycraftMod.instance, GuiHandler.GuiId.ringChest.ordinal(), world, i, j, k);
+                        if (tile != null && tile instanceof TileEntityChest) FMLNetworkHandler.openGui(player, JewelrycraftMod.instance, 0, world, i, j, k);
                     }
                 }
                 else if(i != -1 && j != -1 && k != -1) player.addChatMessage("Chest out of range! You need to be " + ((int)player.getDistance(i + 0.5F, j + 0.5F, k + 0.5F) - 127) + " blocks closer.");

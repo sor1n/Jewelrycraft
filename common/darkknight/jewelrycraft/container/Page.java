@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import darkknight.jewelrycraft.client.GuiGuide;
 
@@ -14,7 +15,7 @@ public class Page
     public static void addCraftingRecipeTextPage(GuiGuide gui, int x, int y, boolean isSmall, ArrayList<String> text, ArrayList<ItemStack> items, int mouseX, int mouseY)
     {
         y+=5;
-        gui.getFont().drawString("§1§n" + items.get(0).getDisplayName(), x + Math.abs(70 - gui.getFont().getStringWidth(items.get(0).getDisplayName())/2) - 10,  y - 2, 0);
+        gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + items.get(0).getDisplayName(), x + Math.abs(70 - gui.getFont().getStringWidth(items.get(0).getDisplayName())/2) - 10,  y - 2, 0);
         GL11.glColor4f(1, 1, 1, 1);
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("jewelrycraft", "textures/gui/guidePageFlip.png"));
         ArrayList<String> name = new ArrayList<String>();
@@ -127,7 +128,7 @@ public class Page
     public static void addSmeltingRecipeTextPage(GuiGuide gui, int x, int y, ArrayList<String> text, ArrayList<ItemStack> items, int mouseX, int mouseY)
     {
         ArrayList<String> name = new ArrayList<String>();
-        gui.getFont().drawString("§1§n" + items.get(1).getDisplayName(), x + Math.abs(70 - gui.getFont().getStringWidth(items.get(0).getDisplayName())/2), y + 2, 0);
+        gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + items.get(1).getDisplayName(), x + Math.abs(70 - gui.getFont().getStringWidth(items.get(0).getDisplayName())/2), y + 2, 0);
         GL11.glColor4f(1, 1, 1, 1);
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("jewelrycraft", "textures/gui/guidePageFlip" + ".png"));
         gui.drawTexturedModalRect(x, y + 10, 145, 100, 111, 46);
@@ -147,7 +148,7 @@ public class Page
     public static void addImageTextPage(GuiGuide gui, int x, int y, ItemStack item, ArrayList<String> text, float size)
     {
         y+=5;
-        gui.getFont().drawString("§1§n" + item.getDisplayName(), x + Math.abs(70 - gui.getFont().getStringWidth(item.getDisplayName())/2) - 10,  y + 2, 0);
+        gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + item.getDisplayName(), x + Math.abs(70 - gui.getFont().getStringWidth(item.getDisplayName())/2) - 10,  y + 2, 0);
         GL11.glColor4f(1, 1, 1, 1);
         gui.renderItem(item, x + 13, y + 18, size);
         for(int i = 0; i < text.size(); i++) gui.getFont().drawString(text.get(i), x, y + 30 + i*12, 0);
@@ -156,7 +157,7 @@ public class Page
     public static void addImageTextPage(GuiGuide gui, int x, int y, ItemStack item, ArrayList<String> text, float size, int txtX, int txtY, boolean showName, int imgX, int imgY)
     {
         y+=5;
-        if(showName) gui.getFont().drawString("§1§n" + item.getDisplayName(), x + Math.abs(70 - gui.getFont().getStringWidth(item.getDisplayName())/2) - 10,  y + 2, 0);
+        if(showName) gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + item.getDisplayName(), x + Math.abs(70 - gui.getFont().getStringWidth(item.getDisplayName())/2) - 10,  y + 2, 0);
         GL11.glColor4f(1, 1, 1, 1);
         gui.renderItem(item, x + 13 + imgX, y + 18 + imgY, size);
         for(int i = 0; i < text.size(); i++) gui.getFont().drawString(text.get(i), x + txtX, y + 30 + txtY + i*12, 0);

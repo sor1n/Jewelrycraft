@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.GuiGuide;
 import darkknight.jewelrycraft.item.ItemList;
@@ -146,11 +147,11 @@ public class GuiTabBlocks extends GuiTab
                 text.add("down. When it's done,");
                 text.add("left click on the");
                 text.add("molder to get the");
-                text.add("jewellery. §4Be aware");
-                text.add("§4that this block must be");
-                text.add("§4placed directly in front");
-                text.add("§4of the smelter,");
-                text.add("§4otherwise it won't work!");
+                text.add("jewellery. " + EnumChatFormatting.DARK_RED + "Be aware");
+                text.add(EnumChatFormatting.DARK_RED + "that this block must be");
+                text.add(EnumChatFormatting.DARK_RED + "placed directly in front");
+                text.add(EnumChatFormatting.DARK_RED + "of the smelter,");
+                text.add(EnumChatFormatting.DARK_RED + "otherwise it won't work!");
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 10: 

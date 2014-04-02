@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import darkknight.jewelrycraft.client.GuiGuide;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.util.JewelryNBT;
@@ -45,9 +46,9 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values));
                 JewelryNBT.addJewel(item, new ItemStack(Item.enderPearl));
 
-                text.add("§2Jewel: §0Ender Pearl");
-                text.add("§2Modifier: §0None");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Ender Pearl");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "None");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring allows you");
                 text.add("to teleport in any");
                 text.add("location from the same");
@@ -59,7 +60,7 @@ public class GuiTabRings extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 2: 
-                text.add("§4§nAltar Effect");
+                text.add(EnumChatFormatting.DARK_RED + "\u00a7nAltar Effect");
                 text.add("  If this ring is placed");
                 text.add("in the altar and if the");
                 text.add("ring has coordonates");
@@ -83,9 +84,9 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, new ItemStack(Item.enderPearl));
                 JewelryNBT.addModifier(item, new ItemStack(Item.bed));
 
-                text.add("§2Jewel: §0Ender Pearl");
-                text.add("§2Modifier: §0Bed");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Ender Pearl");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Bed");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  Just like the other");
                 text.add("ring that had only an");
                 text.add("ender pearl as a jewel,");
@@ -96,7 +97,7 @@ public class GuiTabRings extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 4: 
-                text.add("§4§nAltar Effect");
+                text.add(EnumChatFormatting.DARK_RED + "\u00a7nAltar Effect");
                 text.add("  Just like the other");
                 text.add("one, when in the altar");
                 text.add("if somebody steps on");
@@ -126,12 +127,12 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, jewels.get(jValues));
                 JewelryNBT.addModifier(item, new ItemStack(Item.blazePowder));
 
-                text.add("§2Jewel: §0None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
-                text.add("§2Modifier: §0Blaze Powder");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Blaze Powder");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring grants you");
-                text.add("§4Fire Resistance§0 when");
+                text.add(EnumChatFormatting.DARK_RED + "Fire Resistance" + EnumChatFormatting.BLACK + " when");
                 text.add("activated and in your");
                 text.add("inventory. To deactivate");
                 text.add("it simply right click with");
@@ -140,7 +141,7 @@ public class GuiTabRings extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 6: 
-                text.add("get §4Fire Resistance§0 I");
+                text.add("get " + EnumChatFormatting.DARK_RED + "Fire Resistance" + EnumChatFormatting.BLACK + " I");
                 text.add("if you haven't got any");
                 text.add("jewel, II for Diamond,");
                 text.add("III for Emerald and");
@@ -163,12 +164,12 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, jewels.get(jValues));
                 JewelryNBT.addModifier(item, new ItemStack(Item.sugar));
 
-                text.add("§2Jewel: §0None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
-                text.add("§2Modifier: §0Sugar");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Sugar");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring grants you");
-                text.add("§4Speed§0 when activated");
+                text.add(EnumChatFormatting.DARK_RED + "Speed" + EnumChatFormatting.BLACK + " when activated");
                 text.add("and in your inventory.");
                 text.add("To deactivate it simply");
                 text.add("right click with it.");
@@ -177,7 +178,7 @@ public class GuiTabRings extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 8: 
-                text.add("get §4Speed§0 I if you");
+                text.add("get " + EnumChatFormatting.DARK_RED + "Speed" + EnumChatFormatting.BLACK + " I if you");
                 text.add("haven't got any jewel,");
                 text.add("II for Diamond,");
                 text.add("III for Emerald and");
@@ -200,12 +201,12 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, jewels.get(jValues));
                 JewelryNBT.addModifier(item, new ItemStack(Item.pickaxeIron));
 
-                text.add("§2Jewel: §0None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
-                text.add("§2Modifier: §0Iron Pickaxe");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Iron Pickaxe");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring grants you");
-                text.add("§4Haste§0 when activated");
+                text.add(EnumChatFormatting.DARK_RED + "Haste" + EnumChatFormatting.BLACK + " when activated");
                 text.add("and in your inventory.");
                 text.add("To deactivate it simply");
                 text.add("right click with it.");
@@ -214,7 +215,7 @@ public class GuiTabRings extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 10: 
-                text.add("get §4Haste§0 I if you");
+                text.add("get " + EnumChatFormatting.DARK_RED + "Haste" + EnumChatFormatting.BLACK + " I if you");
                 text.add("haven't got any jewel,");
                 text.add("II for Diamond,");
                 text.add("III for Emerald and");
@@ -237,12 +238,12 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, jewels.get(jValues));
                 JewelryNBT.addModifier(item, new ItemStack(Item.feather));
 
-                text.add("§2Jewel: §0None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
-                text.add("§2Modifier: §0Feather");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Feather");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring grants you");
-                text.add("§4Jump Boost§0 when");
+                text.add(EnumChatFormatting.DARK_RED + "Jump Boost" + EnumChatFormatting.BLACK + " when");
                 text.add("activated and in your");
                 text.add("inventory, as well as");
                 text.add("remove any fall damage.");
@@ -253,7 +254,7 @@ public class GuiTabRings extends GuiTab
             case 12: 
                 text.add("Depending on the jewel");
                 text.add("you used, you get");
-                text.add("§4Jump Boost§0 I if you");
+                text.add(EnumChatFormatting.DARK_RED + "Jump Boost" + EnumChatFormatting.BLACK + " I if you");
                 text.add("haven't got any jewel,");
                 text.add("II for Diamond,");
                 text.add("III for Emerald and");
@@ -276,13 +277,13 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, jewels.get(jValues));
                 JewelryNBT.addModifier(item, new ItemStack(Item.potion, 1, 8270));
 
-                text.add("§2Jewel: §0None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
-                text.add("§2Modifier: §08min Potion of");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "8min Potion of");
                 text.add("Invisibility");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring grants you");
-                text.add("§4Invisibility§0 when");
+                text.add(EnumChatFormatting.DARK_RED + "Invisibility" + EnumChatFormatting.BLACK + " when");
                 text.add("activated and in your");
                 text.add("inventory, as well as");
                 text.add("remove any fall damage.");
@@ -293,7 +294,7 @@ public class GuiTabRings extends GuiTab
                 text.add("right click with it.");
                 text.add("Depending on the jewel");
                 text.add("you used, you get");
-                text.add("§4Invisibility§0 I if you");
+                text.add(EnumChatFormatting.DARK_RED + "Invisibility" + EnumChatFormatting.BLACK + " I if you");
                 text.add("haven't got any jewel,");
                 text.add("II for Diamond,");
                 text.add("III for Emerald and");
@@ -310,13 +311,13 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, new ItemStack(Item.netherStar));
                 JewelryNBT.addModifier(item, new ItemStack(Item.book));
 
-                text.add("§2Jewel: §0Nether Star");
-                text.add("§2Modifier: §0Book");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Nether Star");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Book");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This has the power");
-                text.add("to §5Enchant§0, §5Disenchant§0");
-                text.add("or even §5Transfer");
-                text.add("§5Enchantments§0. To");
+                text.add("to " + EnumChatFormatting.DARK_PURPLE + "Enchant" + EnumChatFormatting.BLACK + ", " + EnumChatFormatting.DARK_PURPLE + "Disenchant" + EnumChatFormatting.BLACK + "");
+                text.add("or even" + EnumChatFormatting.DARK_PURPLE + " Transfer");
+                text.add(EnumChatFormatting.DARK_PURPLE + "Enchantments" + EnumChatFormatting.BLACK + ". To");
                 text.add("change its mode simply");
                 text.add("right click it. However,");
                 text.add("this ring only works");
@@ -324,7 +325,7 @@ public class GuiTabRings extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 16: 
-                text.add("§5§nDisenchanting§0");
+                text.add(EnumChatFormatting.DARK_PURPLE + "\u00a7nDisenchanting" + EnumChatFormatting.BLACK + "");
                 text.add(" If the ring is held");
                 text.add("and an enchanted item");
                 text.add("is placed beside it in");
@@ -354,7 +355,7 @@ public class GuiTabRings extends GuiTab
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 18: 
-                text.add("§5§nEnchanting§0");
+                text.add(EnumChatFormatting.DARK_PURPLE + "\u00a7nEnchanting" + EnumChatFormatting.BLACK + "");
                 text.add(" This mode allows you");
                 text.add("to give a random");
                 text.add("enchantment to an item");
@@ -382,7 +383,7 @@ public class GuiTabRings extends GuiTab
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 20: 
-                text.add("§5§nEnchantment Transfer§0");
+                text.add(EnumChatFormatting.DARK_PURPLE + "\u00a7nEnchantment Transfer" + EnumChatFormatting.BLACK + "");
                 text.add(" This mode is very");
                 text.add("special as it lets you");
                 text.add("transfer enchantments");
@@ -403,10 +404,10 @@ public class GuiTabRings extends GuiTab
                 text.add("at a time, after each");
                 text.add("transfer it requiring a");
                 text.add("cooldown.");
-                text.add(" §4Again, this ring only");
-                text.add("§4works when it is in the");
-                text.add("§4players hotbar and");
-                text.add("§4being held!");
+                text.add(EnumChatFormatting.DARK_RED + " Again, this ring only");
+                text.add(EnumChatFormatting.DARK_RED + "works when it is in the");
+                text.add(EnumChatFormatting.DARK_RED + "players hotbar and");
+                text.add(EnumChatFormatting.DARK_RED + "being held!");
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 22:                 
@@ -419,9 +420,9 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, new ItemStack(Item.enderPearl));
                 JewelryNBT.addModifier(item, new ItemStack(Block.chest));
 
-                text.add("§2Jewel: §0Ender Pearl");
-                text.add("§2Modifier: §0Chest");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Ender Pearl");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Chest");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring can link");
                 text.add("to any chest and");
                 text.add("access its inventory.");
@@ -457,9 +458,9 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, new ItemStack(Block.obsidian));
                 JewelryNBT.addModifier(item, new ItemStack(Item.eyeOfEnder));
 
-                text.add("§2Jewel: §0Obsidian");
-                text.add("§2Modifier: §0Eye of Ender");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Obsidian");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Eye of Ender");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring is connected");
                 text.add("to your ender chest.");
                 text.add("Just right click it");
@@ -477,9 +478,9 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, new ItemStack(Item.netherStar));
                 JewelryNBT.addModifier(item, new ItemStack(Block.chest));
 
-                text.add("§2Jewel: §0Nether Star");
-                text.add("§2Modifier: §0Chest");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Nether Star");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Chest");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring can store");
                 text.add("any entity in it. To do");
                 text.add("that right click an");
@@ -507,9 +508,9 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, JewelrycraftUtil.jewel.get(jValues));
                 JewelryNBT.addModifier(item, new ItemStack(Item.dyePowder, 1, 15));
 
-                text.add("§2Jewel: §0Any");
-                text.add("§2Modifier: §0Bone Meal");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Bone Meal");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  While having it in");
                 text.add("the inventory it will");
                 text.add("hydrate any farmland");
@@ -523,7 +524,7 @@ public class GuiTabRings extends GuiTab
             case 28: 
                 text.add("clicking if you want to");
                 text.add("see an actual effect.");
-                text.add("§4§nAltar Effect");
+                text.add(EnumChatFormatting.DARK_RED + "\u00a7nAltar Effect");
                 text.add("  In the altar, the ring");
                 text.add("has the ability to");
                 text.add("hydrate any tilted land");
@@ -542,9 +543,9 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, new ItemStack(Item.enderPearl));
                 JewelryNBT.addModifier(item, new ItemStack(Item.pickaxeDiamond));
 
-                text.add("§2Jewel: §0Ender Pearl");
-                text.add("§2Modifier: §0Diamond Pick");
-                text.add("§2Ingot: §0Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Ender Pearl");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Diamond Pick");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  You can right click");
                 text.add("any block (or crouch");
                 text.add("right click) to store");
@@ -560,9 +561,9 @@ public class GuiTabRings extends GuiTab
                 JewelryNBT.addJewel(item, new ItemStack(Item.netherStar));
                 JewelryNBT.addModifier(item, new ItemStack(Item.pickaxeDiamond));
 
-                text.add("§2Jewel: §0Nether Star");
-                text.add("§2Modifier: §0Diamond Pick");
-                text.add("§2Ingot: §0Shadow Ingot");
+                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Nether Star");
+                text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Diamond Pick");
+                text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Shadow Ingot");
                 text.add("  Right clicking with");
                 text.add("this on any block will");
                 text.add("cause that block to");

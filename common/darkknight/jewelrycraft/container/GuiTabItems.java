@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.GuiGuide;
 import darkknight.jewelrycraft.item.ItemList;
@@ -232,7 +233,7 @@ public class GuiTabItems extends GuiTab
                 break;
             case 14: 
                 String link = "HERE";
-                if(x >= gui.getLeft() + 138 && x <= gui.getLeft() + 168 && y >= gui.getTop() + 98 && y <= gui.getTop() + 108) link = "§1HERE§0";
+                if(x >= gui.getLeft() + 138 && x <= gui.getLeft() + 168 && y >= gui.getTop() + 98 && y <= gui.getTop() + 108) link = EnumChatFormatting.DARK_BLUE + "HERE" + EnumChatFormatting.BLACK;
                 text.add("see all the recipes.");
                 text.add("Since you are reading");
                 text.add("this, how about making");
