@@ -47,7 +47,7 @@ public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRende
         modelTable.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         if (jt != null)
         {
-            if (jt.hasJewelry && jt.jewelry.getIconIndex().getIconName() != "")
+            if (jt.hasJewelry && jt.jewelry.getIconIndex() != null && jt.jewelry.getIconIndex().getIconName() != "")
             {
                 GL11.glPushMatrix();
                 GL11.glDisable(GL11.GL_LIGHTING);

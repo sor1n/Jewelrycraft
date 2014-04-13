@@ -84,7 +84,7 @@ public class ItemRing extends Item
         ResourceManager rm = Minecraft.getMinecraft().getResourceManager();
         BufferedImage icon;
         int x=0, y=0, ok = 0, red, green, blue;
-        if (pass == 0 && JewelryNBT.ingot(stack) != null && JewelryNBT.ingotColor(stack) == 16777215)
+        if (pass == 0 && JewelryNBT.ingot(stack) != null && JewelryNBT.ingot(stack).getIconIndex() != null && JewelryNBT.ingotColor(stack) == 16777215)
         {
             String ingotIconName = JewelryNBT.ingot(stack).getIconIndex().getIconName(); 
 
@@ -117,7 +117,7 @@ public class ItemRing extends Item
             }
             JewelryNBT.addIngotColor(stack, icon.getRGB(x, y));
         }
-        else if (pass == 1 && JewelryNBT.jewel(stack) != null && JewelryNBT.jewelColor(stack) == 16777215)
+        else if (pass == 1 && JewelryNBT.jewel(stack) != null && JewelryNBT.jewel(stack).getIconIndex() != null && JewelryNBT.jewelColor(stack) == 16777215)
         {
             x = 0; y = 0; ok=0;
             String jewelIconName = JewelryNBT.jewel(stack).getIconIndex().getIconName(); 

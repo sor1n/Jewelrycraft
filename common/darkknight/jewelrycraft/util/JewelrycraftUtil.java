@@ -1,7 +1,6 @@
 package darkknight.jewelrycraft.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -18,7 +17,6 @@ public class JewelrycraftUtil
     public static ArrayList<ItemStack> jewelry = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> metal = new ArrayList<ItemStack>();
     public static ArrayList<String> jamcraftPlayers = new ArrayList<String>();
-    public static HashMap<ItemStack, ItemStack> combinations = new HashMap<ItemStack, ItemStack>();
     public static Random rand = new Random();
 
     public static void addStuff()
@@ -55,16 +53,6 @@ public class JewelrycraftUtil
         jewelry.add(new ItemStack(ItemList.necklace));
     }
     
-    public static void addSpecialCombinations()
-    {
-        combinations.put(new ItemStack(Item.enderPearl), new ItemStack(Block.chest));
-        combinations.put(new ItemStack(Item.enderPearl), new ItemStack(Item.bed));
-        combinations.put(new ItemStack(Block.obsidian), new ItemStack(Item.eyeOfEnder));
-        combinations.put(new ItemStack(Item.netherStar), new ItemStack(Block.chest));
-        //An ender pearl with any modifier that is not a chest or bed
-        combinations.put(new ItemStack(Item.enderPearl), new ItemStack(Item.itemsList.length, 0, 0));
-    }
-    
     public static void jamcrafters()
     {
         jamcraftPlayers.add("allout58");
@@ -94,7 +82,9 @@ public class JewelrycraftUtil
         {
             while(index2 < OreDictionary.getOres(OreDictionary.getOreNames()[index]).size())
             {
-                if(OreDictionary.getOres(OreDictionary.getOreNames()[index]).get(index2).getUnlocalizedName().toLowerCase().contains("ingot") && !JewelrycraftUtil.metal.contains(OreDictionary.getOres(OreDictionary.getOreNames()[index]).get(index2)))
+                ItemStack stack = OreDictionary.getOres(OreDictionary.getOreNames()[index]).get(index2).copy();
+                if(stack.getItemDamage() == Short.MAX_VALUE) stack.setItemDamage(0);
+                if(stack.getUnlocalizedName().toLowerCase().contains("ingot") && !JewelrycraftUtil.metal.contains(stack))
                     metal.add(OreDictionary.getOres(OreDictionary.getOreNames()[index]).get(index2));
                 index2++;
             }

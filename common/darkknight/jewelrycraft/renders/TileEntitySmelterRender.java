@@ -76,7 +76,7 @@ public class TileEntitySmelterRender extends TileEntitySpecialRenderer
         GL11.glPopMatrix();
         if (st != null)
         {
-            if (st.hasMetal && st.metal.getIconIndex().getIconName() != "")
+            if (st.hasMetal && st.metal != null && st.metal.getIconIndex() != null && st.metal.getIconIndex().getIconName() != "")
             {
                 GL11.glPushMatrix();
                 GL11.glDisable(GL11.GL_LIGHTING);
