@@ -22,6 +22,8 @@ eclipse/options.txt
 eclipse/white-list.txt
 eclipse/server.properties
 eclipse/servers.dat
+eclipse/Jewelrycraft/.settings/*
+eclipse/Jewelrycraft/bin/*
 build/*
 bin/*
 .gradle/*
