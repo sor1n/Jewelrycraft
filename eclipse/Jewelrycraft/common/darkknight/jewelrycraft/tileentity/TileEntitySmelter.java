@@ -5,6 +5,9 @@ import java.util.Random;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntitySmelter extends TileEntity
@@ -59,7 +62,7 @@ public class TileEntitySmelter extends TileEntity
         Random rand = new Random();
         if(isDirty){
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            isDirty = true;
+            isDirty = false;
         }
         if (p > 0)
             --p;
@@ -100,7 +103,23 @@ public class TileEntitySmelter extends TileEntity
                 this.metal = new ItemStack(Item.getItemById(0), 0, 0);
                 this.hasMoltenMetal = true;
                 melting = -1;
+                this.isDirty = true;
+                this.markDirty();
             }
         }
+    }
+    
+    public Packet getDescriptionPacket()
+    {
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        this.writeToNBT(nbttagcompound);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbttagcompound);
+    }
+    
+    @Override
+    public void onDataPacket (NetworkManager net, S35PacketUpdateTileEntity packet)
+    {
+        readFromNBT(packet.func_148857_g());
+        worldObj.func_147479_m(xCoord, yCoord, zCoord);
     }
 }

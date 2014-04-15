@@ -57,6 +57,7 @@ public class BlockMolder extends BlockContainer
                 if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
                 entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage.Jewelrycraft.molder.addedmold", te.mold.getDisplayName())));
                 te.isDirty = true;
+                te.markDirty();
                 world.markTileEntityChunkModified(i, j, k, te);
             }
             if (te.hasMold && entityPlayer.isSneaking() && !te.hasMoltenMetal)
@@ -65,6 +66,7 @@ public class BlockMolder extends BlockContainer
                 te.mold = new ItemStack(Item.getItemById(0), 0, 0);
                 te.hasMold = false;
                 te.isDirty = true;
+                te.markDirty();
             }
             else if(te.hasMoltenMetal) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.molder.hasmoltenmetal")));
         }
@@ -88,7 +90,7 @@ public class BlockMolder extends BlockContainer
         {
             if(te.hasJewelBase) dropItem(te.getWorldObj(), (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.jewelBase.copy());
             if(te.hasMold) dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.mold.copy());
-            world.markBlockForUpdate(i, j, k);
+            world.removeTileEntity(i, j, k);
         }
 
         super.breakBlock(world, i, j, k, par5, par6);
@@ -115,11 +117,12 @@ public class BlockMolder extends BlockContainer
             }
             else if (me.hasMoltenMetal && me.cooling > 0)
                 player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.molder.metaliscooling") + " (" + ((ConfigHandler.ingotCoolingTime - me.cooling)*100/ConfigHandler.ingotCoolingTime) + "%)"));
-            else if (me.mold.equals(ItemList.molds) && !me.hasMoltenMetal)
+            else if (me.mold.getItem() == ItemList.molds && !me.hasMoltenMetal)
                 player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.molder.moldisempty")));
-            else if (!me.mold.equals(ItemList.molds))
+            else if (me.mold.getItem() != ItemList.molds)
                 player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.molder.moldismissing")));
             me.isDirty = true;
+            me.markDirty();
         }
     }
 
@@ -141,7 +144,7 @@ public class BlockMolder extends BlockContainer
         return -1;
     }
 
-    public void registerIcons(IIconRegister icon)
+    public void registerBlockIcons(IIconRegister icon)
     {
         this.blockIcon = icon.registerIcon("jewelrycraft:molder");
     }

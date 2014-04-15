@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.model.ModelSmelter;
 import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
 
@@ -100,6 +101,25 @@ public class TileEntitySmelterRender extends TileEntitySpecialRenderer
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glPopMatrix();
             }
+//            if(st.hasMoltenMetal && st.moltenMetal != null)
+//            {
+//
+//                GL11.glPushMatrix();
+//                GL11.glDisable(GL11.GL_LIGHTING);
+//                EntityItem moltenMetal = new EntityItem(te.getWorldObj(), 0.0D, 0.0D, 0.0D, new ItemStack(BlockList.moltenMetal));
+//                moltenMetal.getEntityItem().stackSize = 1;
+//                moltenMetal.hoverStart = 0.0F;
+//
+//                GL11.glColor4f(0f, 0f, 1f, 1f);
+//                GL11.glTranslatef(-0F, 0.75F, -0.3F);
+//                GL11.glScalef(1.25F, 1.0F, 1.47F);
+//                GL11.glRotatef(90F, 1F, 0F, 0f);
+//                RenderItem.renderInFrame = true;
+//                RenderManager.instance.renderEntityWithPosYaw(moltenMetal, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+//                RenderItem.renderInFrame = false;
+//                GL11.glEnable(GL11.GL_LIGHTING);
+//                GL11.glPopMatrix();
+//            }
         }
 
         GL11.glPopMatrix();

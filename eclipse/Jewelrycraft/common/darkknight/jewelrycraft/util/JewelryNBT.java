@@ -341,13 +341,13 @@ public class JewelryNBT
 
     public static boolean isJewelX(ItemStack stack, ItemStack jewel)
     {
-        if(jewel(stack) != null && jewel(stack) == jewel && jewel(stack).getItemDamage() == jewel.getItemDamage()) return true;
+        if(jewel(stack) != null && jewel(stack).getItem() == jewel.getItem() && jewel(stack).getItemDamage() == jewel.getItemDamage()) return true;
         return false;
     }
 
     public static boolean isModifierX(ItemStack stack, ItemStack modifier)
     {
-        if(modifier(stack) != null && modifier(stack) == modifier && modifier(stack).getItemDamage() == modifier.getItemDamage()) return true;
+        if(modifier(stack) != null && modifier(stack).getItem() == modifier.getItem() && modifier(stack).getItemDamage() == modifier.getItemDamage()) return true;
         return false;
     }
 
@@ -361,7 +361,7 @@ public class JewelryNBT
 
     public static boolean isIngotX(ItemStack stack, ItemStack ingot)
     {
-        if(ingot(stack) != null && ingot(stack) == ingot && ingot(stack).getItemDamage() == ingot.getItemDamage()) return true;
+        if(ingot(stack) != null && ingot(stack).getItem() == ingot.getItem() && ingot(stack).getItemDamage() == ingot.getItemDamage()) return true;
         return false;
     }
 

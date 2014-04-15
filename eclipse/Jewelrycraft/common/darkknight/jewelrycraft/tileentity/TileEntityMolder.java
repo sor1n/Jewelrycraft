@@ -3,6 +3,9 @@ package darkknight.jewelrycraft.tileentity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.util.JewelryNBT;
@@ -71,8 +74,9 @@ public class TileEntityMolder extends TileEntity
     {
         super.updateEntity();
         if(isDirty){
+        	this.markDirty();
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            isDirty = true;
+            isDirty = false;
         }
         if (moltenMetal.getItem() != Item.getItemById(0))
         {
@@ -99,7 +103,23 @@ public class TileEntityMolder extends TileEntity
                 this.moltenMetal = new ItemStack(Item.getItemById(0), 0, 0);
                 this.hasJewelBase = true;
                 cooling = -1;
+                this.isDirty = true;
+                this.markDirty();
             }
         }
+    }
+    
+    public Packet getDescriptionPacket()
+    {
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        this.writeToNBT(nbttagcompound);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbttagcompound);
+    }
+    
+    @Override
+    public void onDataPacket (NetworkManager net, S35PacketUpdateTileEntity packet)
+    {
+        readFromNBT(packet.func_148857_g());
+        worldObj.func_147479_m(xCoord, yCoord, zCoord);
     }
 }

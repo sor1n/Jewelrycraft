@@ -3,7 +3,9 @@ package darkknight.jewelrycraft.tileentity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityDisplayer extends TileEntity
@@ -88,5 +90,19 @@ public class TileEntityDisplayer extends TileEntity
         if(isDescending3) ringTranslation3 -= 0.03;
         if(rotAngle < 360F) rotAngle += 6F;
         if(rotAngle>=360F) rotAngle = 0F;
+    }
+    
+    public Packet getDescriptionPacket()
+    {
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        this.writeToNBT(nbttagcompound);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbttagcompound);
+    }
+    
+    @Override
+    public void onDataPacket (NetworkManager net, S35PacketUpdateTileEntity packet)
+    {
+        readFromNBT(packet.func_148857_g());
+        worldObj.func_147479_m(xCoord, yCoord, zCoord);
     }
 }

@@ -1,11 +1,13 @@
 package darkknight.jewelrycraft.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import darkknight.jewelrycraft.item.ItemList;
@@ -17,6 +19,7 @@ public class JewelrycraftUtil
     public static ArrayList<ItemStack> jewelry = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> metal = new ArrayList<ItemStack>();
     public static ArrayList<String> jamcraftPlayers = new ArrayList<String>();
+    public static HashMap<String,Item> liquids = new HashMap<String,Item>();
     public static Random rand = new Random();
 
     public static void addStuff()
@@ -102,7 +105,7 @@ public class JewelrycraftUtil
         while (i.hasNext())
         {
             ItemStack temp = i.next();
-            if (temp.equals(item) && temp.getItemDamage() == item.getItemDamage())
+            if (temp.getItem() == item.getItem() && temp.getItemDamage() == item.getItemDamage())
                 return true;
         }
         return false;
@@ -115,7 +118,7 @@ public class JewelrycraftUtil
         while (i.hasNext())
         {
             ItemStack temp = i.next();
-            if (temp.equals(item) && temp.getItemDamage() == item.getItemDamage())
+            if (temp.getItem() == item.getItem() && temp.getItemDamage() == item.getItemDamage())
                 return true;
         }
         return false;
@@ -128,7 +131,7 @@ public class JewelrycraftUtil
         while (i.hasNext())
         {
             ItemStack temp = i.next();
-            if (temp.equals(item) && temp.getItemDamage() == item.getItemDamage())
+            if (temp.getItem() == item.getItem() && temp.getItemDamage() == item.getItemDamage())
                 return true;
         }
         return false;

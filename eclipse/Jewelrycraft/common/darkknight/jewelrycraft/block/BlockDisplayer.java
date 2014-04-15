@@ -71,6 +71,7 @@ public class BlockDisplayer extends BlockContainer
                 te.hasObject = true;
                 if (!entityPlayer.capabilities.isCreativeMode) item.stackSize = 0;
                 te.isDirty = true;
+                te.markDirty();
             }
             else if(te.object.getItem() == item.getItem() && te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0) && te.object.getItemDamage() == item.getItemDamage())
             {
@@ -80,13 +81,15 @@ public class BlockDisplayer extends BlockContainer
                     te.object.stackSize = 1;
                     if (!entityPlayer.capabilities.isCreativeMode) item.stackSize = 0;
                     te.isDirty = true;
+                    te.markDirty();
                 }
                 else if(!te.object.hasTagCompound() && !item.hasTagCompound())
                 {
                     te.quantity += item.stackSize;
                     te.object.stackSize = 1;
                     if (!entityPlayer.capabilities.isCreativeMode) item.stackSize = 0;
-                    te.isDirty = true;                    
+                    te.isDirty = true;     
+                    te.markDirty();               
                 }
             }
         }
@@ -119,6 +122,7 @@ public class BlockDisplayer extends BlockContainer
                         te.quantity = 0;
                     }
                     te.isDirty = true;
+                    te.markDirty();
                 }
                 else
                 {
@@ -137,6 +141,7 @@ public class BlockDisplayer extends BlockContainer
                         te.quantity = 0;
                     }
                     te.isDirty = true;
+                    te.markDirty();
                 }  
             }
         }
@@ -159,7 +164,7 @@ public class BlockDisplayer extends BlockContainer
         {
             te.object.stackSize = te.quantity;
             dropItem(te.getWorldObj(), (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.object);
-            world.markBlockForUpdate(i, j, k);
+            world.removeTileEntity(i, j, k);
         }
 
         super.breakBlock(world, i, j, k, block, par6);

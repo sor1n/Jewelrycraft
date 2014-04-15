@@ -66,6 +66,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                     entityPlayer.inventory.markDirty();
                     world.setTileEntity(i, j, k, te);
                     te.isDirty = true;
+                    te.markDirty();
                 }
             }
             if (!te.hasEndItem && !te.hasModifier && item != null && JewelrycraftUtil.isModifier(item))
@@ -81,6 +82,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                     entityPlayer.inventory.markDirty();
                     world.setTileEntity(i, j, k, te);
                     te.isDirty = true;
+                    te.markDirty();
                 }
             }
             if (!te.hasEndItem && !te.hasJewel && item != null && JewelrycraftUtil.isJewel(item))
@@ -96,6 +98,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                     entityPlayer.inventory.markDirty();
                     world.setTileEntity(i, j, k, te);
                     te.isDirty = true;
+                    te.markDirty();
                 }
             }
             if (te.timer <= 0 && !te.hasEndItem && te.hasJewelry && (te.hasModifier || te.hasJewel)){ te.timer = ConfigHandler.jewelryCraftingTime; te.angle = 0;}
@@ -109,6 +112,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 te.timer = 0;
                 te.angle = 0F;
                 te.isDirty = true;
+                te.markDirty();
                 world.markBlockForUpdate(i, j, k);
                 world.setTileEntity(i, j, k, te);
             }
@@ -120,6 +124,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 te.timer = 0;
                 te.angle = 0F;
                 te.isDirty = true;
+                te.markDirty();
                 world.markBlockForUpdate(i, j, k);
                 world.setTileEntity(i, j, k, te);
             }
@@ -131,6 +136,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 te.timer = 0;
                 te.angle = 0F;
                 te.isDirty = true;
+                te.markDirty();
                 world.markBlockForUpdate(i, j, k);
                 world.setTileEntity(i, j, k, te);
             }
@@ -156,7 +162,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
             if (te.hasJewelry) dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.jewelry.copy());
             if (te.hasJewel) dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.jewel.copy());
             if (te.hasEndItem) dropItem(te.getWorldObj(), (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.endItem.copy());
-            world.markBlockForUpdate(i, j, k);
+            world.removeTileEntity(i, j, k);
         }
         super.breakBlock(world, i, j, k, par5, par6);
     }
@@ -180,6 +186,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 te.endItem = new ItemStack(Item.getItemById(0), 0, 0);
                 te.hasEndItem = false;
                 te.isDirty = true;
+                te.markDirty();
                 world.markBlockForUpdate(i, j, k);
                 world.setTileEntity(i, j, k, te);
             }
@@ -208,7 +215,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         return -1;
     }
 
-    public void registerIcons(IIconRegister icon)
+    public void registerBlockIcons(IIconRegister icon)
     {
         this.blockIcon = icon.registerIcon("jewelrycraft:jewelrsCraftingTable");
     }

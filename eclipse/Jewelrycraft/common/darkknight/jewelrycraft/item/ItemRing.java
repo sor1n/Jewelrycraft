@@ -172,7 +172,7 @@ public class ItemRing extends Item
         return 16777215;
     }
 
-    public String getItemDisplayName(ItemStack stack)
+    public String getItemStackDisplayName(ItemStack stack)
     {
         if (JewelryNBT.ingot(stack) != null && JewelryNBT.jewel(stack) != null && JewelryNBT.modifier(stack) == null && JewelryNBT.isJewelX(stack, new ItemStack(Items.diamond)) && JewelryNBT.isIngotX(stack, new ItemStack(Items.gold_ingot))) return "Wedding Ring";
         else if(JewelryNBT.ingot(stack) != null) return JewelryNBT.ingot(stack).getDisplayName().replace("Ingot", " ").trim() + " " + ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
@@ -240,7 +240,7 @@ public class ItemRing extends Item
                 }
                 if(JewelryNBT.isModeX(stack, "Activated")) mode = "Deactivated";
                 else if(JewelryNBT.isModeX(stack, "Deactivated")) mode = "Activated";
-                if(mode != "")
+                if(mode != "" && mode != "Transfer" && mode != "Enchant" && mode != "Disenchant")
                 {
                     player.addChatMessage(new ChatComponentText("The Ring has been " + mode));
                     JewelryNBT.addMode(stack, mode);
@@ -371,14 +371,7 @@ public class ItemRing extends Item
                 }
             }
             if(JewelryNBT.isModifierX(stack, new ItemStack(Items.diamond_pickaxe)) && JewelryNBT.isJewelX(stack, new ItemStack(Items.nether_star)) && JewelryNBT.isIngotX(stack, new ItemStack(ItemList.shadowIngot)) && j > 0 && world.getBlock(i, j, k) != Blocks.bedrock)
-            {
-            	EntityItem entityitem = new EntityItem(world, i + 0.5D, j + 1D, k + 0.5D, new ItemStack(world.getBlock(i, j, k)));
-                entityitem.motionX = 0;
-                entityitem.motionZ = 0;
-                entityitem.motionY = 0.21000000298023224D;
-                world.spawnEntityInWorld(entityitem);
-            	world.setBlockToAir(i, j, k);
-            }
+            	world.func_147480_a(i, j, k, true);
         }
         return true;
     }
@@ -443,7 +436,7 @@ public class ItemRing extends Item
                 }
                 else if (JewelryNBT.isModifierX(stack, new ItemStack(Items.potionitem, 1, 8270)) && entityplayer != null) entityplayer.addPotionEffect(new PotionEffect(Potion.invisibility.id, 4, amplifier, true));
             }
-            if(entityplayer.inventory.getCurrentItem() != null && JewelryNBT.isJewelX(stack, new ItemStack(Items.nether_star)) && JewelryNBT.isModifierX(stack, new ItemStack(Items.book)) && entityplayer.inventory.getCurrentItem().equals(stack))
+            if(entityplayer.inventory.getCurrentItem() != null && JewelryNBT.isJewelX(stack, new ItemStack(Items.nether_star)) && JewelryNBT.isModifierX(stack, new ItemStack(Items.book)) && entityplayer.inventory.getCurrentItem().getItem() == stack.getItem())
             {
                 ItemStack item = null;
                 if(entityplayer.inventory.currentItem + 1 <= 8 && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1) != null && entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1).isItemEnchanted()) item = entityplayer.inventory.getStackInSlot(entityplayer.inventory.currentItem + 1);

@@ -72,7 +72,7 @@ public class ItemNecklace extends Item
         return itemIcon;
     }
 
-    public String getItemDisplayName(ItemStack stack)
+    public String getItemStackDisplayName(ItemStack stack)
     {
         if(JewelryNBT.ingot(stack) != null) return JewelryNBT.ingot(stack).getDisplayName().replace("Ingot", " ").trim() + " " + ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
         return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
@@ -215,21 +215,11 @@ public class ItemNecklace extends Item
             for(int x = (int) - 1; x <= 1; x++)
                 for(int z = (int) - 1; z <= 1; z++)
                     if(JewelryNBT.isModifierX(stack, new ItemStack(Items.diamond_pickaxe)) && JewelryNBT.isJewelX(stack, new ItemStack(Items.nether_star)) && JewelryNBT.isIngotX(stack, new ItemStack(ItemList.shadowIngot)))
-                        if((side == 0 || side == 1) && j > 0 && world.getBlock(i + x, j, k + z) != Blocks.bedrock) destroyBlock(world, i + x, j, k + z);
-                        else if((side == 2 || side == 3) && j + x > 0 && world.getBlock(i + z, j + x, k) != Blocks.bedrock) destroyBlock(world, i + z, j + x, k);
-                        else if((side == 4 || side == 5) && j + x > 0 && world.getBlock(i, j + x, k + z) != Blocks.bedrock) destroyBlock(world, i, j + x, k + z);
+                        if((side == 0 || side == 1) && j > 0 && world.getBlock(i + x, j, k + z) != Blocks.bedrock) world.func_147480_a(i + x, j, k + z, true);
+                        else if((side == 2 || side == 3) && j + x > 0 && world.getBlock(i + z, j + x, k) != Blocks.bedrock) world.func_147480_a(i + z, j + x, k, true);
+                        else if((side == 4 || side == 5) && j + x > 0 && world.getBlock(i, j + x, k + z) != Blocks.bedrock) world.func_147480_a(i, j + x, k + z, true);
         }
         return true;
-    }
-    
-    public void destroyBlock(World world, int i, int j, int k)
-    {
-    	EntityItem entityitem = new EntityItem(world, i + 0.5D, j + 1D, k + 0.5D, new ItemStack(world.getBlock(i, j, k)));
-        entityitem.motionX = 0;
-        entityitem.motionZ = 0;
-        entityitem.motionY = 0.21000000298023224D;
-        world.spawnEntityInWorld(entityitem);
-    	world.setBlockToAir(i, j, k);    	
     }
 
     public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5)

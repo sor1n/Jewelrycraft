@@ -14,6 +14,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -57,14 +58,14 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
             renderLabel(Integer.toString(disp.quantity), 0F, (-0.171F)*ind, 0F, block, disp, Color.GRAY.getRGB());
             GL11.glPopMatrix();
             ind++;
-            if(!(disp.object.getItem() instanceof ItemMap) && disp.object != null && disp.object != new ItemStack(Item.getItemById(0), 0, 0) && disp.object.getTooltip(null, true) != null)
+            if(!(disp.object.getItem() instanceof ItemMap) && disp.object != null && disp.object != new ItemStack(Item.getItemById(0), 0, 0) && disp.object.getTooltip(te.getWorldObj().getClosestPlayer(x, y, z, 2D), true) != null)
             {
-                for(int i = 1; i < disp.object.getTooltip(new FakePlayer((WorldServer) te.getWorldObj(), new GameProfile("0", "Player")), true).size(); i++)
+                for(int i = 1; i < disp.object.getTooltip(te.getWorldObj().getClosestPlayer(x, y, z, 2D), true).size(); i++)
                 {
-                    if(disp.object.getTooltip(new FakePlayer((WorldServer) te.getWorldObj(), new GameProfile("0", "Player")), true).get(i).toString() != "")
+                    if(disp.object.getTooltip(te.getWorldObj().getClosestPlayer(x, y, z, 2D), true).get(i).toString() != "")
                     {
                         GL11.glPushMatrix();
-                        renderLabel(disp.object.getTooltip(new FakePlayer((WorldServer) te.getWorldObj(), new GameProfile("0", "Player")), true).get(i).toString(), 0F, (-0.171F)*ind, 0F, block, disp, Color.GRAY.getRGB());
+                        renderLabel(disp.object.getTooltip(te.getWorldObj().getClosestPlayer(x, y, z, 2D), true).get(i).toString(), 0F, (-0.171F)*ind, 0F, block, disp, Color.GRAY.getRGB());
                         GL11.glPopMatrix();
                         ind++;
                     }
@@ -140,7 +141,7 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_TEXTURE_2D);     
         GL11.glScalef(var17*70F, 1F, 0F);
-        fontrenderer.drawString(par2Str.replaceFirst("ยง0", "ยงr").replaceFirst("ยง1", "ยงr").replaceFirst("ยง2", "ยงr").replaceFirst("ยง3", "ยงr").replaceFirst("ยง4", "ยงr").replaceFirst("ยง5", "ยงr").replaceFirst("ยง6", "ยงr").replaceFirst("ยง7", "ยงr").replaceFirst("ยง8", "ยงr").replaceFirst("ยง9", "ยงr").replaceFirst("ยงa", "ยงr").replaceFirst("ยงb", "ยงr").replaceFirst("ยงc", "ยงr").replaceFirst("ยงd", "ยงr").replaceFirst("ยงe", "ยงr").replaceFirst("ยงf", "ยงr"), -j, 0, 65536 * (red/2) + 256 * (green/2) + blue/2);
+        fontrenderer.drawString(par2Str.replaceFirst("ง0", "งr").replaceFirst("ง1", "งr").replaceFirst("ง2", "งr").replaceFirst("ง3", "งr").replaceFirst("ง4", "งr").replaceFirst("ง5", "งr").replaceFirst("ง6", "งr").replaceFirst("ง7", "งr").replaceFirst("ง8", "งr").replaceFirst("ง9", "งr").replaceFirst("งa", "งr").replaceFirst("งb", "งr").replaceFirst("งc", "งr").replaceFirst("งd", "งr").replaceFirst("งe", "งr").replaceFirst("งf", "งr"), -j, 0, 65536 * (red/2) + 256 * (green/2) + blue/2);
         GL11.glPopMatrix();
         GL11.glTranslatef((float)x - 1f, (float)y - 1f, (float)z - 1F);   
         GL11.glScalef(var17*70F, 1F, 0F);
@@ -152,85 +153,85 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
     
     public void replaceEnumEnchValues(String str, int color)
     {
-        if(str.contains("ยง0"))
+        if(str.contains("ง0"))
         {
             color = Color.BLACK.getRGB();
-            str.replace("ยง0", "");
+            str.replace("ง0", "");
         }
-        if(str.contains("ยง1"))
+        if(str.contains("ง1"))
         {
             color = 85;
-            str.replace("ยง1", "");
+            str.replace("ง1", "");
         }
-        if(str.contains("ยง2"))
+        if(str.contains("ง2"))
         {
             color = 17920;
-            str.replace("ยง2", "");
+            str.replace("ง2", "");
         }
-        if(str.contains("ยง3"))
+        if(str.contains("ง3"))
         {
             color = 1336183;
-            str.replace("ยง3", "");
+            str.replace("ง3", "");
         }
-        if(str.contains("ยง4"))
+        if(str.contains("ง4"))
         {
             color = 4587520;
-            str.replace("ยง4", "");
+            str.replace("ง4", "");
         }
-        if(str.contains("ยง5"))
+        if(str.contains("ง5"))
         {
             color = 5701759;
-            str.replace("ยง5", "");
+            str.replace("ง5", "");
         }
-        if(str.contains("ยง6"))
+        if(str.contains("ง6"))
         {
             color = 16762880;
-            str.replace("ยง6", "");
+            str.replace("ง6", "");
         }
-        if(str.contains("ยง7"))
+        if(str.contains("ง7"))
         {
             color = Color.GRAY.getRGB();
-            str.replace("ยง7", "");
+            str.replace("ง7", "");
         }
-        if(str.contains("ยง8"))
+        if(str.contains("ง8"))
         {
             color = Color.DARK_GRAY.getRGB();
-            str.replace("ยง8", "");
+            str.replace("ง8", "");
         }
-        if(str.contains("ยง9"))
+        if(str.contains("ง9"))
         {
             color = Color.BLUE.getRGB();
-            str.replace("ยง9", "");
+            str.replace("ง9", "");
         }
-        if(str.contains("ยงa"))
+        if(str.contains("งa"))
         {
             color = Color.GREEN.getRGB();
-            str.replace("ยงa", "");
+            str.replace("งa", "");
         }
-        if(str.contains("ยงb"))
+        if(str.contains("งb"))
         {
             color = Color.CYAN.getRGB();
-            str.replace("ยงb", "");
+            str.replace("งb", "");
         }
-        if(str.contains("ยงc"))
+        if(str.contains("งc"))
         {
             color = Color.RED.getRGB();
-            str.replace("ยงc", "");
+            str.replace("งc", "");
         }
-        if(str.contains("ยงd"))
+        if(str.contains("งd"))
         {
             color = 11665663;
-            str.replace("ยงd", "");
+            str.replace("งd", "");
         }
-        if(str.contains("ยงe"))
+        if(str.contains("งe"))
         {
             color = Color.YELLOW.getRGB();
-            str.replace("ยงe", "");
+            str.replace("งe", "");
         }
-        if(str.contains("ยงf"))
+        if(str.contains("งf"))
         {
             color = Color.WHITE.getRGB();
-            str.replace("ยงf", "");
+            str.replace("งf", "");
         }
     }
 }

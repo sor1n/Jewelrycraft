@@ -35,7 +35,7 @@ public class BlockJewelAltar extends BlockContainer
         return true;
     }
     
-    public void registerIcons(IIconRegister par1IconRegister)
+    public void registerBlockIcons(IIconRegister par1IconRegister)
     {
         this.altarSide = par1IconRegister.registerIcon(this.getTextureName() + "_" + "side");
         this.altarBottom = par1IconRegister.registerIcon(this.getTextureName() + "_" + "bottom");
@@ -54,12 +54,13 @@ public class BlockJewelAltar extends BlockContainer
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && !world.isRemote)
         {            
-            if(item != null && item != new ItemStack(Item.getItemById(0), 0, 0) && (item.equals(ItemList.ring) || item.equals(ItemList.necklace)) && !te.hasObject)
+            if(item != null && item != new ItemStack(Item.getItemById(0), 0, 0) && (item.getItem() == ItemList.ring || item.getItem() == ItemList.necklace) && !te.hasObject)
             {   
                 te.object = item.copy();
                 item.stackSize = 0;
                 te.playerName = entityPlayer.getDisplayName();
                 te.isDirty = true;
+                te.markDirty();
                 te.hasObject = true;
             }
             
@@ -69,6 +70,7 @@ public class BlockJewelAltar extends BlockContainer
                 te.object = new ItemStack(Item.getItemById(0), 0, 0);
                 te.playerName = "";
                 te.isDirty = true;
+                te.markDirty();
                 te.hasObject = false;
             }
         }
@@ -103,7 +105,7 @@ public class BlockJewelAltar extends BlockContainer
         if (te != null && te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0))
         {
             dropItem(te.getWorldObj(), (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.object);
-            world.markBlockForUpdate(i, j, k);
+            world.removeTileEntity(i, j, k);
         }
 
         super.breakBlock(world, i, j, k, block, par6);

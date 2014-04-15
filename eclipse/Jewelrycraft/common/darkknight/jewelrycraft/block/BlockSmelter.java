@@ -57,7 +57,7 @@ public class BlockSmelter extends BlockContainer
         TileEntitySmelter te = (TileEntitySmelter) world.getTileEntity(i, j, k);
         if (te != null && te.hasMetal){
             dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.metal.copy());
-            world.markBlockForUpdate(i, j, k);
+            world.removeTileEntity(i, j, k);
         }
         super.breakBlock(world, i, j, k, par5, par6);
     }
@@ -80,6 +80,7 @@ public class BlockSmelter extends BlockContainer
                 te.melting = ConfigHandler.ingotMeltingTime;
                 if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
                 te.isDirty = true;
+                te.markDirty();
             }
             else if (te.hasMetal && !te.hasMoltenMetal && item != null && item.getDisplayName().contains("Ingot") && !item.getDisplayName().contains("Mold"))
                 entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage.Jewelrycraft.smelter.alreadyhasingot", te.metal.getDisplayName())));
@@ -95,6 +96,8 @@ public class BlockSmelter extends BlockContainer
                 dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.metal.copy());
                 te.hasMetal = false;
                 te.melting = -1;
+                te.isDirty = true;
+                te.markDirty();
                 world.markBlockForUpdate(i, j, k);
                 world.setTileEntity(i, j, k, te);
             }
@@ -126,7 +129,8 @@ public class BlockSmelter extends BlockContainer
                 me.cooling = ConfigHandler.ingotCoolingTime;
                 te.moltenMetal = new ItemStack(Item.getItemById(0), 0, 0);
                 te.hasMoltenMetal = false;
-                me.isDirty = true;
+                te.isDirty = true;
+                te.markDirty();
                 world.markBlockForUpdate(i, j, k);
                 world.setTileEntity(i, j, k, te);
             }
@@ -185,7 +189,7 @@ public class BlockSmelter extends BlockContainer
         return -1;
     }
     
-    public void registerIcons(IIconRegister icon)
+    public void registerBlockIcons(IIconRegister icon)
     {
         this.blockIcon = icon.registerIcon("jewelrycraft:smelter");
     }

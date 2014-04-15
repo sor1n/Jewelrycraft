@@ -1,5 +1,7 @@
 package darkknight.jewelrycraft.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -17,6 +19,7 @@ import darkknight.jewelrycraft.tileentity.TileEntityBlockShadow;
 public class BlockShadow extends BlockContainer
 {
     private IIcon[] iconArray;
+    private static final String __OBFID = "CL_00000312";
 
     public BlockShadow()
     {
@@ -60,7 +63,7 @@ public class BlockShadow extends BlockContainer
         return new TileEntityBlockShadow();
     }
     
-    public void registerIcons(IIconRegister par1IconRegister)
+    public void registerBlockIcons(IIconRegister par1IconRegister)
     {
         this.iconArray = new IIcon[16];
 
@@ -87,11 +90,6 @@ public class BlockShadow extends BlockContainer
 
         if (this == BlockList.shadowBlock)
         {
-            if (p_149646_1_.getBlockMetadata(p_149646_2_, p_149646_3_, p_149646_4_) != p_149646_1_.getBlockMetadata(p_149646_2_ - Facing.offsetsXForSide[p_149646_5_], p_149646_3_ - Facing.offsetsYForSide[p_149646_5_], p_149646_4_ - Facing.offsetsZForSide[p_149646_5_]))
-            {
-                return true;
-            }
-
             if (block == this)
             {
                 return false;
@@ -109,5 +107,11 @@ public class BlockShadow extends BlockContainer
     public int getComparatorInputOverride(World world, int x, int y, int z, int meta)
     {
         return world.getBlockMetadata(x, y, z);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(int side, int meta)
+    {
+        return this.iconArray[meta];
     }
 }

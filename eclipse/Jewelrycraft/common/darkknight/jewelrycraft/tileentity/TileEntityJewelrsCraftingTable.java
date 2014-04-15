@@ -4,6 +4,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.JewelryNBT;
@@ -86,7 +89,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
         super.updateEntity();
         if(isDirty){
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            isDirty = true;
+            isDirty = false;
         }
         if(angle<360F)angle+=3F;
         else angle=0F;
@@ -120,5 +123,19 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
                 timer = -1;
             }
         }
+    }
+    
+    public Packet getDescriptionPacket()
+    {
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        this.writeToNBT(nbttagcompound);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbttagcompound);
+    }
+    
+    @Override
+    public void onDataPacket (NetworkManager net, S35PacketUpdateTileEntity packet)
+    {
+        readFromNBT(packet.func_148857_g());
+        worldObj.func_147479_m(xCoord, yCoord, zCoord);
     }
 }

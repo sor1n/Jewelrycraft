@@ -9,6 +9,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import darkknight.jewelrycraft.util.JewelryNBT;
@@ -57,7 +60,7 @@ public class TileEntityAltar extends TileEntity
         if(isDirty)
         {
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            isDirty = true;
+            isDirty = false;
         }
         if(hasObject && playerName != "")
         {
@@ -87,8 +90,8 @@ public class TileEntityAltar extends TileEntity
                             for(int k=-1; k<=1; k++)
                             {
                                 //if(worldObj.getBlockId(xCoord + i, yCoord + j, zCoord + k) == Block.dirt.blockID && (worldObj.getBlockId(xCoord + i, yCoord + j + 1, zCoord + k) == 0 || worldObj.getBlockId(xCoord + i, yCoord + j + 1, zCoord + k) == Block.crops.blockID) || worldObj.getBlockId(xCoord + i, yCoord + j + 1, zCoord + k) == Block.potato.blockID) worldObj.setBlock(xCoord + i, yCoord + j, zCoord + k, Block.tilledField.blockID);
-                                if(worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k).equals(Blocks.farmland)) worldObj.setBlockMetadataWithNotify(xCoord + i, yCoord + j, zCoord + k, 1, 7); 
-                                if(!worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k).equals(Blocks.farmland)) worldObj.scheduleBlockUpdate(xCoord + i, yCoord + j, zCoord + k, worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k), 5);
+                                if(worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k) == Blocks.farmland) worldObj.setBlockMetadataWithNotify(xCoord + i, yCoord + j, zCoord + k, 1, 7); 
+                                if(worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k) != Blocks.farmland) worldObj.scheduleBlockUpdate(xCoord + i, yCoord + j, zCoord + k, worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k), 5);
                                 //JewelrycraftUtil.applyBonemeal(object, worldObj, xCoord + i, yCoord + j, zCoord + k, player);
                             }
                 }
@@ -116,12 +119,26 @@ public class TileEntityAltar extends TileEntity
                             for(int k=-3; k<=3; k++)
                             {
                                 //if(worldObj.getBlockId(xCoord + i, yCoord + j, zCoord + k) == Block.dirt.blockID && (worldObj.getBlockId(xCoord + i, yCoord + j + 1, zCoord + k) == 0 || worldObj.getBlockId(xCoord + i, yCoord + j + 1, zCoord + k) == Block.crops.blockID) || worldObj.getBlockId(xCoord + i, yCoord + j + 1, zCoord + k) == Block.potato.blockID) worldObj.setBlock(xCoord + i, yCoord + j, zCoord + k, Block.tilledField.blockID);
-                                if(worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k).equals(Blocks.farmland)) worldObj.setBlockMetadataWithNotify(xCoord + i, yCoord + j, zCoord + k, 1, 7); 
-                                if(!worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k).equals(Blocks.farmland)) worldObj.scheduleBlockUpdate(xCoord + i, yCoord + j, zCoord + k, worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k), 5);
+                                if(worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k) == Blocks.farmland) worldObj.setBlockMetadataWithNotify(xCoord + i, yCoord + j, zCoord + k, 1, 7); 
+                                if(worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k) != Blocks.farmland) worldObj.scheduleBlockUpdate(xCoord + i, yCoord + j, zCoord + k, worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k), 5);
                                 //JewelrycraftUtil.applyBonemeal(object, worldObj, xCoord + i, yCoord + j, zCoord + k, player);
                             }
                 }
             }            
         }
+    }
+    
+    public Packet getDescriptionPacket()
+    {
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        this.writeToNBT(nbttagcompound);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbttagcompound);
+    }
+    
+    @Override
+    public void onDataPacket (NetworkManager net, S35PacketUpdateTileEntity packet)
+    {
+        readFromNBT(packet.func_148857_g());
+        worldObj.func_147479_m(xCoord, yCoord, zCoord);
     }
 }
