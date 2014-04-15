@@ -6,24 +6,8 @@
 *.ear
 
 includeCP/fmlbranding.properties
-eclipse/.metadata/*
-eclipse/assets/*
-eclipse/config/*
-eclipse/crash-reports/*
-eclipse/logs/*
-eclipse/mods/*
-eclipse/resourcepacks/*
-eclipse/saves/*
-eclipse/world/*
-eclipse/banned-ips.txt
-eclipse/banned-players.txt
-eclipse/ops.txt
-eclipse/options.txt
-eclipse/white-list.txt
-eclipse/server.properties
-eclipse/servers.dat
-eclipse/Jewelrycraft/.settings/*
-eclipse/Jewelrycraft/bin/*
+eclipse/*
+eclipse - Copy/*
 build/*
 bin/*
 .gradle/*
