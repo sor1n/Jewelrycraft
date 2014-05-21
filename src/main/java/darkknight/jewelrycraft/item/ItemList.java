@@ -22,6 +22,7 @@ public class ItemList
 	public static ItemNecklace     necklace;
 	public static Item     guide;
 	public static ItemMoltenMetalBucket     bucket;
+	public static ItemMoltenMetal     metal;
 
 	private static boolean isInitialized = false;
 
@@ -38,6 +39,7 @@ public class ItemList
 			necklace = (ItemNecklace) new ItemNecklace().setUnlocalizedName("Jewelrycraft.necklace").setTextureName("jewelrycraft:necklace");
 			guide = new ItemGuide().setUnlocalizedName("Jewelrycraft.guide").setTextureName("jewelrycraft:guide").setCreativeTab(JewelrycraftMod.jewelrycraft);
 			bucket = (ItemMoltenMetalBucket) new ItemMoltenMetalBucket().setUnlocalizedName("Jewelrycraft.bucket");
+			metal = (ItemMoltenMetal) new ItemMoltenMetal().setUnlocalizedName("Jewelrycraft.bucket");
 
 			GameRegistry.registerItem(thiefGloves, "thiefGloves");
 			GameRegistry.registerItem(shadowIngot, "shadowIngot");
@@ -48,6 +50,7 @@ public class ItemList
 			GameRegistry.registerItem(crystal, "crystal");
 			GameRegistry.registerItem(guide, "guide");
 			GameRegistry.registerItem(bucket, "moltenMetalBucket");
+			GameRegistry.registerItem(metal, "moltenMetal");
 
 			isInitialized = true;
 		}

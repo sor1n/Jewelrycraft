@@ -2,8 +2,10 @@ package darkknight.jewelrycraft.renders;
 
 import org.lwjgl.opengl.GL11;
 
+import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.model.ModelMolder;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
+import darkknight.jewelrycraft.util.JewelryNBT;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -14,6 +16,8 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -78,6 +82,25 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                 if(entityitem != null) RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
                 RenderItem.renderInFrame = false;
                 GL11.glColor4f(1, 1F, 1F, 1.0F);
+                GL11.glEnable(GL11.GL_LIGHTING);
+                GL11.glPopMatrix();
+            }
+            if(me.hasMoltenMetal && me.moltenMetal != null && me.moltenMetal != new ItemStack(Item.getItemById(0), 0, 0))
+            {
+                GL11.glPushMatrix();
+                GL11.glDisable(GL11.GL_LIGHTING);
+                ItemStack metal = new ItemStack(ItemList.metal);
+                JewelryNBT.addMetal(metal, new ItemStack(me.moltenMetal.getItem()));
+                EntityItem moltenMetal = new EntityItem(te.getWorldObj(), 0.0D, 0.0D, 0.0D, metal);
+                moltenMetal.getEntityItem().stackSize = 1;
+                moltenMetal.hoverStart = 0.0F;
+
+                GL11.glTranslatef(-0F, 1.43f - 0.115f*me.quantity, -0.3F);
+                GL11.glScalef(1.2F, 1.0F, 1.45F);
+                GL11.glRotatef(90F, 1F, 0F, 0f);
+                RenderItem.renderInFrame = true;
+                RenderManager.instance.renderEntityWithPosYaw(moltenMetal, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+                RenderItem.renderInFrame = false;
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glPopMatrix();
             }

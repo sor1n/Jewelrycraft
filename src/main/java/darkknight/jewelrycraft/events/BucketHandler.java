@@ -18,6 +18,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import darkknight.jewelrycraft.JewelrycraftMod;
+import darkknight.jewelrycraft.block.BlockMoltenMetal;
+import darkknight.jewelrycraft.util.JewelryNBT;
 
 public class BucketHandler {
 
@@ -47,7 +50,9 @@ public class BucketHandler {
 		Item bucket = buckets.get(block);
 		if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
 			world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
-			return new ItemStack(bucket);
+			ItemStack item = new ItemStack(bucket);
+			JewelryNBT.addMetal(item, new ItemStack(Item.getItemById(JewelrycraftMod.saveData.getInteger(BlockMoltenMetal.coords(pos.blockX, pos.blockY, pos.blockZ)))));
+			return item;
 		} else
 			return null;
 

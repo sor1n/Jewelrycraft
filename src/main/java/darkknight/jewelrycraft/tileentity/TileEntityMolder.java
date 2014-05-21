@@ -15,6 +15,7 @@ public class TileEntityMolder extends TileEntity
     public int cooling;
     public boolean hasMoltenMetal, hasJewelBase, hasMold, isDirty;
     public ItemStack mold, jewelBase, moltenMetal, ringMetal;
+    public float quantity;
     
     public TileEntityMolder()
     {
@@ -23,6 +24,7 @@ public class TileEntityMolder extends TileEntity
         this.mold = new ItemStack(Item.getItemById(0), 0, 0);
         this.ringMetal = new ItemStack(Item.getItemById(0), 0, 0);
         this.cooling = 0;
+        this.quantity = 0f;
         this.hasJewelBase = false;
         this.hasMoltenMetal = false;
         this.hasMold = false;
@@ -34,6 +36,7 @@ public class TileEntityMolder extends TileEntity
     {
         super.writeToNBT(nbt);
         nbt.setInteger("cooling", cooling);
+        nbt.setFloat("quantity", quantity);
         nbt.setBoolean("hasJewelBase", hasJewelBase);
         nbt.setBoolean("hasMoltenMetal", hasMoltenMetal);
         nbt.setBoolean("hasMold", hasMold);
@@ -56,6 +59,7 @@ public class TileEntityMolder extends TileEntity
     {
         super.readFromNBT(nbt);
         this.cooling = nbt.getInteger("cooling");
+        this.quantity = nbt.getFloat("quantity");
         this.hasJewelBase = nbt.getBoolean("hasJewelBase");
         this.hasMoltenMetal = nbt.getBoolean("hasMoltenMetal");
         this.hasMold = nbt.getBoolean("hasMold");
@@ -74,21 +78,19 @@ public class TileEntityMolder extends TileEntity
     {
         super.updateEntity();
         if(isDirty){
-        	this.markDirty();
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             isDirty = false;
         }
         if (moltenMetal.getItem() != Item.getItemById(0))
         {
-            if(worldObj.rand.nextInt(20) == 0) this.worldObj.playSoundEffect(xCoord, yCoord + 0.5F, zCoord, "random.fizz", 0.5F, 1F);
+//            if(worldObj.rand.nextInt(20) == 0) this.worldObj.playSoundEffect(xCoord, yCoord + 0.5F, zCoord, "random.fizz", 0.5F, 1F);
             for (int l = 0; l < 2; ++l)
                 this.worldObj.spawnParticle("reddust", xCoord + Math.random(), (double) yCoord + 0.2F, zCoord + Math.random(), 0.0D, 1.0D, 1.0D);
         }
         if (this.hasMoltenMetal && !this.hasJewelBase)
         {
             ringMetal = moltenMetal;
-            if (cooling > 0)
-                this.cooling--;
+            if (cooling > 0 && quantity > 0.9f) this.cooling--;
             if (cooling == 0)
             {
                 this.hasMoltenMetal = false;
@@ -103,8 +105,8 @@ public class TileEntityMolder extends TileEntity
                 this.moltenMetal = new ItemStack(Item.getItemById(0), 0, 0);
                 this.hasJewelBase = true;
                 cooling = -1;
-                this.isDirty = true;
-                this.markDirty();
+                quantity = 0f;
+                isDirty = true;
             }
         }
     }

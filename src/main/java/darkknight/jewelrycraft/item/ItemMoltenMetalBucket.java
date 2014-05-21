@@ -1,14 +1,9 @@
 package darkknight.jewelrycraft.item;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 
 import javax.imageio.ImageIO;
 
@@ -28,6 +23,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import cpw.mods.fml.common.eventhandler.Event;
@@ -35,6 +31,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.block.BlockMoltenMetal;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
@@ -206,12 +203,9 @@ public class ItemMoltenMetalBucket extends Item
 			else
 			{
 				if (!par1World.isRemote && flag && !material.isLiquid()) par1World.func_147480_a(par2, par3, par4, true);
-				JewelrycraftUtil.liquids.put(String.valueOf(par2) + " " + String.valueOf(par3) + " " + String.valueOf(par4), JewelryNBT.ingot(stack).getItem());
-				JewelrycraftMod.saveData = new NBTTagCompound();
-				JewelrycraftMod.saveData.setString("coords", String.valueOf(par2) + " " + String.valueOf(par3) + " " + String.valueOf(par4));
-				JewelrycraftMod.saveData.setInteger("item", Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()));
-				CompressedStreamTools.writeCompressed(JewelrycraftMod.saveData, new FileOutputStream(JewelrycraftMod.liquidsConf));
-				System.out.println(JewelrycraftMod.saveData.getString("coords"));
+				
+				JewelrycraftMod.saveData.setInteger(String.valueOf(par2) + " " + String.valueOf(par3) + " " + String.valueOf(par4), Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()));
+				
 				par1World.setBlock(par2, par3, par4, BlockList.moltenMetal, 0, 3);
 				return true;
 			}

@@ -301,6 +301,7 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         {
             smelter.moltenMetal = JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size()));
             smelter.hasMoltenMetal = true;
+            smelter.quantity = 1f;
         }
     }
 
@@ -320,8 +321,11 @@ public class ComponentJewelry extends StructureVillagePieces.House1
                 if(hasStuff){
                     ItemStack ring = new ItemStack(ItemList.ring);
                     JewelryNBT.addMetal(ring, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())));
+                    ItemStack necklace = new ItemStack(ItemList.necklace);
+                    JewelryNBT.addMetal(necklace, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())));
                     if(meta == 0) molder.jewelBase = JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())); 
-                    else molder.jewelBase = ring;
+                    else if(meta == 1) molder.jewelBase = ring;
+                    else molder.jewelBase = necklace;
                     molder.hasJewelBase = true;
                 }
             }

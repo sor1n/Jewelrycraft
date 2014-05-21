@@ -19,7 +19,6 @@ public class JewelrycraftUtil
     public static ArrayList<ItemStack> jewelry = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> metal = new ArrayList<ItemStack>();
     public static ArrayList<String> jamcraftPlayers = new ArrayList<String>();
-    public static HashMap<String,Item> liquids = new HashMap<String,Item>();
     public static Random rand = new Random();
 
     public static void addStuff()

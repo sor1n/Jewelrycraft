@@ -71,7 +71,7 @@ public class BlockSmelter extends BlockContainer
         {
             int index = -1;
             for(int a = 0; a < JewelrycraftUtil.jamcraftPlayers.size(); a++) if(entityPlayer.getDisplayName().equals(JewelrycraftUtil.jamcraftPlayers.get(a))) index = a;
-            if (!te.hasMetal && !te.hasMoltenMetal && item != null && (item.getUnlocalizedName().toLowerCase().contains("ingot") || index != -1) && !item.getUnlocalizedName().toLowerCase().contains("mold"))
+            if (!te.hasMetal && !te.hasMoltenMetal && !te.pouring && item != null && (item.getUnlocalizedName().toLowerCase().contains("ingot") || index != -1) && !item.getUnlocalizedName().toLowerCase().contains("mold"))
             {
                 entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage.Jewelrycraft.smelter.nowsmeltingingot", item.getDisplayName())));
                 te.metal = item.copy();
@@ -80,7 +80,6 @@ public class BlockSmelter extends BlockContainer
                 te.melting = ConfigHandler.ingotMeltingTime;
                 if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
                 te.isDirty = true;
-                te.markDirty();
             }
             else if (te.hasMetal && !te.hasMoltenMetal && item != null && item.getDisplayName().contains("Ingot") && !item.getDisplayName().contains("Mold"))
                 entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage.Jewelrycraft.smelter.alreadyhasingot", te.metal.getDisplayName())));
@@ -96,8 +95,6 @@ public class BlockSmelter extends BlockContainer
                 dropItem(world, (double)te.xCoord, (double)te.yCoord, (double)te.zCoord, te.metal.copy());
                 te.hasMetal = false;
                 te.melting = -1;
-                te.isDirty = true;
-                te.markDirty();
                 world.markBlockForUpdate(i, j, k);
                 world.setTileEntity(i, j, k, te);
             }
@@ -124,13 +121,8 @@ public class BlockSmelter extends BlockContainer
         {
             if (te.hasMoltenMetal && isConnectedToMolder(world, i, j, k) && me != null && me.hasMold && !me.hasMoltenMetal && !me.hasJewelBase)
             {
-                me.moltenMetal = te.moltenMetal;
-                me.hasMoltenMetal = true;
-                me.cooling = ConfigHandler.ingotCoolingTime;
-                te.moltenMetal = new ItemStack(Item.getItemById(0), 0, 0);
-                te.hasMoltenMetal = false;
+                te.pouring = true;
                 te.isDirty = true;
-                te.markDirty();
                 world.markBlockForUpdate(i, j, k);
                 world.setTileEntity(i, j, k, te);
             }

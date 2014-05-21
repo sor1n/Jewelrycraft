@@ -145,7 +145,7 @@ public class ItemNecklace extends Item
      */
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
     {
-        if (stack.hasTagCompound() && Minecraft.getMinecraft().gameSettings.advancedItemTooltips)
+        if (stack.hasTagCompound())
         {
             ItemStack ingot = JewelryNBT.ingot(stack);
             if (ingot != null) list.add("Ingot: " + EnumChatFormatting.YELLOW + ingot.getDisplayName());

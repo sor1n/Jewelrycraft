@@ -11,19 +11,16 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.util.FakePlayer;
 
 import org.lwjgl.opengl.GL11;
-
-import com.mojang.authlib.GameProfile;
 
 import darkknight.jewelrycraft.model.ModelDisplayer;
 import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
@@ -58,14 +55,15 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
             renderLabel(Integer.toString(disp.quantity), 0F, (-0.171F)*ind, 0F, block, disp, Color.GRAY.getRGB());
             GL11.glPopMatrix();
             ind++;
-            if(!(disp.object.getItem() instanceof ItemMap) && disp.object != null && disp.object != new ItemStack(Item.getItemById(0), 0, 0) && disp.object.getTooltip(te.getWorldObj().getClosestPlayer(x, y, z, 2D), true) != null)
+            EntityPlayer player = te.getWorldObj().getClosestPlayer(te.xCoord, te.yCoord, te.zCoord, 50D);
+            if(disp.object.getItem() != Items.map && player != null && disp.object.getTooltip(player, true) != null)
             {
-                for(int i = 1; i < disp.object.getTooltip(te.getWorldObj().getClosestPlayer(x, y, z, 2D), true).size(); i++)
+                for(int i = 1; i < disp.object.getTooltip(player, true).size(); i++)
                 {
-                    if(disp.object.getTooltip(te.getWorldObj().getClosestPlayer(x, y, z, 2D), true).get(i).toString() != "")
+                    if(disp.object.getTooltip(player, true).get(i).toString() != "")
                     {
                         GL11.glPushMatrix();
-                        renderLabel(disp.object.getTooltip(te.getWorldObj().getClosestPlayer(x, y, z, 2D), true).get(i).toString(), 0F, (-0.171F)*ind, 0F, block, disp, Color.GRAY.getRGB());
+                        renderLabel(disp.object.getTooltip(player, true).get(i).toString(), 0F, (-0.171F)*ind, 0F, block, disp, Color.GRAY.getRGB());
                         GL11.glPopMatrix();
                         ind++;
                     }

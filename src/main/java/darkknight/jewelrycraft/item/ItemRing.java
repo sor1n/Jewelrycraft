@@ -268,7 +268,7 @@ public class ItemRing extends Item
      */
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
     {
-        if (stack.hasTagCompound() && stack.getDisplayName() != "Wedding Ring" && Minecraft.getMinecraft().gameSettings.advancedItemTooltips)
+        if (stack.hasTagCompound() && stack.getDisplayName() != "Wedding Ring")
         {
             ItemStack ingot = JewelryNBT.ingot(stack);
             if (ingot != null) list.add("Ingot: " + EnumChatFormatting.YELLOW + ingot.getDisplayName());
