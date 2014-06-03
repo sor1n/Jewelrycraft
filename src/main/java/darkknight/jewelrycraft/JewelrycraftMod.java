@@ -63,6 +63,7 @@ public class JewelrycraftMod
     
     public static final Logger logger = Logger.getLogger("Jewelrycraft");
     public static File dir;
+	//TODO Look at how you did in ChowTime for files
 
     public static CreativeTabs jewelrycraft = new CreativeTabs("JewelryCraft")
     {
