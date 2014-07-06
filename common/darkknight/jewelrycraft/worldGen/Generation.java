@@ -2,6 +2,7 @@ package darkknight.jewelrycraft.worldGen;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
@@ -36,8 +37,11 @@ public class Generation implements IWorldGenerator
             int x = i + random.nextInt(16);
             int y = 5 + random.nextInt(4);
             int z = j + random.nextInt(16);
-            world.setBlock(x, y, z, BlockList.shadowOre.blockID);
-            if(random.nextInt(3) == 0) world.setBlock(x + random.nextInt(2), y + random.nextInt(1), z + random.nextInt(2), BlockList.shadowOre.blockID);
+            int randX = random.nextInt(2);
+            int randY = random.nextInt(1);
+            int randZ = random.nextInt(2);
+            if(world.getBlockId(x, y, z) == Block.stone.blockID) world.setBlock(x, y, z, BlockList.shadowOre.blockID);
+            if(random.nextInt(3) == 0 && world.getBlockId(x + randX, y + randY, z + randZ) == Block.stone.blockID) world.setBlock(x + randX, y + randY, z + randZ, BlockList.shadowOre.blockID);
         }
     }
     

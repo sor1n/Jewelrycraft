@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import darkknight.jewelrycraft.model.ModelDisplayer;
@@ -51,14 +52,15 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
             renderLabel(Integer.toString(disp.quantity), 0F, (-0.171F)*ind, 0F, block, disp, Color.GRAY.getRGB());
             GL11.glPopMatrix();
             ind++;
-            if(disp.object.itemID != Item.map.itemID && disp.object != null && disp.object != new ItemStack(0, 0, 0) && disp.object.getTooltip(null, true) != null)
+            EntityPlayer player = new FakePlayer(te.worldObj, "Player");
+            if(disp.object.itemID != Item.map.itemID && disp.object != null && disp.object != new ItemStack(0, 0, 0) && disp.object.getTooltip(player, true) != null)
             {
-                for(int i = 1; i < disp.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).size(); i++)
+                for(int i = 1; i < disp.object.getTooltip(player, true).size(); i++)
                 {
-                    if(disp.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).get(i).toString() != "")
+                    if(disp.object.getTooltip(player, true).get(i).toString() != "")
                     {
                         GL11.glPushMatrix();
-                        renderLabel(disp.object.getTooltip(new FakePlayer(te.worldObj, "Player"), true).get(i).toString(), 0F, (-0.171F)*ind, 0F, block, disp, Color.GRAY.getRGB());
+                        renderLabel(disp.object.getTooltip(player, true).get(i).toString(), 0F, (-0.171F)*ind, 0F, block, disp, Color.GRAY.getRGB());
                         GL11.glPopMatrix();
                         ind++;
                     }
