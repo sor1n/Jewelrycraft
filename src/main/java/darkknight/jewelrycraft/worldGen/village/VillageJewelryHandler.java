@@ -9,13 +9,14 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
+import darkknight.jewelrycraft.config.ConfigHandler;
 
 public class VillageJewelryHandler implements IVillageCreationHandler
 {
     @Override
     public PieceWeight getVillagePieceWeight (Random random, int i)
     {
-        return new PieceWeight(ComponentJewelry.class, 30, i + random.nextInt(4));
+        return new PieceWeight(ComponentJewelry.class, ConfigHandler.jewelerWeight, ConfigHandler.maxVillageJewelers);
     }
 
     @Override

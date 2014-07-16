@@ -71,7 +71,7 @@ public class BlockSmelter extends BlockContainer
         {
             int index = -1;
             for(int a = 0; a < JewelrycraftUtil.jamcraftPlayers.size(); a++) if(entityPlayer.getDisplayName().equals(JewelrycraftUtil.jamcraftPlayers.get(a))) index = a;
-            if (!te.hasMetal && !te.hasMoltenMetal && !te.pouring && item != null && (item.getUnlocalizedName().toLowerCase().contains("ingot") || index != -1) && !item.getUnlocalizedName().toLowerCase().contains("mold"))
+            if (!te.hasMetal && !te.hasMoltenMetal && !te.pouring && item != null && (item.getUnlocalizedName().toLowerCase().contains("ingot") || item.getUnlocalizedName().toLowerCase().contains("alloy") || index != -1) && !item.getUnlocalizedName().toLowerCase().contains("mold"))
             {
                 entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage.Jewelrycraft.smelter.nowsmeltingingot", item.getDisplayName())));
                 te.metal = item.copy();

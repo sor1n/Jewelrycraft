@@ -82,15 +82,14 @@ public class JewelrycraftUtil
         int index = 0, index2 = 0;
         while(index < OreDictionary.getOreNames().length)
         {
-            while(index2 < OreDictionary.getOres(OreDictionary.getOreNames()[index]).size())
+            Iterator<ItemStack> i = OreDictionary.getOres(OreDictionary.getOreNames()[index]).iterator();
+
+            while (i.hasNext())
             {
-                ItemStack stack = OreDictionary.getOres(OreDictionary.getOreNames()[index]).get(index2).copy();
-                if(stack.getItemDamage() == Short.MAX_VALUE) stack.setItemDamage(0);
-                if(stack.getUnlocalizedName().toLowerCase().contains("ingot") && !JewelrycraftUtil.metal.contains(stack))
-                    metal.add(OreDictionary.getOres(OreDictionary.getOreNames()[index]).get(index2));
-                index2++;
+                ItemStack nextStack = i.next();
+
+                if ((nextStack.getItem().getUnlocalizedName().toLowerCase().contains("ingot") || nextStack.getItem().getUnlocalizedName().toLowerCase().contains("alloy")) && !metal.contains(nextStack)) metal.add(nextStack);
             }
-            index2 = 0;
             index++;
         }   
         if(!metal.contains(new ItemStack(Items.gold_ingot)))metal.add(new ItemStack(Items.gold_ingot));

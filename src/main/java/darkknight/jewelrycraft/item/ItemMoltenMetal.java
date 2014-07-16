@@ -102,7 +102,7 @@ public class ItemMoltenMetal extends Item
                 red = (icon.getRGB(x, y) >> 16) & 0xFF;
                 green = (icon.getRGB(x, y) >> 8) & 0xFF;
                 blue = icon.getRGB(x, y) & 0xFF;
-                if((red <= 80 && green <= 80 && blue <= 80) || (red >= 180 && green >= 180 && blue >= 180))
+                if(!isColorPretty(red, green, blue))
                 {
                     if(x<icon.getTileWidth()-1) x++;
                     if(x>=icon.getTileWidth()-1 && y<icon.getTileWidth()-1)
@@ -118,5 +118,11 @@ public class ItemMoltenMetal extends Item
         }
         if(JewelryNBT.ingot(stack) != null) return JewelryNBT.ingotColor(stack);
         return 16777215;
+    }
+    
+    public static boolean isColorPretty(int r, int g, int b)
+    {
+        if(r > 80 || g > 80 || b > 80 || (r > 80 && g > 80 && b > 80 && r < 180 && b < 180 && g < 180)) return true;
+        return false;
     }
 }

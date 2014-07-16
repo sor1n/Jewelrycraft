@@ -215,9 +215,9 @@ public class ItemNecklace extends Item
             for(int x = (int) - 1; x <= 1; x++)
                 for(int z = (int) - 1; z <= 1; z++)
                     if(JewelryNBT.isModifierX(stack, new ItemStack(Items.diamond_pickaxe)) && JewelryNBT.isJewelX(stack, new ItemStack(Items.nether_star)) && JewelryNBT.isIngotX(stack, new ItemStack(ItemList.shadowIngot)))
-                        if((side == 0 || side == 1) && j > 0 && world.getBlock(i + x, j, k + z) != Blocks.bedrock) world.func_147480_a(i + x, j, k + z, true);
-                        else if((side == 2 || side == 3) && j + x > 0 && world.getBlock(i + z, j + x, k) != Blocks.bedrock) world.func_147480_a(i + z, j + x, k, true);
-                        else if((side == 4 || side == 5) && j + x > 0 && world.getBlock(i, j + x, k + z) != Blocks.bedrock) world.func_147480_a(i, j + x, k + z, true);
+                        if((side == 0 || side == 1) && j > 0 && world.getBlock(i, j + x, k + z) != Blocks.air && world.getBlock(i + x, j, k + z).getBlockHardness(world, i + x, j, k + z) > 0F) world.func_147480_a(i + x, j, k + z, true);
+                        else if((side == 2 || side == 3) && j + x > 0 && world.getBlock(i, j + x, k + z) != Blocks.air && world.getBlock(i + z, j + x, k).getBlockHardness(world, i + z, j + x, k) > 0F) world.func_147480_a(i + z, j + x, k, true);
+                        else if((side == 4 || side == 5) && j + x > 0 && world.getBlock(i, j + x, k + z) != Blocks.air && world.getBlock(i, j + x, k + z).getBlockHardness(world, i, j + x, k + z) > 0F) world.func_147480_a(i, j + x, k + z, true);
         }
         return true;
     }

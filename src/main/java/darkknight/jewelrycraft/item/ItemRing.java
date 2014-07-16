@@ -117,7 +117,7 @@ public class ItemRing extends Item
                 red = (icon.getRGB(x, y) >> 16) & 0xFF;
                 green = (icon.getRGB(x, y) >> 8) & 0xFF;
                 blue = icon.getRGB(x, y) & 0xFF;
-                if((red <= 80 && green <= 80 && blue <= 80) || (red >= 180 && green >= 180 && blue >= 180))
+                if(!isColorPretty(red, green, blue))
                 {
                     if(x<icon.getTileWidth()-1) x++;
                     if(x>=icon.getTileWidth()-1 && y<icon.getTileWidth()-1)
@@ -151,7 +151,7 @@ public class ItemRing extends Item
                 red = (icon.getRGB(x, y) >> 16) & 0xFF;
                 green = (icon.getRGB(x, y) >> 8) & 0xFF;
                 blue = icon.getRGB(x, y) & 0xFF;
-                if((red <= 95 && green <= 95 && blue <= 95) || (red >= 180 && green >= 180 && blue >= 180))
+                if(!isColorPretty(red, green, blue))
                 {
                     if(x<icon.getTileWidth()-1) x++;
                     if(x>=icon.getTileWidth()-1 && y<icon.getTileWidth()-1)
@@ -170,6 +170,12 @@ public class ItemRing extends Item
         if(pass == 1 && JewelryNBT.jewel(stack) != null) return JewelryNBT.jewelColor(stack);
         else if(JewelryNBT.ingot(stack) != null) return JewelryNBT.ingotColor(stack);
         return 16777215;
+    }
+    
+    public static boolean isColorPretty(int r, int g, int b)
+    {
+        if(r > 80 || g > 80 || b > 80 || (r > 80 && g > 80 && b > 80 && r < 180 && b < 180 && g < 180)) return true;
+        return false;
     }
 
     public String getItemStackDisplayName(ItemStack stack)
@@ -359,18 +365,18 @@ public class ItemRing extends Item
                     used = true;
                 }
 
-                if(!JewelryNBT.hasTag(stack, "tile") && world.getTileEntity(i, j, k) != null && !used){
+                if(!JewelryNBT.hasTag(stack, "tile") && world.getTileEntity(i, j, k) != null && !used && world.getBlock(i, j, k).getBlockHardness(world, i, j, k) > 0F){
                     JewelryNBT.addTileEntityBlock(stack, world, i, j, k);
                     world.removeTileEntity(i, j, k);
                     world.setBlock(i, j, k, Block.getBlockById(0));
                 }
-                else if(!JewelryNBT.hasTag(stack, "blockID") && !used){
+                else if(!JewelryNBT.hasTag(stack, "blockID") && !used && world.getBlock(i, j, k).getBlockHardness(world, i, j, k) > 0F){
                     JewelryNBT.addBlock(stack, Block.getIdFromBlock(world.getBlock(i, j, k)), world.getBlockMetadata(i, j, k));
                     JewelryNBT.addBlockCoordonates(stack, i, j, k);
                     world.setBlock(i, j, k, Block.getBlockById(0));
                 }
             }
-            if(JewelryNBT.isModifierX(stack, new ItemStack(Items.diamond_pickaxe)) && JewelryNBT.isJewelX(stack, new ItemStack(Items.nether_star)) && JewelryNBT.isIngotX(stack, new ItemStack(ItemList.shadowIngot)) && j > 0 && world.getBlock(i, j, k) != Blocks.bedrock)
+            if(JewelryNBT.isModifierX(stack, new ItemStack(Items.diamond_pickaxe)) && JewelryNBT.isJewelX(stack, new ItemStack(Items.nether_star)) && JewelryNBT.isIngotX(stack, new ItemStack(ItemList.shadowIngot)) && j > 0 && world.getBlock(i, j, k).getBlockHardness(world, i, j, k) > 0F)
             	world.func_147480_a(i, j, k, true);
         }
         return true;

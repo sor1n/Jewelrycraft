@@ -16,6 +16,7 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.item.ItemMolds;
 import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
@@ -170,29 +171,29 @@ public class ComponentJewelry extends StructureVillagePieces.House1
             for(int j = 1; j <= 5; j++)
                 this.placeBlockAtCurrentPosition(world, Blocks.carpet, bgCarpetColor, i, 1, j, sbb);
 
-        generateChest(world, 3, 1, 1, 0, random, sbb, 2, 6);
+        generateChest(world, 3, 1, 1, 0, random, sbb, ConfigHandler.jewelsChestMin, ConfigHandler.jewelsChestMax);
         generateDisplayer(world, 3, 1, 2, (coordBaseMode == 0 || coordBaseMode == 2)?1:2, random, sbb);
         placeBlockAtCurrentPosition(world, BlockList.jewelCraftingTable, (coordBaseMode == 0 || coordBaseMode == 2)?1:2, 3, 1, 3, sbb);
         generateDisplayer(world, 3, 1, 4, (coordBaseMode == 0 || coordBaseMode == 2)?1:2, random, sbb);
-        generateChest(world, 3, 1, 5, 0, random, sbb, 2, 6);
+        generateChest(world, 3, 1, 5, 0, random, sbb, ConfigHandler.jewelsChestMin, ConfigHandler.jewelsChestMax);
 
-        generateFurnace(world, 1, 1, 7, 0, random, sbb, 1, 2, true);
-        generateFurnace(world, 1, 2, 7, 0, random, sbb, 2, 3, true);
-        generateFurnace(world, 1, 3, 7, 0, random, sbb, 1, 3, true);
-        generateFurnace(world, 1, 1, 10, 0, random, sbb, 1, 2, true);
-        generateFurnace(world, 1, 2, 10, 0, random, sbb, 2, 3, true);
-        generateFurnace(world, 1, 3, 10, 0, random, sbb, 1, 3, true);
+        generateFurnace(world, 1, 1, 7, 0, random, sbb, ConfigHandler.furnacesIngotStackMin, ConfigHandler.furnacesIngotStackMax, ConfigHandler.canFurnacesGenerateIngots);
+        generateFurnace(world, 1, 2, 7, 0, random, sbb, ConfigHandler.furnacesIngotStackMin, ConfigHandler.furnacesIngotStackMax, ConfigHandler.canFurnacesGenerateIngots);
+        generateFurnace(world, 1, 3, 7, 0, random, sbb, ConfigHandler.furnacesIngotStackMin, ConfigHandler.furnacesIngotStackMax, ConfigHandler.canFurnacesGenerateIngots);
+        generateFurnace(world, 1, 1, 10, 0, random, sbb, ConfigHandler.furnacesIngotStackMin, ConfigHandler.furnacesIngotStackMax, ConfigHandler.canFurnacesGenerateIngots);
+        generateFurnace(world, 1, 2, 10, 0, random, sbb, ConfigHandler.furnacesIngotStackMin, ConfigHandler.furnacesIngotStackMax, ConfigHandler.canFurnacesGenerateIngots);
+        generateFurnace(world, 1, 3, 10, 0, random, sbb, ConfigHandler.furnacesIngotStackMin, ConfigHandler.furnacesIngotStackMax, ConfigHandler.canFurnacesGenerateIngots);
 
         generateSmelter(world, 1, 1, 8, (coordBaseMode == 0 || coordBaseMode == 2)?1:2, random, sbb, random.nextBoolean());
         generateSmelter(world, 1, 1, 9, (coordBaseMode == 0 || coordBaseMode == 2)?1:2, random, sbb, random.nextBoolean());
 
         generateMolder(world, 2, 1, 8, (coordBaseMode == 0 || coordBaseMode == 2)?1:2, random, sbb, random.nextBoolean(), random.nextBoolean());
         generateMolder(world, 2, 1, 9, (coordBaseMode == 0 || coordBaseMode == 2)?1:2, random, sbb, random.nextBoolean(), random.nextBoolean());
-        
-        generateIngotChest(world, 9, 1, 7, 0, random, sbb, 3, 12, Blocks.chest, 5);
-        generateIngotChest(world, 9, 1, 8, 0, random, sbb, 5, 16, Blocks.chest, 3);
-        generateIngotChest(world, 9, 1, 9, 0, random, sbb, 3, 10, Blocks.trapped_chest, 2);
-        generateIngotChest(world, 9, 1, 10, 0, random, sbb, 3, 9, Blocks.trapped_chest, 6);
+                
+        generateIngotChest(world, 9, 1, 7, 0, random, sbb, ConfigHandler.ingotChestMin, ConfigHandler.ingotChestMax, Blocks.chest, ConfigHandler.ingotChestMaxStack);
+        generateIngotChest(world, 9, 1, 8, 0, random, sbb, ConfigHandler.ingotChestMin, ConfigHandler.ingotChestMax, Blocks.chest, ConfigHandler.ingotChestMaxStack);
+        generateIngotChest(world, 9, 1, 9, 0, random, sbb, ConfigHandler.ingotChestMin, ConfigHandler.ingotChestMax, Blocks.trapped_chest, ConfigHandler.ingotChestMaxStack);
+        generateIngotChest(world, 9, 1, 10, 0, random, sbb, ConfigHandler.ingotChestMin, ConfigHandler.ingotChestMax, Blocks.trapped_chest, ConfigHandler.ingotChestMaxStack);
         
 
         for (int l = 0; l < 6; ++l)
@@ -228,9 +229,11 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         TileEntityChest chest = (TileEntityChest)world.getTileEntity(i1, j1, k1);
         while(chest != null && t > 0)
         {
+            ItemStack jewels = JewelrycraftUtil.jewel.get(random.nextInt(JewelrycraftUtil.jewel.size()));
             chest.func_145976_a("Jeweler's Chest");
             if(random.nextBoolean()) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), JewelrycraftUtil.modifiers.get(random.nextInt(JewelrycraftUtil.modifiers.size())));
-            else chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), JewelrycraftUtil.jewel.get(random.nextInt(JewelrycraftUtil.jewel.size())));
+            else if(jewels.getItem() == Items.nether_star && ConfigHandler.generateVillageNetherstar) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), jewels);
+            else if(random.nextBoolean() && jewels.getItem() != Items.nether_star) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), jewels);
             t--;
         }
     }

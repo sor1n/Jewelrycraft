@@ -59,7 +59,8 @@ public class EntityEventHandler
 	{     
 		if(!event.world.isRemote)
 		{
-			JewelrycraftMod.liquidsConf = new File(JewelrycraftMod.dir, "JLP" + event.world.getWorldInfo().getWorldName() + ".cfg");
+	        new File(JewelrycraftMod.dir + File.separator + "Jewelrycraft").mkdirs();
+			JewelrycraftMod.liquidsConf = new File(JewelrycraftMod.dir + File.separator + "Jewelrycraft", "JLP" + event.world.getWorldInfo().getWorldName() + ".cfg");
 			try {
 				if(!JewelrycraftMod.liquidsConf.exists()) JewelrycraftMod.liquidsConf.createNewFile();
 			} catch (IOException e) {
