@@ -43,9 +43,9 @@ public class CraftingRecipes
             
             //Smelting
             GameRegistry.addSmelting(BlockList.shadowOre, new ItemStack(ItemList.shadowIngot), 1.5f);         
-            GameRegistry.addSmelting(new ItemStack(ItemList.clayMolds, 0), new ItemStack(ItemList.molds, 1, 0), 0.2F);
-            GameRegistry.addSmelting(new ItemStack(ItemList.clayMolds, 1), new ItemStack(ItemList.molds, 1, 1), 0.2F);
-            GameRegistry.addSmelting(new ItemStack(ItemList.clayMolds, 2), new ItemStack(ItemList.molds, 1, 2), 0.2F);
+            GameRegistry.addSmelting(new ItemStack(ItemList.clayMolds, 1, 0), new ItemStack(ItemList.molds, 1, 0), 0.2F);
+            GameRegistry.addSmelting(new ItemStack(ItemList.clayMolds, 1, 1), new ItemStack(ItemList.molds, 1, 1), 0.2F);
+            GameRegistry.addSmelting(new ItemStack(ItemList.clayMolds, 1, 2), new ItemStack(ItemList.molds, 1, 2), 0.2F);
             
             isInitialized = true;
         }
