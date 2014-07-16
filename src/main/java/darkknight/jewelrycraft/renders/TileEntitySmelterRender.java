@@ -96,7 +96,7 @@ public class TileEntitySmelterRender extends TileEntitySpecialRenderer
         
         t.draw();
         
-        /*
+        
         GL11.glTranslatef(-0F, 1.25F, -0.3F);
         GL11.glScalef(1.25F, 1.0F, 1.47F);
         GL11.glRotatef(90F, 1F, 0F, 0f);
@@ -113,7 +113,7 @@ public class TileEntitySmelterRender extends TileEntitySpecialRenderer
         GL11.glTranslatef(0F, -5.6F, 0.0F);
         RenderItem.renderInFrame = true;
         RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
-        RenderItem.renderInFrame = false;*/
+        RenderItem.renderInFrame = false;
         
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

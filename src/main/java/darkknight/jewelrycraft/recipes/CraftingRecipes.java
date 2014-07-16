@@ -4,6 +4,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import darkknight.jewelrycraft.block.BlockList;
@@ -22,7 +23,7 @@ public class CraftingRecipes
             GameRegistry.addRecipe(new ItemStack(ItemList.clayMolds, 1, 0), "xx", 'x', Items.clay_ball);
             GameRegistry.addRecipe(new ItemStack(ItemList.clayMolds, 1, 1), " x ", "x x", " x ", 'x', Items.clay_ball);
             GameRegistry.addRecipe(new ItemStack(ItemList.clayMolds, 1, 2), "x x", "x x", " x ", 'x', Items.clay_ball);
-            GameRegistry.addRecipe(new ItemStack(ItemList.crystal, 1, 15), " x ", "x x", " x ", 'x', Blocks.glass);
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemList.crystal, 1, 15), " x ", "x x", " x ", 'x', Blocks.glass));
             for(int i=0; i < 15; i++)
             {
                 GameRegistry.addShapelessRecipe(new ItemStack(ItemList.crystal, 1, i), new Object[]{new ItemStack(ItemList.crystal, 1, 15), new ItemStack(Items.dye, 1, i)});
@@ -34,11 +35,11 @@ public class CraftingRecipes
             GameRegistry.addShapelessRecipe(new ItemStack(ItemList.guide), new Object[]{new ItemStack(Items.book), new ItemStack(ItemList.molds, 1, 2)});
             
             //Blocks
-            GameRegistry.addRecipe(new ItemStack(BlockList.molder), "x x", "xxx", 'x', Blocks.cobblestone);
-            GameRegistry.addRecipe(new ItemStack(BlockList.smelter), "xyx", "x x", "xzx", 'x', Blocks.cobblestone, 'y', Items.bucket, 'z', Items.lava_bucket);
-            GameRegistry.addRecipe(new ItemStack(BlockList.jewelCraftingTable), "xxx", "y y", "y y", 'x', Blocks.planks, 'y', Blocks.cobblestone);
-            GameRegistry.addRecipe(new ItemStack(BlockList.displayer, 2), " x ", "xxx", "yyy", 'x', Items.iron_ingot, 'y', Blocks.emerald_block);
-            GameRegistry.addRecipe(new ItemStack(BlockList.shadowBlock, 1), "xxx", "xxx", "xxx", 'x', ItemList.shadowIngot);
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockList.molder), "x x", "xxx", 'x', Blocks.cobblestone));
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockList.smelter), "xyx", "x x", "xzx", 'x', Blocks.cobblestone, 'y', Items.bucket, 'z', Items.lava_bucket));
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockList.jewelCraftingTable), "xxx", "y y", "y y", 'x', Blocks.planks, 'y', Blocks.cobblestone));
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockList.displayer, 2), " x ", "xxx", "yyy", 'x', Items.iron_ingot, 'y', Blocks.emerald_block));
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockList.shadowBlock, 1), "xxx", "xxx", "xxx", 'x', ItemList.shadowIngot));
             GameRegistry.addRecipe(new ItemStack(BlockList.jewelAltar, 1), "sws", "bwb", "bbb", 's', Blocks.end_stone, 'w', new ItemStack(Blocks.wool, 1, 5), 'b', Blocks.nether_brick);
             
             //Smelting
