@@ -209,9 +209,9 @@ public class ItemNecklace extends Item
             for(int x = (int) - 1; x <= 1; x++)
                 for(int z = (int) - 1; z <= 1; z++)
                     if(JewelryNBT.isModifierX(stack, new ItemStack(Item.pickaxeDiamond)) && JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar)) && JewelryNBT.isIngotX(stack, new ItemStack(ItemList.shadowIngot)))
-                        if((side == 0 || side == 1) && j > 0 && world.getBlockId(i + x, j, k + z) != Block.bedrock.blockID) world.destroyBlock(i + x, j, k + z, true);
-                        else if((side == 2 || side == 3) && j + x > 0 && world.getBlockId(i + z, j + x, k) != Block.bedrock.blockID) world.destroyBlock(i + z, j + x, k, true);
-                        else if((side == 4 || side == 5) && j + x > 0 && world.getBlockId(i, j + x, k + z) != Block.bedrock.blockID) world.destroyBlock(i, j + x, k + z, true);
+                        if((side == 0 || side == 1) && j > 0 && Block.blocksList[world.getBlockId(i + x, j, k + z)].getBlockHardness(world, i + x, j, k + z) > 0F) world.destroyBlock(i + x, j, k + z, true);
+                        else if((side == 2 || side == 3) && j + x > 0 && Block.blocksList[world.getBlockId(i + z, j + x, k)].getBlockHardness(world, i + z, j + x, k) > 0F) world.destroyBlock(i + z, j + x, k, true);
+                        else if((side == 4 || side == 5) && j + x > 0 && Block.blocksList[world.getBlockId(i, j + x, k + z)].getBlockHardness(world, i, j + x, k + z) > 0F) world.destroyBlock(i, j + x, k + z, true);
         }
         return true;
     }

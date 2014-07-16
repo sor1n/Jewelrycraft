@@ -348,18 +348,18 @@ public class ItemRing extends Item
                     used = true;
                 }
 
-                if(!JewelryNBT.hasTag(stack, "tile") && world.getBlockTileEntity(i, j, k) != null && !used){
+                if(!JewelryNBT.hasTag(stack, "tile") && world.getBlockTileEntity(i, j, k) != null && !used && Block.blocksList[world.getBlockId(i, j, k)].getBlockHardness(world, i, j, k) > 0F){
                     JewelryNBT.addTileEntityBlock(stack, world, i, j, k);
                     world.removeBlockTileEntity(i, j, k);
                     world.setBlock(i, j, k, 0);
                 }
-                else if(!JewelryNBT.hasTag(stack, "blockID") && !used){
+                else if(!JewelryNBT.hasTag(stack, "blockID") && !used && Block.blocksList[world.getBlockId(i, j, k)].getBlockHardness(world, i, j, k) > 0F){
                     JewelryNBT.addBlock(stack, world.getBlockId(i, j, k), world.getBlockMetadata(i, j, k));
                     JewelryNBT.addBlockCoordonates(stack, i, j, k);
                     world.setBlock(i, j, k, 0);
                 }
             }
-            if(JewelryNBT.isModifierX(stack, new ItemStack(Item.pickaxeDiamond)) && JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar)) && JewelryNBT.isIngotX(stack, new ItemStack(ItemList.shadowIngot)) && j > 0 && world.getBlockId(i, j, k) != Block.bedrock.blockID)
+            if(JewelryNBT.isModifierX(stack, new ItemStack(Item.pickaxeDiamond)) && JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar)) && JewelryNBT.isIngotX(stack, new ItemStack(ItemList.shadowIngot)) && j > 0 && Block.blocksList[world.getBlockId(i, j, k)].getBlockHardness(world, i, j, k) > 0F)
                 world.destroyBlock(i, j, k, true);
         }
         return true;
