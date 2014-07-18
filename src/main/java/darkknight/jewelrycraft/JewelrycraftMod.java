@@ -87,6 +87,12 @@ public class JewelrycraftMod
         ItemList.preInit(e);
         CraftingRecipes.preInit(e);
         OreDictionary.registerOre("ingotShadow", new ItemStack(ItemList.shadowIngot));
+        OreDictionary.registerOre("ingot2", new ItemStack(ItemList.ingot2));
+        OreDictionary.registerOre("ingot3", new ItemStack(ItemList.ingot3));
+        OreDictionary.registerOre("ingot4", new ItemStack(ItemList.ingot4));
+        OreDictionary.registerOre("ingot5", new ItemStack(ItemList.ingot5));
+        OreDictionary.registerOre("ingot6", new ItemStack(ItemList.ingot6));
+        OreDictionary.registerOre("ingot7", new ItemStack(ItemList.ingot7));
         OreDictionary.registerOre("oreShadow", new ItemStack(BlockList.shadowOre));
         
         VillagerRegistry.instance().registerVillagerId(3000);

@@ -174,7 +174,7 @@ public class ItemRing extends Item
     
     public static boolean isColorPretty(int r, int g, int b)
     {
-        if(r > 50 || g > 50 || b > 50 || (r > 50 && g > 50 && b > 50 && r < 230 && b < 230 && g < 230)) return true;
+        if((r > 80 || g > 80 || b > 80) || (r > 80 && g > 80 && b > 80 && r < 230 && b < 230 && g < 230)) return true;
         else return false;
     }
 
