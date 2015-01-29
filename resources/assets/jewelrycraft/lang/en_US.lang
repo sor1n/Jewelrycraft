@@ -18,6 +18,7 @@ item.Jewelrycraft.necklace.name=Necklace
 item.Jewelrycraft.crystal.name=Crystal
 item.Jewelrycraft.guide.name=Jewelrycraft Guide
 item.Jewelrycraft.bucket.name=Bucket of Molten
+
 tile.Jewelrycraft.oreShadow.name=Shadow Ore
 tile.Jewelrycraft.blockShadow.name=Shadow Block
 tile.Jewelrycraft.glow.name=Glow
@@ -27,10 +28,15 @@ tile.Jewelrycraft.displayer.name=Storage Displayer
 tile.Jewelrycraft.jewelCraftingTable.name=Jeweler's Crafting Table
 tile.Jewelrycraft.altar.name=Jewel Altar
 tile.Jewelrycraft.moltenMetal.name=Molten
+tile.Jewelrycraft.shadowHand.name=Shadow Hand
+tile.Jewelrycraft.shadowEye.name=Cursed Eye
+tile.Jewelrycraft.handPedestal.name=Hand Pedestal
+
 itemGroup.JewelryCraft=Jewelrycraft
 itemGroup.Rings=Jewelrycraft Rings
 itemGroup.Necklaces=Jewelrycraft Necklaces
 itemGroup.Liquids=Liquids
+
 chatmessage.Jewelrycraft.molder.addedmold=Added %s to molder.
 chatmessage.Jewelrycraft.molder.metaliscooling=Molten metal is cooling...
 chatmessage.Jewelrycraft.molder.moldisempty=Mold is currently empty.
@@ -48,9 +54,8 @@ chatmessage.Jewelrycraft.smelter.nowsmeltingingot=Smelter is now smelting a %s.
 chatmessage.Jewelrycraft.smelter.metalismelting=%s is being melted.
 chatmessage.Jewelrycraft.smelter.empty=The Smelter is empty.
 chatmessage.Jewelrycraft.table.hasenditem=First take out the crafted jewel before inserting new stuff.
-chatmessage.Jewelrycraft.table.missingjewelryandmodifierorjewel=You need a jewelry piece and a modifier or a jewel.
+chatmessage.Jewelrycraft.table.missinggem=You need a gem.
 chatmessage.Jewelrycraft.table.missingjewelry=You're missing a piece of jewelry.
-chatmessage.Jewelrycraft.table.missingmodifierorjewel=You need a modifier or a jewel.
 chatmessage.Jewelrycraft.table.iscrafting=The %s is being modified.
 chatmessage.Jewelrycraft.table.jewelrymodifiedfull=This piece of jewelry is already modified at maxium. You can't modify it anymore!
 chatmessage.Jewelrycraft.table.jewelrycontainsmodifier=The piece of jewelry already contains a modifier.

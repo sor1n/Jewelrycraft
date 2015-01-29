@@ -1,5 +1,7 @@
 package darkknight.jewelrycraft.tileentity;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,15 +15,16 @@ public class TileEntityDisplayer extends TileEntity
     public float ringTranslation1, ringTranslation2, ringTranslation3, rotAngle;
     public boolean isDescending1, isDescending2, isDescending3, isDirty, hasObject;
     public ItemStack object;
-    public int quantity;
+    public int quantity, infoIndex, timer = 0;
     
     public TileEntityDisplayer()
     {
-        this.ringTranslation1 = 0;
-        this.ringTranslation2 = 0;
-        this.ringTranslation3 = 0;
+        this.ringTranslation1 = 0.6f;
+        this.ringTranslation2 = 0.3f;
+        this.ringTranslation3 = 0.0f;
         this.rotAngle = 0;
         this.quantity = 0;
+        this.infoIndex = 1;
         this.isDescending1 = false;
         this.isDescending2 = false;
         this.isDescending3 = false;
@@ -39,6 +42,7 @@ public class TileEntityDisplayer extends TileEntity
         nbt.setFloat("translation3", ringTranslation3);
         nbt.setFloat("angle", rotAngle);
         nbt.setInteger("quantity", quantity);
+        nbt.setInteger("infoIndex", infoIndex);
         nbt.setBoolean("descending1", isDescending1);
         nbt.setBoolean("descending2", isDescending2);
         nbt.setBoolean("descending3", isDescending3);
@@ -57,6 +61,7 @@ public class TileEntityDisplayer extends TileEntity
         this.ringTranslation3 = nbt.getFloat("translation3");
         this.rotAngle = nbt.getFloat("angle");
         this.quantity = nbt.getInteger("quantity");
+        this.infoIndex = nbt.getInteger("infoIndex");
         this.isDescending1 = nbt.getBoolean("descending1");
         this.isDescending2 = nbt.getBoolean("descending2");
         this.isDescending3 = nbt.getBoolean("descending3");
@@ -90,6 +95,11 @@ public class TileEntityDisplayer extends TileEntity
         if (isDescending3) ringTranslation3 -= 0.03;
         if (rotAngle < 360F) rotAngle += 6F;
         if (rotAngle >= 360F) rotAngle = 0F;
+        timer++;
+        if(timer >= 20){
+            infoIndex++;
+            timer = 0;
+        }
     }
     
     public Packet getDescriptionPacket()

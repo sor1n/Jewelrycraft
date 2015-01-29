@@ -13,7 +13,7 @@ public class GuiTabJewelsAndModifiers extends GuiTab
 {
     public GuiTabJewelsAndModifiers(int id)
     {
-        super("Jewels, modifiers and ingots", id);
+        super("Gems, modifiers and ingots", id);
     }
     
     public ItemStack getIcon()
@@ -26,14 +26,14 @@ public class GuiTabJewelsAndModifiers extends GuiTab
     {
         int xPos = (page % 2 == 0) ? 107 : -35;
         for (int i = (page - 1) * 9; i < page * 9; i++)
-            if (i < JewelrycraftUtil.jewel.size())
+            if (i < JewelrycraftUtil.gem.size())
             {
-                gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + "Jewels", gui.getLeft() + xPos + 40, gui.getTop(), 0);
-                gui.renderItem(JewelrycraftUtil.jewel.get(i), gui.getLeft() + xPos + 10, gui.getTop() + 22 + 16 * (i - 9 * (page - 1)), 30f);
-                gui.getFont().drawString(JewelrycraftUtil.jewel.get(i).getDisplayName(), gui.getLeft() + xPos + 20, gui.getTop() + 12 + 16 * (i - 9 * (page - 1)), 0);
+                gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + "Gems", gui.getLeft() + xPos + 40, gui.getTop(), 0);
+                gui.renderItem(JewelrycraftUtil.gem.get(i), gui.getLeft() + xPos + 10, gui.getTop() + 22 + 16 * (i - 9 * (page - 1)), 30f);
+                gui.getFont().drawString(JewelrycraftUtil.gem.get(i).getDisplayName(), gui.getLeft() + xPos + 20, gui.getTop() + 12 + 16 * (i - 9 * (page - 1)), 0);
                 GL11.glDisable(GL11.GL_LIGHTING);
             }
-        page -= (JewelrycraftUtil.jewel.size() / 9 + 1);
+        page -= (JewelrycraftUtil.gem.size() / 9 + 1);
         for (int i = (page - 1) * 9; i < page * 9; i++)
         {
             if (i < JewelrycraftUtil.modifiers.size() && page > 0)
@@ -59,7 +59,7 @@ public class GuiTabJewelsAndModifiers extends GuiTab
     
     public int getMaxPages()
     {
-        return JewelrycraftUtil.jewel.size() / 9 + JewelrycraftUtil.modifiers.size() / 9 + JewelrycraftUtil.metal.size() / 9 + 2;
+        return JewelrycraftUtil.gem.size() / 9 + JewelrycraftUtil.modifiers.size() / 9 + JewelrycraftUtil.metal.size() / 9 + 2;
     }
     
     @Override

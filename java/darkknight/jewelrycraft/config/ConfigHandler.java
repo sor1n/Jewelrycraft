@@ -5,7 +5,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class ConfigHandler
 {
-    private static Configuration config;
+    public static Configuration config;
     public static int ingotCoolingTime = 100;
     public static int ingotMeltingTime = 1500;
     public static int jewelryCraftingTime = 1000;

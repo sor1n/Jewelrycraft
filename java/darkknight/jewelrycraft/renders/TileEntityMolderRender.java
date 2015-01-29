@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 public class TileEntityMolderRender extends TileEntitySpecialRenderer
 {
     ModelMolder modelMolder = new ModelMolder();
-    String texture = "textures/tileentities/Molder.png";
     
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale)
@@ -33,20 +32,27 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
         TileEntityMolder me = (TileEntityMolder) te;
-        
+        String texture = "textures/tileentities/Molder.png";
         ResourceLocation blockTexture = new ResourceLocation("jewelrycraft", texture);
         Minecraft.getMinecraft().renderEngine.bindTexture(blockTexture);
-        int block = me.getBlockMetadata();
-        
         GL11.glPushMatrix();
-        if (block == 0) GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-        else if (block == 1)
+        GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+        try
         {
-            GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-            GL11.glRotatef(90F, 0.0F, 1.0F, 0.0F);
+            int block = me.getBlockMetadata();
+            if (block == 1) GL11.glRotatef(90F, 0.0F, 1.0F, 0.0F);
+            else if (block == 2){
+                GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+                GL11.glRotatef(180F, 1.0F, 0.0F, 0.0F);
+            }
+            else if (block == 3){
+                GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+                GL11.glRotatef(180F, 1.0F, 0.0F, 1.0F);
+            }
         }
-        else if (block == 2) GL11.glRotatef(180F, 1.0F, 0.0F, 0.0F);
-        else if (block == 3) GL11.glRotatef(180F, 1.0F, 0.0F, 1.0F);
+        catch (Exception e)
+        {
+        }
         modelMolder.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         if (me != null)
         {

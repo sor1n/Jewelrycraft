@@ -50,94 +50,28 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && !world.isRemote)
         {
+            if (te.hasEndItem && item != null) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.hasenditem")));
             if (!te.hasEndItem && !te.hasJewelry && item != null && JewelrycraftUtil.isJewelry(item))
             {
-                if (te.hasModifier && te.hasJewel && item.hasTagCompound() && item.getTagCompound().hasKey("modifier") && item.getTagCompound().hasKey("jewel")) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.jewelrymodifiedfull")));
-                else if (te.hasJewel && item.hasTagCompound() && item.getTagCompound().hasKey("jewel")) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.jewelrycontainsjewel")));
-                else if (te.hasModifier && item.hasTagCompound() && item.getTagCompound().hasKey("modifier")) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.jewelrycontainsmodifier")));
-                else
-                {
-                    te.jewelry = item.copy();
-                    te.hasJewelry = true;
-                    if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
-                    entityPlayer.inventory.markDirty();
-                    world.setTileEntity(i, j, k, te);
-                    te.isDirty = true;
-                    te.markDirty();
-                }
+                te.jewelry = item.copy();
+                te.hasJewelry = true;
+                if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
+                te.isDirty = true;
             }
-            if (!te.hasEndItem && !te.hasModifier && item != null && JewelrycraftUtil.isModifier(item))
+            if (!te.hasEndItem && !te.hasGem && item != null && JewelrycraftUtil.isGem(item))
             {
-                if (te.hasJewelry && te.jewelry.hasTagCompound() && te.jewelry.getTagCompound().hasKey("modifier")) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.jewelrycontainsmodifier")));
-                else
-                {
-                    te.modifier = item.copy();
-                    te.modifier.stackSize = 1;
-                    te.hasModifier = true;
-                    if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
-                    entityPlayer.inventory.markDirty();
-                    world.setTileEntity(i, j, k, te);
-                    te.isDirty = true;
-                    te.markDirty();
-                }
+                te.gem = item.copy();
+                te.gem.stackSize = 1;
+                te.hasGem = true;
+                if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
+                te.isDirty = true;
             }
-            if (!te.hasEndItem && !te.hasJewel && item != null && JewelrycraftUtil.isJewel(item))
+            if (!te.hasEndItem && te.hasJewelry && te.hasGem && !te.crafting)
             {
-                if (te.hasJewelry && te.jewelry.hasTagCompound() && te.jewelry.getTagCompound().hasKey("jewel")) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.jewelrycontainsjewel")));
-                else
-                {
-                    te.jewel = item.copy();
-                    te.jewel.stackSize = 1;
-                    te.hasJewel = true;
-                    if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
-                    entityPlayer.inventory.markDirty();
-                    world.setTileEntity(i, j, k, te);
-                    te.isDirty = true;
-                    te.markDirty();
-                }
-            }
-            if (te.timer <= 0 && !te.hasEndItem && te.hasJewelry && (te.hasModifier || te.hasJewel))
-            {
-                te.timer = ConfigHandler.jewelryCraftingTime;
+                te.carving = ConfigHandler.jewelryCraftingTime;
                 te.angle = 0;
-            }
-            if (te.hasEndItem && item != null) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.hasenditem")));
-            
-            if (te.hasModifier && entityPlayer.isSneaking())
-            {
-                dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.modifier.copy());
-                te.modifier = new ItemStack(Item.getItemById(0), 0, 0);
-                te.hasModifier = false;
-                te.timer = 0;
-                te.angle = 0F;
+                te.crafting = true;
                 te.isDirty = true;
-                te.markDirty();
-                world.markBlockForUpdate(i, j, k);
-                world.setTileEntity(i, j, k, te);
-            }
-            if (te.hasJewelry && entityPlayer.isSneaking())
-            {
-                dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.jewelry.copy());
-                te.jewelry = new ItemStack(Item.getItemById(0), 0, 0);
-                te.hasJewelry = false;
-                te.timer = 0;
-                te.angle = 0F;
-                te.isDirty = true;
-                te.markDirty();
-                world.markBlockForUpdate(i, j, k);
-                world.setTileEntity(i, j, k, te);
-            }
-            if (te.hasJewel && entityPlayer.isSneaking())
-            {
-                dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.jewel.copy());
-                te.jewel = new ItemStack(Item.getItemById(0), 0, 0);
-                te.hasJewel = false;
-                te.timer = 0;
-                te.angle = 0F;
-                te.isDirty = true;
-                te.markDirty();
-                world.markBlockForUpdate(i, j, k);
-                world.setTileEntity(i, j, k, te);
             }
         }
         return true;
@@ -157,9 +91,8 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         TileEntityJewelrsCraftingTable te = (TileEntityJewelrsCraftingTable) world.getTileEntity(i, j, k);
         if (te != null)
         {
-            if (te.hasModifier) dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.modifier.copy());
             if (te.hasJewelry) dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.jewelry.copy());
-            if (te.hasJewel) dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.jewel.copy());
+            if (te.hasGem) dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.gem.copy());
             if (te.hasEndItem) dropItem(te.getWorldObj(), (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.endItem.copy());
             world.removeTileEntity(i, j, k);
         }
@@ -179,20 +112,42 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         TileEntityJewelrsCraftingTable te = (TileEntityJewelrsCraftingTable) world.getTileEntity(i, j, k);
         if (te != null && !world.isRemote)
         {
-            if (te.hasEndItem)
+            if (player.isSneaking())
             {
-                dropItem(te.getWorldObj(), (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.endItem.copy());
-                te.endItem = new ItemStack(Item.getItemById(0), 0, 0);
-                te.hasEndItem = false;
-                te.isDirty = true;
-                te.markDirty();
-                world.markBlockForUpdate(i, j, k);
-                world.setTileEntity(i, j, k, te);
+                if (te.hasJewelry)
+                {
+                    dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.jewelry.copy());
+                    te.jewelry = new ItemStack(Item.getItemById(0), 0, 0);
+                    te.hasJewelry = false;
+                    te.carving = -1;
+                    te.crafting = false;
+                    te.angle = 0F;
+                    te.isDirty = true;
+                }
+                if (te.hasGem)
+                {
+                    dropItem(world, (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.gem.copy());
+                    te.gem = new ItemStack(Item.getItemById(0), 0, 0);
+                    te.hasGem = false;
+                    te.carving = -1;
+                    te.crafting = false;
+                    te.angle = 0F;
+                    te.isDirty = true;
+                }
             }
-            else if (te.hasJewelry && (te.hasModifier || te.hasJewel) && te.timer > 0 && te.jewelry != null) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage.Jewelrycraft.table.iscrafting", te.jewelry.getDisplayName()) + " (" + ((ConfigHandler.jewelryCraftingTime - te.timer) * 100 / ConfigHandler.jewelryCraftingTime) + "%)"));
-            else if ((!te.hasModifier || !te.hasJewel) && !te.hasJewelry) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.missingjewelryandmodifierorjewel")));
-            else if (!te.hasJewelry) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.missingjewelry")));
-            else if (!te.hasModifier || !te.hasJewel) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.missingmodifierorjewel")));
+            else
+            {
+                if (te.hasEndItem)
+                {
+                    dropItem(te.getWorldObj(), (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.endItem.copy());
+                    te.endItem = new ItemStack(Item.getItemById(0), 0, 0);
+                    te.hasEndItem = false;
+                    te.isDirty = true;
+                }
+                else if (te.hasJewelry && te.hasGem && te.carving > 0 && te.jewelry != null) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage.Jewelrycraft.table.iscrafting", te.jewelry.getDisplayName()) + " (" + ((ConfigHandler.jewelryCraftingTime - te.carving) * 100 / ConfigHandler.jewelryCraftingTime) + "%)"));
+                else if (!te.hasGem) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.missinggem")));
+                else if (!te.hasJewelry) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.missingjewelry")));
+            }
         }
     }
     

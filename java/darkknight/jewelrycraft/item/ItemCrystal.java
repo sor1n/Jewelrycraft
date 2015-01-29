@@ -2,13 +2,23 @@ package darkknight.jewelrycraft.item;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSkull;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import darkknight.jewelrycraft.util.JewelryNBT;
 
 public class ItemCrystal extends Item
 {
@@ -45,6 +55,12 @@ public class ItemCrystal extends Item
     public IIcon getIcon(ItemStack stack, int pass)
     {
         return pass == 0 ? itemIcon : overlay;
+    }
+    
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int i, int j, int k, int side, float par8, float par9, float par10)
+    {
+        //System.out.println(world.getBlockMetadata(i, j, k));
+        return true;
     }
     
     @SuppressWarnings(

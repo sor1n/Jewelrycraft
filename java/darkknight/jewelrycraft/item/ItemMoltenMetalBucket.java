@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -129,7 +130,6 @@ public class ItemMoltenMetalBucket extends Item
                     }
                     catch (IOException e)
                     {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
@@ -284,7 +284,16 @@ public class ItemMoltenMetalBucket extends Item
     
     public String getItemStackDisplayName(ItemStack stack)
     {
-        if (JewelryNBT.ingot(stack) != null) return (StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim() + " " + JewelryNBT.ingot(stack).getDisplayName().replace("Ingot", " ").trim();
+        if (JewelryNBT.ingot(stack) != null){
+            ItemStack ingot = JewelryNBT.ingot(stack);
+            if(Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_glass) 
+                    || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_glass_pane) 
+                    || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_hardened_clay)
+                    || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.wool)
+                    || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.carpet)) 
+                ingot.setItemDamage(15 - ingot.getItemDamage());
+            return (StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim() + " " + ingot.getDisplayName().replace("Ingot", " ").trim();
+        }
         return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim() + " Metal";
     }
 }

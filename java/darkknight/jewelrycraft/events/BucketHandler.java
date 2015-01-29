@@ -36,12 +36,9 @@ public class BucketHandler
     
     @SubscribeEvent
     public void onBucketFill(FillBucketEvent event)
-    {
-        
-        ItemStack result = fillCustomBucket(event.world, event.target);
-        
-        if (result == null) return;
-        
+    {        
+        ItemStack result = fillCustomBucket(event.world, event.target);        
+        if (result == null) return;        
         event.result = result;
         event.setResult(Result.ALLOW);
     }
@@ -67,7 +64,6 @@ public class BucketHandler
                     {
                         itemID = Integer.parseInt(splitData[0]);
                         itemDamage = Integer.parseInt(splitData[1]);
-                        
                         JewelryNBT.addMetal(item, new ItemStack(Item.getItemById(itemID), 1, itemDamage));
                     }
                     catch (Exception e)

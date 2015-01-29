@@ -41,7 +41,7 @@ public class GuiGuide extends GuiContainer
         this.world = world;
         
         tabs = new GuiTab[]
-        { new GuiTabBlocks(0), new GuiTabItems(1), new GuiTabJewelsAndModifiers(2), new GuiTabRings(3), new GuiTabNecklaces(4) };
+        { new GuiTabBlocks(0), new GuiTabItems(1), new GuiTabJewelsAndModifiers(2)};
         
         activeTab = tabs[0];
     }

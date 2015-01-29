@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import darkknight.jewelrycraft.client.GuiGuide;
@@ -26,7 +25,7 @@ public class GuiTabNecklaces extends GuiTab
     {
         ItemStack it = new ItemStack(ItemList.necklace);
         JewelryNBT.addMetal(it, new ItemStack(Items.iron_ingot));
-        JewelryNBT.addJewel(it, new ItemStack(Blocks.redstone_block));
+        JewelryNBT.addGem(it, new ItemStack(Blocks.redstone_block));
         return it;
     }
     
@@ -34,7 +33,7 @@ public class GuiTabNecklaces extends GuiTab
     public void drawBackground(GuiGuide gui, int x, int y, int page)
     {
         ArrayList<String> text = new ArrayList<String>();
-        ArrayList<ItemStack> jewels = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> gems = new ArrayList<ItemStack>();
         ItemStack item = new ItemStack(ItemList.necklace);
         int xPos = (page % 2 == 0) ? 107 : -35;
         switch (page)
@@ -46,9 +45,9 @@ public class GuiTabNecklaces extends GuiTab
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, new ItemStack(Items.ender_pearl));
+                JewelryNBT.addGem(item, new ItemStack(Items.ender_pearl));
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Ender Pearl");
+                text.add(EnumChatFormatting.DARK_GREEN + "gem: " + EnumChatFormatting.BLACK + "Ender Pearl");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "None");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring teleports");
@@ -80,10 +79,10 @@ public class GuiTabNecklaces extends GuiTab
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, new ItemStack(Items.ender_pearl));
-                JewelryNBT.addModifier(item, new ItemStack(Items.bed));
+                JewelryNBT.addGem(item, new ItemStack(Items.ender_pearl));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Ender Pearl");
+                text.add(EnumChatFormatting.DARK_GREEN + "gem: " + EnumChatFormatting.BLACK + "Ender Pearl");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Bed");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  Just like the other");
@@ -109,10 +108,10 @@ public class GuiTabNecklaces extends GuiTab
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 5:
-                jewels.add(null);
-                jewels.add(new ItemStack(Items.diamond));
-                jewels.add(new ItemStack(Items.emerald));
-                jewels.add(new ItemStack(Items.nether_star));
+                gems.add(null);
+                gems.add(new ItemStack(Items.diamond));
+                gems.add(new ItemStack(Items.emerald));
+                gems.add(new ItemStack(Items.nether_star));
                 
                 if (del == 0)
                 {
@@ -122,13 +121,13 @@ public class GuiTabNecklaces extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
-                if (jValues > jewels.size() - 1) jValues = 0;
+                if (jValues > gems.size() - 1) jValues = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, jewels.get(jValues));
-                JewelryNBT.addModifier(item, new ItemStack(Items.blaze_powder));
+                JewelryNBT.addGem(item, gems.get(jValues));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "gem: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Blaze Powder");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
@@ -142,21 +141,21 @@ public class GuiTabNecklaces extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 6:
-                text.add("Depending on the jewel");
+                text.add("Depending on the gem");
                 text.add("used, you and the");
                 text.add("others get " + EnumChatFormatting.DARK_RED + "Fire");
                 text.add(EnumChatFormatting.DARK_RED + "Resistance" + EnumChatFormatting.BLACK + " I if you");
-                text.add("haven't got any jewel,");
+                text.add("haven't got any gem,");
                 text.add("II for Diamond,");
                 text.add("III for Emerald and");
                 text.add("VIII for Nether Star.");
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 7:
-                jewels.add(null);
-                jewels.add(new ItemStack(Items.diamond));
-                jewels.add(new ItemStack(Items.emerald));
-                jewels.add(new ItemStack(Items.nether_star));
+                gems.add(null);
+                gems.add(new ItemStack(Items.diamond));
+                gems.add(new ItemStack(Items.emerald));
+                gems.add(new ItemStack(Items.nether_star));
                 
                 if (del == 0)
                 {
@@ -166,13 +165,13 @@ public class GuiTabNecklaces extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
-                if (jValues > jewels.size() - 1) jValues = 0;
+                if (jValues > gems.size() - 1) jValues = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, jewels.get(jValues));
-                JewelryNBT.addModifier(item, new ItemStack(Items.sugar));
+                JewelryNBT.addGem(item, gems.get(jValues));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "gem: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Sugar");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
@@ -186,20 +185,20 @@ public class GuiTabNecklaces extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 8:
-                text.add("Depending on the jewel");
+                text.add("Depending on the gem");
                 text.add("used, you and the");
                 text.add("others get " + EnumChatFormatting.DARK_RED + "Speed" + EnumChatFormatting.BLACK + " I");
                 text.add("if you haven't got any");
-                text.add("jewel, II for Diamond,");
+                text.add("gem, II for Diamond,");
                 text.add("III for Emerald and");
                 text.add("VIII for Nether Star.");
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 9:
-                jewels.add(null);
-                jewels.add(new ItemStack(Items.diamond));
-                jewels.add(new ItemStack(Items.emerald));
-                jewels.add(new ItemStack(Items.nether_star));
+                gems.add(null);
+                gems.add(new ItemStack(Items.diamond));
+                gems.add(new ItemStack(Items.emerald));
+                gems.add(new ItemStack(Items.nether_star));
                 
                 if (del == 0)
                 {
@@ -209,13 +208,13 @@ public class GuiTabNecklaces extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
-                if (jValues > jewels.size() - 1) jValues = 0;
+                if (jValues > gems.size() - 1) jValues = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, jewels.get(jValues));
-                JewelryNBT.addModifier(item, new ItemStack(Items.iron_pickaxe));
+                JewelryNBT.addGem(item, gems.get(jValues));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "gem: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Iron Pickaxe");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
@@ -229,20 +228,20 @@ public class GuiTabNecklaces extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 10:
-                text.add("Depending on the jewel");
+                text.add("Depending on the gem");
                 text.add("used, you and the");
                 text.add("others get " + EnumChatFormatting.DARK_RED + "Haste" + EnumChatFormatting.BLACK + " I");
                 text.add("if you haven't got any");
-                text.add("jewel, II for Diamond,");
+                text.add("gem, II for Diamond,");
                 text.add("III for Emerald and");
                 text.add("VIII for Nether Star.");
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 11:
-                jewels.add(null);
-                jewels.add(new ItemStack(Items.diamond));
-                jewels.add(new ItemStack(Items.emerald));
-                jewels.add(new ItemStack(Items.nether_star));
+                gems.add(null);
+                gems.add(new ItemStack(Items.diamond));
+                gems.add(new ItemStack(Items.emerald));
+                gems.add(new ItemStack(Items.nether_star));
                 
                 if (del == 0)
                 {
@@ -252,13 +251,13 @@ public class GuiTabNecklaces extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
-                if (jValues > jewels.size() - 1) jValues = 0;
+                if (jValues > gems.size() - 1) jValues = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, jewels.get(jValues));
-                JewelryNBT.addModifier(item, new ItemStack(Items.feather));
+                JewelryNBT.addGem(item, gems.get(jValues));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "gem: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Feather");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
@@ -272,20 +271,20 @@ public class GuiTabNecklaces extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 12:
-                text.add("Depending on the jewel");
+                text.add("Depending on the gem");
                 text.add("used, you and the");
                 text.add("others get " + EnumChatFormatting.DARK_RED + "Jump Boost");
                 text.add("I if you haven't got any");
-                text.add("jewel, II for Diamond,");
+                text.add("gem, II for Diamond,");
                 text.add("III for Emerald and");
                 text.add("VIII for Nether Star.");
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 13:
-                jewels.add(null);
-                jewels.add(new ItemStack(Items.diamond));
-                jewels.add(new ItemStack(Items.emerald));
-                jewels.add(new ItemStack(Items.nether_star));
+                gems.add(null);
+                gems.add(new ItemStack(Items.diamond));
+                gems.add(new ItemStack(Items.emerald));
+                gems.add(new ItemStack(Items.nether_star));
                 
                 if (del == 0)
                 {
@@ -295,13 +294,13 @@ public class GuiTabNecklaces extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
-                if (jValues > jewels.size() - 1) jValues = 0;
+                if (jValues > gems.size() - 1) jValues = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, jewels.get(jValues));
-                JewelryNBT.addModifier(item, new ItemStack(Items.potionitem, 1, 8270));
+                JewelryNBT.addGem(item, gems.get(jValues));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "gem: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "8min Potion of");
                 text.add("Invisibility");
@@ -316,20 +315,20 @@ public class GuiTabNecklaces extends GuiTab
                 break;
             case 14:
                 text.add("right click with it.");
-                text.add("Depending on the jewel");
+                text.add("Depending on the gem");
                 text.add("used, you and the");
                 text.add("others get " + EnumChatFormatting.DARK_RED + "Invisibility" + EnumChatFormatting.BLACK + " I");
                 text.add("if you haven't got any");
-                text.add("jewel, II for Diamond,");
+                text.add("gem, II for Diamond,");
                 text.add("III for Emerald and");
                 text.add("VIII for Nether Star.");
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 15:
-                jewels.add(null);
-                jewels.add(new ItemStack(Items.diamond));
-                jewels.add(new ItemStack(Items.emerald));
-                jewels.add(new ItemStack(Items.nether_star));
+                gems.add(null);
+                gems.add(new ItemStack(Items.diamond));
+                gems.add(new ItemStack(Items.emerald));
+                gems.add(new ItemStack(Items.nether_star));
                 
                 if (del == 0)
                 {
@@ -339,13 +338,13 @@ public class GuiTabNecklaces extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
-                if (jValues > jewels.size() - 1) jValues = 0;
+                if (jValues > gems.size() - 1) jValues = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, jewels.get(jValues));
-                JewelryNBT.addModifier(item, new ItemStack(Items.dye, 1, 15));
+                JewelryNBT.addGem(item, gems.get(jValues));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "gem: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Bone Meal");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
@@ -359,7 +358,7 @@ public class GuiTabNecklaces extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 16:
-                text.add("determined by the jewel");
+                text.add("determined by the gem");
                 text.add("used. For none, the");
                 text.add("area is a block, diamond");
                 text.add("is 3x3, emerald 5x5 and");
@@ -375,10 +374,10 @@ public class GuiTabNecklaces extends GuiTab
                 break;
             case 17:
                 JewelryNBT.addMetal(item, new ItemStack(ItemList.shadowIngot));
-                JewelryNBT.addJewel(item, new ItemStack(Items.nether_star));
-                JewelryNBT.addModifier(item, new ItemStack(Items.diamond_pickaxe));
+                JewelryNBT.addGem(item, new ItemStack(Items.nether_star));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Nether Star");
+                text.add(EnumChatFormatting.DARK_GREEN + "gem: " + EnumChatFormatting.BLACK + "Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Diamond Pick");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Shadow Ingot");
                 text.add("  This will break all");

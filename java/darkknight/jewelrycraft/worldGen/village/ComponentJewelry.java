@@ -233,7 +233,7 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         TileEntityChest chest = (TileEntityChest) world.getTileEntity(i1, j1, k1);
         while (chest != null && t > 0)
         {
-            ItemStack jewels = JewelrycraftUtil.jewel.get(random.nextInt(JewelrycraftUtil.jewel.size()));
+            ItemStack jewels = JewelrycraftUtil.gem.get(random.nextInt(JewelrycraftUtil.gem.size()));
             chest.func_145976_a("Jeweler's Chest");
             if (random.nextBoolean()) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), JewelrycraftUtil.modifiers.get(random.nextInt(JewelrycraftUtil.modifiers.size())));
             else if (jewels.getItem() == Items.nether_star && ConfigHandler.generateVillageNetherstar) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), jewels);
@@ -291,10 +291,10 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         {
             ItemStack ring = new ItemStack(ItemList.ring);
             JewelryNBT.addMetal(ring, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())));
-            JewelryNBT.addModifier(ring, JewelrycraftUtil.modifiers.get(random.nextInt(JewelrycraftUtil.modifiers.size())));
-            JewelryNBT.addJewel(ring, JewelrycraftUtil.jewel.get(random.nextInt(JewelrycraftUtil.jewel.size())));
-            if (JewelryNBT.isModifierEffectType(ring)) JewelryNBT.addMode(ring, "Activated");
-            if (JewelryNBT.isJewelX(ring, new ItemStack(Items.nether_star)) && JewelryNBT.isModifierX(ring, new ItemStack(Items.book))) JewelryNBT.addMode(ring, "Disenchant");
+            JewelryNBT.addModifiers(ring, JewelrycraftUtil.addRandomModifiers());
+            JewelryNBT.addGem(ring, JewelrycraftUtil.gem.get(random.nextInt(JewelrycraftUtil.gem.size())));
+//            if (JewelryNBT.isModifierEffectType(ring)) JewelryNBT.addMode(ring, "Activated");
+            if (JewelryNBT.isGemX(ring, new ItemStack(Items.nether_star)) && JewelryNBT.isModifierX(ring, new ItemStack(Items.book))) JewelryNBT.addMode(ring, "Disenchant");
             displayer.object = ring;
             displayer.quantity = 1;
             displayer.hasObject = true;

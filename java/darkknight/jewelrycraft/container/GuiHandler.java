@@ -7,6 +7,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.client.GuiGuide;
+import darkknight.jewelrycraft.client.GuiJewelry;
 import darkknight.jewelrycraft.client.GuiRingChest;
 
 public class GuiHandler implements IGuiHandler
@@ -25,6 +26,8 @@ public class GuiHandler implements IGuiHandler
                 return new ContainerRingChest(player.inventory, (TileEntityChest) world.getTileEntity(x, y, z));
             case 1:
                 return new ContainerGuide();
+            case 2:
+                return new ContainerJewelryTab(player, player.inventory);
             default:
                 return null;
         }
@@ -39,6 +42,8 @@ public class GuiHandler implements IGuiHandler
                 return new GuiRingChest((ContainerRingChest) getServerGuiElement(ID, player, world, x, y, z));
             case 1:
                 return new GuiGuide((ContainerGuide) getServerGuiElement(ID, player, world, x, y, z), world);
+            case 2:
+                return new GuiJewelry(new ContainerJewelryTab(player, player.inventory));
             default:
                 return null;
         }

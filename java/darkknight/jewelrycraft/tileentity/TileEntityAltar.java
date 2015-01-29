@@ -70,7 +70,7 @@ public class TileEntityAltar extends TileEntity
             List entitiesN = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(xCoord - 0.5D, yCoord + 1D, zCoord - 0.5D, xCoord + 1.5D, yCoord + 2D, zCoord + 1.5D));
             if (object.getUnlocalizedName().contains("ring"))
             {
-                if (JewelryNBT.isJewelX(object, new ItemStack(Items.ender_pearl)) && JewelryNBT.dimension(object) != -2 && JewelryNBT.playerPosX(object) != -1 && JewelryNBT.playerPosY(object) != -1 && JewelryNBT.playerPosZ(object) != -1)
+                if (JewelryNBT.isGemX(object, new ItemStack(Items.ender_pearl)) && JewelryNBT.dimension(object) != -2 && JewelryNBT.playerPosX(object) != -1 && JewelryNBT.playerPosY(object) != -1 && JewelryNBT.playerPosZ(object) != -1)
                 {
                     double posX = JewelryNBT.playerPosX(object), posY = JewelryNBT.playerPosY(object), posZ = JewelryNBT.playerPosZ(object);
                     int dimension = JewelryNBT.dimension(object);
@@ -111,7 +111,7 @@ public class TileEntityAltar extends TileEntity
             }
             else if (object.getUnlocalizedName().contains("necklace"))
             {
-                if (JewelryNBT.isJewelX(object, new ItemStack(Items.ender_pearl)) && JewelryNBT.dimension(object) != -2 && JewelryNBT.playerPosX(object) != -1 && JewelryNBT.playerPosY(object) != -1 && JewelryNBT.playerPosZ(object) != -1)
+                if (JewelryNBT.isGemX(object, new ItemStack(Items.ender_pearl)) && JewelryNBT.dimension(object) != -2 && JewelryNBT.playerPosX(object) != -1 && JewelryNBT.playerPosY(object) != -1 && JewelryNBT.playerPosZ(object) != -1)
                 {
                     double posX = JewelryNBT.playerPosX(object), posY = JewelryNBT.playerPosY(object), posZ = JewelryNBT.playerPosZ(object);
                     int dimension = JewelryNBT.dimension(object);

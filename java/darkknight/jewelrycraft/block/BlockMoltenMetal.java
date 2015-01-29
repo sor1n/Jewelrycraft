@@ -43,6 +43,7 @@ public class BlockMoltenMetal extends BlockFluidClassic
         super(fluid, material);
         setBlockName("Jewelrycraft.moltenMetal");
         this.setQuantaPerBlock(5);
+        this.setRenderPass(1);
         setLightLevel(15f);
     }
     
@@ -247,7 +248,6 @@ public class BlockMoltenMetal extends BlockFluidClassic
                 {
                     itemID = Integer.parseInt(splitData[0]);
                     itemDamage = Integer.parseInt(splitData[1]);
-                    
                     JewelryNBT.addMetal(item, new ItemStack(Item.getItemById(itemID), 1, itemDamage));
                 }
                 catch (Exception e)

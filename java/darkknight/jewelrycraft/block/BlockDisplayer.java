@@ -61,35 +61,68 @@ public class BlockDisplayer extends BlockContainer
     {
         TileEntityDisplayer te = (TileEntityDisplayer) world.getTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
-        if (te != null && item != null && item != new ItemStack(Item.getItemById(0), 0, 0) && !world.isRemote)
+        if (te != null)
         {
-            if (!te.hasObject)
+            if (item != null && item != new ItemStack(Item.getItemById(0), 0, 0) && !world.isRemote)
             {
-                te.object = item.copy();
-                te.object.stackSize = 1;
-                te.quantity += item.stackSize;
-                te.hasObject = true;
-                if (!entityPlayer.capabilities.isCreativeMode) item.stackSize = 0;
-                te.isDirty = true;
-                te.markDirty();
-            }
-            else if (te.object.getItem() == item.getItem() && te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0) && te.object.getItemDamage() == item.getItemDamage())
-            {
-                if (te.object.hasTagCompound() && item.hasTagCompound() && te.object.getTagCompound().equals(item.getTagCompound()))
+                if (!te.hasObject)
                 {
+                    te.object = item.copy();
                     te.quantity += item.stackSize;
-                    te.object.stackSize = 1;
+                    te.hasObject = true;
                     if (!entityPlayer.capabilities.isCreativeMode) item.stackSize = 0;
                     te.isDirty = true;
                     te.markDirty();
                 }
-                else if (!te.object.hasTagCompound() && !item.hasTagCompound())
+                else if (te.object.getItem() == item.getItem() && te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0) && te.object.getItemDamage() == item.getItemDamage())
                 {
-                    te.quantity += item.stackSize;
-                    te.object.stackSize = 1;
-                    if (!entityPlayer.capabilities.isCreativeMode) item.stackSize = 0;
+                    if (te.object.hasTagCompound() && item.hasTagCompound() && te.object.getTagCompound().equals(item.getTagCompound()))
+                    {
+                        te.quantity += item.stackSize;
+                        if (!entityPlayer.capabilities.isCreativeMode) entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, item.stackSize);
+                        te.isDirty = true;
+                        te.markDirty();
+                    }
+                    else if (!te.object.hasTagCompound() && !item.hasTagCompound())
+                    {
+                        te.quantity += item.stackSize;
+                        if (!entityPlayer.capabilities.isCreativeMode) entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, item.stackSize);
+                        te.isDirty = true;
+                        te.markDirty();
+                    }
+                }
+            }
+            else if (item == null || item == new ItemStack(Item.getItemById(0), 0, 0))
+            {
+                if (!entityPlayer.capabilities.isCreativeMode)
+                {
+                    for (int inv = 0; inv < entityPlayer.inventory.getSizeInventory(); inv++)
+                    {
+                        item = entityPlayer.inventory.getStackInSlot(inv);
+                        if (item != null && te.object.getItem() == item.getItem() && te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0) && te.object.getItemDamage() == item.getItemDamage())
+                        {
+                            if (te.object.hasTagCompound() && item.hasTagCompound() && te.object.getTagCompound().equals(item.getTagCompound()))
+                            {
+                                te.quantity += item.stackSize;
+                                if (!entityPlayer.capabilities.isCreativeMode) entityPlayer.inventory.decrStackSize(inv, item.stackSize);
+                                te.isDirty = true;
+                                te.markDirty();
+                            }
+                            else if (!te.object.hasTagCompound() && !item.hasTagCompound())
+                            {
+                                te.quantity += item.stackSize;
+                                if (!entityPlayer.capabilities.isCreativeMode) entityPlayer.inventory.decrStackSize(inv, item.stackSize);
+                                te.isDirty = true;
+                                te.markDirty();
+                            }
+                        }
+                    }
+                }
+                else if(te.hasObject && te.object.getItem() != null)
+                {
+                    te.quantity += 64;
                     te.isDirty = true;
-                    te.markDirty();
+                    te.markDirty();                    
                 }
             }
         }
@@ -104,7 +137,7 @@ public class BlockDisplayer extends BlockContainer
         {
             if (te.hasObject && te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0) && player.inventory.addItemStackToInventory(te.object))
             {
-                if (player.isSneaking())
+                if (!player.isSneaking())
                 {
                     if (te.quantity > te.object.getMaxStackSize())
                     {

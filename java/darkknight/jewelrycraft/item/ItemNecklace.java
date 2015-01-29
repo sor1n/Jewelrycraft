@@ -1,14 +1,13 @@
 package darkknight.jewelrycraft.item;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -26,10 +25,11 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 public class ItemNecklace extends Item
 {
-    public IIcon jewel;
+    public IIcon gem;
     private double amplifier;
     int index = 0;
     
@@ -42,7 +42,7 @@ public class ItemNecklace extends Item
     public void registerIcons(IIconRegister iconRegister)
     {
         itemIcon = iconRegister.registerIcon("jewelrycraft:necklace");
-        jewel = iconRegister.registerIcon("jewelrycraft:jewelNecklace");
+        gem = iconRegister.registerIcon("jewelrycraft:jewelNecklace");
     }
     
     @Override
@@ -68,7 +68,7 @@ public class ItemNecklace extends Item
     public IIcon getIcon(ItemStack stack, int pass)
     {
         if (pass == 0) return itemIcon;
-        if (pass == 1 && JewelryNBT.jewel(stack) != null) return jewel;
+        if (pass == 1 && JewelryNBT.gem(stack) != null) return gem;
         return itemIcon;
     }
     
@@ -88,7 +88,7 @@ public class ItemNecklace extends Item
             if (JewelryNBT.playerPosX(stack) != -1 && JewelryNBT.playerPosY(stack) != -1 && JewelryNBT.playerPosZ(stack) != -1)
             {
                 double posX = JewelryNBT.playerPosX(stack), posY = JewelryNBT.playerPosY(stack), posZ = JewelryNBT.playerPosZ(stack);
-                if (JewelryNBT.isJewelX(stack, new ItemStack(Items.ender_pearl)) && JewelryNBT.isModifierX(stack, new ItemStack(Items.bed)) && JewelryNBT.dimension(stack) != -2 && JewelryNBT.dimName(stack) != null)
+                if (JewelryNBT.isGemX(stack, new ItemStack(Items.ender_pearl)) && JewelryNBT.isModifierX(stack, new ItemStack(Items.bed)) && JewelryNBT.dimension(stack) != -2 && JewelryNBT.dimName(stack) != null)
                 {
                     int dimension = JewelryNBT.dimension(stack);
                     for (int i = 1; i <= 20; i++)
@@ -110,12 +110,12 @@ public class ItemNecklace extends Item
                 }
                 else player.addChatMessage(new ChatComponentText("You can't teleport to these coordonates! You need to be in the same dimension they were set!"));
             }
-            else if (JewelryNBT.isJewelX(stack, new ItemStack(Items.ender_pearl)) && JewelryNBT.isModifierX(stack, new ItemStack(Items.bed)) && JewelryNBT.dimension(stack) == -2 && JewelryNBT.playerPosX(stack) == -1 && JewelryNBT.playerPosY(stack) == -1 && JewelryNBT.playerPosZ(stack) == -1)
+            else if (JewelryNBT.isGemX(stack, new ItemStack(Items.ender_pearl)) && JewelryNBT.isModifierX(stack, new ItemStack(Items.bed)) && JewelryNBT.dimension(stack) == -2 && JewelryNBT.playerPosX(stack) == -1 && JewelryNBT.playerPosY(stack) == -1 && JewelryNBT.playerPosZ(stack) == -1)
             {
                 JewelryNBT.addCoordonatesAndDimension(stack, player.posX, player.posY, player.posZ, world.provider.dimensionId, world.provider.getDimensionName());
                 JewelryNBT.addFakeEnchantment(stack);
             }
-            else if (JewelryNBT.isJewelX(stack, new ItemStack(Items.ender_pearl)) && !JewelryNBT.hasTag(stack, "modifier") && JewelryNBT.playerPosX(stack) == -1 && JewelryNBT.playerPosY(stack) == -1 && JewelryNBT.playerPosZ(stack) == -1)
+            else if (JewelryNBT.isGemX(stack, new ItemStack(Items.ender_pearl)) && !JewelryNBT.hasTag(stack, "modifier") && JewelryNBT.playerPosX(stack) == -1 && JewelryNBT.playerPosY(stack) == -1 && JewelryNBT.playerPosZ(stack) == -1)
             {
                 JewelryNBT.addCoordonatesAndDimension(stack, player.posX, player.posY, player.posZ, world.provider.dimensionId, world.provider.getDimensionName());
                 JewelryNBT.addFakeEnchantment(stack);
@@ -141,7 +141,7 @@ public class ItemNecklace extends Item
     // player, EntityLivingBase entity)
     // {
     // if (!player.worldObj.isRemote && entity instanceof EntityLivingBase &&
-    // JewelryNBT.isJewelX(stack, new ItemStack(Item.netherStar)) &&
+    // JewelryNBT.isGemX(stack, new ItemStack(Item.netherStar)) &&
     // JewelryNBT.isModifierX(stack, new ItemStack(Block.chest)) &&
     // JewelryNBT.entity(stack, player) == null){
     // JewelryNBT.addEntity(stack, entity);
@@ -158,16 +158,17 @@ public class ItemNecklace extends Item
      */
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
     {
-        if (stack.hasTagCompound())
+        if (stack.hasTagCompound() && par4)
         {
             ItemStack ingot = JewelryNBT.ingot(stack);
             if (ingot != null && Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) > 0) list.add("Ingot: " + EnumChatFormatting.YELLOW + ingot.getDisplayName());
             
-            ItemStack jewel = JewelryNBT.jewel(stack);
-            if (jewel != null) list.add("Jewel: " + EnumChatFormatting.BLUE + jewel.getDisplayName());
+            ItemStack gem = JewelryNBT.gem(stack);
+            if (gem != null) list.add("Gem: " + EnumChatFormatting.BLUE + gem.getDisplayName());
             
-            ItemStack modifier = JewelryNBT.modifier(stack);
-            if (modifier != null) list.add("Modifier: " + EnumChatFormatting.DARK_PURPLE + modifier.getDisplayName());
+            ArrayList<ItemStack> modifier = JewelryNBT.modifier(stack);
+            if(!modifier.isEmpty()) list.add("Modifiers: ");
+            for(int i = 0; i < modifier.size(); i++) list.add(EnumChatFormatting.DARK_PURPLE + modifier.get(i).getDisplayName() + " x" + modifier.get(i).stackSize);
             
             double playerPosX = JewelryNBT.playerPosX(stack), playerPosY = JewelryNBT.playerPosY(stack), playerPosZ = JewelryNBT.playerPosZ(stack);
             if (playerPosX != -1 && playerPosY != -1 && playerPosZ != -1) list.add(EnumChatFormatting.YELLOW + "X: " + EnumChatFormatting.GRAY + (int) playerPosX + EnumChatFormatting.YELLOW + " Y: " + EnumChatFormatting.GRAY + (int) playerPosY + EnumChatFormatting.YELLOW + " Z: " + EnumChatFormatting.GRAY + (int) playerPosZ);
@@ -205,17 +206,17 @@ public class ItemNecklace extends Item
             // int colorI = JewelryNBT.ingotColor(stack);
             // if(colorI != -1) list.add("Ingot Color: " + colorI);
             //
-            // int colorJ = JewelryNBT.jewelColor(stack);
-            // if(colorJ != -1) list.add("Jewel Color: " + colorJ);
+            // int colorJ = JewelryNBT.gemColor(stack);
+            // if(colorJ != -1) list.add("gem Color: " + colorJ);
         }
     }
     
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int i, int j, int k, int side, float par8, float par9, float par10)
     {
         amplifier = 0;
-        if (JewelryNBT.isJewelX(stack, new ItemStack(Items.diamond))) amplifier = 1D;
-        else if (JewelryNBT.isJewelX(stack, new ItemStack(Items.emerald))) amplifier = 2D;
-        else if (JewelryNBT.isJewelX(stack, new ItemStack(Items.nether_star))) amplifier = 5D;
+        if (JewelryNBT.isGemX(stack, new ItemStack(Items.diamond))) amplifier = 1D;
+        else if (JewelryNBT.isGemX(stack, new ItemStack(Items.emerald))) amplifier = 2D;
+        else if (JewelryNBT.isGemX(stack, new ItemStack(Items.nether_star))) amplifier = 5D;
         
         if (!world.isRemote)
         {
@@ -226,7 +227,7 @@ public class ItemNecklace extends Item
             
             for (int x = (int) -1; x <= 1; x++)
                 for (int z = (int) -1; z <= 1; z++)
-                    if (JewelryNBT.isModifierX(stack, new ItemStack(Items.diamond_pickaxe)) && JewelryNBT.isJewelX(stack, new ItemStack(Items.nether_star)) && JewelryNBT.isIngotX(stack, new ItemStack(ItemList.shadowIngot))) if ((side == 0 || side == 1) && j > 0 && world.getBlock(i, j + x, k + z) != Blocks.air && world.getBlock(i + x, j, k + z).getBlockHardness(world, i + x, j, k + z) > 0F) world.func_147480_a(i + x, j, k + z, true);
+                    if (JewelryNBT.isModifierX(stack, new ItemStack(Items.diamond_pickaxe)) && JewelryNBT.isGemX(stack, new ItemStack(Items.nether_star)) && JewelryNBT.isIngotX(stack, new ItemStack(ItemList.shadowIngot))) if ((side == 0 || side == 1) && j > 0 && world.getBlock(i, j + x, k + z) != Blocks.air && world.getBlock(i + x, j, k + z).getBlockHardness(world, i + x, j, k + z) > 0F) world.func_147480_a(i + x, j, k + z, true);
                     else if ((side == 2 || side == 3) && j + x > 0 && world.getBlock(i, j + x, k + z) != Blocks.air && world.getBlock(i + z, j + x, k).getBlockHardness(world, i + z, j + x, k) > 0F) world.func_147480_a(i + z, j + x, k, true);
                     else if ((side == 4 || side == 5) && j + x > 0 && world.getBlock(i, j + x, k + z) != Blocks.air && world.getBlock(i, j + x, k + z).getBlockHardness(world, i, j + x, k + z) > 0F) world.func_147480_a(i, j + x, k + z, true);
         }
@@ -241,9 +242,9 @@ public class ItemNecklace extends Item
             EntityPlayer entityplayer = (EntityPlayer) entity;
             int posX = (int) Math.floor(entityplayer.posX), posY = (int) Math.floor(entityplayer.posY), posZ = (int) Math.floor(entityplayer.posZ);
             
-            if (JewelryNBT.isJewelX(stack, new ItemStack(Items.diamond))) amplifier = 1D;
-            else if (JewelryNBT.isJewelX(stack, new ItemStack(Items.emerald))) amplifier = 2D;
-            else if (JewelryNBT.isJewelX(stack, new ItemStack(Items.nether_star))) amplifier = 5D;
+            if (JewelryNBT.isGemX(stack, new ItemStack(Items.diamond))) amplifier = 1D;
+            else if (JewelryNBT.isGemX(stack, new ItemStack(Items.emerald))) amplifier = 2D;
+            else if (JewelryNBT.isGemX(stack, new ItemStack(Items.nether_star))) amplifier = 5D;
             
             if (JewelryNBT.isModifierX(stack, new ItemStack(Items.dye, 1, 15)) && world.getBlock(posX, posY - 1, posZ) == Blocks.farmland) for (int i = (int) -amplifier; i <= amplifier; i++)
                 for (int j = (int) -amplifier; j <= amplifier; j++)
@@ -256,7 +257,7 @@ public class ItemNecklace extends Item
                 {
                     if (JewelryNBT.isModifierX(stack, new ItemStack(Items.blaze_powder))) ((EntityLivingBase) entities.get(i)).addPotionEffect(new PotionEffect(Potion.fireResistance.id, 4, 0, true));
                     else if (JewelryNBT.isModifierX(stack, new ItemStack(Items.sugar))) ((EntityLivingBase) entities.get(i)).addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 4, 0, true));
-                    else if (JewelryNBT.isModifierX(stack, new ItemStack(Items.iron_pickaxe)) && !JewelryNBT.isJewelX(stack, new ItemStack(Items.ender_pearl))) ((EntityLivingBase) entities.get(i)).addPotionEffect(new PotionEffect(Potion.digSpeed.id, 4, 0, true));
+                    else if (JewelryNBT.isModifierX(stack, new ItemStack(Items.iron_pickaxe)) && !JewelryNBT.isGemX(stack, new ItemStack(Items.ender_pearl))) ((EntityLivingBase) entities.get(i)).addPotionEffect(new PotionEffect(Potion.digSpeed.id, 4, 0, true));
                     else if (JewelryNBT.isModifierX(stack, new ItemStack(Items.feather)))
                     {
                         ((EntityLivingBase) entities.get(i)).addPotionEffect(new PotionEffect(Potion.jump.id, 4, 0, true));
@@ -268,14 +269,14 @@ public class ItemNecklace extends Item
         }
     }
     
-    public ItemStack getModifiedItemStack(ItemStack ingot, ItemStack modifier, ItemStack jewel)
+    public ItemStack getModifiedItemStack(ItemStack ingot, ItemStack modifier, ItemStack gem)
     {
         ItemStack itemstack = new ItemStack(this);
         JewelryNBT.addMetal(itemstack, ingot);
-        JewelryNBT.addModifier(itemstack, modifier);
-        JewelryNBT.addJewel(itemstack, jewel);
-        if (JewelryNBT.isModifierEffectType(itemstack) && !(JewelryNBT.isJewelX(itemstack, new ItemStack(Items.ender_pearl)) && JewelryNBT.isModifierX(itemstack, new ItemStack(Items.iron_pickaxe)))) JewelryNBT.addMode(itemstack, "Activated");
-        if (JewelryNBT.isJewelX(itemstack, new ItemStack(Items.nether_star)) && JewelryNBT.isModifierX(itemstack, new ItemStack(Items.book))) JewelryNBT.addMode(itemstack, "Disenchant");
+        JewelryNBT.addModifiers(itemstack, JewelrycraftUtil.addRandomModifiers());
+        JewelryNBT.addGem(itemstack, gem);
+//        if (JewelryNBT.isModifierEffectType(itemstack) && !(JewelryNBT.isGemX(itemstack, new ItemStack(Items.ender_pearl)) && JewelryNBT.isModifierX(itemstack, new ItemStack(Items.iron_pickaxe)))) JewelryNBT.addMode(itemstack, "Activated");
+        if (JewelryNBT.isGemX(itemstack, new ItemStack(Items.nether_star)) && JewelryNBT.isModifierX(itemstack, new ItemStack(Items.book))) JewelryNBT.addMode(itemstack, "Disenchant");
         return itemstack;
     }
 }

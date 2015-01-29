@@ -11,14 +11,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.lib.Reference;
 
 public class JewelrycraftUtil
 {
     public static ArrayList<ItemStack> modifiers = new ArrayList<ItemStack>();
-    public static ArrayList<ItemStack> jewel = new ArrayList<ItemStack>();
+    public static ArrayList<ItemStack> gem = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> jewelry = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> metal = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> ores = new ArrayList<ItemStack>();
+    public static HashMap<String, Integer> curses = new HashMap<String, Integer>();
     public static HashMap<Item, ItemStack> oreToIngot = new HashMap<Item, ItemStack>();
     public static ArrayList<String> jamcraftPlayers = new ArrayList<String>();
     public static Random rand = new Random();
@@ -43,18 +45,25 @@ public class JewelrycraftUtil
         
         // Jewels
         for (int i = 0; i < 16; i++)
-            jewel.add(new ItemStack(ItemList.crystal, 1, i));
-        jewel.add(new ItemStack(Blocks.redstone_block));
-        jewel.add(new ItemStack(Blocks.lapis_block));
-        jewel.add(new ItemStack(Blocks.obsidian));
-        jewel.add(new ItemStack(Items.diamond));
-        jewel.add(new ItemStack(Items.emerald));
-        jewel.add(new ItemStack(Items.ender_pearl));
-        jewel.add(new ItemStack(Items.nether_star));
+            gem.add(new ItemStack(ItemList.crystal, 1, i));
+        gem.add(new ItemStack(Blocks.redstone_block));
+        gem.add(new ItemStack(Blocks.lapis_block));
+        gem.add(new ItemStack(Blocks.obsidian));
+        gem.add(new ItemStack(Items.diamond));
+        gem.add(new ItemStack(Items.emerald));
+        gem.add(new ItemStack(Items.ender_pearl));
+        gem.add(new ItemStack(Items.nether_star));
         
         // Jewelry
         jewelry.add(new ItemStack(ItemList.ring));
         jewelry.add(new ItemStack(ItemList.necklace));
+        
+        // Curses
+        curses.put(Reference.MODNAME + ":" + "Blind", 0);
+        curses.put(Reference.MODNAME + ":" + "Weak", 1);
+        curses.put(Reference.MODNAME + ":" + "Anemic", 2);
+        curses.put(Reference.MODNAME + ":" + "Scared", 3);
+        curses.put(Reference.MODNAME + ":" + "Brave", 4);
     }
     
     public static void jamcrafters()
@@ -77,6 +86,16 @@ public class JewelrycraftUtil
         jamcraftPlayers.add("theminecoder");
         jamcraftPlayers.add("YSPilot");
         jamcraftPlayers.add("direwolf20");
+    }
+    
+    public static ArrayList<ItemStack> addRandomModifiers()
+    {
+        ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+        for(int i = 0; i < new Random().nextInt(modifiers.size()); i++)
+        {
+            list.add(modifiers.get(new Random().nextInt(modifiers.size())));
+        }
+        return list;        
     }
     
     public static void addMetals()
@@ -119,9 +138,9 @@ public class JewelrycraftUtil
         return false;
     }
     
-    public static boolean isJewel(ItemStack item)
+    public static boolean isGem(ItemStack item)
     {
-        Iterator<ItemStack> i = jewel.iterator();
+        Iterator<ItemStack> i = gem.iterator();
         
         while (i.hasNext())
         {

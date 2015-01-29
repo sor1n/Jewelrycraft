@@ -1,12 +1,14 @@
 package darkknight.jewelrycraft.util;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import darkknight.jewelrycraft.item.ItemRing;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -43,12 +45,12 @@ public class JewelryNBT
      * 
      * @param item
      *            The item you want to add the NBT data on
-     * @param jewel
-     *            The jewel you want to add on the item
+     * @param gem
+     *            The gem you want to add on the item
      */
-    public static void addJewel(ItemStack item, ItemStack jewel)
+    public static void addGem(ItemStack item, ItemStack gem)
     {
-        if (jewel != null)
+        if (gem != null)
         {
             NBTTagCompound itemStackData;
             if (item.hasTagCompound()) itemStackData = item.getTagCompound();
@@ -57,9 +59,9 @@ public class JewelryNBT
                 itemStackData = new NBTTagCompound();
                 item.setTagCompound(itemStackData);
             }
-            NBTTagCompound jewelNBT = new NBTTagCompound();
-            jewel.writeToNBT(jewelNBT);
-            itemStackData.setTag("jewel", jewelNBT);
+            NBTTagCompound gemNBT = new NBTTagCompound();
+            gem.writeToNBT(gemNBT);
+            itemStackData.setTag("gem", gemNBT);
         }
     }
     
@@ -70,7 +72,7 @@ public class JewelryNBT
      * @param modifier
      *            The modifier you want to add on the item
      */
-    public static void addModifier(ItemStack item, ItemStack modifier)
+    public static void addModifiers(ItemStack item, ArrayList<ItemStack> modifier)
     {
         if (modifier != null)
         {
@@ -81,9 +83,13 @@ public class JewelryNBT
                 itemStackData = new NBTTagCompound();
                 item.setTagCompound(itemStackData);
             }
-            NBTTagCompound modifierNBT = new NBTTagCompound();
-            modifier.writeToNBT(modifierNBT);
-            itemStackData.setTag("modifier", modifierNBT);
+            for (int i = 0; i < modifier.size(); i++)
+            {
+                NBTTagCompound modifierNBT = new NBTTagCompound();
+                modifier.get(i).writeToNBT(modifierNBT);
+                itemStackData.setTag("modifier" + i, modifierNBT);
+            }
+            itemStackData.setInteger("modifierSize", modifier.size());
         }
     }
     
@@ -255,7 +261,8 @@ public class JewelryNBT
         itemStackData.setTag("ingotColor", colors);
     }
     
-    public static void addJewelColor(ItemStack item, int color)
+    // TODO
+    public static void addGemColor(ItemStack item, int color)
     {
         NBTTagCompound itemStackData;
         if (item.hasTagCompound()) itemStackData = item.getTagCompound();
@@ -265,8 +272,8 @@ public class JewelryNBT
             item.setTagCompound(itemStackData);
         }
         NBTTagCompound colors = new NBTTagCompound();
-        colors.setInteger("jewelColor", color);
-        itemStackData.setTag("jewelColor", colors);
+        colors.setInteger("gemColor", color);
+        itemStackData.setTag("gemColor", colors);
     }
     
     @SuppressWarnings("rawtypes")
@@ -329,21 +336,19 @@ public class JewelryNBT
         return false;
     }
     
-    public static boolean isJewelX(ItemStack stack, ItemStack jewel)
+    public static boolean isGemX(ItemStack stack, ItemStack gem)
     {
-        if (jewel(stack) != null && jewel(stack).getItem() == jewel.getItem() && jewel(stack).getItemDamage() == jewel.getItemDamage()) return true;
+        if (gem(stack) != null && gem(stack).getItem() == gem.getItem() && gem(stack).getItemDamage() == gem.getItemDamage()) return true;
         return false;
     }
     
     public static boolean isModifierX(ItemStack stack, ItemStack modifier)
     {
-        if (modifier(stack) != null && modifier(stack).getItem() == modifier.getItem() && modifier(stack).getItemDamage() == modifier.getItemDamage()) return true;
-        return false;
-    }
-    
-    public static boolean isModifierEffectType(ItemStack stack)
-    {
-        if (modifier(stack) != null && (isModifierX(stack, new ItemStack(Items.blaze_powder)) || isModifierX(stack, new ItemStack(Items.sugar)) || isModifierX(stack, new ItemStack(Items.iron_pickaxe)) || isModifierX(stack, new ItemStack(Items.feather)) || isModifierX(stack, new ItemStack(Items.potionitem, 1, 8270)))) return true;
+        if (modifier(stack) != null)
+        {
+            ArrayList<ItemStack> list = modifier(stack);
+            for(int i = 0; i < list.size(); i++) if(list.get(i).getItem() == modifier.getItem() && list.get(i).getItemDamage() == modifier.getItemDamage()) return true;
+        }
         return false;
     }
     
@@ -379,26 +384,50 @@ public class JewelryNBT
     
     // TODO Return components based on NBT
     
-    public static ItemStack jewel(ItemStack stack)
+    public static ItemStack gem(ItemStack stack)
     {
-        if (stack != null && stack != new ItemStack(Item.getItemById(0), 0, 0) && stack.hasTagCompound() && stack.getTagCompound().hasKey("jewel"))
+        if (stack != null && stack != new ItemStack(Item.getItemById(0), 0, 0) && stack.hasTagCompound() && stack.getTagCompound().hasKey("gem"))
         {
-            NBTTagCompound jewelNBT = (NBTTagCompound) stack.getTagCompound().getTag("jewel");
-            ItemStack jewel = new ItemStack(Item.getItemById(0), 0, 0);
-            jewel.readFromNBT(jewelNBT);
-            return jewel;
+            NBTTagCompound jewelNBT = (NBTTagCompound) stack.getTagCompound().getTag("gem");
+            ItemStack gem = new ItemStack(Item.getItemById(0), 0, 0);
+            gem.readFromNBT(jewelNBT);
+            return gem;
         }
         return null;
     }
     
-    public static ItemStack modifier(ItemStack stack)
+    public static ArrayList<ItemStack> gems(ItemStack stack)
     {
-        if (stack != null && stack != new ItemStack(Item.getItemById(0), 0, 0) && stack.hasTagCompound() && stack.getTagCompound().hasKey("modifier"))
+        if (stack != null && stack != new ItemStack(Item.getItemById(0), 0, 0) && stack.hasTagCompound() && stack.getTagCompound().hasKey("gemNumber"))
         {
-            NBTTagCompound modifierNBT = (NBTTagCompound) stack.getTagCompound().getTag("modifier");
-            ItemStack modifier = new ItemStack(Item.getItemById(0), 0, 0);
-            modifier.readFromNBT(modifierNBT);
-            return modifier;
+            int no = stack.getTagCompound().getInteger("gemNumber");
+            ArrayList<ItemStack> gems = new ArrayList<ItemStack>();
+            for (int i = 1; i <= no; i++)
+            {
+                NBTTagCompound gemNBT = (NBTTagCompound) stack.getTagCompound().getTag("gem" + i);
+                ItemStack gem = new ItemStack(Item.getItemById(0), 0, 0);
+                gem.readFromNBT(gemNBT);
+                gems.add(gem);
+            }
+            return gems;
+        }
+        return null;
+    }
+    
+    //TODO Modifier
+    public static ArrayList<ItemStack> modifier(ItemStack stack)
+    {
+        if (stack != null && stack != new ItemStack(Item.getItemById(0), 0, 0) && stack.hasTagCompound())
+        {
+            int size = stack.getTagCompound().getInteger("modifierSize");
+            ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+            for(int i = 0; i < size; i++){
+                ItemStack modifier = new ItemStack(Item.getItemById(0), 0, 0);
+                NBTTagCompound modifierNBT = (NBTTagCompound) stack.getTagCompound().getTag("modifier" + i);
+                modifier.readFromNBT(modifierNBT);
+                list.add(modifier);
+            }
+            return list;
         }
         return null;
     }
@@ -582,12 +611,13 @@ public class JewelryNBT
         return 16777215;
     }
     
-    public static int jewelColor(ItemStack stack)
+    // TODO
+    public static int gemColor(ItemStack stack)
     {
-        if (stack != null && stack != new ItemStack(Item.getItemById(0), 0, 0) && stack.hasTagCompound() && stack.getTagCompound().hasKey("jewelColor"))
+        if (stack != null && stack != new ItemStack(Item.getItemById(0), 0, 0) && stack.hasTagCompound() && stack.getTagCompound().hasKey("gemColor"))
         {
-            NBTTagCompound colors = (NBTTagCompound) stack.getTagCompound().getTag("jewelColor");
-            int color = colors.getInteger("jewelColor");
+            NBTTagCompound colors = (NBTTagCompound) stack.getTagCompound().getTag("gemColor");
+            int color = colors.getInteger("gemColor");
             return color;
         }
         return 16777215;

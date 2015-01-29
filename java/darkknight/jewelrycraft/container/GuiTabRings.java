@@ -25,7 +25,7 @@ public class GuiTabRings extends GuiTab
     {
         ItemStack it = new ItemStack(ItemList.ring);
         JewelryNBT.addMetal(it, new ItemStack(Items.gold_ingot));
-        JewelryNBT.addJewel(it, new ItemStack(Items.ender_pearl));
+        JewelryNBT.addGem(it, new ItemStack(Items.ender_pearl));
         return it;
     }
     
@@ -33,7 +33,7 @@ public class GuiTabRings extends GuiTab
     public void drawBackground(GuiGuide gui, int x, int y, int page)
     {
         ArrayList<String> text = new ArrayList<String>();
-        ArrayList<ItemStack> jewels = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> Gems = new ArrayList<ItemStack>();
         ItemStack item = new ItemStack(ItemList.ring);
         int xPos = (page % 2 == 0) ? 107 : -35;
         switch (page)
@@ -45,9 +45,9 @@ public class GuiTabRings extends GuiTab
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, new ItemStack(Items.ender_pearl));
+                JewelryNBT.addGem(item, new ItemStack(Items.ender_pearl));
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Ender Pearl");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "Ender Pearl");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "None");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring allows you");
@@ -82,15 +82,15 @@ public class GuiTabRings extends GuiTab
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, new ItemStack(Items.ender_pearl));
-                JewelryNBT.addModifier(item, new ItemStack(Items.bed));
+                JewelryNBT.addGem(item, new ItemStack(Items.ender_pearl));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Ender Pearl");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "Ender Pearl");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Bed");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  Just like the other");
                 text.add("ring that had only an");
-                text.add("ender pearl as a jewel,");
+                text.add("ender pearl as a Gem,");
                 text.add("by adding a bed as a");
                 text.add("modifier to it you can");
                 text.add("travel between");
@@ -113,10 +113,10 @@ public class GuiTabRings extends GuiTab
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 5:
-                jewels.add(null);
-                jewels.add(new ItemStack(Items.diamond));
-                jewels.add(new ItemStack(Items.emerald));
-                jewels.add(new ItemStack(Items.nether_star));
+                Gems.add(null);
+                Gems.add(new ItemStack(Items.diamond));
+                Gems.add(new ItemStack(Items.emerald));
+                Gems.add(new ItemStack(Items.nether_star));
                 
                 if (del == 0)
                 {
@@ -126,13 +126,13 @@ public class GuiTabRings extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
-                if (jValues > jewels.size() - 1) jValues = 0;
+                if (jValues > Gems.size() - 1) jValues = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, jewels.get(jValues));
-                JewelryNBT.addModifier(item, new ItemStack(Items.blaze_powder));
+                JewelryNBT.addGem(item, Gems.get(jValues));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Blaze Powder");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
@@ -142,22 +142,22 @@ public class GuiTabRings extends GuiTab
                 text.add("inventory. To deactivate");
                 text.add("it simply right click with");
                 text.add("it. Depending on the");
-                text.add("jewel you used, you");
+                text.add("Gem you used, you");
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 6:
                 text.add("get " + EnumChatFormatting.DARK_RED + "Fire Resistance" + EnumChatFormatting.BLACK + " I");
                 text.add("if you haven't got any");
-                text.add("jewel, II for Diamond,");
+                text.add("Gem, II for Diamond,");
                 text.add("III for Emerald and");
                 text.add("VIII for Nether Star.");
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 7:
-                jewels.add(null);
-                jewels.add(new ItemStack(Items.diamond));
-                jewels.add(new ItemStack(Items.emerald));
-                jewels.add(new ItemStack(Items.nether_star));
+                Gems.add(null);
+                Gems.add(new ItemStack(Items.diamond));
+                Gems.add(new ItemStack(Items.emerald));
+                Gems.add(new ItemStack(Items.nether_star));
                 
                 if (del == 0)
                 {
@@ -167,13 +167,13 @@ public class GuiTabRings extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
-                if (jValues > jewels.size() - 1) jValues = 0;
+                if (jValues > Gems.size() - 1) jValues = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, jewels.get(jValues));
-                JewelryNBT.addModifier(item, new ItemStack(Items.sugar));
+                JewelryNBT.addGem(item, Gems.get(jValues));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Sugar");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
@@ -183,22 +183,22 @@ public class GuiTabRings extends GuiTab
                 text.add("To deactivate it simply");
                 text.add("right click with it.");
                 text.add("Depending on the");
-                text.add("jewel you used, you");
+                text.add("Gem you used, you");
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 8:
                 text.add("get " + EnumChatFormatting.DARK_RED + "Speed" + EnumChatFormatting.BLACK + " I if you");
-                text.add("haven't got any jewel,");
+                text.add("haven't got any Gem,");
                 text.add("II for Diamond,");
                 text.add("III for Emerald and");
                 text.add("VIII for Nether Star.");
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 9:
-                jewels.add(null);
-                jewels.add(new ItemStack(Items.diamond));
-                jewels.add(new ItemStack(Items.emerald));
-                jewels.add(new ItemStack(Items.nether_star));
+                Gems.add(null);
+                Gems.add(new ItemStack(Items.diamond));
+                Gems.add(new ItemStack(Items.emerald));
+                Gems.add(new ItemStack(Items.nether_star));
                 
                 if (del == 0)
                 {
@@ -208,13 +208,13 @@ public class GuiTabRings extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
-                if (jValues > jewels.size() - 1) jValues = 0;
+                if (jValues > Gems.size() - 1) jValues = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, jewels.get(jValues));
-                JewelryNBT.addModifier(item, new ItemStack(Items.iron_pickaxe));
+                JewelryNBT.addGem(item, Gems.get(jValues));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Iron Pickaxe");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
@@ -224,22 +224,22 @@ public class GuiTabRings extends GuiTab
                 text.add("To deactivate it simply");
                 text.add("right click with it.");
                 text.add("Depending on the");
-                text.add("jewel you used, you");
+                text.add("Gem you used, you");
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 10:
                 text.add("get " + EnumChatFormatting.DARK_RED + "Haste" + EnumChatFormatting.BLACK + " I if you");
-                text.add("haven't got any jewel,");
+                text.add("haven't got any Gem,");
                 text.add("II for Diamond,");
                 text.add("III for Emerald and");
                 text.add("VIII for Nether Star.");
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 11:
-                jewels.add(null);
-                jewels.add(new ItemStack(Items.diamond));
-                jewels.add(new ItemStack(Items.emerald));
-                jewels.add(new ItemStack(Items.nether_star));
+                Gems.add(null);
+                Gems.add(new ItemStack(Items.diamond));
+                Gems.add(new ItemStack(Items.emerald));
+                Gems.add(new ItemStack(Items.nether_star));
                 
                 if (del == 0)
                 {
@@ -249,13 +249,13 @@ public class GuiTabRings extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
-                if (jValues > jewels.size() - 1) jValues = 0;
+                if (jValues > Gems.size() - 1) jValues = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, jewels.get(jValues));
-                JewelryNBT.addModifier(item, new ItemStack(Items.feather));
+                JewelryNBT.addGem(item, Gems.get(jValues));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Feather");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
@@ -269,20 +269,20 @@ public class GuiTabRings extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), item, text, 50f, 0, -10, false, 45, 0);
                 break;
             case 12:
-                text.add("Depending on the jewel");
+                text.add("Depending on the Gem");
                 text.add("you used, you get");
                 text.add(EnumChatFormatting.DARK_RED + "Jump Boost" + EnumChatFormatting.BLACK + " I if you");
-                text.add("haven't got any jewel,");
+                text.add("haven't got any Gem,");
                 text.add("II for Diamond,");
                 text.add("III for Emerald and");
                 text.add("VIII for Nether Star.");
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 13:
-                jewels.add(null);
-                jewels.add(new ItemStack(Items.diamond));
-                jewels.add(new ItemStack(Items.emerald));
-                jewels.add(new ItemStack(Items.nether_star));
+                Gems.add(null);
+                Gems.add(new ItemStack(Items.diamond));
+                Gems.add(new ItemStack(Items.emerald));
+                Gems.add(new ItemStack(Items.nether_star));
                 
                 if (del == 0)
                 {
@@ -292,13 +292,13 @@ public class GuiTabRings extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
-                if (jValues > jewels.size() - 1) jValues = 0;
+                if (jValues > Gems.size() - 1) jValues = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, jewels.get(jValues));
-                JewelryNBT.addModifier(item, new ItemStack(Items.potionitem, 1, 8270));
+                JewelryNBT.addGem(item, Gems.get(jValues));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "None, Diamond");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "None, Diamond");
                 text.add("Emerald or Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "8min Potion of");
                 text.add("Invisibility");
@@ -313,10 +313,10 @@ public class GuiTabRings extends GuiTab
                 break;
             case 14:
                 text.add("right click with it.");
-                text.add("Depending on the jewel");
+                text.add("Depending on the Gem");
                 text.add("you used, you get");
                 text.add(EnumChatFormatting.DARK_RED + "Invisibility" + EnumChatFormatting.BLACK + " I if you");
-                text.add("haven't got any jewel,");
+                text.add("haven't got any Gem,");
                 text.add("II for Diamond,");
                 text.add("III for Emerald and");
                 text.add("VIII for Nether Star.");
@@ -329,10 +329,10 @@ public class GuiTabRings extends GuiTab
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, new ItemStack(Items.nether_star));
-                JewelryNBT.addModifier(item, new ItemStack(Items.book));
+                JewelryNBT.addGem(item, new ItemStack(Items.nether_star));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Nether Star");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Book");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This has the power");
@@ -438,10 +438,10 @@ public class GuiTabRings extends GuiTab
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, new ItemStack(Items.ender_pearl));
-                JewelryNBT.addModifier(item, new ItemStack(Blocks.chest));
+                JewelryNBT.addGem(item, new ItemStack(Items.ender_pearl));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Ender Pearl");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "Ender Pearl");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Chest");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring can link");
@@ -476,10 +476,10 @@ public class GuiTabRings extends GuiTab
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, new ItemStack(Blocks.obsidian));
-                JewelryNBT.addModifier(item, new ItemStack(Items.ender_eye));
+                JewelryNBT.addGem(item, new ItemStack(Blocks.obsidian));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Obsidian");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "Obsidian");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Eye of Ender");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring is connected");
@@ -496,10 +496,10 @@ public class GuiTabRings extends GuiTab
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, new ItemStack(Items.nether_star));
-                JewelryNBT.addModifier(item, new ItemStack(Blocks.chest));
+                JewelryNBT.addGem(item, new ItemStack(Items.nether_star));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Nether Star");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Chest");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  This ring can store");
@@ -527,13 +527,13 @@ public class GuiTabRings extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
-                if (jValues > JewelrycraftUtil.jewel.size() - 1) jValues = 0;
+                if (jValues > JewelrycraftUtil.gem.size() - 1) jValues = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, JewelrycraftUtil.jewel.get(jValues).copy());
-                JewelryNBT.addModifier(item, new ItemStack(Items.dye, 1, 15));
+                JewelryNBT.addGem(item, JewelrycraftUtil.gem.get(jValues).copy());
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Any");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "Any");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Bone Meal");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  While having it in");
@@ -565,10 +565,10 @@ public class GuiTabRings extends GuiTab
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
                 
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
-                JewelryNBT.addJewel(item, new ItemStack(Items.ender_pearl));
-                JewelryNBT.addModifier(item, new ItemStack(Items.diamond_pickaxe));
+                JewelryNBT.addGem(item, new ItemStack(Items.ender_pearl));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Ender Pearl");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "Ender Pearl");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Diamond Pick");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Any");
                 text.add("  You can right click");
@@ -583,10 +583,10 @@ public class GuiTabRings extends GuiTab
                 break;
             case 30:
                 JewelryNBT.addMetal(item, new ItemStack(ItemList.shadowIngot));
-                JewelryNBT.addJewel(item, new ItemStack(Items.nether_star));
-                JewelryNBT.addModifier(item, new ItemStack(Items.diamond_pickaxe));
+                JewelryNBT.addGem(item, new ItemStack(Items.nether_star));
+                JewelryNBT.addModifiers(item, JewelrycraftUtil.addRandomModifiers());
                 
-                text.add(EnumChatFormatting.DARK_GREEN + "Jewel: " + EnumChatFormatting.BLACK + "Nether Star");
+                text.add(EnumChatFormatting.DARK_GREEN + "Gem: " + EnumChatFormatting.BLACK + "Nether Star");
                 text.add(EnumChatFormatting.DARK_GREEN + "Modifier: " + EnumChatFormatting.BLACK + "Diamond Pick");
                 text.add(EnumChatFormatting.DARK_GREEN + "Ingot: " + EnumChatFormatting.BLACK + "Shadow Ingot");
                 text.add("  Right clicking with");

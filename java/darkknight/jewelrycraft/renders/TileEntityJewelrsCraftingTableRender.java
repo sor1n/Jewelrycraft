@@ -29,18 +29,28 @@ public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRende
         
         ResourceLocation blockTexture = new ResourceLocation("jewelrycraft", texture);
         Minecraft.getMinecraft().renderEngine.bindTexture(blockTexture);
-        int block = te.getBlockMetadata();
         TileEntityJewelrsCraftingTable jt = (TileEntityJewelrsCraftingTable) te;
         
         GL11.glPushMatrix();
-        if (block == 0) GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-        else if (block == 1)
+        GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+        try
         {
-            GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-            GL11.glRotatef(90F, 0.0F, 1.0F, 0.0F);
+            int block = te.getBlockMetadata();
+            if (block == 1) GL11.glRotatef(90F, 0.0F, 1.0F, 0.0F);
+            else if (block == 2)
+            {
+                GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+                GL11.glRotatef(180F, 1.0F, 0.0F, 0.0F);
+            }
+            else if (block == 3)
+            {
+                GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+                GL11.glRotatef(180F, 1.0F, 0.0F, 1.0F);
+            }
         }
-        else if (block == 2) GL11.glRotatef(180F, 1.0F, 0.0F, 0.0F);
-        else if (block == 3) GL11.glRotatef(180F, 1.0F, 0.0F, 1.0F);
+        catch (Exception e)
+        {
+        }
         
         modelTable.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         if (jt != null)
@@ -55,7 +65,7 @@ public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRende
                 
                 GL11.glRotatef(180F, 1F, 0F, 0F);
                 GL11.glScalef(0.5F, 0.5F, 0.5F);
-                GL11.glTranslatef(0.0F, -1.6F, 0.6F);
+                GL11.glTranslatef(0.55F, -1.5F, -0.45F);
                 GL11.glRotatef(jt.angle, 0F, 1F, 0F);
                 if (RenderManager.instance.options.fancyGraphics) RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
                 else
@@ -93,34 +103,11 @@ public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRende
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glPopMatrix();
             }
-            if (jt.hasModifier && jt.modifier.getIconIndex().getIconName() != "")
+            if (jt.hasGem && jt.gem.getIconIndex().getIconName() != "")
             {
                 GL11.glPushMatrix();
                 GL11.glDisable(GL11.GL_LIGHTING);
-                EntityItem entityitem = new EntityItem(te.getWorldObj(), 0.0D, 0.0D, 0.0D, jt.modifier);
-                entityitem.getEntityItem().stackSize = 1;
-                entityitem.hoverStart = 0.0F;
-                
-                GL11.glRotatef(180F, 1F, 0F, 0F);
-                GL11.glScalef(0.5F, 0.5F, 0.5F);
-                GL11.glTranslatef(0.55F, -1.5F, -0.45F);
-                GL11.glRotatef(jt.angle, 0F, 1F, 0F);
-                if (RenderManager.instance.options.fancyGraphics) RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
-                else
-                {
-                    GL11.glRotatef(180F, 0F, 1F, 0F);
-                    RenderManager.instance.options.fancyGraphics = true;
-                    RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
-                    RenderManager.instance.options.fancyGraphics = false;
-                }
-                GL11.glEnable(GL11.GL_LIGHTING);
-                GL11.glPopMatrix();
-            }
-            if (jt.hasJewel && jt.jewel.getIconIndex().getIconName() != "")
-            {
-                GL11.glPushMatrix();
-                GL11.glDisable(GL11.GL_LIGHTING);
-                EntityItem entityitem = new EntityItem(te.getWorldObj(), 0.0D, 0.0D, 0.0D, jt.jewel);
+                EntityItem entityitem = new EntityItem(te.getWorldObj(), 0.0D, 0.0D, 0.0D, jt.gem);
                 entityitem.getEntityItem().stackSize = 1;
                 entityitem.hoverStart = 0.0F;
                 

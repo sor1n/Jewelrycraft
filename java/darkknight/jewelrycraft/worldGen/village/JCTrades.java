@@ -114,10 +114,10 @@ public class JCTrades implements IVillageTradeHandler
                 }
                 case 9:
                 {
-                    int end = random.nextInt(JewelrycraftUtil.jewel.size());
-                    result = JewelrycraftUtil.jewel.get(end);
-                    result.stackSize = 1 + random.nextInt(JewelrycraftUtil.jewel.size() - end);
-                    if (JewelrycraftUtil.jewel.size() - 1 - end >= 1)
+                    int end = random.nextInt(JewelrycraftUtil.gem.size());
+                    result = JewelrycraftUtil.gem.get(end);
+                    result.stackSize = 1 + random.nextInt(JewelrycraftUtil.gem.size() - end);
+                    if (JewelrycraftUtil.gem.size() - 1 - end >= 1)
                     {
                         int value = end;
                         if (value > 64) value = 64;
@@ -143,10 +143,10 @@ public class JCTrades implements IVillageTradeHandler
                 {
                     result = new ItemStack(ItemList.ring, 1, 0);
                     JewelryNBT.addMetal(result, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())));
-                    JewelryNBT.addModifier(result, JewelrycraftUtil.modifiers.get(random.nextInt(JewelrycraftUtil.modifiers.size())));
-                    JewelryNBT.addJewel(result, JewelrycraftUtil.jewel.get(random.nextInt(JewelrycraftUtil.jewel.size())));
-                    if (JewelryNBT.isModifierEffectType(result)) JewelryNBT.addMode(result, "Activated");
-                    if (JewelryNBT.isJewelX(result, new ItemStack(Items.nether_star)) && JewelryNBT.isModifierX(result, new ItemStack(Items.book))) JewelryNBT.addMode(result, "Disenchant");
+                    JewelryNBT.addModifiers(result, JewelrycraftUtil.addRandomModifiers());
+                    JewelryNBT.addGem(result, JewelrycraftUtil.gem.get(random.nextInt(JewelrycraftUtil.gem.size())));
+//                    if (JewelryNBT.isModifierEffectType(result)) JewelryNBT.addMode(result, "Activated");
+                    if (JewelryNBT.isGemX(result, new ItemStack(Items.nether_star)) && JewelryNBT.isModifierX(result, new ItemStack(Items.book))) JewelryNBT.addMode(result, "Disenchant");
                     ingredient = new ItemStack(Items.emerald, 16 + random.nextInt(20));
                     ingredient2 = new ItemStack(Blocks.emerald_block, 5 + random.nextInt(5));
                 }

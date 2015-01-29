@@ -106,15 +106,15 @@ public class TileEntitySmelter extends TileEntity
             if (melting == 0)
             {
                 this.hasMetal = false;
-                if(!isOre) this.moltenMetal = metal;
-                else{
+                if (!isOre) this.moltenMetal = metal;
+                else
+                {
                     this.moltenMetal = JewelrycraftUtil.getIngotFromOre(metal.getItem());
-                    moltenMetal.stackSize*=2;
+                    moltenMetal.stackSize *= 2;
                 }
-//                System.out.println(JewelrycraftUtil.getIngotFromOre(metal) + " | " + JewelrycraftUtil.ores + " | " + JewelrycraftUtil.oreToIngot);
                 this.hasMoltenMetal = true;
-                if(!isOre) this.quantity = 0.1f * metal.stackSize;
-                else this.quantity = 0.2f * metal.stackSize; 
+                if (!isOre) this.quantity = 0.1f * metal.stackSize;
+                else this.quantity = 0.2f * metal.stackSize;
                 this.metal = new ItemStack(Item.getItemById(0), 0, 0);
                 melting = -1;
                 this.isDirty = true;
@@ -127,9 +127,9 @@ public class TileEntitySmelter extends TileEntity
             if (melting == 0)
             {
                 this.hasMetal = false;
-                if(!isOre) this.moltenMetal.stackSize += this.metal.stackSize;
-                else this.moltenMetal.stackSize += this.metal.stackSize*2;
-                if(!isOre) this.quantity += 0.1f * metal.stackSize;
+                if (!isOre) this.moltenMetal.stackSize += this.metal.stackSize;
+                else this.moltenMetal.stackSize += this.metal.stackSize * 2;
+                if (!isOre) this.quantity += 0.1f * metal.stackSize;
                 else this.quantity += 0.2f * metal.stackSize;
                 this.metal = new ItemStack(Item.getItemById(0), 0, 0);
                 melting = -1;
