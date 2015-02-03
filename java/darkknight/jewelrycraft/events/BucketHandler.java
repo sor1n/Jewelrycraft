@@ -44,8 +44,7 @@ public class BucketHandler
     }
     
     private ItemStack fillCustomBucket(World world, MovingObjectPosition pos)
-    {
-        
+    {        
         Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
         Item bucket = buckets.get(block);
         
@@ -57,13 +56,14 @@ public class BucketHandler
             if (ingotData != null && ingotData != "")
             {
                 String[] splitData = ingotData.split(":");
-                if (splitData.length == 2)
+                if (splitData.length == 3)
                 {
-                    int itemID, itemDamage;
+                    int itemID, itemDamage, color;
                     try
                     {
                         itemID = Integer.parseInt(splitData[0]);
                         itemDamage = Integer.parseInt(splitData[1]);
+                        color = Integer.parseInt(splitData[2]);
                         JewelryNBT.addMetal(item, new ItemStack(Item.getItemById(itemID), 1, itemDamage));
                     }
                     catch (Exception e)

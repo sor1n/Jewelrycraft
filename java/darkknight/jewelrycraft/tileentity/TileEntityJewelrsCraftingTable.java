@@ -17,6 +17,7 @@ import net.minecraft.util.MathHelper;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.particles.EntityShadowsFX;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 public class TileEntityJewelrsCraftingTable extends TileEntity
 {
@@ -96,7 +97,6 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
         if (angle < 360F) angle += 3F;
         else angle = 0F;
         
-        if (carving > 0) System.out.println(carving);
         if (this.hasJewelry && this.hasGem && !this.hasEndItem && crafting)
         {
             if (carving > 0) carving--;
@@ -104,6 +104,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
             {
                 for (int l = 0; l < ConfigHandler.jewelryCraftingTime / (carving + 2); ++l)
                 {
+                    if (worldObj.rand.nextInt(10) == 0) this.worldObj.playSoundEffect(xCoord, yCoord + 0.5F, zCoord, "random.orb", 0.05F, 1F);
                     if (this.getBlockMetadata() == 0) this.worldObj.spawnParticle("instantSpell", xCoord + 0.5F, (double) yCoord + 0.8F, zCoord + 0.2F, 0.0D, 0.0D, 0.0D);
                     if (this.getBlockMetadata() == 1) this.worldObj.spawnParticle("instantSpell", xCoord + 0.8F, (double) yCoord + 0.8F, zCoord + 0.5F, 0.0D, 0.0D, 0.0D);
                     if (this.getBlockMetadata() == 2) this.worldObj.spawnParticle("instantSpell", xCoord + 0.5F, (double) yCoord + 0.8F, zCoord + 0.8F, 0.0D, 0.0D, 0.0D);
@@ -127,7 +128,12 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
                     {
                         ItemStack aux = JewelryNBT.gem(jewelry);
                         JewelryNBT.addGem(endItem, gem);
-                        gem = aux.copy();
+                        if(JewelrycraftUtil.rand.nextBoolean()) gem = aux.copy();
+                        else
+                        {
+                            this.hasGem = false;
+                            this.gem = new ItemStack(Item.getItemById(0), 0, 0);
+                        }
                     }
                 }
                 this.hasJewelry = false;

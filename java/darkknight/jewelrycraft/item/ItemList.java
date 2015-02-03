@@ -20,6 +20,8 @@ public class ItemList
     public static Item crystal;
     public static ItemRing ring;
     public static ItemNecklace necklace;
+    public static ItemBracelet bracelet;
+    public static ItemEarrings earrings;
     public static Item guide;
     public static ItemMoltenMetalBucket bucket;
     public static ItemMoltenMetal metal;
@@ -35,8 +37,10 @@ public class ItemList
             molds = new ItemMolds().setUnlocalizedName("Jewelrycraft.mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
             clayMolds = new ItemClayMolds().setUnlocalizedName("Jewelrycraft.mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
             ring = (ItemRing) new ItemRing().setUnlocalizedName("Jewelrycraft.ring").setTextureName("jewelrycraft:ring");
-            crystal = new ItemCrystal().setUnlocalizedName("Jewelrycraft.crystal").setTextureName("jewelrycraft:crystal").setCreativeTab(JewelrycraftMod.jewelrycraft);
             necklace = (ItemNecklace) new ItemNecklace().setUnlocalizedName("Jewelrycraft.necklace").setTextureName("jewelrycraft:necklace");
+            bracelet = (ItemBracelet) new ItemBracelet().setUnlocalizedName("Jewelrycraft.bracelet").setTextureName("jewelrycraft:bracelet");
+            earrings = (ItemEarrings) new ItemEarrings().setUnlocalizedName("Jewelrycraft.earrings").setTextureName("jewelrycraft:earrings");
+            crystal = new ItemCrystal().setUnlocalizedName("Jewelrycraft.crystal").setTextureName("jewelrycraft:crystal").setCreativeTab(JewelrycraftMod.jewelrycraft);
             guide = new ItemGuide().setUnlocalizedName("Jewelrycraft.guide").setTextureName("jewelrycraft:guide").setCreativeTab(JewelrycraftMod.jewelrycraft);
             bucket = (ItemMoltenMetalBucket) new ItemMoltenMetalBucket().setUnlocalizedName("Jewelrycraft.bucket");
             metal = (ItemMoltenMetal) new ItemMoltenMetal().setUnlocalizedName("Jewelrycraft.bucket");
@@ -47,6 +51,8 @@ public class ItemList
             GameRegistry.registerItem(clayMolds, "clayMolds");
             GameRegistry.registerItem(ring, "ring");
             GameRegistry.registerItem(necklace, "necklace");
+            GameRegistry.registerItem(bracelet, "bracelet");
+            GameRegistry.registerItem(earrings, "earrings");
             GameRegistry.registerItem(crystal, "crystal");
             GameRegistry.registerItem(guide, "guide");
             GameRegistry.registerItem(bucket, "moltenMetalBucket");

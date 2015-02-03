@@ -235,8 +235,7 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         {
             ItemStack jewels = JewelrycraftUtil.gem.get(random.nextInt(JewelrycraftUtil.gem.size()));
             chest.func_145976_a("Jeweler's Chest");
-            if (random.nextBoolean()) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), JewelrycraftUtil.modifiers.get(random.nextInt(JewelrycraftUtil.modifiers.size())));
-            else if (jewels.getItem() == Items.nether_star && ConfigHandler.generateVillageNetherstar) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), jewels);
+            if (jewels.getItem() == Items.nether_star && ConfigHandler.generateVillageNetherstar) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), jewels);
             else if (random.nextBoolean() && jewels.getItem() != Items.nether_star) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), jewels);
             t--;
         }
@@ -289,13 +288,12 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         TileEntityDisplayer displayer = (TileEntityDisplayer) world.getTileEntity(i1, j1, k1);
         if (displayer != null)
         {
-            ItemStack ring = new ItemStack(ItemList.ring);
-            JewelryNBT.addMetal(ring, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())));
-            JewelryNBT.addModifiers(ring, JewelrycraftUtil.addRandomModifiers());
-            JewelryNBT.addGem(ring, JewelrycraftUtil.gem.get(random.nextInt(JewelrycraftUtil.gem.size())));
-//            if (JewelryNBT.isModifierEffectType(ring)) JewelryNBT.addMode(ring, "Activated");
-            if (JewelryNBT.isGemX(ring, new ItemStack(Items.nether_star)) && JewelryNBT.isModifierX(ring, new ItemStack(Items.book))) JewelryNBT.addMode(ring, "Disenchant");
-            displayer.object = ring;
+            Item[] jewels = {ItemList.ring, ItemList.necklace};
+            ItemStack jewel = new ItemStack(jewels[random.nextInt(jewels.length)]);
+            JewelryNBT.addMetal(jewel, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())));
+            JewelryNBT.addModifiers(jewel, JewelrycraftUtil.addRandomModifiers(random.nextInt(4)));
+            JewelryNBT.addGem(jewel, JewelrycraftUtil.gem.get(random.nextInt(JewelrycraftUtil.gem.size())));
+            displayer.object = jewel;
             displayer.quantity = 1;
             displayer.hasObject = true;
         }

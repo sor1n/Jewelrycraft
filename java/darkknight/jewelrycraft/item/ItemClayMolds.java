@@ -15,7 +15,7 @@ public class ItemClayMolds extends Item
 {
     /** List of molds color names */
     public static final String[] moldsItemNames = new String[]
-    { "clayIngot", "clayRing", "clayNecklace" };
+    { "clayIngot", "clayRing", "clayNecklace", "clayBracelet", "clayEarrings"};
     @SideOnly(Side.CLIENT)
     private IIcon[] moldsIcons;
     
@@ -42,7 +42,7 @@ public class ItemClayMolds extends Item
      * ItemStack so different stacks can have different names based on their
      * damage or NBT.
      */
-    public String getUnlocalizedNameInefficiently(ItemStack par1ItemStack)
+    public String getUnlocalizedName(ItemStack par1ItemStack)
     {
         int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, moldsItemNames.length - 1);
         return super.getUnlocalizedName() + "." + moldsItemNames[i];

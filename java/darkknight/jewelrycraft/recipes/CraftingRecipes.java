@@ -23,6 +23,8 @@ public class CraftingRecipes
             GameRegistry.addRecipe(new ItemStack(ItemList.clayMolds, 1, 0), "xx", 'x', Items.clay_ball);
             GameRegistry.addRecipe(new ItemStack(ItemList.clayMolds, 1, 1), " x ", "x x", " x ", 'x', Items.clay_ball);
             GameRegistry.addRecipe(new ItemStack(ItemList.clayMolds, 1, 2), "x x", "x x", " x ", 'x', Items.clay_ball);
+            GameRegistry.addRecipe(new ItemStack(ItemList.clayMolds, 1, 3), "xxx", "x x", "xxx", 'x', Items.clay_ball);
+            GameRegistry.addRecipe(new ItemStack(ItemList.clayMolds, 1, 4), "x x", 'x', Items.clay_ball);
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemList.crystal, 1, 15), " x ", "x x", " x ", 'x', Blocks.glass));
             for (int i = 0; i < 15; i++)
             {
@@ -39,6 +41,10 @@ public class CraftingRecipes
             { new ItemStack(Items.book), new ItemStack(ItemList.molds, 1, 1) });
             GameRegistry.addShapelessRecipe(new ItemStack(ItemList.guide), new Object[]
             { new ItemStack(Items.book), new ItemStack(ItemList.molds, 1, 2) });
+            GameRegistry.addShapelessRecipe(new ItemStack(ItemList.guide), new Object[]
+            { new ItemStack(Items.book), new ItemStack(ItemList.molds, 1, 3) });
+            GameRegistry.addShapelessRecipe(new ItemStack(ItemList.guide), new Object[]
+            { new ItemStack(Items.book), new ItemStack(ItemList.molds, 1, 4) });
             
             // Blocks
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockList.molder), "x x", "xxx", 'x', Blocks.cobblestone));
@@ -53,6 +59,8 @@ public class CraftingRecipes
             GameRegistry.addSmelting(new ItemStack(ItemList.clayMolds, 1, 0), new ItemStack(ItemList.molds, 1, 0), 0.2F);
             GameRegistry.addSmelting(new ItemStack(ItemList.clayMolds, 1, 1), new ItemStack(ItemList.molds, 1, 1), 0.2F);
             GameRegistry.addSmelting(new ItemStack(ItemList.clayMolds, 1, 2), new ItemStack(ItemList.molds, 1, 2), 0.2F);
+            GameRegistry.addSmelting(new ItemStack(ItemList.clayMolds, 1, 3), new ItemStack(ItemList.molds, 1, 3), 0.2F);
+            GameRegistry.addSmelting(new ItemStack(ItemList.clayMolds, 1, 4), new ItemStack(ItemList.molds, 1, 4), 0.2F);
             
             isInitialized = true;
         }

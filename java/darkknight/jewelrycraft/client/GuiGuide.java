@@ -19,10 +19,9 @@ import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.container.GuiRectangle;
 import darkknight.jewelrycraft.container.GuiTab;
 import darkknight.jewelrycraft.container.GuiTabBlocks;
+import darkknight.jewelrycraft.container.GuiTabGemsAndIngots;
 import darkknight.jewelrycraft.container.GuiTabItems;
-import darkknight.jewelrycraft.container.GuiTabJewelsAndModifiers;
-import darkknight.jewelrycraft.container.GuiTabNecklaces;
-import darkknight.jewelrycraft.container.GuiTabRings;
+import darkknight.jewelrycraft.container.GuiTabModifiers;
 
 public class GuiGuide extends GuiContainer
 {
@@ -41,7 +40,7 @@ public class GuiGuide extends GuiContainer
         this.world = world;
         
         tabs = new GuiTab[]
-        { new GuiTabBlocks(0), new GuiTabItems(1), new GuiTabJewelsAndModifiers(2)};
+        { new GuiTabBlocks(0), new GuiTabItems(1), new GuiTabGemsAndIngots(2), new GuiTabModifiers(3)};
         
         activeTab = tabs[0];
     }

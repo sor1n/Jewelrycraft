@@ -34,15 +34,16 @@ public class PacketRequestLiquidData implements IMessage, IMessageHandler<Packet
         
         IMessage replyPacket = null;
         
-        if (splitData.length == 2)
+        if (splitData.length == 3)
         {
-            int itemID, itemDamage;
+            int itemID, itemDamage, color;
             try
             {
                 itemID = Integer.parseInt(splitData[0]);
                 itemDamage = Integer.parseInt(splitData[1]);
+                color = Integer.parseInt(splitData[2]);
                 
-                replyPacket = (IMessage) new PacketSendLiquidData(message, itemID, itemDamage);
+                replyPacket = (IMessage) new PacketSendLiquidData(message, itemID, itemDamage, color);
             }
             catch (Exception e)
             {

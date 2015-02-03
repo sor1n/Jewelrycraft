@@ -1,23 +1,38 @@
 item.Jewelrycraft.thiefGloves.name=Thiefing Gloves
 item.Jewelrycraft.ingotShadow.name=Shadow Ingot
-item.Jewelrycraft.ingot2.0.name=Testium Ingot
-item.Jewelrycraft.ingot2.1.name=Metallium Ingot
-item.Jewelrycraft.ingot3.name=Ingot 3
-item.Jewelrycraft.ingot4.name=Ingot 4
-item.Jewelrycraft.ingot5.name=Ingot 5
-item.Jewelrycraft.ingot6.name=Ingot 6
-item.Jewelrycraft.ingot7.name=Ingot 7
 item.Jewelrycraft.mold.ingot.name=Ingot Mold
 item.Jewelrycraft.mold.ring.name=Ring Mold
 item.Jewelrycraft.mold.necklace.name=Necklace Mold
+item.Jewelrycraft.mold.bracelet.name=Bracelet Mold
+item.Jewelrycraft.mold.earrings.name=Earrings Mold
 item.Jewelrycraft.mold.clayIngot.name=Clay Ingot Mold
 item.Jewelrycraft.mold.clayRing.name=Clay Ring Mold
 item.Jewelrycraft.mold.clayNecklace.name=Clay Necklace Mold
+item.Jewelrycraft.mold.clayBracelet.name=Clay Bracelet Mold
+item.Jewelrycraft.mold.clayEarrings.name=Clay Earrings Mold
 item.Jewelrycraft.ring.name=Ring
 item.Jewelrycraft.necklace.name=Necklace
-item.Jewelrycraft.crystal.name=Crystal
+item.Jewelrycraft.bracelet.name=Bracelet
+item.Jewelrycraft.earrings.name=Earrings
 item.Jewelrycraft.guide.name=Jewelrycraft Guide
 item.Jewelrycraft.bucket.name=Bucket of Molten
+
+item.Jewelrycraft.crystal.0.name=Black Crystal
+item.Jewelrycraft.crystal.1.name=Red Crystal
+item.Jewelrycraft.crystal.2.name=Green Crystal
+item.Jewelrycraft.crystal.3.name=Brown Crystal
+item.Jewelrycraft.crystal.4.name=Blue Crystal
+item.Jewelrycraft.crystal.5.name=Purple Crystal
+item.Jewelrycraft.crystal.6.name=Cyan Crystal
+item.Jewelrycraft.crystal.7.name=Light Gray Crystal
+item.Jewelrycraft.crystal.8.name=Gray Crystal
+item.Jewelrycraft.crystal.9.name=Pink Crystal
+item.Jewelrycraft.crystal.10.name=Lime Crystal
+item.Jewelrycraft.crystal.11.name=Yellow Crystal
+item.Jewelrycraft.crystal.12.name=Light Blue Crystal
+item.Jewelrycraft.crystal.13.name=Magenta Crystal
+item.Jewelrycraft.crystal.14.name=Orange Crystal
+item.Jewelrycraft.crystal.15.name=White Crystal
 
 tile.Jewelrycraft.oreShadow.name=Shadow Ore
 tile.Jewelrycraft.blockShadow.name=Shadow Block
@@ -33,8 +48,6 @@ tile.Jewelrycraft.shadowEye.name=Cursed Eye
 tile.Jewelrycraft.handPedestal.name=Hand Pedestal
 
 itemGroup.JewelryCraft=Jewelrycraft
-itemGroup.Rings=Jewelrycraft Rings
-itemGroup.Necklaces=Jewelrycraft Necklaces
 itemGroup.Liquids=Liquids
 
 chatmessage.Jewelrycraft.molder.addedmold=Added %s to molder.

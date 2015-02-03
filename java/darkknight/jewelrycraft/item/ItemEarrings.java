@@ -5,18 +5,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import darkknight.jewelrycraft.util.JewelryNBT;
 
-public class ItemRing extends ItemBaseJewelry
+public class ItemEarrings extends ItemBaseJewelry
 {
     public IIcon gem;    
-    public ItemRing()
+    public ItemEarrings()
     {
-        super();
-    }
+    }    
     
     public void registerIcons(IIconRegister iconRegister)
     {
-        itemIcon = iconRegister.registerIcon("jewelrycraft:ring");
-        gem = iconRegister.registerIcon("jewelrycraft:jewelRing");
+        itemIcon = iconRegister.registerIcon("jewelrycraft:earrings");
+        gem = iconRegister.registerIcon("jewelrycraft:jewelEarrings");
     }
     
     public IIcon getIcon(ItemStack stack, int pass)

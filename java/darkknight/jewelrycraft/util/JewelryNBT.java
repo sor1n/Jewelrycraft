@@ -21,11 +21,8 @@ public class JewelryNBT
 {
     // TODO NBT Tag Adding
     /**
-     * 
-     * @param item
-     *            The item you want to add the NBT data on
-     * @param metal
-     *            The metal you want to add on the item
+     * @param item The item you want to add the NBT data on
+     * @param metal The metal you want to add on the item
      */
     public static void addMetal(ItemStack item, ItemStack metal)
     {
@@ -42,11 +39,8 @@ public class JewelryNBT
     }
     
     /**
-     * 
-     * @param item
-     *            The item you want to add the NBT data on
-     * @param gem
-     *            The gem you want to add on the item
+     * @param item The item you want to add the NBT data on
+     * @param gem The gem you want to add on the item
      */
     public static void addGem(ItemStack item, ItemStack gem)
     {
@@ -66,11 +60,8 @@ public class JewelryNBT
     }
     
     /**
-     * 
-     * @param item
-     *            The item you want to add the NBT data on
-     * @param modifier
-     *            The modifier you want to add on the item
+     * @param item The item you want to add the NBT data on
+     * @param modifier The modifier you want to add on the item
      */
     public static void addModifiers(ItemStack item, ArrayList<ItemStack> modifier)
     {
@@ -93,6 +84,10 @@ public class JewelryNBT
         }
     }
     
+    /**
+     * @param item The item you want to add the NBT data on
+     * @param entity The entity to add on the item
+     */
     public static void addEntity(ItemStack item, EntityLivingBase entity)
     {
         NBTTagCompound itemStackData;
@@ -221,20 +216,6 @@ public class JewelryNBT
         itemStackData.setTag("dimName", coords);
     }
     
-    public static void addMode(ItemStack item, String modeN)
-    {
-        NBTTagCompound itemStackData;
-        if (item.hasTagCompound()) itemStackData = item.getTagCompound();
-        else
-        {
-            itemStackData = new NBTTagCompound();
-            item.setTagCompound(itemStackData);
-        }
-        NBTTagCompound mode = new NBTTagCompound();
-        mode.setString("mode", modeN);
-        itemStackData.setTag("mode", mode);
-    }
-    
     public static void addFakeEnchantment(ItemStack item)
     {
         NBTTagCompound itemStackData;
@@ -347,7 +328,8 @@ public class JewelryNBT
         if (modifier(stack) != null)
         {
             ArrayList<ItemStack> list = modifier(stack);
-            for(int i = 0; i < list.size(); i++) if(list.get(i).getItem() == modifier.getItem() && list.get(i).getItemDamage() == modifier.getItemDamage()) return true;
+            for (int i = 0; i < list.size(); i++)
+                if (list.get(i).getItem() == modifier.getItem() && list.get(i).getItemDamage() == modifier.getItemDamage()) return true;
         }
         return false;
     }
@@ -355,12 +337,6 @@ public class JewelryNBT
     public static boolean isIngotX(ItemStack stack, ItemStack ingot)
     {
         if (ingot(stack) != null && ingot(stack).getItem() == ingot.getItem() && ingot(stack).getItemDamage() == ingot.getItemDamage()) return true;
-        return false;
-    }
-    
-    public static boolean isModeX(ItemStack stack, String modeN)
-    {
-        if (modeName(stack) != null && modeName(stack).equals(modeN)) return true;
         return false;
     }
     
@@ -382,8 +358,7 @@ public class JewelryNBT
         return false;
     }
     
-    // TODO Return components based on NBT
-    
+    // TODO Return components based on NBT    
     public static ItemStack gem(ItemStack stack)
     {
         if (stack != null && stack != new ItemStack(Item.getItemById(0), 0, 0) && stack.hasTagCompound() && stack.getTagCompound().hasKey("gem"))
@@ -396,32 +371,14 @@ public class JewelryNBT
         return null;
     }
     
-    public static ArrayList<ItemStack> gems(ItemStack stack)
-    {
-        if (stack != null && stack != new ItemStack(Item.getItemById(0), 0, 0) && stack.hasTagCompound() && stack.getTagCompound().hasKey("gemNumber"))
-        {
-            int no = stack.getTagCompound().getInteger("gemNumber");
-            ArrayList<ItemStack> gems = new ArrayList<ItemStack>();
-            for (int i = 1; i <= no; i++)
-            {
-                NBTTagCompound gemNBT = (NBTTagCompound) stack.getTagCompound().getTag("gem" + i);
-                ItemStack gem = new ItemStack(Item.getItemById(0), 0, 0);
-                gem.readFromNBT(gemNBT);
-                gems.add(gem);
-            }
-            return gems;
-        }
-        return null;
-    }
-    
-    //TODO Modifier
     public static ArrayList<ItemStack> modifier(ItemStack stack)
     {
         if (stack != null && stack != new ItemStack(Item.getItemById(0), 0, 0) && stack.hasTagCompound())
         {
             int size = stack.getTagCompound().getInteger("modifierSize");
             ArrayList<ItemStack> list = new ArrayList<ItemStack>();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++)
+            {
                 ItemStack modifier = new ItemStack(Item.getItemById(0), 0, 0);
                 NBTTagCompound modifierNBT = (NBTTagCompound) stack.getTagCompound().getTag("modifier" + i);
                 modifier.readFromNBT(modifierNBT);

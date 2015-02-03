@@ -15,7 +15,7 @@ public class ItemMolds extends Item
 {
     /** List of molds color names */
     public static final String[] moldsItemNames = new String[]
-    { "ingot", "ring", "necklace" };
+    { "ingot", "ring", "necklace", "bracelet", "earrings" };
     @SideOnly(Side.CLIENT)
     private IIcon[] moldsIcons;
     

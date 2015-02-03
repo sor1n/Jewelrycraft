@@ -26,53 +26,28 @@ public class GuiTabBlocks extends GuiTab
     @Override
     public void drawBackground(GuiGuide gui, int x, int y, int page)
     {
-        ArrayList<String> text = new ArrayList<String>();
+        String text = "";
         ArrayList<ItemStack> items = new ArrayList<ItemStack>();
         int xPos = (page % 2 == 0) ? 107 : -35;
         switch (page)
         {
             case 1:
-                text.add("  This ore is extremely");
-                text.add("rare and can be found");
-                text.add("only between Y level 5");
-                text.add("and 8. It can only be");
-                text.add("mined using a diamond");
-                text.add("pickaxe.");
+                text = "This ore is extremely rare and can be found only between Y-level 5 and 8. It can only be mined using a diamond pickaxe.";
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), new ItemStack(BlockList.shadowOre), text, 90f);
                 break;
             case 2:
-                text.add("  The Shadow Block is");
-                text.add("crafted using 9 shadow");
-                text.add("ingots. It has been");
-                text.add("discovered that it");
-                text.add("poseses abnormal");
-                text.add("properties in the");
-                text.add("shadow. The darker it");
+                text = "The Shadow Block is crafted using 9 shadow ingots. Magicians believed it held the ability to merge with the shadows. It becomes more transparent as it";
                 items.add(new ItemStack(BlockList.shadowBlock));
                 for (int i = 1; i <= 9; i++)
                     items.add(new ItemStack(ItemList.shadowIngot));
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, items, x, y);
                 break;
             case 3:
-                text.add("is, the more");
-                text.add("transparent it will be,");
-                text.add("until it becomes");
-                text.add("walkable through. If a");
-                text.add("comparator is attached");
-                text.add("to it, the output");
-                text.add("strength will be equal");
-                text.add("to the value of");
-                text.add("darkness it is in.");
+                text = "gets darker. If a comparator is attached to it, the output strength will be equal to the value of darkness it is in.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 4:
-                text.add("  The smelter is one of");
-                text.add("the first blocks needed");
-                text.add("to get started with");
-                text.add("Jewelrycraft. Requiring");
-                text.add("just some cobble and");
-                text.add("a couple buckets, it's");
-                text.add("the most important");
+                text = "The smelter is one of the first blocks needed to get started with Jewelrycraft. Requiring just some cobble and a couple buckets. It is required in order to";
                 items.add(new ItemStack(BlockList.smelter));
                 items.add(new ItemStack(Blocks.cobblestone));
                 items.add(new ItemStack(Items.bucket));
@@ -86,37 +61,15 @@ public class GuiTabBlocks extends GuiTab
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, items, x, y);
                 break;
             case 5:
-                text.add("block as it can melt");
-                text.add("ingots which can be");
-                text.add("made into pieces of");
-                text.add("jewellery, like rings");
-                text.add("or necklaces. To use");
-                text.add("the block all you need");
-                text.add("to do is right click");
-                text.add("on it with any ingot.");
-                text.add("If left clicked while");
-                text.add("smelting, a message");
-                text.add("will appear saying the");
-                text.add("percentage it is done.");
+                text = "melt ingots or even ores which can be made into rings, necklaces, bracelets or earrings. To use the block all you need to do is right click on it with any ore or ingot. It can melt multimple ingots/ores at a time. Crouch (default: Shift) + Right Click will remove all items";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 6:
-                text.add("If left clicked when");
-                text.add("it's done smelting,");
-                text.add("a message will be");
-                text.add("displayed, mentioning");
-                text.add("the contents of the");
-                text.add("block.");
+                text = "added. If right clicked when done smelting, it will say what the block contains.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 7:
-                text.add("  The molder is a key");
-                text.add("piece in creating");
-                text.add("jewellery. You need");
-                text.add("to pour the molten");
-                text.add("metal out of the");
-                text.add("smelter somewhere.");
-                text.add("That somewhere is the");
+                text = "The molder is a key piece in creating jewellery. You need to pour the molten metal out of the smelter somewhere. That somewhere is the";
                 
                 items.add(new ItemStack(BlockList.molder));
                 items.add(new ItemStack(Blocks.cobblestone));
@@ -127,43 +80,15 @@ public class GuiTabBlocks extends GuiTab
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, items, x, y);
                 break;
             case 8:
-                text.add("molder. But before");
-                text.add("pouring the molten");
-                text.add("metal in it, you must");
-                text.add("first add a mold.");
-                text.add("You can do that by");
-                text.add("simply right clicking");
-                text.add("the block with the");
-                text.add("mold of your choice.");
-                text.add("If you want to get the");
-                text.add("mold out, simply crouch");
-                text.add("and right click it with");
-                text.add("an empty hand.");
+                text = "molder. But before pouring the molten metal in it, you must first add a mold. You can do that by simply right clicking the block with the mold of your choice. If you want to get the mold out, simply crouch and Right Click it with an empty hand. Once you";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 9:
-                text.add("  Once you have a mold");
-                text.add("inside, left click on");
-                text.add("the smelter and wait");
-                text.add("for the metal to cool");
-                text.add("down. When it's done,");
-                text.add("left click on the");
-                text.add("molder to get the");
-                text.add("jewellery. " + EnumChatFormatting.DARK_RED + "Be aware");
-                text.add(EnumChatFormatting.DARK_RED + "that this block must be");
-                text.add(EnumChatFormatting.DARK_RED + "placed directly in front");
-                text.add(EnumChatFormatting.DARK_RED + "of the smelter,");
-                text.add(EnumChatFormatting.DARK_RED + "otherwise it won't work!");
+                text = "have a mold inside, left click on the smelter and wait for the metal to cool down. When it's done, left click on the molder to get the jewellery. Be aware that this block must be placed directly in front of the smelter, otherwise it won't work!";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 10:
-                text.add("  Your jewellery on");
-                text.add("their own don't do");
-                text.add("much. They need to be");
-                text.add("modified a bit and the");
-                text.add("only way to do that is");
-                text.add("by using this block.");
-                text.add("Simply right click the");
+                text = "This table allows you to add a gem to a piece of jewellery. Right click the block while holding a jewellery to add it in. Then do the same with a gem (you";
                 if (del == 0) values++;
                 del++;
                 if (del >= 300) del = 0;
@@ -180,39 +105,15 @@ public class GuiTabBlocks extends GuiTab
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, items, x, y);
                 break;
             case 11:
-                text.add("block while holding the");
-                text.add("jewellery to place it in.");
-                text.add("After that just add in");
-                text.add("a jewel or a modifier,");
-                text.add("or even both, to the");
-                text.add("block. To do that simply");
-                text.add("right click with them on");
-                text.add("the block. Once it's");
-                text.add("done modifying, left");
-                text.add("click on it to retrieve");
-                text.add("the modified item. If");
-                text.add("you wish to know how");
+                text = "can find a list with all possible gems in this guide). Crouch + Right Click to retreive placed items. Left Click the block to see the progress the crafting has made. Once the crafting is done, Left Click the block to get the item. You are able to recraft a";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 12:
-                text.add("much is left before the");
-                text.add("transformation is done,");
-                text.add("simply left click on the");
-                text.add("table in the process.");
-                text.add("  A list with all the");
-                text.add("possible modifiers is");
-                text.add("located in a separate");
-                text.add("tab.");
+                text = "jewellery by readding the modified version to this block and adding a different gem to it. Once the crafting is done, the current gem will be replaced by the new one. There is also a 50% chance that you will get back the old gem.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 13:
-                text.add("  This block can store");
-                text.add("any jewellery in it");
-                text.add("and activate their");
-                text.add("effects as it were a");
-                text.add("player. However, it");
-                text.add("does not work with");
-                text.add("everything. You can");
+                text = "This block can store any jewellery in it and activate their effects as it were a player. To do that simply right click the block with a jewellery. Crouch +";
                 items.add(new ItemStack(BlockList.jewelAltar));
                 items.add(new ItemStack(Blocks.end_stone));
                 items.add(new ItemStack(Blocks.wool, 1, 5));
@@ -226,24 +127,11 @@ public class GuiTabBlocks extends GuiTab
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, items, x, y);
                 break;
             case 14:
-                text.add("find out which jewellery");
-                text.add("works by looking in");
-                text.add("their apropriate tab.");
-                text.add("  Each item will have a");
-                text.add("note where it is");
-                text.add("mentioned their effect");
-                text.add("when placed in this");
-                text.add("block.");
+                text = "Right Click to retreive the jewellery.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 15:
-                text.add("  The Storage");
-                text.add("Displayer, as the");
-                text.add("name suggests, can");
-                text.add("store a large amount");
-                text.add("of a single item/block");
-                text.add("placed in it. This will");
-                text.add("display all possible");
+                text = "The Storage Displayer, as the name suggests, can store a large amount (Up to: " + Integer.MAX_VALUE + ") of a  single item/block placed in it. It will";
                 items.add(new ItemStack(BlockList.displayer));
                 items.add(null);
                 items.add(new ItemStack(Items.iron_ingot));
@@ -257,28 +145,15 @@ public class GuiTabBlocks extends GuiTab
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, items, x, y);
                 break;
             case 16:
-                text.add("infromation about the");
-                text.add("object in it, such as");
-                text.add("the name, durability,");
-                text.add("enchantments and many");
-                text.add("more. Below the name");
-                text.add("is shown the amount");
-                text.add("stored. To store");
-                text.add("something in it simply");
-                text.add("right click with that");
-                text.add("object on it and the");
-                text.add("whole amount of items");
-                text.add("or blocks will be");
+                text = "display all possible infromation about the object in it, such as the name, durability, enchantments etc. To store something in it simply right click with that object on it and the whole amount of items or blocks you are holding will be immediately stored inside.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 17:
-                text.add("immediately stored");
-                text.add("inside. To retrieve");
-                text.add("a single item just");
-                text.add("left click the block.");
-                text.add("If you wish to get");
-                text.add("a whole stack, just");
-                text.add("crouch and left click.");
+                text = "If a displayer already contains an item and you have that in your inventory, you can simply hold right click on it with an empty hand to add all of your items of that type from your inventory. To retrieve a single item just left click the block. If you wish to";
+                Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
+                break;
+            case 18:
+                text = "get a whole stack, Crouch + Left Click on it. In creative mode you can simply hold Right Click on a displayer containing an object and it will add 64 of it with every right click, without it being in your inventory.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             default:

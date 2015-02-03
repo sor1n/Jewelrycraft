@@ -2,11 +2,11 @@ package darkknight.jewelrycraft.renders;
 
 import org.lwjgl.opengl.GL11;
 
+import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.model.ModelMolder;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
 import darkknight.jewelrycraft.util.JewelryNBT;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -93,8 +94,15 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
             {
                 GL11.glPushMatrix();
                 GL11.glDisable(GL11.GL_LIGHTING);
+                if (JewelrycraftMod.fancyRender)
+                {
+                    GL11.glEnable(GL11.GL_BLEND);
+                    OpenGlHelper.glBlendFunc(1, 1, 0, 0);
+                }
                 ItemStack metal = new ItemStack(ItemList.metal);
-                JewelryNBT.addMetal(metal, me.moltenMetal);
+                ItemStack ingot = me.moltenMetal.copy();
+                if (Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_glass) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_hardened_clay) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.wool) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.carpet)) ingot.setItemDamage(15 - ingot.getItemDamage());
+                JewelryNBT.addMetal(metal, ingot);
                 EntityItem moltenMetal = new EntityItem(te.getWorldObj(), 0.0D, 0.0D, 0.0D, metal);
                 moltenMetal.getEntityItem().stackSize = 1;
                 moltenMetal.hoverStart = 0.0F;
@@ -105,6 +113,7 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                 RenderItem.renderInFrame = true;
                 RenderManager.instance.renderEntityWithPosYaw(moltenMetal, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
                 RenderItem.renderInFrame = false;
+                if (JewelrycraftMod.fancyRender) GL11.glDisable(GL11.GL_BLEND);
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glPopMatrix();
             }

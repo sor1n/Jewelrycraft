@@ -122,9 +122,9 @@ public class TileEntitySmelterRender extends TileEntitySpecialRenderer
                     OpenGlHelper.glBlendFunc(1, 1, 0, 0);
                 }
                 ItemStack metal = new ItemStack(ItemList.metal);
-                ItemStack stack = new ItemStack(st.moltenMetal.getItem(), 1, st.moltenMetal.getItemDamage());
-                if (Item.getIdFromItem(stack.getItem()) == Block.getIdFromBlock(Blocks.stained_glass) || Item.getIdFromItem(stack.getItem()) == Block.getIdFromBlock(Blocks.stained_glass_pane) || Item.getIdFromItem(stack.getItem()) == Block.getIdFromBlock(Blocks.stained_hardened_clay) || Item.getIdFromItem(stack.getItem()) == Block.getIdFromBlock(Blocks.wool) || Item.getIdFromItem(stack.getItem()) == Block.getIdFromBlock(Blocks.carpet)) stack.setItemDamage(15 - stack.getItemDamage());
-                JewelryNBT.addMetal(metal, stack);
+                ItemStack ingot = st.moltenMetal.copy();
+                if (Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_glass) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_hardened_clay) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.wool) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.carpet)) ingot.setItemDamage(15 - ingot.getItemDamage());
+                JewelryNBT.addMetal(metal, ingot);
                 EntityItem moltenMetal = new EntityItem(te.getWorldObj(), 0.0D, 0.0D, 0.0D, metal);
                 moltenMetal.getEntityItem().stackSize = 1;
                 moltenMetal.hoverStart = 0.0F;

@@ -11,13 +11,13 @@ import io.netty.buffer.ByteBuf;
 
 public class PacketSendLiquidData implements IMessage, IMessageHandler<PacketSendLiquidData, IMessage>
 {
-    int dimID, x, y, z, itemID, itemMeta;
+    int dimID, x, y, z, itemID, itemMeta, color;
     
     public PacketSendLiquidData()
     {
     }
     
-    public PacketSendLiquidData(PacketRequestLiquidData packet, int itemID, int itemMeta)
+    public PacketSendLiquidData(PacketRequestLiquidData packet, int itemID, int itemMeta, int color)
     {
         dimID = packet.dimID;
         x = packet.x;
@@ -25,9 +25,10 @@ public class PacketSendLiquidData implements IMessage, IMessageHandler<PacketSen
         z = packet.z;
         this.itemID = itemID;
         this.itemMeta = itemMeta;
+        this.color = color;
     }
     
-    public PacketSendLiquidData(int dimID, int x, int y, int z, int itemID, int itemMeta)
+    public PacketSendLiquidData(int dimID, int x, int y, int z, int itemID, int itemMeta, int color)
     {
         this.dimID = dimID;
         this.x = x;
@@ -35,6 +36,7 @@ public class PacketSendLiquidData implements IMessage, IMessageHandler<PacketSen
         this.z = z;
         this.itemID = itemID;
         this.itemMeta = itemMeta;
+        this.color = color;
     }
     
     @Override
@@ -46,6 +48,7 @@ public class PacketSendLiquidData implements IMessage, IMessageHandler<PacketSen
         z = buf.readInt();
         itemID = buf.readInt();
         itemMeta = buf.readInt();
+        color = buf.readInt();
     }
     
     @Override
@@ -57,12 +60,13 @@ public class PacketSendLiquidData implements IMessage, IMessageHandler<PacketSen
         buf.writeInt(z);
         buf.writeInt(itemID);
         buf.writeInt(itemMeta);
+        buf.writeInt(color);
     }
     
     @Override
     public IMessage onMessage(PacketSendLiquidData message, MessageContext ctx)
     {
-        JewelrycraftMod.clientData.setString(message.x + " " + message.y + " " + message.z + " " + message.dimID, message.itemID + ":" + message.itemMeta);
+        JewelrycraftMod.clientData.setString(message.x + " " + message.y + " " + message.z + " " + message.dimID, message.itemID + ":" + message.itemMeta + ":" + message.color);
         
         Block block = Minecraft.getMinecraft().theWorld.getBlock(message.x, message.y, message.z);
         Minecraft.getMinecraft().theWorld.markBlockForUpdate(message.x, message.y, message.z);

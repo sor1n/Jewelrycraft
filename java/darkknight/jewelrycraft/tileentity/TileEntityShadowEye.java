@@ -1,11 +1,12 @@
 package darkknight.jewelrycraft.tileentity;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -13,6 +14,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.registry.GameData;
 import darkknight.jewelrycraft.block.BlockHandPedestal;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.particles.EntityShadowsFX;
@@ -118,14 +120,6 @@ public class TileEntityShadowEye extends TileEntity
                 persistTag.setBoolean("nearStartedRitual", true);
             }
         }
-        try
-        {
-            // System.out.println(pedestalItems);
-        }
-        catch (Exception e)
-        {
-            // System.out.println(e);
-        }
     }
     
     public boolean isValidStructure(World world, int x, int y, int z, int metadata)
@@ -213,8 +207,6 @@ public class TileEntityShadowEye extends TileEntity
     public void addData(World world, int x, int y, int z)
     {
         pedestalItems.clear();
-        // addPedestalInfo((TileEntityHandPedestal) world.getTileEntity(x, y -
-        // 3, z));
         addPedestalInfo((TileEntityHandPedestal) world.getTileEntity(x + 2, y - 3, z - 4));
         addPedestalInfo((TileEntityHandPedestal) world.getTileEntity(x - 4, y - 3, z + 2));
         addPedestalInfo((TileEntityHandPedestal) world.getTileEntity(x, y - 3, z - 5));
@@ -231,7 +223,6 @@ public class TileEntityShadowEye extends TileEntity
     
     public void addPedestalInfo(TileEntityHandPedestal pedestal)
     {
-        System.out.println(pedestalItems);
         if (pedestal != null && pedestal.object != null && pedestal.object.getItem() != null)
         {
             if (pedestalItems.isEmpty()) pedestalItems.add(pedestal.object.copy());

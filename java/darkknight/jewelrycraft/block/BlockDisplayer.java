@@ -69,10 +69,10 @@ public class BlockDisplayer extends BlockContainer
                 {
                     te.object = item.copy();
                     te.quantity += item.stackSize;
+                    te.object.stackSize = 1;
                     te.hasObject = true;
-                    if (!entityPlayer.capabilities.isCreativeMode) item.stackSize = 0;
+                    if (!entityPlayer.capabilities.isCreativeMode) entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, item.stackSize);
                     te.isDirty = true;
-                    te.markDirty();
                 }
                 else if (te.object.getItem() == item.getItem() && te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0) && te.object.getItemDamage() == item.getItemDamage())
                 {
@@ -81,14 +81,12 @@ public class BlockDisplayer extends BlockContainer
                         te.quantity += item.stackSize;
                         if (!entityPlayer.capabilities.isCreativeMode) entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, item.stackSize);
                         te.isDirty = true;
-                        te.markDirty();
                     }
                     else if (!te.object.hasTagCompound() && !item.hasTagCompound())
                     {
                         te.quantity += item.stackSize;
                         if (!entityPlayer.capabilities.isCreativeMode) entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, item.stackSize);
                         te.isDirty = true;
-                        te.markDirty();
                     }
                 }
             }
@@ -113,18 +111,17 @@ public class BlockDisplayer extends BlockContainer
                                 te.quantity += item.stackSize;
                                 if (!entityPlayer.capabilities.isCreativeMode) entityPlayer.inventory.decrStackSize(inv, item.stackSize);
                                 te.isDirty = true;
-                                te.markDirty();
                             }
                         }
                     }
                 }
-                else if(te.hasObject && te.object.getItem() != null)
+                else if(entityPlayer.capabilities.isCreativeMode && te.hasObject && te.object.getItem() != null)
                 {
                     te.quantity += 64;
-                    te.isDirty = true;
-                    te.markDirty();                    
+                    te.isDirty = true;                  
                 }
             }
+            te.isDirty = true;  
         }
         return true;
     }
@@ -145,6 +142,7 @@ public class BlockDisplayer extends BlockContainer
                         player.inventory.addItemStackToInventory(te.object);
                         te.object.stackSize = 1;
                         te.quantity -= te.object.getMaxStackSize();
+                        te.isDirty = true;
                     }
                     else
                     {
@@ -153,9 +151,9 @@ public class BlockDisplayer extends BlockContainer
                         te.hasObject = false;
                         te.object = new ItemStack(Item.getItemById(0), 0, 0);
                         te.quantity = 0;
+                        te.isDirty = true;
                     }
                     te.isDirty = true;
-                    te.markDirty();
                 }
                 else
                 {
@@ -163,7 +161,8 @@ public class BlockDisplayer extends BlockContainer
                     {
                         player.inventory.addItemStackToInventory(te.object);
                         te.object.stackSize = 1;
-                        --te.quantity;
+                        te.quantity--;
+                        te.isDirty = true;
                     }
                     else
                     {
@@ -172,9 +171,9 @@ public class BlockDisplayer extends BlockContainer
                         te.hasObject = false;
                         te.object = new ItemStack(Item.getItemById(0), 0, 0);
                         te.quantity = 0;
+                        te.isDirty = true;
                     }
                     te.isDirty = true;
-                    te.markDirty();
                 }
             }
         }

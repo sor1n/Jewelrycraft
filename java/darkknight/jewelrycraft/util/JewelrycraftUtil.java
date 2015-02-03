@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
+import cpw.mods.fml.common.registry.GameData;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -15,12 +17,15 @@ import darkknight.jewelrycraft.lib.Reference;
 
 public class JewelrycraftUtil
 {
-    public static ArrayList<ItemStack> modifiers = new ArrayList<ItemStack>();
+    public static ArrayList<ItemStack> objects = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> gem = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> jewelry = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> metal = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> ores = new ArrayList<ItemStack>();
-    public static HashMap<String, Integer> curses = new HashMap<String, Integer>();
+    public static HashMap<String, Integer> curseValues = new HashMap<String, Integer>();
+    public static HashMap<Integer, String> curseNames = new HashMap<Integer, String>();
+    public static HashMap<Integer, String> availableCurseNames = new HashMap<Integer, String>();
+    public static HashMap<String, Integer> availableCurseValues = new HashMap<String, Integer>();
     public static HashMap<Item, ItemStack> oreToIngot = new HashMap<Item, ItemStack>();
     public static ArrayList<String> jamcraftPlayers = new ArrayList<String>();
     public static Random rand = new Random();
@@ -28,20 +33,12 @@ public class JewelrycraftUtil
     public static void addStuff()
     {
         // Modifiers
-        modifiers.add(new ItemStack(Blocks.chest));
-        modifiers.add(new ItemStack(Blocks.torch));
-        modifiers.add(new ItemStack(Items.book));
-        modifiers.add(new ItemStack(Items.dye, 1, 15));
-        modifiers.add(new ItemStack(Items.bone));
-        modifiers.add(new ItemStack(Items.sugar));
-        modifiers.add(new ItemStack(Items.feather));
-        modifiers.add(new ItemStack(Items.bed));
-        modifiers.add(new ItemStack(Items.iron_pickaxe));
-        modifiers.add(new ItemStack(Items.redstone));
-        modifiers.add(new ItemStack(Items.diamond_pickaxe));
-        modifiers.add(new ItemStack(Items.blaze_powder));
-        modifiers.add(new ItemStack(Items.ender_eye));
-        modifiers.add(new ItemStack(Items.potionitem, 1, 8270));
+        for(Object item: GameData.getItemRegistry())
+        {
+            ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+            ((Item)item).getSubItems((Item)item, null, items);
+            objects.addAll(items);
+        }
         
         // Jewels
         for (int i = 0; i < 16; i++)
@@ -57,13 +54,15 @@ public class JewelrycraftUtil
         // Jewelry
         jewelry.add(new ItemStack(ItemList.ring));
         jewelry.add(new ItemStack(ItemList.necklace));
+        jewelry.add(new ItemStack(ItemList.bracelet));
+        jewelry.add(new ItemStack(ItemList.earrings));
         
         // Curses
-        curses.put(Reference.MODNAME + ":" + "Blind", 0);
-        curses.put(Reference.MODNAME + ":" + "Weak", 1);
-        curses.put(Reference.MODNAME + ":" + "Anemic", 2);
-        curses.put(Reference.MODNAME + ":" + "Scared", 3);
-        curses.put(Reference.MODNAME + ":" + "Brave", 4);
+        addCurse(Reference.MODNAME + ":" + "Blind", 0);
+        addCurse(Reference.MODNAME + ":" + "Weak", 1);
+        addCurse(Reference.MODNAME + ":" + "Anemic", 2);
+        addCurse(Reference.MODNAME + ":" + "Scared", 3);
+        addCurse(Reference.MODNAME + ":" + "Brave", 4);
     }
     
     public static void jamcrafters()
@@ -88,14 +87,24 @@ public class JewelrycraftUtil
         jamcraftPlayers.add("direwolf20");
     }
     
-    public static ArrayList<ItemStack> addRandomModifiers()
+    public static void addCurse(String name, int val)
+    {
+        curseValues.put(name, val);
+        curseNames.put(val, name);
+        availableCurseValues.put(name, val);
+        availableCurseNames.put(val, name);
+    }
+    
+    public static ArrayList<ItemStack> addRandomModifiers(int randValue)
     {
         ArrayList<ItemStack> list = new ArrayList<ItemStack>();
-        for(int i = 0; i < new Random().nextInt(modifiers.size()); i++)
+        for (int i = 0; i < 2 + randValue; i++)
         {
-            list.add(modifiers.get(new Random().nextInt(modifiers.size())));
+            ItemStack item = objects.get(new Random().nextInt(objects.size()));
+            item.stackSize = 1 + new Random().nextInt(2);
+            list.add(item);
         }
-        return list;        
+        return list;
     }
     
     public static void addMetals()
@@ -109,16 +118,18 @@ public class JewelrycraftUtil
             {
                 ItemStack nextStack = i.next();
                 
-                if ((nextStack.getItem().getUnlocalizedName().toLowerCase().contains("ingot") || nextStack.getItem().getUnlocalizedName().toLowerCase().contains("alloy")) && !nextStack.getItem().getUnlocalizedName().toLowerCase().contains("powder") && !nextStack.getItem().getUnlocalizedName().toLowerCase().contains("dust") && !nextStack.getItem().getUnlocalizedName().toLowerCase().contains("block") && !metal.contains(nextStack)){
+                if ((nextStack.getItem().getUnlocalizedName().toLowerCase().contains("ingot") || nextStack.getItem().getUnlocalizedName().toLowerCase().contains("alloy")) && !nextStack.getItem().getUnlocalizedName().toLowerCase().contains("powder") && !nextStack.getItem().getUnlocalizedName().toLowerCase().contains("dust") && !nextStack.getItem().getUnlocalizedName().toLowerCase().contains("block") && !metal.contains(nextStack))
+                {
                     metal.add(nextStack);
-                    if(OreDictionary.getOres(OreDictionary.getOreNames()[index].replace("ingot", "ore")) != null){
-                    	ores.addAll(OreDictionary.getOres(OreDictionary.getOreNames()[index].replace("ingot", "ore")));
-                    	Iterator<ItemStack> ores = OreDictionary.getOres(OreDictionary.getOreNames()[index].replace("ingot", "ore")).iterator();
-                    	while(ores.hasNext())
-                    	{
-                    		ItemStack ore = ores.next();
-                        	oreToIngot.put(ore.getItem(), nextStack);
-                    	}
+                    if (OreDictionary.getOres(OreDictionary.getOreNames()[index].replace("ingot", "ore")) != null)
+                    {
+                        ores.addAll(OreDictionary.getOres(OreDictionary.getOreNames()[index].replace("ingot", "ore")));
+                        Iterator<ItemStack> ores = OreDictionary.getOres(OreDictionary.getOreNames()[index].replace("ingot", "ore")).iterator();
+                        while (ores.hasNext())
+                        {
+                            ItemStack ore = ores.next();
+                            oreToIngot.put(ore.getItem(), nextStack);
+                        }
                     }
                 }
             }
@@ -128,7 +139,7 @@ public class JewelrycraftUtil
     
     public static boolean isModifier(ItemStack item)
     {
-        Iterator<ItemStack> i = modifiers.iterator();
+        Iterator<ItemStack> i = objects.iterator();
         
         while (i.hasNext())
         {

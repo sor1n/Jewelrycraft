@@ -1,5 +1,7 @@
 package darkknight.jewelrycraft.tileentity;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -90,13 +92,15 @@ public class TileEntityMolder extends TileEntity
         }
         if (this.hasMoltenMetal && !this.hasJewelBase && quantity >= 0.1f)
         {
-            ringMetal = moltenMetal;
+            ringMetal = moltenMetal.copy();
             if (cooling > 0) this.cooling--;
             if (cooling <= 0f)
             {
                 if (mold.getItemDamage() == 0) this.jewelBase = moltenMetal;
                 else if (mold.getItemDamage() == 1) this.jewelBase = new ItemStack(ItemList.ring);
-                else this.jewelBase = new ItemStack(ItemList.necklace);
+                else if (mold.getItemDamage() == 2) this.jewelBase = new ItemStack(ItemList.necklace);
+                else if (mold.getItemDamage() == 3) this.jewelBase = new ItemStack(ItemList.bracelet);
+                else if (mold.getItemDamage() == 4) this.jewelBase = new ItemStack(ItemList.earrings);
                 ringMetal.stackSize = 1;
                 jewelBase.stackSize = 1;
                 if (mold.getItemDamage() != 0 && jewelBase != new ItemStack(Item.getItemById(0), 0, 0)) JewelryNBT.addMetal(jewelBase, ringMetal);

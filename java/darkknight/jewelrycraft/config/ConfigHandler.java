@@ -1,5 +1,7 @@
 package darkknight.jewelrycraft.config;
 
+import java.io.File;
+
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
@@ -8,7 +10,7 @@ public class ConfigHandler
     public static Configuration config;
     public static int ingotCoolingTime = 100;
     public static int ingotMeltingTime = 1500;
-    public static int jewelryCraftingTime = 1000;
+    public static int jewelryCraftingTime = 200;
     
     private static boolean isInitialized = false;
     public static boolean generateVillageNetherstar = false;
@@ -27,7 +29,7 @@ public class ConfigHandler
     {
         if (!isInitialized)
         {
-            config = new Configuration(e.getSuggestedConfigurationFile());
+            config = new Configuration(new File(e.getModConfigurationDirectory(), "JewelryCraftv2.0.cfg"));
             
             config.load();
             

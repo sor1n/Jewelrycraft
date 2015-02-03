@@ -11,6 +11,8 @@ import net.minecraft.util.EnumChatFormatting;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.GuiGuide;
 import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 public class GuiTabItems extends GuiTab
 {
@@ -28,31 +30,19 @@ public class GuiTabItems extends GuiTab
     @Override
     public void drawBackground(GuiGuide gui, int x, int y, int page)
     {
-        ArrayList<String> text = new ArrayList<String>();
+        String text = "";
         ArrayList<ItemStack> items = new ArrayList<ItemStack>();
         int xPos = (page % 2 == 0) ? 107 : -35;
         switch (page)
         {
             case 1:
-                text.add("  Shadow ingots are");
-                text.add("obtained by smelting");
-                text.add("shadow ore. They are");
-                text.add("used in a few recipes");
-                text.add("and an important key");
-                text.add("for making some");
-                text.add("jewellery work.");
+                text = "Shadow ingots are obtained by smelting shadow ore. They are used in a few recipes and an important key for making some jewellery work.";
                 items.add(new ItemStack(BlockList.shadowOre));
                 items.add(new ItemStack(ItemList.shadowIngot));
                 Page.addSmeltingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text, items, x, y);
                 break;
             case 2:
-                text.add("  These gloves allow");
-                text.add("you to steal the trades");
-                text.add("the pesky Testificates");
-                text.add("have to offer.");
-                text.add("  To use these simply");
-                text.add("open their gui at least");
-                text.add("once, then crouch and");
+                text = "These gloves give you the chance to steal the trades those pesky Testificates have to offer. To use these simply open their gui at least once, then Crouch and";
                 items.add(new ItemStack(ItemList.thiefGloves));
                 items.add(new ItemStack(ItemList.shadowIngot));
                 items.add(null);
@@ -66,62 +56,18 @@ public class GuiTabItems extends GuiTab
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, items, x, y);
                 break;
             case 3:
-                text.add("right click on the them");
-                text.add("to steal the trades.");
-                text.add("A villager has 7 of the");
-                text.add("same trade item. So, for");
-                text.add("example, if he wants 2");
-                text.add("emeralds in exchange");
-                text.add("for 4 diamonds, you will");
-                text.add("get 28 diamonds from");
-                text.add("him, because 7*4=28.");
-                text.add("However, if you have");
-                text.add("traded with him before,");
-                text.add("then he will have that");
+                text = "right click on the them to hopefully steal the trades. If you traded with him before, then you have a chance of getting the traded emeralds back as well. This has a maximum of 10 uses before it breaks.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 4:
-                text.add("many times less of the");
-                text.add("item. This has a maximum");
-                text.add("of 10 uses before it");
-                text.add("breaks.");
-                Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
-                break;
-            case 5:
-                text.add("  In order to get the");
-                text.add("ingot back from the");
-                text.add("smelter you need a");
-                text.add("mold for it. However,");
-                text.add("this mold can't be used.");
-                text.add("It is too soft. It needs");
-                text.add("to be hardened in");
-                text.add("order for it to be used.");
+                text = "In order to get the ingot back from the smelter you need a mold for it. However, this mold can't be used. It is too soft. It needs to be hardened in order for it to be used.";
                 items.add(new ItemStack(ItemList.clayMolds, 1, 0));
                 items.add(new ItemStack(Items.clay_ball));
                 items.add(new ItemStack(Items.clay_ball));
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), true, text, items, x, y);
                 break;
-            case 6:
-                text.add("  By smelting the clay_ball");
-                text.add("mold you get a harder");
-                text.add("version which can be");
-                text.add("used to create ingots.");
-                text.add("Simply right click with");
-                text.add("this on a molder to");
-                text.add("attach it and you're");
-                text.add("ready to go.");
-                items.add(new ItemStack(ItemList.clayMolds, 1, 0));
-                items.add(new ItemStack(ItemList.molds, 1, 0));
-                Page.addSmeltingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text, items, x, y);
-                break;
-            case 7:
-                text.add("  In order to create a");
-                text.add("ring you need a mold");
-                text.add("for it. However, this");
-                text.add("one can't be used. It is");
-                text.add("too soft. It needs to be");
-                text.add("hardened in order for");
-                text.add("it to be used.");
+            case 5:
+                text = "To create a ring you need a mold for it. However, this one is too soft to be used. It needs to be hardened in order for it to be used.";
                 items.add(new ItemStack(ItemList.clayMolds, 1, 1));
                 items.add(null);
                 items.add(new ItemStack(Items.clay_ball));
@@ -132,60 +78,62 @@ public class GuiTabItems extends GuiTab
                 items.add(null);
                 items.add(new ItemStack(Items.clay_ball));
                 items.add(null);
+                Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, items, x, y);
+                break;
+            case 6:
+                text = "To create a necklace you need a mold for it. However, this one can't be used. It is too soft. It needs to be hardened in order for it to be used.";
+                items.add(new ItemStack(ItemList.clayMolds, 1, 2));
+                items.add(new ItemStack(Items.clay_ball));
+                items.add(null);
+                items.add(new ItemStack(Items.clay_ball));
+                items.add(new ItemStack(Items.clay_ball));
+                items.add(null);
+                items.add(new ItemStack(Items.clay_ball));
+                items.add(null);
+                items.add(new ItemStack(Items.clay_ball));
+                items.add(null);
+                Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, items, x, y);
+                break;
+            case 7:
+                text = "To create a bracelet you need a mold for it. However, this one can't be used. It is too soft. It needs to be hardened in order for it to be used.";
+                items.add(new ItemStack(ItemList.clayMolds, 1, 3));
+                items.add(new ItemStack(Items.clay_ball));
+                items.add(new ItemStack(Items.clay_ball));
+                items.add(new ItemStack(Items.clay_ball));
+                items.add(new ItemStack(Items.clay_ball));
+                items.add(null);
+                items.add(new ItemStack(Items.clay_ball));
+                items.add(new ItemStack(Items.clay_ball));
+                items.add(new ItemStack(Items.clay_ball));
+                items.add(new ItemStack(Items.clay_ball));
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, items, x, y);
                 break;
             case 8:
-                text.add("  By smelting the clay_ball");
-                text.add("mold you get a harder");
-                text.add("version which can be");
-                text.add("used to create rings.");
-                text.add("Simply right click with");
-                text.add("this on a molder to");
-                text.add("attach it and you're");
-                text.add("ready to go.");
-                items.add(new ItemStack(ItemList.clayMolds, 1, 1));
-                items.add(new ItemStack(ItemList.molds, 1, 1));
-                Page.addSmeltingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text, items, x, y);
-                break;
-            case 9:
-                text.add("  In order to create a");
-                text.add("necklace you need a");
-                text.add("mold for it. However,");
-                text.add("this one can't be used.");
-                text.add("It is too soft. It needs");
-                text.add("to be hardened in");
-                text.add("order for it to be used.");
-                items.add(new ItemStack(ItemList.clayMolds, 1, 2));
-                items.add(new ItemStack(Items.clay_ball));
+                text = "To create a necklace you need a mold for it. However, this one can't be used. It is too soft. It needs to be hardened in order for it to be used.";
+                items.add(new ItemStack(ItemList.clayMolds, 1, 4));
                 items.add(null);
-                items.add(new ItemStack(Items.clay_ball));
-                items.add(new ItemStack(Items.clay_ball));
+                items.add(null);
                 items.add(null);
                 items.add(new ItemStack(Items.clay_ball));
                 items.add(null);
                 items.add(new ItemStack(Items.clay_ball));
+                items.add(null);
+                items.add(null);
                 items.add(null);
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, items, x, y);
                 break;
-            case 10:
-                text.add("  By smelting the clay_ball");
-                text.add("mold you get a harder");
-                text.add("version which can be");
-                text.add("used to create");
-                text.add("necklaces. Simply right");
-                text.add("click with this on a");
-                text.add("molder to attach it and");
-                text.add("you're ready to go.");
-                items.add(new ItemStack(ItemList.clayMolds, 1, 2));
-                items.add(new ItemStack(ItemList.molds, 1, 2));
+            case 9:
+                if (del == 0) values++;
+                del++;
+                if (del >= 300) del = 0;
+                if (values > 4) values = 0;
+                text = "By smelting a clay mold you get a harder version which can be used to create jewellery. Simply right click with this on a molder to attach it and you're ready to go.";
+                items.add(new ItemStack(ItemList.clayMolds, 1, values));
+                items.add(new ItemStack(ItemList.molds, 1, values));
                 Page.addSmeltingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text, items, x, y);
                 break;
-            case 11:
-                text.add("  Crystals don't do");
-                text.add("much. They can be dyed");
-                text.add("in any color and used");
-                text.add("as jewels to create a");
-                text.add("nice jewellery.");
+            case 10:
+                text = "Crystals don't do much as of yet. They can be dyed in any color and used as gems to create a nice jewellery.";
                 items.add(new ItemStack(ItemList.crystal, 1, 15));
                 items.add(null);
                 items.add(new ItemStack(Blocks.glass));
@@ -198,7 +146,7 @@ public class GuiTabItems extends GuiTab
                 items.add(null);
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, items, x, y);
                 break;
-            case 12:
+            case 11:
                 if (del == 0) values++;
                 del++;
                 if (del >= 300) del = 0;
@@ -213,41 +161,36 @@ public class GuiTabItems extends GuiTab
                 items.add(new ItemStack(ItemList.crystal, 1, values));
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop() + 60, true, text, items, x, y);
                 break;
-            case 13:
+            case 12:
                 if (del == 0) values++;
                 del++;
                 if (del >= 300) del = 0;
-                if (values >= 3) values = 0;
-                text.add("  It's this exact guide.");
-                text.add("I don't even know why");
-                text.add("you're reading this.");
-                text.add("I added this recipe in");
-                text.add("case you lose the");
-                text.add("original. In case you");
-                text.add("don't have it, I suggest");
-                text.add("adding NEI so you can");
+                if (values > 4) values = 0;
+                text = "It's this exact guide. I don't even know why you're reading this. I added this recipe in case you lose the original. Even if this is more helpful than NEI, I do suggest";
                 items.add(new ItemStack(ItemList.guide));
                 items.add(new ItemStack(ItemList.molds, 1, values));
                 items.add(new ItemStack(Items.book));
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), true, text, items, x, y);
                 break;
-            case 14:
+            case 13:
                 String link = "HERE";
-                if (x >= gui.getLeft() + 138 && x <= gui.getLeft() + 168 && y >= gui.getTop() + 98 && y <= gui.getTop() + 108) link = EnumChatFormatting.DARK_BLUE + "HERE" + EnumChatFormatting.BLACK;
-                text.add("see all the recipes.");
-                text.add("Since you are reading");
-                text.add("this, how about making");
-                text.add("a youtube video");
-                text.add("spotlighting this mod.");
-                text.add("I'd really appreciate it.");
-                text.add("After that you can");
-                text.add("share it in the main");
-                text.add("thread " + link + ".");
-                text.add("  This mod was made by");
-                text.add("DarkKnight (or sor1n");
-                text.add("depending from where");
-                text.add("you got this)");
+                if (x >= gui.getLeft() && x <= gui.getLeft() + 30 && y >= gui.getTop() + 104 && y <= gui.getTop() + 124) link = EnumChatFormatting.DARK_BLUE + "HERE" + EnumChatFormatting.BLACK;
+                text = "installing it so you can see all the recipes. Since you are reading this, how about making a youtube video spotlighting this mod. I'd really appreciate it. After that you can share it in the main thread " + link + "." + " This mod was made by DarkKnight (or sor1n, depends";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
+                break;
+            case 14:
+                text = "where you got this mod from) and the help of domi1819 and bspkrs.";
+                Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
+                break;
+            case 15:
+                ItemStack item = new ItemStack(ItemList.bucket); 
+                if (del == 0) values++;
+                del++;
+                if (del >= 300) del = 0;
+                if (values > JewelrycraftUtil.metal.size() - 1) values = 0;               
+                JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
+                text = "These buckets contain molten metal. To obtain one simply Right Click a full Smelter to get a bucket. You can pour the metal, other than that it has no use. You can place the molten metal back in a Smelter by Right Clicking one with it.";
+                Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, item, text, 40f, 0, 0, true, 45, 10);
                 break;
             default:
                 ;
@@ -256,12 +199,12 @@ public class GuiTabItems extends GuiTab
     
     public int getMaxPages()
     {
-        return 13;
+        return 15;
     }
     
     public void mouseClick(GuiGuide gui, int x, int y, int button)
     {
-        if (gui.page == 13 && x >= gui.getLeft() + 138 && x <= gui.getLeft() + 168 && y >= gui.getTop() + 98 && y <= gui.getTop() + 108)
+        if (gui.page == 13 && x >= gui.getLeft() && x <= gui.getLeft() + 30 && y >= gui.getTop() + 104 && y <= gui.getTop() + 124)
         {
             try
             {

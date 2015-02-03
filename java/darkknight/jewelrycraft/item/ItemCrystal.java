@@ -59,8 +59,12 @@ public class ItemCrystal extends Item
     
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int i, int j, int k, int side, float par8, float par9, float par10)
     {
-        //System.out.println(world.getBlockMetadata(i, j, k));
         return true;
+    }
+    
+    public String getUnlocalizedName(ItemStack stack)
+    {
+        return super.getUnlocalizedName() + "." + stack.getItemDamage();
     }
     
     @SuppressWarnings(
