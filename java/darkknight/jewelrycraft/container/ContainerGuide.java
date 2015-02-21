@@ -9,10 +9,16 @@ import net.minecraft.inventory.Container;
 public class ContainerGuide extends Container
 {
     
+    /**
+     * 
+     */
     public ContainerGuide()
-    {
-    }
+    {}
     
+    /**
+     * @param entityplayer
+     * @return
+     */
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer)
     {

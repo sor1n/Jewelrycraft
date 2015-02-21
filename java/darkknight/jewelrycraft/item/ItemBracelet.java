@@ -7,17 +7,30 @@ import darkknight.jewelrycraft.util.JewelryNBT;
 
 public class ItemBracelet extends ItemBaseJewelry
 {
-    public IIcon gem;    
-    public ItemBracelet()
-    {
-    }    
+    public IIcon gem;
     
+    /**
+     * 
+     */
+    public ItemBracelet()
+    {}
+    
+    /**
+     * @param iconRegister
+     */
+    @Override
     public void registerIcons(IIconRegister iconRegister)
     {
         itemIcon = iconRegister.registerIcon("jewelrycraft:bracelet");
         gem = iconRegister.registerIcon("jewelrycraft:jewelBracelet");
     }
     
+    /**
+     * @param stack
+     * @param pass
+     * @return
+     */
+    @Override
     public IIcon getIcon(ItemStack stack, int pass)
     {
         if (pass == 0) return itemIcon;

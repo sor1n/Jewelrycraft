@@ -1,7 +1,5 @@
 package darkknight.jewelrycraft.tileentity;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,20 +17,26 @@ public class TileEntityMolder extends TileEntity
     public ItemStack mold, jewelBase, moltenMetal, ringMetal;
     public float quantity;
     
+    /**
+     * 
+     */
     public TileEntityMolder()
     {
-        this.moltenMetal = new ItemStack(Item.getItemById(0), 0, 0);
-        this.jewelBase = new ItemStack(Item.getItemById(0), 0, 0);
-        this.mold = new ItemStack(Item.getItemById(0), 0, 0);
-        this.ringMetal = new ItemStack(Item.getItemById(0), 0, 0);
-        this.cooling = -1;
-        this.quantity = 0f;
-        this.hasJewelBase = false;
-        this.hasMoltenMetal = false;
-        this.hasMold = false;
-        this.isDirty = false;
+        moltenMetal = new ItemStack(Item.getItemById(0), 0, 0);
+        jewelBase = new ItemStack(Item.getItemById(0), 0, 0);
+        mold = new ItemStack(Item.getItemById(0), 0, 0);
+        ringMetal = new ItemStack(Item.getItemById(0), 0, 0);
+        cooling = -1;
+        quantity = 0f;
+        hasJewelBase = false;
+        hasMoltenMetal = false;
+        hasMold = false;
+        isDirty = false;
     }
     
+    /**
+     * @param nbt
+     */
     @Override
     public void writeToNBT(NBTTagCompound nbt)
     {
@@ -46,67 +50,69 @@ public class TileEntityMolder extends TileEntity
         NBTTagCompound tag1 = new NBTTagCompound();
         NBTTagCompound tag2 = new NBTTagCompound();
         NBTTagCompound tag3 = new NBTTagCompound();
-        this.mold.writeToNBT(tag);
+        mold.writeToNBT(tag);
         nbt.setTag("mold", tag);
-        this.jewelBase.writeToNBT(tag1);
+        jewelBase.writeToNBT(tag1);
         nbt.setTag("jewelBase", tag1);
-        this.moltenMetal.writeToNBT(tag2);
+        moltenMetal.writeToNBT(tag2);
         nbt.setTag("moltenMetal", tag2);
-        this.ringMetal.writeToNBT(tag3);
+        ringMetal.writeToNBT(tag3);
         nbt.setTag("ringMetal", tag3);
     }
     
+    /**
+     * @param nbt
+     */
     @Override
     public void readFromNBT(NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-        this.cooling = nbt.getInteger("cooling");
-        this.quantity = nbt.getFloat("quantity");
-        this.hasJewelBase = nbt.getBoolean("hasJewelBase");
-        this.hasMoltenMetal = nbt.getBoolean("hasMoltenMetal");
-        this.hasMold = nbt.getBoolean("hasMold");
-        this.mold = new ItemStack(Item.getItemById(0), 0, 0);
-        this.mold.readFromNBT(nbt.getCompoundTag("mold"));
-        this.jewelBase = new ItemStack(Item.getItemById(0), 0, 0);
-        this.jewelBase.readFromNBT(nbt.getCompoundTag("jewelBase"));
-        this.moltenMetal = new ItemStack(Item.getItemById(0), 0, 0);
-        this.moltenMetal.readFromNBT(nbt.getCompoundTag("moltenMetal"));
-        this.ringMetal = new ItemStack(Item.getItemById(0), 0, 0);
-        this.ringMetal.readFromNBT(nbt.getCompoundTag("ringMetal"));
+        cooling = nbt.getInteger("cooling");
+        quantity = nbt.getFloat("quantity");
+        hasJewelBase = nbt.getBoolean("hasJewelBase");
+        hasMoltenMetal = nbt.getBoolean("hasMoltenMetal");
+        hasMold = nbt.getBoolean("hasMold");
+        mold = new ItemStack(Item.getItemById(0), 0, 0);
+        mold.readFromNBT(nbt.getCompoundTag("mold"));
+        jewelBase = new ItemStack(Item.getItemById(0), 0, 0);
+        jewelBase.readFromNBT(nbt.getCompoundTag("jewelBase"));
+        moltenMetal = new ItemStack(Item.getItemById(0), 0, 0);
+        moltenMetal.readFromNBT(nbt.getCompoundTag("moltenMetal"));
+        ringMetal = new ItemStack(Item.getItemById(0), 0, 0);
+        ringMetal.readFromNBT(nbt.getCompoundTag("ringMetal"));
     }
     
+    /**
+     * 
+     */
     @Override
     public void updateEntity()
     {
         super.updateEntity();
-        if (isDirty)
-        {
+        if (isDirty){
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             isDirty = false;
         }
-        if (this.hasMoltenMetal && moltenMetal.getItem() != Item.getItemById(0) && quantity > 0f)
-        {
-            if (worldObj.rand.nextInt(20) == 0) this.worldObj.playSoundEffect(xCoord, yCoord + 0.5F, zCoord, "random.fizz", 0.5F, 1F);
-            for (int l = 0; l < 2; ++l)
-                this.worldObj.spawnParticle("reddust", xCoord + Math.random(), (double) yCoord + 0.2F, zCoord + Math.random(), 0.0D, 1.0D, 1.0D);
+        if (hasMoltenMetal && moltenMetal.getItem() != Item.getItemById(0) && quantity > 0f){
+            if (worldObj.rand.nextInt(20) == 0) worldObj.playSoundEffect(xCoord, yCoord + 0.5F, zCoord, "random.fizz", 0.5F, 1F);
+            for(int l = 0; l < 2; ++l)
+                worldObj.spawnParticle("reddust", xCoord + Math.random(), (double)yCoord + 0.2F, zCoord + Math.random(), 0.0D, 1.0D, 1.0D);
         }
-        if (this.hasMoltenMetal && !this.hasJewelBase && quantity >= 0.1f)
-        {
+        if (hasMoltenMetal && !hasJewelBase && quantity >= 0.1f){
             ringMetal = moltenMetal.copy();
-            if (cooling > 0) this.cooling--;
-            if (cooling <= 0f)
-            {
-                if (mold.getItemDamage() == 0) this.jewelBase = moltenMetal;
-                else if (mold.getItemDamage() == 1) this.jewelBase = new ItemStack(ItemList.ring);
-                else if (mold.getItemDamage() == 2) this.jewelBase = new ItemStack(ItemList.necklace);
-                else if (mold.getItemDamage() == 3) this.jewelBase = new ItemStack(ItemList.bracelet);
-                else if (mold.getItemDamage() == 4) this.jewelBase = new ItemStack(ItemList.earrings);
+            if (cooling > 0) cooling--;
+            if (cooling <= 0f){
+                if (mold.getItemDamage() == 0) jewelBase = moltenMetal;
+                else if (mold.getItemDamage() == 1) jewelBase = new ItemStack(ItemList.ring);
+                else if (mold.getItemDamage() == 2) jewelBase = new ItemStack(ItemList.necklace);
+                else if (mold.getItemDamage() == 3) jewelBase = new ItemStack(ItemList.bracelet);
+                else if (mold.getItemDamage() == 4) jewelBase = new ItemStack(ItemList.earrings);
                 ringMetal.stackSize = 1;
                 jewelBase.stackSize = 1;
                 if (mold.getItemDamage() != 0 && jewelBase != new ItemStack(Item.getItemById(0), 0, 0)) JewelryNBT.addMetal(jewelBase, ringMetal);
-                this.hasMoltenMetal = false;
-                this.moltenMetal = new ItemStack(Item.getItemById(0), 0, 0);
-                this.hasJewelBase = true;
+                hasMoltenMetal = false;
+                moltenMetal = new ItemStack(Item.getItemById(0), 0, 0);
+                hasJewelBase = true;
                 cooling = -1;
                 quantity = 0f;
                 isDirty = true;
@@ -114,13 +120,21 @@ public class TileEntityMolder extends TileEntity
         }
     }
     
+    /**
+     * @return
+     */
+    @Override
     public Packet getDescriptionPacket()
     {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
-        this.writeToNBT(nbttagcompound);
-        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbttagcompound);
+        writeToNBT(nbttagcompound);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbttagcompound);
     }
     
+    /**
+     * @param net
+     * @param packet
+     */
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
     {

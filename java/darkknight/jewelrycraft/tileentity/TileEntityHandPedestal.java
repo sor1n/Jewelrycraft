@@ -1,8 +1,6 @@
 package darkknight.jewelrycraft.tileentity;
 
-import java.util.List;
-
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -10,59 +8,175 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
+/**
+ * @author Paul Fulham (pau101)
+ */
 public class TileEntityHandPedestal extends TileEntity
 {
-    public boolean isDirty, hasObject;
-    public ItemStack object = new ItemStack(Item.getItemById(0), 0, 0);
+    protected boolean isDirty;
+    protected ItemStack heldItemStack;
+    /**
+     * When the hand is open the grip is 0 and is 20 when closed.
+     */
+    private float grip;
+    private float prevGrip;
+    private float gripMax;
+    private float gripScale;
+    private boolean isHandOpen;
     
+    /**
+     * 
+     */
     public TileEntityHandPedestal()
     {
-        this.isDirty = false;
-        this.hasObject = false;
+        isDirty = false;
+        heldItemStack = null;
+        grip = 0;
+        gripMax = 20;
+        gripScale = 1;
+        isHandOpen = true;
     }
     
+    /**
+     * @param tagCompound
+     */
     @Override
-    public void writeToNBT(NBTTagCompound nbt)
+    public void writeToNBT(NBTTagCompound tagCompound)
     {
-        super.writeToNBT(nbt);
-        nbt.setBoolean("hasObject", hasObject);
-        NBTTagCompound tag = new NBTTagCompound();
-        this.object.writeToNBT(tag);
-        nbt.setTag("object", tag);
+        super.writeToNBT(tagCompound);
+        if (heldItemStack != null){
+            NBTTagCompound objectCompound = new NBTTagCompound();
+            heldItemStack.writeToNBT(objectCompound);
+            tagCompound.setTag("object", objectCompound);
+        }
+        tagCompound.setBoolean("isHandOpen", isHandOpen);
     }
     
+    /**
+     * @param tagCompound
+     */
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
+    public void readFromNBT(NBTTagCompound tagCompound)
     {
-        super.readFromNBT(nbt);
-        this.hasObject = nbt.getBoolean("hasObject");
-        this.object = new ItemStack(Item.getItemById(0), 0, 0);
-        this.object.readFromNBT(nbt.getCompoundTag("object"));
+        super.readFromNBT(tagCompound);
+        if (tagCompound.hasKey("object", 10)) setHeldItemStack(ItemStack.loadItemStackFromNBT(tagCompound.getCompoundTag("object")));
+        else removeHeldItemStack();
+        isHandOpen = tagCompound.getBoolean("isHandOpen");
     }
     
+    /**
+     * 
+     */
     @Override
     public void updateEntity()
     {
         super.updateEntity();
-        if (isDirty)
-        {
+        updateGrip();
+        if (isDirty){
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             isDirty = false;
         }
-        //System.out.println(Item.getIdFromItem(object.getItem()));
     }
     
+    /**
+     * 
+     */
+    private void updateGrip()
+    {
+        prevGrip = grip;
+        if (grip > 0 && isHandOpen) grip -= 1 / gripScale;
+        else if (grip < gripMax && !isHandOpen) grip += 1 / gripScale;
+    }
+    
+    /**
+     * @return
+     */
+    @Override
     public Packet getDescriptionPacket()
     {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
-        this.writeToNBT(nbttagcompound);
-        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbttagcompound);
+        writeToNBT(nbttagcompound);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbttagcompound);
     }
     
+    /**
+     * @param networkManager
+     * @param packet
+     */
     @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+    public void onDataPacket(NetworkManager networkManager, S35PacketUpdateTileEntity packet)
     {
         readFromNBT(packet.func_148857_g());
         worldObj.func_147479_m(xCoord, yCoord, zCoord);
+    }
+    
+    /**
+     * 
+     */
+    @Override
+    public void markDirty()
+    {
+        super.markDirty();
+        isDirty = true;
+    }
+    
+    /**
+     * @return
+     */
+    public ItemStack getHeldItemStack()
+    {
+        return heldItemStack;
+    }
+    
+    /**
+     * @param heldItemStack
+     */
+    public void setHeldItemStack(ItemStack heldItemStack)
+    {
+        heldItemStack.stackSize = 1;
+        this.heldItemStack = heldItemStack;
+        if (heldItemStack.getItem() instanceof ItemBlock) gripScale = 0.5f;
+        else gripScale = 1;
+    }
+    
+    /**
+     * 
+     */
+    public void removeHeldItemStack()
+    {
+        heldItemStack = null;
+    }
+    
+    /**
+     * 
+     */
+    public void openHand()
+    {
+        isHandOpen = true;
+    }
+    
+    /**
+     * 
+     */
+    public void closeHand()
+    {
+        isHandOpen = false;
+    }
+    
+    /**
+     * @param t
+     * @return
+     */
+    public float getGrip(float t)
+    {
+        return (prevGrip * (1 - t) + grip * t) / gripMax;
+    }
+    
+    /**
+     * @return
+     */
+    public float getGripScale()
+    {
+        return gripScale;
     }
 }

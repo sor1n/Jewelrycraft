@@ -12,11 +12,17 @@ public class TileEntityBlockShadow extends TileEntity
 {
     public int metadata;
     
+    /**
+     * 
+     */
     public TileEntityBlockShadow()
     {
-        this.metadata = -1;
+        metadata = -1;
     }
     
+    /**
+     * @param nbt
+     */
     @Override
     public void writeToNBT(NBTTagCompound nbt)
     {
@@ -24,13 +30,19 @@ public class TileEntityBlockShadow extends TileEntity
         nbt.setInteger("metadata", metadata);
     }
     
+    /**
+     * @param nbt
+     */
     @Override
     public void readFromNBT(NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-        this.metadata = nbt.getInteger("metadata");
+        metadata = nbt.getInteger("metadata");
     }
     
+    /**
+     * 
+     */
     @Override
     public void updateEntity()
     {
@@ -38,33 +50,35 @@ public class TileEntityBlockShadow extends TileEntity
         int blockLight, realLight;
         int lightValue = worldObj.getSavedLightValue(EnumSkyBlock.Sky, xCoord, yCoord, zCoord) - worldObj.skylightSubtracted;
         float sunPosAngle = worldObj.getCelestialAngleRadians(1.0F);
-        
-        if (sunPosAngle < (float) Math.PI) sunPosAngle += (0.0F - sunPosAngle) * 0.2F;
-        else sunPosAngle += (((float) Math.PI * 2F) - sunPosAngle) * 0.2F;
-        
-        lightValue = Math.round((float) lightValue * MathHelper.cos(sunPosAngle));
-        
+        if (sunPosAngle < (float)Math.PI) sunPosAngle += (0.0F - sunPosAngle) * 0.2F;
+        else sunPosAngle += ((float)Math.PI * 2F - sunPosAngle) * 0.2F;
+        lightValue = Math.round(lightValue * MathHelper.cos(sunPosAngle));
         if (lightValue < 0) lightValue = 0;
         if (lightValue > 15) lightValue = 15;
-        
         blockLight = worldObj.getChunkFromBlockCoords(xCoord, zCoord).getSavedLightValue(EnumSkyBlock.Block, xCoord & 15, yCoord, zCoord & 15);
         realLight = worldObj.getChunkFromBlockCoords(xCoord, zCoord).getBlockLightValue(xCoord & 15, yCoord, zCoord & 15, 0);
-        
-        if ((blockLight == 0 && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)) || (lightValue >= blockLight)) metadata = 15 - lightValue;
+        if (blockLight == 0 && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || lightValue >= blockLight) metadata = 15 - lightValue;
         else if (!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)) metadata = 15 - realLight;
         else if (lightValue < blockLight) metadata = 15 - blockLight;
-        
         worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, metadata, 2);
         worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
     }
     
+    /**
+     * @return
+     */
+    @Override
     public Packet getDescriptionPacket()
     {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
-        this.writeToNBT(nbttagcompound);
-        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbttagcompound);
+        writeToNBT(nbttagcompound);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbttagcompound);
     }
     
+    /**
+     * @param net
+     * @param packet
+     */
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
     {

@@ -1,23 +1,27 @@
 package darkknight.jewelrycraft.network;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import io.netty.buffer.ByteBuf;
-import cpw.mods.fml.common.network.handshake.NetworkDispatcher;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import darkknight.jewelrycraft.JewelrycraftMod;
-import darkknight.jewelrycraft.util.JewelryNBT;
 
 public class PacketRequestLiquidData implements IMessage, IMessageHandler<PacketRequestLiquidData, IMessage>
 {
     int dimID, x, y, z;
     
+    /**
+     * 
+     */
     public PacketRequestLiquidData()
-    {
-    }
+    {}
     
+    /**
+     * @param dimID
+     * @param x
+     * @param y
+     * @param z
+     */
     public PacketRequestLiquidData(int dimID, int x, int y, int z)
     {
         this.dimID = dimID;
@@ -26,34 +30,35 @@ public class PacketRequestLiquidData implements IMessage, IMessageHandler<Packet
         this.z = z;
     }
     
+    /**
+     * @param message
+     * @param ctx
+     * @return
+     */
     @Override
     public IMessage onMessage(PacketRequestLiquidData message, MessageContext ctx)
     {
         String data = JewelrycraftMod.saveData.getString(message.x + " " + message.y + " " + message.z + " " + message.dimID);
         String[] splitData = data.split(":");
-        
         IMessage replyPacket = null;
-        
-        if (splitData.length == 3)
-        {
+        if (splitData.length == 3){
             int itemID, itemDamage, color;
-            try
-            {
+            try{
                 itemID = Integer.parseInt(splitData[0]);
                 itemDamage = Integer.parseInt(splitData[1]);
                 color = Integer.parseInt(splitData[2]);
-                
-                replyPacket = (IMessage) new PacketSendLiquidData(message, itemID, itemDamage, color);
+                replyPacket = new PacketSendLiquidData(message, itemID, itemDamage, color);
             }
-            catch (Exception e)
-            {
+            catch(Exception e){
                 e.printStackTrace();
             }
         }
-        
         return replyPacket;
     }
     
+    /**
+     * @param buf
+     */
     @Override
     public void fromBytes(ByteBuf buf)
     {
@@ -63,6 +68,9 @@ public class PacketRequestLiquidData implements IMessage, IMessageHandler<Packet
         z = buf.readInt();
     }
     
+    /**
+     * @param buf
+     */
     @Override
     public void toBytes(ByteBuf buf)
     {

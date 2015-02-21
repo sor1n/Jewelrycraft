@@ -1,7 +1,6 @@
 package darkknight.jewelrycraft.block;
 
 import java.util.Random;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,41 +17,78 @@ public class BlockShadowEye extends BlockContainer
 {
     Random rand = new Random();
     
+    /**
+     * 
+     */
     protected BlockShadowEye()
     {
         super(Material.rock);
     }
     
+    /**
+     * @param world
+     * @param var2
+     * @return
+     */
     @Override
     public TileEntity createNewTileEntity(World world, int var2)
     {
         return new TileEntityShadowEye();
     }
     
+    /**
+     * @return
+     */
     @Override
     public boolean renderAsNormalBlock()
     {
         return false;
     }
     
+    /**
+     * @param iblockaccess
+     * @param i
+     * @param j
+     * @param k
+     * @param l
+     * @return
+     */
     @Override
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         return false;
     }
     
+    /**
+     * @return
+     */
     @Override
     public boolean isOpaqueCube()
     {
         return false;
     }
     
+    /**
+     * @return
+     */
     @Override
     public int getRenderType()
     {
         return -1;
     }
     
+    /**
+     * @param world
+     * @param i
+     * @param j
+     * @param k
+     * @param entityPlayer
+     * @param par6
+     * @param par7
+     * @param par8
+     * @param par9
+     * @return
+     */
     @Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
     {
@@ -61,11 +97,25 @@ public class BlockShadowEye extends BlockContainer
         return true;
     }
     
+    /**
+     * @param world
+     * @param i
+     * @param j
+     * @param k
+     * @param player
+     */
     @Override
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
-    {
-    }
+    {}
     
+    /**
+     * @param world
+     * @param i
+     * @param j
+     * @param k
+     * @param entityLiving
+     * @param par6ItemStack
+     */
     @Override
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityLiving, ItemStack par6ItemStack)
     {
@@ -73,9 +123,12 @@ public class BlockShadowEye extends BlockContainer
         world.setBlockMetadataWithNotify(i, j, k, rotation, 2);
     }
     
+    /**
+     * @param icon
+     */
     @Override
     public void registerBlockIcons(IIconRegister icon)
     {
-        this.blockIcon = icon.registerIcon("minecraft:stonebrick");
+        blockIcon = icon.registerIcon("minecraft:stonebrick");
     }
 }

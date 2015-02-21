@@ -2,147 +2,145 @@ package darkknight.jewelrycraft.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import com.pau101.util.CubicBezier;
+import darkknight.jewelrycraft.tileentity.TileEntityHandPedestal;
 
+/**
+ * @author Paul Fulham (pau101)
+ */
 public class ModelHandPedestal extends ModelBase
 {
-    //fields
-    ModelRenderer finger1;
-    ModelRenderer finger2;
-    ModelRenderer finger3;
-    ModelRenderer finger4;
-    ModelRenderer finger5;
-    ModelRenderer finger6;
-    ModelRenderer finger7;
-    ModelRenderer finger8;
-    ModelRenderer finger9;
-    ModelRenderer finger10;
-    ModelRenderer Base;
-    ModelRenderer Base2;
-    ModelRenderer Base3;
-    ModelRenderer Palm;
+    protected ModelRenderer plinth;
+    protected ModelRenderer base;
+    protected ModelRenderer shaft;
+    private ModelRenderer palm;
+    private ModelRenderer[] fingers;
+    private ModelRenderer thumb;
+    private ItemStackModelRenderer heldItemStack;
+    private CubicBezier easeInOut;
     
-    public ModelHandPedestal()
+    /**
+     * @param resetResourceLocation
+     */
+    public ModelHandPedestal(ResourceLocation resetResourceLocation)
     {
-        textureWidth = 64;
-        textureHeight = 32;
-        
-        finger1 = new ModelRenderer(this, 0, 0);
-        finger1.addBox(-1.5F, -4.5F, -9F, 2, 4, 3);
-        finger1.setRotationPoint(0F, 10F, 0F);
-        finger1.setTextureSize(64, 32);
-        finger1.mirror = true;
-        setRotation(finger1, -0.2094395F, 0.7853982F, 0F);
-        finger2 = new ModelRenderer(this, 0, 0);
-        finger2.addBox(-2.5F, -4.5F, -9F, 2, 4, 3);
-        finger2.setRotationPoint(0F, 10F, 0F);
-        finger2.setTextureSize(64, 32);
-        finger2.mirror = true;
-        setRotation(finger2, -0.2094395F, 0.0872665F, 0F);
-        finger3 = new ModelRenderer(this, 0, 0);
-        finger3.addBox(0.5F, -4.5F, -9F, 2, 4, 3);
-        finger3.setRotationPoint(0F, 10F, 0F);
-        finger3.setTextureSize(64, 32);
-        finger3.mirror = true;
-        setRotation(finger3, -0.2094395F, -0.0872665F, 0F);
-        finger4 = new ModelRenderer(this, 0, 0);
-        finger4.addBox(-0.5F, -4.5F, -9F, 2, 4, 3);
-        finger4.setRotationPoint(0F, 10F, 0F);
-        finger4.setTextureSize(64, 32);
-        finger4.mirror = true;
-        setRotation(finger4, -0.2094395F, -0.7853982F, 0F);
-        finger5 = new ModelRenderer(this, 0, 0);
-        finger5.addBox(-1F, -4.5F, 5F, 2, 4, 3);
-        finger5.setRotationPoint(0F, 10F, 0F);
-        finger5.setTextureSize(64, 32);
-        finger5.mirror = true;
-        setRotation(finger5, 0.2094395F, 0F, 0F);
-        finger6 = new ModelRenderer(this, 0, 0);
-        finger6.addBox(-1.5F, -0.5F, -9F, 2, 3, 5);
-        finger6.setRotationPoint(0F, 10F, 0F);
-        finger6.setTextureSize(64, 32);
-        finger6.mirror = true;
-        setRotation(finger6, -0.2094395F, 0.7853982F, 0F);
-        finger7 = new ModelRenderer(this, 0, 0);
-        finger7.addBox(-2.5F, -0.5F, -9F, 2, 3, 5);
-        finger7.setRotationPoint(0F, 10F, 0F);
-        finger7.setTextureSize(64, 32);
-        finger7.mirror = true;
-        setRotation(finger7, -0.2094395F, 0.0872665F, 0F);
-        finger8 = new ModelRenderer(this, 0, 0);
-        finger8.addBox(0.5F, -0.5F, -9F, 2, 3, 5);
-        finger8.setRotationPoint(0F, 10F, 0F);
-        finger8.setTextureSize(64, 32);
-        finger8.mirror = true;
-        setRotation(finger8, -0.2094395F, -0.0872665F, 0F);
-        finger9 = new ModelRenderer(this, 0, 0);
-        finger9.addBox(-0.5F, -0.5F, -9F, 2, 3, 5);
-        finger9.setRotationPoint(0F, 10F, 0F);
-        finger9.setTextureSize(64, 32);
-        finger9.mirror = true;
-        setRotation(finger9, -0.2094395F, -0.7853982F, 0F);
-        finger10 = new ModelRenderer(this, 0, 0);
-        finger10.addBox(-1F, -0.5F, 3F, 2, 3, 5);
-        finger10.setRotationPoint(0F, 10F, 0F);
-        finger10.setTextureSize(64, 32);
-        finger10.mirror = true;
-        setRotation(finger10, 0.2094395F, 0F, 0F);
-        Base = new ModelRenderer(this, 0, 0);
-        Base.addBox(-6F, 4F, -6F, 12, 4, 12);
-        Base.setRotationPoint(0F, 16F, 0F);
-        Base.setTextureSize(64, 32);
-        Base.mirror = true;
-        setRotation(Base, 0F, 0F, 0F);
-        Base2 = new ModelRenderer(this, 0, 0);
-        Base2.addBox(-4F, 0F, -4F, 8, 4, 8);
-        Base2.setRotationPoint(0F, 16F, 0F);
-        Base2.setTextureSize(64, 32);
-        Base2.mirror = true;
-        setRotation(Base2, 0F, 0F, 0F);
-        Base3 = new ModelRenderer(this, 0, 0);
-        Base3.addBox(-3F, -4F, -3F, 6, 4, 6);
-        Base3.setRotationPoint(0F, 16F, 0F);
-        Base3.setTextureSize(64, 32);
-        Base3.mirror = true;
-        setRotation(Base3, 0F, 0F, 0F);
-        Palm = new ModelRenderer(this, 0, 0);
-        Palm.addBox(-4F, -8F, -4F, 8, 4, 8);
-        Palm.setRotationPoint(0F, 16F, 0F);
-        Palm.setTextureSize(64, 32);
-        Palm.mirror = true;
-        setRotation(Palm, 0F, 0F, 0F);
+        initPedestalRenderers();
+        plinth.setRotationPoint(0, 16, 0);
+        plinth.addChild(base);
+        base.addChild(shaft);
+        initHandModelRenderers(resetResourceLocation);
+        initCubicBeziers();
     }
     
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    /**
+     * 
+     */
+    protected void initPedestalRenderers()
     {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-        setRotationAngles(f, f1, f2, f3, f4, f5);
-        finger1.render(f5);
-        finger2.render(f5);
-        finger3.render(f5);
-        finger4.render(f5);
-        finger5.render(f5);
-        finger6.render(f5);
-        finger7.render(f5);
-        finger8.render(f5);
-        finger9.render(f5);
-        finger10.render(f5);
-        Base.render(f5);
-        Base2.render(f5);
-        Base3.render(f5);
-        Palm.render(f5);
+        plinth = createModelRenderer(0, 0).addBox(-6, 4, -6, 12, 4, 12);
+        base = createModelRenderer(0, 0).addBox(-4, 0, -4, 8, 4, 8);
+        shaft = createModelRenderer(0, 0).addBox(-3, -4, -3, 6, 4, 6);
     }
     
-    private void setRotation(ModelRenderer model, float x, float y, float z)
+    /**
+     * 
+     */
+    private void initCubicBeziers()
     {
-        model.rotateAngleX = x;
-        model.rotateAngleY = y;
-        model.rotateAngleZ = z;
+        easeInOut = new CubicBezier(0.4F, 0, 0.6F, 1);
     }
     
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
+    /**
+     * @param textureOffsetX
+     * @param textureOffsetY
+     * @return
+     */
+    protected final ModelRenderer createModelRenderer(int textureOffsetX, int textureOffsetY)
     {
-        super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
+        ModelRenderer modelRenderer = new ModelRenderer(this, textureOffsetX, textureOffsetY);
+        modelRenderer.setTextureSize(textureWidth, textureHeight);
+        return modelRenderer;
     }
     
+    /**
+     * @return
+     */
+    private ModelRenderer createPhalanges()
+    {
+        return createModelRenderer(0, 0).addBox(-1, -1.5F, 0, 2, 3, 5).addBox(-1, -5.5F, 2, 2, 4, 3);
+    }
+    
+    /**
+     * @param resetResourceLocation
+     */
+    private void initHandModelRenderers(ResourceLocation resetResourceLocation)
+    {
+        palm = createModelRenderer(0, 0).addBox(-4, -8, -4, 8, 4, 8);
+        shaft.addChild(palm);
+        int fingerCount = 4;
+        fingers = new ModelRenderer[fingerCount];
+        for(int i = 0; i < fingerCount; i++){
+            ModelRenderer phalanges = createPhalanges();
+            float theta = (i / (float)fingerCount - 0.5F + 1F / fingerCount / 2) * ((float)Math.PI * 0.6F);
+            phalanges.rotateAngleY = theta;
+            phalanges.setRotationPoint(MathHelper.sin(theta) * 5, -5.75F, MathHelper.cos(theta) * 5 - 1);
+            fingers[i] = phalanges;
+            palm.addChild(phalanges);
+        }
+        thumb = createPhalanges();
+        thumb.rotateAngleY = (float)Math.PI;
+        thumb.rotationPointY = -5.75F;
+        thumb.rotationPointZ = -3;
+        palm.addChild(thumb);
+        heldItemStack = new ItemStackModelRenderer(this, resetResourceLocation);
+        heldItemStack.rotateAngleZ = (float)Math.PI;
+        heldItemStack.rotateAngleX = (float)(Math.PI / 2);
+        heldItemStack.setRotationPoint(0, -8.5F, -3.5F);
+        palm.addChild(heldItemStack);
+    }
+    
+    /**
+     * @param pedestal
+     * @param partialRenderTicks
+     * @param scale
+     */
+    public void render(TileEntityHandPedestal pedestal, float partialRenderTicks, float scale)
+    {
+        handleHeldItemStack(pedestal.getHeldItemStack());
+        float gripScale = pedestal.getGripScale();
+        float grip = easeInOut.eval(pedestal.getGrip(partialRenderTicks)) * gripScale;
+        float rotateAngleX = (float)(grip * 75 * Math.PI / 180 + (1 - grip) * 10 * Math.PI / 180);
+        float rotateAngleZ = (float)(grip * 20 * Math.PI / 180);
+        for(int i = 0; i < fingers.length; i++){
+            ModelRenderer phalanges = fingers[i];
+            phalanges.rotateAngleX = rotateAngleX;
+            phalanges.rotateAngleZ = rotateAngleZ * (2F / (fingers.length - 1) * i - 1);
+        }
+        thumb.rotateAngleX = (float)(grip * 60 * Math.PI / 180 + (1 - grip) * 10 * Math.PI / 180);
+        thumb.rotateAngleZ = rotateAngleZ;
+        plinth.render(scale);
+    }
+    
+    /**
+     * @param itemStack
+     */
+    private void handleHeldItemStack(ItemStack itemStack)
+    {
+        heldItemStack.setItemStack(itemStack);
+        if (itemStack != null){
+            Item item = itemStack.getItem();
+            if (item instanceof ItemBlock){
+                heldItemStack.rotateAngleX = 0;
+                heldItemStack.rotationPointZ = 0;
+            }else{
+                heldItemStack.rotateAngleX = (float)(Math.PI / 2);
+                heldItemStack.rotationPointZ = -3.5F;
+            }
+        }
+    }
 }

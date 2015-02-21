@@ -18,44 +18,71 @@ import darkknight.jewelrycraft.tileentity.TileEntityAltar;
 
 public class BlockJewelAltar extends BlockContainer
 {
-    @SideOnly(Side.CLIENT)
+    @SideOnly (Side.CLIENT)
     private IIcon altarSide;
-    @SideOnly(Side.CLIENT)
+    @SideOnly (Side.CLIENT)
     private IIcon altarBottom;
-    @SideOnly(Side.CLIENT)
+    @SideOnly (Side.CLIENT)
     private IIcon altarTop;
     
+    /**
+     * 
+     */
     public BlockJewelAltar()
     {
         super(Material.iron);
     }
     
+    /**
+     * @param par0
+     * @return
+     */
     public static boolean isNormalCube(int par0)
     {
         return true;
     }
     
+    /**
+     * @param par1IconRegister
+     */
+    @Override
     public void registerBlockIcons(IIconRegister par1IconRegister)
     {
-        this.altarSide = par1IconRegister.registerIcon(this.getTextureName() + "_" + "side");
-        this.altarBottom = par1IconRegister.registerIcon(this.getTextureName() + "_" + "bottom");
-        this.altarTop = par1IconRegister.registerIcon(this.getTextureName() + "_" + "top");
+        altarSide = par1IconRegister.registerIcon(getTextureName() + "_" + "side");
+        altarBottom = par1IconRegister.registerIcon(getTextureName() + "_" + "bottom");
+        altarTop = par1IconRegister.registerIcon(getTextureName() + "_" + "top");
     }
     
+    /**
+     * @param par1
+     * @param par2
+     * @return
+     */
+    @Override
     public IIcon getIcon(int par1, int par2)
     {
-        return par1 == 1 ? this.altarTop : (par1 == 0 ? this.altarBottom : this.altarSide);
+        return par1 == 1 ? altarTop : par1 == 0 ? altarBottom : altarSide;
     }
     
+    /**
+     * @param world
+     * @param i
+     * @param j
+     * @param k
+     * @param entityPlayer
+     * @param par6
+     * @param par7
+     * @param par8
+     * @param par9
+     * @return
+     */
     @Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
     {
-        TileEntityAltar te = (TileEntityAltar) world.getTileEntity(i, j, k);
+        TileEntityAltar te = (TileEntityAltar)world.getTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
-        if (te != null && !world.isRemote)
-        {
-            if (item != null && item != new ItemStack(Item.getItemById(0), 0, 0) && (item.getItem() == ItemList.ring || item.getItem() == ItemList.necklace) && !te.hasObject)
-            {
+        if (te != null && !world.isRemote){
+            if (item != null && item != new ItemStack(Item.getItemById(0), 0, 0) && (item.getItem() == ItemList.ring || item.getItem() == ItemList.necklace) && !te.hasObject){
                 te.object = item.copy();
                 item.stackSize = 0;
                 te.playerName = entityPlayer.getDisplayName();
@@ -63,9 +90,7 @@ public class BlockJewelAltar extends BlockContainer
                 te.markDirty();
                 te.hasObject = true;
             }
-            
-            if (te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0) && te.hasObject && entityPlayer.isSneaking())
-            {
+            if (te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0) && te.hasObject && entityPlayer.isSneaking()){
                 entityPlayer.inventory.addItemStackToInventory(te.object);
                 te.object = new ItemStack(Item.getItemById(0), 0, 0);
                 te.playerName = "";
@@ -77,18 +102,27 @@ public class BlockJewelAltar extends BlockContainer
         return true;
     }
     
+    /**
+     * @param world
+     * @param i
+     * @param j
+     * @param k
+     * @param player
+     */
     @Override
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
     {
-        TileEntityAltar te = (TileEntityAltar) world.getTileEntity(i, j, k);
-        if (te != null && !world.isRemote)
-        {
-            if (te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0))
-            {
-            }
-        }
+        TileEntityAltar te = (TileEntityAltar)world.getTileEntity(i, j, k);
+        if (te != null && !world.isRemote) if (te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0)){}
     }
     
+    /**
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @param stack
+     */
     public void dropItem(World world, double x, double y, double z, ItemStack stack)
     {
         EntityItem entityitem = new EntityItem(world, x + 0.5D, y + 1.5D, z + 0.5D, stack);
@@ -98,19 +132,30 @@ public class BlockJewelAltar extends BlockContainer
         world.spawnEntityInWorld(entityitem);
     }
     
+    /**
+     * @param world
+     * @param i
+     * @param j
+     * @param k
+     * @param block
+     * @param par6
+     */
+    @Override
     public void breakBlock(World world, int i, int j, int k, Block block, int par6)
     {
-        TileEntityAltar te = (TileEntityAltar) world.getTileEntity(i, j, k);
-        
-        if (te != null && te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0))
-        {
-            dropItem(te.getWorldObj(), (double) te.xCoord, (double) te.yCoord, (double) te.zCoord, te.object);
+        TileEntityAltar te = (TileEntityAltar)world.getTileEntity(i, j, k);
+        if (te != null && te.object != null && te.object != new ItemStack(Item.getItemById(0), 0, 0)){
+            dropItem(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord, te.object);
             world.removeTileEntity(i, j, k);
         }
-        
         super.breakBlock(world, i, j, k, block, par6);
     }
     
+    /**
+     * @param world
+     * @param var2
+     * @return
+     */
     @Override
     public TileEntity createNewTileEntity(World world, int var2)
     {

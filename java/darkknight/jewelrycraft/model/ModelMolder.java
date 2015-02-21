@@ -13,11 +13,13 @@ public class ModelMolder extends ModelBase
     ModelRenderer Side2;
     ModelRenderer Side3;
     
+    /**
+     * 
+     */
     public ModelMolder()
     {
         textureWidth = 64;
         textureHeight = 32;
-        
         Base = new ModelRenderer(this, 0, 0);
         Base.addBox(0F, 0F, 0F, 10, 1, 10);
         Base.setRotationPoint(-5F, 23F, -5F);
@@ -50,6 +52,16 @@ public class ModelMolder extends ModelBase
         setRotation(Side3, 0F, 0F, 0F);
     }
     
+    /**
+     * @param entity
+     * @param f
+     * @param f1
+     * @param f2
+     * @param f3
+     * @param f4
+     * @param f5
+     */
+    @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         super.render(entity, f, f1, f2, f3, f4, f5);
@@ -61,6 +73,12 @@ public class ModelMolder extends ModelBase
         Side3.render(f5);
     }
     
+    /**
+     * @param model
+     * @param x
+     * @param y
+     * @param z
+     */
     private void setRotation(ModelRenderer model, float x, float y, float z)
     {
         model.rotateAngleX = x;
@@ -68,9 +86,16 @@ public class ModelMolder extends ModelBase
         model.rotateAngleZ = z;
     }
     
+    /**
+     * @param f
+     * @param f1
+     * @param f2
+     * @param f3
+     * @param f4
+     * @param f5
+     */
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
     {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
     }
-    
 }

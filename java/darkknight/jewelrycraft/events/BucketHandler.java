@@ -9,9 +9,7 @@ package darkknight.jewelrycraft.events;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,54 +24,56 @@ import darkknight.jewelrycraft.util.JewelryNBT;
 
 public class BucketHandler
 {
-    
     public static BucketHandler INSTANCE = new BucketHandler();
     public Map<Block, Item> buckets = new HashMap<Block, Item>();
     
+    /**
+     * 
+     */
     private BucketHandler()
-    {
-    }
+    {}
     
+    /**
+     * @param event
+     */
     @SubscribeEvent
     public void onBucketFill(FillBucketEvent event)
-    {        
-        ItemStack result = fillCustomBucket(event.world, event.target);        
-        if (result == null) return;        
+    {
+        ItemStack result = fillCustomBucket(event.world, event.target);
+        if (result == null) return;
         event.result = result;
         event.setResult(Result.ALLOW);
     }
     
+    /**
+     * @param world
+     * @param pos
+     * @return
+     */
     private ItemStack fillCustomBucket(World world, MovingObjectPosition pos)
-    {        
+    {
         Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
         Item bucket = buckets.get(block);
-        
-        if (bucket != null && world.getBlock(pos.blockX, pos.blockY, pos.blockZ) != Blocks.air && world.getBlock(pos.blockX, pos.blockY, pos.blockZ) instanceof BlockMoltenMetal)
-        {
+        if (bucket != null && world.getBlock(pos.blockX, pos.blockY, pos.blockZ) != Blocks.air && world.getBlock(pos.blockX, pos.blockY, pos.blockZ) instanceof BlockMoltenMetal){
             world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
             ItemStack item = new ItemStack(bucket);
             String ingotData = JewelrycraftMod.saveData.getString(pos.blockX + " " + pos.blockY + " " + pos.blockZ + " " + world.provider.dimensionId);
-            if (ingotData != null && ingotData != "")
-            {
+            if (ingotData != null && ingotData != ""){
                 String[] splitData = ingotData.split(":");
-                if (splitData.length == 3)
-                {
-                    int itemID, itemDamage, color;
-                    try
-                    {
+                if (splitData.length == 3){
+                    int itemID, itemDamage;
+                    try{
                         itemID = Integer.parseInt(splitData[0]);
                         itemDamage = Integer.parseInt(splitData[1]);
-                        color = Integer.parseInt(splitData[2]);
+                        Integer.parseInt(splitData[2]);
                         JewelryNBT.addMetal(item, new ItemStack(Item.getItemById(itemID), 1, itemDamage));
                     }
-                    catch (Exception e)
-                    {
+                    catch(Exception e){
                         e.printStackTrace();
                     }
                 }
             }
             return item;
-        }
-        else return null;
+        }else return null;
     }
 }

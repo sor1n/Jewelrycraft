@@ -12,29 +12,44 @@ public class PacketSendPlayerInfo implements IMessage, IMessageHandler<PacketSen
 {
     public NBTTagCompound tagCompound;
     
+    /**
+     * @param tagCompound
+     */
     public PacketSendPlayerInfo(NBTTagCompound tagCompound)
     {
-        this.tagCompound = tagCompound;  
+        this.tagCompound = tagCompound;
     }
     
+    /**
+     * 
+     */
     public PacketSendPlayerInfo()
-    {
-    }
-
+    {}
+    
+    /**
+     * @param message
+     * @param ctx
+     * @return
+     */
     @Override
     public IMessage onMessage(PacketSendPlayerInfo message, MessageContext ctx)
     {
-        ScreenHandler.tagCache = message.tagCompound;   
-        
+        ScreenHandler.tagCache = message.tagCompound;
         return null;
     }
-
+    
+    /**
+     * @param buf
+     */
     @Override
     public void fromBytes(ByteBuf buf)
     {
         tagCompound = ByteBufUtils.readTag(buf);
     }
-
+    
+    /**
+     * @param buf
+     */
     @Override
     public void toBytes(ByteBuf buf)
     {

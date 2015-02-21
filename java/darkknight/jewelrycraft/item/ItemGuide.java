@@ -8,19 +8,25 @@ import darkknight.jewelrycraft.JewelrycraftMod;
 
 public class ItemGuide extends Item
 {
+    
+    /**
+     * 
+     */
     public ItemGuide()
     {
         super();
     }
     
+    /**
+     * @param stack
+     * @param world
+     * @param player
+     * @return
+     */
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
-        if (world.isRemote)
-        {
-            player.openGui(JewelrycraftMod.instance, 1, player.worldObj, 0, 0, 0);
-        }
-        
+        if (world.isRemote) player.openGui(JewelrycraftMod.instance, 1, player.worldObj, 0, 0, 0);
         return stack;
     }
 }

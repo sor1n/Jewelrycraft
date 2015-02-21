@@ -19,18 +19,18 @@ import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
 
 public class BlockList
 {
-    public static Block shadowOre, glow, smelter, molder, displayer, jewelCraftingTable, shadowBlock, shadowEye, jewelAltar, handPedestal, shadowHand;
+    public static Block shadowOre, smelter, molder, displayer, jewelCraftingTable, shadowBlock, shadowEye, jewelAltar, handPedestal, shadowHand;
     public static BlockMoltenMetal moltenMetal;
     public static Fluid moltenMetalFluid;
-    
     private static boolean isInitialized = false;
     
+    /**
+     * @param e
+     */
     public static void preInit(FMLPreInitializationEvent e)
     {
-        if (!isInitialized)
-        {
+        if (!isInitialized){
             shadowOre = new BlockJCOre().setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypePiston).setBlockTextureName("jewelrycraft:oreShadow").setBlockName("Jewelrycraft.oreShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            glow = new BlockGlow().setBlockName("Jewelrycraft.glow").setLightLevel(1F);
             smelter = new BlockSmelter().setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundTypePiston).setBlockName("Jewelrycraft.smelter").setCreativeTab(JewelrycraftMod.jewelrycraft);
             molder = new BlockMolder(Material.rock).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundTypePiston).setBlockName("Jewelrycraft.molder").setCreativeTab(JewelrycraftMod.jewelrycraft);
             displayer = new BlockDisplayer(Material.iron).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundTypeMetal).setBlockName("Jewelrycraft.displayer").setCreativeTab(JewelrycraftMod.jewelrycraft);
@@ -40,7 +40,6 @@ public class BlockList
             shadowEye = new BlockShadowEye().setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundTypePiston).setBlockName("Jewelrycraft.shadowEye").setCreativeTab(JewelrycraftMod.jewelrycraft);
             handPedestal = new BlockHandPedestal(Material.rock).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundTypePiston).setBlockName("Jewelrycraft.handPedestal").setCreativeTab(JewelrycraftMod.jewelrycraft);
             shadowHand = new BlockShadowHand(Material.rock).setStepSound(Block.soundTypePiston).setBlockName("Jewelrycraft.shadowHand").setCreativeTab(JewelrycraftMod.jewelrycraft).setBlockUnbreakable();
-            
             GameRegistry.registerBlock(shadowOre, "shadowOre");
             GameRegistry.registerBlock(shadowBlock, "shadowBlock");
             GameRegistry.registerBlock(smelter, "Smelter");
@@ -51,7 +50,6 @@ public class BlockList
             GameRegistry.registerBlock(shadowEye, "Shadow Eye");
             GameRegistry.registerBlock(handPedestal, "Stone Bricks Pedestal");
             GameRegistry.registerBlock(shadowHand, "Shadow Hand");
-            
             GameRegistry.registerTileEntity(TileEntitySmelter.class, "jewelrycraft:smelter");
             GameRegistry.registerTileEntity(TileEntityMolder.class, "jewelrycraft:molder");
             GameRegistry.registerTileEntity(TileEntityJewelrsCraftingTable.class, "jewelrycraft:table");
@@ -61,12 +59,10 @@ public class BlockList
             GameRegistry.registerTileEntity(TileEntityShadowEye.class, "jewelrycraft:shadowEye");
             GameRegistry.registerTileEntity(TileEntityHandPedestal.class, "jewelrycraft:handPedestal");
             GameRegistry.registerTileEntity(TileEntityShadowHand.class, "jewelrycraft:shadowHand");
-            
             moltenMetalFluid = new Fluid("metal.molten").setLuminosity(15).setDensity(3000).setTemperature(2000).setViscosity(6000);
             if (!FluidRegistry.registerFluid(moltenMetalFluid)) moltenMetalFluid = FluidRegistry.getFluid("metal.molten");
             moltenMetal = new BlockMoltenMetal(moltenMetalFluid, Material.lava);
             GameRegistry.registerBlock(moltenMetal, "moltenMetalLiquid");
-            
             isInitialized = true;
         }
     }

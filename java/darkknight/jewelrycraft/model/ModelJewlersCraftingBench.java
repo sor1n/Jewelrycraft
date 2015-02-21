@@ -21,11 +21,13 @@ public class ModelJewlersCraftingBench extends ModelBase
     ModelRenderer Support7;
     ModelRenderer Support8;
     
+    /**
+     * 
+     */
     public ModelJewlersCraftingBench()
     {
         textureWidth = 64;
         textureHeight = 32;
-        
         Leg1 = new ModelRenderer(this, 0, 0);
         Leg1.addBox(0F, 0F, 0F, 2, 10, 2);
         Leg1.setRotationPoint(-6F, 14F, 4F);
@@ -106,6 +108,16 @@ public class ModelJewlersCraftingBench extends ModelBase
         setRotation(Support8, 0F, 0F, 0F);
     }
     
+    /**
+     * @param entity
+     * @param f
+     * @param f1
+     * @param f2
+     * @param f3
+     * @param f4
+     * @param f5
+     */
+    @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         super.render(entity, f, f1, f2, f3, f4, f5);
@@ -125,6 +137,12 @@ public class ModelJewlersCraftingBench extends ModelBase
         Support8.render(f5);
     }
     
+    /**
+     * @param model
+     * @param x
+     * @param y
+     * @param z
+     */
     private void setRotation(ModelRenderer model, float x, float y, float z)
     {
         model.rotateAngleX = x;
@@ -132,9 +150,16 @@ public class ModelJewlersCraftingBench extends ModelBase
         model.rotateAngleZ = z;
     }
     
+    /**
+     * @param f
+     * @param f1
+     * @param f2
+     * @param f3
+     * @param f4
+     * @param f5
+     */
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
     {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
     }
-    
 }

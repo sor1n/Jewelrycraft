@@ -1,0 +1,124 @@
+/**
+ * 
+ */
+package darkknight.jewelrycraft.commands;
+
+/**
+ * @author Sorin
+ *
+ */
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.IChatComponent;
+import darkknight.jewelrycraft.JewelrycraftMod;
+import darkknight.jewelrycraft.curses.Curse;
+import darkknight.jewelrycraft.events.EntityEventHandler;
+import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
+import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.PlayerUtils;
+
+public class JewelrycraftCommands extends CommandBase
+{
+    private List aliases;
+    
+    public JewelrycraftCommands()
+    {
+        this.aliases = new ArrayList();
+        this.aliases.add("jw");
+        this.aliases.add("jc");
+        this.aliases.add("jcrft");
+        this.aliases.add("jCraft");
+        this.aliases.add("jewelry");
+    }
+    
+    @Override
+    public String getCommandName()
+    {
+        return "jewelrycraft";
+    }
+    
+    @Override
+    public String getCommandUsage(ICommandSender var1)
+    {
+        String use = "/jewelrycraft <addCursePoints:getCursePoints:setCursePoints> <user> [points] | ";
+        use += "/jewelrycraft <addModifier> <modifier> |";
+        use += "/jewelrycraft <addCurse> <curse> ";
+        return use;
+    }
+    
+    @Override
+    public List getCommandAliases()
+    {
+        return aliases;
+    }
+    
+    @Override
+    public void processCommand(ICommandSender commandSender, String[] astring)
+    {
+        if (astring.length == 0 || astring[0].equals("help")) throw new WrongUsageException(getCommandUsage(commandSender));
+        if (astring[0].equals("getCursePoints")){
+            EntityPlayerMP entityplayermp = getPlayer(commandSender, astring[1]);
+            commandSender.addChatMessage(new ChatComponentTranslation(Integer.toString(JewelrycraftUtil.getCursePoints(entityplayermp))));
+        }else if (astring[0].equals("addCursePoints")){
+            int points = CommandBase.parseIntWithMin(commandSender, astring[2], 0);
+            EntityPlayerMP entityplayermp = getPlayer(commandSender, astring[1]);
+            JewelrycraftUtil.addCursePoints(entityplayermp, points);
+        }else if (astring[0].equals("setCursePoints")){
+            int points = CommandBase.parseIntWithMin(commandSender, astring[2], 0);
+            EntityPlayerMP entityplayermp = getPlayer(commandSender, astring[1]);
+            JewelrycraftUtil.addCursePoints(entityplayermp, points - JewelrycraftUtil.getCursePoints(entityplayermp));
+        }else if (astring[0].equals("addModifier")){
+            ItemStack item = new ItemStack(CommandBase.getItemByText(commandSender, astring[1]));
+            EntityPlayerMP entityplayermp = getPlayer(commandSender, commandSender.getCommandSenderName());
+            ArrayList<ItemStack> modifier = new ArrayList<ItemStack>();
+            modifier.add(item);
+            JewelryNBT.addModifiers(entityplayermp.getCurrentEquippedItem(), modifier);
+        }else if (astring[0].equals("addCurse")){
+            int curse = Integer.valueOf(astring[1]);
+            EntityPlayerMP entityplayermp = getPlayer(commandSender, commandSender.getCommandSenderName());
+            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(entityplayermp, "Jewelrycraft");
+            if (curse < Curse.availableCurses.size()){
+                try{
+                    for(int i = 0; i <= 5; i++)
+                        EntityEventHandler.addCurse(entityplayermp, playerInfo, ("curse" + i).toString(), curse);
+                    JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+                }
+                catch(Exception e){
+                    entityplayermp.addChatMessage(new ChatComponentText(curse + " " + Curse.availableCurses.size()));
+                }
+            }
+        }
+    }
+    
+    @Override
+    public List addTabCompletionOptions(ICommandSender icommandsender, String[] astring)
+    {
+        final List<String> MATCHES = new LinkedList<String>();
+        final String ARG_LC = astring[astring.length - 1].toLowerCase();
+        if (astring.length == 1){
+            if ("addCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("addCursePoints");
+            if ("getCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("getCursePoints");
+            if ("setCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("setCursePoints");
+            if ("setCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("addModifier");
+            if ("setCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("addCurse");
+        }else if (astring.length == 2){
+            if (!astring[0].equals("addModifier") && !astring[0].equals("addCurse")){
+                for(String un: MinecraftServer.getServer().getAllUsernames())
+                    if (un.toLowerCase().startsWith(ARG_LC)) MATCHES.add(un);
+            }else return getListOfStringsFromIterableMatchingLastWord(astring, Item.itemRegistry.getKeys());
+        }
+        return MATCHES.isEmpty() ? null : MATCHES;
+    }
+}

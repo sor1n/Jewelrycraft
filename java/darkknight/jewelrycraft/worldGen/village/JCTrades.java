@@ -1,7 +1,6 @@
 package darkknight.jewelrycraft.worldGen.village;
 
 import java.util.Random;
-
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -18,109 +17,101 @@ import darkknight.jewelrycraft.util.JewelrycraftUtil;
 public class JCTrades implements IVillageTradeHandler
 {
     
+    /**
+     * 
+     */
     public JCTrades()
     {
         super();
     }
     
+    /**
+     * @param villager
+     * @param recipeList
+     * @param random
+     */
     @Override
     public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
     {
-        if (villager.getProfession() == 3000)
-        {
+        if (villager.getProfession() == 3000){
             ItemStack ingredient = null;
             ItemStack ingredient2 = null;
             ItemStack result;
-            
             int type = random.nextInt(12);
-            switch (type)
+            switch(type)
             {
-                case 0:
-                {
+                case 0:{
                     result = JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size()));
                     result.stackSize = 5 + random.nextInt(5);
                     ingredient = new ItemStack(Items.emerald, 2 + random.nextInt(7));
                     if (random.nextBoolean()) ingredient2 = new ItemStack(Items.emerald, 2 + random.nextInt(2));
                     break;
                 }
-                case 1:
-                {
+                case 1:{
                     result = new ItemStack(ItemList.molds, 5 + random.nextInt(7), random.nextInt(ItemMolds.moldsItemNames.length));
                     ingredient = new ItemStack(Items.emerald, 1);
                     if (random.nextBoolean()) ingredient2 = new ItemStack(Items.emerald, 1 + random.nextInt(2));
                     break;
                 }
-                case 2:
-                {
+                case 2:{
                     int number = random.nextInt(3);
                     result = new ItemStack(BlockList.displayer, 1 + number);
-                    ingredient = new ItemStack(Blocks.emerald_block, 2 + number*3 + random.nextInt(2));
+                    ingredient = new ItemStack(Blocks.emerald_block, 2 + number * 3 + random.nextInt(2));
                     ingredient2 = new ItemStack(Items.emerald, 3 + number + random.nextInt(8));
                     break;
                 }
-                case 3:
-                {
+                case 3:{
                     result = new ItemStack(BlockList.jewelCraftingTable);
                     ingredient = new ItemStack(Items.emerald, 1 + random.nextInt(2));
                     if (random.nextBoolean()) ingredient2 = new ItemStack(Items.emerald, 1 + random.nextInt(2));
                     break;
                 }
-                case 4:
-                {
+                case 4:{
                     result = new ItemStack(BlockList.shadowOre, 1 + random.nextInt(6));
                     ingredient = new ItemStack(Items.emerald, 3 + random.nextInt(4));
                     if (random.nextBoolean()) ingredient2 = new ItemStack(Items.emerald, 3 + random.nextInt(4));
                     break;
                 }
-                case 5:
-                {
+                case 5:{
                     result = new ItemStack(BlockList.molder, 5 + random.nextInt(5));
                     ingredient = new ItemStack(Items.emerald, 1);
                     if (random.nextBoolean()) ingredient2 = new ItemStack(Items.emerald, 1);
                     break;
                 }
-                case 6:
-                {
+                case 6:{
                     result = new ItemStack(BlockList.smelter);
                     ingredient = new ItemStack(Items.emerald, 1 + random.nextInt(2));
                     if (random.nextBoolean()) ingredient2 = new ItemStack(Items.emerald, 1 + random.nextInt(2));
                     break;
                 }
-                case 7:
-                {
+                case 7:{
                     int end = random.nextInt(JewelrycraftUtil.gem.size());
                     result = JewelrycraftUtil.gem.get(end);
                     result.stackSize = 1 + random.nextInt(JewelrycraftUtil.gem.size() - end);
-                    if (JewelrycraftUtil.gem.size() - 1 - end >= 1)
-                    {
+                    if (JewelrycraftUtil.gem.size() - 1 - end >= 1){
                         int value = end;
                         if (value > 64) value = 64;
                         ingredient = new ItemStack(Items.emerald, 2 + random.nextInt(value));
                         if (random.nextBoolean()) ingredient2 = new ItemStack(Items.emerald, 2 + random.nextInt(value));
-                    }
-                    else
-                    {
+                    }else{
                         ingredient = new ItemStack(Blocks.emerald_block, 16 + random.nextInt(32));
                         ingredient2 = new ItemStack(Blocks.emerald_block, 8 + random.nextInt(48));
                     }
                     break;
                 }
-                case 8:
-                {
+                case 8:{
                     result = JewelrycraftUtil.ores.get(random.nextInt(JewelrycraftUtil.ores.size()));
                     result.stackSize = 3 + random.nextInt(3);
                     ingredient = new ItemStack(Items.emerald, 2 + random.nextInt(5));
                     if (random.nextBoolean()) ingredient2 = new ItemStack(Items.emerald, 2 + random.nextInt(6));
                     break;
                 }
-                case 9:
-                {
+                case 9:{
                     result = new ItemStack(ItemList.guide, 1);
                     ingredient = new ItemStack(Items.emerald, 1);
                     break;
                 }
-                default:
-                {
+                default:{
                     result = new ItemStack(ItemList.ring, 1, 0);
                     int randValue = random.nextInt(4);
                     JewelryNBT.addMetal(result, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())));
@@ -130,7 +121,6 @@ public class JCTrades implements IVillageTradeHandler
                     ingredient2 = new ItemStack(Blocks.emerald_block, 2 + randValue);
                 }
             }
-            
             recipeList.addToListWithCheck(new MerchantRecipe(ingredient, ingredient2, result));
         }
     }

@@ -1,38 +1,42 @@
 package darkknight.jewelrycraft;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
+/**
+ * The Class CreativeTabLiquids.
+ */
 public class CreativeTabLiquids extends CreativeTabs
 {
+    /**
+     * Instantiates a new creative tab liquids.
+     *
+     * @param par2Str the par2 str
+     */
     public CreativeTabLiquids(String par2Str)
     {
         super(par2Str);
     }
     
+    /**
+     * @return the Item for the icon
+     */
     @Override
     public Item getTabIconItem()
     {
         return ItemList.bucket;
     }
     
-    @SuppressWarnings(
-    { "rawtypes", "unchecked" })
+    /**
+     * @param par1List List of items to display
+     */
+    @Override
     public void displayAllReleventItems(List par1List)
     {
-        for (int i = 0; i < JewelrycraftUtil.metal.size(); i++)
+        for(int i = 0; i < JewelrycraftUtil.metal.size(); i++)
             par1List.add(ItemList.bucket.getModifiedItemStack(JewelrycraftUtil.metal.get(i)));
     }
-    
 }
