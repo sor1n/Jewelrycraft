@@ -37,6 +37,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.client.InventoryTabVanilla;
+import darkknight.jewelrycraft.client.TabJewelry;
+import darkknight.jewelrycraft.client.TabRegistry;
 import darkknight.jewelrycraft.commands.JewelrycraftCommands;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.container.GuiHandler;
@@ -113,10 +116,15 @@ public class JewelrycraftMod
         catch(Throwable e2){
             logger.severe("Error registering Jewelrycraft Structures with Vanilla Minecraft: this is expected in versions earlier than 1.7.10");
         }
+        TabRegistry.registerTab(new InventoryTabVanilla());
+        TabRegistry.registerTab(new TabJewelry());
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
-        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) MinecraftForge.EVENT_BUS.register(new PlayerRenderHandler());
-        ResourceLocation jeweleryTexture = new ResourceLocation("jewelrycraft", "textures/gui/curses.png");
-        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) MinecraftForge.EVENT_BUS.register(new ScreenHandler(Minecraft.getMinecraft(), jeweleryTexture));
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT){
+            MinecraftForge.EVENT_BUS.register(new PlayerRenderHandler());
+            ResourceLocation jeweleryTexture = new ResourceLocation("jewelrycraft", "textures/gui/curses.png");
+            MinecraftForge.EVENT_BUS.register(new ScreenHandler(Minecraft.getMinecraft(), jeweleryTexture));
+            MinecraftForge.EVENT_BUS.register(new TabRegistry());
+        }
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         BucketHandler.INSTANCE.buckets.put(BlockList.moltenMetal, ItemList.bucket);
         

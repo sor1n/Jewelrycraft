@@ -5,6 +5,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.container.ContainerJewelryTab;
+import darkknight.jewelrycraft.container.JewelryInventory;
 import darkknight.jewelrycraft.events.KeyBindings;
 
 public class GuiJewelry extends GuiContainer
@@ -53,5 +54,16 @@ public class GuiJewelry extends GuiContainer
     {
         super.keyTyped(charecter, key);
         if (key == KeyBindings.inventory.getKeyCode()) mc.thePlayer.closeScreen();
+    }
+
+    @Override
+    public void initGui ()
+    {
+        super.initGui();
+        int cornerX = guiLeft;
+        int cornerY = guiTop;
+        this.buttonList.clear();
+        TabRegistry.updateTabValues(cornerX, cornerY, TabJewelry.class);
+        TabRegistry.addTabsToList(this.buttonList);
     }
 }

@@ -114,6 +114,7 @@ public class EntityEventHandler
             }
         }
     }
+     
     
     /**
      * @param event
@@ -172,7 +173,6 @@ public class EntityEventHandler
                         player.heal(Math.abs(damage));
                     }
                 }
-                JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
             }
         }else if (event.source.getEntity() instanceof EntityPlayer){
             EntityPlayer player = (EntityPlayer)event.source.getEntity();
