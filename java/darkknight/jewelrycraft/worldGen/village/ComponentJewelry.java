@@ -387,8 +387,8 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         int k1 = getZWithOffset(i, k);
         placeBlockAtCurrentPosition(world, BlockList.molder, metadata, i, j, k, sbb);
         TileEntityMolder molder = (TileEntityMolder)world.getTileEntity(i1, j1, k1);
-        if (molder != null) if (hasMold){
-            int meta = random.nextInt(ItemMolds.moldsItemNames.length + 1);
+        if (molder != null && !molder.hasMold) if (hasMold){
+            int meta = random.nextInt(ItemMolds.moldsItemNames.length);
             molder.mold = new ItemStack(ItemList.molds, 1, meta);
             molder.hasMold = true;
             if (hasStuff){

@@ -1,15 +1,17 @@
 package darkknight.jewelrycraft.effects;
 
 import java.util.ArrayList;
+import java.util.Random;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
-public abstract class ModifierEffects
+public class ModifierEffects
 {
     protected ItemStack modifier;
+    protected Random rand = new Random();
     protected static ArrayList<ModifierEffects> effects = new ArrayList<ModifierEffects>();
     
     /**
@@ -34,7 +36,8 @@ public abstract class ModifierEffects
      * @param player
      * @param jewelry
      */
-    public abstract void action(ItemStack item, EntityPlayer player, Item jewelry);
+    public void action(ItemStack item, EntityPlayer player, Item jewelry)
+    {};
     
     /**
      * @param item
@@ -43,7 +46,10 @@ public abstract class ModifierEffects
      * @param jewelry
      * @return
      */
-    public abstract boolean onEntityAttackedCacellable(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount);
+    public boolean onEntityAttackedCacellable(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount)
+    {
+        return false;
+    }
     
     /**
      * @param item
@@ -52,7 +58,11 @@ public abstract class ModifierEffects
      * @param jewelry
      * @return
      */
-    public abstract boolean onPlayerAttackedCacellable(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount);
+    public boolean onPlayerAttackedCacellable(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
+    {
+        return false;
+    }
+    
     /**
      * @param item
      * @param player
@@ -60,7 +70,8 @@ public abstract class ModifierEffects
      * @param jewelry
      * @return
      */
-    public abstract void onEntityAttacked(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount);
+    public void onEntityAttacked(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount)
+    {}
     
     /**
      * @param item
@@ -69,14 +80,6 @@ public abstract class ModifierEffects
      * @param jewelry
      * @return
      */
-    public abstract void onPlayerAttacked(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount);
-    
-    /**
-     * @param item
-     * @param player
-     * @param source
-     * @param jewelry
-     * @return
-     */
-    public abstract boolean onPlayerFall(ItemStack item, EntityPlayer player, Item jewelry);
+    public void onPlayerAttacked(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
+    {}
 }

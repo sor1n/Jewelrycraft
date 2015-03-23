@@ -26,6 +26,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.effects.ModifierEffects;
 import darkknight.jewelrycraft.util.JewelryNBT;
 
@@ -35,6 +36,7 @@ public abstract class ItemBaseJewelry extends Item
     {
         super();
         setMaxStackSize(1);
+        setCreativeTab(JewelrycraftMod.jewelrycraft);
     }
     
     public boolean requiresMultipleRenderPasses()
@@ -255,18 +257,5 @@ public abstract class ItemBaseJewelry extends Item
     public void onEntityAttacked(ItemStack item, EntityPlayer player, Entity target, float amount)
     {
         for(ModifierEffects mod: ModifierEffects.getEffects()) mod.onEntityAttacked(item, player, target, this, amount);
-    }
-    
-    /**
-     * @param item
-     * @param player
-     * @param source
-     * @return
-     */
-    public boolean onPlayerFall(ItemStack item, EntityPlayer player)
-    {
-        for(ModifierEffects mod: ModifierEffects.getEffects())
-            return mod.onPlayerFall(item, player, this);
-        return false;
     }
 }

@@ -5,9 +5,9 @@ package darkknight.jewelrycraft;
  */
 public class CommonProxy
 {
-    /**
-     * Register renderers.
-     */
-    public void registerRenderers()
+    public void preInit()
+    {}
+    
+    public void postInit()
     {}
 }

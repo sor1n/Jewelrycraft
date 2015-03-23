@@ -20,6 +20,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.curses.Curse;
@@ -54,7 +55,7 @@ public class JewelrycraftCommands extends CommandBase
     {
         String use = "/jewelrycraft <addCursePoints:getCursePoints:setCursePoints> <user> [points] | ";
         use += "/jewelrycraft <addModifier> <modifier> |";
-        use += "/jewelrycraft <addCurse> <curse> ";
+        use += "/jewelrycraft <addCurse> <user> <curseID> <curseGrade>";
         return use;
     }
     
@@ -86,19 +87,18 @@ public class JewelrycraftCommands extends CommandBase
             modifier.add(item);
             JewelryNBT.addModifiers(entityplayermp.getCurrentEquippedItem(), modifier);
         }else if (astring[0].equals("addCurse")){
-            int curse = Integer.valueOf(astring[1]);
-            EntityPlayerMP entityplayermp = getPlayer(commandSender, commandSender.getCommandSenderName());
+            EntityPlayerMP entityplayermp = getPlayer(commandSender, astring[1]);
+            int curse = Integer.valueOf(astring[2]);
+            int grade = Integer.valueOf(astring[3]);
             NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(entityplayermp, "Jewelrycraft");
-            if (curse < Curse.availableCurses.size()){
-                try{
-                    for(int i = 0; i <= 5; i++)
-                        EntityEventHandler.addCurse(entityplayermp, playerInfo, ("curse" + i).toString(), curse);
-                    JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
-                }
-                catch(Exception e){
-                    entityplayermp.addChatMessage(new ChatComponentText(curse + " " + Curse.availableCurses.size()));
-                }
+            if(curse < Curse.getCurseList().size() && grade <= 2)
+            {
+                EntityEventHandler.addCurse(entityplayermp, playerInfo, curse, grade);
+                JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
             }
+            else if(curse >= Curse.getCurseList().size()) entityplayermp.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Curse ID exceedes the maximum value of " + (Curse.getCurseList().size() - 1)));
+            else entityplayermp.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Curse grade exceedes the maximum value of 2"));
+            
         }
     }
     
@@ -111,13 +111,13 @@ public class JewelrycraftCommands extends CommandBase
             if ("addCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("addCursePoints");
             if ("getCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("getCursePoints");
             if ("setCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("setCursePoints");
-            if ("setCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("addModifier");
-            if ("setCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("addCurse");
+            if ("addModifier".toLowerCase().startsWith(ARG_LC)) MATCHES.add("addModifier");
+            if ("addCurse".toLowerCase().startsWith(ARG_LC)) MATCHES.add("addCurse");
         }else if (astring.length == 2){
-            if (!astring[0].equals("addModifier") && !astring[0].equals("addCurse")){
+            if (!astring[0].equals("addModifier")){
                 for(String un: MinecraftServer.getServer().getAllUsernames())
                     if (un.toLowerCase().startsWith(ARG_LC)) MATCHES.add(un);
-            }else return getListOfStringsFromIterableMatchingLastWord(astring, Item.itemRegistry.getKeys());
+            }else if (!astring[0].equals("addCurse")) return getListOfStringsFromIterableMatchingLastWord(astring, Item.itemRegistry.getKeys());
         }
         return MATCHES.isEmpty() ? null : MATCHES;
     }

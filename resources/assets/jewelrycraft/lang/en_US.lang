@@ -73,3 +73,7 @@ chatmessage.Jewelrycraft.table.iscrafting=The %s is being modified.
 chatmessage.Jewelrycraft.table.jewelrymodifiedfull=This piece of jewelry is already modified at maxium. You can't modify it anymore!
 chatmessage.Jewelrycraft.table.jewelrycontainsmodifier=The piece of jewelry already contains a modifier.
 chatmessage.Jewelrycraft.table.jewelrycontainsjewel=The piece of jewelry already contains a jewel.
+
+death.attack.weak=%1$s was weakened by a piece of jewelry and died
+death.attack.shadows=%1$s was consumed by the shadows
+death.attack.blackHeart=%1$s was killed by %2$s's curse

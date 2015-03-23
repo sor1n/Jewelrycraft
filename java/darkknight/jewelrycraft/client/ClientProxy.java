@@ -1,8 +1,10 @@
 package darkknight.jewelrycraft.client;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -11,6 +13,8 @@ import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.entities.renders.HeartRender;
+import darkknight.jewelrycraft.events.PlayerRenderHandler;
+import darkknight.jewelrycraft.events.ScreenHandler;
 import darkknight.jewelrycraft.model.ModelDisplayer;
 import darkknight.jewelrycraft.model.ModelHalfHeart;
 import darkknight.jewelrycraft.model.ModelHandPedestal;
@@ -35,11 +39,12 @@ import darkknight.jewelrycraft.tileentity.renders.TileEntityMolderRender;
 import darkknight.jewelrycraft.tileentity.renders.TileEntityShadowEyeRender;
 import darkknight.jewelrycraft.tileentity.renders.TileEntityShadowHandRender;
 import darkknight.jewelrycraft.tileentity.renders.TileEntitySmelterRender;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 public class ClientProxy extends CommonProxy
 {
     @Override
-    public void registerRenderers()
+    public void preInit()
     {
         ResourceLocation pedestalResourceLocation = new ResourceLocation("jewelrycraft", "textures/tileentities/BricksPedestal.png");
         TileEntityHandPedestalRender pedestalRender = new TileEntityHandPedestalRender(new ModelHandPedestal(pedestalResourceLocation), pedestalResourceLocation);
@@ -65,5 +70,18 @@ public class ClientProxy extends CommonProxy
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHeart.class, new HeartRender(new ModelHeart(), 0.25F));
         RenderingRegistry.registerEntityRenderingHandler(EntityHalfHeart.class, new HeartRender(new ModelHalfHeart(), 0.25F));
+        
+        TabRegistry.registerTab(new InventoryTabVanilla());
+        TabRegistry.registerTab(new TabJewelry());
+        MinecraftForge.EVENT_BUS.register(new TabRegistry());
+        MinecraftForge.EVENT_BUS.register(new PlayerRenderHandler());
+        ResourceLocation jeweleryTexture = new ResourceLocation("jewelrycraft", "textures/gui/curses.png");
+        MinecraftForge.EVENT_BUS.register(new ScreenHandler(Minecraft.getMinecraft(), jeweleryTexture));
+    }
+    
+    @Override
+    public void postInit()
+    {
+        JewelrycraftUtil.addStuff();        
     }
 }

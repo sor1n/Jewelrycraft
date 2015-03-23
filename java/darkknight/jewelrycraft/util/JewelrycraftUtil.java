@@ -51,16 +51,16 @@ public class JewelrycraftUtil
         jewelry.add(new ItemStack(ItemList.earrings));
         for(Object item: GameData.getItemRegistry()){
             ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-            if (((Item)item).getHasSubtypes()){
-                for(int i = 0; i < ((Item)item).getMaxDamage(); i++)
-                    items.add(new ItemStack((Item)item, 1, i));
-            }else objects.add(new ItemStack((Item)item));
+            if (item != null && ((Item)item).getHasSubtypes()) ((Item)item).getSubItems((Item)item, null, items);
+            else objects.add(new ItemStack((Item)item));
+            
             if (!items.isEmpty()) objects.addAll(items);
         }
     }
     
     /**
-     *  Adds curse points to a player
+     * Adds curse points to a player
+     * 
      * @param player the player to add the points to
      * @param points amount of curse points
      */

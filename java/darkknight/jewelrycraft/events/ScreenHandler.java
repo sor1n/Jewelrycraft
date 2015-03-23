@@ -17,7 +17,7 @@ import darkknight.jewelrycraft.curses.Curse;
 public class ScreenHandler extends Gui
 {
     private Minecraft mc;
-    public static NBTTagCompound tagCache;
+    public static NBTTagCompound tagCache = null;
     public static int cooldown;
     static ResourceLocation texture;
     static ResourceLocation hearts = new ResourceLocation("jewelrycraft", "textures/gui/hearts.png");
@@ -32,6 +32,7 @@ public class ScreenHandler extends Gui
     @SubscribeEvent
     public void renderScreen(RenderGameOverlayEvent event)
     {
+//        if (event.type != ElementType.TEXT) Gui.drawRect(0, 0, mc.displayWidth, mc.displayHeight, 0xff000000);
         if (event.isCancelable() || event.type != ElementType.ALL || tagCache == null) return;
         if (!mc.gameSettings.showDebugInfo && !(mc.currentScreen instanceof GuiChat)){
             int count = 0;
@@ -76,8 +77,11 @@ public class ScreenHandler extends Gui
                         count++;
                     }
             }
+            GL11.glPushMatrix();
+            GL11.glColor4f(1f, 1f, 1f, 1.0f);
             mc.renderEngine.bindTexture(hearts);
             count = 0;
+            size = 16;
             if (tagCache.getFloat("BlueHeart") > 0){
                 for(int i = 0; i < (int)tagCache.getFloat("BlueHeart") / 2; i++)
                     drawTexturedModalRect(2 + 13 * i, resolution.getScaledHeight() / 2 - 25 + 16 * count, 0 * size, 0 * size, size, size);
@@ -92,6 +96,7 @@ public class ScreenHandler extends Gui
             count++;
             if (tagCache.getFloat("WhiteHeart") > 0)
                 drawTexturedModalRect(2, resolution.getScaledHeight() / 2 - 25 + 16 * count, 2 * size, 1 * size, size, size);
+            GL11.glPopMatrix();
         }
     }
 }

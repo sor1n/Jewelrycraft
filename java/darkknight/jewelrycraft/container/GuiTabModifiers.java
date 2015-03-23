@@ -6,10 +6,7 @@ import darkknight.jewelrycraft.client.GuiGuide;
 
 public class GuiTabModifiers extends GuiTab
 {
-    
-    /**
-     * @param id
-     */
+    int maxPages;
     public GuiTabModifiers(int id)
     {
         super("Modifiers", id);
@@ -43,10 +40,16 @@ public class GuiTabModifiers extends GuiTab
                 break;
             case 2:
                 text = "The ancient ones talked about a rising fire in your heart. Fret do not, for flames do not burn, but water might sting a turn. Watch your step, do not be cocky, for its protection is a bit sloppy.";
-                Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), new ItemStack(Items.blaze_powder), text, 40f);
+                Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 7, new ItemStack(Items.blaze_powder), text, 40f, true);
                 break;
-            default:
-                ;
+            case 3:
+                text = "Light and swift as a feather can be good all together. Enemies miss and get confused, this power can be abused. Against an arrow you can't compare, so move around, don't just stare. Fire is your enemy and weakness is the penalty.";
+                Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 7, new ItemStack(Items.feather), text, 40f, true);
+                break;
+            case 4:
+                text = "Endermen may tolerate you, end portals are near too, you may find ore that is true. But be careful, for the power may make you dizzy, blind you if you're a sissy, worsen your vision if you're unaware and shift positions everywhere.";
+                Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 7, new ItemStack(Items.ender_eye), text, 40f, true);
+                break;
         }
     }
     
@@ -56,7 +59,7 @@ public class GuiTabModifiers extends GuiTab
     @Override
     public int getMaxPages()
     {
-        return 1;
+        return 4;
     }
     
     /**

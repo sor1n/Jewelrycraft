@@ -1,5 +1,6 @@
 package darkknight.jewelrycraft.util;
 
+import darkknight.jewelrycraft.events.ScreenHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -17,6 +18,8 @@ public class PlayerUtils
      */
     public static NBTTagCompound getModPlayerPersistTag(EntityPlayer player, String modName)
     {
+        if (player.worldObj.isRemote && ScreenHandler.tagCache != null) return ScreenHandler.tagCache;
+        
         NBTTagCompound tag = player.getEntityData();
         NBTTagCompound persistTag = null;
         if (tag.hasKey(EntityPlayer.PERSISTED_NBT_TAG)) persistTag = tag.getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);

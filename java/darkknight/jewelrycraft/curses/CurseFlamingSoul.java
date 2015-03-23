@@ -13,7 +13,7 @@ public class CurseFlamingSoul extends Curse
     @Override
     public void action(World world, EntityPlayer player)
     {
-        if (!player.isBurning()) player.setFire(60);
+        if (!player.isBurning() && rand.nextInt(20) == 0) player.setFire(5);
     }
     
     public String getDescription()

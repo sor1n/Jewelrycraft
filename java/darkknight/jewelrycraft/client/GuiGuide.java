@@ -2,9 +2,12 @@ package darkknight.jewelrycraft.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.Container;
@@ -13,12 +16,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.block.BlockShadowEye;
 import darkknight.jewelrycraft.container.GuiRectangle;
 import darkknight.jewelrycraft.container.GuiTab;
 import darkknight.jewelrycraft.container.GuiTabBlocks;
 import darkknight.jewelrycraft.container.GuiTabGemsAndIngots;
+import darkknight.jewelrycraft.container.GuiTabIntroduction;
 import darkknight.jewelrycraft.container.GuiTabItems;
 import darkknight.jewelrycraft.container.GuiTabModifiers;
+import darkknight.jewelrycraft.container.GuiTabRitual;
 
 public class GuiGuide extends GuiContainer
 {
@@ -42,7 +48,7 @@ public class GuiGuide extends GuiContainer
         rot = 0;
         del = 0;
         this.world = world;
-        tabs = new GuiTab[]{new GuiTabBlocks(0), new GuiTabItems(1), new GuiTabGemsAndIngots(2), new GuiTabModifiers(3)};
+        tabs = new GuiTab[]{new GuiTabIntroduction(0), new GuiTabBlocks(1), new GuiTabItems(2), new GuiTabGemsAndIngots(3), new GuiTabModifiers(4), new GuiTabRitual(5)};
         activeTab = tabs[0];
         pageTexture = pageTex;
         flippedPageTexture = flipPageTex;
@@ -146,7 +152,12 @@ public class GuiGuide extends GuiContainer
         if (item.isItemEqual(new ItemStack(BlockList.jewelAltar))){
             GL11.glRotatef(160.0F, 1.0F, 0.0F, 0.0F);
             GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+        }else if (item.isItemEqual(new ItemStack(BlockList.handPedestal))){
+            GL11.glScalef(1.2F, 1.2F, 1.2F);
+            GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+            GL11.glTranslatef(0F, 0.05F, 0F);
         }else GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+        if (!(Block.getBlockFromItem(entityitem.getEntityItem().getItem()) instanceof BlockAir)) RenderHelper.enableStandardItemLighting();
         if (RenderManager.instance.options.fancyGraphics) RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
         else{
             GL11.glRotatef(180F, 0F, 1F, 0F);
@@ -154,6 +165,7 @@ public class GuiGuide extends GuiContainer
             RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
             RenderManager.instance.options.fancyGraphics = false;
         }
+        if (!(Block.getBlockFromItem(entityitem.getEntityItem().getItem()) instanceof BlockAir)) RenderHelper.disableStandardItemLighting();
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
@@ -164,7 +176,7 @@ public class GuiGuide extends GuiContainer
      * @param y
      * @param scale
      */
-    public void renderItem(ItemStack item, float x, float y, float scale)
+    public void renderItem(ItemStack item, float x, float y, float scale, boolean rotate, float xRot, float yRot, float zRot)
     {
         GL11.glPushMatrix();
         EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, item);
@@ -172,14 +184,23 @@ public class GuiGuide extends GuiContainer
         GL11.glTranslatef(x, y, 100);
         GL11.glScalef(-scale, scale, scale);
         GL11.glRotatef(160.0F, 1.0F, 0.0F, 0.0F);
-        GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(rot, 0.0F, 1.0F, 0.0F);
+        if (rotate) GL11.glRotatef(rot, 0.0F, 1.0F, 0.0F);
+        else{
+            // GL11.glRotatef(entityitem.getEntityItem().getItemDamage() % 8 / 8F * 360, 0, 1, 0);
+            GL11.glRotatef(xRot, 1, 0, 0);
+            GL11.glRotatef(yRot, 0, 1, 0);
+            GL11.glRotatef(zRot, 0, 0, 1);
+            if (xRot >= 90F || zRot >= 90F) GL11.glTranslatef(0F, -0.2F, 0F);
+            if (Block.getBlockFromItem(entityitem.getEntityItem().getItem()) instanceof BlockShadowEye) GL11.glTranslatef(0F, 0F, 0.025F);
+        }
+        if (!(Block.getBlockFromItem(entityitem.getEntityItem().getItem()) instanceof BlockAir)) RenderHelper.enableStandardItemLighting();
         if (RenderManager.instance.options.fancyGraphics) RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
         else{
             RenderManager.instance.options.fancyGraphics = true;
             RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
             RenderManager.instance.options.fancyGraphics = false;
         }
+        if (!(Block.getBlockFromItem(entityitem.getEntityItem().getItem()) instanceof BlockAir)) RenderHelper.disableStandardItemLighting();
         GL11.glPopMatrix();
     }
     

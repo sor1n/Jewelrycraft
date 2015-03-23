@@ -1,6 +1,8 @@
 package darkknight.jewelrycraft.curses;
 
 import java.util.ArrayList;
+import java.util.Random;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -8,6 +10,7 @@ public class Curse
 {
     protected int id, texturepack;
     protected String name, description;
+    protected Random rand = new Random();
     private static ArrayList<Curse> curses = new ArrayList<Curse>();
     public static ArrayList<Curse> availableCurses = new ArrayList<Curse>();
     
@@ -68,6 +71,34 @@ public class Curse
      * @param player
      */
     public void action(World world, EntityPlayer player)
+    {}
+
+    /**
+     * @param world
+     * @param player
+     */
+    public void deathAction(World world, EntityPlayer player)
+    {}
+
+    /**
+     * @param world
+     * @param player
+     */
+    public void respawnAction(World world, EntityPlayer player)
+    {}
+
+    /**
+     * @param world
+     * @param player
+     */
+    public void attackedAction(World world, EntityPlayer player)
+    {}
+
+    /**
+     * @param world
+     * @param player
+     */
+    public void attackedByPlayerAction(World world, EntityPlayer player, Entity target)
     {}
     
     public boolean itemToss()

@@ -7,10 +7,13 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * @author TinkersCOnstruct
  */
+@SideOnly(Side.CLIENT)
 public abstract class AbstractTab extends GuiButton
 {
     ResourceLocation texture = new ResourceLocation("textures/gui/container/creative_inventory/tabs.png");

@@ -8,7 +8,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
  */
 public class DamageSourceList
 {
-    public static DamageSource shadows, weak, blackHeart, basic;
+    public static DamageSource shadows, weak, blackHeart;
     private static boolean isInitialized = false;
     
     /**
@@ -20,7 +20,6 @@ public class DamageSourceList
             shadows = new DamageSource("shadows").setDamageBypassesArmor().setDamageIsAbsolute();
             blackHeart = new DamageSource("blackHeart").setDamageBypassesArmor().setDamageIsAbsolute();
             weak = new DamageSource("weak");
-            basic = new DamageSource("basic").setDifficultyScaled();
             isInitialized = true;
         }
     }
