@@ -1,0 +1,5 @@
+[18:23:14] [main/INFO]: Logging in with username & password
+[18:23:23] [main/INFO]: Setting user: OnyxDarkKnight
+[18:23:28] [Client thread/INFO]: LWJGL Version: 2.9.1
+[18:23:31] [Twitch authenticator/ERROR]: Given twitch access token is invalid
+[18:23:50] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Jewelrycraft

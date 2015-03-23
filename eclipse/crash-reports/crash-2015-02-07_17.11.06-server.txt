@@ -1,0 +1,103 @@
+---- Minecraft Crash Report ----
+// But it works on my machine.
+
+Time: 2/7/15 5:11 PM
+Description: Exception getting block type in world
+
+java.lang.IllegalArgumentException: n must be positive
+	at java.util.Random.nextInt(Random.java:300)
+	at darkknight.jewelrycraft.util.JewelrycraftUtil.addRandomModifiers(JewelrycraftUtil.java:96)
+	at darkknight.jewelrycraft.worldGen.village.ComponentJewelry.generateDisplayer(ComponentJewelry.java:316)
+	at darkknight.jewelrycraft.worldGen.village.ComponentJewelry.addComponentParts(ComponentJewelry.java:170)
+	at net.minecraft.world.gen.structure.StructureStart.generateStructure(StructureStart.java:48)
+	at net.minecraft.world.gen.structure.MapGenStructure.generateStructuresInChunk(MapGenStructure.java:101)
+	at net.minecraft.world.gen.ChunkProviderGenerate.populate(ChunkProviderGenerate.java:405)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:313)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1147)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:479)
+	at net.minecraft.world.World.getBlock(World.java:384)
+	at net.minecraft.block.BlockStaticLiquid.updateTick(BlockStaticLiquid.java:62)
+	at net.minecraft.world.WorldServer.func_147456_g(WorldServer.java:408)
+	at net.minecraft.world.WorldServer.tick(WorldServer.java:191)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:692)
+	at net.minecraft.server.dedicated.DedicatedServer.updateTimeLightAndEntities(DedicatedServer.java:350)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:614)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:485)
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:752)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at java.util.Random.nextInt(Random.java:300)
+	at darkknight.jewelrycraft.util.JewelrycraftUtil.addRandomModifiers(JewelrycraftUtil.java:96)
+	at darkknight.jewelrycraft.worldGen.village.ComponentJewelry.generateDisplayer(ComponentJewelry.java:316)
+	at darkknight.jewelrycraft.worldGen.village.ComponentJewelry.addComponentParts(ComponentJewelry.java:170)
+	at net.minecraft.world.gen.structure.StructureStart.generateStructure(StructureStart.java:48)
+	at net.minecraft.world.gen.structure.MapGenStructure.generateStructuresInChunk(MapGenStructure.java:101)
+	at net.minecraft.world.gen.ChunkProviderGenerate.populate(ChunkProviderGenerate.java:405)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:313)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1147)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:479)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (184,10,111), Chunk: (at 8,0,15 in 11,6; contains blocks 176,0,96 to 191,255,111), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+Stacktrace:
+	at net.minecraft.world.World.getBlock(World.java:384)
+	at net.minecraft.block.BlockStaticLiquid.updateTick(BlockStaticLiquid.java:62)
+	at net.minecraft.world.WorldServer.func_147456_g(WorldServer.java:408)
+	at net.minecraft.world.WorldServer.tick(WorldServer.java:191)
+
+-- Affected level --
+Details:
+	Level name: world
+	All players: 1 total; [EntityPlayerMP['OnyxDarkKnight'/324, l='world', x=26.47, y=70.00, z=284.98]]
+	Chunk stats: ServerChunkCache: 719 Drop: 0
+	Level seed: -6319409189828058395
+	Level generator: ID 00 - default, ver 1. Features enabled: true
+	Level generator options: 
+	Level spawn location: World: (-28,64,252), Chunk: (at 4,4,12 in -2,15; contains blocks -32,0,240 to -17,255,255), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 22247 game time, 4380 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 112040 (now: false), thunder time: 66686 (now: false)
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:692)
+	at net.minecraft.server.dedicated.DedicatedServer.updateTimeLightAndEntities(DedicatedServer.java:350)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:614)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:485)
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:752)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 8.1 (amd64) version 6.3
+	Java Version: 1.7.0_71, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 924360704 bytes (881 MB) / 1038876672 bytes (990 MB) up to 1038876672 bytes (990 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 95
+	FML: MCP v9.05 FML v7.10.25.1208 Minecraft Forge 10.13.0.1208 4 mods loaded, 4 mods active
+	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	FML{7.10.25.1208} [Forge Mod Loader] (forgeSrc-1.7.10-10.13.0.1208.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Forge{10.13.0.1208} [Minecraft Forge] (forgeSrc-1.7.10-10.13.0.1208.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Jewelrycraft{2.0} [Jewelrycraft] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Player Count: 1 / 20; [EntityPlayerMP['OnyxDarkKnight'/324, l='world', x=26.47, y=70.00, z=284.98]]
+	Is Modded: Definitely; Server brand changed to 'fml,forge'
+	Type: Dedicated Server (map_server.txt)

@@ -1,0 +1,86 @@
+---- Minecraft Crash Report ----
+// Daisy, daisy...
+
+Time: 7/27/14 4:59 PM
+Description: Ticking memory connection
+
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(Unknown Source)
+	at java.util.HashMap$ValueIterator.next(Unknown Source)
+	at net.minecraft.world.gen.structure.MapGenStructure.generateStructuresInChunk(MapGenStructure.java:97)
+	at net.minecraft.world.gen.ChunkProviderFlat.populate(ChunkProviderFlat.java:195)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:315)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1163)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:210)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:151)
+	at net.minecraft.server.management.PlayerManager$PlayerInstance.<init>(PlayerManager.java:411)
+	at net.minecraft.server.management.PlayerManager.getOrCreateChunkWatcher(PlayerManager.java:114)
+	at net.minecraft.server.management.PlayerManager.filterChunkLoadQueue(PlayerManager.java:197)
+	at net.minecraft.server.management.PlayerManager.updatePlayerPertinentChunks(PlayerManager.java:300)
+	at net.minecraft.server.management.ServerConfigurationManager.updatePlayerPertinentChunks(ServerConfigurationManager.java:328)
+	at net.minecraft.network.NetHandlerPlayServer.processPlayer(NetHandlerPlayServer.java:430)
+	at net.minecraft.network.play.client.C03PacketPlayer.processPacket(C03PacketPlayer.java:37)
+	at net.minecraft.network.play.client.C03PacketPlayer$C04PacketPlayerPosition.processPacket(C03PacketPlayer.java:163)
+	at net.minecraft.network.NetworkManager.processReceivedPackets(NetworkManager.java:247)
+	at net.minecraft.network.NetworkSystem.networkTick(NetworkSystem.java:182)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:736)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:624)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:118)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:495)
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:762)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at java.util.HashMap$HashIterator.nextEntry(Unknown Source)
+	at java.util.HashMap$ValueIterator.next(Unknown Source)
+	at net.minecraft.world.gen.structure.MapGenStructure.generateStructuresInChunk(MapGenStructure.java:97)
+	at net.minecraft.world.gen.ChunkProviderFlat.populate(ChunkProviderFlat.java:195)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:315)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1163)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:210)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:151)
+	at net.minecraft.server.management.PlayerManager$PlayerInstance.<init>(PlayerManager.java:411)
+	at net.minecraft.server.management.PlayerManager.getOrCreateChunkWatcher(PlayerManager.java:114)
+	at net.minecraft.server.management.PlayerManager.filterChunkLoadQueue(PlayerManager.java:197)
+	at net.minecraft.server.management.PlayerManager.updatePlayerPertinentChunks(PlayerManager.java:300)
+	at net.minecraft.server.management.ServerConfigurationManager.updatePlayerPertinentChunks(ServerConfigurationManager.java:328)
+	at net.minecraft.network.NetHandlerPlayServer.processPlayer(NetHandlerPlayServer.java:430)
+	at net.minecraft.network.play.client.C03PacketPlayer.processPacket(C03PacketPlayer.java:37)
+	at net.minecraft.network.play.client.C03PacketPlayer$C04PacketPlayerPosition.processPacket(C03PacketPlayer.java:163)
+	at net.minecraft.network.NetworkManager.processReceivedPackets(NetworkManager.java:247)
+
+-- Ticking connection --
+Details:
+	Connection: net.minecraft.network.NetworkManager@50611b1b
+Stacktrace:
+	at net.minecraft.network.NetworkSystem.networkTick(NetworkSystem.java:182)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:736)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:624)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:118)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:495)
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:762)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.7.0_51, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 300364120 bytes (286 MB) / 518979584 bytes (494 MB) up to 518979584 bytes (494 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx512M -Xms512M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.05 FML v7.10.25.1188 Minecraft Forge 10.13.0.1188 4 mods loaded, 4 mods active
+	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	FML{7.10.25.1188} [Forge Mod Loader] (forgeSrc-1.7.10-10.13.0.1188.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Forge{10.13.0.1188} [Minecraft Forge] (forgeSrc-1.7.10-10.13.0.1188.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Jewelrycraft{1.4.2} [Jewelrycraft] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Player Count: 1 / 8; [EntityPlayerMP['sor1n'/516, l='Village', x=-1200.52, y=15.54, z=-389.81]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

@@ -1,0 +1,56 @@
+[18:38:48] [main/INFO]: Logging in with username & password
+[18:38:54] [main/INFO]: Setting user: OnyxDarkKnight
+[18:38:56] [Client thread/INFO]: LWJGL Version: 2.9.1
+[18:38:58] [Twitch authenticator/ERROR]: Given twitch access token is invalid
+[18:39:02] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Jewelrycraft
+[18:39:06] [Sound Library Loader/INFO]: Sound engine started
+[18:39:08] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[18:39:08] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[18:39:08] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Jewelrycraft
+[18:39:08] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[18:39:08] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[18:39:09] [Sound Library Loader/INFO]: Sound engine started
+[18:39:16] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[18:39:16] [Server thread/INFO]: Generating keypair
+[18:39:17] [Server thread/INFO]: Preparing start region for level 0
+[18:39:18] [Server thread/INFO]: Preparing spawn area: 73%
+[18:39:19] [Server thread/INFO]: Changing view distance to 6, from 10
+[18:39:20] [Server thread/INFO]: OnyxDarkKnight[local:E:3277d59b] logged in with entity id 188 at (-212.64832379279514, 61.0, -730.6999999880791)
+[18:39:20] [Server thread/INFO]: OnyxDarkKnight joined the game
+[18:39:32] [Server thread/INFO]: [OnyxDarkKnight: Set own game mode to Creative Mode]
+[18:39:32] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[18:39:52] [Server thread/INFO]: OnyxDarkKnight fell out of the world
+[18:39:52] [Client thread/INFO]: [CHAT] OnyxDarkKnight fell out of the world
+[18:39:52] [Client thread/INFO]: [CHAT] Ouch! That looked like it hurt
+[18:40:18] [Server thread/INFO]: OnyxDarkKnight fell out of the world
+[18:40:18] [Client thread/INFO]: [CHAT] OnyxDarkKnight fell out of the world
+[18:40:18] [Client thread/INFO]: [CHAT] Ouch! That looked like it hurt
+[18:42:29] [Server thread/INFO]: [OnyxDarkKnight: Set own game mode to Survival Mode]
+[18:42:29] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[18:48:17] [Server thread/INFO]: OnyxDarkKnight fell out of the world
+[18:48:17] [Client thread/INFO]: [CHAT] OnyxDarkKnight fell out of the world
+[18:48:17] [Client thread/INFO]: [CHAT] Ouch! That looked like it hurt
+[18:48:54] [Server thread/INFO]: OnyxDarkKnight fell out of the world
+[18:48:54] [Client thread/INFO]: [CHAT] OnyxDarkKnight fell out of the world
+[18:48:54] [Client thread/INFO]: [CHAT] Ouch! That looked like it hurt
+[18:49:05] [Server thread/INFO]: Saving and pausing game...
+[18:49:05] [Server thread/INFO]: Saving chunks for level 'Test 2'/Overworld
+[18:49:05] [Server thread/INFO]: Saving chunks for level 'Test 2'/Nether
+[18:49:05] [Server thread/INFO]: Saving chunks for level 'Test 2'/The End
+[18:50:15] [Server thread/INFO]: OnyxDarkKnight fell out of the world
+[18:50:15] [Client thread/INFO]: [CHAT] OnyxDarkKnight fell out of the world
+[18:50:15] [Client thread/INFO]: [CHAT] Ouch! That looked like it hurt
+[18:50:44] [Server thread/INFO]: OnyxDarkKnight fell out of the world
+[18:50:44] [Client thread/INFO]: [CHAT] OnyxDarkKnight fell out of the world
+[18:50:44] [Client thread/INFO]: [CHAT] Ouch! That looked like it hurt
+[18:50:58] [Server thread/INFO]: Saving and pausing game...
+[18:50:59] [Server thread/INFO]: Saving chunks for level 'Test 2'/Overworld
+[18:50:59] [Server thread/INFO]: Saving chunks for level 'Test 2'/Nether
+[18:50:59] [Server thread/INFO]: Saving chunks for level 'Test 2'/The End
+[18:51:42] [Server thread/INFO]: OnyxDarkKnight fell out of the world
+[18:51:42] [Client thread/INFO]: [CHAT] OnyxDarkKnight fell out of the world
+[18:51:42] [Client thread/INFO]: [CHAT] Ouch! That looked like it hurt
+[18:51:48] [Server thread/INFO]: Saving and pausing game...
+[18:51:48] [Server thread/INFO]: Saving chunks for level 'Test 2'/Overworld
+[18:51:49] [Server thread/INFO]: Saving chunks for level 'Test 2'/Nether
+[18:51:49] [Server thread/INFO]: Saving chunks for level 'Test 2'/The End

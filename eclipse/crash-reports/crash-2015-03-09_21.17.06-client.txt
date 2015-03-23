@@ -1,0 +1,98 @@
+---- Minecraft Crash Report ----
+// I blame Dinnerbone.
+
+Time: 3/9/15 9:17 PM
+Description: Unexpected error
+
+java.lang.Error: Unresolved compilation problem: 
+
+	at darkknight.jewelrycraft.events.EntityEventHandler.fogDensity(EntityEventHandler.java:401)
+	at cpw.mods.fml.common.eventhandler.ASMEventHandler_11_EntityEventHandler_fogDensity_FogDensity.invoke(.dynamic)
+	at cpw.mods.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:51)
+	at cpw.mods.fml.common.eventhandler.EventBus.post(EventBus.java:122)
+	at net.minecraft.client.renderer.EntityRenderer.setupFog(EntityRenderer.java:1966)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1349)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1087)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1056)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:951)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:134)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at darkknight.jewelrycraft.events.EntityEventHandler.fogDensity(EntityEventHandler.java:401)
+	at cpw.mods.fml.common.eventhandler.ASMEventHandler_11_EntityEventHandler_fogDensity_FogDensity.invoke(.dynamic)
+	at cpw.mods.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:51)
+	at cpw.mods.fml.common.eventhandler.EventBus.post(EventBus.java:122)
+	at net.minecraft.client.renderer.EntityRenderer.setupFog(EntityRenderer.java:1966)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1349)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['OnyxDarkKnight'/30717, l='MpServer', x=-213.97, y=67.62, z=-731.93]]
+	Chunk stats: MultiplayerChunkCache: 169, 169
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (-235,4,-715), Chunk: (at 5,0,5 in -15,-45; contains blocks -240,0,-720 to -225,255,-705), Region: (-1,-2; contains chunks -32,-64 to -1,-33, blocks -512,0,-1024 to -1,255,-513)
+	Level time: 4232919 game time, 1000 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false
+	Forced entities: 36 total; [EntityZombie['Zombie'/45559, l='MpServer', x=-268.50, y=15.00, z=-682.50], EntitySlime['Slime'/30608, l='MpServer', x=-178.92, y=25.64, z=-658.38], EntitySlime['Slime'/30614, l='MpServer', x=-180.38, y=25.47, z=-655.75], EntityWitch['Witch'/44440, l='MpServer', x=-266.50, y=15.00, z=-693.56], EntityZombie['Zombie'/44171, l='MpServer', x=-154.50, y=24.00, z=-681.50], EntityCreeper['Creeper'/44434, l='MpServer', x=-268.63, y=15.00, z=-693.09], EntityEnderman['Enderman'/44436, l='MpServer', x=-268.28, y=15.00, z=-692.31], EntityEnderman['Enderman'/44437, l='MpServer', x=-267.28, y=15.00, z=-692.69], EntityCreeper['Creeper'/47736, l='MpServer', x=-248.50, y=9.00, z=-691.50], EntityCreeper['Creeper'/47737, l='MpServer', x=-247.00, y=9.00, z=-689.59], EntityCreeper['Creeper'/47731, l='MpServer', x=-250.50, y=9.00, z=-688.50], EntityBat['Bat'/49457, l='MpServer', x=-268.50, y=14.88, z=-656.13], EntityCreeper['Creeper'/47732, l='MpServer', x=-249.50, y=9.00, z=-689.50], EntityCreeper['Creeper'/47733, l='MpServer', x=-248.50, y=9.00, z=-692.50], EntityBat['Bat'/49459, l='MpServer', x=-268.56, y=14.00, z=-652.15], EntityBat['Bat'/49458, l='MpServer', x=-271.13, y=14.82, z=-653.47], EntityCreeper['Creeper'/47735, l='MpServer', x=-248.50, y=9.00, z=-694.50], EntityMinecartChest['entity.MinecartChest.name'/30625, l='MpServer', x=-162.50, y=24.50, z=-680.50], EntityBat['Bat'/45703, l='MpServer', x=-144.13, y=20.00, z=-661.50], EntityHalfHeart['entity.Half-Heart.name'/30552, l='MpServer', x=-246.75, y=64.00, z=-699.84], EntityHeart['entity.Heart.name'/30551, l='MpServer', x=-246.75, y=64.00, z=-699.84], EntityZombie['Zombie'/43404, l='MpServer', x=-156.50, y=24.00, z=-660.50], EntityMinecartChest['entity.MinecartChest.name'/30543, l='MpServer', x=-268.50, y=14.34, z=-660.53], EntityZombie['Zombie'/48029, l='MpServer', x=-148.50, y=24.00, z=-659.50], EntityZombie['Zombie'/48030, l='MpServer', x=-141.50, y=24.00, z=-665.50], EntityEnderman['Enderman'/48027, l='MpServer', x=-155.50, y=24.00, z=-662.50], EntityEnderman['Enderman'/47753, l='MpServer', x=-165.50, y=24.00, z=-660.50], EntitySpider['Spider'/38427, l='MpServer', x=-154.50, y=20.00, z=-676.50], EntityClientPlayerMP['OnyxDarkKnight'/30717, l='MpServer', x=-213.97, y=67.62, z=-731.93], EntityBat['Bat'/46702, l='MpServer', x=-152.75, y=20.05, z=-671.06], EntityZombie['Zombie'/48600, l='MpServer', x=-185.50, y=21.00, z=-662.50], EntityZombie['Zombie'/48603, l='MpServer', x=-185.50, y=21.00, z=-661.50], EntityZombie['Zombie'/48599, l='MpServer', x=-177.97, y=21.00, z=-666.41], EntityHalfHeart['entity.Half-Heart.name'/30565, l='MpServer', x=-237.66, y=64.00, z=-706.50], EntityZombie['Zombie'/48598, l='MpServer', x=-183.56, y=21.00, z=-663.06], EntityZombie['Zombie'/30564, l='MpServer', x=-229.53, y=64.00, z=-750.69]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:415)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2555)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:980)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:134)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 8.1 (amd64) version 6.3
+	Java Version: 1.7.0_71, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 172539032 bytes (164 MB) / 518979584 bytes (494 MB) up to 518979584 bytes (494 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx512M -Xms512M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.05 FML v7.10.25.1208 Minecraft Forge 10.13.0.1208 4 mods loaded, 4 mods active
+	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	FML{7.10.25.1208} [Forge Mod Loader] (forgeSrc-1.7.10-10.13.0.1208.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	Forge{10.13.0.1208} [Minecraft Forge] (forgeSrc-1.7.10-10.13.0.1208.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	Jewelrycraft{2.0} [Jewelrycraft] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	Launched Version: 1.7
+	LWJGL: 2.9.1
+	OpenGL: GeForce GT 525M/PCIe/SSE2 GL version 4.5.0 NVIDIA 347.25, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Anisotropic filtering is supported and maximum anisotropy is 16.
+Shaders are available because OpenGL 2.1 is supported.
+
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)

@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package darkknight.jewelrycraft.container;
+
+/**
+ * @author Sorin
+ *
+ */
+public class GuiTabIntroduction
+{
+}

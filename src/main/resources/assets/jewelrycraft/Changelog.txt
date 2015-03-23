@@ -1,0 +1,81 @@
+Both 1.6.4 and 1.7.10
+- Fixed bug with Natura causing the game to crash
+Only 1.7.10
+- Updated the mod to Minecraft 1.7.10
+- Added more config options regarding Jeweler house generation
+- Reduced the number of possible jewelers to spawn in a village to 1
+- Added Molten Metal and Molten Metal Buckets
+- Buckets of the molten metal can be obtained either by filling a smelter with the metal of your choice and then right clicking the smelter with an empty bucket, 
+or by destroying the filled smelter, causing the metal to pour out and then use a bucket to pick it up.
+- Smelters now spawn molten metal, if they have any, when broken
+- Added the possibility to smelt ores
+- Smelted ores give double the amount of ingots
+- Jewelers houses now have a chance to also generate ores
+- Jewelers can sell ores now
+- Fixed a bug where the first time you would pour metal in a molder it would generate 2 items instead of one
+
+TODO
+- Make a way so that the ingot affects the jewels somehow
+- Add a ring of Resistance
+- Think of a way to balance the rings
+- (MAYBE) Shadow Ring -> Shadow ingot ring, nether star, obsidian - makes you appear as hostile so mobs actually leave you alone
+- Elemental jewellery -> punch a creature with it in your hand to do different things, lightning, fling into the air, set on fire, 
+  encase in ice/fences/iron bars, turn into a sheep (like that spell from Warcraft 2, if anyone remembers that), blindness, extreme 
+  knockback, charm (turns on your enemies), tame - tames any tamable mob
+!- Add Necklaces, bracelets and earrings; Necklaces could have an AOE effect;
+- Shadow armor and tools
+- Add an item that can store rings (maybe a keychain?)
+- Monks Ring -> ups your unarmed damage / block breaking speed / ability to break harder blocks with bare hands, made with a block of iron and a jewel.
+- Ring of Strength -> self explanatory
+- (MAYBE) Add a Shadow Merchant (a villager that trades only shadow related stuff and appears randomly at night)
+- Add a blast protection jewelry
+- Add a jewelery of the Arrow Catcher - each tier of protection gives you a certain % chance of catching arrows instead of being hit by them.
+- (MAYBE) Render the rings on the character
+- In the case of passive benefits, might it be possible to make it so, with fire resistance for example, it refreshes the buff as long as you're not in fire, 
+  but as soon as you are it gains a limited duration (better jewels for longer durations) that, when it expires there goes the buff and you can burn to death. 
+  Then you'd need to avoid being on fire for a cooldown period of a few seconds before it could refresh back to the passive state (this part reduced by better jewels)? 
+  Invisibility could turn off for a period when you punch a mob, that kind of thing. 
+- Glowstone Block (Modifier): Places a torch-like blob of light in exchange for 1/2 a heart, higher-tier jewels increase the light emitted.
+- Ghast Tear (Modifier): Allows for a limited-duration flight buff, say starting at 3 seconds all the way to 60 when combined with a nether star. When the timer expires 
+  you have to land again to reset the usage.
+- Any Color Dye (Modifier): Right-click a sheep to dye it the chosen color. Posted Image
+- Beacon (Modifier): Portable beacon, with the tier based on the jewel added. Shift + Right-click to open the beacon GUI, which would work just like the vanilla one.
+- Water Bucket (Modifier): Right-click the air to start a storm.
+- Lava Bucket (Modifier): Passively adds fire aspect to your weapons and tools.
+- Sand (Modifier): Shift + right-click to advance the day 1 hour. Only usable once per day by default, better jewels increase this.
+- Glass (Jewel): Right-click while holding the ring to zoom in!
+- Lapis Piece (Modifier): Passively adds a slowing effect to your weapons. Better jewels improve this.
+- Lapis Block (Jewel): A jewel that looks pretty but doesn't do much else.
+- Bone (Jewel): Right-click to trade 1/2 a hunger for a bonemeal effect. Otherwise a white jewel with no benefit.
+- Carrot (Modifier): Right-click to trade 1/2 a heart for 1/2 a hunger. Better jewels increase these values. 4 hearts for a steaks-worth of food? XD
+- Diamond Block (Jewel): When on a gold ring it turns it into "Ostentatious Wedding Ring". Otherwise the same (or a little better than) diamond.
+- Golden Apple (Jewel): Ring becomes named "Discord". Right-clicking gives an entirely random buff, a debuff, launches you high into the air, teleports you to a 
+  random location, sets you on fire, spawns a pig or makes lightning strike. Pretty much anything can happen, and the more biased to negative results the better. :P
+- Enchanted Golden Apple (Jewel): As above, but more biased towards positive effects. Hail Discordia!
+- Name Tag (Jewel): Right-clicking a mob gives it a random name (bonus points if it's from a user-editable list!)
+- Add randomly generated "named" loot to dungeon chests!  Ring of Displacement (lets you tele randomly like an enderman), Necklace of Second Chances 
+  (heals you for 50 when you drop to 3 or fewer hearts with a cooldown of ~1 minute), Trinket of the Gale (arrow/fireball immunity!), Goggles of the Merfolk 
+  (water breathing!). Endless possibilities! :D
+- Also! Trinkets and Belts!
+
+Trinkets would probably require a new mold, and should bring out the more passive side of items (like, say, instead of opening an enderchest, it automatically 
+sucks items into your ender chest, or instead of teleporting you it prevents endermen from teleporting away from you [which could be done pretty easily with a 
+fake screen overlay that's treated like the pumpkin one]).
+
+Belts... I'd personally see belts as a ring crafted with a piece of Leather as the "jewel" and could provide conditional buffs proportionate to some factor, like 
+say increasing strength buff the lower your HP is. The idea being that the belt should assist you in a useful way, but only when its needed. I'd probably limit it 
+to HP and Hunger as determining factors. Things like resistance, regeneration and strength could be applied at low HP, while things like jump boost, haste and speed 
+could be applied at high hunger meter values. I wouldn't tie anything to having high/max HP or no hunger since those would be things that players normally try to 
+avoid or always have.
+
+And as for goggles... A new mold for the base goggle template, and have it only accept "jewel"-typed items (as "lenses"). If you can't think of where to put a neat 
+effect it should probably end up on goggles. Off the top of my head I can think of a few neat uses: Ore Radar (2x diamonds), Clear Vision (2x glass), Mob Spawnable 
+Area Highlighting (2x ender pearl), Compass and Clock overlays (doy), Coordinate HUD (map and glass), Speedometer (glass and enderpearl), Altimiter (glass and emerald),
+Thermometer (diamond and glass)... Required Pickaxe Level HUD (no idea). XD
+
+Oooh! And last but not least: Cursed items! I'd probably start with an upgraded jewelry table requiring a regular one, a brewing stand, a piece of glass and a stick. 
+You could initially use this upgraded stand to add additional effects, or merge two items into one. Should operate kind of like a furnace, but only accepts blaze powder 
+and rods as fuel (about 1 rod or 2 powder = 1 process, the idea being using the blaze stuff like welding materials). But the other use would be cursing jewelry! Why?  
+Because nothing says "I hate you so much." like a non-dequipable piece of jewelry that gives you blindness and slowness! Slimeballs could add a cursed sticky effect 
+that prevents you dropping it without dying. Fermented spider eye, like with brewing potions, could corrupt the effects on the item. Flint and steel could randomly set 
+you on fire. Eye of Ender could randomly tell the world your coordinates.

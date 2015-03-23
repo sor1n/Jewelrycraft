@@ -1,0 +1,50 @@
+Curses
+- Multiplicate number of enemies around you by 2 every time you get hit
+- An enemy spawns 8 projectiles, 1 in each direction, when it is killed
+- Whenever you get damaged, an item is either removed from inventory (if it has no durability) or reduces the durability
+- Summons a monster whenever you use a potion
+- All monsters change to a specific type (eg. a Zombie and 2 Skeletons become 3 Spiders)
+- Previous curses remain attached to you even after you die (except this one)
+- Half of the damage you deal to an enemy is redirected to you
+- When near a player, one of your curses is transferred to him (except this one)
+- You have half of your normal health and deal half as normal damage (this includes weapon damage)
+- Only 25% of the mobs you kill have a chance of dropping experience
+- When you kill too many mobs, a guardian is summoned
+- Killing too many mobs sends you to the Shadows
+- You are no longer able to speak (chat messages)
+- There is a chance for a near-by Tile Entity to be removed
+- Random chance of precious blocks to be removed
+- Killing a boss results in you dying as well
+- Every time you kill an animal, there is a 25% chance for a minion to spawn(they help you, but have low health)
+- Killing a minnion summons a Dad
+- Slaying a dad grants you one wish
+- Next time you revive, an extra curse is permanently added to you
+- You can shoot tears from your eyes
+- Bloddy vision (simply annoying, but if you have tears you can do more damage)
+- Swords deal more damage
+- You destroy all blocks you are near
+- Creepers blow up instantly when near you
+- TNT explodes immediately as it is placed down
+- Creepers explode when hit
+- One of your curses is transferred to an item, whoever has that item gets that curse
+- A cursed item cannot be removed from inventory, even after death
+- Slimes get bigger when killed, rather than small
+- You can never die, but you deal no damage at all and can never heal (lasts until a full moon, when you suddenly die)
+- During full moon you have half of your life points
+- During full moon you deal 4 times more damage, but will take half of the total damaged dealt during the night in the morning and your armour is reduced by 75%
+- You slowly take damage over 7 days, during this time you can't heal
+- All food is poisonous (food poison)
+- Food damages you equal to the amount of hunger it heals
+- Food heals half of its hunger
+- Food no longer heals hunger
+- You can no longer swim
+- You swim twice as slow
+- Water is lava
+- The floor is lava
+- Your spawn point is reset to the original location and you can no longer set your spawn point
+- You can't throw away anything or craft stuff
+- You burst in flames whenever you take damage from entities
+- You get poisoned whenever you eat
+- You are blinded (potion effect) and get completely blind for 5 seconds when you get damaged
+- You get teleported randomly at random times
+

@@ -1,0 +1,17 @@
+[13:00:40] [main/INFO]: Setting user: jeb_
+[13:00:42] [Client thread/INFO]: LWJGL Version: 2.9.1
+[13:00:48] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Jewelrycraft
+[13:00:49] [Sound Library Loader/INFO]: Sound engine started
+[13:00:50] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[13:00:50] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[13:00:51] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Jewelrycraft
+[13:00:51] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[13:00:51] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[13:00:52] [Sound Library Loader/INFO]: Sound engine started
+[13:00:54] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[13:00:54] [Server thread/INFO]: Generating keypair
+[13:00:55] [Server thread/INFO]: Preparing start region for level 0
+[13:00:56] [Server thread/INFO]: Preparing spawn area: 76%
+[13:00:56] [Server thread/INFO]: Changing view distance to 6, from 10
+[13:00:57] [Server thread/INFO]: jeb_[local:E:5afc6cfd] logged in with entity id 116 at (-222.7924131751146, 64.0, -730.7848380809104)
+[13:00:57] [Server thread/INFO]: jeb_ joined the game

@@ -1,0 +1,105 @@
+---- Minecraft Crash Report ----
+// But it works on my machine.
+
+Time: 2/7/15 5:28 PM
+Description: Ticking entity
+
+java.lang.IllegalArgumentException: n must be positive
+	at java.util.Random.nextInt(Random.java:300)
+	at darkknight.jewelrycraft.util.JewelrycraftUtil.addRandomModifiers(JewelrycraftUtil.java:96)
+	at darkknight.jewelrycraft.worldGen.village.JCTrades.manipulateTradesForVillager(JCTrades.java:118)
+	at cpw.mods.fml.common.registry.VillagerRegistry.manageVillagerTrades(VillagerRegistry.java:203)
+	at net.minecraft.entity.passive.EntityVillager.addDefaultEquipmentAndRecipies(EntityVillager.java:469)
+	at net.minecraft.entity.passive.EntityVillager.updateAITick(EntityVillager.java:173)
+	at net.minecraft.entity.EntityLiving.updateAITasks(EntityLiving.java:619)
+	at net.minecraft.entity.EntityLivingBase.onLivingUpdate(EntityLivingBase.java:1981)
+	at net.minecraft.entity.EntityLiving.onLivingUpdate(EntityLiving.java:431)
+	at net.minecraft.entity.EntityAgeable.onLivingUpdate(EntityAgeable.java:138)
+	at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:1814)
+	at net.minecraft.entity.EntityLiving.onUpdate(EntityLiving.java:250)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2271)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:684)
+	at net.minecraft.world.World.updateEntity(World.java:2231)
+	at net.minecraft.world.World.updateEntities(World.java:2081)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:515)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:703)
+	at net.minecraft.server.dedicated.DedicatedServer.updateTimeLightAndEntities(DedicatedServer.java:350)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:614)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:485)
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:752)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at java.util.Random.nextInt(Random.java:300)
+	at darkknight.jewelrycraft.util.JewelrycraftUtil.addRandomModifiers(JewelrycraftUtil.java:96)
+	at darkknight.jewelrycraft.worldGen.village.JCTrades.manipulateTradesForVillager(JCTrades.java:118)
+	at cpw.mods.fml.common.registry.VillagerRegistry.manageVillagerTrades(VillagerRegistry.java:203)
+	at net.minecraft.entity.passive.EntityVillager.addDefaultEquipmentAndRecipies(EntityVillager.java:469)
+	at net.minecraft.entity.passive.EntityVillager.updateAITick(EntityVillager.java:173)
+	at net.minecraft.entity.EntityLiving.updateAITasks(EntityLiving.java:619)
+	at net.minecraft.entity.EntityLivingBase.onLivingUpdate(EntityLivingBase.java:1981)
+	at net.minecraft.entity.EntityLiving.onLivingUpdate(EntityLiving.java:431)
+	at net.minecraft.entity.EntityAgeable.onLivingUpdate(EntityAgeable.java:138)
+	at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:1814)
+	at net.minecraft.entity.EntityLiving.onUpdate(EntityLiving.java:250)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2271)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:684)
+	at net.minecraft.world.World.updateEntity(World.java:2231)
+
+-- Entity being ticked --
+Details:
+	Entity Type: Villager (net.minecraft.entity.passive.EntityVillager)
+	Entity ID: 1346
+	Entity Name: Villager
+	Entity's Exact location: 20.47, 66.77, 298.70
+	Entity's Block location: World: (20,66,298), Chunk: (at 4,4,10 in 1,18; contains blocks 16,0,288 to 31,255,303), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Entity's Momentum: -0.02, -0.23, 0.00
+Stacktrace:
+	at net.minecraft.world.World.updateEntities(World.java:2081)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:515)
+
+-- Affected level --
+Details:
+	Level name: world
+	All players: 1 total; [EntityPlayerMP['OnyxDarkKnight'/299, l='world', x=25.44, y=69.00, z=283.81]]
+	Chunk stats: ServerChunkCache: 486 Drop: 0
+	Level seed: -6319409189828058395
+	Level generator: ID 00 - default, ver 1. Features enabled: true
+	Level generator options: 
+	Level spawn location: World: (-28,64,252), Chunk: (at 4,4,12 in -2,15; contains blocks -32,0,240 to -17,255,255), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 32577 game time, 1007 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 101710 (now: false), thunder time: 56356 (now: false)
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:703)
+	at net.minecraft.server.dedicated.DedicatedServer.updateTimeLightAndEntities(DedicatedServer.java:350)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:614)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:485)
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:752)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 8.1 (amd64) version 6.3
+	Java Version: 1.7.0_71, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 945840368 bytes (902 MB) / 1038876672 bytes (990 MB) up to 1038876672 bytes (990 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 12, tallocated: 94
+	FML: MCP v9.05 FML v7.10.25.1208 Minecraft Forge 10.13.0.1208 4 mods loaded, 4 mods active
+	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	FML{7.10.25.1208} [Forge Mod Loader] (forgeSrc-1.7.10-10.13.0.1208.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Forge{10.13.0.1208} [Minecraft Forge] (forgeSrc-1.7.10-10.13.0.1208.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Jewelrycraft{2.0} [Jewelrycraft] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Player Count: 1 / 20; [EntityPlayerMP['OnyxDarkKnight'/299, l='world', x=25.44, y=69.00, z=283.81]]
+	Is Modded: Definitely; Server brand changed to 'fml,forge'
+	Type: Dedicated Server (map_server.txt)

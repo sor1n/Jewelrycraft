@@ -1,0 +1,97 @@
+2014-10-29 14:38:40,182 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-8.1.14.v20131031
+2014-10-29 14:38:40,482 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@127.0.0.1:49911
+2014-10-29 15:53:25,567 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - stopped o.e.j.s.ServletContextHandler{/help,null}
+2014-12-21 15:52:58,450 [main] WARN  o.e.r.i.c.rcp.TypeBindingAnalyzer - Can't handle class org.eclipse.jdt.internal.compiler.ast.IfStatement as parent of completion location.
+2014-12-28 22:26:03,121 [Worker-12] ERROR o.e.r.m.a.MavenCentralFingerprintSearchAdvisor - Exception when querying Solr Server <http://search.maven.org/solrsearch>
+org.apache.solr.client.solrj.SolrServerException: java.net.SocketTimeoutException: Read timed out
+	at org.apache.solr.client.solrj.impl.CommonsHttpSolrServer.request(CommonsHttpSolrServer.java:480) ~[org.apache.solr.client.solrj_3.5.0.v20120530-0900.jar:na]
+	at org.apache.solr.client.solrj.impl.CommonsHttpSolrServer.request(CommonsHttpSolrServer.java:246) ~[org.apache.solr.client.solrj_3.5.0.v20120530-0900.jar:na]
+	at org.apache.solr.client.solrj.request.QueryRequest.process(QueryRequest.java:89) ~[na:na]
+	at org.apache.solr.client.solrj.SolrServer.query(SolrServer.java:266) ~[org.apache.solr.client.solrj_3.5.0.v20120530-0900.jar:na]
+	at org.eclipse.recommenders.models.advisors.MavenCentralFingerprintSearchAdvisor.doSuggest(MavenCentralFingerprintSearchAdvisor.java:91) ~[org.eclipse.recommenders.models_2.1.9.v20140917-1240.jar:na]
+	at org.eclipse.recommenders.models.advisors.AbstractProjectCoordinateAdvisor.suggest(AbstractProjectCoordinateAdvisor.java:29) [org.eclipse.recommenders.models_2.1.9.v20140917-1240.jar:na]
+	at org.eclipse.recommenders.models.rcp.advisors.EclipseMavenCentralFingerprintSearchAdvisor.suggest(EclipseMavenCentralFingerprintSearchAdvisor.java:55) [org.eclipse.recommenders.models.rcp_2.1.9.v20140917-1240.jar:na]
+	at org.eclipse.recommenders.models.advisors.ProjectCoordinateAdvisorService.suggest(ProjectCoordinateAdvisorService.java:52) [org.eclipse.recommenders.models_2.1.9.v20140917-1240.jar:na]
+	at org.eclipse.recommenders.internal.models.rcp.EclipseProjectCoordinateAdvisorService$2.load(EclipseProjectCoordinateAdvisorService.java:101) [org.eclipse.recommenders.models.rcp_2.1.9.v20140917-1240.jar:na]
+	at org.eclipse.recommenders.internal.models.rcp.EclipseProjectCoordinateAdvisorService$2.load(EclipseProjectCoordinateAdvisorService.java:1) [org.eclipse.recommenders.models.rcp_2.1.9.v20140917-1240.jar:na]
+	at com.google.common.cache.CacheLoader.reload(CacheLoader.java:94) [com.google.guava_15.0.0.v201403281430.jar:na]
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3525) [com.google.guava_15.0.0.v201403281430.jar:na]
+	at com.google.common.cache.LocalCache$Segment.loadAsync(LocalCache.java:2321) [com.google.guava_15.0.0.v201403281430.jar:na]
+	at com.google.common.cache.LocalCache$Segment.refresh(LocalCache.java:2385) [com.google.guava_15.0.0.v201403281430.jar:na]
+	at com.google.common.cache.LocalCache.refresh(LocalCache.java:4085) [com.google.guava_15.0.0.v201403281430.jar:na]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.refresh(LocalCache.java:4825) [com.google.guava_15.0.0.v201403281430.jar:na]
+	at org.eclipse.recommenders.internal.models.rcp.EclipseProjectCoordinateAdvisorService$RefreshProjectCoordinatesJob.run(EclipseProjectCoordinateAdvisorService.java:209) [org.eclipse.recommenders.models.rcp_2.1.9.v20140917-1240.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54) [org.eclipse.core.jobs_3.6.0.v20140424-0053.jar:na]
+Caused by: java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_25]
+	at java.net.SocketInputStream.read(Unknown Source) ~[na:1.8.0_25]
+	at java.net.SocketInputStream.read(Unknown Source) ~[na:1.8.0_25]
+	at java.io.BufferedInputStream.fill(Unknown Source) ~[na:1.8.0_25]
+	at java.io.BufferedInputStream.read(Unknown Source) ~[na:1.8.0_25]
+	at org.apache.commons.httpclient.HttpParser.readRawLine(HttpParser.java:78) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpParser.readLine(HttpParser.java:106) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpConnection.readLine(HttpConnection.java:1116) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.MultiThreadedHttpConnectionManager$HttpConnectionAdapter.readLine(MultiThreadedHttpConnectionManager.java:1413) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpMethodBase.readStatusLine(HttpMethodBase.java:1973) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpMethodBase.readResponse(HttpMethodBase.java:1735) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpMethodBase.execute(HttpMethodBase.java:1098) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpMethodDirector.executeWithRetry(HttpMethodDirector.java:398) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpMethodDirector.executeMethod(HttpMethodDirector.java:171) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:397) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:323) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.solr.client.solrj.impl.CommonsHttpSolrServer.request(CommonsHttpSolrServer.java:424) ~[org.apache.solr.client.solrj_3.5.0.v20120530-0900.jar:na]
+	... 17 common frames omitted
+2014-12-28 22:26:06,427 [Worker-12] ERROR o.e.r.m.a.MavenCentralFingerprintSearchAdvisor - Exception when querying Solr Server <http://search.maven.org/solrsearch>
+org.apache.solr.client.solrj.SolrServerException: java.net.SocketTimeoutException: Read timed out
+	at org.apache.solr.client.solrj.impl.CommonsHttpSolrServer.request(CommonsHttpSolrServer.java:480) ~[org.apache.solr.client.solrj_3.5.0.v20120530-0900.jar:na]
+	at org.apache.solr.client.solrj.impl.CommonsHttpSolrServer.request(CommonsHttpSolrServer.java:246) ~[org.apache.solr.client.solrj_3.5.0.v20120530-0900.jar:na]
+	at org.apache.solr.client.solrj.request.QueryRequest.process(QueryRequest.java:89) ~[na:na]
+	at org.apache.solr.client.solrj.SolrServer.query(SolrServer.java:266) ~[org.apache.solr.client.solrj_3.5.0.v20120530-0900.jar:na]
+	at org.eclipse.recommenders.models.advisors.MavenCentralFingerprintSearchAdvisor.doSuggest(MavenCentralFingerprintSearchAdvisor.java:91) ~[org.eclipse.recommenders.models_2.1.9.v20140917-1240.jar:na]
+	at org.eclipse.recommenders.models.advisors.AbstractProjectCoordinateAdvisor.suggest(AbstractProjectCoordinateAdvisor.java:29) [org.eclipse.recommenders.models_2.1.9.v20140917-1240.jar:na]
+	at org.eclipse.recommenders.models.rcp.advisors.EclipseMavenCentralFingerprintSearchAdvisor.suggest(EclipseMavenCentralFingerprintSearchAdvisor.java:55) [org.eclipse.recommenders.models.rcp_2.1.9.v20140917-1240.jar:na]
+	at org.eclipse.recommenders.models.advisors.ProjectCoordinateAdvisorService.suggest(ProjectCoordinateAdvisorService.java:52) [org.eclipse.recommenders.models_2.1.9.v20140917-1240.jar:na]
+	at org.eclipse.recommenders.internal.models.rcp.EclipseProjectCoordinateAdvisorService$2.load(EclipseProjectCoordinateAdvisorService.java:101) [org.eclipse.recommenders.models.rcp_2.1.9.v20140917-1240.jar:na]
+	at org.eclipse.recommenders.internal.models.rcp.EclipseProjectCoordinateAdvisorService$2.load(EclipseProjectCoordinateAdvisorService.java:1) [org.eclipse.recommenders.models.rcp_2.1.9.v20140917-1240.jar:na]
+	at com.google.common.cache.CacheLoader.reload(CacheLoader.java:94) [com.google.guava_15.0.0.v201403281430.jar:na]
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3525) [com.google.guava_15.0.0.v201403281430.jar:na]
+	at com.google.common.cache.LocalCache$Segment.loadAsync(LocalCache.java:2321) [com.google.guava_15.0.0.v201403281430.jar:na]
+	at com.google.common.cache.LocalCache$Segment.refresh(LocalCache.java:2385) [com.google.guava_15.0.0.v201403281430.jar:na]
+	at com.google.common.cache.LocalCache.refresh(LocalCache.java:4085) [com.google.guava_15.0.0.v201403281430.jar:na]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.refresh(LocalCache.java:4825) [com.google.guava_15.0.0.v201403281430.jar:na]
+	at org.eclipse.recommenders.internal.models.rcp.EclipseProjectCoordinateAdvisorService$RefreshProjectCoordinatesJob.run(EclipseProjectCoordinateAdvisorService.java:209) [org.eclipse.recommenders.models.rcp_2.1.9.v20140917-1240.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54) [org.eclipse.core.jobs_3.6.0.v20140424-0053.jar:na]
+Caused by: java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_25]
+	at java.net.SocketInputStream.read(Unknown Source) ~[na:1.8.0_25]
+	at java.net.SocketInputStream.read(Unknown Source) ~[na:1.8.0_25]
+	at java.io.BufferedInputStream.fill(Unknown Source) ~[na:1.8.0_25]
+	at java.io.BufferedInputStream.read(Unknown Source) ~[na:1.8.0_25]
+	at org.apache.commons.httpclient.HttpParser.readRawLine(HttpParser.java:78) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpParser.readLine(HttpParser.java:106) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpConnection.readLine(HttpConnection.java:1116) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.MultiThreadedHttpConnectionManager$HttpConnectionAdapter.readLine(MultiThreadedHttpConnectionManager.java:1413) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpMethodBase.readStatusLine(HttpMethodBase.java:1973) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpMethodBase.readResponse(HttpMethodBase.java:1735) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpMethodBase.execute(HttpMethodBase.java:1098) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpMethodDirector.executeWithRetry(HttpMethodDirector.java:398) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpMethodDirector.executeMethod(HttpMethodDirector.java:171) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:397) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:323) ~[org.apache.commons.httpclient_3.1.0.v201012070820.jar:na]
+	at org.apache.solr.client.solrj.impl.CommonsHttpSolrServer.request(CommonsHttpSolrServer.java:424) ~[org.apache.solr.client.solrj_3.5.0.v20120530-0900.jar:na]
+	... 17 common frames omitted
+2014-12-28 23:16:22,132 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-8.1.14.v20131031
+2014-12-28 23:16:22,458 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@127.0.0.1:51761
+2015-01-02 05:55:19,774 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-8.1.14.v20131031
+2015-01-02 05:55:20,178 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@127.0.0.1:54156
+2015-01-25 16:18:09,146 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-8.1.14.v20131031
+2015-01-25 16:18:09,396 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@127.0.0.1:52874
+2015-01-25 18:29:31,438 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - stopped o.e.j.s.ServletContextHandler{/help,null}
+2015-01-25 20:52:48,048 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-8.1.14.v20131031
+2015-01-25 20:52:48,205 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@127.0.0.1:54278
+2015-01-29 21:22:40,304 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-8.1.14.v20131031
+2015-01-29 21:22:40,623 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@127.0.0.1:60169
+2015-01-30 02:16:13,345 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - stopped o.e.j.s.ServletContextHandler{/help,null}
+2015-01-30 23:44:30,268 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-8.1.14.v20131031
+2015-01-30 23:44:30,648 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@127.0.0.1:64856
+2015-01-31 02:48:51,887 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - stopped o.e.j.s.ServletContextHandler{/help,null}

@@ -1,0 +1,81 @@
+[17:41:01] [main/INFO]: Logging in with username & password
+[17:41:07] [main/INFO]: Setting user: OnyxDarkKnight
+[17:41:10] [Client thread/INFO]: LWJGL Version: 2.9.1
+[17:41:12] [Twitch authenticator/ERROR]: Given twitch access token is invalid
+[17:41:17] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Jewelrycraft, FMLFileResourcePack:AnimationAPI, FMLFileResourcePack:Animation Example
+[17:41:19] [Sound Library Loader/INFO]: Sound engine started
+[17:41:21] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[17:41:21] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[17:41:21] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Jewelrycraft, FMLFileResourcePack:AnimationAPI, FMLFileResourcePack:Animation Example
+[17:41:22] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[17:41:22] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[17:41:23] [Sound Library Loader/INFO]: Sound engine started
+[17:41:52] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[17:41:52] [Server thread/INFO]: Generating keypair
+[17:41:53] [Server thread/INFO]: Preparing start region for level 0
+[17:41:54] [Server thread/INFO]: Preparing spawn area: 17%
+[17:41:54] [Server thread/INFO]: Changing view distance to 8, from 10
+[17:41:55] [Server thread/INFO]: OnyxDarkKnight[local:E:08677a87] logged in with entity id 106 at (-225.75161726535444, 65.0, -715.6200412300524)
+[17:41:55] [Server thread/INFO]: OnyxDarkKnight joined the game
+[18:13:31] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:step.anvil
+[18:13:31] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:step.anvil
+[18:14:14] [Server thread/INFO]: Changing view distance to 1, from 8
+[18:14:14] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:14:14] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:14:14] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:14:23] [Server thread/INFO]: Saving and pausing game...
+[18:14:23] [Server thread/INFO]: Saving chunks for level 'Test 2'/Overworld
+[18:14:24] [Server thread/INFO]: Saving chunks for level 'Test 2'/Nether
+[18:14:24] [Server thread/INFO]: Saving chunks for level 'Test 2'/The End
+[18:14:31] [Server thread/INFO]: Changing view distance to 8, from 1
+[18:14:36] [Server thread/INFO]: Changing view distance to 1, from 8
+[18:14:36] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:14:36] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:14:36] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:14:38] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:14:38] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:14:38] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:14:47] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:14:47] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:14:47] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:14:48] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:14:48] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:14:48] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:14:56] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:14:56] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:14:56] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:14:58] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:14:58] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:14:58] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:15:08] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:15:08] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:15:08] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:15:10] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:15:10] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:15:10] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:15:10] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:15:10] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:15:10] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:15:14] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:15:14] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:15:14] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:15:17] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:15:17] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:15:17] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:15:19] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:15:19] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:15:19] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:15:23] [Client thread/INFO]: [CHAT] §7You sense some Shadow Ore around you.
+[18:15:23] [Client thread/INFO]: [CHAT] §7You sense some Iron Ore around you.
+[18:15:23] [Client thread/INFO]: [CHAT] §7You sense some Gold Ore around you.
+[18:17:26] [Server thread/INFO]: Saving and pausing game...
+[18:17:26] [Server thread/INFO]: Saving chunks for level 'Test 2'/Overworld
+[18:17:26] [Server thread/INFO]: Saving chunks for level 'Test 2'/Nether
+[18:17:26] [Server thread/INFO]: Saving chunks for level 'Test 2'/The End
+[18:17:27] [Server thread/INFO]: Stopping server
+[18:17:27] [Server thread/INFO]: Saving players
+[18:17:27] [Server thread/INFO]: Saving worlds
+[18:17:27] [Server thread/INFO]: Saving chunks for level 'Test 2'/Overworld
+[18:17:27] [Server thread/INFO]: Saving chunks for level 'Test 2'/Nether
+[18:17:27] [Server thread/INFO]: Saving chunks for level 'Test 2'/The End
+[18:17:30] [Client thread/INFO]: Stopping!

@@ -1,0 +1,103 @@
+---- Minecraft Crash Report ----
+// This doesn't make any sense!
+
+Time: 12/19/14 10:14 AM
+Description: Ticking block entity
+
+java.lang.NullPointerException: Ticking block entity
+	at darkknight.jewelrycraft.tileentity.TileEntityShadowEye.addPedestalInfo(TileEntityShadowEye.java:228)
+	at darkknight.jewelrycraft.tileentity.TileEntityShadowEye.addData(TileEntityShadowEye.java:219)
+	at darkknight.jewelrycraft.tileentity.TileEntityShadowEye.updateEntity(TileEntityShadowEye.java:65)
+	at net.minecraft.world.World.updateEntities(World.java:2133)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:2086)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1028)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:951)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:134)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at darkknight.jewelrycraft.tileentity.TileEntityShadowEye.addPedestalInfo(TileEntityShadowEye.java:228)
+	at darkknight.jewelrycraft.tileentity.TileEntityShadowEye.addData(TileEntityShadowEye.java:219)
+	at darkknight.jewelrycraft.tileentity.TileEntityShadowEye.updateEntity(TileEntityShadowEye.java:65)
+
+-- Block entity being ticked --
+Details:
+	Name: jewelrycraft:shadowEye // darkknight.jewelrycraft.tileentity.TileEntityShadowEye
+	Block type: ID #178 (tile.Jewelrycraft.shadowEye // darkknight.jewelrycraft.block.BlockShadowEye)
+	Block data value: 3 / 0x3 / 0b0011
+	Block location: World: (-231,67,-716), Chunk: (at 9,4,4 in -15,-45; contains blocks -240,0,-720 to -225,255,-705), Region: (-1,-2; contains chunks -32,-64 to -1,-33, blocks -512,0,-1024 to -1,255,-513)
+	Actual block type: ID #178 (tile.Jewelrycraft.shadowEye // darkknight.jewelrycraft.block.BlockShadowEye)
+	Actual block data value: 3 / 0x3 / 0b0011
+Stacktrace:
+	at net.minecraft.world.World.updateEntities(World.java:2133)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['sor1n'/140, l='MpServer', x=-227.27, y=65.62, z=-715.75]]
+	Chunk stats: MultiplayerChunkCache: 169, 169
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (-235,4,-715), Chunk: (at 5,0,5 in -15,-45; contains blocks -240,0,-720 to -225,255,-705), Region: (-1,-2; contains chunks -32,-64 to -1,-33, blocks -512,0,-1024 to -1,255,-513)
+	Level time: 55400 game time, 39626 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 25 total; [EntityClientPlayerMP['sor1n'/140, l='MpServer', x=-227.27, y=65.62, z=-715.75], EntityZombie['Zombie'/59190, l='MpServer', x=-155.50, y=24.00, z=-662.50], EntitySpider['Spider'/81823, l='MpServer', x=-159.50, y=64.00, z=-666.50], EntityMinecartChest['entity.MinecartChest.name'/50, l='MpServer', x=-268.50, y=14.50, z=-657.50], EntityZombie['Zombie'/71835, l='MpServer', x=-154.50, y=20.00, z=-666.50], EntityBat['Bat'/78573, l='MpServer', x=-266.52, y=15.84, z=-648.25], EntityZombie['Zombie'/81267, l='MpServer', x=-263.94, y=64.00, z=-710.28], EntityZombie['Zombie'/81266, l='MpServer', x=-266.50, y=64.00, z=-705.50], EntityZombie['Zombie'/81265, l='MpServer', x=-266.50, y=64.00, z=-706.50], EntityZombie['Zombie'/81264, l='MpServer', x=-263.38, y=64.00, z=-711.09], EntityZombie['Zombie'/79228, l='MpServer', x=-306.50, y=64.00, z=-703.50], EntityZombie['Zombie'/79226, l='MpServer', x=-297.91, y=64.00, z=-706.31], EntityZombie['Zombie'/79224, l='MpServer', x=-303.50, y=64.00, z=-699.50], EntityZombie['Zombie'/79222, l='MpServer', x=-299.88, y=64.00, z=-705.44], EntitySkeleton['Skeleton'/79217, l='MpServer', x=-165.50, y=25.00, z=-641.88], EntitySkeleton['Skeleton'/79216, l='MpServer', x=-167.50, y=25.00, z=-638.50], EntityCreeper['Creeper'/79723, l='MpServer', x=-279.50, y=64.00, z=-660.50], EntityCreeper['Creeper'/65512, l='MpServer', x=-153.50, y=24.00, z=-667.50], EntityBat['Bat'/79883, l='MpServer', x=-267.25, y=14.48, z=-647.03], EntityMinecartChest['entity.MinecartChest.name'/108, l='MpServer', x=-162.50, y=24.50, z=-680.50], EntityWitch['Witch'/67230, l='MpServer', x=-196.50, y=21.00, z=-663.50], EntityCreeper['Creeper'/79719, l='MpServer', x=-279.88, y=64.00, z=-651.78], EntityBat['Bat'/79884, l='MpServer', x=-267.78, y=14.67, z=-635.47], EntityBat['Bat'/79885, l='MpServer', x=-270.47, y=14.79, z=-645.25], EntityMinecartChest['entity.MinecartChest.name'/112, l='MpServer', x=-167.50, y=25.50, z=-639.50]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:415)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2555)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:973)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:134)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 8.1 (amd64) version 6.3
+	Java Version: 1.7.0_71, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 355101032 bytes (338 MB) / 518979584 bytes (494 MB) up to 518979584 bytes (494 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx512M -Xms512M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.05 FML v7.10.25.1208 Minecraft Forge 10.13.0.1208 4 mods loaded, 4 mods active
+	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	FML{7.10.25.1208} [Forge Mod Loader] (forgeSrc-1.7.10-10.13.0.1208.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Forge{10.13.0.1208} [Minecraft Forge] (forgeSrc-1.7.10-10.13.0.1208.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Jewelrycraft{1.5} [Jewelrycraft] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Launched Version: 1.7
+	LWJGL: 2.9.1
+	OpenGL: GeForce GT 525M/PCIe/SSE2 GL version 4.4.0, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Anisotropic filtering is supported and maximum anisotropy is 16.
+Shaders are available because OpenGL 2.1 is supported.
+
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: ~~ERROR~~ NullPointerException: null
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)
