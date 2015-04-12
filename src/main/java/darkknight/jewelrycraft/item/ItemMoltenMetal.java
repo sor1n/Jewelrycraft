@@ -18,6 +18,7 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 
 public class ItemMoltenMetal extends Item
 {
@@ -37,7 +38,7 @@ public class ItemMoltenMetal extends Item
     @Override
     public void registerIcons(IIconRegister iconRegister)
     {
-        itemIcon = iconRegister.registerIcon("jewelrycraft:moltenMetalStill");
+        itemIcon = iconRegister.registerIcon(Variables.MODID + ":moltenMetalStill");
     }
     
     /**

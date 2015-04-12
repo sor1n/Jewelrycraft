@@ -17,9 +17,6 @@ public class BlockShadowEye extends BlockContainer
 {
     Random rand = new Random();
     
-    /**
-     * 
-     */
     protected BlockShadowEye()
     {
         super(Material.rock);
@@ -93,7 +90,11 @@ public class BlockShadowEye extends BlockContainer
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
     {
         TileEntityShadowEye tile = (TileEntityShadowEye)world.getTileEntity(i, j, k);
-        tile.active = true;
+        if (!tile.active && tile.opening == 1){
+            tile.active = true;
+            tile.target = entityPlayer;
+            tile.shouldAddData = true;
+        }
         return true;
     }
     

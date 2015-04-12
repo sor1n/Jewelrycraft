@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
 import darkknight.jewelrycraft.util.PlayerUtils;
+import darkknight.jewelrycraft.util.Variables;
 
 /**
  * @author Sorin
@@ -27,7 +28,7 @@ public class EntityHalfHeart extends EntityHeart
     public void onCollideWithPlayer(EntityPlayer player)
     {
         if (!player.worldObj.isRemote){
-            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
+            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
             if (getType().equals("Red") && player.getHealth() < player.getMaxHealth()){
                 player.heal(1f);
                 this.setDead();
@@ -35,8 +36,8 @@ public class EntityHalfHeart extends EntityHeart
                 playerInfo.setFloat(getType() + "Heart", 0F);
                 player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() + 2f);
                 this.setDead();
-            }else if (!getType().equals("Red") && playerInfo.getFloat(getType() + "Heart") < 20f){
-                playerInfo.setFloat(getType() + "Heart", playerInfo.getFloat(getType() + "Heart") + 1.0F <= 20f ? playerInfo.getFloat(getType() + "Heart") + 1.0F : 20f);
+            }else if (!getType().equals("Red")){
+                playerInfo.setFloat(getType() + "Heart", playerInfo.getFloat(getType() + "Heart") + 1.0F);
                 this.setDead();
             }
         }

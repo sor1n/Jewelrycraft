@@ -9,6 +9,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import darkknight.jewelrycraft.util.Variables;
 
 public class ItemMolds extends Item
 {
@@ -82,6 +83,6 @@ public class ItemMolds extends Item
     {
         moldsIcons = new IIcon[moldsItemNames.length];
         for(int i = 0; i < moldsItemNames.length; ++i)
-            moldsIcons[i] = par1IconRegister.registerIcon("jewelrycraft:" + moldsItemNames[i] + getIconString());
+            moldsIcons[i] = par1IconRegister.registerIcon(Variables.MODID + ":" + moldsItemNames[i] + getIconString());
     }
 }

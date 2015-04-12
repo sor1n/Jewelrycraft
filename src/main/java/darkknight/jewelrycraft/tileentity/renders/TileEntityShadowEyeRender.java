@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.model.ModelShadowEye;
 import darkknight.jewelrycraft.tileentity.TileEntityShadowEye;
+import darkknight.jewelrycraft.util.Variables;
 
 public class TileEntityShadowEyeRender extends TileEntitySpecialRenderer
 {
@@ -32,7 +33,7 @@ public class TileEntityShadowEyeRender extends TileEntitySpecialRenderer
         GL11.glTranslatef((float)x + 0.5F, (float)y + 1.6F, (float)z + 0.5F);
         TileEntityShadowEye eyeS = (TileEntityShadowEye)te;
         String texture = "textures/tileentities/ShadowEye" + eyeS.opening + ".png";
-        ResourceLocation blockTexture = new ResourceLocation("jewelrycraft", texture);
+        ResourceLocation blockTexture = new ResourceLocation(Variables.MODID, texture);
         Minecraft.getMinecraft().renderEngine.bindTexture(blockTexture);
         GL11.glPushMatrix();
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);

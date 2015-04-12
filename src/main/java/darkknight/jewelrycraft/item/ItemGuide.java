@@ -8,21 +8,11 @@ import darkknight.jewelrycraft.JewelrycraftMod;
 
 public class ItemGuide extends Item
 {
-    
-    /**
-     * 
-     */
     public ItemGuide()
     {
         super();
     }
     
-    /**
-     * @param stack
-     * @param world
-     * @param player
-     * @return
-     */
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {

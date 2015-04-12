@@ -66,14 +66,14 @@ public class JewelrycraftUtil
      */
     public static void addCursePoints(EntityPlayer player, int points)
     {
-        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
+        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         playerInfo.setInteger("cursePoints", playerInfo.hasKey("cursePoints") ? (playerInfo.getInteger("cursePoints") + points) : points);
         playerInfo.setBoolean("playerCursePointsChanged", true);
     }
     
     public static int getCursePoints(EntityPlayer player)
     {
-        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
+        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         return playerInfo.getInteger("cursePoints");
     }
     

@@ -22,6 +22,7 @@ import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.network.PacketSendLiquidData;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 
 public class ItemMoltenMetalBucket extends Item
 {
@@ -142,7 +143,7 @@ public class ItemMoltenMetalBucket extends Item
     public void registerIcons(IIconRegister iconRegister)
     {
         itemIcon = iconRegister.registerIcon("bucket_empty");
-        liquid = iconRegister.registerIcon("jewelrycraft:bucketOverlay");
+        liquid = iconRegister.registerIcon(Variables.MODID + ":bucketOverlay");
     }
     
     /**

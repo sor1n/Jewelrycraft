@@ -18,6 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.network.PacketRequestLiquidData;
 import darkknight.jewelrycraft.network.PacketSendLiquidData;
+import darkknight.jewelrycraft.util.Variables;
 
 public class BlockMoltenMetal extends BlockFluidClassic
 {
@@ -33,7 +34,7 @@ public class BlockMoltenMetal extends BlockFluidClassic
     public BlockMoltenMetal(Fluid fluid, Material material)
     {
         super(fluid, material);
-        setBlockName("Jewelrycraft.moltenMetal");
+        setBlockName(Variables.MODID + ".moltenMetal");
         setQuantaPerBlock(5);
         setRenderPass(1);
         setLightLevel(15f);
@@ -57,8 +58,8 @@ public class BlockMoltenMetal extends BlockFluidClassic
     @SideOnly (Side.CLIENT)
     public void registerBlockIcons(IIconRegister register)
     {
-        stillIcon = register.registerIcon("jewelrycraft:moltenMetalStill");
-        flowingIcon = register.registerIcon("jewelrycraft:moltenMetalFlow");
+        stillIcon = register.registerIcon(Variables.MODID + ":moltenMetalStill");
+        flowingIcon = register.registerIcon(Variables.MODID + ":moltenMetalFlow");
     }
     
     /**

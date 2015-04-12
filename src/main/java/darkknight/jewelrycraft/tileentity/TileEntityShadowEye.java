@@ -16,18 +16,18 @@ import darkknight.jewelrycraft.block.BlockHandPedestal;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.particles.EntityShadowsFX;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
+import darkknight.jewelrycraft.util.Variables;
 
 public class TileEntityShadowEye extends TileEntity
 {
     public int opening, timer, t = 20;
-    public boolean active;
+    public boolean active, shouldAddData;
     public ArrayList<ItemStack> pedestalItems = new ArrayList<ItemStack>();
-    ResourceLocation particleTexture = new ResourceLocation("jewelrycraft", "textures/particle/shadows.png");
+    ResourceLocation particleTexture = new ResourceLocation(Variables.MODID, "textures/particle/shadows.png");
+    public EntityPlayer target;
     
-    /**
-     * 
-     */
     public TileEntityShadowEye()
     {
         opening = 1;
@@ -45,6 +45,7 @@ public class TileEntityShadowEye extends TileEntity
         nbt.setInteger("opening", opening);
         nbt.setInteger("timer", timer);
         nbt.setBoolean("active", active);
+        nbt.setBoolean("shouldAddData", shouldAddData);
     }
     
     /**
@@ -57,6 +58,7 @@ public class TileEntityShadowEye extends TileEntity
         opening = nbt.getInteger("opening");
         timer = nbt.getInteger("timer");
         active = nbt.getBoolean("active");
+        shouldAddData = nbt.getBoolean("shouldAddData");
     }
     
     /**
@@ -68,6 +70,11 @@ public class TileEntityShadowEye extends TileEntity
         super.updateEntity();
         boolean valid = isValidStructure(worldObj, xCoord, yCoord, zCoord, blockMetadata);
         if (active) timer--;
+        if (active && target != null && this.getDistanceFrom(target.posX, target.posY, target.posZ) > 30D){
+            active = false;
+            timer = -1;
+            shouldAddData = false;
+        }
         if (opening == 4 && timer <= 0) active = false;
         if (!active && timer <= 0 && opening != 1){
             if (t > 0) t--;
@@ -76,7 +83,7 @@ public class TileEntityShadowEye extends TileEntity
                 t = 20;
             }
         }
-        if (opening == 2 && timer <= 0 && t == 10){
+        if (opening == 2 && timer <= 0 && t == 10 && shouldAddData){
             addData(worldObj, xCoord, yCoord, zCoord);
             TileEntityHandPedestal target = (TileEntityHandPedestal)worldObj.getTileEntity(xCoord, yCoord - 3, zCoord);
             if (target != null && target.getHeldItemStack() != null) JewelryNBT.addModifiers(target.getHeldItemStack(), pedestalItems);
@@ -92,11 +99,11 @@ public class TileEntityShadowEye extends TileEntity
                 timer = -1;
             }
         }
-        EntityPlayer player1 = worldObj.getClosestPlayer(xCoord, yCoord, zCoord, 7F);
-        if (player1 != null){
-            NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag(player1, "Jewelrycraft");
-            persistTag.setBoolean("nearStartedRitual", false);
-        }
+        for(Object player: worldObj.getEntitiesWithinAABB(EntityPlayer.class, getRenderBoundingBox().expand(10D, 10D, 10D)))
+            if (player != null){
+                NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag((EntityPlayer)player, Variables.MODID);
+                persistTag.setBoolean("nearStartedRitual", false);
+            }
         if (active && opening == 4){
             float din = 6F;
             int i = Minecraft.getMinecraft().gameSettings.particleSetting;
@@ -105,11 +112,11 @@ public class TileEntityShadowEye extends TileEntity
                     if (x * x + z * z >= din * din - 1 && x * x + z * z <= din * din + 1) Minecraft.getMinecraft().effectRenderer.addEffect(new EntityShadowsFX(worldObj, xCoord + x + 0.5F, yCoord - 0.5F, zCoord + z + 0.5F, 15F, 0.04F - 0.01F * i, particleTexture));
             for(int l = 0; l <= 2 - i; l++)
                 worldObj.spawnParticle("depthsuspend", xCoord + 6.5F - worldObj.rand.nextInt(9) - worldObj.rand.nextFloat(), yCoord - 2F + worldObj.rand.nextFloat(), zCoord + 6.5F - worldObj.rand.nextInt(9) - worldObj.rand.nextFloat(), 0, 0, 0);
-            EntityPlayer player = worldObj.getClosestPlayer(xCoord, yCoord, zCoord, 6F);
-            if (player != null){
-                NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
-                persistTag.setBoolean("nearStartedRitual", true);
-            }
+            for(Object player: worldObj.getEntitiesWithinAABB(EntityPlayer.class, getRenderBoundingBox().expand(10D, 10D, 10D)))
+                if (player != null){
+                    NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag((EntityPlayer)player, Variables.MODID);
+                    persistTag.setBoolean("nearStartedRitual", true);
+                }
         }
     }
     
@@ -247,6 +254,7 @@ public class TileEntityShadowEye extends TileEntity
             pedestal.removeHeldItemStack();
             pedestal.openHand();
         }
+        else if(pedestal != null && target != null) JewelrycraftUtil.addCursePoints(target, 20);
     }
     
     /**

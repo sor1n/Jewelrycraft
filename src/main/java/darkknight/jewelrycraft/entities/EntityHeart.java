@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
 import darkknight.jewelrycraft.util.PlayerUtils;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -45,13 +46,13 @@ public class EntityHeart extends EntityLiving
     @Override
     public void onCollideWithPlayer(EntityPlayer player)
     {
-        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
+        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         if (getType() == "Red" && player.getHealth() < player.getMaxHealth()){
             player.heal(2f);
             this.setDead();
         }
-        else if (getType() != "Red" && playerInfo.getFloat(getType() + "Heart") < 20f){
-            playerInfo.setFloat(getType() + "Heart", playerInfo.getFloat(getType() + "Heart") + 2.0F <= 20f ? playerInfo.getFloat(getType() + "Heart") + 2.0F : 20f);
+        else if (getType() != "Red"){
+            playerInfo.setFloat(getType() + "Heart", playerInfo.getFloat(getType() + "Heart") + 2.0F);
             JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
             this.setDead();
         }

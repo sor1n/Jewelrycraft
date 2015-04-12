@@ -5,6 +5,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import darkknight.jewelrycraft.util.PlayerUtils;
+import darkknight.jewelrycraft.util.Variables;
 
 public class PacketRequestPlayerInfo implements IMessage, IMessageHandler<PacketRequestPlayerInfo, IMessage>
 {
@@ -23,7 +24,7 @@ public class PacketRequestPlayerInfo implements IMessage, IMessageHandler<Packet
     @Override
     public IMessage onMessage(PacketRequestPlayerInfo message, MessageContext ctx)
     {
-        return new PacketSendPlayerInfo(PlayerUtils.getModPlayerPersistTag(ctx.getServerHandler().playerEntity, "Jewelrycraft"));
+        return new PacketSendPlayerInfo(PlayerUtils.getModPlayerPersistTag(ctx.getServerHandler().playerEntity, Variables.MODID));
     }
     
     /**

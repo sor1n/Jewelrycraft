@@ -14,8 +14,8 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import darkknight.jewelrycraft.events.PlayerRenderHandler;
-import darkknight.jewelrycraft.lib.Reference;
 import darkknight.jewelrycraft.util.PlayerUtils;
+import darkknight.jewelrycraft.util.Variables;
 
 /**
  * @author Sorin
@@ -63,7 +63,7 @@ public class PacketSendCurseStats implements IMessage, IMessageHandler<PacketSen
         while (players.hasNext())
         {
             EntityPlayer current = players.next();
-            if(PlayerUtils.getModPlayerPersistTag(current, "Jewelrycraft").getInteger(Reference.MODNAME + ":" + "Infamy") > 0)
+            if(PlayerUtils.getModPlayerPersistTag(current, Variables.MODID).getInteger(Variables.MODNAME + ":" + "Infamy") > 0)
                 infamyPlayers = infamyPlayers + (infamyPlayers == "" ? "" : ";") + current.getDisplayName();
         }
         ByteBufUtils.writeUTF8String(buf, infamyPlayers);

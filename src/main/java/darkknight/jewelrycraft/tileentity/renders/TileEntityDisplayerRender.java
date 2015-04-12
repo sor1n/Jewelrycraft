@@ -21,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.model.ModelDisplayer;
 import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
+import darkknight.jewelrycraft.util.Variables;
 
 public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
 {
@@ -60,7 +61,7 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
         GL11.glPushMatrix();
         GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
         TileEntityDisplayer disp = (TileEntityDisplayer)te;
-        ResourceLocation blockTexture = new ResourceLocation("jewelrycraft", texture);
+        ResourceLocation blockTexture = new ResourceLocation(Variables.MODID, texture);
         Minecraft.getMinecraft().renderEngine.bindTexture(blockTexture);
         GL11.glPushMatrix();
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);

@@ -38,9 +38,6 @@ public class JewelrycraftCommands extends CommandBase
     {
         this.aliases = new ArrayList();
         this.aliases.add("jw");
-        this.aliases.add("jc");
-        this.aliases.add("jcrft");
-        this.aliases.add("jCraft");
         this.aliases.add("jewelry");
     }
     
@@ -53,10 +50,7 @@ public class JewelrycraftCommands extends CommandBase
     @Override
     public String getCommandUsage(ICommandSender var1)
     {
-        String use = "/jewelrycraft <addCursePoints:getCursePoints:setCursePoints> <user> [points] | ";
-        use += "/jewelrycraft <addModifier> <modifier> |";
-        use += "/jewelrycraft <addCurse> <user> <curseID> <curseGrade>";
-        return use;
+        return "/jewelrycraft <addCursePoints:getCursePoints:setCursePoints> <user> [points]";
     }
     
     @Override
@@ -80,25 +74,6 @@ public class JewelrycraftCommands extends CommandBase
             int points = CommandBase.parseIntWithMin(commandSender, astring[2], 0);
             EntityPlayerMP entityplayermp = getPlayer(commandSender, astring[1]);
             JewelrycraftUtil.addCursePoints(entityplayermp, points - JewelrycraftUtil.getCursePoints(entityplayermp));
-        }else if (astring[0].equals("addModifier")){
-            ItemStack item = new ItemStack(CommandBase.getItemByText(commandSender, astring[1]));
-            EntityPlayerMP entityplayermp = getPlayer(commandSender, commandSender.getCommandSenderName());
-            ArrayList<ItemStack> modifier = new ArrayList<ItemStack>();
-            modifier.add(item);
-            JewelryNBT.addModifiers(entityplayermp.getCurrentEquippedItem(), modifier);
-        }else if (astring[0].equals("addCurse")){
-            EntityPlayerMP entityplayermp = getPlayer(commandSender, astring[1]);
-            int curse = Integer.valueOf(astring[2]);
-            int grade = Integer.valueOf(astring[3]);
-            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(entityplayermp, "Jewelrycraft");
-            if(curse < Curse.getCurseList().size() && grade <= 2)
-            {
-                EntityEventHandler.addCurse(entityplayermp, playerInfo, curse, grade);
-                JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
-            }
-            else if(curse >= Curse.getCurseList().size()) entityplayermp.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Curse ID exceedes the maximum value of " + (Curse.getCurseList().size() - 1)));
-            else entityplayermp.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Curse grade exceedes the maximum value of 2"));
-            
         }
     }
     
@@ -111,13 +86,9 @@ public class JewelrycraftCommands extends CommandBase
             if ("addCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("addCursePoints");
             if ("getCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("getCursePoints");
             if ("setCursePoints".toLowerCase().startsWith(ARG_LC)) MATCHES.add("setCursePoints");
-            if ("addModifier".toLowerCase().startsWith(ARG_LC)) MATCHES.add("addModifier");
-            if ("addCurse".toLowerCase().startsWith(ARG_LC)) MATCHES.add("addCurse");
         }else if (astring.length == 2){
-            if (!astring[0].equals("addModifier")){
-                for(String un: MinecraftServer.getServer().getAllUsernames())
-                    if (un.toLowerCase().startsWith(ARG_LC)) MATCHES.add(un);
-            }else if (!astring[0].equals("addCurse")) return getListOfStringsFromIterableMatchingLastWord(astring, Item.itemRegistry.getKeys());
+            for(String un: MinecraftServer.getServer().getAllUsernames())
+                if (un.toLowerCase().startsWith(ARG_LC)) MATCHES.add(un);
         }
         return MATCHES.isEmpty() ? null : MATCHES;
     }

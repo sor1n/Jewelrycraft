@@ -10,6 +10,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import darkknight.jewelrycraft.util.Variables;
 
 public class ItemCrystal extends Item
 {
@@ -32,8 +33,8 @@ public class ItemCrystal extends Item
     @Override
     public void registerIcons(IIconRegister iconRegister)
     {
-        itemIcon = iconRegister.registerIcon("jewelrycraft:crystal");
-        overlay = iconRegister.registerIcon("jewelrycraft:crystalOverlay");
+        itemIcon = iconRegister.registerIcon(Variables.MODID + ":crystal");
+        overlay = iconRegister.registerIcon(Variables.MODID + ":crystalOverlay");
     }
     
     /**

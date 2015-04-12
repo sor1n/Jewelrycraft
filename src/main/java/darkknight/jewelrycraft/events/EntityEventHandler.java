@@ -48,7 +48,6 @@ import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.item.ItemBaseJewelry;
 import darkknight.jewelrycraft.item.ItemBracelet;
 import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.lib.Reference;
 import darkknight.jewelrycraft.network.PacketClearColorCache;
 import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
 import darkknight.jewelrycraft.network.PacketSendCurseStats;
@@ -57,6 +56,7 @@ import darkknight.jewelrycraft.util.BlockUtils;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
+import darkknight.jewelrycraft.util.Variables;
 
 /**
  * Code taken from OpenBlocks
@@ -74,7 +74,7 @@ public class EntityEventHandler
         final Entity entity = event.entity;
         if (!event.world.isRemote && entity instanceof EntityPlayer){
             EntityPlayer player = (EntityPlayer)entity;
-            NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
+            NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
             boolean shouldGiveManual = ItemList.guide != null && !persistTag.getBoolean("givenGuide");
             if (shouldGiveManual){
                 ItemStack manual = new ItemStack(ItemList.guide);
@@ -108,7 +108,7 @@ public class EntityEventHandler
         }
         if (entity instanceof EntityPlayer){
             EntityPlayer player = (EntityPlayer)entity;
-            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
+            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
             playerInfo.setBoolean("fancyRender", JewelrycraftMod.fancyRender);
             if (playerInfo.getBoolean("stunned") && playerInfo.getInteger("stunTime") > 0){
                 player.motionX *= 0D;
@@ -124,7 +124,7 @@ public class EntityEventHandler
                 if (playerInfo.hasKey("ext" + i)){
                     NBTTagCompound nbt = (NBTTagCompound)playerInfo.getTag("ext" + i);
                     ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-                    ((ItemBaseJewelry)item.getItem()).action(item, player);
+                    if(item != null) ((ItemBaseJewelry)item.getItem()).action(item, player);
                 }
             if (!player.worldObj.isRemote){
                 if (playerInfo.hasKey("reselectCurses") && !playerInfo.getBoolean("reselectCurses")){
@@ -133,7 +133,7 @@ public class EntityEventHandler
                 }
                 if (playerInfo.hasKey("playerCursePointsChanged") && playerInfo.getBoolean("playerCursePointsChanged")){
                     int points = playerInfo.getInteger("cursePoints");
-                    for(int i = 1; i <= JewelrycraftMod.MAX_CURSES; i++)
+                    for(int i = 1; i <= Variables.MAX_CURSES; i++)
                         if (points > (i - 1) * 1750) addCurse(player, playerInfo, i);
                     if (!playerInfo.hasKey("curseTime") || !playerInfo.hasKey("reselectCurses") || playerInfo.getBoolean("reselectCurses")){
                         playerInfo.setInteger("curseTime", 23000);
@@ -161,7 +161,7 @@ public class EntityEventHandler
         Entity entity = event.entityLiving;
         if (entity instanceof EntityPlayer && !(event.source.getEntity() instanceof EntityPlayer)){
             EntityPlayer player = (EntityPlayer)entity;
-            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
+            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
             if (event.source.getEntity() != null && event.source.getEntity().getEntityData().getBoolean("stunned")) event.setCanceled(true);
             if (!player.worldObj.isRemote) for(int i = 0; i < 18; i++)
                 if (playerInfo.hasKey("ext" + i)){
@@ -220,7 +220,7 @@ public class EntityEventHandler
                 if (playerInfo.getInteger(curse.getName()) > 0) curse.attackedAction(player.worldObj, player);
         }else if (event.source.getEntity() instanceof EntityPlayer){
             EntityPlayer player = (EntityPlayer)event.source.getEntity();
-            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
+            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
             for(int i = 0; i < 18; i++)
                 if (playerInfo.hasKey("ext" + i)){
                     NBTTagCompound nbt = (NBTTagCompound)playerInfo.getTag("ext" + i);
@@ -249,10 +249,10 @@ public class EntityEventHandler
     {
         EntityPlayer player = event.entityPlayer;
         if (!player.worldObj.isRemote){
-            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
-            if (playerInfo.hasKey("cursePoints") && playerInfo.getInteger("cursePoints") > 0){
+            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
+            if (playerInfo.hasKey("cursePoints")){
                 int points = playerInfo.getInteger("cursePoints");
-                for(int i = 1; i <= JewelrycraftMod.MAX_CURSES; i++)
+                for(int i = 1; i <= Variables.MAX_CURSES; i++)
                     if (points > (i - 1) * 1750) addCurse(player, playerInfo, i);
                 if (!playerInfo.hasKey("curseTime") || !playerInfo.hasKey("reselectCurses") || playerInfo.getBoolean("reselectCurses")){
                     playerInfo.setInteger("curseTime", 23000);
@@ -298,7 +298,7 @@ public class EntityEventHandler
     @SubscribeEvent
     public void itemToss(ItemTossEvent event)
     {
-        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(event.player, "Jewelrycraft");
+        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(event.player, Variables.MODID);
         for(Curse curse: Curse.getCurseList())
             if (playerInfo.getInteger(curse.getName()) > 0 && curse.itemToss()){
                 EntityItem entityitem = new EntityItem(event.player.worldObj, event.player.posX + 0.5D, event.player.posY + 0.5D, event.player.posZ + 0.5D, event.entityItem.getEntityItem());
@@ -354,7 +354,7 @@ public class EntityEventHandler
         }
         if (entity instanceof EntityPlayer){
             EntityPlayer player = (EntityPlayer)entity;
-            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
+            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
             playerInfo.setFloat("BlueHeart", 0f);
             playerInfo.setFloat("BlackHeart", 0f);
             playerInfo.setFloat("WhiteHeart", 0f); 
@@ -381,8 +381,8 @@ public class EntityEventHandler
     public void onWorldLoad(WorldEvent.Load event)
     {
         if (!event.world.isRemote){
-            new File(JewelrycraftMod.dir + File.separator + "Jewelrycraft").mkdirs();
-            JewelrycraftMod.liquidsConf = new File(JewelrycraftMod.dir + File.separator + "Jewelrycraft", "JLP" + event.world.getWorldInfo().getWorldName() + ".cfg");
+            new File(JewelrycraftMod.dir + File.separator + Variables.MODID).mkdirs();
+            JewelrycraftMod.liquidsConf = new File(JewelrycraftMod.dir + File.separator + Variables.MODID, "JLP" + event.world.getWorldInfo().getWorldName() + ".cfg");
             try{
                 if (!JewelrycraftMod.liquidsConf.exists()) JewelrycraftMod.liquidsConf.createNewFile();
             }
@@ -427,7 +427,7 @@ public class EntityEventHandler
     {
         if (event.entity instanceof EntityPlayer){
             EntityPlayer player = (EntityPlayer)event.entity;
-            NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
+            NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
             if (persistTag.getBoolean("nearStartedRitual")){
                 event.red = 0f;
                 event.green = 0f;
@@ -454,7 +454,7 @@ public class EntityEventHandler
     {
         if (event.entity instanceof EntityPlayer){
             EntityPlayer player = (EntityPlayer)event.entity;
-            NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
+            NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
             if (persistTag.getBoolean("nearStartedRitual")){
                 GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
                 GL11.glFogf(GL11.GL_FOG_DENSITY, 0.6F);

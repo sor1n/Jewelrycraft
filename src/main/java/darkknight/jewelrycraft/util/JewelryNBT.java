@@ -376,13 +376,29 @@ public class JewelryNBT
      * @param modifier
      * @return
      */
-    public static int doesModifierExist(ItemStack stack, ItemStack modifier)
+    public static boolean doesModifierExist(ItemStack stack, ItemStack modifier)
     {
         if (modifier(stack) != null){
             ArrayList<ItemStack> list = modifier(stack);
             for(int i = 0; i < list.size(); i++)
-                if (list.get(i).getItem() == modifier.getItem() && list.get(i).getItemDamage() == modifier.getItemDamage()) return i;
+                if (list.get(i).getItem() == modifier.getItem() && list.get(i).getItemDamage() == modifier.getItemDamage()) return true;
         }
+        return false;
+    }
+    
+    public static int modifierSize(ItemStack stack, ItemStack modifier)
+    {
+        if (modifier(stack) != null){
+            ArrayList<ItemStack> list = modifier(stack);
+            for(int i = 0; i < list.size(); i++)
+                if (list.get(i).getItem() == modifier.getItem() && list.get(i).getItemDamage() == modifier.getItemDamage()) return list.get(i).stackSize;
+        }
+        return -1;
+    }
+    
+    public static int numberOfModifiers(ItemStack stack)
+    {
+        if (modifier(stack) != null) return modifier(stack).size();
         return -1;
     }
     

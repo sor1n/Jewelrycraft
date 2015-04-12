@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.model.ModelJewlersCraftingBench;
 import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
+import darkknight.jewelrycraft.util.Variables;
 
 public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRenderer
 {
@@ -32,7 +33,7 @@ public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRende
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
-        ResourceLocation blockTexture = new ResourceLocation("jewelrycraft", texture);
+        ResourceLocation blockTexture = new ResourceLocation(Variables.MODID, texture);
         Minecraft.getMinecraft().renderEngine.bindTexture(blockTexture);
         TileEntityJewelrsCraftingTable jt = (TileEntityJewelrsCraftingTable)te;
         GL11.glPushMatrix();

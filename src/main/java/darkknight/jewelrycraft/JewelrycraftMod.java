@@ -35,9 +35,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.client.gui.GuiHandler;
 import darkknight.jewelrycraft.commands.JewelrycraftCommands;
 import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.container.GuiHandler;
 import darkknight.jewelrycraft.curses.CurseList;
 import darkknight.jewelrycraft.damage.DamageSourceList;
 import darkknight.jewelrycraft.effects.EffectsList;
@@ -47,31 +47,33 @@ import darkknight.jewelrycraft.events.BucketHandler;
 import darkknight.jewelrycraft.events.EntityEventHandler;
 import darkknight.jewelrycraft.events.KeyBindings;
 import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.lib.Reference;
 import darkknight.jewelrycraft.network.PacketClearColorCache;
 import darkknight.jewelrycraft.network.PacketKeyPressEvent;
 import darkknight.jewelrycraft.network.PacketRequestLiquidData;
 import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
+import darkknight.jewelrycraft.network.PacketRequestSetSlot;
 import darkknight.jewelrycraft.network.PacketSendCurseStats;
 import darkknight.jewelrycraft.network.PacketSendLiquidData;
 import darkknight.jewelrycraft.network.PacketSendPlayerInfo;
+import darkknight.jewelrycraft.proxy.CommonProxy;
 import darkknight.jewelrycraft.recipes.CraftingRecipes;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.Variables;
 import darkknight.jewelrycraft.worldGen.Generation;
 import darkknight.jewelrycraft.worldGen.village.ComponentJewelry;
 import darkknight.jewelrycraft.worldGen.village.JCTrades;
 import darkknight.jewelrycraft.worldGen.village.VillageJewelryHandler;
 
-@Mod (modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION)
+@Mod (modid = Variables.MODID, name = Variables.MODNAME, version = Variables.VERSION)
 public class JewelrycraftMod
 {
-    @Instance (Reference.MODID)
+    @Instance (Variables.MODID)
     public static JewelrycraftMod instance;
-    @SidedProxy (clientSide = "darkknight.jewelrycraft.client.ClientProxy", serverSide = "darkknight.jewelrycraft.CommonProxy")
+    @SidedProxy (clientSide = "darkknight.jewelrycraft.proxy.ClientProxy", serverSide = "darkknight.jewelrycraft.proxy.CommonProxy")
     public static CommonProxy proxy;
     public static final Logger logger = Logger.getLogger("Jewelrycraft");
     public static File dir;
-    public static CreativeTabs jewelrycraft = new CreativeTabs("JewelryCraft"){
+    public static CreativeTabs jewelrycraft = new CreativeTabs(Variables.MODID){
         @Override
         public Item getTabIconItem()
         {
@@ -84,7 +86,6 @@ public class JewelrycraftMod
     public static File liquidsConf;
     public static SimpleNetworkWrapper netWrapper;
     public static boolean fancyRender;
-    public static final int MAX_CURSES = 10;
     
     /**
      * Pre initialization of mod stuff.
@@ -106,7 +107,7 @@ public class JewelrycraftMod
         VillagerRegistry.instance().registerVillageTradeHandler(3000, new JCTrades());
         VillagerRegistry.instance().registerVillageCreationHandler(new VillageJewelryHandler());
         try{
-            MapGenStructureIO.func_143031_a(ComponentJewelry.class, "Jewelrycraft:Jewelry");
+            MapGenStructureIO.func_143031_a(ComponentJewelry.class, Variables.MODID + ":Jewelry");
         }
         catch(Throwable e2){
             logger.severe("Error registering Jewelrycraft Structures with Vanilla Minecraft: this is expected in versions earlier than 1.7.10");
@@ -118,13 +119,13 @@ public class JewelrycraftMod
         ModMetadata metadata = e.getModMetadata();
         List<String> authorList = new ArrayList<String>();
         
-        authorList.add("DarkKnight (or sor1n)");
+        authorList.add("OnyxDarkKnight");
         authorList.add("bspkrs");
         authorList.add("domi1819");
         
         dir = e.getModConfigurationDirectory();
         proxy.preInit();
-        netWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MODID);
+        netWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(Variables.MODID);
         netWrapper.registerMessage(PacketRequestLiquidData.class, PacketRequestLiquidData.class, 0, Side.SERVER);
         netWrapper.registerMessage(PacketSendLiquidData.class, PacketSendLiquidData.class, 1, Side.CLIENT);
         netWrapper.registerMessage(PacketClearColorCache.class, PacketClearColorCache.class, 2, Side.CLIENT);
@@ -132,12 +133,14 @@ public class JewelrycraftMod
         netWrapper.registerMessage(PacketRequestPlayerInfo.class, PacketRequestPlayerInfo.class, 4, Side.SERVER);
         netWrapper.registerMessage(PacketSendPlayerInfo.class, PacketSendPlayerInfo.class, 5, Side.CLIENT);
         netWrapper.registerMessage(PacketSendCurseStats.class, PacketSendCurseStats.class, 6, Side.CLIENT);
+        netWrapper.registerMessage(PacketRequestSetSlot.class, PacketRequestSetSlot.class, 7, Side.SERVER);
+        
         metadata.autogenerated = false;
         metadata.authorList = authorList;
         metadata.url = "https://github.com/sor1n/Jewelrycraft";
         
-        createEntity(EntityHeart.class, "Heart", 0x000000, 0xFF0000, true);
-        createEntity(EntityHalfHeart.class, "Half-Heart", 0x000000, 0xFF0000, true);
+        createEntity(EntityHeart.class, Variables.MODID + ".Heart", 0xFF0000, 0xFF0000, false);
+        createEntity(EntityHalfHeart.class, Variables.MODID + ".Half-Heart", 0x000000, 0xFF0000, false);
 
 //        EntityRegistry.addSpawn(EntityMob.class, 5, 2, 3, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.plains, BiomeGenBase.beach, BiomeGenBase.coldBeach, BiomeGenBase.frozenRiver);
     }

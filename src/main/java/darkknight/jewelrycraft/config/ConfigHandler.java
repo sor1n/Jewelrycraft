@@ -3,6 +3,7 @@ package darkknight.jewelrycraft.config;
 import java.io.File;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import darkknight.jewelrycraft.util.Variables;
 
 public class ConfigHandler
 {
@@ -31,7 +32,7 @@ public class ConfigHandler
     public static void preInit(FMLPreInitializationEvent e)
     {
         if (!isInitialized){
-            config = new Configuration(new File(e.getModConfigurationDirectory(), "JewelryCraftv2.0.cfg"));
+            config = new Configuration(new File(e.getModConfigurationDirectory(), Variables.MODID+".cfg"));
             config.load();
             ingotCoolingTime = config.get("Timers", "Molder Ingot Cooling Time", ingotCoolingTime, "This sets the number of ticks you need to wait before the mold is cooled.").getInt();
             ingotMeltingTime = config.get("Timers", "Ingot Melting Time", ingotMeltingTime, "This sets the number of ticks you need to wait before an ingot is completely smelted.").getInt();

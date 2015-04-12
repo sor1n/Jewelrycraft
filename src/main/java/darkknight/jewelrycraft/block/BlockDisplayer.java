@@ -15,6 +15,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
+import darkknight.jewelrycraft.util.Variables;
 
 public class BlockDisplayer extends BlockContainer
 {
@@ -239,6 +240,6 @@ public class BlockDisplayer extends BlockContainer
     @Override
     public void registerBlockIcons(IIconRegister icon)
     {
-        blockIcon = icon.registerIcon("jewelrycraft:displayer");
+        blockIcon = icon.registerIcon(Variables.MODID + ":displayer");
     }
 }

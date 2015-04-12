@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import darkknight.jewelrycraft.entities.EntityHeart;
+import darkknight.jewelrycraft.util.Variables;
 
 /**
  * @author Sorin
@@ -33,7 +34,7 @@ public class HeartRender extends RenderLiving
         GL11.glRotatef(55F, 1F, 0F, 0F);
         String type = entity.getType();
         if(type == "" || type == null) type = "Red";
-        texture = new ResourceLocation("jewelrycraft", "textures/entities/"+type+"Heart.png");
+        texture = new ResourceLocation(Variables.MODID, "textures/entities/"+type+"Heart.png");
     }
 
     @Override

@@ -12,6 +12,7 @@ import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
+import darkknight.jewelrycraft.util.Variables;
 
 public class CurseInfamy extends Curse
 {
@@ -24,7 +25,7 @@ public class CurseInfamy extends Curse
     public void attackedByPlayerAction(World world, EntityPlayer player, Entity target)
     {
         if (rand.nextInt(5) == 0 && !world.isRemote && !(target instanceof EntityMob) && target instanceof EntityLiving && !(target instanceof EntityHeart) && !(target instanceof EntityHalfHeart) && target.canAttackWithItem()){
-            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, "Jewelrycraft");
+            NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
             if (playerInfo.getFloat("BlackHeart") < 20F) playerInfo.setFloat("BlackHeart", playerInfo.getFloat("BlackHeart") + 1.0F);
             if (player.getMaxHealth() >= 3F){
                 player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() - 1.0F);

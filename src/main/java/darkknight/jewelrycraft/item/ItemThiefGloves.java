@@ -86,7 +86,7 @@ public class ItemThiefGloves extends Item
                         s.setTagCompound(recipe.getItemToSell().getTagCompound());
                         if (player.inventory.addItemStackToInventory(s)) ;
                         else villager.entityDropItem(s, 0);
-                        JewelrycraftUtil.addCursePoints(player, 5);
+                        if (!player.capabilities.isCreativeMode) JewelrycraftUtil.addCursePoints(player, 5);
                         player.addChatMessage(new ChatComponentText("Villager #" + villager.getProfession() + ": Hmmm... I seem to have lost my " + s.getDisplayName() + "!"));
                         stack.damageItem(1, player);
                     }
@@ -99,7 +99,7 @@ public class ItemThiefGloves extends Item
                     player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "dwell on."));
                 }else{
                     stack.damageItem(1, player);
-                    JewelrycraftUtil.addCursePoints(player, 25);
+                    if (!player.capabilities.isCreativeMode) JewelrycraftUtil.addCursePoints(player, 25);
                     if (player.isPotionActive(Potion.invisibility)){
                         player.addChatMessage(new ChatComponentText("Villager #" + villager.getProfession() + " sensed a strange presence around him, making him cling on to his items. You didn't get anything."));
                     }

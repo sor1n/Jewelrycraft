@@ -21,6 +21,7 @@ import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.model.ModelMolder;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 
 public class TileEntityMolderRender extends TileEntitySpecialRenderer
 {
@@ -40,7 +41,7 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
         GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
         TileEntityMolder me = (TileEntityMolder)te;
         String texture = "textures/tileentities/Molder.png";
-        ResourceLocation blockTexture = new ResourceLocation("jewelrycraft", texture);
+        ResourceLocation blockTexture = new ResourceLocation(Variables.MODID, texture);
         Minecraft.getMinecraft().renderEngine.bindTexture(blockTexture);
         GL11.glPushMatrix();
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);

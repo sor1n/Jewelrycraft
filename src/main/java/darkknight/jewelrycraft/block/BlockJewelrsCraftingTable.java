@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.Variables;
 
 public class BlockJewelrsCraftingTable extends BlockContainer
 {
@@ -71,7 +72,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
         TileEntityJewelrsCraftingTable te = (TileEntityJewelrsCraftingTable)world.getTileEntity(i, j, k);
         ItemStack item = entityPlayer.inventory.getCurrentItem();
         if (te != null && !world.isRemote){
-            if (te.hasEndItem && item != null) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.hasenditem")));
+            if (te.hasEndItem && item != null) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".table.hasenditem")));
             if (!te.hasEndItem && !te.hasJewelry && item != null && JewelrycraftUtil.isJewelry(item)){
                 te.jewelry = item.copy();
                 te.hasJewelry = true;
@@ -182,9 +183,9 @@ public class BlockJewelrsCraftingTable extends BlockContainer
             te.endItem = new ItemStack(Item.getItemById(0), 0, 0);
             te.hasEndItem = false;
             te.isDirty = true;
-        }else if (te.hasJewelry && te.hasGem && te.carving > 0 && te.jewelry != null) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage.Jewelrycraft.table.iscrafting", te.jewelry.getDisplayName()) + " (" + (ConfigHandler.jewelryCraftingTime - te.carving) * 100 / ConfigHandler.jewelryCraftingTime + "%)"));
-        else if (!te.hasGem) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.missinggem")));
-        else if (!te.hasJewelry) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage.Jewelrycraft.table.missingjewelry")));
+        }else if (te.hasJewelry && te.hasGem && te.carving > 0 && te.jewelry != null) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage." + Variables.MODID + ".table.iscrafting", te.jewelry.getDisplayName()) + " (" + (ConfigHandler.jewelryCraftingTime - te.carving) * 100 / ConfigHandler.jewelryCraftingTime + "%)"));
+        else if (!te.hasGem) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".table.missinggem")));
+        else if (!te.hasJewelry) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".table.missingjewelry")));
     }
     
     /**
@@ -225,6 +226,6 @@ public class BlockJewelrsCraftingTable extends BlockContainer
     @Override
     public void registerBlockIcons(IIconRegister icon)
     {
-        blockIcon = icon.registerIcon("jewelrycraft:jewelrsCraftingTable");
+        blockIcon = icon.registerIcon(Variables.MODID + ":jewelrsCraftingTable");
     }
 }

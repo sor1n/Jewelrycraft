@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 
 public class ItemEarrings extends ItemBaseJewelry
 {
@@ -21,8 +22,8 @@ public class ItemEarrings extends ItemBaseJewelry
     @Override
     public void registerIcons(IIconRegister iconRegister)
     {
-        itemIcon = iconRegister.registerIcon("jewelrycraft:earrings");
-        gem = iconRegister.registerIcon("jewelrycraft:jewelEarrings");
+        itemIcon = iconRegister.registerIcon(Variables.MODID + ":earrings");
+        gem = iconRegister.registerIcon(Variables.MODID + ":jewelEarrings");
     }
     
     /**
