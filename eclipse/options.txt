@@ -87,8 +87,13 @@ key_key.hotbar.8:9
 key_key.hotbar.9:10
 key_Pretty Render:44
 key_Jewelry Inventory:36
-soundCategory_master:0.06622516
-soundCategory_music:0.2112676
+key_waila.keybind.wailaconfig:82
+key_waila.keybind.wailadisplay:79
+key_waila.keybind.liquid:80
+key_waila.keybind.recipe:81
+key_waila.keybind.usage:75
+soundCategory_master:0.009933775
+soundCategory_music:0.0
 soundCategory_record:1.0
 soundCategory_weather:0.0
 soundCategory_block:0.0

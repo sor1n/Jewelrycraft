@@ -1,0 +1,107 @@
+---- Minecraft Crash Report ----
+// Why is it breaking :(
+
+Time: 3/27/15 2:37 PM
+Description: Unexpected error
+
+java.lang.NullPointerException: Unexpected error
+	at darkknight.jewelrycraft.client.gui.GuiJewelryModifier.<init>(GuiJewelryModifier.java:23)
+	at darkknight.jewelrycraft.client.gui.GuiHandler.getClientGuiElement(GuiHandler.java:82)
+	at cpw.mods.fml.common.network.NetworkRegistry.getLocalGuiContainer(NetworkRegistry.java:263)
+	at cpw.mods.fml.common.network.internal.FMLNetworkHandler.openGui(FMLNetworkHandler.java:93)
+	at net.minecraft.entity.player.EntityPlayer.openGui(EntityPlayer.java:2500)
+	at darkknight.jewelrycraft.item.ItemJewelryModifier.onItemRightClick(ItemJewelryModifier.java:19)
+	at net.minecraft.item.ItemStack.useItemRightClick(ItemStack.java:162)
+	at net.minecraft.client.multiplayer.PlayerControllerMP.sendUseItem(PlayerControllerMP.java:430)
+	at net.minecraft.client.Minecraft.func_147121_ag(Minecraft.java:1546)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:2033)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1028)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:951)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:134)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at darkknight.jewelrycraft.client.gui.GuiJewelryModifier.<init>(GuiJewelryModifier.java:23)
+	at darkknight.jewelrycraft.client.gui.GuiHandler.getClientGuiElement(GuiHandler.java:82)
+	at cpw.mods.fml.common.network.NetworkRegistry.getLocalGuiContainer(NetworkRegistry.java:263)
+	at cpw.mods.fml.common.network.internal.FMLNetworkHandler.openGui(FMLNetworkHandler.java:93)
+	at net.minecraft.entity.player.EntityPlayer.openGui(EntityPlayer.java:2500)
+	at darkknight.jewelrycraft.item.ItemJewelryModifier.onItemRightClick(ItemJewelryModifier.java:19)
+	at net.minecraft.item.ItemStack.useItemRightClick(ItemStack.java:162)
+	at net.minecraft.client.multiplayer.PlayerControllerMP.sendUseItem(PlayerControllerMP.java:430)
+	at net.minecraft.client.Minecraft.func_147121_ag(Minecraft.java:1546)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['OnyxDarkKnight'/96, l='MpServer', x=-245.96, y=65.62, z=-747.62]]
+	Chunk stats: MultiplayerChunkCache: 289, 289
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (-235,4,-715), Chunk: (at 5,0,5 in -15,-45; contains blocks -240,0,-720 to -225,255,-705), Region: (-1,-2; contains chunks -32,-64 to -1,-33, blocks -512,0,-1024 to -1,255,-513)
+	Level time: 5143922 game time, 1000 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 23 total; [EntityVillager['Villager'/68, l='MpServer', x=-231.69, y=64.00, z=-787.69], EntityVillager['Villager'/69, l='MpServer', x=-236.72, y=64.00, z=-787.25], EntityItemFrame['entity.ItemFrame.name'/70, l='MpServer', x=-224.50, y=65.50, z=-759.06], EntityVillager['Villager'/71, l='MpServer', x=-231.38, y=64.00, z=-684.84], EntityTrail['unknown'/279, l='MpServer', x=-245.96, y=65.62, z=-747.62], EntityClientPlayerMP['OnyxDarkKnight'/96, l='MpServer', x=-245.96, y=65.62, z=-747.62], EntityVillager['Villager'/46, l='MpServer', x=-324.47, y=64.00, z=-726.84], EntityVillager['Villager'/47, l='MpServer', x=-309.34, y=64.00, z=-770.31], EntityVillager['Villager'/51, l='MpServer', x=-280.69, y=64.00, z=-748.66], EntityVillager['Villager'/50, l='MpServer', x=-294.16, y=64.00, z=-691.41], EntityVillager['Villager'/49, l='MpServer', x=-302.31, y=64.00, z=-739.47], EntityVillager['Villager'/48, l='MpServer', x=-306.22, y=64.00, z=-738.66], EntityVillager['Villager'/55, l='MpServer', x=-257.69, y=62.00, z=-723.69], EntityVillager['Villager'/54, l='MpServer', x=-257.31, y=62.00, z=-723.31], EntityVillager['Villager'/53, l='MpServer', x=-285.56, y=64.00, z=-711.28], EntityVillager['Villager'/52, l='MpServer', x=-285.34, y=64.00, z=-749.28], EntityVillager['Villager'/59, l='MpServer', x=-268.72, y=64.00, z=-680.63], EntityBat['Bat'/58, l='MpServer', x=-267.02, y=15.00, z=-669.50], EntityVillager['Villager'/57, l='MpServer', x=-273.28, y=64.00, z=-693.50], EntityVillager['Villager'/56, l='MpServer', x=-256.44, y=64.00, z=-709.72], EntityVillager['Villager'/63, l='MpServer', x=-255.22, y=64.00, z=-695.44], EntityVillager['Villager'/62, l='MpServer', x=-253.31, y=62.00, z=-729.31], EntityVillager['Villager'/61, l='MpServer', x=-255.25, y=64.00, z=-778.50]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:415)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2555)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:980)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:134)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 8.1 (amd64) version 6.3
+	Java Version: 1.7.0_71, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 178973624 bytes (170 MB) / 518979584 bytes (494 MB) up to 518979584 bytes (494 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx512M -Xms512M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.05 FML v7.10.25.1208 Minecraft Forge 10.13.0.1208 8 mods loaded, 8 mods active
+	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	FML{7.10.25.1208} [Forge Mod Loader] (forgeSrc-1.7.10-10.13.0.1208.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Forge{10.13.0.1208} [Minecraft Forge] (forgeSrc-1.7.10-10.13.0.1208.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	CodeChickenCore{1.0.4.29} [CodeChicken Core] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	NotEnoughItems{1.0.3.74} [Not Enough Items] (NotEnoughItems-1.7.10-1.0.3.74-universal.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	jewelrycraft2{1.0} [Jewelrycraft 2] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	iChunUtil{4.1.3} [iChunUtil] (iChunUtil-4.1.3.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Tabula{4.1.1} [Tabula] (Tabula-4.1.1.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Launched Version: 1.7
+	LWJGL: 2.9.1
+	OpenGL: GeForce GT 525M/PCIe/SSE2 GL version 4.5.0 NVIDIA 347.25, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Anisotropic filtering is supported and maximum anisotropy is 16.
+Shaders are available because OpenGL 2.1 is supported.
+
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)

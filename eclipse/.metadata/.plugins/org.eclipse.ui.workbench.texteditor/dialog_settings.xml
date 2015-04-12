@@ -2,37 +2,37 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="stair" key="selection"/>
+		<item value="boolean exists" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="stair"/>
-			<item value=", 1, 0"/>
-			<item value="renderDistanceChunks"/>
-			<item value="weakDamage"/>
-			<item value="stunned"/>
-			<item value="greed"/>
-			<item value="infamy"/>
-			<item value="spell"/>
+			<item value="int pos"/>
+			<item value="pos != -1"/>
+			<item value="System"/>
+			<item value="Sysem"/>
+			<item value="addCursePoints"/>
+			<item value="cursePoints"/>
+			<item value=" &amp;&amp; playerInfo.getInteger(&quot;cursePoints&quot;) &gt; 0"/>
+			<item value="new PacketRequestPlayerInfo()"/>
 		</list>
 		<list key="replacehistory">
+			<item value="boolean exists"/>
+			<item value="exists"/>
 			<item value=""/>
+			<item value="new PacketRequestPlayerInfo(player)"/>
+			<item value="getModPlayerPersistTag(player, Variables.MODID)"/>
+			<item value="jewelrycraft2"/>
+			<item value="Variables.MODID + &quot;"/>
 			<item value="Crouch"/>
-			<item value="addModifiers"/>
-			<item value="JewelrycraftUtil.addRandomModifiers()"/>
-			<item value="JewelryNBT.gem(stack)"/>
-			<item value="gem"/>
-			<item value="isGemX"/>
-			<item value="gemColor"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="257" key="DIALOG_WIDTH"/>
-		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="380" key="DIALOG_HEIGHT"/>
-		<item value="459" key="DIALOG_Y_ORIGIN"/>
-		<item value="1284" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|5|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="381" key="DIALOG_HEIGHT"/>
+		<item value="355" key="DIALOG_Y_ORIGIN"/>
+		<item value="1117" key="DIALOG_X_ORIGIN"/>
 	</section>
 </section>
