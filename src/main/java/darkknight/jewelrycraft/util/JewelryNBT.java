@@ -16,6 +16,21 @@ import net.minecraft.world.World;
 public class JewelryNBT
 {
     // TODO NBT Tag Adding
+    public static void addItem(ItemStack item, ItemStack target)
+    {
+        if (target != null){
+            NBTTagCompound itemStackData;
+            if (item.hasTagCompound()) itemStackData = item.getTagCompound();
+            else{
+                itemStackData = new NBTTagCompound();
+                item.setTagCompound(itemStackData);
+            }
+            NBTTagCompound targetNBT = new NBTTagCompound();
+            target.writeToNBT(targetNBT);
+            itemStackData.setTag("target", targetNBT);
+        }
+    }
+    
     /**
      * @param item The item you want to add the NBT data on
      * @param metal The metal you want to add on the item
@@ -448,6 +463,17 @@ public class JewelryNBT
     }
     
     // TODO Return components based on NBT
+    public static ItemStack item(ItemStack stack)
+    {
+        if (stack != null && stack != new ItemStack(Item.getItemById(0), 0, 0) && stack.hasTagCompound() && stack.getTagCompound().hasKey("target")){
+            NBTTagCompound itemNBT = (NBTTagCompound)stack.getTagCompound().getTag("target");
+            ItemStack target = new ItemStack(Item.getItemById(0), 0, 0);
+            target.readFromNBT(itemNBT);
+            return target;
+        }
+        return null;
+    }
+    
     /**
      * @param stack
      * @return

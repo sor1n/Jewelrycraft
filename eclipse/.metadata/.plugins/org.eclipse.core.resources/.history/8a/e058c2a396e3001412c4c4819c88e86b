@@ -1,0 +1,36 @@
+package darkknight.jewelrycraft.curses;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.entities.EntityHalfHeart;
+import darkknight.jewelrycraft.entities.EntityHeart;
+import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
+
+public class CurseMidasTouch extends Curse
+{
+    public CurseMidasTouch(int id, String name, int text)
+    {
+        super(id, name, text);
+    }
+    
+    @Override
+    public void attackedByPlayerAction(World world, EntityPlayer player, Entity target)
+    {
+        if (!world.isRemote && target instanceof EntityLiving && !(target instanceof EntityHeart) && !(target instanceof EntityHalfHeart)){
+            world.setBlock((int)target.posX, (int)target.posY, (int)target.posZ, BlockList.midasTouchBlock, 0, 2);
+            TileEntityMidasTouch midasTouchVictim = new TileEntityMidasTouch();
+            midasTouchVictim.setEntity(target);
+            world.setTileEntity((int)target.posX, (int)target.posY, (int)target.posZ, midasTouchVictim);
+            target.setDead();
+        }
+    }
+    
+    public String getDescription()
+    {
+        return "Be careful what you wish for...";
+    }
+}

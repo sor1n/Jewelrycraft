@@ -36,7 +36,6 @@ public class PlayerRenderHandler
             while (players.hasNext()){
                 EntityPlayer player = players.next();
                 NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
-//                System.out.println(event.entityPlayer + " | " + player + " | " + playerInfo);
                 if (checkPlayerInfamy(player.getDisplayName()) && event.entityPlayer.getDisplayName().equals(player.getDisplayName()) && playerInfo.getInteger("cursePoints") > 0){
                     float yaw = player.prevRotationYawHead + (player.rotationYawHead - player.prevRotationYawHead) * event.partialRenderTick;
                     float yawOffset = player.prevRenderYawOffset + (player.renderYawOffset - player.prevRenderYawOffset) * event.partialRenderTick;

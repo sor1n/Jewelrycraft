@@ -47,6 +47,7 @@ tile.jewelrycraft2.moltenMetal.name=Molten
 tile.jewelrycraft2.shadowHand.name=Shadow Hand
 tile.jewelrycraft2.shadowEye.name=Cursed Eye
 tile.jewelrycraft2.handPedestal.name=Hand Pedestal
+tile.jewelrycraft2.midasTouchBlock.name=Golden Creature
 
 itemGroup.jewelrycraft2=Jewelrycraft 2
 itemGroup.Liquids=Liquids

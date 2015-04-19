@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package darkknight.jewelrycraft.config;
+
+/**
+ * @author Sorin
+ *
+ */
+public class ConfigGui
+{
+}

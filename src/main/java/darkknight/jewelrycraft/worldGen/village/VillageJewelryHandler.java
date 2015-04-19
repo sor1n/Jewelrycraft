@@ -18,7 +18,7 @@ public class VillageJewelryHandler implements IVillageCreationHandler
     @Override
     public PieceWeight getVillagePieceWeight(Random random, int i)
     {
-        return new PieceWeight(ComponentJewelry.class, ConfigHandler.jewelerWeight, ConfigHandler.maxVillageJewelers);
+        return new PieceWeight(ComponentJewelry.class, ConfigHandler.JEWELER_WEIGHT, ConfigHandler.MAX_VILLAGE_JEWELERS);
     }
     
     /**

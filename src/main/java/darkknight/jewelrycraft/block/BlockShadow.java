@@ -24,6 +24,7 @@ public class BlockShadow extends BlockContainer
     public BlockShadow()
     {
         super(Material.iron);
+        setHarvestLevel("pickaxe", 3);
         setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
     

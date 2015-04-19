@@ -95,3 +95,5 @@ Caused by: java.net.SocketTimeoutException: Read timed out
 2015-01-30 23:44:30,268 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-8.1.14.v20131031
 2015-01-30 23:44:30,648 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@127.0.0.1:64856
 2015-01-31 02:48:51,887 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - stopped o.e.j.s.ServletContextHandler{/help,null}
+2015-04-19 01:38:49,576 [main] WARN  o.e.r.i.c.rcp.TypeBindingAnalyzer - Can't handle class org.eclipse.jdt.internal.compiler.ast.OR_OR_Expression as parent of completion location.
+2015-04-19 01:38:51,921 [main] WARN  o.e.r.i.c.rcp.TypeBindingAnalyzer - Can't handle class org.eclipse.jdt.internal.compiler.ast.UnaryExpression as parent of completion location.

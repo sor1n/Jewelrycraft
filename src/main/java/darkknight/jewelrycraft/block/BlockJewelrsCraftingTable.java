@@ -87,7 +87,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
                 te.isDirty = true;
             }
             if (!te.hasEndItem && te.hasJewelry && te.hasGem && !te.crafting){
-                te.carving = ConfigHandler.jewelryCraftingTime;
+                te.carving = ConfigHandler.GEM_PLACEMENT_TIME;
                 te.angle = 0;
                 te.crafting = true;
                 te.isDirty = true;
@@ -183,7 +183,7 @@ public class BlockJewelrsCraftingTable extends BlockContainer
             te.endItem = new ItemStack(Item.getItemById(0), 0, 0);
             te.hasEndItem = false;
             te.isDirty = true;
-        }else if (te.hasJewelry && te.hasGem && te.carving > 0 && te.jewelry != null) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage." + Variables.MODID + ".table.iscrafting", te.jewelry.getDisplayName()) + " (" + (ConfigHandler.jewelryCraftingTime - te.carving) * 100 / ConfigHandler.jewelryCraftingTime + "%)"));
+        }else if (te.hasJewelry && te.hasGem && te.carving > 0 && te.jewelry != null) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage." + Variables.MODID + ".table.iscrafting", te.jewelry.getDisplayName()) + " (" + (ConfigHandler.GEM_PLACEMENT_TIME - te.carving) * 100 / ConfigHandler.GEM_PLACEMENT_TIME + "%)"));
         else if (!te.hasGem) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".table.missinggem")));
         else if (!te.hasJewelry) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".table.missingjewelry")));
     }

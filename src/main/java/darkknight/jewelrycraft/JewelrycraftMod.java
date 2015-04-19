@@ -43,8 +43,10 @@ import darkknight.jewelrycraft.damage.DamageSourceList;
 import darkknight.jewelrycraft.effects.EffectsList;
 import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
+import darkknight.jewelrycraft.events.BlockEventHandler;
 import darkknight.jewelrycraft.events.BucketHandler;
 import darkknight.jewelrycraft.events.EntityEventHandler;
+import darkknight.jewelrycraft.events.EventCommonHandler;
 import darkknight.jewelrycraft.events.KeyBindings;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.network.PacketClearColorCache;
@@ -64,15 +66,17 @@ import darkknight.jewelrycraft.worldGen.village.ComponentJewelry;
 import darkknight.jewelrycraft.worldGen.village.JCTrades;
 import darkknight.jewelrycraft.worldGen.village.VillageJewelryHandler;
 
-@Mod (modid = Variables.MODID, name = Variables.MODNAME, version = Variables.VERSION)
+@Mod (modid = Variables.MODID, name = Variables.MODNAME, version = Variables.VERSION, guiFactory = Variables.CONFIG_GUI)
 public class JewelrycraftMod
 {
     @Instance (Variables.MODID)
     public static JewelrycraftMod instance;
-    @SidedProxy (clientSide = "darkknight.jewelrycraft.proxy.ClientProxy", serverSide = "darkknight.jewelrycraft.proxy.CommonProxy")
+    
+    @SidedProxy (clientSide = Variables.CLIENT_PROXY, serverSide = Variables.SERVER_PROXY)
     public static CommonProxy proxy;
     public static final Logger logger = Logger.getLogger("Jewelrycraft");
     public static File dir;
+    
     public static CreativeTabs jewelrycraft = new CreativeTabs(Variables.MODID){
         @Override
         public Item getTabIconItem()
@@ -80,6 +84,7 @@ public class JewelrycraftMod
             return Item.getItemFromBlock(BlockList.jewelCraftingTable);
         }
     };
+    
     public static CreativeTabs liquids = new CreativeTabLiquids("Liquids");
     public static NBTTagCompound saveData = new NBTTagCompound();
     public static NBTTagCompound clientData = new NBTTagCompound();
@@ -96,7 +101,7 @@ public class JewelrycraftMod
     @EventHandler
     public void preInit(FMLPreInitializationEvent e) throws IOException
     {
-        ConfigHandler.preInit(e);
+        ConfigHandler.INSTANCE.loadConfig(e);
         BlockList.preInit(e);
         ItemList.preInit(e);
         CraftingRecipes.preInit(e);
@@ -113,7 +118,9 @@ public class JewelrycraftMod
             logger.severe("Error registering Jewelrycraft Structures with Vanilla Minecraft: this is expected in versions earlier than 1.7.10");
         }
         MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
+        MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+        FMLCommonHandler.instance().bus().register(new EventCommonHandler());
         BucketHandler.INSTANCE.buckets.put(BlockList.moltenMetal, ItemList.bucket);
         
         ModMetadata metadata = e.getModMetadata();
@@ -142,7 +149,6 @@ public class JewelrycraftMod
         createEntity(EntityHeart.class, Variables.MODID + ".Heart", 0xFF0000, 0xFF0000, false);
         createEntity(EntityHalfHeart.class, Variables.MODID + ".Half-Heart", 0x000000, 0xFF0000, false);
 
-//        EntityRegistry.addSpawn(EntityMob.class, 5, 2, 3, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.birchForest, BiomeGenBase.birchForestHills, BiomeGenBase.plains, BiomeGenBase.beach, BiomeGenBase.coldBeach, BiomeGenBase.frozenRiver);
     }
 
     public void createEntity(Class<? extends Entity> entity, String entityName, int solidColor, int spotColor, boolean hasSpawnEgg)
@@ -164,6 +170,7 @@ public class JewelrycraftMod
         GameRegistry.registerWorldGenerator(new Generation(), 0);
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT) FMLCommonHandler.instance().bus().register(new KeyBindings());
         new GuiHandler();
+        FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
     }
     
     /**

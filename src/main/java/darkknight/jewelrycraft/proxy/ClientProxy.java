@@ -7,6 +7,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.InventoryTabVanilla;
@@ -17,6 +18,7 @@ import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.entities.renders.HeartRender;
 import darkknight.jewelrycraft.events.PlayerRenderHandler;
 import darkknight.jewelrycraft.events.ScreenHandler;
+import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.item.render.ItemRender;
 import darkknight.jewelrycraft.model.ModelDisplayer;
 import darkknight.jewelrycraft.model.ModelHalfHeart;
@@ -30,6 +32,7 @@ import darkknight.jewelrycraft.model.ModelSmelter;
 import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
 import darkknight.jewelrycraft.tileentity.TileEntityHandPedestal;
 import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
+import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
 import darkknight.jewelrycraft.tileentity.TileEntityShadowEye;
 import darkknight.jewelrycraft.tileentity.TileEntityShadowHand;
@@ -37,6 +40,7 @@ import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
 import darkknight.jewelrycraft.tileentity.renders.TileEntityDisplayerRender;
 import darkknight.jewelrycraft.tileentity.renders.TileEntityHandPedestalRender;
 import darkknight.jewelrycraft.tileentity.renders.TileEntityJewelrsCraftingTableRender;
+import darkknight.jewelrycraft.tileentity.renders.TileEntityMidasTouchRender;
 import darkknight.jewelrycraft.tileentity.renders.TileEntityMolderRender;
 import darkknight.jewelrycraft.tileentity.renders.TileEntityShadowEyeRender;
 import darkknight.jewelrycraft.tileentity.renders.TileEntityShadowHandRender;
@@ -59,6 +63,7 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJewelrsCraftingTable.class, new TileEntityJewelrsCraftingTableRender());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDisplayer.class, new TileEntityDisplayerRender());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityShadowEye.class, new TileEntityShadowEyeRender());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMidasTouch.class, new TileEntityMidasTouchRender());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHandPedestal.class, pedestalRender);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityShadowHand.class, shadowHandRender);
         
@@ -69,11 +74,13 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.shadowEye), new ItemRender(new TileEntityShadowEyeRender(), new TileEntityShadowEye(), new ModelShadowEye()));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.handPedestal), new ItemRender(pedestalRender, new TileEntityHandPedestal(), new ModelHandPedestal(pedestalResourceLocation)));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.shadowHand), new ItemRender(shadowHandRender, new TileEntityShadowHand(), new ModelShadowHand(shadowResourceLocation)));
+        MinecraftForgeClient.registerItemRenderer(ItemList.goldObj, new ItemRender());
+        
         VillagerRegistry.instance().registerVillagerSkin(3000, new ResourceLocation(Variables.MODID, "textures/entities/jeweler.png"));
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHeart.class, new HeartRender(new ModelHeart(), 0.25F));
         RenderingRegistry.registerEntityRenderingHandler(EntityHalfHeart.class, new HeartRender(new ModelHalfHeart(), 0.25F));
-        
+
         TabRegistry.registerTab(new InventoryTabVanilla());
         TabRegistry.registerTab(new TabJewelry());
         MinecraftForge.EVENT_BUS.register(new TabRegistry());

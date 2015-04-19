@@ -7,6 +7,7 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.network.play.client.C0DPacketCloseWindow;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,52 +19,47 @@ import darkknight.jewelrycraft.client.*;
 public class TabRegistry
 {
     private static ArrayList<AbstractTab> tabList = new ArrayList<AbstractTab>();
-
-    public static void registerTab (AbstractTab tab)
+    
+    public static void registerTab(AbstractTab tab)
     {
         tabList.add(tab);
     }
-
-    public static ArrayList<AbstractTab> getTabList ()
+    
+    public static ArrayList<AbstractTab> getTabList()
     {
         return tabList;
     }
-
-    @SideOnly(Side.CLIENT)
+    
+    @SideOnly (Side.CLIENT)
     @SubscribeEvent
-    public void guiPostInit (GuiScreenEvent.InitGuiEvent.Post event)
+    public void guiPostInit(GuiScreenEvent.InitGuiEvent.Post event)
     {
-        if ((event.gui instanceof GuiInventory))
-        {
+        if ((event.gui instanceof GuiInventory)){
             int xSize = 176;
             int ySize = 166;
             int guiLeft = (event.gui.width - xSize) / 2;
             int guiTop = (event.gui.height - ySize) / 2;
-            if(!mc.thePlayer.getActivePotionEffects().isEmpty()) guiLeft += 60;
-
+            if (!mc.thePlayer.getActivePotionEffects().isEmpty()) guiLeft += 60;
             updateTabValues(guiLeft, guiTop, InventoryTabVanilla.class);
             addTabsToList(event.buttonList);
         }
     }
-
+    
     private static Minecraft mc = FMLClientHandler.instance().getClient();
-
-    public static void openInventoryGui ()
+    
+    public static void openInventoryGui()
     {
         mc.thePlayer.sendQueue.addToSendQueue(new C0DPacketCloseWindow(mc.thePlayer.openContainer.windowId));
         GuiInventory inventory = new GuiInventory(mc.thePlayer);
         mc.displayGuiScreen(inventory);
     }
-
-    public static void updateTabValues (int cornerX, int cornerY, Class<?> selectedButton)
+    
+    public static void updateTabValues(int cornerX, int cornerY, Class<?> selectedButton)
     {
-        int count = 2;
-        for (int i = 0; i < tabList.size(); i++)
-        {
+        int count = 2 + (Loader.isModLoaded("TConstruct") ? 1 : 0);
+        for(int i = 0; i < tabList.size(); i++){
             AbstractTab t = tabList.get(i);
-
-            if (t.shouldAddToList())
-            {
+            if (t.shouldAddToList()){
                 t.id = count;
                 t.xPosition = cornerX + (count - 2) * 28;
                 t.yPosition = cornerY - 28;
@@ -72,15 +68,11 @@ public class TabRegistry
             }
         }
     }
-
-    public static void addTabsToList (List buttonList)
+    
+    public static void addTabsToList(List buttonList)
     {
-        for (AbstractTab tab : tabList)
-        {
-            if (tab.shouldAddToList())
-            {
-                buttonList.add(tab);
-            }
+        for(AbstractTab tab: tabList){
+            if (tab.shouldAddToList()) if (!(Loader.isModLoaded("TConstruct") && tab instanceof InventoryTabVanilla) || !tabList.get(1).enabled) buttonList.add(tab);
         }
     }
 }

@@ -156,14 +156,14 @@ public class BlockSmelter extends BlockContainer
                         // if (Item.getIdFromItem(te.metal.getItem()) == Block.getIdFromBlock(Blocks.stained_glass) || Item.getIdFromItem(te.metal.getItem()) == Block.getIdFromBlock(Blocks.stained_hardened_clay) || Item.getIdFromItem(te.metal.getItem()) == Block.getIdFromBlock(Blocks.wool) || Item.getIdFromItem(te.metal.getItem()) == Block.getIdFromBlock(Blocks.carpet)) te.metal.setItemDamage(15 - te.metal.getItemDamage());
                         te.metal.stackSize = 1;
                         te.hasMetal = true;
-                        te.melting = ConfigHandler.ingotMeltingTime;
+                        te.melting = ConfigHandler.INGOT_MELTING_TIME;
                         if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
                         te.isDirty = true;
                     }else if (te.hasMetal && te.hasMoltenMetal && check2 && overflow || te.hasMetal && !te.hasMoltenMetal && itemCoincidesWithMetal && overflow){
                         entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("Smelting extra " + (isOre ? "ores" : "ingots") + " (" + (te.metal.stackSize + 1) + ")")));
                         te.metal.stackSize++;
                         te.hasMetal = true;
-                        te.melting += ConfigHandler.ingotMeltingTime;
+                        te.melting += ConfigHandler.INGOT_MELTING_TIME;
                         if (!entityPlayer.capabilities.isCreativeMode) --item.stackSize;
                         te.isDirty = true;
                     }
@@ -200,8 +200,7 @@ public class BlockSmelter extends BlockContainer
         if (te != null && me != null && !world.isRemote) if (te.hasMoltenMetal && isConnectedToMolder(world, i, j, k) && me != null && me.hasMold && !me.hasMoltenMetal && !me.hasJewelBase){
             te.pouring = true;
             te.isDirty = true;
-//            System.out.println(Block.getBlockById(Item.getIdFromItem(te.moltenMetal.getItem())));
-        }else if (te.hasMetal && te.melting > 0) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage." + Variables.MODID + ".smelter.metalismelting", te.metal.getDisplayName()) + " (" + (ConfigHandler.ingotMeltingTime * te.metal.stackSize - te.melting) * 100 / (ConfigHandler.ingotMeltingTime * te.metal.stackSize) + "%)"));
+        }else if (te.hasMetal && te.melting > 0) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage." + Variables.MODID + ".smelter.metalismelting", te.metal.getDisplayName()) + " (" + (ConfigHandler.INGOT_MELTING_TIME * te.metal.stackSize - te.melting) * 100 / (ConfigHandler.INGOT_MELTING_TIME * te.metal.stackSize) + "%)"));
         else if (te.hasMoltenMetal && !isConnectedToMolder(world, i, j, k)) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".smelter.molderismissing")));
         else if (!me.hasMold && te.hasMoltenMetal) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".smelter.molderhasnomold")));
         else if (me.hasMoltenMetal && te.hasMoltenMetal) player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".smelter.molderhasmoltenmetal")));

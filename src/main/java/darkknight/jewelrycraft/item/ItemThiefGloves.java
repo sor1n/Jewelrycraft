@@ -28,9 +28,6 @@ public class ItemThiefGloves extends Item
 {
     public Random rand = new Random();
     
-    /**
-     * 
-     */
     public ItemThiefGloves()
     {
         super();

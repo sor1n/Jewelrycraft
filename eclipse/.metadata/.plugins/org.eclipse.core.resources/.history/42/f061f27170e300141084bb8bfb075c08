@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package darkknight.jewelrycraft.tileentity;
+
+/**
+ * @author Sorin
+ *
+ */
+public class TileEntityMidasTouch
+{
+}

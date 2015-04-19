@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+package darkknight.jewelrycraft.events;
+
+import net.minecraftforge.event.world.BlockEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
+/**
+ * @author Sorin
+ *
+ */
+public class BlockEventHandler
+{
+    @SubscribeEvent
+    public void onBlockDestroyed(BlockEvent.BreakEvent event)
+    {
+//        System.out.println("Broken " + event.getResult());
+    }
+}

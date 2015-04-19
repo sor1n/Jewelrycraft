@@ -1,0 +1,24 @@
+package darkknight.jewelrycraft.tileentity.renders;
+
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.tileentity.TileEntity;
+import org.lwjgl.opengl.GL11;
+import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
+
+public class TileEntityMidasTouchRender extends TileEntitySpecialRenderer
+{
+    @Override
+    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale)
+    {
+        GL11.glPushMatrix();
+        TileEntityMidasTouch midas = (TileEntityMidasTouch)te;
+        if (midas.target != null){
+            ((EntityLiving)midas.target).hurtTime = 0;
+            GL11.glColor4f(1F, 0.0F, 0.0F, 0.3F);
+            RenderManager.instance.renderEntityStatic(midas.target, 1F, false);
+        }
+        GL11.glPopMatrix();
+    }
+}

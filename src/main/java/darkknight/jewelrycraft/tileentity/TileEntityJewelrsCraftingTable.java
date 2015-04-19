@@ -98,7 +98,7 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
         else angle = 0F;
         if (hasJewelry && hasGem && !hasEndItem && crafting){
             if (carving > 0) carving--;
-            if (crafting) for(int l = 0; l < ConfigHandler.jewelryCraftingTime / (carving + 2); ++l){
+            if (crafting) for(int l = 0; l < ConfigHandler.GEM_PLACEMENT_TIME / (carving + 2); ++l){
                 if (worldObj.rand.nextInt(10) == 0) worldObj.playSoundEffect(xCoord, yCoord + 0.5F, zCoord, "random.orb", 0.05F, 1F);
                 if (getBlockMetadata() == 0) worldObj.spawnParticle("instantSpell", xCoord + 0.5F, (double)yCoord + 0.8F, zCoord + 0.2F, 0.0D, 0.0D, 0.0D);
                 if (getBlockMetadata() == 1) worldObj.spawnParticle("instantSpell", xCoord + 0.8F, (double)yCoord + 0.8F, zCoord + 0.5F, 0.0D, 0.0D, 0.0D);

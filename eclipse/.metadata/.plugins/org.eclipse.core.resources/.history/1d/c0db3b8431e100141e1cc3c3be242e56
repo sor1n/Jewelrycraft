@@ -1,0 +1,60 @@
+package darkknight.jewelrycraft.config;
+
+import java.io.File;
+import net.minecraftforge.common.config.Configuration;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import darkknight.jewelrycraft.util.Variables;
+
+public class ConfigHandler
+{
+    public static Configuration config;
+    public static final ConfigHandler INSTANCE = new ConfigHandler();
+    public static int ingotCoolingTime;
+    public static int ingotMeltingTime;
+    public static int jewelryCraftingTime;
+    public static boolean generateVillageNetherstar;
+    public static boolean canFurnacesGenerateIngots;
+    public static int maxVillageJewelers;
+    public static int jewelerWeight;
+    public static int ingotChestMin;
+    public static int ingotChestMax;
+    public static int ingotChestMaxStack = 2;
+    public static int jewelsChestMin = 2;
+    public static int jewelsChestMax = 5;
+    public static int furnacesIngotStackMin;
+    public static int furnacesIngotStackMax;
+    
+    public void loadConfig(FMLPreInitializationEvent event)
+    {
+        config = new Configuration(event.getSuggestedConfigurationFile());
+        config.load();
+        syncConfigs();
+    }
+    
+    private void syncConfigs()
+    {
+        ingotCoolingTime = config.get("Timers", "Molder Ingot Cooling Time", ingotCoolingTime, "This sets the number of ticks you need to wait before the mold is cooled.").getInt(100);
+        ingotMeltingTime = config.get("Timers", "Ingot Melting Time", ingotMeltingTime, "This sets the number of ticks you need to wait before an ingot is completely smelted.").getInt(1500);
+        jewelryCraftingTime = config.get("Timers", "Jewelry Crafting Time", jewelryCraftingTime, "This sets the number of ticks it takes for a jewel to be modified.").getInt(200);
+        generateVillageNetherstar = config.get("Village Generation", "Netherstar Generation", generateVillageNetherstar, "If set to true Nether Stars will be able to generate in Jewelers chests.").getBoolean(false);
+        canFurnacesGenerateIngots = config.get("Village Generation", "Furnace Ingots Generation", canFurnacesGenerateIngots, "If set to true jewelers will generate ingots in furnaces.").getBoolean(true);
+        maxVillageJewelers = config.get("Village Generation", "Maximum Jewelers", maxVillageJewelers, "Sets how many jewelers can be in a village.").getInt(1);
+        jewelerWeight = config.get("Village Generation", "Jewelers Weight", jewelerWeight, "Chance of getting a jeweler in a village. The higher the value, the higher the chance.").getInt(30);
+        ingotChestMin = config.get("Village Generation", "Ingot Chest Min", ingotChestMin, "Minimum number of ingots that can be found in a chest from the Jeweler. (It's the chest from the back part)").getInt(1);
+        ingotChestMax = config.get("Village Generation", "Ingot Chest Max", ingotChestMax, "Maximum number of ingots that can be found in a chest from the Jeweler. (It's the chest from the back part)").getInt(4);
+        ingotChestMaxStack = config.get("Village Generation", "Ingot Chest Max Stack", ingotChestMaxStack, "Maximum number of the stack the ingots can be. For example: if set to 2 and ingots have a chance of generating, you have a chance of getting a stack of max 2 ingots in a chest.").getInt(2);
+        jewelsChestMin = config.get("Village Generation", "Jewelers Chest Min", jewelsChestMin, "Determines the minimum nuber of jewels/modifiers that can be generated in the front chests of a Jeweler.").getInt(2);
+        jewelsChestMax = config.get("Village Generation", "Jewelers Chest Max", jewelsChestMax, "Determines the maximum nuber of jewels/modifiers that can be generated in the front chests of a Jeweler.").getInt(5);
+        furnacesIngotStackMin = config.get("Village Generation", "Ingot Furnace Min", furnacesIngotStackMin, "Determines the minimum number of ingots that can generate in a furnace.").getInt(2);
+        furnacesIngotStackMax = config.get("Village Generation", "Ingot Furnace Max", furnacesIngotStackMax, "Determines the maximum number of ingots that can generate in a furnace.").getInt(5);
+        if (config.hasChanged()) config.save();
+    }
+    
+    @SubscribeEvent
+    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
+        if (event.modID.equals(Variables.MODID)) syncConfigs();
+    }
+}

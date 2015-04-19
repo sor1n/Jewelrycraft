@@ -1,0 +1,33 @@
+1428858322752	Rename field 'ingotCoolingTime'
+1428858378499	Rename field 'jewelryCraftingTime'
+1428858453102	Rename field 'generateVillageNetherstar'
+1428858545077	Rename field 'canFurnacesGenerateIngots'
+1428858580546	Rename field 'maxVillageJewelers'
+1428858610139	Rename field 'jewelerWeight'
+1428858631202	Rename field 'ingotChestMin'
+1428858644003	Rename field 'ingotChestMax'
+1428858659900	Rename field 'ingotChestMaxStack'
+1428858754945	Rename field 'jewelsChestMin'
+1428858765633	Rename field 'jewelsChestMax'
+1428858789095	Rename field 'furnacesIngotStackMin'
+1428858817906	Rename field 'furnacesIngotStackMax'
+1429274022464	Delete element
+1429274043126	Rename field 'goldifiedObject'
+1429278619252	Rename local variable 'p_78443_1_'
+1429278665911	Rename local variable 'p_78443_2_'
+1429278677023	Rename local variable 'p_78443_3_'
+1429279708564	Rename local variable 'p_77015_1_'
+1429279719138	Rename local variable 'p_77015_2_'
+1429279745850	Rename local variable 'p_77015_3_'
+1429279752445	Rename local variable 'p_77015_4_'
+1429279759998	Rename local variable 'p_77015_5_'
+1429293090556	Rename local variable 'p_147800_1_'
+1429293103588	Rename local variable 'p_147800_2_'
+1429293117457	Rename local variable 'p_147800_3_'
+1429400571353	Move compilation units
+1429401049332	Move compilation units
+1429401055519	Delete element
+1429401307313	Move compilation units
+1429401403715	Move compilation unit
+1429401444358	Move compilation unit
+1429401452334	Move compilation unit

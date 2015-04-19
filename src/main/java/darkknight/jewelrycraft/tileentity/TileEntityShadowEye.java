@@ -14,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import darkknight.jewelrycraft.block.BlockHandPedestal;
 import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.particles.EntityShadowsFX;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
@@ -93,7 +94,7 @@ public class TileEntityShadowEye extends TileEntity
                 opening++;
                 timer = 20;
             }
-            if (valid && opening == 4) timer = 1000;
+            if (valid && opening == 4) timer = ConfigHandler.RITUAL_TIME;
             else if (!valid){
                 active = false;
                 timer = -1;

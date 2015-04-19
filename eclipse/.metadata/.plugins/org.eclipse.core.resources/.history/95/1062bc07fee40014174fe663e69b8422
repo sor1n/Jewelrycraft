@@ -1,0 +1,48 @@
+package darkknight.jewelrycraft.curses;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.entities.EntityHalfHeart;
+import darkknight.jewelrycraft.entities.EntityHeart;
+import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
+
+public class CurseMidasTouch extends Curse
+{
+    public CurseMidasTouch(int id, String name, int text)
+    {
+        super(id, name, text);
+    }
+    
+    @Override
+    public void attackedByPlayerAction(World world, EntityPlayer player, Entity target)
+    {
+        if (!world.isRemote && target instanceof EntityLiving && !(target instanceof EntityHeart) && !(target instanceof EntityHalfHeart) && player.inventory.getCurrentItem() == null){
+            world.setBlock(MathHelper.floor_double(target.posX), MathHelper.floor_double(target.posY), MathHelper.floor_double(target.posZ), BlockList.midasTouchBlock, 0, 2);
+            TileEntityMidasTouch midasTouchVictim = new TileEntityMidasTouch();
+            midasTouchVictim.setEntity(target);
+            world.setTileEntity(MathHelper.floor_double(target.posX), MathHelper.floor_double(target.posY), MathHelper.floor_double(target.posZ), midasTouchVictim);
+            target.setDead();
+        }
+    }
+
+    @Override
+    public void action(World world, EntityPlayer player)
+    {
+        if(player.inventory.getCurrentItem() != null){
+            int index = player.inventory.currentItem;
+            ItemStack item = player.inventory.getCurrentItem();
+            player.inventory.setInventorySlotContents(index, new ItemStack(ItemList.goldifiedObject, item.stackSize, item.getItemDamage()));
+        }
+    }
+    
+    public String getDescription()
+    {
+        return "Be careful what you wish for...";
+    }
+}
