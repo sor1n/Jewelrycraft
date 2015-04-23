@@ -3,8 +3,11 @@ package darkknight.jewelrycraft.curses;
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 
 public class Curse
 {
@@ -77,7 +80,10 @@ public class Curse
      * @param world
      * @param player
      */
-    public void deathAction(World world, EntityPlayer player)
+    public void playerDeathAction(World world, EntityPlayer player)
+    {}
+    
+    public void entityDeathAction(World world, EntityLivingBase target, EntityPlayer player)
     {}
 
     /**
@@ -99,6 +105,12 @@ public class Curse
      * @param player
      */
     public void attackedByPlayerAction(World world, EntityPlayer player, Entity target)
+    {}
+    
+    public void entityDropItems(EntityPlayer player, Entity target, ArrayList<EntityItem> drops)
+    {}
+    
+    public void playerRender(EntityPlayer player, RenderPlayerEvent.Specials.Post event)
     {}
     
     public boolean itemToss()

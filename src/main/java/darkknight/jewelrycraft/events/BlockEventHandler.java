@@ -21,7 +21,6 @@ public class BlockEventHandler
     @SubscribeEvent
     public void onBlockDestroyed(BlockEvent.BreakEvent event)
     {
-        // System.out.println("Broken " + event.getResult());
         ItemStack item = event.getPlayer().inventory.getCurrentItem();
         if (event.block instanceof BlockMidasTouch && item != null && item.getItem().getHarvestLevel(item, "pickaxe") >= event.block.getHarvestLevel(event.blockMetadata)){
             TileEntityMidasTouch te = (TileEntityMidasTouch)event.world.getTileEntity(event.x, event.y, event.z);

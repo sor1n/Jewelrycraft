@@ -11,6 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import darkknight.jewelrycraft.curses.Curse;
+import darkknight.jewelrycraft.curses.CurseList;
 import darkknight.jewelrycraft.entities.renders.RenderHelper;
 import darkknight.jewelrycraft.item.render.BraceletRender;
 import darkknight.jewelrycraft.item.render.EarringsRender;
@@ -22,36 +24,22 @@ import darkknight.jewelrycraft.util.Variables;
 
 public class PlayerRenderHandler
 {
-    MaskRender mask = new MaskRender();
     EarringsRender earrings = new EarringsRender();
     BraceletRender bracelet = new BraceletRender();
-    public static String[] infamyCache = new String[]{};
+    public static NBTTagCompound playersInfo = new NBTTagCompound();
     
     @SubscribeEvent
     public void renderScreen(RenderPlayerEvent.Specials.Post event)
     {
         ModelBiped main = event.renderer.modelBipedMain;
         Iterator<EntityPlayer> players = event.entityPlayer.worldObj.playerEntities.iterator();
-        if (infamyCache != null){
+        if (playersInfo != null){
             while (players.hasNext()){
                 EntityPlayer player = players.next();
-                NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
-                if (checkPlayerInfamy(player.getDisplayName()) && event.entityPlayer.getDisplayName().equals(player.getDisplayName()) && playerInfo.getInteger("cursePoints") > 0){
-                    float yaw = player.prevRotationYawHead + (player.rotationYawHead - player.prevRotationYawHead) * event.partialRenderTick;
-                    float yawOffset = player.prevRenderYawOffset + (player.renderYawOffset - player.prevRenderYawOffset) * event.partialRenderTick;
-                    float pitch = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * event.partialRenderTick;
-                    GL11.glPushMatrix();
-                    GL11.glColor4f(1, 1, 1, 1);
-                    GL11.glRotatef(yawOffset, 0, -1, 0);
-                    GL11.glRotatef(yaw - 90, 0, 1, 0);
-                    GL11.glRotatef(pitch, 0, 0, -1);
-                    GL11.glRotatef(90F, 0, 1F, 0F);
-                    RenderHelper.translateToHeadLevel(player);
-                    GL11.glScalef(1.6f, 1.6f, 1.6f);
-                    GL11.glTranslatef(-0.25F, -0.25F, -0.25F);
-                    mask.doRender(event.entityPlayer, 0F, 0F, 0F, 0F, 0F);
-                    GL11.glPopMatrix();
-                }
+                NBTTagCompound playerInfo = (NBTTagCompound)playersInfo.getTag(player.getDisplayName());
+                for(Curse curse: Curse.getCurseList())
+                    if (playerInfo.getInteger(curse.getName()) > 0 && event.entityPlayer.getDisplayName().equals(player.getDisplayName()) && playerInfo.getInteger("cursePoints") > 0) 
+                        curse.playerRender(player, event);
                 if (playerInfo.hasKey("ext17") && event.entityPlayer.getDisplayName().equals(player.getDisplayName())){
                     NBTTagCompound nbt = (NBTTagCompound)playerInfo.getTag("ext17");
                     ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
@@ -115,8 +103,8 @@ public class PlayerRenderHandler
      */
     private boolean checkPlayerInfamy(String string)
     {
-        for(int i = 0; i < infamyCache.length; i++)
-            if (infamyCache[i].equals(string)) return true;
+        NBTTagCompound playerInfo = (NBTTagCompound)playersInfo.getTag(string);
+        if(playerInfo.getInteger(CurseList.infamy.getName()) > 0) return true;
         return false;
     }
 }

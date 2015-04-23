@@ -24,7 +24,7 @@ public class PacketRequestPlayerInfo implements IMessage, IMessageHandler<Packet
     @Override
     public IMessage onMessage(PacketRequestPlayerInfo message, MessageContext ctx)
     {
-        return new PacketSendPlayerInfo(PlayerUtils.getModPlayerPersistTag(ctx.getServerHandler().playerEntity, Variables.MODID));
+        return new PacketSendClientPlayerInfo(PlayerUtils.getModPlayerPersistTag(ctx.getServerHandler().playerEntity, Variables.MODID));
     }
     
     /**

@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package darkknight.jewelrycraft.curses;
+
+public class CurseRabbitsPaw extends Curse
+{
+    public CurseRabbitsPaw(int id, String name, int text)
+    {
+        super(id, name, text);
+    }
+}

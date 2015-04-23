@@ -2,30 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="fishin" key="selection"/>
+		<item value="v" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="fishin"/>
-			<item value="harvest"/>
-			<item value="Harvest"/>
-			<item value="onBlockHarvest"/>
-			<item value="goldColor"/>
-			<item value="break"/>
-			<item value="color"/>
-			<item value="pressure"/>
+			<item value="p_73729_4_"/>
+			<item value="p_73729_3_"/>
+			<item value="p_73729_6_"/>
+			<item value="p_73729_2_"/>
+			<item value="p_73729_5_"/>
+			<item value="p_73729_1_"/>
+			<item value="update"/>
+			<item value="playerInfo.setBoolean(&quot;sendInfo&quot;, true);"/>
 		</list>
 		<list key="replacehistory">
-			<item value="renderBlocksIr"/>
-			<item value="nbt"/>
+			<item value="v"/>
+			<item value="u"/>
+			<item value="z"/>
+			<item value="height"/>
+			<item value="y"/>
+			<item value="width"/>
+			<item value="x"/>
 			<item value=""/>
-			<item value="categories[1]"/>
-			<item value="boolean exists"/>
-			<item value="exists"/>
-			<item value="new PacketRequestPlayerInfo(player)"/>
-			<item value="getModPlayerPersistTag(player, Variables.MODID)"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

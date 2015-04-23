@@ -48,7 +48,7 @@ public class ItemGoldObj extends Item
     
     public String getItemStackDisplayName(ItemStack stack)
     {
-        return "Golden " + ((JewelryNBT.item(stack) != null) ? JewelryNBT.item(stack).getDisplayName() : "Object");
+        return "Golden " + ((Item.getItemById(Integer.valueOf(stack.getTagCompound().getTag("target").toString().split(",")[0].substring(4).replace("s", ""))) != null && stack != null && JewelryNBT.item(stack) != null) ? JewelryNBT.item(stack).getDisplayName() : "Object");
     }
     
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean displayInfo)

@@ -1,0 +1,151 @@
+---- Minecraft Crash Report ----
+// Ooh. Shiny.
+
+Time: 4/20/15 4:17 PM
+Description: Rendering entity in world
+
+java.lang.StringIndexOutOfBoundsException: String index out of range: -5
+	at java.lang.String.substring(String.java:1911)
+	at darkknight.jewelrycraft.item.render.ItemRender.renderItem(ItemRender.java:93)
+	at net.minecraftforge.client.ForgeHooksClient.renderEntityItem(ForgeHooksClient.java:136)
+	at net.minecraft.client.renderer.entity.RenderItem.doRender(RenderItem.java:101)
+	at net.minecraft.client.renderer.entity.RenderItem.doRender(RenderItem.java:783)
+	at net.minecraft.client.renderer.entity.RenderManager.func_147939_a(RenderManager.java:300)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntityWithPosYaw(RenderManager.java:283)
+	at net.minecraft.client.renderer.tileentity.RenderItemFrame.func_82402_b(RenderItemFrame.java:249)
+	at net.minecraft.client.renderer.tileentity.RenderItemFrame.doRender(RenderItemFrame.java:72)
+	at net.minecraft.client.renderer.tileentity.RenderItemFrame.doRender(RenderItemFrame.java:337)
+	at net.minecraft.client.renderer.entity.RenderManager.func_147939_a(RenderManager.java:300)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntityStatic(RenderManager.java:278)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntitySimple(RenderManager.java:251)
+	at net.minecraft.client.renderer.RenderGlobal.renderEntities(RenderGlobal.java:527)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1300)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1087)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1056)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:951)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:134)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at java.lang.String.substring(String.java:1911)
+	at darkknight.jewelrycraft.item.render.ItemRender.renderItem(ItemRender.java:93)
+	at net.minecraftforge.client.ForgeHooksClient.renderEntityItem(ForgeHooksClient.java:136)
+	at net.minecraft.client.renderer.entity.RenderItem.doRender(RenderItem.java:101)
+	at net.minecraft.client.renderer.entity.RenderItem.doRender(RenderItem.java:783)
+
+-- Entity being rendered --
+Details:
+	Entity Type: Item (net.minecraft.entity.item.EntityItem)
+	Entity ID: 7075
+	Entity Name: item.item.jewelrycraft2.goldObject
+	Entity's Exact location: 0.00, 0.00, 0.00
+	Entity's Block location: World: (0,0,0), Chunk: (at 0,0,0 in 0,0; contains blocks 0,0,0 to 15,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Entity's Momentum: 0.09, 0.20, 0.01
+
+-- Renderer details --
+Details:
+	Assigned renderer: net.minecraft.client.renderer.entity.RenderItem@6584f73
+	Location: 0.00,0.00,0.00 - World: (0,0,0), Chunk: (at 0,0,0 in 0,0; contains blocks 0,0,0 to 15,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Rotation: 0.0
+	Delta: 0.0
+Stacktrace:
+	at net.minecraft.client.renderer.entity.RenderManager.func_147939_a(RenderManager.java:300)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntityWithPosYaw(RenderManager.java:283)
+	at net.minecraft.client.renderer.tileentity.RenderItemFrame.func_82402_b(RenderItemFrame.java:249)
+	at net.minecraft.client.renderer.tileentity.RenderItemFrame.doRender(RenderItemFrame.java:72)
+	at net.minecraft.client.renderer.tileentity.RenderItemFrame.doRender(RenderItemFrame.java:337)
+
+-- Entity being rendered --
+Details:
+	Entity Type: ItemFrame (net.minecraft.entity.item.EntityItemFrame)
+	Entity ID: 2460
+	Entity Name: entity.ItemFrame.name
+	Entity's Exact location: -234.50, 65.50, -743.94
+	Entity's Block location: World: (-235,65,-744), Chunk: (at 5,4,8 in -15,-47; contains blocks -240,0,-752 to -225,255,-737), Region: (-1,-2; contains chunks -32,-64 to -1,-33, blocks -512,0,-1024 to -1,255,-513)
+	Entity's Momentum: 0.00, 0.00, 0.00
+
+-- Renderer details --
+Details:
+	Assigned renderer: net.minecraft.client.renderer.tileentity.RenderItemFrame@fc80a46
+	Location: 0.52,-0.12,-0.91 - World: (0,-1,-1), Chunk: (at 0,-1,15 in 0,-1; contains blocks 0,0,-16 to 15,255,-1), Region: (0,-1; contains chunks 0,-32 to 31,-1, blocks 0,0,-512 to 511,255,-1)
+	Rotation: 180.0
+	Delta: 0.3235625
+Stacktrace:
+	at net.minecraft.client.renderer.entity.RenderManager.func_147939_a(RenderManager.java:300)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntityStatic(RenderManager.java:278)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntitySimple(RenderManager.java:251)
+	at net.minecraft.client.renderer.RenderGlobal.renderEntities(RenderGlobal.java:527)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1300)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['OnyxDarkKnight'/2497, l='MpServer', x=-235.02, y=65.62, z=-743.02]]
+	Chunk stats: MultiplayerChunkCache: 441, 441
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (-235,4,-715), Chunk: (at 5,0,5 in -15,-45; contains blocks -240,0,-720 to -225,255,-705), Region: (-1,-2; contains chunks -32,-64 to -1,-33, blocks -512,0,-1024 to -1,255,-513)
+	Level time: 6265756 game time, 1000 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false
+	Forced entities: 38 total; [EntityItemFrame['entity.ItemFrame.name'/2443, l='MpServer', x=-231.50, y=68.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2442, l='MpServer', x=-232.50, y=68.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2441, l='MpServer', x=-233.50, y=68.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2440, l='MpServer', x=-234.50, y=68.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2447, l='MpServer', x=-234.50, y=67.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2446, l='MpServer', x=-233.50, y=67.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2445, l='MpServer', x=-232.50, y=67.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2444, l='MpServer', x=-231.50, y=67.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2439, l='MpServer', x=-235.50, y=68.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2437, l='MpServer', x=-224.50, y=65.50, z=-759.06], EntityItemFrame['entity.ItemFrame.name'/2458, l='MpServer', x=-231.50, y=65.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2459, l='MpServer', x=-233.50, y=64.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2456, l='MpServer', x=-233.50, y=65.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2457, l='MpServer', x=-232.50, y=65.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2462, l='MpServer', x=-235.50, y=64.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2463, l='MpServer', x=-231.50, y=64.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2460, l='MpServer', x=-234.50, y=65.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2461, l='MpServer', x=-234.50, y=64.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2450, l='MpServer', x=-234.50, y=66.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2451, l='MpServer', x=-233.50, y=66.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2448, l='MpServer', x=-235.50, y=67.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2449, l='MpServer', x=-235.50, y=66.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2454, l='MpServer', x=-235.50, y=65.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2455, l='MpServer', x=-235.50, y=65.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2452, l='MpServer', x=-232.50, y=66.50, z=-743.94], EntityItemFrame['entity.ItemFrame.name'/2453, l='MpServer', x=-231.50, y=66.50, z=-743.94], EntityBat['Bat'/2540, l='MpServer', x=-159.88, y=21.98, z=-664.25], EntityClientPlayerMP['OnyxDarkKnight'/2497, l='MpServer', x=-235.02, y=65.62, z=-743.02], EntityBat['Bat'/2538, l='MpServer', x=-157.50, y=21.00, z=-666.75], EntityHalfHeart['Half-Heart'/2471, l='MpServer', x=-219.50, y=59.00, z=-746.50], EntityVillager['Villager'/2418, l='MpServer', x=-284.34, y=64.00, z=-777.41], EntityBat['Bat'/2430, l='MpServer', x=-247.81, y=9.30, z=-676.43], EntityMinecartChest['entity.MinecartChest.name'/2484, l='MpServer', x=-162.50, y=24.50, z=-680.50], EntityHalfHeart['Half-Heart'/2425, l='MpServer', x=-263.16, y=64.00, z=-738.66], EntityHeart['Heart'/2424, l='MpServer', x=-271.38, y=64.00, z=-776.72], EntityVillager['Villager'/2486, l='MpServer', x=-159.69, y=64.00, z=-798.72], EntityBat['Bat'/2487, l='MpServer', x=-156.25, y=22.10, z=-664.50], EntityHeart['Heart'/2426, l='MpServer', x=-263.16, y=64.00, z=-738.66]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:415)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2555)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:973)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:134)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 8.1 (amd64) version 6.3
+	Java Version: 1.7.0_71, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 24192480 bytes (23 MB) / 518979584 bytes (494 MB) up to 518979584 bytes (494 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx512M -Xms512M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.05 FML v7.10.25.1208 Minecraft Forge 10.13.0.1208 6 mods loaded, 6 mods active
+	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	FML{7.10.25.1208} [Forge Mod Loader] (forgeSrc-1.7.10-10.13.0.1208.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	Forge{10.13.0.1208} [Minecraft Forge] (forgeSrc-1.7.10-10.13.0.1208.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	CodeChickenCore{1.0.4.35} [CodeChicken Core] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	NotEnoughItems{1.0.4.95} [Not Enough Items] (NotEnoughItems-1.7.10-1.0.4.95-universal.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	jewelrycraft2{1.0} [Jewelrycraft 2] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	Launched Version: 1.7
+	LWJGL: 2.9.1
+	OpenGL: GeForce GT 525M/PCIe/SSE2 GL version 4.5.0 NVIDIA 347.25, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Anisotropic filtering is supported and maximum anisotropy is 16.
+Shaders are available because OpenGL 2.1 is supported.
+
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)

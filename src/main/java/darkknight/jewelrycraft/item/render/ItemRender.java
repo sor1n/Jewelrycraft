@@ -1,6 +1,7 @@
 package darkknight.jewelrycraft.item.render;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockAnvil;
 import net.minecraft.block.BlockHopper;
 import net.minecraft.client.Minecraft;
@@ -76,17 +77,21 @@ public class ItemRender implements IItemRenderer
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object ... data)
     {
-        if (render != null && entity != null && JewelryNBT.item(item) == null){
-            if (type == IItemRenderer.ItemRenderType.ENTITY){
-                GL11.glRotatef(180f, 0f, 1f, 0f);
-                GL11.glTranslatef(-0.5f, -0.5f, -0.4f);
+        if (item != null){
+            if (render != null && entity != null && JewelryNBT.item(item) == null){
+                if (type == IItemRenderer.ItemRenderType.ENTITY){
+                    GL11.glRotatef(180f, 0f, 1f, 0f);
+                    GL11.glTranslatef(-0.5f, -0.5f, -0.4f);
+                }
+                render.renderTileEntityAt(entity, 0.0D, 0.0D, 0.0D, 0.0F);
+            }else if (JewelryNBT.item(item) != null){
+                GL11.glPushMatrix();
+                GL11.glColor3f(1F, 1F, 0F);
+                if(Item.getItemById(Integer.valueOf(item.getTagCompound().getTag("target").toString().split(",")[0].substring(4).replace("s", ""))) != null)
+                    renderItem(Minecraft.getMinecraft().thePlayer, JewelryNBT.item(item), 0, type);
+                else renderItem(Minecraft.getMinecraft().thePlayer, new ItemStack(Blocks.end_portal), 0, type);;
+                GL11.glPopMatrix();
             }
-            render.renderTileEntityAt(entity, 0.0D, 0.0D, 0.0D, 0.0F);
-        }else if (JewelryNBT.item(item) != null){
-            GL11.glPushMatrix();
-            GL11.glColor3f(1F, 1F, 0F);
-            renderItem(Minecraft.getMinecraft().thePlayer, JewelryNBT.item(item), 0, type);
-            GL11.glPopMatrix();
         }
     }
     
@@ -94,100 +99,101 @@ public class ItemRender implements IItemRenderer
     {
         GL11.glPushMatrix();
         TextureManager texturemanager = this.mc.getTextureManager();
-        Item item = itemStack.getItem();
-        Block block = Block.getBlockFromItem(item);
-        IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(itemStack, type);
-        if (customRenderer != null){
-            texturemanager.bindTexture(texturemanager.getResourceLocation(itemStack.getItemSpriteNumber()));
-            if (type.equals(type.EQUIPPED)) GL11.glTranslatef(0.7F, 0.55F, 0.55F);
-            ForgeHooksClient.renderEquippedItem(type, customRenderer, renderBlocksIr, entity, itemStack);
-        }else if (itemStack.getItemSpriteNumber() == 0 && item instanceof ItemBlock && RenderBlocks.renderItemIn3d(block.getRenderType())){
-            texturemanager.bindTexture(texturemanager.getResourceLocation(0));
-            if (type.equals(type.EQUIPPED)) GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-            if (itemStack != null && block != null && block.getRenderBlockPass() != 0){
-                GL11.glDepthMask(false);
-                renderBlockAsItem(block, itemStack.getItemDamage(), 1.0F);
-                GL11.glDepthMask(true);
-            }else{
-                renderBlockAsItem(block, itemStack.getItemDamage(), 1.0F);
-            }
-        }else{ 
-            IIcon iicon = itemStack.getIconIndex();
-            if (iicon == null){
-                GL11.glPopMatrix();
-                return;
-            }
-            texturemanager.bindTexture(texturemanager.getResourceLocation(itemStack.getItemSpriteNumber()));
-            TextureUtil.func_152777_a(false, false, 1.0F);
-            Tessellator tessellator = Tessellator.instance;
-            float f = iicon.getMinU();
-            float f1 = iicon.getMaxU();
-            float f2 = iicon.getMinV();
-            float f3 = iicon.getMaxV();
-            float f4 = 0.0F;
-            float f5 = 0.3F;
-            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            float f6 = 1.6F;
-            GL11.glScalef(f6, f6, f6);
-            if(type.equals(type.ENTITY)){
-                GL11.glTranslatef(0.0F, 0.0265F, 0.0F);
-                GL11.glRotatef(-30F, 0.0F, 0.0F, 1.0F);
-                GL11.glRotatef(45F, 0.0F, 1.0F, 0.0F);
-                GL11.glScalef(0.625F, 0.625F, 0.625F);
-            }
-            if (!type.equals(type.EQUIPPED_FIRST_PERSON)){
-                GL11.glRotatef(45f, 0f, 1f, 0f);
-                GL11.glRotatef(180f, 0f, 1f, 0f);
-                GL11.glRotatef(30f, 1f, 0f, 0f);
-                if (type.equals(type.EQUIPPED)){
-                    GL11.glRotatef(35f, 1f, 0f, 0f);
-                    GL11.glTranslatef(0F, -0.15F, -0.6F);
+        if (itemStack != null){
+            Item item = itemStack.getItem();
+            Block block = Block.getBlockFromItem(item);
+            IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(itemStack, type);
+            if (customRenderer != null){
+                texturemanager.bindTexture(texturemanager.getResourceLocation(itemStack.getItemSpriteNumber()));
+                if (type.equals(type.EQUIPPED)) GL11.glTranslatef(0.7F, 0.55F, 0.55F);
+                ForgeHooksClient.renderEquippedItem(type, customRenderer, renderBlocksIr, entity, itemStack);
+            }else if (itemStack.getItemSpriteNumber() == 0 && item instanceof ItemBlock && RenderBlocks.renderItemIn3d(block.getRenderType())){
+                texturemanager.bindTexture(texturemanager.getResourceLocation(0));
+                if (type.equals(type.EQUIPPED)) GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+                if (itemStack != null && block != null && block.getRenderBlockPass() != 0){
+                    GL11.glDepthMask(false);
+                    renderBlockAsItem(block, itemStack.getItemDamage(), 1.0F);
+                    GL11.glDepthMask(true);
+                }else{
+                    renderBlockAsItem(block, itemStack.getItemDamage(), 1.0F);
                 }
-                GL11.glTranslatef(-0.5F, -0.5F, 0.0F);
-            }
-            else if(type.equals(type.EQUIPPED_FIRST_PERSON)){
-                GL11.glTranslatef(-0.35F, 0.4F, 0.93F);
-                GL11.glRotatef(45f, 0f, 1f, 0f);
-                GL11.glRotatef(-25f, 0f, 0f, 1f);
-            }
-            if (itemStack.getItem().requiresMultipleRenderPasses()){
-                for(int x = 0; x < itemStack.getItem().getRenderPasses(itemStack.getItemDamage()); x++){
-                    iicon = itemStack.getItem().getIcon(itemStack, x);
-                    f = iicon.getMinU();
-                    f1 = iicon.getMaxU();
-                    f2 = iicon.getMinV();
-                    f3 = iicon.getMaxV();
+            }else{
+                IIcon iicon = itemStack.getIconIndex();
+                if (iicon == null){
+                    GL11.glPopMatrix();
+                    return;
+                }
+                texturemanager.bindTexture(texturemanager.getResourceLocation(itemStack.getItemSpriteNumber()));
+                TextureUtil.func_152777_a(false, false, 1.0F);
+                Tessellator tessellator = Tessellator.instance;
+                float f = iicon.getMinU();
+                float f1 = iicon.getMaxU();
+                float f2 = iicon.getMinV();
+                float f3 = iicon.getMaxV();
+                float f4 = 0.0F;
+                float f5 = 0.3F;
+                GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+                float f6 = 1.6F;
+                GL11.glScalef(f6, f6, f6);
+                if (type.equals(type.ENTITY)){
+                    GL11.glTranslatef(0.0F, 0.0265F, 0.0F);
+                    GL11.glRotatef(-30F, 0.0F, 0.0F, 1.0F);
+                    GL11.glRotatef(45F, 0.0F, 1.0F, 0.0F);
+                    GL11.glScalef(0.625F, 0.625F, 0.625F);
+                }
+                if (!type.equals(type.EQUIPPED_FIRST_PERSON)){
+                    GL11.glRotatef(45f, 0f, 1f, 0f);
+                    GL11.glRotatef(180f, 0f, 1f, 0f);
+                    GL11.glRotatef(30f, 1f, 0f, 0f);
+                    if (type.equals(type.EQUIPPED)){
+                        GL11.glRotatef(35f, 1f, 0f, 0f);
+                        GL11.glTranslatef(0F, -0.15F, -0.6F);
+                    }
+                    GL11.glTranslatef(-0.5F, -0.5F, 0.0F);
+                }else if (type.equals(type.EQUIPPED_FIRST_PERSON)){
+                    GL11.glTranslatef(-0.35F, 0.4F, 0.93F);
+                    GL11.glRotatef(45f, 0f, 1f, 0f);
+                    GL11.glRotatef(-25f, 0f, 0f, 1f);
+                }
+                if (itemStack.getItem().requiresMultipleRenderPasses()){
+                    for(int x = 0; x < itemStack.getItem().getRenderPasses(itemStack.getItemDamage()); x++){
+                        iicon = itemStack.getItem().getIcon(itemStack, x);
+                        f = iicon.getMinU();
+                        f1 = iicon.getMaxU();
+                        f2 = iicon.getMinV();
+                        f3 = iicon.getMaxV();
+                        ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
+                    }
+                }else{
                     ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
                 }
-            }else{
-                ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
+                GL11.glDepthFunc(GL11.GL_EQUAL);
+                texturemanager.bindTexture(RES_ITEM_GLINT);
+                GL11.glEnable(GL11.GL_BLEND);
+                OpenGlHelper.glBlendFunc(768, 1, 1, 0);
+                GL11.glMatrixMode(GL11.GL_TEXTURE);
+                GL11.glPushMatrix();
+                float f8 = 0.325F;
+                GL11.glScalef(f8, f8, f8);
+                GL11.glTranslatef(17F, 0.0F, 0.0F);
+                GL11.glRotatef(-30.0F, 0.0F, 0.0F, 1.0F);
+                GL11.glColor3f(1F, 1F, 0F);
+                ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
+                GL11.glPopMatrix();
+                GL11.glPushMatrix();
+                GL11.glScalef(f8, f8, f8);
+                float f9 = (float)(Minecraft.getSystemTime() % 30000L) / 30000.0F * 8.0F;
+                GL11.glTranslatef(-f9, 0.0F, 0.0F);
+                GL11.glRotatef(30.0F, 0.0F, 0.0F, 1.0F);
+                ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
+                GL11.glPopMatrix();
+                GL11.glMatrixMode(GL11.GL_MODELVIEW);
+                GL11.glDisable(GL11.GL_BLEND);
+                GL11.glDepthFunc(GL11.GL_LEQUAL);
+                GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+                texturemanager.bindTexture(texturemanager.getResourceLocation(itemStack.getItemSpriteNumber()));
+                TextureUtil.func_147945_b();
             }
-            GL11.glDepthFunc(GL11.GL_EQUAL);
-            texturemanager.bindTexture(RES_ITEM_GLINT);
-            GL11.glEnable(GL11.GL_BLEND);
-            OpenGlHelper.glBlendFunc(768, 1, 1, 0);
-            GL11.glMatrixMode(GL11.GL_TEXTURE);
-            GL11.glPushMatrix();
-            float f8 = 0.325F;
-            GL11.glScalef(f8, f8, f8);
-            GL11.glTranslatef(17F, 0.0F, 0.0F);
-            GL11.glRotatef(-30.0F, 0.0F, 0.0F, 1.0F);
-            GL11.glColor3f(1F, 1F, 0F);
-            ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
-            GL11.glPopMatrix();
-            GL11.glPushMatrix();
-            GL11.glScalef(f8, f8, f8);
-            float f9 = (float)(Minecraft.getSystemTime() % 30000L) / 30000.0F * 8.0F;
-            GL11.glTranslatef(-f9, 0.0F, 0.0F);
-            GL11.glRotatef(30.0F, 0.0F, 0.0F, 1.0F);
-            ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
-            GL11.glPopMatrix();
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-            GL11.glDisable(GL11.GL_BLEND);
-            GL11.glDepthFunc(GL11.GL_LEQUAL);
-            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-            texturemanager.bindTexture(texturemanager.getResourceLocation(itemStack.getItemSpriteNumber()));
-            TextureUtil.func_147945_b();
         }
         GL11.glPopMatrix();
     }
