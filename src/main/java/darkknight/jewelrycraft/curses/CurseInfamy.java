@@ -22,9 +22,9 @@ import darkknight.jewelrycraft.util.Variables;
 public class CurseInfamy extends Curse
 {
     MaskRender mask = new MaskRender();
-    public CurseInfamy(int id, String name, int text)
+    public CurseInfamy(String name, int txtID, String pack)
     {
-        super(id, name, text);
+        super(name, txtID, pack);
     }
     
     @Override
@@ -41,6 +41,7 @@ public class CurseInfamy extends Curse
         }
     }
     
+    @Override
     public void playerRender(EntityPlayer player, RenderPlayerEvent.Specials.Post event)
     {
         float yaw = player.prevRotationYawHead + (player.rotationYawHead - player.prevRotationYawHead) * event.partialRenderTick;

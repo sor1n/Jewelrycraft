@@ -2,12 +2,10 @@ package darkknight.jewelrycraft.proxy;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.InventoryTabVanilla;
@@ -53,10 +51,8 @@ public class ClientProxy extends CommonProxy
     @Override
     public void preInit()
     {
-        ResourceLocation pedestalResourceLocation = new ResourceLocation(Variables.MODID, "textures/tileentities/BricksPedestal.png");
-        TileEntityHandPedestalRender pedestalRender = new TileEntityHandPedestalRender(new ModelHandPedestal(pedestalResourceLocation), pedestalResourceLocation);
-        ResourceLocation shadowResourceLocation = new ResourceLocation(Variables.MODID, "textures/tileentities/ShadowHand.png");
-        TileEntityShadowHandRender shadowHandRender = new TileEntityShadowHandRender(new ModelShadowHand(shadowResourceLocation), shadowResourceLocation);
+        TileEntityHandPedestalRender pedestalRender = new TileEntityHandPedestalRender(new ModelHandPedestal(Variables.PEDESTAL_TEXTURE), Variables.PEDESTAL_TEXTURE);
+        TileEntityShadowHandRender shadowHandRender = new TileEntityShadowHandRender(new ModelShadowHand(Variables.SHADOW_HAND_TEXTURE), Variables.SHADOW_HAND_TEXTURE);
         
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySmelter.class, new TileEntitySmelterRender());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMolder.class, new TileEntityMolderRender());
@@ -72,11 +68,11 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.smelter), new ItemRender(new TileEntitySmelterRender(), new TileEntitySmelter(), new ModelSmelter()));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.molder), new ItemRender(new TileEntityMolderRender(), new TileEntityMolder(), new ModelMolder()));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.shadowEye), new ItemRender(new TileEntityShadowEyeRender(), new TileEntityShadowEye(), new ModelShadowEye()));
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.handPedestal), new ItemRender(pedestalRender, new TileEntityHandPedestal(), new ModelHandPedestal(pedestalResourceLocation)));
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.shadowHand), new ItemRender(shadowHandRender, new TileEntityShadowHand(), new ModelShadowHand(shadowResourceLocation)));
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.handPedestal), new ItemRender(pedestalRender, new TileEntityHandPedestal(), new ModelHandPedestal(Variables.PEDESTAL_TEXTURE)));
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.shadowHand), new ItemRender(shadowHandRender, new TileEntityShadowHand(), new ModelShadowHand(Variables.SHADOW_HAND_TEXTURE)));
         MinecraftForgeClient.registerItemRenderer(ItemList.goldObj, new ItemRender());
         
-        VillagerRegistry.instance().registerVillagerSkin(3000, new ResourceLocation(Variables.MODID, "textures/entities/jeweler.png"));
+        VillagerRegistry.instance().registerVillagerSkin(3000, Variables.VILLAGER_TEXTURE);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHeart.class, new HeartRender(new ModelHeart(), 0.25F));
         RenderingRegistry.registerEntityRenderingHandler(EntityHalfHeart.class, new HeartRender(new ModelHalfHeart(), 0.25F));
@@ -85,8 +81,7 @@ public class ClientProxy extends CommonProxy
         TabRegistry.registerTab(new TabJewelry());
         MinecraftForge.EVENT_BUS.register(new TabRegistry());
         MinecraftForge.EVENT_BUS.register(new PlayerRenderHandler());
-        ResourceLocation jeweleryTexture = new ResourceLocation(Variables.MODID, "textures/gui/curses.png");
-        MinecraftForge.EVENT_BUS.register(new ScreenHandler(Minecraft.getMinecraft(), jeweleryTexture));
+        MinecraftForge.EVENT_BUS.register(new ScreenHandler(Minecraft.getMinecraft()));
     }
     
     @Override

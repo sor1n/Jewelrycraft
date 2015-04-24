@@ -5,9 +5,9 @@ import net.minecraft.world.World;
 
 public class CurseFlamingSoul extends Curse
 {
-    public CurseFlamingSoul(int id, String name, int text)
+    public CurseFlamingSoul(String name, int txtID, String pack)
     {
-        super(id, name, text);
+        super(name, txtID, pack);
     }
     
     @Override

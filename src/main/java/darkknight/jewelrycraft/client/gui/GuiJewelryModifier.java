@@ -48,10 +48,10 @@ public class GuiJewelryModifier extends GuiContainer
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
         if (selectedX != 0 && selectedY != 0 && page == selectedPage) drawTexturedModalRect(selectedX, selectedY, 211, 0, 18, 18);
-        for(Map items: selectedItemsPos){
+        for(Map<Integer, Map<Integer, Integer>> items: selectedItemsPos){
             for(Object itemPage: items.keySet()){
-                if (page == (Integer)itemPage) for(Object x: ((Map)items.get(itemPage)).keySet())
-                    drawTexturedModalRect((int)x, (int)((Map)items.get(itemPage)).get(x), 211, 0, 18, 18);
+                if (page == (Integer)itemPage) for(int x: ((Map<Integer, Integer>)items.get(itemPage)).keySet())
+                    drawTexturedModalRect(x, (int)((Map<Integer, Integer>)items.get(itemPage)).get(x), 211, 0, 18, 18);
             }
         }
         this.searchField.drawTextBox();

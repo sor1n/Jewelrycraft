@@ -7,6 +7,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -43,12 +44,12 @@ public class ItemGoldObj extends Item
     {
         ItemStack item = JewelryNBT.item(stack);
         if (item != null) return item.getIconIndex();
-        return itemIcon;
+        return new ItemStack(Blocks.end_portal).getIconIndex();
     }
     
     public String getItemStackDisplayName(ItemStack stack)
     {
-        return "Golden " + ((Item.getItemById(Integer.valueOf(stack.getTagCompound().getTag("target").toString().split(",")[0].substring(4).replace("s", ""))) != null && stack != null && JewelryNBT.item(stack) != null) ? JewelryNBT.item(stack).getDisplayName() : "Object");
+        return "Golden " + (stack != null && (Item.getItemById(Integer.valueOf(stack.getTagCompound().getTag("target").toString().split(",")[0].substring(4).replace("s", ""))) != null && JewelryNBT.item(stack) != null) ? JewelryNBT.item(stack).getDisplayName() : "Object");
     }
     
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean displayInfo)

@@ -7,9 +7,9 @@ import net.minecraft.world.World;
 
 public class CurseBlind extends Curse
 {
-    public CurseBlind(int id, String name, int text)
+    public CurseBlind(String name, int txtID, String pack)
     {
-        super(id, name, text);
+        super(name, txtID, pack);
     }
     
     @Override

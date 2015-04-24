@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="net.minecraft.entity.player.EntityPlayer"/>
-<fullyQualifiedTypeName name="darkknight.jewelrycraft.network.PacketSendCurseStats"/>
-<fullyQualifiedTypeName name="darkknight.jewelrycraft.events.PlayerRenderHandler"/>
-<fullyQualifiedTypeName name="darkknight.jewelrycraft.events.ScreenHandler"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.monster.EntityMob"/>
 <fullyQualifiedTypeName name="darkknight.jewelrycraft.damage.DamageSourceList"/>
@@ -27,7 +23,6 @@
 <fullyQualifiedTypeName name="net.minecraft.inventory.InventoryBasic"/>
 <fullyQualifiedTypeName name="darkknight.jewelrycraft.client.gui.container.ContainerJewelryTab"/>
 <fullyQualifiedTypeName name="darkknight.jewelrycraft.client.gui.container.ContainerJewelryModifier"/>
-<fullyQualifiedTypeName name="darkknight.jewelrycraft.JewelrycraftMod"/>
 <fullyQualifiedTypeName name="darkknight.jewelrycraft.network.PacketRequestSetSlot"/>
 <fullyQualifiedTypeName name="net.minecraft.nbt.NBTTagCompound"/>
 <fullyQualifiedTypeName name="cpw.mods.fml.common.network.ByteBufUtils"/>
@@ -58,6 +53,11 @@
 <fullyQualifiedTypeName name="net.minecraft.block.BlockAir"/>
 <fullyQualifiedTypeName name="net.minecraft.client.renderer.entity.RenderItem"/>
 <fullyQualifiedTypeName name="net.minecraft.client.renderer.ItemRenderer"/>
-<fullyQualifiedTypeName name="net.minecraft.init.Items"/>
 <fullyQualifiedTypeName name="net.minecraft.client.Minecraft"/>
+<fullyQualifiedTypeName name="net.minecraftforge.client.event.RenderPlayerEvent.SetArmorModel"/>
+<fullyQualifiedTypeName name="darkknight.jewelrycraft.network.PacketHandler"/>
+<fullyQualifiedTypeName name="darkknight.jewelrycraft.JewelrycraftMod"/>
+<fullyQualifiedTypeName name="darkknight.jewelrycraft.entities.EntityList"/>
+<fullyQualifiedTypeName name="darkknight.jewelrycraft.events.EventList"/>
+<fullyQualifiedTypeName name="net.minecraft.init.Items"/>
 </qualifiedTypeNameHistroy>

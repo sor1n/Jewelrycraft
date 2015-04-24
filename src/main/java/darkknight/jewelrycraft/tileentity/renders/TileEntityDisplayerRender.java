@@ -77,6 +77,7 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
                 GL11.glRotatef(180F, 1F, 0F, 0F);
                 GL11.glTranslatef(0.0F, -0.6F + disp.ringTranslation1 / 5, 0F);
                 GL11.glRotatef(disp.rotAngle, 0F, 1F, 0F);
+                GL11.glColor4f(1F, 1F, 1F, 1F);
                 if (RenderManager.instance.options.fancyGraphics) RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
                 else{
                     GL11.glRotatef(180F, 0F, 1F, 0F);

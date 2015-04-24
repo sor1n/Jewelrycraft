@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package darkknight.jewelrycraft.events;
+
+/**
+ * @author Sorin
+ *
+ */
+public class EventList
+{
+}

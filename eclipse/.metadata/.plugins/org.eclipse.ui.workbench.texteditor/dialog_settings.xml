@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="v" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="isChild"/>
+			<item value="chi"/>
+			<item value="chil"/>
+			<item value="child"/>
 			<item value="p_73729_4_"/>
 			<item value="p_73729_3_"/>
 			<item value="p_73729_6_"/>
 			<item value="p_73729_2_"/>
-			<item value="p_73729_5_"/>
-			<item value="p_73729_1_"/>
-			<item value="update"/>
-			<item value="playerInfo.setBoolean(&quot;sendInfo&quot;, true);"/>
 		</list>
 		<list key="replacehistory">
 			<item value="v"/>

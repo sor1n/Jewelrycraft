@@ -29,9 +29,9 @@ import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 public class CurseMidasTouch extends Curse
 {
-    public CurseMidasTouch(int id, String name, int text)
+    public CurseMidasTouch(String name, int txtID, String pack)
     {
-        super(id, name, text);
+        super(name, txtID, pack);
     }
     
     @Override

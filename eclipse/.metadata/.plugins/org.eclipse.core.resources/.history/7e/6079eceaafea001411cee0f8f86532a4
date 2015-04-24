@@ -1,0 +1,26 @@
+/**
+ * 
+ */
+package darkknight.jewelrycraft.events;
+
+import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.entities.EntityHalfHeart;
+import darkknight.jewelrycraft.entities.EntityHeart;
+import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.util.Variables;
+
+public class EventList
+{
+    public static void preInit(FMLPreInitializationEvent e)
+    {        
+        
+        MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
+        MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
+        MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+        FMLCommonHandler.instance().bus().register(new EventCommonHandler());
+        BucketHandler.INSTANCE.buckets.put(BlockList.moltenMetal, ItemList.bucket);
+    }
+}

@@ -17,9 +17,9 @@ import net.minecraft.world.World;
 
 public class CurseRabbitsPaw extends Curse
 {
-    public CurseRabbitsPaw(int id, String name, int text)
+    public CurseRabbitsPaw(String name, int txtID, String pack)
     {
-        super(id, name, text);
+        super(name, txtID, pack);
     }
     
     @Override

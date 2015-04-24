@@ -1,6 +1,8 @@
 package darkknight.jewelrycraft.item;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
@@ -29,37 +31,36 @@ public class ItemList
      */
     public static void preInit(FMLPreInitializationEvent e)
     {
-        if (!isInitialized){
-            thiefGloves = new ItemThiefGloves().setUnlocalizedName(Variables.MODID + ".thiefGloves").setTextureName(Variables.MODID + ":thiefGloves").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            shadowIngot = new Item().setUnlocalizedName(Variables.MODID + ".ingotShadow").setTextureName(Variables.MODID + ":ingotShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            molds = new ItemMolds().setUnlocalizedName(Variables.MODID + ".mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            clayMolds = new ItemClayMolds().setUnlocalizedName(Variables.MODID + ".mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            ring = (ItemRing)new ItemRing().setUnlocalizedName(Variables.MODID + ".ring").setTextureName(Variables.MODID + ":ring").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            necklace = (ItemNecklace)new ItemNecklace().setUnlocalizedName(Variables.MODID + ".necklace").setTextureName(Variables.MODID + ":necklace").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            bracelet = (ItemBracelet)new ItemBracelet().setUnlocalizedName(Variables.MODID + ".bracelet").setTextureName(Variables.MODID + ":bracelet").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            earrings = (ItemEarrings)new ItemEarrings().setUnlocalizedName(Variables.MODID + ".earrings").setTextureName(Variables.MODID + ":earrings").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            crystal = new ItemCrystal().setUnlocalizedName(Variables.MODID + ".crystal").setTextureName(Variables.MODID + ":crystal").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            guide = new ItemGuide().setUnlocalizedName(Variables.MODID + ".guide").setTextureName(Variables.MODID + ":guide").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            bucket = (ItemMoltenMetalBucket)new ItemMoltenMetalBucket().setUnlocalizedName(Variables.MODID + ".bucket");
-            metal = (ItemMoltenMetal)new ItemMoltenMetal().setUnlocalizedName(Variables.MODID + ".bucket");
-            jewelryModifier = new ItemJewelryModifier().setUnlocalizedName(Variables.MODID + ".jewelryModifier").setTextureName(Variables.MODID + ":jewelryModifier").setCreativeTab(JewelrycraftMod.jewelrycraft);
-            goldObj = new ItemGoldObj().setUnlocalizedName(Variables.MODID + ".goldObject");
-            
-            GameRegistry.registerItem(thiefGloves, "thiefGloves");
-            GameRegistry.registerItem(shadowIngot, "shadowIngot");
-            GameRegistry.registerItem(molds, "molds");
-            GameRegistry.registerItem(clayMolds, "clayMolds");
-            GameRegistry.registerItem(ring, "ring");
-            GameRegistry.registerItem(necklace, "necklace");
-            GameRegistry.registerItem(bracelet, "bracelet");
-            GameRegistry.registerItem(earrings, "earrings");
-            GameRegistry.registerItem(crystal, "crystal");
-            GameRegistry.registerItem(guide, "guide");
-            GameRegistry.registerItem(bucket, "moltenMetalBucket");
-            GameRegistry.registerItem(metal, "moltenMetal");
-            GameRegistry.registerItem(jewelryModifier, "jewelryModifier");
-            GameRegistry.registerItem(goldObj, "goldObject");
-            isInitialized = true;
-        }
+        thiefGloves = new ItemThiefGloves().setUnlocalizedName(Variables.MODID + ".thiefGloves").setTextureName(Variables.MODID + ":thiefGloves").setCreativeTab(JewelrycraftMod.jewelrycraft);
+        shadowIngot = new Item().setUnlocalizedName(Variables.MODID + ".ingotShadow").setTextureName(Variables.MODID + ":ingotShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
+        molds = new ItemMolds().setUnlocalizedName(Variables.MODID + ".mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
+        clayMolds = new ItemClayMolds().setUnlocalizedName(Variables.MODID + ".mold").setTextureName("Mold").setCreativeTab(JewelrycraftMod.jewelrycraft);
+        ring = (ItemRing)new ItemRing().setUnlocalizedName(Variables.MODID + ".ring").setTextureName(Variables.MODID + ":ring").setCreativeTab(JewelrycraftMod.jewelrycraft);
+        necklace = (ItemNecklace)new ItemNecklace().setUnlocalizedName(Variables.MODID + ".necklace").setTextureName(Variables.MODID + ":necklace").setCreativeTab(JewelrycraftMod.jewelrycraft);
+        bracelet = (ItemBracelet)new ItemBracelet().setUnlocalizedName(Variables.MODID + ".bracelet").setTextureName(Variables.MODID + ":bracelet").setCreativeTab(JewelrycraftMod.jewelrycraft);
+        earrings = (ItemEarrings)new ItemEarrings().setUnlocalizedName(Variables.MODID + ".earrings").setTextureName(Variables.MODID + ":earrings").setCreativeTab(JewelrycraftMod.jewelrycraft);
+        crystal = new ItemCrystal().setUnlocalizedName(Variables.MODID + ".crystal").setTextureName(Variables.MODID + ":crystal").setCreativeTab(JewelrycraftMod.jewelrycraft);
+        guide = new ItemGuide().setUnlocalizedName(Variables.MODID + ".guide").setTextureName(Variables.MODID + ":guide").setCreativeTab(JewelrycraftMod.jewelrycraft);
+        bucket = (ItemMoltenMetalBucket)new ItemMoltenMetalBucket().setUnlocalizedName(Variables.MODID + ".bucket");
+        metal = (ItemMoltenMetal)new ItemMoltenMetal().setUnlocalizedName(Variables.MODID + ".bucket");
+        jewelryModifier = new ItemJewelryModifier().setUnlocalizedName(Variables.MODID + ".jewelryModifier").setTextureName(Variables.MODID + ":jewelryModifier").setCreativeTab(JewelrycraftMod.jewelrycraft);
+        goldObj = new ItemGoldObj().setUnlocalizedName(Variables.MODID + ".goldObject");
+        
+        GameRegistry.registerItem(thiefGloves, "thiefGloves");
+        GameRegistry.registerItem(shadowIngot, "shadowIngot");
+        GameRegistry.registerItem(molds, "molds");
+        GameRegistry.registerItem(clayMolds, "clayMolds");
+        GameRegistry.registerItem(ring, "ring");
+        GameRegistry.registerItem(necklace, "necklace");
+        GameRegistry.registerItem(bracelet, "bracelet");
+        GameRegistry.registerItem(earrings, "earrings");
+        GameRegistry.registerItem(crystal, "crystal");
+        GameRegistry.registerItem(guide, "guide");
+        GameRegistry.registerItem(bucket, "moltenMetalBucket");
+        GameRegistry.registerItem(metal, "moltenMetal");
+        GameRegistry.registerItem(jewelryModifier, "jewelryModifier");
+        GameRegistry.registerItem(goldObj, "goldObject");
+        
+        OreDictionary.registerOre("ingotShadow", new ItemStack(ItemList.shadowIngot));
     }
 }

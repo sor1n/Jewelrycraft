@@ -7,9 +7,9 @@ import net.minecraft.world.World;
 
 public class CurseRottenHeart extends Curse
 {
-    public CurseRottenHeart(int id, String name, int text)
+    public CurseRottenHeart(String name, int txtID, String pack)
     {
-        super(id, name, text);
+        super(name, txtID, pack);
     }
     
     @Override

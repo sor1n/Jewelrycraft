@@ -1,11 +1,11 @@
-[18:09:20] [main/INFO]: Logging in with username & password
-[18:09:30] [main/INFO]: Setting user: OnyxDarkKnight
-[18:09:33] [Client thread/INFO]: LWJGL Version: 2.9.1
-[18:09:35] [Twitch authenticator/ERROR]: Given twitch access token is invalid
-[18:09:42] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Not Enough Items, FMLFileResourcePack:Jewelrycraft 2
-[18:09:47] [Sound Library Loader/INFO]: Sound engine started
-[18:09:48] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
-[18:09:48] [Client thread/ERROR]: Using missing texture, unable to load minecraft:textures/items/MISSING_ICON_ITEM_4109_jewelrycraft2.goldObject.png
+[20:00:31] [main/INFO]: Logging in with username & password
+[20:00:39] [main/INFO]: Setting user: OnyxDarkKnight
+[20:00:43] [Client thread/INFO]: LWJGL Version: 2.9.1
+[20:00:45] [Twitch authenticator/ERROR]: Given twitch access token is invalid
+[20:00:49] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Not Enough Items, FMLFileResourcePack:Jewelrycraft 2
+[20:00:52] [Sound Library Loader/INFO]: Sound engine started
+[20:00:53] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[20:00:53] [Client thread/ERROR]: Using missing texture, unable to load minecraft:textures/items/MISSING_ICON_ITEM_4109_jewelrycraft2.goldObject.png
 java.io.FileNotFoundException: minecraft:textures/items/MISSING_ICON_ITEM_4109_jewelrycraft2.goldObject.png
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:65) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -23,9 +23,9 @@ java.io.FileNotFoundException: minecraft:textures/items/MISSING_ICON_ITEM_4109_j
 	at java.lang.reflect.Method.invoke(Method.java:606) ~[?:1.7.0_71]
 	at net.minecraft.launchwrapper.Launch.launch(Launch.java:134) [launchwrapper-1.9.jar:?]
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.9.jar:?]
-[18:09:48] [Client thread/INFO]: Created: 256x256 textures/items-atlas
-[18:09:49] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Not Enough Items, FMLFileResourcePack:Jewelrycraft 2
-[18:09:49] [Client thread/ERROR]: Using missing texture, unable to load minecraft:textures/items/MISSING_ICON_ITEM_4109_jewelrycraft2.goldObject.png
+[20:00:53] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[20:00:54] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Not Enough Items, FMLFileResourcePack:Jewelrycraft 2
+[20:00:54] [Client thread/ERROR]: Using missing texture, unable to load minecraft:textures/items/MISSING_ICON_ITEM_4109_jewelrycraft2.goldObject.png
 java.io.FileNotFoundException: minecraft:textures/items/MISSING_ICON_ITEM_4109_jewelrycraft2.goldObject.png
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:65) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -46,113 +46,28 @@ java.io.FileNotFoundException: minecraft:textures/items/MISSING_ICON_ITEM_4109_j
 	at java.lang.reflect.Method.invoke(Method.java:606) ~[?:1.7.0_71]
 	at net.minecraft.launchwrapper.Launch.launch(Launch.java:134) [launchwrapper-1.9.jar:?]
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.9.jar:?]
-[18:09:49] [Client thread/INFO]: Created: 256x256 textures/items-atlas
-[18:09:49] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
-[18:09:50] [Sound Library Loader/INFO]: Sound engine started
-[18:09:59] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
-[18:09:59] [Server thread/INFO]: Generating keypair
-[18:10:00] [Server thread/INFO]: Preparing start region for level 0
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:00] [Server thread/WARN]: Skipping Piece with id Jewelrycraft:Jewelry
-[18:10:01] [Server thread/INFO]: Preparing spawn area: 49%
-[18:10:03] [Server thread/INFO]: OnyxDarkKnight[local:E:53edac9d] logged in with entity id 92 at (-217.5074337317938, 64.0, -741.4745099482494)
-[18:10:03] [Server thread/INFO]: OnyxDarkKnight joined the game
-[18:10:06] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2017ms behind, skipping 40 tick(s)
-[18:10:25] [Client thread/INFO]: [CHAT] Saved screenshot as 2015-04-20_18.10.24.png
-[18:10:29] [Client thread/INFO]: [CHAT] Saved screenshot as 2015-04-20_18.10.28.png
+[20:00:54] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[20:00:54] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[20:00:55] [Sound Library Loader/INFO]: Sound engine started
+[20:01:35] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[20:01:35] [Server thread/INFO]: Generating keypair
+[20:01:36] [Server thread/INFO]: Preparing start region for level 0
+[20:01:37] [Server thread/INFO]: Preparing spawn area: 72%
+[20:01:37] [Server thread/INFO]: OnyxDarkKnight[local:E:3d541775] logged in with entity id 42 at (-329.96801369126877, 64.0, -843.7067155409562)
+[20:01:37] [Server thread/INFO]: OnyxDarkKnight joined the game
+[20:01:58] [Client thread/INFO]: [CHAT] You are now playing survival
+[20:14:07] [Client thread/INFO]: [CHAT] The Smelter contains a molten Iron Ingot
+[20:14:08] [Client thread/INFO]: [CHAT] The Smelter contains a molten Iron Ingot
+[20:21:49] [Client thread/INFO]: [CHAT] The Smelter contains a molten Iron Ingot
+[20:21:50] [Client thread/INFO]: [CHAT] The Smelter contains a molten Iron Ingot
+[20:21:52] [Server thread/INFO]: Saving and pausing game...
+[20:21:52] [Server thread/INFO]: Saving chunks for level 'Copy of Test 2'/Overworld
+[20:21:52] [Server thread/INFO]: Saving chunks for level 'Copy of Test 2'/Nether
+[20:21:52] [Server thread/INFO]: Saving chunks for level 'Copy of Test 2'/The End
+[20:21:53] [Server thread/INFO]: Stopping server
+[20:21:53] [Server thread/INFO]: Saving players
+[20:21:53] [Server thread/INFO]: Saving worlds
+[20:21:53] [Server thread/INFO]: Saving chunks for level 'Copy of Test 2'/Overworld
+[20:21:53] [Server thread/INFO]: Saving chunks for level 'Copy of Test 2'/Nether
+[20:21:53] [Server thread/INFO]: Saving chunks for level 'Copy of Test 2'/The End
+[20:21:54] [Client thread/INFO]: Stopping!

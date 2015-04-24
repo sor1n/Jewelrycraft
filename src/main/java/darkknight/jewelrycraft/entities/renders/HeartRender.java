@@ -19,7 +19,6 @@ public class HeartRender extends RenderLiving
     public HeartRender(ModelBase modelBase, float shadowSize)
     {
         super(modelBase, shadowSize);
-//        texture = new ResourceLocation("jewelrycraft", "textures/entities/RedHeart.png");
     }
  
     @Override
