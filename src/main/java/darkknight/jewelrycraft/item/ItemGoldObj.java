@@ -55,7 +55,7 @@ public class ItemGoldObj extends Item
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean displayInfo)
     {
         if (displayInfo) 
-            if(JewelryNBT.item(stack).getItem() instanceof ItemFood) list.add(EnumChatFormatting.DARK_PURPLE + "It's made of solid gold. How are you suppose to eat this?");
+            if(JewelryNBT.item(stack).getItem() instanceof ItemFood) list.add(EnumChatFormatting.DARK_PURPLE + "It's made of solid gold! How are you suppose to eat this?");
             else list.add(EnumChatFormatting.DARK_PURPLE + "Shiny, but useless :(");
     }
 }
