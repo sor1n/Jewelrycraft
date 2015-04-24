@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename field &apos;jewel&apos; in &apos;darkknight.jewelrycraft.util.JewelrycraftUtil&apos; to &apos;gem&apos;&#x0D;&#x0A;- Original project: &apos;Minecraft&apos;&#x0D;&#x0A;- Original element: &apos;darkknight.jewelrycraft.util.JewelrycraftUtil.jewel&apos;&#x0D;&#x0A;- Renamed element: &apos;darkknight.jewelrycraft.util.JewelrycraftUtil.gem&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;jewel&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src\/main\/java&lt;darkknight.jewelrycraft.util{JewelrycraftUtil.java[JewelrycraftUtil^jewel" name="gem" references="true" setter="false" stamp="1420250341472" textual="false" version="1.0"/>
-</session>
