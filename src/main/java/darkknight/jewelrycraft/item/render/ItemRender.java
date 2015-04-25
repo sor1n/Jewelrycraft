@@ -87,12 +87,10 @@ public class ItemRender implements IItemRenderer
             }else if (JewelryNBT.item(item) != null){
                 GL11.glPushMatrix();
                 GL11.glColor3f(1F, 1F, 0F);
-                if(Item.getItemById(Integer.valueOf(item.getTagCompound().getTag("target").toString().split(",")[0].substring(4).replace("s", ""))) != null)
-                    renderItem(Minecraft.getMinecraft().thePlayer, JewelryNBT.item(item), 0, type);
+                if (Item.getItemById(Integer.valueOf(item.getTagCompound().getTag("target").toString().split(",")[0].substring(4).replace("s", ""))) != null) renderItem(Minecraft.getMinecraft().thePlayer, JewelryNBT.item(item), 0, type);
                 else renderItem(Minecraft.getMinecraft().thePlayer, new ItemStack(Blocks.end_portal), 0, type);
                 GL11.glPopMatrix();
-            }
-            else{
+            }else{
                 GL11.glPushMatrix();
                 GL11.glColor3f(1F, 1F, 0F);
                 renderItem(Minecraft.getMinecraft().thePlayer, new ItemStack(Blocks.end_portal), 0, type);
@@ -208,24 +206,8 @@ public class ItemRender implements IItemRenderer
         int k;
         if (j != 0 && j != 31 && j != 39 && j != 16 && j != 26){
             GL11.glColor4f(1F, 1F, 0F, 1.0F);
-            if (j == 1){
-                tessellator.startDrawingQuads();
-                tessellator.setNormal(0.0F, -1.0F, 0.0F);
-                IIcon iicon = renderBlocksIr.getBlockIconFromSideAndMetadata(block, 0, damage);
-                renderBlocksIr.drawCrossedSquares(iicon, -0.5D, -0.5D, -0.5D, 1.0F);
-                tessellator.draw();
-            }else if (j == 19){
-                tessellator.startDrawingQuads();
-                tessellator.setNormal(0.0F, -1.0F, 0.0F);
-                block.setBlockBoundsForItemRender();
-                renderBlocksIr.renderBlockStemSmall(block, damage, renderBlocksIr.renderMaxY, -0.5D, -0.5D, -0.5D);
-                tessellator.draw();
-            }else if (j == 23){
-                tessellator.startDrawingQuads();
-                tessellator.setNormal(0.0F, -1.0F, 0.0F);
-                block.setBlockBoundsForItemRender();
-                tessellator.draw();
-            }else if (j == 13){
+            if (j == 13){
+                // Cactus
                 block.setBlockBoundsForItemRender();
                 GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
                 f1 = 0.0625F;
@@ -263,21 +245,21 @@ public class ItemRender implements IItemRenderer
                 tessellator.draw();
                 GL11.glTranslatef(0.5F, 0.5F, 0.5F);
             }else if (j == 22){
+                // Chest
                 GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
                 GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
                 TileEntityRendererChestHelper.instance.renderChest(block, damage, luminacy);
                 GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            }else if (j == 6){
-                tessellator.startDrawingQuads();
-                tessellator.setNormal(0.0F, -1.0F, 0.0F);
-                renderBlocksIr.renderBlockCropsImpl(block, damage, -0.5D, -0.5D, -0.5D);
-                tessellator.draw();
-            }else if (j == 2){
-                tessellator.startDrawingQuads();
-                tessellator.setNormal(0.0F, -1.0F, 0.0F);
-                renderBlocksIr.renderTorchAtAngle(block, -0.5D, -0.5D, -0.5D, 0.0D, 0.0D, 0);
-                tessellator.draw();
+                
+                GL11.glPushMatrix();
+                GL11.glTranslatef(0F, 0.0F, -0.001F);
+                renderShine(tessellator);
+                GL11.glMatrixMode(GL11.GL_MODELVIEW);
+                GL11.glDisable(GL11.GL_BLEND);
+                GL11.glDepthFunc(GL11.GL_LEQUAL);
+                GL11.glPopMatrix();
             }else if (j == 10){
+                // Stairs
                 for(k = 0; k < 2; ++k){
                     if (k == 0){
                         renderBlocksIr.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.5D);
@@ -313,6 +295,7 @@ public class ItemRender implements IItemRenderer
                     GL11.glTranslatef(0.5F, 0.5F, 0.5F);
                 }
             }else if (j == 27){
+                // Dragon Egg
                 k = 0;
                 GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
                 tessellator.startDrawingQuads();
@@ -369,6 +352,7 @@ public class ItemRender implements IItemRenderer
                 GL11.glTranslatef(0.5F, 0.5F, 0.5F);
                 renderBlocksIr.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
             }else if (j == 11){
+                // Fence
                 for(k = 0; k < 4; ++k){
                     f2 = 0.125F;
                     if (k == 0){
@@ -413,6 +397,7 @@ public class ItemRender implements IItemRenderer
                 }
                 renderBlocksIr.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
             }else if (j == 21){
+                // Fence Gate
                 for(k = 0; k < 3; ++k){
                     f2 = 0.0625F;
                     if (k == 0){
@@ -453,6 +438,7 @@ public class ItemRender implements IItemRenderer
                     GL11.glTranslatef(0.5F, 0.5F, 0.5F);
                 }
             }else if (j == 32){
+                // Wall
                 for(k = 0; k < 2; ++k){
                     if (k == 0){
                         renderBlocksIr.setRenderBounds(0.0D, 0.0D, 0.3125D, 1.0D, 0.8125D, 0.6875D);
@@ -489,10 +475,12 @@ public class ItemRender implements IItemRenderer
                 }
                 renderBlocksIr.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
             }else if (j == 35){
+                // Anvil
                 GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
                 renderBlocksIr.renderBlockAnvilOrient((BlockAnvil)block, 0, 0, 0, damage << 2, true);
                 GL11.glTranslatef(0.5F, 0.5F, 0.5F);
             }else if (j == 34){
+                // Beacon
                 for(k = 0; k < 3; ++k){
                     if (k == 0){
                         renderBlocksIr.setRenderBounds(0.125D, 0.0D, 0.125D, 0.875D, 0.1875D, 0.875D);
@@ -533,10 +521,6 @@ public class ItemRender implements IItemRenderer
                 }
                 renderBlocksIr.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
                 renderBlocksIr.clearOverrideBlockTexture();
-            }else if (j == 38){
-                GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-                renderBlocksIr.renderBlockHopperMetadata((BlockHopper)block, 0, 0, 0, 0, true);
-                GL11.glTranslatef(0.5F, 0.5F, 0.5F);
             }else{
                 FMLRenderAccessLibrary.renderInventoryBlock(renderBlocksIr, block, damage, j);
             }
@@ -552,52 +536,85 @@ public class ItemRender implements IItemRenderer
             tessellator.setNormal(0.0F, -1.0F, 0.0F);
             renderBlocksIr.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSideAndMetadata(block, 0, damage));
             tessellator.draw();
-            renderShine(tessellator);
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-            GL11.glDisable(GL11.GL_BLEND);
-            GL11.glDepthFunc(GL11.GL_LEQUAL);
             GL11.glColor4f(1F, 1F, 0F, 1.0F);
             tessellator.startDrawingQuads();
             tessellator.setNormal(0.0F, 1.0F, 0.0F);
             renderBlocksIr.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSideAndMetadata(block, 1, damage));
             tessellator.draw();
-//            renderShine(tessellator);
-//            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-//            GL11.glDisable(GL11.GL_BLEND);
-//            GL11.glDepthFunc(GL11.GL_LEQUAL);
             GL11.glColor4f(1F, 1F, 0F, 1.0F);
             tessellator.startDrawingQuads();
             tessellator.setNormal(0.0F, 0.0F, -1.0F);
             renderBlocksIr.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSideAndMetadata(block, 2, damage));
             tessellator.draw();
-//            renderShine(tessellator);
-//            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-//            GL11.glDisable(GL11.GL_BLEND);
-//            GL11.glDepthFunc(GL11.GL_LEQUAL);
             tessellator.startDrawingQuads();
             tessellator.setNormal(0.0F, 0.0F, 1.0F);
             renderBlocksIr.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSideAndMetadata(block, 3, damage));
             tessellator.draw();
-//            renderShine(tessellator);
-//            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-//            GL11.glDisable(GL11.GL_BLEND);
-//            GL11.glDepthFunc(GL11.GL_LEQUAL);
             tessellator.startDrawingQuads();
             tessellator.setNormal(-1.0F, 0.0F, 0.0F);
             renderBlocksIr.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSideAndMetadata(block, 4, damage));
             tessellator.draw();
-//            renderShine(tessellator);
-//            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-//            GL11.glDisable(GL11.GL_BLEND);
-//            GL11.glDepthFunc(GL11.GL_LEQUAL);
             tessellator.startDrawingQuads();
             tessellator.setNormal(1.0F, 0.0F, 0.0F);
             renderBlocksIr.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSideAndMetadata(block, 5, damage));
             tessellator.draw();
-//            renderShine(tessellator);
-//            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-//            GL11.glDisable(GL11.GL_BLEND);
-//            GL11.glDepthFunc(GL11.GL_LEQUAL);
+            
+            GL11.glTranslatef((float)block.getBlockBoundsMinX(), (float)block.getBlockBoundsMinY(), (float)block.getBlockBoundsMinZ());
+            GL11.glScalef((float)block.getBlockBoundsMaxX() - (float)block.getBlockBoundsMinX(), (float)block.getBlockBoundsMaxY() - (float)block.getBlockBoundsMinY(), (float)block.getBlockBoundsMaxZ() - (float)block.getBlockBoundsMinZ());
+            
+            GL11.glPushMatrix();
+            GL11.glTranslatef(0F, 0.0F, -0.001F);
+            renderShine(tessellator);
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glDepthFunc(GL11.GL_LEQUAL);
+            GL11.glPopMatrix();
+            
+            GL11.glPushMatrix();
+            GL11.glTranslatef(1.0F, 0.0F, 1.0001F);
+            GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
+            renderShine(tessellator);
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glDepthFunc(GL11.GL_LEQUAL);
+            GL11.glPopMatrix();
+            
+            GL11.glPushMatrix();
+            GL11.glTranslatef(-0.001F, 0.0F, 0.0F);
+            GL11.glRotatef(90.0F, 0.0F, -1.0F, 0.0F);
+            renderShine(tessellator);
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glDepthFunc(GL11.GL_LEQUAL);
+            GL11.glPopMatrix();
+            
+            GL11.glPushMatrix();
+            GL11.glTranslatef(1.001F, 0.0F, 1.0F);
+            GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+            renderShine(tessellator);
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glDepthFunc(GL11.GL_LEQUAL);
+            GL11.glPopMatrix();
+            
+            GL11.glPushMatrix();
+            GL11.glTranslatef(0.0F, -0.001F, 0.0F);
+            GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
+            renderShine(tessellator);
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glDepthFunc(GL11.GL_LEQUAL);
+            GL11.glPopMatrix();
+            
+            GL11.glPushMatrix();
+            GL11.glTranslatef(0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
+            renderShine(tessellator);
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glDepthFunc(GL11.GL_LEQUAL);
+            GL11.glPopMatrix();
+            
             GL11.glTranslatef(0.5F, 0.5F, 0.5F);
         }
     }
@@ -615,11 +632,7 @@ public class ItemRender implements IItemRenderer
         GL11.glTranslatef(17F, 0.0F, 0.0F);
         GL11.glRotatef(-30.0F, 0.0F, 0.0F, 1.0F);
         GL11.glColor3f(1F, 1F, 0F);
-        ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
-//        tessellator.addVertexWithUV(0.0D, 0.0D, 0.0D, (double)0F, (double)1F);
-//        tessellator.addVertexWithUV(1.0D, 0.0D, 0.0D, (double)1F, (double)1F);
-//        tessellator.addVertexWithUV(1.0D, 1.0D, 0.0D, (double)1F, (double)0F);
-//        tessellator.addVertexWithUV(0.0D, 1.0D, 0.0D, (double)0F, (double)0F);
+        ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.001F);
         GL11.glPopMatrix();
     }
 }
