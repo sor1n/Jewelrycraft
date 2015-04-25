@@ -23,7 +23,9 @@ public class CursePentagram extends Curse
     
     @Override
     public void attackedByPlayerAction(World world, EntityPlayer player, Entity target)
-    {}
+    {
+        
+    }
     
     @Override
     public void playerRender(EntityPlayer player, RenderPlayerEvent.Specials.Post event)

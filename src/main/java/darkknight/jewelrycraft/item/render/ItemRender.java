@@ -30,6 +30,7 @@ public class ItemRender implements IItemRenderer
     private RenderBlocks renderBlocksIr = new RenderBlocks();
     private Minecraft mc = Minecraft.getMinecraft();
     private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
+    private float tran = 0F;
     
     /**
      * @param render
@@ -172,7 +173,7 @@ public class ItemRender implements IItemRenderer
                     ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
                 }
                 GL11.glDepthFunc(GL11.GL_EQUAL);
-                renderShine(tessellator);
+                renderShine(tessellator, true);
                 GL11.glPushMatrix();
                 float f8 = 0.325F;
                 GL11.glScalef(f8, f8, f8);
@@ -243,21 +244,18 @@ public class ItemRender implements IItemRenderer
                 renderBlocksIr.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSide(block, 5));
                 tessellator.addTranslation(f1, 0.0F, 0.0F);
                 tessellator.draw();
-                GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+                GL11.glTranslatef(0.0625F, 0.0F, 0.0625F);
+                GL11.glScalef(0.9375F - 0.0625F, 1F, 0.9375F - 0.0625F);
+                shinyBlock(tessellator, false);
             }else if (j == 22){
                 // Chest
                 GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
                 GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
                 TileEntityRendererChestHelper.instance.renderChest(block, damage, luminacy);
                 GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-                
-                GL11.glPushMatrix();
-                GL11.glTranslatef(0F, 0.0F, -0.001F);
-                renderShine(tessellator);
-                GL11.glMatrixMode(GL11.GL_MODELVIEW);
-                GL11.glDisable(GL11.GL_BLEND);
-                GL11.glDepthFunc(GL11.GL_LEQUAL);
-                GL11.glPopMatrix();
+                GL11.glTranslatef(0.0625F, 0.0F, 0.0625F);
+                GL11.glScalef(0.9375F - 0.0625F, 0.875F, 0.9375F - 0.0625F);
+                shinyBlock(tessellator, false);
             }else if (j == 10){
                 // Stairs
                 for(k = 0; k < 2; ++k){
@@ -521,6 +519,8 @@ public class ItemRender implements IItemRenderer
                 }
                 renderBlocksIr.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
                 renderBlocksIr.clearOverrideBlockTexture();
+                GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+                shinyBlock(tessellator, false);
             }else{
                 FMLRenderAccessLibrary.renderInventoryBlock(renderBlocksIr, block, damage, j);
             }
@@ -561,65 +561,13 @@ public class ItemRender implements IItemRenderer
             
             GL11.glTranslatef((float)block.getBlockBoundsMinX(), (float)block.getBlockBoundsMinY(), (float)block.getBlockBoundsMinZ());
             GL11.glScalef((float)block.getBlockBoundsMaxX() - (float)block.getBlockBoundsMinX(), (float)block.getBlockBoundsMaxY() - (float)block.getBlockBoundsMinY(), (float)block.getBlockBoundsMaxZ() - (float)block.getBlockBoundsMinZ());
-            
-            GL11.glPushMatrix();
-            GL11.glTranslatef(0F, 0.0F, -0.001F);
-            renderShine(tessellator);
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-            GL11.glDisable(GL11.GL_BLEND);
-            GL11.glDepthFunc(GL11.GL_LEQUAL);
-            GL11.glPopMatrix();
-            
-            GL11.glPushMatrix();
-            GL11.glTranslatef(1.0F, 0.0F, 1.0001F);
-            GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-            renderShine(tessellator);
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-            GL11.glDisable(GL11.GL_BLEND);
-            GL11.glDepthFunc(GL11.GL_LEQUAL);
-            GL11.glPopMatrix();
-            
-            GL11.glPushMatrix();
-            GL11.glTranslatef(-0.001F, 0.0F, 0.0F);
-            GL11.glRotatef(90.0F, 0.0F, -1.0F, 0.0F);
-            renderShine(tessellator);
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-            GL11.glDisable(GL11.GL_BLEND);
-            GL11.glDepthFunc(GL11.GL_LEQUAL);
-            GL11.glPopMatrix();
-            
-            GL11.glPushMatrix();
-            GL11.glTranslatef(1.001F, 0.0F, 1.0F);
-            GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-            renderShine(tessellator);
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-            GL11.glDisable(GL11.GL_BLEND);
-            GL11.glDepthFunc(GL11.GL_LEQUAL);
-            GL11.glPopMatrix();
-            
-            GL11.glPushMatrix();
-            GL11.glTranslatef(0.0F, -0.001F, 0.0F);
-            GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
-            renderShine(tessellator);
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-            GL11.glDisable(GL11.GL_BLEND);
-            GL11.glDepthFunc(GL11.GL_LEQUAL);
-            GL11.glPopMatrix();
-            
-            GL11.glPushMatrix();
-            GL11.glTranslatef(0.0F, 1.0F, 0.0F);
-            GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
-            renderShine(tessellator);
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-            GL11.glDisable(GL11.GL_BLEND);
-            GL11.glDepthFunc(GL11.GL_LEQUAL);
-            GL11.glPopMatrix();
+            shinyBlock(tessellator, false);
             
             GL11.glTranslatef(0.5F, 0.5F, 0.5F);
         }
     }
     
-    public void renderShine(Tessellator tessellator)
+    public void renderShine(Tessellator tessellator, boolean autoAnimate)
     {
         TextureManager texturemanager = this.mc.getTextureManager();
         texturemanager.bindTexture(RES_ITEM_GLINT);
@@ -629,10 +577,71 @@ public class ItemRender implements IItemRenderer
         GL11.glPushMatrix();
         float f8 = 0.325F;
         GL11.glScalef(f8, f8, f8);
-        GL11.glTranslatef(17F, 0.0F, 0.0F);
+        if (autoAnimate) GL11.glTranslatef(17F, 0.0F, 0.0F);
+        else{
+            GL11.glTranslatef(tran, 0.0F, 0.0F);
+            tran+=0.0001F;
+            if(tran >= 360F) tran = 0F;
+        }
         GL11.glRotatef(-30.0F, 0.0F, 0.0F, 1.0F);
         GL11.glColor3f(1F, 1F, 0F);
         ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.001F);
+        GL11.glPopMatrix();
+    }
+    
+    public void shinyBlock(Tessellator tessellator, boolean autoAnimate)
+    {
+        GL11.glPushMatrix();
+        GL11.glTranslatef(0F, 0.0F, -0.001F);
+        renderShine(tessellator, autoAnimate);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDepthFunc(GL11.GL_LEQUAL);
+        GL11.glPopMatrix();
+        
+        GL11.glPushMatrix();
+        GL11.glTranslatef(1.0F, 0.0F, 1.0001F);
+        GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
+        renderShine(tessellator, autoAnimate);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDepthFunc(GL11.GL_LEQUAL);
+        GL11.glPopMatrix();
+        
+        GL11.glPushMatrix();
+        GL11.glTranslatef(-0.001F, 0.0F, 0.0F);
+        GL11.glRotatef(90.0F, 0.0F, -1.0F, 0.0F);
+        renderShine(tessellator, autoAnimate);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDepthFunc(GL11.GL_LEQUAL);
+        GL11.glPopMatrix();
+        
+        GL11.glPushMatrix();
+        GL11.glTranslatef(1.001F, 0.0F, 1.0F);
+        GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+        renderShine(tessellator, autoAnimate);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDepthFunc(GL11.GL_LEQUAL);
+        GL11.glPopMatrix();
+        
+        GL11.glPushMatrix();
+        GL11.glTranslatef(0.0F, -0.001F, 0.0F);
+        GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
+        renderShine(tessellator, autoAnimate);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDepthFunc(GL11.GL_LEQUAL);
+        GL11.glPopMatrix();
+        
+        GL11.glPushMatrix();
+        GL11.glTranslatef(0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
+        renderShine(tessellator, autoAnimate);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDepthFunc(GL11.GL_LEQUAL);
         GL11.glPopMatrix();
     }
 }

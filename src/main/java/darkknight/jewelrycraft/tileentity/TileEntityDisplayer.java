@@ -90,17 +90,17 @@ public class TileEntityDisplayer extends TileEntity
         }
         if (ringTranslation1 >= 0.6) isDescending1 = true;
         if (ringTranslation1 <= 0) isDescending1 = false;
-        if (!isDescending1) ringTranslation1 += 0.05;
-        if (isDescending1) ringTranslation1 -= 0.05;
+        if (!isDescending1) ringTranslation1 += 0.03;
+        if (isDescending1) ringTranslation1 -= 0.03;
         if (ringTranslation2 >= 0.6) isDescending2 = true;
         if (ringTranslation2 <= 0) isDescending2 = false;
-        if (!isDescending2) ringTranslation2 += 0.04;
-        if (isDescending2) ringTranslation2 -= 0.04;
+        if (!isDescending2) ringTranslation2 += 0.02;
+        if (isDescending2) ringTranslation2 -= 0.02;
         if (ringTranslation3 >= 0.6) isDescending3 = true;
         if (ringTranslation3 <= 0) isDescending3 = false;
-        if (!isDescending3) ringTranslation3 += 0.03;
-        if (isDescending3) ringTranslation3 -= 0.03;
-        if (rotAngle < 360F) rotAngle += 6F;
+        if (!isDescending3) ringTranslation3 += 0.01;
+        if (isDescending3) ringTranslation3 -= 0.01;
+        if (rotAngle < 360F) rotAngle += 3F;
         if (rotAngle >= 360F) rotAngle = 0F;
         timer++;
         if (timer >= 20){
