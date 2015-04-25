@@ -1,6 +1,7 @@
 package darkknight.jewelrycraft.curses;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.util.Variables;
 
 public class CurseList

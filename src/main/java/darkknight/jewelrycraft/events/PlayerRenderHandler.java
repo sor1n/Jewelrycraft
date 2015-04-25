@@ -14,7 +14,7 @@ import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import darkknight.jewelrycraft.curses.Curse;
+import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.curses.CurseList;
 import darkknight.jewelrycraft.item.render.BraceletRender;
 import darkknight.jewelrycraft.item.render.EarringsRender;

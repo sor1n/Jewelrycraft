@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameData;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.events.EntityEventHandler;
@@ -51,6 +52,7 @@ public class JewelrycraftUtil
         jewelry.add(new ItemStack(ItemList.earrings));
         for(Object item: GameData.getItemRegistry()){
             ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+            if (Loader.isModLoaded("Mantle") && ((Item)item).getUnlocalizedName().equals("Mantle:item.mantle.manual")) continue; 
             if (item != null && ((Item)item).getHasSubtypes()) ((Item)item).getSubItems((Item)item, null, items);
             else objects.add(new ItemStack((Item)item));
             

@@ -23,7 +23,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import darkknight.jewelrycraft.JewelrycraftMod;
-import darkknight.jewelrycraft.curses.Curse;
+import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.events.EntityEventHandler;
 import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
 import darkknight.jewelrycraft.util.JewelryNBT;

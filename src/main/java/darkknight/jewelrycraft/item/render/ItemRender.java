@@ -174,19 +174,9 @@ public class ItemRender implements IItemRenderer
                     ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
                 }
                 GL11.glDepthFunc(GL11.GL_EQUAL);
-                texturemanager.bindTexture(RES_ITEM_GLINT);
-                GL11.glEnable(GL11.GL_BLEND);
-                OpenGlHelper.glBlendFunc(768, 1, 1, 0);
-                GL11.glMatrixMode(GL11.GL_TEXTURE);
+                renderShine(tessellator);
                 GL11.glPushMatrix();
                 float f8 = 0.325F;
-                GL11.glScalef(f8, f8, f8);
-                GL11.glTranslatef(17F, 0.0F, 0.0F);
-                GL11.glRotatef(-30.0F, 0.0F, 0.0F, 1.0F);
-                GL11.glColor3f(1F, 1F, 0F);
-                ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
-                GL11.glPopMatrix();
-                GL11.glPushMatrix();
                 GL11.glScalef(f8, f8, f8);
                 float f9 = (float)(Minecraft.getSystemTime() % 30000L) / 30000.0F * 8.0F;
                 GL11.glTranslatef(-f9, 0.0F, 0.0F);
@@ -562,29 +552,74 @@ public class ItemRender implements IItemRenderer
             tessellator.setNormal(0.0F, -1.0F, 0.0F);
             renderBlocksIr.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSideAndMetadata(block, 0, damage));
             tessellator.draw();
+            renderShine(tessellator);
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glDepthFunc(GL11.GL_LEQUAL);
             GL11.glColor4f(1F, 1F, 0F, 1.0F);
             tessellator.startDrawingQuads();
             tessellator.setNormal(0.0F, 1.0F, 0.0F);
             renderBlocksIr.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSideAndMetadata(block, 1, damage));
             tessellator.draw();
+//            renderShine(tessellator);
+//            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+//            GL11.glDisable(GL11.GL_BLEND);
+//            GL11.glDepthFunc(GL11.GL_LEQUAL);
             GL11.glColor4f(1F, 1F, 0F, 1.0F);
             tessellator.startDrawingQuads();
             tessellator.setNormal(0.0F, 0.0F, -1.0F);
             renderBlocksIr.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSideAndMetadata(block, 2, damage));
             tessellator.draw();
+//            renderShine(tessellator);
+//            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+//            GL11.glDisable(GL11.GL_BLEND);
+//            GL11.glDepthFunc(GL11.GL_LEQUAL);
             tessellator.startDrawingQuads();
             tessellator.setNormal(0.0F, 0.0F, 1.0F);
             renderBlocksIr.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSideAndMetadata(block, 3, damage));
             tessellator.draw();
+//            renderShine(tessellator);
+//            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+//            GL11.glDisable(GL11.GL_BLEND);
+//            GL11.glDepthFunc(GL11.GL_LEQUAL);
             tessellator.startDrawingQuads();
             tessellator.setNormal(-1.0F, 0.0F, 0.0F);
             renderBlocksIr.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSideAndMetadata(block, 4, damage));
             tessellator.draw();
+//            renderShine(tessellator);
+//            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+//            GL11.glDisable(GL11.GL_BLEND);
+//            GL11.glDepthFunc(GL11.GL_LEQUAL);
             tessellator.startDrawingQuads();
             tessellator.setNormal(1.0F, 0.0F, 0.0F);
             renderBlocksIr.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, renderBlocksIr.getBlockIconFromSideAndMetadata(block, 5, damage));
             tessellator.draw();
+//            renderShine(tessellator);
+//            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+//            GL11.glDisable(GL11.GL_BLEND);
+//            GL11.glDepthFunc(GL11.GL_LEQUAL);
             GL11.glTranslatef(0.5F, 0.5F, 0.5F);
         }
+    }
+    
+    public void renderShine(Tessellator tessellator)
+    {
+        TextureManager texturemanager = this.mc.getTextureManager();
+        texturemanager.bindTexture(RES_ITEM_GLINT);
+        GL11.glEnable(GL11.GL_BLEND);
+        OpenGlHelper.glBlendFunc(768, 1, 1, 0);
+        GL11.glMatrixMode(GL11.GL_TEXTURE);
+        GL11.glPushMatrix();
+        float f8 = 0.325F;
+        GL11.glScalef(f8, f8, f8);
+        GL11.glTranslatef(17F, 0.0F, 0.0F);
+        GL11.glRotatef(-30.0F, 0.0F, 0.0F, 1.0F);
+        GL11.glColor3f(1F, 1F, 0F);
+        ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
+//        tessellator.addVertexWithUV(0.0D, 0.0D, 0.0D, (double)0F, (double)1F);
+//        tessellator.addVertexWithUV(1.0D, 0.0D, 0.0D, (double)1F, (double)1F);
+//        tessellator.addVertexWithUV(1.0D, 1.0D, 0.0D, (double)1F, (double)0F);
+//        tessellator.addVertexWithUV(0.0D, 1.0D, 0.0D, (double)0F, (double)0F);
+        GL11.glPopMatrix();
     }
 }

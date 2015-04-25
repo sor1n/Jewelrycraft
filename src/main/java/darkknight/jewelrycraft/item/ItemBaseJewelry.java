@@ -27,7 +27,7 @@ import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
-import darkknight.jewelrycraft.effects.ModifierEffects;
+import darkknight.jewelrycraft.api.ModifierEffects;
 import darkknight.jewelrycraft.util.JewelryNBT;
 
 public abstract class ItemBaseJewelry extends Item

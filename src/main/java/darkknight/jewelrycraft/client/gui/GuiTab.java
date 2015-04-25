@@ -6,8 +6,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly (Side.CLIENT)
 public abstract class GuiTab extends GuiRectangle
 {
-    int values, del;
-    private String name;
+    protected int values;
+    protected int del;
+    protected String name;
     
     /**
      * @param name

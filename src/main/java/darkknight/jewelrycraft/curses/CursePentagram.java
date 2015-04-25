@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
+import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.util.Variables;
 
 public class CursePentagram extends Curse

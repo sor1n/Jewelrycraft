@@ -1,4 +1,4 @@
-package darkknight.jewelrycraft.curses;
+package darkknight.jewelrycraft.api;
 
 import java.util.ArrayList;
 import java.util.Random;

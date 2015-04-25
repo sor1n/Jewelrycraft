@@ -4,6 +4,7 @@
 package darkknight.jewelrycraft.curses;
 
 import java.util.ArrayList;
+import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
 import net.minecraft.entity.Entity;

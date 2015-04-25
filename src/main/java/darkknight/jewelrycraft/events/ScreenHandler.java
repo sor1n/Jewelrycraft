@@ -11,7 +11,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import darkknight.jewelrycraft.curses.Curse;
+import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.util.Variables;
 
 public class ScreenHandler extends Gui

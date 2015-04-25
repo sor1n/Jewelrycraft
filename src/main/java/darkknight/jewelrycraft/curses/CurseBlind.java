@@ -1,5 +1,6 @@
 package darkknight.jewelrycraft.curses;
 
+import darkknight.jewelrycraft.api.Curse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;

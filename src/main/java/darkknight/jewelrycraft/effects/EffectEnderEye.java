@@ -17,6 +17,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.biome.BiomeGenBase;
 import cpw.mods.fml.relauncher.ReflectionHelper;
+import darkknight.jewelrycraft.api.ModifierEffects;
 import darkknight.jewelrycraft.item.ItemBracelet;
 import darkknight.jewelrycraft.item.ItemEarrings;
 import darkknight.jewelrycraft.item.ItemNecklace;

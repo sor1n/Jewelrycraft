@@ -1,6 +1,7 @@
 package darkknight.jewelrycraft.effects;
 
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import darkknight.jewelrycraft.api.ModifierEffects;
 
 public class EffectsList
 {
