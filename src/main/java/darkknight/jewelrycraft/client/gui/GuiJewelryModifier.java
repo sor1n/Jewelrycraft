@@ -65,7 +65,7 @@ public class GuiJewelryModifier extends GuiContainer
     {
         int i = 0;
         for(ItemStack item: JewelrycraftUtil.objects){
-            if (this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase())){
+            if (item != null && (this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase()))){
                 GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glColor3f(1F, 1F, 1F);
                 GL11.glEnable(GL11.GL_LIGHTING);
@@ -159,11 +159,11 @@ public class GuiJewelryModifier extends GuiContainer
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
             if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(2)).enabled){
-                JewelryNBT.addModifiers(targetItem, selectedItems);
+                JewelryNBT.addItem(targetItem, selectedItem);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
             if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(3)).enabled){
-                JewelryNBT.addItem(targetItem, selectedItem);
+                JewelryNBT.addModifiers(targetItem, selectedItems);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
         }

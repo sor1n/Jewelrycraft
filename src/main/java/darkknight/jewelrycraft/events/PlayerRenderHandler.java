@@ -36,12 +36,12 @@ public class PlayerRenderHandler
         ModelRenderer leftArm = event.renderer.modelBipedMain.bipedLeftArm;
         ModelRenderer head = event.renderer.modelBipedMain.bipedHead;
         Iterator<EntityPlayer> players = event.entityPlayer.worldObj.playerEntities.iterator();
-        int[] gemColor = {-1, -1, -1, -1};
-        int[] ingotColor = {-1, -1, -1, -1};
-        int earringGem = -1;
-        int earringIngot = -1;
         if (playersInfo != null){
             while (players.hasNext()){
+                int[] gemColor = {-1, -1, -1, -1};
+                int[] ingotColor = {-1, -1, -1, -1};
+                int earringGem = -1;
+                int earringIngot = -1;
                 EntityPlayer player = players.next();
                 NBTTagCompound playerInfo = (NBTTagCompound)playersInfo.getTag(player.getDisplayName());
                 for(Curse curse: Curse.getCurseList())
