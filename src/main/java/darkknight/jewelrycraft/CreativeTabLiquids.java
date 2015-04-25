@@ -36,7 +36,7 @@ public class CreativeTabLiquids extends CreativeTabs
     @Override
     public void displayAllReleventItems(List par1List)
     {
-        for(int i = 0; i < JewelrycraftUtil.metal.size(); i++)
-            par1List.add(ItemList.bucket.getModifiedItemStack(JewelrycraftUtil.metal.get(i)));
+        for(int i = 0; i < JewelrycraftUtil.objects.size(); i++)
+            par1List.add(ItemList.bucket.getModifiedItemStack(JewelrycraftUtil.objects.get(i)));
     }
 }

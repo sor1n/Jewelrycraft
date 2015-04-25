@@ -5,6 +5,7 @@ package darkknight.jewelrycraft.item;
 
 import java.util.List;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -16,6 +17,7 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 
 public class ItemGoldObj extends Item
 {
@@ -40,6 +42,12 @@ public class ItemGoldObj extends Item
     }
     
     @Override
+    public void registerIcons(IIconRegister iconRegister)
+    {
+        itemIcon = iconRegister.registerIcon("apple_golden");
+    }
+    
+    @Override
     public IIcon getIcon(ItemStack stack, int pass)
     {
         ItemStack item = JewelryNBT.item(stack);
@@ -49,13 +57,13 @@ public class ItemGoldObj extends Item
     
     public String getItemStackDisplayName(ItemStack stack)
     {
-        return "Golden " + (stack != null && (Item.getItemById(Integer.valueOf(stack.getTagCompound().getTag("target").toString().split(",")[0].substring(4).replace("s", ""))) != null && JewelryNBT.item(stack) != null) ? JewelryNBT.item(stack).getDisplayName() : "Object");
+        if (stack != null && stack.hasTagCompound() && stack.getTagCompound().hasKey("target") && Item.getItemById(Integer.valueOf(stack.getTagCompound().getTag("target").toString().split(",")[0].substring(4).replace("s", ""))) != null && JewelryNBT.item(stack) != null) return "Golden " + JewelryNBT.item(stack).getDisplayName();
+        return "Golden Object";
     }
     
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean displayInfo)
     {
-        if (displayInfo) 
-            if(JewelryNBT.item(stack).getItem() instanceof ItemFood) list.add(EnumChatFormatting.DARK_PURPLE + "It's made of solid gold! How are you suppose to eat this?");
-            else list.add(EnumChatFormatting.DARK_PURPLE + "Shiny, but useless :(");
+        if (displayInfo) if (stack != null && JewelryNBT.item(stack) != null && JewelryNBT.item(stack).getItem() instanceof ItemFood) list.add(EnumChatFormatting.DARK_PURPLE + "It's made of solid gold! How are you suppose to eat this?");
+        else list.add(EnumChatFormatting.DARK_PURPLE + "Shiny, but useless :(");
     }
 }

@@ -89,7 +89,13 @@ public class ItemRender implements IItemRenderer
                 GL11.glColor3f(1F, 1F, 0F);
                 if(Item.getItemById(Integer.valueOf(item.getTagCompound().getTag("target").toString().split(",")[0].substring(4).replace("s", ""))) != null)
                     renderItem(Minecraft.getMinecraft().thePlayer, JewelryNBT.item(item), 0, type);
-                else renderItem(Minecraft.getMinecraft().thePlayer, new ItemStack(Blocks.end_portal), 0, type);;
+                else renderItem(Minecraft.getMinecraft().thePlayer, new ItemStack(Blocks.end_portal), 0, type);
+                GL11.glPopMatrix();
+            }
+            else{
+                GL11.glPushMatrix();
+                GL11.glColor3f(1F, 1F, 0F);
+                renderItem(Minecraft.getMinecraft().thePlayer, new ItemStack(Blocks.end_portal), 0, type);
                 GL11.glPopMatrix();
             }
         }

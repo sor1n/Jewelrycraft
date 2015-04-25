@@ -25,7 +25,7 @@ public class GuiJewelryModifier extends GuiContainer
     private GuiButton addItems;
     private GuiTextField searchField, pages;
     private boolean clicked;
-    private int page = 1, maxPages = 1, selectedX = 0, selectedY = 0, selectedPage = 0;
+    private int page = 1, maxPages = 1, selectedX = 0, selectedY = 0, selectedPage = 0, enabled = 0;
     private ItemStack selectedItem;
     private ArrayList<ItemStack> selectedItems = new ArrayList<ItemStack>();
     private List<Map<Integer, Map<Integer, Integer>>> selectedItemsPos = new ArrayList<Map<Integer, Map<Integer, Integer>>>();
@@ -46,12 +46,14 @@ public class GuiJewelryModifier extends GuiContainer
     {
         GL11.glColor3f(1, 1, 1);
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+        int k = (this.width - this.xSize) / 2;
+        int l = (this.height - this.ySize) / 2;
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-        if (selectedX != 0 && selectedY != 0 && page == selectedPage) drawTexturedModalRect(selectedX, selectedY, 211, 0, 18, 18);
+        if (selectedX != 0 && selectedY != 0 && page == selectedPage) drawTexturedModalRect(k + selectedX, l + selectedY, 211, 0, 18, 18);
         for(Map<Integer, Map<Integer, Integer>> items: selectedItemsPos){
             for(Object itemPage: items.keySet()){
                 if (page == (Integer)itemPage) for(int x: ((Map<Integer, Integer>)items.get(itemPage)).keySet())
-                    drawTexturedModalRect(x, (int)((Map<Integer, Integer>)items.get(itemPage)).get(x), 211, 0, 18, 18);
+                    drawTexturedModalRect(k + x, l + (int)((Map<Integer, Integer>)items.get(itemPage)).get(x), 211, 0, 18, 18);
             }
         }
         this.searchField.drawTextBox();
@@ -97,8 +99,8 @@ public class GuiJewelryModifier extends GuiContainer
             maxPages = JewelrycraftUtil.objects.size() / 48 + 1;
         }else this.searchField.setFocused(false);
         for(Object button: this.buttonList){
-            if (((GuiButton)button).id < 3 && ((GuiButton)button).mousePressed(mc, x, y)){
-                if (((GuiButton)button).id < 2){
+            if (((GuiButton)button).id < 4 && ((GuiButton)button).mousePressed(mc, x, y)){
+                if (((GuiButton)button).id != 3){
                     this.selectedItems.removeAll(selectedItems);
                     this.selectedItemsPos.removeAll(selectedItemsPos);
                 }else{
@@ -109,22 +111,24 @@ public class GuiJewelryModifier extends GuiContainer
                 ((GuiButton)buttonList.get(0)).enabled = true;
                 ((GuiButton)buttonList.get(1)).enabled = true;
                 ((GuiButton)buttonList.get(2)).enabled = true;
+                ((GuiButton)buttonList.get(3)).enabled = true;
                 ((GuiButton)button).enabled = false;
+                enabled = ((GuiButton)button).id; 
             }
         }
         int i = 0;
         for(ItemStack item: JewelrycraftUtil.objects){
             if (this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase())){
                 if (i >= (page - 1) * 48 && i < page * 48 && x >= this.guiLeft + 88 + 20 * (i % 6) && x < this.guiLeft + 108 + 20 * (i % 6) && y >= this.guiTop + 9 + 17 * (i / 6) - 136 * (page - 1) && y < this.guiTop + 25 + 17 * (i / 6) - 136 * (page - 1)){
-                    if (!((GuiButton)buttonList.get(0)).enabled || !((GuiButton)buttonList.get(1)).enabled){
+                    if (!((GuiButton)buttonList.get(0)).enabled || !((GuiButton)buttonList.get(1)).enabled || !((GuiButton)buttonList.get(2)).enabled){
                         this.selectedItem = item;
-                        this.selectedX = this.guiLeft + 87 + 20 * (i % 6);
-                        this.selectedY = this.guiTop + 6 + 17 * (i / 6) - 136 * (page - 1);
+                        this.selectedX = 87 + 20 * (i % 6);
+                        this.selectedY = 6 + 17 * (i / 6) - 136 * (page - 1);
                         this.selectedPage = page;
-                    }else if (!((GuiButton)buttonList.get(2)).enabled){
+                    }else if (!((GuiButton)buttonList.get(3)).enabled){
                         Map<Integer, Map<Integer, Integer>> itemPage = new HashMap<Integer, Map<Integer, Integer>>();
                         Map<Integer, Integer> pos = new HashMap<Integer, Integer>();
-                        pos.put(this.guiLeft + 87 + 20 * (i % 6), this.guiTop + 6 + 17 * (i / 6) - 136 * (page - 1));
+                        pos.put(87 + 20 * (i % 6), 6 + 17 * (i / 6) - 136 * (page - 1));
                         itemPage.put(page, pos);
                         if (!this.selectedItems.contains(item)){
                             this.selectedItems.add(item);
@@ -138,24 +142,28 @@ public class GuiJewelryModifier extends GuiContainer
                 i++;
             }
         }
-        if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && page > 1) page--;
-        if (((GuiButton)buttonList.get(5)).mousePressed(mc, x, y) && page < maxPages) page++;
+        if (((GuiButton)buttonList.get(5)).mousePressed(mc, x, y) && page > 1) page--;
+        if (((GuiButton)buttonList.get(6)).mousePressed(mc, x, y) && page < maxPages) page++;
         if (jMod.modInv.getStackInSlot(36) != null){
             ItemStack targetItem = jMod.modInv.getStackInSlot(36).copy();
-            if (((GuiButton)buttonList.get(3)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(0)).enabled){
+            if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(0)).enabled){
                 JewelryNBT.addIngotColor(targetItem, 16777215);
                 JewelryNBT.addMetal(targetItem, new ItemStack(Item.getItemById(0), 0, 0));
                 JewelryNBT.addMetal(targetItem, this.selectedItem);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
-            if (((GuiButton)buttonList.get(3)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(1)).enabled){
+            if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(1)).enabled){
                 JewelryNBT.addGemColor(targetItem, 16777215);
                 JewelryNBT.addGem(targetItem, new ItemStack(Item.getItemById(0), 0, 0));
                 JewelryNBT.addGem(targetItem, this.selectedItem);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
-            if (((GuiButton)buttonList.get(3)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(2)).enabled){
+            if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(2)).enabled){
                 JewelryNBT.addModifiers(targetItem, selectedItems);
+                JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
+            }
+            if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(3)).enabled){
+                JewelryNBT.addItem(targetItem, selectedItem);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
         }
@@ -178,11 +186,12 @@ public class GuiJewelryModifier extends GuiContainer
         this.pages.setText(page + "/" + maxPages);
         this.buttonList.add(new GuiButton(0, this.guiLeft + 17, this.guiTop + 30, 52, 20, "Metal"));
         this.buttonList.add(new GuiButton(1, this.guiLeft + 17, this.guiTop + 52, 52, 20, "Gem"));
-        this.buttonList.add(new GuiButton(2, this.guiLeft + 17, this.guiTop + 74, 52, 20, "Modifiers"));
-        this.buttonList.add(new GuiButton(3, this.guiLeft + 17, this.guiTop + 96, 52, 20, "Add Items"));
-        this.buttonList.add(new GuiButton(4, this.guiLeft + 5, this.guiTop + 142, 13, 20, "<<"));
-        this.buttonList.add(new GuiButton(5, this.guiLeft + 73, this.guiTop + 142, 13, 20, ">>"));
-        ((GuiButton)buttonList.get(0)).enabled = false;
+        this.buttonList.add(new GuiButton(2, this.guiLeft + 17, this.guiTop + 74, 52, 20, "Item"));
+        this.buttonList.add(new GuiButton(3, this.guiLeft + 17, this.guiTop + 96, 52, 20, "Modifiers"));
+        this.buttonList.add(new GuiButton(4, this.guiLeft + 17, this.guiTop + 118, 52, 20, "Add Items"));
+        this.buttonList.add(new GuiButton(5, this.guiLeft + 5, this.guiTop + 142, 13, 20, "<<"));
+        this.buttonList.add(new GuiButton(6, this.guiLeft + 73, this.guiTop + 142, 13, 20, ">>"));
+        ((GuiButton)buttonList.get(enabled)).enabled = false;
     }
     
     public void drawScreen(int x, int y, float z)
