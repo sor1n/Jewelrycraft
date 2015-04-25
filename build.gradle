@@ -20,7 +20,7 @@ apply plugin: 'forge'
 project.ext.buildnumber = "undefined"
 if (System.getenv().BUILD_NUMBER) project.buildnumber = System.getenv().BUILD_NUMBER
 
-version = project.mcversion + "-alpha-" + project.buildnumber
+version = project.minecraft.version + "-alpha-" + project.buildnumber
 group= "darkknight.jewelrycraft2"
 archivesBaseName = "Jewelrycraft2"
 
