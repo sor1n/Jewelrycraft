@@ -1,14 +1,16 @@
 [
 {
-  "modid": "jewelrycraft2",
-  "name": "Jewelrycraft 2",
-  "description": "Jewelrycraft 2 is a mod about creating jewellery and imbuing them with mystical powers. However, they have both positives and negatives. There are also curses, some good, some bad. Maybe acquiring some wouldn't be that bad.",
+  "modid": "${modid}",
+  "name": "${name}",
+  "description": "Jewelrycraft 2 is a mod about creating jewellery and imbuing them with mystical powers. 
+  However, they have both positives and negatives. There are also curses, some good, some bad. 
+  Maybe acquiring some wouldn't be that bad.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "https://github.com/sor1n/Jewelrycraft",
   "updateUrl": "",
-  "authorList": "",
-  "credits": "domi1819, MrCompost, pau101",
+  "authorList": "OnyxDarkKnight",
+  "credits": "domi1819, MrCompost, pau101, bspkrs",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
