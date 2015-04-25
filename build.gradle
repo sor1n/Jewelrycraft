@@ -22,7 +22,7 @@ if (System.getenv().BUILD_NUMBER) project.buildnumber = System.getenv().BUILD_NU
 
 version = "1.7.10-alpha-" + project.buildnumber
 group= "darkknight.jewelrycraft2"
-archivesBaseName = "Jewelrycraft 2"
+archivesBaseName = "Jewelrycraft2"
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
