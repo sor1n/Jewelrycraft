@@ -132,7 +132,11 @@ public class GuiTabBlocks extends GuiTab
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(BlockList.shadowEye), new ItemStack(Blocks.stonebrick), new ItemStack(Blocks.stained_hardened_clay, 1, 15), new ItemStack(Blocks.stonebrick), new ItemStack(Blocks.stained_hardened_clay, 1, 15), new ItemStack(Items.ender_eye), new ItemStack(Blocks.stained_hardened_clay, 1, 15), new ItemStack(Blocks.stonebrick), new ItemStack(Blocks.stained_hardened_clay, 1, 15), new ItemStack(Blocks.stonebrick));
                 break;
             case 22:
-                text = "though, for He sees everything. To see how to create the ritual look in the Ritual tab.";
+                text = "though, for He sees everything. To see how to create the ritual look in the Ritual tab. One you created the ritual, simple place a piece of jewelery in the middle pedestal and your modifiers of choice in the other ones (you don't need to put an item in every single pedestal). After";
+                Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
+                break;
+            case 23:
+                text = "you do that simply right click the eye to activate the ritual. Be careful not to leave the premise or you'll die! When the ritual is done, Shift+Right Click on the central hand pedestal to retrieve your newly modified item!";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             default:
@@ -146,7 +150,7 @@ public class GuiTabBlocks extends GuiTab
     @Override
     public int getMaxPages()
     {
-        return 21;
+        return 23;
     }
     
     /**

@@ -154,7 +154,7 @@ public class Page
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        if (showName) gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + item.getDisplayName(), x + Math.abs(70 - gui.getFont().getStringWidth(item.getDisplayName()) / 2) - 10, y + 2, 0);
+        if (showName) gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + item.getDisplayName().substring(0, item.getDisplayName().length() > 23?23:item.getDisplayName().length()), x + Math.abs(70 - gui.getFont().getStringWidth(item.getDisplayName()) / 2) - 10, y + 2, 0);
         GL11.glColor4f(1, 1, 1, 1);
         gui.renderItem(item, x + 13 + imgX, y + 18 + imgY, size, rotate, 0, 0, 0);
         drawText(gui, text, x + txtX, y + txtY);

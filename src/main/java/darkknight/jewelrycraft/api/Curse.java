@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.event.world.BlockEvent;
 
 public class Curse
 {
@@ -115,6 +116,12 @@ public class Curse
     {}
     
     public void playerHandRender(EntityPlayer player, RenderHandEvent event)
+    {}
+    
+    public void onBlockItemsDrop(EntityPlayer player, BlockEvent.HarvestDropsEvent event)
+    {}
+    
+    public void onBlockDestroyed(EntityPlayer player, BlockEvent.BreakEvent event)
     {}
     
     public boolean itemToss()

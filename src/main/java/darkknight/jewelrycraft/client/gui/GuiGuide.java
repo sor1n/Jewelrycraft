@@ -84,10 +84,10 @@ public class GuiGuide extends GuiContainer
         activeTab.drawBackground(this, i, j, page + 1);
         ArrayList<String> text = new ArrayList<String>();
         text.add(Integer.toString(page));
-        drawHoveringText(text, guiLeft - 10 + 20 - text.get(0).length(), guiTop + 150 + 20, fontRendererObj);
+        drawHoveringText(text, guiLeft - 10 + 20 - text.get(0).length(), guiTop + 150 + 25, fontRendererObj);
         text.remove(Integer.toString(page));
         text.add(Integer.toString(page + 1));
-        drawHoveringText(text, guiLeft - 10 + 20 + 147 - text.get(0).length(), guiTop + 150 + 20, fontRendererObj);
+        drawHoveringText(text, guiLeft - 10 + 20 + 147 - text.get(0).length(), guiTop + 150 + 25, fontRendererObj);
         for(int tab = 0; tab < tabs.length; tab++)
             renderItem(tabs[tab].getIcon(), guiLeft - 52, guiTop + 26 + tab * 19, activeTab.getIcon());
     }

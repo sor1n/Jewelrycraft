@@ -30,10 +30,10 @@ public class CurseList
         midasTouch = new CurseMidasTouch(Variables.MODNAME + ":" + "Midas Touch", 5, Variables.MODID + "_curses_0");
         rabbitsPaw = new CurseRabbitsPaw(Variables.MODNAME + ":" + "Rabbit's Paw", 6, Variables.MODID + "_curses_0");
         pentagram = new CursePentagram(Variables.MODNAME + ":" + "Pentagram", 7, Variables.MODID + "_curses_0");
-//        vampireHunger = new CurseMidasTouch(8, Variables.MODNAME + ":" + "Vampire Hunger", 8, 0);
-//        humbleBundle = new CurseMidasTouch(9, Variables.MODNAME + ":" + "Humble Bundle", 9, 0);
-//        deathsTouch = new CurseMidasTouch(10, Variables.MODNAME + ":" + "Deaths Touch", 10, 0);
-//        antichrist = new CurseMidasTouch(11, Variables.MODNAME + ":" + "Antichrist", 11, 0);
-//        moneyEqualsPower = new CurseMidasTouch(12, Variables.MODNAME + ":" + "Money Equals Power", 12, 0);
+        vampireHunger = new CurseVampireHunger(Variables.MODNAME + ":" + "Vampire Hunger", 8, Variables.MODID + "_curses_0");
+        humbleBundle = new CurseHumbleBundle(Variables.MODNAME + ":" + "Humble Bundle", 9, Variables.MODID + "_curses_0");
+//        deathsTouch = new CurseMidasTouch(Variables.MODNAME + ":" + "Deaths Touch", 10, Variables.MODID + "_curses_0");
+//        antichrist = new CurseMidasTouch(Variables.MODNAME + ":" + "Antichrist", 11, Variables.MODID + "_curses_0");
+//        moneyEqualsPower = new CurseMidasTouch(Variables.MODNAME + ":" + "Money Equals Power", 12, Variables.MODID + "_curses_0");
     }
 }

@@ -82,4 +82,7 @@ public class ModifierEffects
      */
     public void onPlayerAttacked(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
     {}
+    
+    public void onPlayerDead(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry)
+    {}
 }

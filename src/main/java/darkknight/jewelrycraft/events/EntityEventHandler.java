@@ -381,6 +381,12 @@ public class EntityEventHandler
             
             for(Curse curse: Curse.getCurseList())
                 if (playerInfo.getInteger(curse.getName()) > 0) curse.playerDeathAction(player.worldObj, player);
+            for(int i = 0; i < 18; i++)
+                if (playerInfo.hasKey("ext" + i)){
+                    NBTTagCompound nbt = (NBTTagCompound)playerInfo.getTag("ext" + i);
+                    ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
+                    if (item != null) ((ItemBaseJewelry)item.getItem()).onPlayerDead(item, player, event.source);
+                }
         }
         if (event.entity instanceof EntityPlayer && !(event.entity instanceof EntityPlayerMP)) JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
     }

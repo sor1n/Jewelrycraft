@@ -51,7 +51,7 @@ public class ScreenHandler extends Gui
                         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                         GL11.glDisable(GL11.GL_LIGHTING);
                         GL11.glScalef(0.45f, 0.45f, 0.0f);
-                        drawTexturedModalRect(28, 18 + (size + 26) * count, tag % size * size, tag / size * size, size, size);
+                        drawTexturedModalRect(28, 18 + (size + 26) * count, tag % 8 * size, tag / 8 * size, size, size);
                         GL11.glPopMatrix();
                         count++;
                     }

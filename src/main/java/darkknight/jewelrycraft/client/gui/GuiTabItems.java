@@ -125,6 +125,14 @@ public class GuiTabItems extends GuiTab
                 text = "These buckets contain molten metal. To obtain one simply Right Click a full Smelter to get a bucket. You can pour the metal, other than that it has no use. You can place the molten metal back in a Smelter by Right Clicking one with it.";
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, item, text, 40f, 0, 0, true, 45, 10, true);
                 break;
+            case 16:
+                text = "This item is a creative only item! Right click it while in creative mode to open a GUI. Place a piece of jewelery inside the slot, select what you want to add, then click on 'Add Items'. If you selected Modifiers, you can select multiple";
+                Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, new ItemStack(ItemList.jewelryModifier), text, 40f, 0, 0, true, 45, 10, true);
+                break;
+            case 17:
+                text = "items at once. The 'Item' button is to add an Item to a Golden Object, which can not be obtained normally. This tool can be really useful, especially for those who want to test the mod and can't wait for the normal processes to finish (Smelter, Jewelers Table, Ritual).";
+                Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
+                break;
             default:
                 ;
         }
@@ -136,7 +144,7 @@ public class GuiTabItems extends GuiTab
     @Override
     public int getMaxPages()
     {
-        return 15;
+        return 17;
     }
     
     /**

@@ -258,4 +258,10 @@ public abstract class ItemBaseJewelry extends Item
     {
         for(ModifierEffects mod: ModifierEffects.getEffects()) mod.onEntityAttacked(item, player, target, this, amount);
     }
+    
+    public void onPlayerDead(ItemStack stack, EntityPlayer player, DamageSource source)
+    {
+        for(ModifierEffects mod: ModifierEffects.getEffects())
+            mod.onPlayerDead(stack, player, source, this);
+    }
 }

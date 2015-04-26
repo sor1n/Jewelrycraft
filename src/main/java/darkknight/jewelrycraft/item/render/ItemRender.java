@@ -580,7 +580,7 @@ public class ItemRender implements IItemRenderer
         if (autoAnimate) GL11.glTranslatef(17F, 0.0F, 0.0F);
         else{
             GL11.glTranslatef(tran, 0.0F, 0.0F);
-            tran+=0.0001F;
+            tran+=0.0004F;
             if(tran >= 360F) tran = 0F;
         }
         GL11.glRotatef(-30.0F, 0.0F, 0.0F, 1.0F);

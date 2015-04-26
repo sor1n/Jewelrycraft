@@ -5,19 +5,17 @@ import darkknight.jewelrycraft.api.ModifierEffects;
 
 public class EffectsList
 {
-    private static ModifierEffects blazePowder, enderEye, feather;
-    private static boolean isInitialized = false;
+    private static ModifierEffects blazePowder, enderEye, feather, enderPearl, obsidian;
     
     /**
      * @param e
      */
     public static void postInit(FMLPostInitializationEvent e)
     {
-        if (!isInitialized){
-            blazePowder = new EffectBlazePowder();
-            enderEye = new EffectEnderEye();
-            feather = new EffectFeather();
-            isInitialized = true;
-        }
+        blazePowder = new EffectBlazePowder();
+        enderEye = new EffectEnderEye();
+        feather = new EffectFeather();
+        enderPearl = new EffectEnderPearl();
+        obsidian = new EffectObsidian();
     }
 }
