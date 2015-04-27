@@ -33,7 +33,7 @@ public class CurseInfamy extends Curse
     {
         if (rand.nextInt(5) == 0 && !world.isRemote && !(target instanceof EntityMob) && target instanceof EntityLiving && !(target instanceof EntityHeart) && !(target instanceof EntityHalfHeart) && target.canAttackWithItem()){
             NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
-            if (playerInfo.getFloat("BlackHeart") < 20F) playerInfo.setFloat("BlackHeart", playerInfo.getFloat("BlackHeart") + 1.0F);
+            playerInfo.setFloat("BlackHeart", playerInfo.getFloat("BlackHeart") + 1.0F);
             if (player.getMaxHealth() >= 3F){
                 player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() - 1.0F);
                 player.setHealth(player.getHealth() - 1.0F);
