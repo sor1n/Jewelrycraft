@@ -70,7 +70,12 @@ public class GuiJewelryModifier extends GuiContainer
                 GL11.glColor3f(1F, 1F, 1F);
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-                if (i >= (page - 1) * 48 && i < page * 48) itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), item, 88 + 20 * (i % 6), 7 + 17 * (i / 6) - 136 * (page - 1));
+                if (i >= (page - 1) * 48 && i < page * 48) try{
+                    itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), item, 88 + 20 * (i % 6), 7 + 17 * (i / 6) - 136 * (page - 1));
+                }
+                catch(Exception e){
+                    JewelrycraftMod.logger.info("Trying to display an item but gets this error: " + e.getMessage() + "\nThe item causing the issue is: " + item);
+                }
                 GL11.glDisable(GL11.GL_LIGHTING);
                 i++;
             }
@@ -113,7 +118,7 @@ public class GuiJewelryModifier extends GuiContainer
                 ((GuiButton)buttonList.get(2)).enabled = true;
                 ((GuiButton)buttonList.get(3)).enabled = true;
                 ((GuiButton)button).enabled = false;
-                enabled = ((GuiButton)button).id; 
+                enabled = ((GuiButton)button).id;
             }
         }
         int i = 0;
@@ -149,21 +154,21 @@ public class GuiJewelryModifier extends GuiContainer
             if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(0)).enabled){
                 JewelryNBT.addIngotColor(targetItem, 16777215);
                 JewelryNBT.addMetal(targetItem, new ItemStack(Item.getItemById(0), 0, 0));
-                if(selectedItem != null) JewelryNBT.addMetal(targetItem, this.selectedItem);
+                if (selectedItem != null) JewelryNBT.addMetal(targetItem, this.selectedItem);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
             if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(1)).enabled){
                 JewelryNBT.addGemColor(targetItem, 16777215);
                 JewelryNBT.addGem(targetItem, new ItemStack(Item.getItemById(0), 0, 0));
-                if(selectedItem != null) JewelryNBT.addGem(targetItem, this.selectedItem);
+                if (selectedItem != null) JewelryNBT.addGem(targetItem, this.selectedItem);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
             if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(2)).enabled){
-                if(selectedItem != null) JewelryNBT.addItem(targetItem, selectedItem);
+                if (selectedItem != null) JewelryNBT.addItem(targetItem, selectedItem);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
             if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(3)).enabled){
-                if(!selectedItems.isEmpty()) JewelryNBT.addModifiers(targetItem, selectedItems);
+                if (!selectedItems.isEmpty()) JewelryNBT.addModifiers(targetItem, selectedItems);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
         }

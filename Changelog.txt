@@ -1,3 +1,6 @@
+Version 1.0.2
+- Fixed crashing with other mods
+
 Version 1.0.1
 - Fixed some grammatical errors from the guide.
 - Made the Smelter basin and bucket look metallic

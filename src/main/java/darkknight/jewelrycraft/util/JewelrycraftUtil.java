@@ -28,6 +28,7 @@ public class JewelrycraftUtil
     public static ArrayList<ItemStack> ores = new ArrayList<ItemStack>();
     public static HashMap<Item, ItemStack> oreToIngot = new HashMap<Item, ItemStack>();
     public static ArrayList<String> jamcraftPlayers = new ArrayList<String>();
+    private static ArrayList<ItemStack> items = new ArrayList<ItemStack>();
     public static Random rand = new Random();
     
     /**
@@ -51,15 +52,17 @@ public class JewelrycraftUtil
         jewelry.add(new ItemStack(ItemList.bracelet));
         jewelry.add(new ItemStack(ItemList.earrings));
         for(Object item: GameData.getItemRegistry()){
-            ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-            if (Loader.isModLoaded("Mantle") && ((Item)item).getUnlocalizedName().equals("Mantle:item.mantle.manual")) continue; 
-            if (Loader.isModLoaded("Fossil/Archeology") && ((Item)item).getUnlocalizedName().equals("Fossil/Archeology") && (((Item)item).getUnlocalizedName().equals("legBone") ||
-                ((Item)item).getUnlocalizedName().equals("uniqueItem") || ((Item)item).getUnlocalizedName().equals("foot") || ((Item)item).getUnlocalizedName().equals("skull") || 
-                ((Item)item).getUnlocalizedName().equals("armBone") || ((Item)item).getUnlocalizedName().equals("dinoRibCage") || ((Item)item).getUnlocalizedName().equals("vertebrae"))) continue; 
-            if (item != null && ((Item)item).getHasSubtypes()) ((Item)item).getSubItems((Item)item, null, items);
-            else objects.add(new ItemStack((Item)item));
-            
-            if (!items.isEmpty()) objects.addAll(items);
+             if (Loader.isModLoaded("Mantle") && ((Item)item).getUnlocalizedName().equals("Mantle:item.mantle.manual")) continue;
+            try{
+                if (item != null && (Item)item != null && ((Item)item).getHasSubtypes()){
+                    ((Item)item).getSubItems((Item)item, ((Item)item).getCreativeTab(), items);
+                }else objects.add(new ItemStack((Item)item));
+                if (!items.isEmpty()) objects.addAll(items);
+                items.removeAll(items);
+            }
+            catch(Exception e){
+                JewelrycraftMod.logger.info("Error, tried to add subtypes of item " + ((Item)item).getUnlocalizedName() + "\nItem is not added in the list.");
+            }
         }
     }
     
