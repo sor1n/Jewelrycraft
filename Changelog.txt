@@ -1,0 +1,11 @@
+Version 1.0.1
+- Fixed some grammatical errors from the guide.
+- Made the Smelter basin and bucket look metallic
+- Made the Jeweler's Crafting Table texture to have a wooden top and stone legs
+- Updated forge to version 10.13.3.1395
+- Changed the Jeweler's Crafting Recipe to use stone instead of cobblestone
+- Fixed Fossils and Archeology from crashing
+- Added a mcmod.info and a logo to it
+
+Version 1.0.0
+- Released the mod

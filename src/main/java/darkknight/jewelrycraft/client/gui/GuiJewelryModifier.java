@@ -149,21 +149,21 @@ public class GuiJewelryModifier extends GuiContainer
             if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(0)).enabled){
                 JewelryNBT.addIngotColor(targetItem, 16777215);
                 JewelryNBT.addMetal(targetItem, new ItemStack(Item.getItemById(0), 0, 0));
-                JewelryNBT.addMetal(targetItem, this.selectedItem);
+                if(selectedItem != null) JewelryNBT.addMetal(targetItem, this.selectedItem);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
             if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(1)).enabled){
                 JewelryNBT.addGemColor(targetItem, 16777215);
                 JewelryNBT.addGem(targetItem, new ItemStack(Item.getItemById(0), 0, 0));
-                JewelryNBT.addGem(targetItem, this.selectedItem);
+                if(selectedItem != null) JewelryNBT.addGem(targetItem, this.selectedItem);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
             if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(2)).enabled){
-                JewelryNBT.addItem(targetItem, selectedItem);
+                if(selectedItem != null) JewelryNBT.addItem(targetItem, selectedItem);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
             if (((GuiButton)buttonList.get(4)).mousePressed(mc, x, y) && !((GuiButton)buttonList.get(3)).enabled){
-                JewelryNBT.addModifiers(targetItem, selectedItems);
+                if(!selectedItems.isEmpty()) JewelryNBT.addModifiers(targetItem, selectedItems);
                 JewelrycraftMod.netWrapper.sendToServer(new PacketRequestSetSlot(targetItem));
             }
         }

@@ -53,6 +53,9 @@ public class JewelrycraftUtil
         for(Object item: GameData.getItemRegistry()){
             ArrayList<ItemStack> items = new ArrayList<ItemStack>();
             if (Loader.isModLoaded("Mantle") && ((Item)item).getUnlocalizedName().equals("Mantle:item.mantle.manual")) continue; 
+            if (Loader.isModLoaded("Fossil/Archeology") && ((Item)item).getUnlocalizedName().equals("Fossil/Archeology") && (((Item)item).getUnlocalizedName().equals("legBone") ||
+                ((Item)item).getUnlocalizedName().equals("uniqueItem") || ((Item)item).getUnlocalizedName().equals("foot") || ((Item)item).getUnlocalizedName().equals("skull") || 
+                ((Item)item).getUnlocalizedName().equals("armBone") || ((Item)item).getUnlocalizedName().equals("dinoRibCage") || ((Item)item).getUnlocalizedName().equals("vertebrae"))) continue; 
             if (item != null && ((Item)item).getHasSubtypes()) ((Item)item).getSubItems((Item)item, null, items);
             else objects.add(new ItemStack((Item)item));
             

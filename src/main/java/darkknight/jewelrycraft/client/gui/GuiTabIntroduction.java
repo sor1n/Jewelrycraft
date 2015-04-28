@@ -30,7 +30,7 @@ public class GuiTabIntroduction extends GuiTab
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 2:
-                text = "block in this giude. Please be aware that even if you can add anything as a modifier and can have multiple modifiers on one jewelry, this mod is still in alpha and does not have that many modifiers implemtnted and currently don't have any different effects depending on";
+                text = "block in this guide. Please be aware that even if you can add anything as a modifier and can have multiple modifiers on one jewelry, this mod is still in alpha and does not have that many modifiers implemented and currently don't have any different effects depending on";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 3:
