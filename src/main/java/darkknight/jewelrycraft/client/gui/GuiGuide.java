@@ -136,14 +136,17 @@ public class GuiGuide extends GuiContainer
         GL11.glDisable(GL11.GL_LIGHTING);
         EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, item);
         entityitem.hoverStart = 0.0F;
-        if (item.isItemEqual(new ItemStack(BlockList.jewelAltar))) y -= 4;
+        if (item.isItemEqual(new ItemStack(BlockList.smelter))){
+            y -= 3;
+            x += 1;
+        }
         GL11.glTranslatef(x, y, 100);
         float scale = 30F;
         GL11.glScalef(-scale, scale, scale);
         if (activeIcon != null && item.isItemEqual(activeIcon)) GL11.glRotatef(rot, 0, 1, 0);
-        if (item.isItemEqual(new ItemStack(BlockList.jewelAltar))){
-            GL11.glRotatef(160.0F, 1.0F, 0.0F, 0.0F);
-            GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+        if (item.isItemEqual(new ItemStack(BlockList.smelter))){
+            GL11.glScalef(1.5F, 1.5F, 1.5F);
+            GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
         }else if (item.isItemEqual(new ItemStack(BlockList.handPedestal))){
             GL11.glScalef(1.2F, 1.2F, 1.2F);
             GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);

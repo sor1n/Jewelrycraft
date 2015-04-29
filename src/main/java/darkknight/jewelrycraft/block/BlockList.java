@@ -9,8 +9,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
-import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.tileentity.TileEntityAltar;
 import darkknight.jewelrycraft.tileentity.TileEntityBlockShadow;
 import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
 import darkknight.jewelrycraft.tileentity.TileEntityHandPedestal;
@@ -24,7 +22,7 @@ import darkknight.jewelrycraft.util.Variables;
 
 public class BlockList
 {
-    public static Block shadowOre, smelter, molder, displayer, jewelCraftingTable, shadowBlock, shadowEye, jewelAltar, handPedestal, shadowHand, midasTouchBlock;
+    public static Block shadowOre, smelter, molder, displayer, jewelCraftingTable, shadowBlock, shadowEye, handPedestal, shadowHand, midasTouchBlock;
     public static BlockMoltenMetal moltenMetal;
     public static Fluid moltenMetalFluid;
     private static boolean isInitialized = false;
@@ -37,7 +35,6 @@ public class BlockList
         displayer = new BlockDisplayer(Material.iron).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundTypeMetal).setBlockName(Variables.MODID + ".displayer").setCreativeTab(JewelrycraftMod.jewelrycraft);
         jewelCraftingTable = new BlockJewelrsCraftingTable(Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypePiston).setBlockName(Variables.MODID + ".jewelCraftingTable").setCreativeTab(JewelrycraftMod.jewelrycraft);
         shadowBlock = new BlockShadow().setHardness(5.0F).setResistance(7.0F).setStepSound(Block.soundTypeMetal).setBlockTextureName(Variables.MODID + ":blockShadow").setBlockName(Variables.MODID + ".blockShadow").setCreativeTab(JewelrycraftMod.jewelrycraft);
-        jewelAltar = new BlockJewelAltar().setHardness(5.0F).setResistance(2.0F).setStepSound(Block.soundTypeMetal).setBlockTextureName(Variables.MODID + ":altar").setBlockName(Variables.MODID + ".altar").setCreativeTab(JewelrycraftMod.jewelrycraft);
         shadowEye = new BlockShadowEye().setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundTypePiston).setBlockName(Variables.MODID + ".shadowEye").setCreativeTab(JewelrycraftMod.jewelrycraft);
         handPedestal = new BlockHandPedestal(Material.rock).setHardness(5.0F).setResistance(6.0F).setStepSound(Block.soundTypePiston).setBlockName(Variables.MODID + ".handPedestal").setCreativeTab(JewelrycraftMod.jewelrycraft);
         shadowHand = new BlockShadowHand(Material.rock).setStepSound(Block.soundTypePiston).setBlockName(Variables.MODID + ".shadowHand").setCreativeTab(JewelrycraftMod.jewelrycraft).setBlockUnbreakable();
@@ -52,7 +49,6 @@ public class BlockList
         GameRegistry.registerBlock(molder, "Molder");
         GameRegistry.registerBlock(jewelCraftingTable, "jewelCraftingTable");
         GameRegistry.registerBlock(displayer, "Displayer");
-        GameRegistry.registerBlock(jewelAltar, "Altar");
         GameRegistry.registerBlock(shadowEye, "Shadow Eye");
         GameRegistry.registerBlock(handPedestal, "Stone Bricks Pedestal");
         GameRegistry.registerBlock(shadowHand, "Shadow Hand");
@@ -64,7 +60,6 @@ public class BlockList
         GameRegistry.registerTileEntity(TileEntityJewelrsCraftingTable.class, Variables.MODID + ":table");
         GameRegistry.registerTileEntity(TileEntityDisplayer.class, Variables.MODID + ":displayer");
         GameRegistry.registerTileEntity(TileEntityBlockShadow.class, Variables.MODID + ":blockShadow");
-        GameRegistry.registerTileEntity(TileEntityAltar.class, Variables.MODID + ":altar");
         GameRegistry.registerTileEntity(TileEntityShadowEye.class, Variables.MODID + ":shadowEye");
         GameRegistry.registerTileEntity(TileEntityHandPedestal.class, Variables.MODID + ":handPedestal");
         GameRegistry.registerTileEntity(TileEntityShadowHand.class, Variables.MODID + ":shadowHand");

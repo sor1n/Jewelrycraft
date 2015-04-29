@@ -45,7 +45,6 @@ public class CraftingRecipes
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockList.jewelCraftingTable), "xxx", "y y", "y y", 'x', Blocks.planks, 'y', Blocks.stone));
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockList.displayer, 2), " x ", "xxx", "yyy", 'x', Items.iron_ingot, 'y', Blocks.emerald_block));
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockList.shadowBlock, 1), "xxx", "xxx", "xxx", 'x', ItemList.shadowIngot));
-            GameRegistry.addRecipe(new ItemStack(BlockList.jewelAltar, 1), "sws", "bwb", "bbb", 's', Blocks.end_stone, 'w', new ItemStack(Blocks.wool, 1, 5), 'b', Blocks.nether_brick);
             // Smelting
             GameRegistry.addSmelting(BlockList.shadowOre, new ItemStack(ItemList.shadowIngot), 1.5f);
             GameRegistry.addSmelting(new ItemStack(ItemList.clayMolds, 1, 0), new ItemStack(ItemList.molds, 1, 0), 0.2F);

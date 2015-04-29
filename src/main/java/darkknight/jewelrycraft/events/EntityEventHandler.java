@@ -311,10 +311,7 @@ public class EntityEventHandler
                 entityitem.motionZ = 0;
                 entityitem.motionY = 0.11000000298023224D;
                 event.player.worldObj.spawnEntityInWorld(entityitem);
-                List players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
-                Iterator plrs = players.iterator();
-                while (plrs.hasNext())
-                    ((EntityPlayerMP)plrs.next()).addChatComponentMessage(new ChatComponentText("<" + event.player.getDisplayName() + "> This is MY item! MINE! I will NEVER give it to you! Mine! Mine! MINE!"));
+                MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText("<" + event.player.getDisplayName() + "> This is MY item! MINE! I will NEVER give it to you! Mine! Mine! MINE!")); 
                 event.setCanceled(true);
             }
     }

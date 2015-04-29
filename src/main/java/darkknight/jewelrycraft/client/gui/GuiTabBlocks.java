@@ -27,7 +27,7 @@ public class GuiTabBlocks extends GuiTab
     @Override
     public ItemStack getIcon()
     {
-        return new ItemStack(BlockList.jewelAltar);
+        return new ItemStack(BlockList.smelter);
     }
     
     /**
@@ -96,46 +96,38 @@ public class GuiTabBlocks extends GuiTab
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 13:
-                text = "This block can store any jewellery in it and activate their effects as it were a player. To do that simply right click the block with a jewellery. Crouch +";
-                Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(BlockList.jewelAltar), new ItemStack(Blocks.end_stone), new ItemStack(Blocks.wool, 1, 5), new ItemStack(Blocks.end_stone), new ItemStack(Blocks.nether_brick), new ItemStack(Blocks.wool, 1, 5), new ItemStack(Blocks.nether_brick), new ItemStack(Blocks.nether_brick), new ItemStack(Blocks.nether_brick), new ItemStack(Blocks.nether_brick));
-                break;
-            case 14:
-                text = "Right Click to retreive the jewellery.";
-                Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
-                break;
-            case 15:
                 text = "The Storage Displayer, as the name suggests, can store a large amount (Up to: " + Integer.MAX_VALUE + ") of a  single item/block placed in it. It will";
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(BlockList.displayer), null, new ItemStack(Items.iron_ingot), null, new ItemStack(Items.iron_ingot), new ItemStack(Items.iron_ingot), new ItemStack(Items.iron_ingot), new ItemStack(Blocks.emerald_block), new ItemStack(Blocks.emerald_block), new ItemStack(Blocks.emerald_block));
                 break;
-            case 16:
+            case 14:
                 text = "display all possible infromation about the object in it, such as the name, durability, enchantments etc. To store something in it simply right click with that object on it and the whole amount of items or blocks you are holding will be immediately stored inside.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
-            case 17:
+            case 15:
                 text = "If a displayer already contains an item and you have that in your inventory, you can simply hold right click on it with an empty hand to add all of your items of that type from your inventory. To retrieve a single item just left click the block. If you wish to";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
-            case 18:
+            case 16:
                 text = "get a whole stack, Crouch + Left Click on it. In creative mode you can simply hold Right Click on a displayer containing an object and it will add 64 of it with every right click, without it being in your inventory.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
-            case 19:
+            case 17:
                 text = "This mysterious shaped block is used in the ritual. The acient ones claimed it had the power to travel through worlds. They would use these to offer";
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(BlockList.handPedestal), new ItemStack(Blocks.cobblestone_wall), new ItemStack(Blocks.cobblestone_wall), new ItemStack(Blocks.cobblestone_wall), null, new ItemStack(Blocks.stonebrick), null, new ItemStack(Blocks.stone_slab, 1, 5), new ItemStack(Blocks.stonebrick), new ItemStack(Blocks.stone_slab, 1, 5));
                 break;
-            case 20:
+            case 18:
                 text = "sacrifices to 'The Dark One' in exchange for unimaginable powers.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
-            case 21:
+            case 19:
                 text = "The Cursed Eye is an ancient artifact also known as 'The Dark One's Eye'. It is part of the sacrifice ritual the ancient ones talk about. Be careful";
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(BlockList.shadowEye), new ItemStack(Blocks.stonebrick), new ItemStack(Blocks.stained_hardened_clay, 1, 15), new ItemStack(Blocks.stonebrick), new ItemStack(Blocks.stained_hardened_clay, 1, 15), new ItemStack(Items.ender_eye), new ItemStack(Blocks.stained_hardened_clay, 1, 15), new ItemStack(Blocks.stonebrick), new ItemStack(Blocks.stained_hardened_clay, 1, 15), new ItemStack(Blocks.stonebrick));
                 break;
-            case 22:
+            case 20:
                 text = "though, for He sees everything. To see how to create the ritual look in the Ritual tab. One you created the ritual, simple place a piece of jewelery in the middle pedestal and your modifiers of choice in the other ones (you don't need to put an item in every single pedestal). After";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
-            case 23:
+            case 21:
                 text = "you do that simply right click the eye to activate the ritual. Be careful not to leave the premise or you'll die! When the ritual is done, Shift+Right Click on the central hand pedestal to retrieve your newly modified item!";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
@@ -150,7 +142,7 @@ public class GuiTabBlocks extends GuiTab
     @Override
     public int getMaxPages()
     {
-        return 23;
+        return 21;
     }
     
     /**

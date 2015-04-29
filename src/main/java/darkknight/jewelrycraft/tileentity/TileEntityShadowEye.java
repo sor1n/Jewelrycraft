@@ -1,6 +1,7 @@
 package darkknight.jewelrycraft.tileentity;
 
 import java.util.ArrayList;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -10,7 +11,10 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import darkknight.jewelrycraft.block.BlockHandPedestal;
 import darkknight.jewelrycraft.block.BlockList;
@@ -70,11 +74,17 @@ public class TileEntityShadowEye extends TileEntity
     {
         super.updateEntity();
         boolean valid = isValidStructure(worldObj, xCoord, yCoord, zCoord, blockMetadata);
-        if (active) timer--;
+        boolean canStartRitual = valid && ((TileEntityHandPedestal)worldObj.getTileEntity(xCoord, yCoord - 3, zCoord)).heldItemStack != null && getNumberOfItems(worldObj, xCoord, yCoord, zCoord) > 0;
+        if (active){
+            timer--;
+            if(canStartRitual && canChangePedestals(worldObj, xCoord, yCoord, zCoord) && opening == 4) changePedestals(worldObj, xCoord, yCoord, zCoord);
+        }
+        
         if (active && target != null && this.getDistanceFrom(target.posX, target.posY, target.posZ) > 30D){
             active = false;
             timer = -1;
             shouldAddData = false;
+            revertPedestals(worldObj, xCoord, yCoord, zCoord);
         }
         if (opening == 4 && timer <= 0) active = false;
         if (!active && timer <= 0 && opening != 1){
@@ -88,16 +98,23 @@ public class TileEntityShadowEye extends TileEntity
             addData(worldObj, xCoord, yCoord, zCoord);
             TileEntityHandPedestal target = (TileEntityHandPedestal)worldObj.getTileEntity(xCoord, yCoord - 3, zCoord);
             if (target != null && target.getHeldItemStack() != null) JewelryNBT.addModifiers(target.getHeldItemStack(), pedestalItems);
+            revertPedestals(worldObj, xCoord, yCoord, zCoord);
         }
         if (active && timer <= 0){
             if (opening < 4){
                 opening++;
                 timer = 20;
             }
-            if (valid && opening == 4) timer = ConfigHandler.RITUAL_TIME;
-            else if (!valid){
+            if (canStartRitual && opening == 4) timer = ConfigHandler.RITUAL_TIME;
+            else if (!canStartRitual){
+                shouldAddData = false;
                 active = false;
                 timer = -1;
+                if (!worldObj.isRemote){
+                    JewelrycraftUtil.addCursePoints(target, 50);
+                    target.addChatMessage(new ChatComponentText(EnumChatFormatting.BLACK + "The Shadows don't like to be disturbed for no reason!"));
+                    target.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "You feel a strange aura encumbering you."));
+                }
             }
         }
         for(Object player: worldObj.getEntitiesWithinAABB(EntityPlayer.class, getRenderBoundingBox().expand(10D, 10D, 10D)))
@@ -228,6 +245,101 @@ public class TileEntityShadowEye extends TileEntity
         addPedestalInfo((TileEntityHandPedestal)world.getTileEntity(x - 2, y - 3, z + 4));
     }
     
+    public int getNumberOfItems(World world, int x, int y, int z)
+    {
+        int items = 0;
+        if (((TileEntityHandPedestal)world.getTileEntity(x + 2, y - 3, z - 4)).heldItemStack != null) items++;
+        if (((TileEntityHandPedestal)world.getTileEntity(x - 4, y - 3, z + 2)).heldItemStack != null) items++;
+        if (((TileEntityHandPedestal)world.getTileEntity(x, y - 3, z - 5)).heldItemStack != null) items++;
+        if (((TileEntityHandPedestal)world.getTileEntity(x - 2, y - 3, z - 4)).heldItemStack != null) items++;
+        if (((TileEntityHandPedestal)world.getTileEntity(x - 4, y - 3, z - 2)).heldItemStack != null) items++;
+        if (((TileEntityHandPedestal)world.getTileEntity(x - 5, y - 3, z)).heldItemStack != null) items++;
+        if (((TileEntityHandPedestal)world.getTileEntity(x + 4, y - 3, z - 2)).heldItemStack != null) items++;
+        if (((TileEntityHandPedestal)world.getTileEntity(x + 5, y - 3, z)).heldItemStack != null) items++;
+        if (((TileEntityHandPedestal)world.getTileEntity(x + 4, y - 3, z + 2)).heldItemStack != null) items++;
+        if (((TileEntityHandPedestal)world.getTileEntity(x + 2, y - 3, z + 4)).heldItemStack != null) items++;
+        if (((TileEntityHandPedestal)world.getTileEntity(x, y - 3, z + 5)).heldItemStack != null) items++;
+        if (((TileEntityHandPedestal)world.getTileEntity(x - 2, y - 3, z + 4)).heldItemStack != null) items++;
+        return items;
+    }
+    
+    public boolean canChangePedestals(World world, int x, int y, int z)
+    {
+        if (world.getBlock(x, y - 3, z) != BlockList.handPedestal) return false;
+        if (world.getBlock(x + 2, y - 3, z - 4) != BlockList.handPedestal) return false;
+        if (world.getBlock(x - 4, y - 3, z + 2) != BlockList.handPedestal) return false;
+        if (world.getBlock(x, y - 3, z - 5) != BlockList.handPedestal) return false;
+        if (world.getBlock(x - 2, y - 3, z - 4) != BlockList.handPedestal) return false;
+        if (world.getBlock(x - 4, y - 3, z - 2) != BlockList.handPedestal) return false;
+        if (world.getBlock(x - 5, y - 3, z) != BlockList.handPedestal) return false;
+        if (world.getBlock(x + 4, y - 3, z - 2) != BlockList.handPedestal) return false;
+        if (world.getBlock(x + 5, y - 3, z) != BlockList.handPedestal) return false;
+        if (world.getBlock(x + 4, y - 3, z + 2) != BlockList.handPedestal) return false;
+        if (world.getBlock(x + 2, y - 3, z + 4) != BlockList.handPedestal) return false;
+        if (world.getBlock(x, y - 3, z + 5) != BlockList.handPedestal) return false;
+        if (world.getBlock(x - 2, y - 3, z + 4) != BlockList.handPedestal) return false;
+        return true;
+    }
+    
+    public void changePedestals(World world, int x, int y, int z)
+    {
+        changeHand(world, x, y - 3, z);
+        changeHand(world, x + 2, y - 3, z - 4);
+        changeHand(world, x - 4, y - 3, z + 2);
+        changeHand(world, x, y - 3, z - 5);
+        changeHand(world, x - 2, y - 3, z - 4);
+        changeHand(world, x - 4, y - 3, z - 2);
+        changeHand(world, x - 5, y - 3, z);
+        changeHand(world, x + 4, y - 3, z - 2);
+        changeHand(world, x + 5, y - 3, z);
+        changeHand(world, x + 4, y - 3, z + 2);
+        changeHand(world, x + 2, y - 3, z + 4);
+        changeHand(world, x, y - 3, z + 5);
+        changeHand(world, x - 2, y - 3, z + 4);
+    }
+    
+    public void changeHand(World world, int x, int y, int z)
+    {
+        int l = world.getBlockMetadata(x, y, z);
+        world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(world.getBlock(x, y, z)));
+        TileEntityShadowHand tile = new TileEntityShadowHand();
+        if(((TileEntityHandPedestal)world.getTileEntity(x, y, z)).heldItemStack != null) tile.setHeldItemStack(((TileEntityHandPedestal)world.getTileEntity(x, y, z)).heldItemStack.copy());
+        if(tile.heldItemStack != null) tile.closeHand();
+        ((TileEntityHandPedestal)world.getTileEntity(x, y, z)).removeHeldItemStack();
+        world.setBlock(x, y, z, BlockList.shadowHand, l, 2);
+        world.setTileEntity(x, y, z, tile);
+    }
+    
+    public void revertPedestals(World world, int x, int y, int z)
+    {
+        revertHand(world, x, y - 3, z);
+        revertHand(world, x + 2, y - 3, z - 4);
+        revertHand(world, x - 4, y - 3, z + 2);
+        revertHand(world, x, y - 3, z - 5);
+        revertHand(world, x - 2, y - 3, z - 4);
+        revertHand(world, x - 4, y - 3, z - 2);
+        revertHand(world, x - 5, y - 3, z);
+        revertHand(world, x + 4, y - 3, z - 2);
+        revertHand(world, x + 5, y - 3, z);
+        revertHand(world, x + 4, y - 3, z + 2);
+        revertHand(world, x + 2, y - 3, z + 4);
+        revertHand(world, x, y - 3, z + 5);
+        revertHand(world, x - 2, y - 3, z + 4);
+    }
+    
+    public void revertHand(World world, int x, int y, int z)
+    {
+        int l = world.getBlockMetadata(x, y, z);
+        world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(BlockList.handPedestal));
+        world.playSoundEffect(x, y + 0.5F, z, "step.wood", 1F, 1F);
+        TileEntityHandPedestal tile = new TileEntityHandPedestal();
+        if(((TileEntityShadowHand)world.getTileEntity(x, y, z)).heldItemStack != null) tile.setHeldItemStack(((TileEntityShadowHand)world.getTileEntity(x, y, z)).heldItemStack.copy());
+        if(tile.heldItemStack != null) tile.closeHand();
+        ((TileEntityShadowHand)world.getTileEntity(x, y, z)).removeHeldItemStack();
+        world.setBlock(x, y, z, BlockList.handPedestal, l, 2);
+        world.setTileEntity(x, y, z, tile);
+    }
+    
     /**
      * @param pedestal
      */
@@ -254,8 +366,7 @@ public class TileEntityShadowEye extends TileEntity
             }
             pedestal.removeHeldItemStack();
             pedestal.openHand();
-        }
-        else if(pedestal != null && target != null) JewelrycraftUtil.addCursePoints(target, 20);
+        }else if (pedestal != null && target != null) JewelrycraftUtil.addCursePoints(target, 20);
     }
     
     /**
