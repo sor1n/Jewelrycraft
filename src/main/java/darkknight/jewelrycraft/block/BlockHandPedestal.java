@@ -98,12 +98,10 @@ public class BlockHandPedestal extends BlockContainer
         if (te != null){
             if (!world.isRemote && te.getHeldItemStack() == null && item != null){
                 te.setHeldItemStack(item.copy());
-                te.closeHand();
                 if (!entityPlayer.capabilities.isCreativeMode) item.stackSize--;
                 te.markDirty();
             }else if (entityPlayer.isSneaking()) if (entityPlayer.inventory.addItemStackToInventory(te.getHeldItemStack())){
                 te.removeHeldItemStack();
-                te.openHand();
             }
             te.markDirty();
         }

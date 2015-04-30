@@ -77,9 +77,8 @@ public class TileEntityShadowEye extends TileEntity
         boolean canStartRitual = valid && ((TileEntityHandPedestal)worldObj.getTileEntity(xCoord, yCoord - 3, zCoord)).heldItemStack != null && getNumberOfItems(worldObj, xCoord, yCoord, zCoord) > 0;
         if (active){
             timer--;
-            if(canStartRitual && canChangePedestals(worldObj, xCoord, yCoord, zCoord) && opening == 4) changePedestals(worldObj, xCoord, yCoord, zCoord);
+            if (canStartRitual && canChangePedestals(worldObj, xCoord, yCoord, zCoord) && opening == 4) changePedestals(worldObj, xCoord, yCoord, zCoord);
         }
-        
         if (active && target != null && this.getDistanceFrom(target.posX, target.posY, target.posZ) > 30D){
             active = false;
             timer = -1;
@@ -303,11 +302,13 @@ public class TileEntityShadowEye extends TileEntity
         int l = world.getBlockMetadata(x, y, z);
         world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(world.getBlock(x, y, z)));
         TileEntityShadowHand tile = new TileEntityShadowHand();
-        if(((TileEntityHandPedestal)world.getTileEntity(x, y, z)).heldItemStack != null) tile.setHeldItemStack(((TileEntityHandPedestal)world.getTileEntity(x, y, z)).heldItemStack.copy());
-        if(tile.heldItemStack != null) tile.closeHand();
-        ((TileEntityHandPedestal)world.getTileEntity(x, y, z)).removeHeldItemStack();
-        world.setBlock(x, y, z, BlockList.shadowHand, l, 2);
-        world.setTileEntity(x, y, z, tile);
+        if (world.getTileEntity(x, y, z) instanceof TileEntityHandPedestal){
+            if (((TileEntityHandPedestal)world.getTileEntity(x, y, z)).heldItemStack != null) tile.setHeldItemStack(((TileEntityHandPedestal)world.getTileEntity(x, y, z)).heldItemStack.copy());
+            if (tile.heldItemStack != null) tile.closeHand();
+            ((TileEntityHandPedestal)world.getTileEntity(x, y, z)).removeHeldItemStack();
+            world.setBlock(x, y, z, BlockList.shadowHand, l, 2);
+            world.setTileEntity(x, y, z, tile);
+        }
     }
     
     public void revertPedestals(World world, int x, int y, int z)
@@ -333,11 +334,12 @@ public class TileEntityShadowEye extends TileEntity
         world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(BlockList.handPedestal));
         world.playSoundEffect(x, y + 0.5F, z, "step.wood", 1F, 1F);
         TileEntityHandPedestal tile = new TileEntityHandPedestal();
-        if(((TileEntityShadowHand)world.getTileEntity(x, y, z)).heldItemStack != null) tile.setHeldItemStack(((TileEntityShadowHand)world.getTileEntity(x, y, z)).heldItemStack.copy());
-        if(tile.heldItemStack != null) tile.closeHand();
-        ((TileEntityShadowHand)world.getTileEntity(x, y, z)).removeHeldItemStack();
-        world.setBlock(x, y, z, BlockList.handPedestal, l, 2);
-        world.setTileEntity(x, y, z, tile);
+        if (world.getTileEntity(x, y, z) instanceof TileEntityShadowHand){
+            if (((TileEntityShadowHand)world.getTileEntity(x, y, z)).heldItemStack != null) tile.setHeldItemStack(((TileEntityShadowHand)world.getTileEntity(x, y, z)).heldItemStack.copy());
+            ((TileEntityShadowHand)world.getTileEntity(x, y, z)).removeHeldItemStack();
+            world.setBlock(x, y, z, BlockList.handPedestal, l, 2);
+            world.setTileEntity(x, y, z, tile);
+        }
     }
     
     /**

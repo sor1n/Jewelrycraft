@@ -1,3 +1,8 @@
+Version 1.0.4
+- Hand Pedestals no longer close the palm when you put something in
+- Fixed the ritual crashing
+- Fixed the Liquids Tab from crashing
+
 Version 1.0.3
 - Removed the Jewel Altar
 - Improved Ritual

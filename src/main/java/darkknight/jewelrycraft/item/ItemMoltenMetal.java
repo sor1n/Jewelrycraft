@@ -22,7 +22,6 @@ import darkknight.jewelrycraft.util.Variables;
 
 public class ItemMoltenMetal extends Item
 {
-    
     /**
      * 
      */
@@ -68,9 +67,15 @@ public class ItemMoltenMetal extends Item
     public static int color(ItemStack stack, int pass) throws IOException
     {
         IResourceManager rm = Minecraft.getMinecraft().getResourceManager();
+        ResourceLocation ingot;
         BufferedImage icon;
         if (stack != null && JewelryNBT.ingot(stack) != null && Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) > 0 && JewelryNBT.ingot(stack).getIconIndex() != null && JewelryNBT.ingotColor(stack) == 16777215){
-            ResourceLocation ingot = ItemBaseJewelry.getLocation(JewelryNBT.ingot(stack), stack, false);
+            try{
+                ingot = ItemBaseJewelry.getLocation(JewelryNBT.ingot(stack), stack, false);
+            }
+            catch(Exception e){
+                ingot = new ResourceLocation("textures/items/apple.png");
+            }
             icon = ImageIO.read(rm.getResource(ingot).getInputStream());
             int height = icon.getHeight();
             int width = icon.getWidth();
