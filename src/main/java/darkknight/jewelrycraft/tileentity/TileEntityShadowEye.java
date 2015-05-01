@@ -1,6 +1,8 @@
 package darkknight.jewelrycraft.tileentity;
 
 import java.util.ArrayList;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +13,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
@@ -127,13 +130,8 @@ public class TileEntityShadowEye extends TileEntity
             for(float x = -din; x <= din; x += 0.2F)
                 for(float z = -din; z <= din; z += 0.2F)
                     if (x * x + z * z >= din * din - 1 && x * x + z * z <= din * din + 1) Minecraft.getMinecraft().effectRenderer.addEffect(new EntityShadowsFX(worldObj, xCoord + x + 0.5F, yCoord - 0.5F, zCoord + z + 0.5F, 15F, 0.04F - 0.01F * i, particleTexture));
-            for(int l = 0; l <= 2 - i; l++)
-                worldObj.spawnParticle("depthsuspend", xCoord + 6.5F - worldObj.rand.nextInt(9) - worldObj.rand.nextFloat(), yCoord - 2F + worldObj.rand.nextFloat(), zCoord + 6.5F - worldObj.rand.nextInt(9) - worldObj.rand.nextFloat(), 0, 0, 0);
-            for(Object player: worldObj.getEntitiesWithinAABB(EntityPlayer.class, getRenderBoundingBox().expand(10D, 10D, 10D)))
-                if (player != null){
-                    NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag((EntityPlayer)player, Variables.MODID);
-                    persistTag.setBoolean("nearStartedRitual", true);
-                }
+            for(int l = 0; l <= 100 - i*45; l++)
+                worldObj.spawnParticle("depthsuspend", xCoord + 6.5F - worldObj.rand.nextInt(12) - worldObj.rand.nextFloat(), yCoord - 2F + worldObj.rand.nextInt(9) - worldObj.rand.nextFloat(), zCoord + 6.5F - worldObj.rand.nextInt(12) - worldObj.rand.nextFloat(), 0, 0, 0);
         }
     }
     
@@ -369,6 +367,13 @@ public class TileEntityShadowEye extends TileEntity
             pedestal.removeHeldItemStack();
             pedestal.openHand();
         }else if (pedestal != null && target != null) JewelrycraftUtil.addCursePoints(target, 20);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getRenderBoundingBox()
+    {
+        AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord - 5.5D, yCoord - 5.5D, zCoord - 5.5D, xCoord + 5.5D, yCoord + 5.5D, zCoord + 5.5D);
+        return bb;
     }
     
     /**

@@ -15,7 +15,6 @@ import darkknight.jewelrycraft.tileentity.TileEntityShadowHand;
 
 public class BlockShadowHand extends BlockContainer
 {
-    
     /**
      * @param material
      */
@@ -104,10 +103,12 @@ public class BlockShadowHand extends BlockContainer
     @Override
     public void breakBlock(World world, int i, int j, int k, Block block, int par6)
     {
-        TileEntityShadowHand te = (TileEntityShadowHand)world.getTileEntity(i, j, k);
-        if (te != null && te.getHeldItemStack() != null){
-            dropItem(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord, te.getHeldItemStack());
-            world.removeTileEntity(i, j, k);
+        if (world.getTileEntity(i, j, k) instanceof TileEntityShadowHand){
+            TileEntityShadowHand te = (TileEntityShadowHand)world.getTileEntity(i, j, k);
+            if (te != null && te.getHeldItemStack() != null){
+                dropItem(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord, te.getHeldItemStack());
+                world.removeTileEntity(i, j, k);
+            }
         }
         super.breakBlock(world, i, j, k, block, par6);
     }

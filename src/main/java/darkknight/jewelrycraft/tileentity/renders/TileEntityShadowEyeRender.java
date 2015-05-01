@@ -11,6 +11,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.glu.GLU;
+import org.lwjgl.util.glu.Sphere;
 import darkknight.jewelrycraft.model.ModelShadowEye;
 import darkknight.jewelrycraft.tileentity.TileEntityShadowEye;
 import darkknight.jewelrycraft.util.Variables;
@@ -18,6 +20,7 @@ import darkknight.jewelrycraft.util.Variables;
 public class TileEntityShadowEyeRender extends TileEntitySpecialRenderer
 {
     ModelShadowEye eye = new ModelShadowEye();
+    Sphere shadow = new Sphere();
     
     /**
      * @param te
@@ -55,6 +58,23 @@ public class TileEntityShadowEyeRender extends TileEntitySpecialRenderer
         }
         catch(Exception e){
             eye.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+        }
+        if (eyeS.opening == 4){
+            GL11.glPushMatrix();
+            GL11.glDisable(GL11.GL_TEXTURE_2D);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            GL11.glColor4f(0.0F, 0.0F, 0.0F, 1F);
+            GL11.glRotatef(eyeS.timer*10F, 0, 1, 0);
+            GL11.glRotatef(90.0F, 1, 0, 0);
+            EntityPlayer player = te.getWorldObj().getClosestPlayer(te.xCoord, te.yCoord, te.zCoord, 9D);
+            shadow.setNormals(GLU.GLU_NONE);
+            shadow.draw(9.5F, 6, 6);
+            GL11.glScalef(-1,-1,-1);
+            shadow.draw(9.5F, 6, 6);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glEnable(GL11.GL_TEXTURE_2D);
+            GL11.glPopMatrix();
         }
         GL11.glPopMatrix();
         GL11.glPopMatrix();

@@ -439,16 +439,6 @@ public class EntityEventHandler
     @SideOnly (Side.CLIENT)
     public void fogColors(EntityViewRenderEvent.FogColors event)
     {
-        if (event.entity instanceof EntityPlayer){
-            EntityPlayer player = (EntityPlayer)event.entity;
-            NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
-            if (persistTag.getBoolean("nearStartedRitual")){
-                event.red = 0f;
-                event.green = 0f;
-                event.blue = 0f;
-            }
-        }
-        if (event.isCancelable()) event.setCanceled(true);
     }
     
     /**
@@ -466,14 +456,5 @@ public class EntityEventHandler
     @SideOnly (Side.CLIENT)
     public void renderFog(EntityViewRenderEvent.RenderFogEvent event)
     {
-        if (event.entity instanceof EntityPlayer){
-            EntityPlayer player = (EntityPlayer)event.entity;
-            NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
-            if (persistTag.getBoolean("nearStartedRitual")){
-                GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
-                GL11.glFogf(GL11.GL_FOG_DENSITY, 0.6F);
-            }
-        }
-        if (event.isCancelable()) event.setCanceled(true);
     }
 }

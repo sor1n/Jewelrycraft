@@ -113,9 +113,12 @@ public class PlayerRenderHandler
     {
         if (playersInfo != null){
             EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-            NBTTagCompound playerInfo = (NBTTagCompound)playersInfo.getTag(player.getDisplayName());
-            for(Curse curse: Curse.getCurseList())
-                if (playerInfo.getInteger(curse.getName()) > 0 && playerInfo.getInteger("cursePoints") > 0) curse.playerHandRender(player, event);
+            if (player != null){
+                NBTTagCompound playerInfo = (NBTTagCompound)playersInfo.getTag(player.getDisplayName());
+                for(Curse curse: Curse.getCurseList())
+                    if (curse != null && playerInfo != null && playerInfo.hasKey(curse.getName()) && playerInfo.getInteger(curse.getName()) > 0 && playerInfo.hasKey("cursePoints") && playerInfo.getInteger("cursePoints") > 0) 
+                        curse.playerHandRender(player, event);
+            }
         }
     }
 }
