@@ -1,6 +1,9 @@
 package darkknight.jewelrycraft.curses;
 
 import org.lwjgl.opengl.GL11;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,7 +25,6 @@ import darkknight.jewelrycraft.util.Variables;
 
 public class CurseInfamy extends Curse
 {
-    MaskRender mask = new MaskRender();
     public CurseInfamy(String name, int txtID, String pack)
     {
         super(name, txtID, pack);
@@ -45,6 +47,7 @@ public class CurseInfamy extends Curse
     @Override
     public void playerRender(EntityPlayer player, RenderPlayerEvent.Specials.Post event)
     {
+        MaskRender mask = new MaskRender();
         float yaw = player.prevRotationYawHead + (player.rotationYawHead - player.prevRotationYawHead) * event.partialRenderTick;
         float yawOffset = player.prevRenderYawOffset + (player.renderYawOffset - player.prevRenderYawOffset) * event.partialRenderTick;
         float pitch = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * event.partialRenderTick;

@@ -10,6 +10,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class Curse
 {
@@ -111,10 +113,12 @@ public class Curse
     
     public void entityDropItems(EntityPlayer player, Entity target, ArrayList<EntityItem> drops)
     {}
-    
+
+    @SideOnly(Side.CLIENT)
     public void playerRender(EntityPlayer player, RenderPlayerEvent.Specials.Post event)
     {}
-    
+
+    @SideOnly(Side.CLIENT)
     public void playerHandRender(EntityPlayer player, RenderHandEvent event)
     {}
     

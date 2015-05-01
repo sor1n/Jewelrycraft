@@ -1,3 +1,6 @@
+Version 1.0.6
+- Fixed the mod from crashing on a server
+
 Version 1.0.5
 - Made the ritual even better
 - Fixed a type where the "Thieving Gloves" were named "Thiefing Gloves"

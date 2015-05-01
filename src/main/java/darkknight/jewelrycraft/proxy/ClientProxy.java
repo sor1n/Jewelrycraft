@@ -6,14 +6,18 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.InventoryTabVanilla;
 import darkknight.jewelrycraft.client.TabJewelry;
 import darkknight.jewelrycraft.client.TabRegistry;
+import darkknight.jewelrycraft.client.gui.GuiHandler;
 import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.entities.renders.HeartRender;
+import darkknight.jewelrycraft.events.KeyBindings;
 import darkknight.jewelrycraft.events.PlayerRenderHandler;
 import darkknight.jewelrycraft.events.ScreenHandler;
 import darkknight.jewelrycraft.item.ItemList;
@@ -82,6 +86,12 @@ public class ClientProxy extends CommonProxy
         MinecraftForge.EVENT_BUS.register(new TabRegistry());
         MinecraftForge.EVENT_BUS.register(new PlayerRenderHandler());
         MinecraftForge.EVENT_BUS.register(new ScreenHandler(Minecraft.getMinecraft()));
+    }
+    
+    @Override
+    public void init()
+    {
+        FMLCommonHandler.instance().bus().register(new KeyBindings());
     }
     
     @Override

@@ -9,6 +9,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.util.Variables;
 
@@ -23,9 +26,7 @@ public class CursePentagram extends Curse
     
     @Override
     public void attackedByPlayerAction(World world, EntityPlayer player, Entity target)
-    {
-        
-    }
+    {}
     
     @Override
     public void playerRender(EntityPlayer player, RenderPlayerEvent.Specials.Post event)

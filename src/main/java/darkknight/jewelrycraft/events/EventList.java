@@ -35,8 +35,8 @@ public class EventList
     public static void init(FMLInitializationEvent e)
     {
         GameRegistry.registerWorldGenerator(new Generation(), 0);
-        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) FMLCommonHandler.instance().bus().register(new KeyBindings());
-        new GuiHandler();
+        JewelrycraftMod.proxy.init();
+        new GuiHandler(); 
         FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
     }
     
