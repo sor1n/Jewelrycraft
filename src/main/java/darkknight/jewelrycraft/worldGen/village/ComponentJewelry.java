@@ -222,7 +222,7 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         int t = random.nextInt(max - min + 1) + min;
         placeBlockAtCurrentPosition(world, Blocks.chest, metadata, i, j, k, sbb);
         TileEntityChest chest = (TileEntityChest)world.getTileEntity(i1, j1, k1);
-        while (chest != null && t > 0){
+        while (chest != null && t > 0 && JewelrycraftUtil.gem.size() > 0){
             ItemStack jewels = JewelrycraftUtil.gem.get(random.nextInt(JewelrycraftUtil.gem.size()));
             chest.func_145976_a("Jeweler's Chest");
             if (jewels.getItem() == Items.nether_star && ConfigHandler.GENERATE_VILLAGE_NETHERSTAR) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), jewels);
@@ -252,7 +252,7 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         int t = random.nextInt(max - min + 1) + min;
         placeBlockAtCurrentPosition(world, chestB, metadata, i, j, k, sbb);
         TileEntityChest chest = (TileEntityChest)world.getTileEntity(i1, j1, k1);
-        while (chest != null && t > 0){
+        while (chest != null && t > 0 && JewelrycraftUtil.metal.size() > 0){
             chest.func_145976_a("Ingot Chest");
             int metalID = random.nextInt(JewelrycraftUtil.metal.size());
             ItemStack metal = JewelrycraftUtil.metal.get(metalID).copy();
@@ -283,7 +283,7 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         int t = random.nextInt(max - min + 1) + min;
         placeBlockAtCurrentPosition(world, chestB, metadata, i, j, k, sbb);
         TileEntityChest chest = (TileEntityChest)world.getTileEntity(i1, j1, k1);
-        while (chest != null && t > 0){
+        while (chest != null && t > 0 && JewelrycraftUtil.ores.size() > 0){
             chest.func_145976_a("Ores Chest");
             int oreID = random.nextInt(JewelrycraftUtil.ores.size());
             ItemStack ores = JewelrycraftUtil.ores.get(oreID).copy();
@@ -312,9 +312,9 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         if (displayer != null){
             Item[] jewels = {ItemList.ring, ItemList.necklace};
             ItemStack jewel = new ItemStack(jewels[random.nextInt(jewels.length)]);
-            JewelryNBT.addMetal(jewel, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())));
-            JewelryNBT.addModifiers(jewel, JewelrycraftUtil.addRandomModifiers(random.nextInt(4)));
-            JewelryNBT.addGem(jewel, JewelrycraftUtil.gem.get(random.nextInt(JewelrycraftUtil.gem.size())));
+            if (JewelrycraftUtil.metal.size() > 0) JewelryNBT.addMetal(jewel, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())));
+            if (JewelrycraftUtil.objects.size() > 0) JewelryNBT.addModifiers(jewel, JewelrycraftUtil.addRandomModifiers(random.nextInt(4)));
+            if (JewelrycraftUtil.gem.size() > 0) JewelryNBT.addGem(jewel, JewelrycraftUtil.gem.get(random.nextInt(JewelrycraftUtil.gem.size())));
             displayer.object = jewel;
             displayer.quantity = 1;
             displayer.hasObject = true;
@@ -338,7 +338,7 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         int k1 = getZWithOffset(i, k);
         placeBlockAtCurrentPosition(world, BlockList.smelter, metadata, i, j, k, sbb);
         TileEntitySmelter smelter = (TileEntitySmelter)world.getTileEntity(i1, j1, k1);
-        if (smelter != null && !isEmpty){
+        if (smelter != null && !isEmpty && JewelrycraftUtil.metal.size() > 0){
             int metal = random.nextInt(JewelrycraftUtil.metal.size());
             smelter.moltenMetal = JewelrycraftUtil.metal.get(metal).copy();
             smelter.hasMoltenMetal = true;
@@ -391,7 +391,7 @@ public class ComponentJewelry extends StructureVillagePieces.House1
             int meta = random.nextInt(ItemMolds.moldsItemNames.length);
             molder.mold = new ItemStack(ItemList.molds, 1, meta);
             molder.hasMold = true;
-            if (hasStuff){
+            if (hasStuff && JewelrycraftUtil.metal.size() > 0){
                 ItemStack ring = new ItemStack(ItemList.ring);
                 JewelryNBT.addMetal(ring, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())).copy());
                 ItemStack necklace = new ItemStack(ItemList.necklace);
@@ -431,7 +431,7 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         TileEntityFurnace furnace = (TileEntityFurnace)world.getTileEntity(i1, j1, k1);
         if (furnace != null){
             if (random.nextBoolean()) furnace.setInventorySlotContents(1, new ItemStack(Items.coal, 1 + random.nextInt(16)));
-            if (hasMetal){
+            if (hasMetal && JewelrycraftUtil.metal.size() > 0){
                 int metalID = random.nextInt(JewelrycraftUtil.metal.size());
                 ItemStack metal = JewelrycraftUtil.metal.get(metalID).copy();
                 metal.stackSize = random.nextInt(max - min + 1) + min;

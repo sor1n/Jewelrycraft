@@ -118,7 +118,7 @@ public class EntityEventHandler
                 if (playerInfo.hasKey("ext" + i)){
                     NBTTagCompound nbt = (NBTTagCompound)playerInfo.getTag("ext" + i);
                     ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-                    if (item != null) ((ItemBaseJewelry)item.getItem()).action(item, player);
+                    if (item != null && item.getItem() instanceof ItemBaseJewelry) ((ItemBaseJewelry)item.getItem()).action(item, player);
                 }
             if (!player.worldObj.isRemote){
                 if (playerInfo.hasKey("reselectCurses") && !playerInfo.getBoolean("reselectCurses")){

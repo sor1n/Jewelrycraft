@@ -47,5 +47,6 @@ public class EventList
         EffectsList.postInit(e);
         DamageSourceList.postInit(e);
         JewelrycraftMod.proxy.postInit();
+        JewelrycraftUtil.addStuff();   
     }
 }

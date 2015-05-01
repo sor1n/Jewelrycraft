@@ -1,3 +1,7 @@
+Version 1.0.7
+- Fixed villages crashing on a server
+- Fixed item duplication glitch
+
 Version 1.0.6
 - Fixed the mod from crashing on a server
 

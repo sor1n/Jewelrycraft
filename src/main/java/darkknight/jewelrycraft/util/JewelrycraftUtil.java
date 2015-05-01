@@ -5,19 +5,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameData;
+import cpw.mods.fml.relauncher.Side;
 import darkknight.jewelrycraft.JewelrycraftMod;
-import darkknight.jewelrycraft.events.EntityEventHandler;
 import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
 
 public class JewelrycraftUtil
 {
@@ -52,10 +51,10 @@ public class JewelrycraftUtil
         jewelry.add(new ItemStack(ItemList.bracelet));
         jewelry.add(new ItemStack(ItemList.earrings));
         for(Object item: GameData.getItemRegistry()){
-             if (Loader.isModLoaded("Mantle") && ((Item)item).getUnlocalizedName().equals("Mantle:item.mantle.manual")) continue;
+            if (Loader.isModLoaded("Mantle") && ((Item)item).getUnlocalizedName().equals("Mantle:item.mantle.manual")) continue;
             try{
-                if (item != null && (Item)item != null && ((Item)item).getHasSubtypes()){
-                    ((Item)item).getSubItems((Item)item, ((Item)item).getCreativeTab(), items);
+                if (item != null && (Item)item != null && ((Item)item).getHasSubtypes() && FMLCommonHandler.instance().getSide() == Side.CLIENT){
+                    ((Item)item).getSubItems((Item)item, null, items);
                 }else objects.add(new ItemStack((Item)item));
                 if (!items.isEmpty()) objects.addAll(items);
                 items.removeAll(items);

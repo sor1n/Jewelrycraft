@@ -16,7 +16,6 @@ import darkknight.jewelrycraft.item.ItemRing;
 
 public class ContainerJewelryTab extends Container
 {
-    
     /**
      * @param player
      * @param inv
@@ -68,23 +67,45 @@ public class ContainerJewelryTab extends Container
         if (slot != null && slot.getHasStack()){
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
-            if (slotID < 18){
-                if (!mergeItemStack(itemstack1, 18, 18 + 36, true)) return null;
-                slot.onSlotChange(itemstack1, itemstack);
-            }else if (itemstack1.getItem() instanceof ItemRing){
-                if (!mergeItemStack(itemstack1, 0, 10, false)) return null;
-            }else if (itemstack1.getItem() instanceof ItemBracelet){
-                if (!mergeItemStack(itemstack1, 10, 14, false)) return null;
-            }else if (itemstack1.getItem() instanceof ItemNecklace){
-                if (!mergeItemStack(itemstack1, 14, 17, false)) return null;
-            }else if (itemstack1.getItem() instanceof ItemEarrings){
-                if (!mergeItemStack(itemstack1, 17, 18, false)) return null;
-            }else{
-                if (!mergeItemStack(itemstack1, 18, 54, true)) return null;
-                slot.onSlotChange(itemstack1, itemstack);
-            }
-            if (itemstack1.stackSize == 0) slot.putStack((ItemStack)null);
+            // if (slotID < 18){
+            // if (!mergeItemStack(itemstack1, 18, 54, true)) return null;
+            // slot.onSlotChange(itemstack1, itemstack);
+            // }else if (itemstack1.getItem() instanceof ItemRing){
+            // if (!mergeItemStack(itemstack1, 0, 10, false)) return null;
+            // }else if (itemstack1.getItem() instanceof ItemBracelet){
+            // if (!mergeItemStack(itemstack1, 10, 14, false)) return null;
+            // }else if (itemstack1.getItem() instanceof ItemNecklace){
+            // if (!mergeItemStack(itemstack1, 14, 17, false)) return null;
+            // }else if (itemstack1.getItem() instanceof ItemEarrings){
+            // if (!mergeItemStack(itemstack1, 17, 18, false)) return null;
+            // }else{
+            // if (!mergeItemStack(itemstack1, 18, 54, true)) return null;
+            // slot.onSlotChange(itemstack1, itemstack);
+            // }
+            if (slotID >= 18){
+                if (itemstack.getItem() instanceof ItemRing){
+                    if (!mergeItemStack(itemstack, 0, 10, false) && !slot.getHasStack()) return null;
+                }else if (itemstack.getItem() instanceof ItemBracelet){
+                    if (!mergeItemStack(itemstack, 10, 14, false) && !slot.getHasStack()) return null;
+                }else if (itemstack.getItem() instanceof ItemNecklace ){
+                    if (!mergeItemStack(itemstack, 14, 17, false) && !slot.getHasStack()) return null;
+                }else if (itemstack.getItem() instanceof ItemEarrings){
+                    if (!mergeItemStack(itemstack, 17, 18, false) && !slot.getHasStack()) return null;
+                }
+                else{
+                    if (slotID < 27){
+                        if (!mergeItemStack(itemstack, 27, 36 + 18, false)) return null;
+                    }else{
+                        if (!mergeItemStack(itemstack, 18, 27, false)) return null;
+                    }
+                }
+            }else if (!mergeItemStack(itemstack, 18, inventorySlots.size(), false)) return null;
+            if (itemstack.stackSize == 0) slot.putStack(null);
             else slot.onSlotChanged();
+            if (itemstack.stackSize != itemstack.stackSize) slot.onPickupFromSlot(player, itemstack);
+            else return null;
+            // if (itemstack1.stackSize == 0) slot.putStack((ItemStack)null);
+            // else slot.onSlotChanged();
         }
         return itemstack;
     }
