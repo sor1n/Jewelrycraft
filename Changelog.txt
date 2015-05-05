@@ -1,3 +1,16 @@
+Version 1.0.8
+- Working on a GUI showing what curses you get with a description on them
+- Added a search bar in the Liquids Tab for easier searching
+- Fixed an issue with golden objects giving errors due to missing default texture
+- Improved the Infamy Mask to have less parts, thus causing less lag
+- Improved ingots and ore detection
+- Fixed certain ores when smelted outputting a different ingot
+- Necklaces and Rings now render as well
+- Updated the guide at the Guide item to have the proper link to the mod as well as mention the right people who helped with it
+- Added a list of the ores that work in the guide
+- Added a new tab to the guide regarding the ores and the ingots they create
+- Changed the stun effect caused by rings with feathers as modifiers to be a potion effect instead
+
 Version 1.0.7
 - Fixed villages crashing on a server
 - Fixed item duplication glitch

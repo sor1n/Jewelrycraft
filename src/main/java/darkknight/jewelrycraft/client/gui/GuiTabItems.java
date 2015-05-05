@@ -108,11 +108,11 @@ public class GuiTabItems extends GuiTab
             case 13:
                 String link = "HERE";
                 if (x >= gui.getLeft() && x <= gui.getLeft() + 30 && y >= gui.getTop() + 104 && y <= gui.getTop() + 124) link = EnumChatFormatting.DARK_BLUE + "HERE" + EnumChatFormatting.BLACK;
-                text = "installing it so you can see all the recipes. Since you are reading this, how about making a youtube video spotlighting this mod. I'd really appreciate it. After that you can share it in the main thread " + link + "." + " This mod was made by DarkKnight (or sor1n, depends";
+                text = "installing it so you can see all the recipes. Since you are reading this, how about making a youtube video spotlighting this mod. I'd really appreciate it. After that you can share it in the main thread " + link + "." + " This mod was made by OnyxDarkKnight and the help of domi1819,";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 14:
-                text = "where you got this mod from) and the help of domi1819 and bspkrs.";
+                text = "pau101 and Damien Hazard.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 15:
@@ -157,7 +157,7 @@ public class GuiTabItems extends GuiTab
     public void mouseClick(GuiGuide gui, int x, int y, int button)
     {
         if (gui.page == 13 && x >= gui.getLeft() && x <= gui.getLeft() + 30 && y >= gui.getTop() + 104 && y <= gui.getTop() + 124) try{
-            Desktop.getDesktop().browse(new URL("http://www.minecraftforum.net/topic/2210959-164smp-ssp-jewelrycraft-version-12/").toURI());
+            Desktop.getDesktop().browse(new URL("http://www.minecraftforum.net/forums/topics/2414865").toURI());
         }
         catch(Exception e){}
     }

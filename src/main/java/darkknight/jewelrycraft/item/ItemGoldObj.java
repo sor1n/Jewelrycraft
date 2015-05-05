@@ -52,7 +52,7 @@ public class ItemGoldObj extends Item
     {
         ItemStack item = JewelryNBT.item(stack);
         if (item != null) return item.getIconIndex();
-        return new ItemStack(Blocks.end_portal).getIconIndex();
+        return new ItemStack(Items.golden_apple).getIconIndex();
     }
     
     public String getItemStackDisplayName(ItemStack stack)

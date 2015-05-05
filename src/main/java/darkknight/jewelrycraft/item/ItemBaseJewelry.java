@@ -192,7 +192,7 @@ public abstract class ItemBaseJewelry extends Item
     {
         if (stack.hasTagCompound() && par4){
             ItemStack ingot = JewelryNBT.ingot(stack);
-            if (ingot != null && Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) > 0) list.add("Ingot: " + EnumChatFormatting.YELLOW + ingot.getDisplayName());
+            if (ingot != null && Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) > 0) list.add("Metal: " + EnumChatFormatting.YELLOW + ingot.getDisplayName().replace("Ingot", " "));
             ItemStack gem = JewelryNBT.gem(stack);
             if (gem != null) list.add("Gem: " + EnumChatFormatting.BLUE + gem.getDisplayName());
             ArrayList<ItemStack> modifier = JewelryNBT.modifier(stack);

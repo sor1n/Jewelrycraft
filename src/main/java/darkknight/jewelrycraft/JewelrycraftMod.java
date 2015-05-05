@@ -7,8 +7,6 @@ package darkknight.jewelrycraft;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -16,9 +14,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -31,6 +29,7 @@ import darkknight.jewelrycraft.entities.EntityList;
 import darkknight.jewelrycraft.events.EventList;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.network.PacketHandler;
+import darkknight.jewelrycraft.potions.PotionList;
 import darkknight.jewelrycraft.proxy.CommonProxy;
 import darkknight.jewelrycraft.recipes.CraftingRecipes;
 import darkknight.jewelrycraft.util.Variables;
@@ -52,7 +51,7 @@ public class JewelrycraftMod
             return Item.getItemFromBlock(BlockList.jewelCraftingTable);
         }
     };
-    public static CreativeTabs liquids = new CreativeTabLiquids("Liquids");
+    public static CreativeTabs liquids = new CreativeTabLiquids("Liquids").setBackgroundImageName("item_search.png");
     public static NBTTagCompound saveData = new NBTTagCompound();
     public static NBTTagCompound clientData = new NBTTagCompound();
     public static File liquidsConf;
@@ -78,23 +77,35 @@ public class JewelrycraftMod
         EntityList.preInit(e);
         VillageHandler.preInit(e);
         EventList.preInit(e);
+        PotionList.preInit(e);
     }
     
     @EventHandler
     public void init(FMLInitializationEvent e)
     {
         EventList.init(e);
+        PotionList.init(e);
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {
         EventList.postInit(e);
+        PotionList.postInit(e);
     }
     
-    @Mod.EventHandler
+    @EventHandler
     public void serverLoad(FMLServerStartingEvent event)
     {
         event.registerServerCommand(new JewelrycraftCommands());
+    }
+    
+    @EventHandler
+    public void imcCallback(FMLInterModComms.IMCEvent event)
+    {
+        for (final FMLInterModComms.IMCMessage imcMessage : event.getMessages())
+        {
+            logger.info("The mod " + imcMessage.getSender() + " has sent the following message: " + imcMessage.getStringValue());
+        }
     }
 }

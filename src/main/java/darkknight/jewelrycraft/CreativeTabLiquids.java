@@ -14,11 +14,16 @@ public class CreativeTabLiquids extends CreativeTabs
     /**
      * Instantiates a new creative tab liquids.
      *
-     * @param par2Str the par2 str
+     * @param name the name
      */
-    public CreativeTabLiquids(String par2Str)
+    public CreativeTabLiquids(String name)
     {
-        super(par2Str);
+        super(name);
+    }
+ 
+    public boolean hasSearchBar() {
+         
+        return true;
     }
     
     /**
@@ -34,9 +39,9 @@ public class CreativeTabLiquids extends CreativeTabs
      * @param par1List List of items to display
      */
     @Override
-    public void displayAllReleventItems(List par1List)
+    public void displayAllReleventItems(List list)
     {
         for(int i = 0; i < JewelrycraftUtil.objects.size(); i++)
-            par1List.add(ItemList.bucket.getModifiedItemStack(JewelrycraftUtil.objects.get(i)));
+            list.add(ItemList.bucket.getModifiedItemStack(JewelrycraftUtil.objects.get(i)));
     }
 }

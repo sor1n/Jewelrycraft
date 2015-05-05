@@ -9,6 +9,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -25,7 +27,7 @@ public class JewelrycraftUtil
     public static ArrayList<ItemStack> jewelry = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> metal = new ArrayList<ItemStack>();
     public static ArrayList<ItemStack> ores = new ArrayList<ItemStack>();
-    public static HashMap<Item, ItemStack> oreToIngot = new HashMap<Item, ItemStack>();
+    public static HashMap<ItemStack, ItemStack> oreToIngot = new HashMap<ItemStack, ItemStack>();
     public static ArrayList<String> jamcraftPlayers = new ArrayList<String>();
     private static ArrayList<ItemStack> items = new ArrayList<ItemStack>();
     public static Random rand = new Random();
@@ -135,15 +137,19 @@ public class JewelrycraftUtil
             Iterator<ItemStack> i = OreDictionary.getOres(OreDictionary.getOreNames()[index]).iterator();
             while (i.hasNext()){
                 ItemStack nextStack = i.next();
-                if ((nextStack.getItem().getUnlocalizedName().toLowerCase().contains("ingot") || nextStack.getItem().getUnlocalizedName().toLowerCase().contains("alloy")) && !nextStack.getItem().getUnlocalizedName().toLowerCase().contains("powder") && !nextStack.getItem().getUnlocalizedName().toLowerCase().contains("dust") && !nextStack.getItem().getUnlocalizedName().toLowerCase().contains("block") && !metal.contains(nextStack)){
+                String stackName = nextStack.getItem().getUnlocalizedName().toLowerCase();
+                if ((stackName.contains("ingot") || stackName.contains("alloy")) && !metal.contains(nextStack))
                     metal.add(nextStack);
-                    if (OreDictionary.getOres(OreDictionary.getOreNames()[index].replace("ingot", "ore")) != null){
-                        ores.addAll(OreDictionary.getOres(OreDictionary.getOreNames()[index].replace("ingot", "ore")));
-                        Iterator<ItemStack> ores = OreDictionary.getOres(OreDictionary.getOreNames()[index].replace("ingot", "ore")).iterator();
-                        while (ores.hasNext()){
-                            ItemStack ore = ores.next();
-                            oreToIngot.put(ore.getItem(), nextStack);
-                        }
+                if (nextStack.getItem().getUnlocalizedName().toLowerCase().contains("ore") && !ores.contains(nextStack)){
+                    ItemStack ingot = FurnaceRecipes.smelting().getSmeltingResult(nextStack);
+                    if(ingot != null && (ingot.getItem().getUnlocalizedName().toLowerCase().contains("ingot") || ingot.getItem().getUnlocalizedName().toLowerCase().contains("alloy")))
+                    {
+                        ores.add(nextStack);
+                        oreToIngot.put(nextStack, ingot);
+                        JewelrycraftMod.logger.info("Original: " + nextStack);
+                        JewelrycraftMod.logger.info("Adding " + nextStack.getDisplayName() + " with damage value " + nextStack.getItemDamage() + " and with " + nextStack.stackSize + " in stack");
+                        JewelrycraftMod.logger.info("Original ingot: " + ingot);
+                        JewelrycraftMod.logger.info("Adding ingot " + ingot.getDisplayName() + " with damage value " + ingot.getItemDamage() + " and with " + ingot.stackSize + " in stack\n");
                     }
                 }
             }
@@ -210,7 +216,7 @@ public class JewelrycraftUtil
         Iterator<ItemStack> i = ores.iterator();
         while (i.hasNext()){
             ItemStack temp = i.next();
-            if (temp.getItem() == item.getItem() && temp.getItemDamage() == item.getItemDamage()) return true;
+            if (temp.getItem().equals(item.getItem()) && temp.getItemDamage() == item.getItemDamage()) return true;
         }
         return false;
     }
@@ -221,8 +227,10 @@ public class JewelrycraftUtil
      * @param ore the ore
      * @return the ingot
      */
-    public static ItemStack getIngotFromOre(Item ore)
+    public static ItemStack getIngotFromOre(ItemStack ore)
     {
-        return oreToIngot.get(ore);
+        for(ItemStack ores: JewelrycraftUtil.oreToIngot.keySet()) 
+            if(ores.getItem().equals(ore.getItem()) && ores.getItemDamage() == ore.getItemDamage()) return oreToIngot.get(ores);
+        return null;
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -29,7 +30,6 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -44,7 +44,9 @@ import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.network.PacketClearColorCache;
 import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
 import darkknight.jewelrycraft.network.PacketSendServerPlayersInfo;
+import darkknight.jewelrycraft.potions.PotionList;
 import darkknight.jewelrycraft.util.BlockUtils;
+import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
@@ -55,6 +57,7 @@ import darkknight.jewelrycraft.util.Variables;
 public class EntityEventHandler
 {
     int updateTime = 0;
+    boolean addedCurses = false;
     
     /**
      * @param event
@@ -89,31 +92,28 @@ public class EntityEventHandler
     public void onEntityUpdate(LivingUpdateEvent event)
     {
         Entity entity = event.entity;
-        if (entity.getEntityData().getBoolean("stunned") && entity.getEntityData().getInteger("stunTime") > 0){
-            entity.motionX *= 0D;
-            entity.motionZ *= 0D;
-            entity.motionY *= 0D;
-            entity.rotationPitch = entity.prevRotationPitch;
-            entity.rotationYaw = entity.prevRotationYaw;
-            entity.getEntityData().setInteger("stunTime", entity.getEntityData().getInteger("stunTime") - 1);
-            if (entity.getEntityData().getInteger("stunTime") == 0) entity.getEntityData().setBoolean("stunned", false);
-            entity.worldObj.spawnParticle("spell", entity.posX, entity.posY + entity.height, entity.posZ, 0.0D, 0.3D, 0.0D);
+        EntityLivingBase entityLiving = event.entityLiving;
+        if (entityLiving.isPotionActive(PotionList.stun)){
+            entityLiving.motionX *= 0D;
+            entityLiving.motionZ *= 0D;
+            entityLiving.motionY *= 0D;
+            entityLiving.isSwingInProgress = false;
+            entityLiving.moveForward = 0F;
+            entityLiving.moveStrafing = 0F;
+            entityLiving.setAIMoveSpeed(0F);
+            entityLiving.limbSwing = 0F;
+            entityLiving.limbSwingAmount = 0F;
+            entityLiving.swingProgressInt = 0;
+            entityLiving.rotationPitch = entity.prevRotationPitch;
+            entityLiving.rotationYaw = entity.prevRotationYaw;
+            entityLiving.worldObj.spawnParticle("spell", entityLiving.posX, entityLiving.posY + entityLiving.getEyeHeight(), entityLiving.posZ, 0.0D, 0.3D, 0.0D);
         }
+        if (entityLiving.isPotionActive(PotionList.stun) && entityLiving.getActivePotionEffect(PotionList.stun).getDuration() == 0) entityLiving.removePotionEffect(PotionList.stun.id);
         if (entity instanceof EntityPlayer){
             EntityPlayer player = (EntityPlayer)entity;
             NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
             playerInfo.setBoolean("fancyRender", JewelrycraftMod.fancyRender);
             if (updateTime > 0) updateTime--;
-            if (playerInfo.getBoolean("stunned") && playerInfo.getInteger("stunTime") > 0){
-                player.motionX *= 0D;
-                player.motionZ *= 0D;
-                player.motionY *= 0D;
-                player.rotationPitch = entity.prevRotationPitch;
-                player.rotationYaw = entity.prevRotationYaw;
-                playerInfo.setInteger("stunTime", playerInfo.getInteger("stunTime") - 1);
-                if (playerInfo.getInteger("stunTime") == 0) playerInfo.setBoolean("stunned", false);
-                player.worldObj.spawnParticle("spell", entity.posX, entity.posY + 0.5F, entity.posZ, 0.0D, 0.3D, 0.0D);
-            }
             for(int i = 0; i < 18; i++)
                 if (playerInfo.hasKey("ext" + i)){
                     NBTTagCompound nbt = (NBTTagCompound)playerInfo.getTag("ext" + i);
@@ -134,6 +134,11 @@ public class EntityEventHandler
                         playerInfo.setBoolean("reselectCurses", false);
                     }
                     JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+                    if (addedCurses){
+                        JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
+                        // player.openGui(JewelrycraftMod.instance, 4, player.worldObj, 0, 0, 0);
+                        addedCurses = false;
+                    }
                 }
                 if (playerInfo.getBoolean("playerCursePointsChanged")) playerInfo.setBoolean("playerCursePointsChanged", false);
                 if (updateTime == 0){
@@ -164,15 +169,15 @@ public class EntityEventHandler
     public void onEntityAttacked(LivingAttackEvent event)
     {
         Entity entity = event.entityLiving;
+        if (event.source.getEntity() != null && event.source.getEntity() instanceof EntityLivingBase && ((EntityLivingBase)event.source.getEntity()).isPotionActive(PotionList.stun)) event.setCanceled(true);
         if (entity instanceof EntityPlayer && !(event.source.getEntity() instanceof EntityPlayer)){
             EntityPlayer player = (EntityPlayer)entity;
             NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
-            if (event.source.getEntity() != null && event.source.getEntity().getEntityData().getBoolean("stunned")) event.setCanceled(true);
             if (!player.worldObj.isRemote) for(int i = 0; i < 18; i++)
                 if (playerInfo.hasKey("ext" + i)){
                     NBTTagCompound nbt = (NBTTagCompound)playerInfo.getTag("ext" + i);
                     ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-                    if (((ItemBaseJewelry)item.getItem()).onPlayerAttackedCacellable(item, player, event.source, event.ammount)){
+                    if (item != null && item.getItem() instanceof ItemBaseJewelry && ((ItemBaseJewelry)item.getItem()).onPlayerAttackedCacellable(item, player, event.source, event.ammount)){
                         event.setCanceled(true);
                         break;
                     }
@@ -181,7 +186,7 @@ public class EntityEventHandler
                         event.setCanceled(true);
                         break;
                     }
-                    ((ItemBaseJewelry)item.getItem()).onPlayerAttacked(item, player, event.source, event.ammount);
+                    if (item != null && item.getItem() instanceof ItemBaseJewelry) ((ItemBaseJewelry)item.getItem()).onPlayerAttacked(item, player, event.source, event.ammount);
                 }
             if (player.getHealth() != player.prevHealth){
                 if (playerInfo.getFloat("WhiteHeart") > 0){
@@ -230,7 +235,7 @@ public class EntityEventHandler
                 if (playerInfo.hasKey("ext" + i)){
                     NBTTagCompound nbt = (NBTTagCompound)playerInfo.getTag("ext" + i);
                     ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-                    if (((ItemBaseJewelry)item.getItem()).onEntityAttackedCacellable(item, player, entity, event.ammount)){
+                    if (item != null && item.getItem() instanceof ItemBaseJewelry && ((ItemBaseJewelry)item.getItem()).onEntityAttackedCacellable(item, player, entity, event.ammount)){
                         event.setCanceled(true);
                         break;
                     }
@@ -239,7 +244,7 @@ public class EntityEventHandler
                         event.setCanceled(true);
                         break;
                     }
-                    ((ItemBaseJewelry)item.getItem()).onEntityAttacked(item, player, entity, event.ammount);
+                    if (item != null && item.getItem() instanceof ItemBaseJewelry) ((ItemBaseJewelry)item.getItem()).onEntityAttacked(item, player, entity, event.ammount);
                 }
             for(Curse curse: Curse.getCurseList())
                 if (playerInfo.getInteger(curse.getName()) > 0) curse.attackedByPlayerAction(entity.worldObj, player, entity);
@@ -264,7 +269,6 @@ public class EntityEventHandler
                     playerInfo.setBoolean("reselectCurses", false);
                 }
             }
-            
             playerInfo.setFloat("BlueHeart", 0f);
             playerInfo.setFloat("BlackHeart", 0f);
             playerInfo.setFloat("WhiteHeart", 0f);
@@ -272,6 +276,14 @@ public class EntityEventHandler
                 if (playerInfo.getInteger(curse.getName()) > 0) curse.respawnAction(player.worldObj, player);
         }
         if (event.entity instanceof EntityPlayer && !(event.entity instanceof EntityPlayerMP)) JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+        if (!player.worldObj.isRemote){
+            JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+            if (addedCurses){
+                JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
+//                 player.openGui(JewelrycraftMod.instance, 4, player.worldObj, 0, 0, 0);
+                addedCurses = false;
+            }
+        }
     }
     
     /**
@@ -286,17 +298,7 @@ public class EntityEventHandler
             Curse cur = Curse.availableCurses.get(no);
             playerInfo.setInteger(cur.getName(), 1);
             Curse.availableCurses.remove(cur);
-            
-        }
-    }
-    
-    public static void addCurse(EntityPlayer player, NBTTagCompound playerInfo, int curseID, int grade)
-    {
-        Curse cur = Curse.getCurseList().get(curseID);
-        if (Curse.availableCurses.size() > 0 && Curse.availableCurses.contains(cur)){
-            playerInfo.setInteger(cur.getName(), grade);
-            Curse.availableCurses.remove(cur);
-            
+            addedCurses = true;
         }
     }
     
@@ -311,7 +313,7 @@ public class EntityEventHandler
                 entityitem.motionZ = 0;
                 entityitem.motionY = 0.11000000298023224D;
                 event.player.worldObj.spawnEntityInWorld(entityitem);
-                MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText("<" + event.player.getDisplayName() + "> This is MY item! MINE! I will NEVER give it to you! Mine! Mine! MINE!")); 
+                MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText("<" + event.player.getDisplayName() + "> This is MY item! MINE! I will NEVER give it to you! Mine! Mine! MINE!"));
                 event.setCanceled(true);
             }
     }
@@ -375,14 +377,13 @@ public class EntityEventHandler
                 }
                 if (entity.worldObj.isRemote) JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
             }
-            
             for(Curse curse: Curse.getCurseList())
                 if (playerInfo.getInteger(curse.getName()) > 0) curse.playerDeathAction(player.worldObj, player);
             for(int i = 0; i < 18; i++)
                 if (playerInfo.hasKey("ext" + i)){
                     NBTTagCompound nbt = (NBTTagCompound)playerInfo.getTag("ext" + i);
                     ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-                    if (item != null) ((ItemBaseJewelry)item.getItem()).onPlayerDead(item, player, event.source);
+                    if (item != null && item.getItem() instanceof ItemBaseJewelry) ((ItemBaseJewelry)item.getItem()).onPlayerDead(item, player, event.source);
                 }
         }
         if (event.entity instanceof EntityPlayer && !(event.entity instanceof EntityPlayerMP)) JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
@@ -438,8 +439,7 @@ public class EntityEventHandler
     @SubscribeEvent
     @SideOnly (Side.CLIENT)
     public void fogColors(EntityViewRenderEvent.FogColors event)
-    {
-    }
+    {}
     
     /**
      * @param event
@@ -455,6 +455,5 @@ public class EntityEventHandler
     @SubscribeEvent
     @SideOnly (Side.CLIENT)
     public void renderFog(EntityViewRenderEvent.RenderFogEvent event)
-    {
-    }
+    {}
 }

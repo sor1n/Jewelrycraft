@@ -40,7 +40,7 @@ public class GuiGuide extends GuiContainer
         rot = 0;
         del = 0;
         this.world = world;
-        tabs = new GuiTab[]{new GuiTabIntroduction(0), new GuiTabBlocks(1), new GuiTabItems(2), new GuiTabGemsAndIngots(3), new GuiTabModifiers(4), new GuiTabRitual(5)};
+        tabs = new GuiTab[]{new GuiTabIntroduction(0), new GuiTabBlocks(1), new GuiTabItems(2), new GuiTabGemsAndIngots(3), new GuiTabOresToIngots(4), new GuiTabModifiers(5), new GuiTabRitual(6)};
         activeTab = tabs[0];
         pageTexture = pageTex;
         flippedPageTexture = flipPageTex;
@@ -151,6 +151,9 @@ public class GuiGuide extends GuiContainer
             GL11.glScalef(1.2F, 1.2F, 1.2F);
             GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
             GL11.glTranslatef(0F, 0.05F, 0F);
+        }else if (item.isItemEqual(new ItemStack(BlockList.shadowOre))){
+            GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+            GL11.glTranslatef(0F, 0.13F, 0F);
         }else GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
         if (!(Block.getBlockFromItem(entityitem.getEntityItem().getItem()) instanceof BlockAir)) RenderHelper.enableStandardItemLighting();
         if (RenderManager.instance.options.fancyGraphics) RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);

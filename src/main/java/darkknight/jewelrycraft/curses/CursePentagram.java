@@ -10,6 +10,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.api.Curse;
@@ -22,6 +25,14 @@ public class CursePentagram extends Curse
     public CursePentagram(String name, int txtID, String pack)
     {
         super(name, txtID, pack);
+    }
+    
+    @Override
+    public void action(World world, EntityPlayer player)
+    {
+//        FMLInterModComms.sendMessage(modId, key, value);
+//        GameRegistry.findItem("Botania", "flower");
+//        FMLInterModComms.fetchRuntimeMessages(forMod)
     }
     
     @Override

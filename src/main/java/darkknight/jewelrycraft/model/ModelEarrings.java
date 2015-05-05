@@ -76,7 +76,7 @@ public class ModelEarrings extends ModelBase
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5);
         GL11.glPushMatrix();
-        GL11.glDisable(GL11.GL_LIGHTING);
+//        GL11.glDisable(GL11.GL_LIGHTING);
         if ((int)f3 != -1){
             int ingotColor = (int)f3;
             int red = ingotColor >> 16 & 0xff;
@@ -102,7 +102,7 @@ public class ModelEarrings extends ModelBase
             Gem1.render(f5);
             GL11.glDisable(GL11.GL_BLEND);
         }
-        GL11.glEnable(GL11.GL_LIGHTING);
+//        GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
     

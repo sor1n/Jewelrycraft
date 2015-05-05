@@ -57,22 +57,22 @@ chatmessage.jewelrycraft2.molder.metaliscooling=Molten metal is cooling...
 chatmessage.jewelrycraft2.molder.moldisempty=Mold is currently empty.
 chatmessage.jewelrycraft2.molder.moldismissing=Molder does not contain a mold.
 chatmessage.jewelrycraft2.molder.hasmoltenmetal=You can't remove the mold. It contains molten metal!
-chatmessage.jewelrycraft2.smelter.alreadyhasingot=The Smelter already contains a %s
-chatmessage.jewelrycraft2.smelter.hasmolteningot=The Smelter contains a molten %s
+chatmessage.jewelrycraft2.smelter.alreadyhasingot=The Smelter already contains %s
+chatmessage.jewelrycraft2.smelter.hasmolteningot=The Smelter contains molten %s
 chatmessage.jewelrycraft2.smelter.itemneedstobeingot=The item needs to be an ingot!
 chatmessage.jewelrycraft2.smelter.itemrenamedtoingot=Nice try, but renaming it to an ingot doesn't make it an ingot :p You can't fool me player!
 chatmessage.jewelrycraft2.smelter.molderhasmoltenmetal=The Molder already has molten metal in it!
 chatmessage.jewelrycraft2.smelter.molderhasnomold=The Molder doesn't have a mold in it! You might as well pour this stuff on the ground, eh?
 chatmessage.jewelrycraft2.smelter.modlerhasitem=The Molder contains an item in it. Now you wouldn't want it to be destroyed, would you?
 chatmessage.jewelrycraft2.smelter.molderismissing=You need a Molder in front of this block in order to pour the molten metal!
-chatmessage.jewelrycraft2.smelter.nowsmeltingingot=Smelter is now smelting a %s.
+chatmessage.jewelrycraft2.smelter.nowsmeltingingot=Smelter is now smelting a(n) %s.
 chatmessage.jewelrycraft2.smelter.metalismelting=%s is being melted.
 chatmessage.jewelrycraft2.smelter.empty=The Smelter is empty.
 chatmessage.jewelrycraft2.table.hasenditem=First take out the crafted jewel before inserting new stuff.
 chatmessage.jewelrycraft2.table.missinggem=You need a gem.
 chatmessage.jewelrycraft2.table.missingjewelry=You're missing a piece of jewelry.
 chatmessage.jewelrycraft2.table.iscrafting=The %s is being modified.
-chatmessage.jewelrycraft2.table.jewelrymodifiedfull=This piece of jewelry is already modified at maxium. You can't modify it anymore!
+chatmessage.jewelrycraft2.table.jewelrymodifiedfull=This piece of jewelry is already modified at maximum. You can't modify it anymore!
 chatmessage.jewelrycraft2.table.jewelrycontainsmodifier=The piece of jewelry already contains a modifier.
 chatmessage.jewelrycraft2.table.jewelrycontainsjewel=The piece of jewelry already contains a jewel.
 
@@ -82,3 +82,5 @@ death.attack.blackHeart=%1$s was killed by %2$s's curse
 
 entity.jewelrycraft2.Heart.name=Heart
 entity.jewelrycraft2.Half-Heart.name=Half-Heart
+
+jewelrycraft2.potion.stun=Stun

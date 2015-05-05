@@ -109,7 +109,7 @@ public class TileEntitySmelter extends TileEntity
                 hasMetal = false;
                 if (!isOre) moltenMetal = metal;
                 else{
-                    moltenMetal = JewelrycraftUtil.getIngotFromOre(metal.getItem());
+                    moltenMetal = JewelrycraftUtil.getIngotFromOre(metal);
                     moltenMetal.stackSize *= 2;
                 }
                 hasMoltenMetal = true;

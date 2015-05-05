@@ -76,7 +76,7 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                 Minecraft.getMinecraft().gameSettings.fancyGraphics = fancyGraphics;
                 GL11.glPopMatrix();
             }
-            if (me.hasJewelBase && me.jewelBase.getIconIndex() != null && me.jewelBase.getIconIndex().getIconName() != ""){
+            if (me.hasJewelBase && me.jewelBase != null && me.jewelBase.getItem() != Item.getItemFromBlock(Blocks.air) && me.jewelBase.getIconIndex() != null && me.jewelBase.getIconIndex().getIconName() != ""){
                 GL11.glPushMatrix();
                 EntityItem entityitem = new EntityItem(te.getWorldObj(), 0.0D, 0.0D, 0.0D, me.jewelBase);
                 entityitem.getEntityItem().stackSize = 1;

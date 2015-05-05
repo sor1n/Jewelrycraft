@@ -3,7 +3,7 @@ package darkknight.jewelrycraft.effects;
 import java.util.Iterator;
 import java.util.List;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
@@ -22,6 +22,7 @@ import darkknight.jewelrycraft.item.ItemBracelet;
 import darkknight.jewelrycraft.item.ItemEarrings;
 import darkknight.jewelrycraft.item.ItemNecklace;
 import darkknight.jewelrycraft.item.ItemRing;
+import darkknight.jewelrycraft.potions.PotionList;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
@@ -71,10 +72,7 @@ public class EffectFeather extends ModifierEffects
                 enemyData.setInteger("reAttacked", enemyData.getInteger("reAttacked") + 1);
                 target.attackEntityFrom(DamageSource.causePlayerDamage(player), amount / (2F + (JewelryNBT.numberOfModifiers(item) - 1) * 0.1F));
                 // Positive ring
-                if (rand.nextInt(2) == 0){
-                    enemyData.setInteger("stunTime", 51 - JewelryNBT.numberOfModifiers(item));
-                    enemyData.setBoolean("stunned", true);
-                }
+                if (rand.nextInt(2) == 0 && target instanceof EntityLivingBase) ((EntityLivingBase)target).addPotionEffect(new PotionEffect(PotionList.stun.id, (51 - JewelryNBT.numberOfModifiers(item))*2, 0, false));
                 playerInfo.setBoolean("weakDamage", true);
             }
             if (enemyData.getInteger("reAttacked") == 1) enemyData.setInteger("reAttacked", 0);

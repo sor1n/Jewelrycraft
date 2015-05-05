@@ -9,6 +9,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.client.JewelryInventory;
+import darkknight.jewelrycraft.client.gui.container.ContainerCurseInfo;
 import darkknight.jewelrycraft.client.gui.container.ContainerGuide;
 import darkknight.jewelrycraft.client.gui.container.ContainerJewelryModifier;
 import darkknight.jewelrycraft.client.gui.container.ContainerJewelryTab;
@@ -53,6 +54,8 @@ public class GuiHandler implements IGuiHandler
                 return new ContainerJewelryTab(player, player.inventory, new JewelryInventory(player));
             case 3:
                 return new ContainerJewelryModifier(player.inventory, new InventoryBasic("ItemModifier", false, 37));
+            case 4:
+                return new ContainerCurseInfo();
             default:
                 return null;
         }
@@ -80,6 +83,8 @@ public class GuiHandler implements IGuiHandler
                 return new GuiJewelry(new ContainerJewelryTab(player, player.inventory, new JewelryInventory(player)), jewelryInvTexture);
             case 3:
                 return new GuiJewelryModifier((ContainerJewelryModifier)getServerGuiElement(ID, player, world, x, y, z), jewlryModTexture);
+            case 4:
+                return new GuiCurseInfo((ContainerCurseInfo)getServerGuiElement(ID, player, world, x, y, z), world, player);
             default:
                 return null;
         }

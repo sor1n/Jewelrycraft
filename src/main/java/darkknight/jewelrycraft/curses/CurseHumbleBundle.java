@@ -50,4 +50,9 @@ public class CurseHumbleBundle extends Curse
         entityitem.motionY = 0.11000000298023224D;
         world.spawnEntityInWorld(entityitem);
     }
+    
+    public String getDescription()
+    {
+        return "Get two for the price of one";
+    }
 }

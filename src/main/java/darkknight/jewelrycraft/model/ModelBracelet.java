@@ -75,7 +75,7 @@ public class ModelBracelet extends ModelBase
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
-        GL11.glDisable(GL11.GL_LIGHTING);
+//        GL11.glDisable(GL11.GL_LIGHTING);
         if ((int)f3 != -1){
             int ingotColor = (int)f3;
             int red = (ingotColor >> 16) & 0xff;
@@ -169,7 +169,7 @@ public class ModelBracelet extends ModelBase
             GL11.glPopMatrix();
             GL11.glDisable(GL11.GL_BLEND);
         }
-        GL11.glEnable(GL11.GL_LIGHTING);
+//        GL11.glEnable(GL11.GL_LIGHTING);
     }
     
     /**

@@ -23,4 +23,9 @@ public class CurseVampireHunger extends Curse
     {
         if(player.shouldHeal() && rand.nextInt(5) == 0) player.heal(1F);
     }
+    
+    public String getDescription()
+    {
+        return "You feel the need for blood";
+    }
 }
