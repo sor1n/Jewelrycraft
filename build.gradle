@@ -72,7 +72,7 @@ processResources{
 curse {
     apiKey = System.getenv("onyxdarkknight_curse")
     projectId = "229927" // my project url is http://minecraft.curseforge.com/mc-mods/229927-jewelrycraft-2
-    changelog = new File('/Changelog.txt').text
+    changelog = new File('Changelog.txt').text
     releaseType = "release"
 
     // the default obfuscated jar is uploaded by default
