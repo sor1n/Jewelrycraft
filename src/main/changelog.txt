@@ -1,0 +1,3 @@
+- Added EE3 EMC values, thank you to MineMarteen for providing the ThirdPartyManager code :)
+- Working on making it possible to translate every part of the mod
+- Created an interface modders can use to make an item wearable in the jewelry inventory and have special effects
