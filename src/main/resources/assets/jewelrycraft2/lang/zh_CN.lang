@@ -1,0 +1,86 @@
+item.jewelrycraft2.thiefGloves.name=神偷护手
+item.jewelrycraft2.ingotShadow.name=暗影锭
+item.jewelrycraft2.mold.ingot.name=锭模具
+item.jewelrycraft2.mold.ring.name=戒指模具
+item.jewelrycraft2.mold.necklace.name=项链模具
+item.jewelrycraft2.mold.bracelet.name=手镯模具
+item.jewelrycraft2.mold.earrings.name=耳环模具
+item.jewelrycraft2.mold.clayIngot.name=粘土锭模具
+item.jewelrycraft2.mold.clayRing.name=粘土戒指模具
+item.jewelrycraft2.mold.clayNecklace.name=粘土项链模具
+item.jewelrycraft2.mold.clayBracelet.name=粘土手镯模具
+item.jewelrycraft2.mold.clayEarrings.name=粘土耳环模具
+item.jewelrycraft2.ring.name=戒指
+item.jewelrycraft2.necklace.name=项链
+item.jewelrycraft2.bracelet.name=手镯
+item.jewelrycraft2.earrings.name=耳环
+item.jewelrycraft2.guide.name=珠宝工艺2 手册
+item.jewelrycraft2.bucket.name=熔融
+
+item.jewelrycraft2.crystal.0.name=黑色水晶
+item.jewelrycraft2.crystal.1.name=红色水晶
+item.jewelrycraft2.crystal.2.name=绿色水晶
+item.jewelrycraft2.crystal.3.name=棕色水晶
+item.jewelrycraft2.crystal.4.name=蓝色水晶
+item.jewelrycraft2.crystal.5.name=紫色水晶
+item.jewelrycraft2.crystal.6.name=青色水晶
+item.jewelrycraft2.crystal.7.name=浅灰色水晶
+item.jewelrycraft2.crystal.8.name=灰色水晶
+item.jewelrycraft2.crystal.9.name=粉色水晶
+item.jewelrycraft2.crystal.10.name=黄绿色水晶
+item.jewelrycraft2.crystal.11.name=黄色水晶
+item.jewelrycraft2.crystal.12.name=淡蓝色水晶
+item.jewelrycraft2.crystal.13.name=品红色水晶
+item.jewelrycraft2.crystal.14.name=橙色水晶
+item.jewelrycraft2.crystal.15.name=白色水晶
+item.jewelrycraft2.jewelryModifier.name=珠宝强化石(创造)
+
+tile.jewelrycraft2.oreShadow.name=暗影矿石
+tile.jewelrycraft2.blockShadow.name=暗影方块
+tile.jewelrycraft2.glow.name=Glow
+tile.jewelrycraft2.smelter.name=熔炼坩埚
+tile.jewelrycraft2.molder.name=模具台
+tile.jewelrycraft2.displayer.name=展示台
+tile.jewelrycraft2.jewelCraftingTable.name=珠宝合成台
+tile.jewelrycraft2.altar.name=宝石圣坛
+tile.jewelrycraft2.moltenMetal.name=熔融
+tile.jewelrycraft2.shadowHand.name=暗影之手
+tile.jewelrycraft2.shadowEye.name=诅咒之眼
+tile.jewelrycraft2.handPedestal.name=石手基座
+tile.jewelrycraft2.midasTouchBlock.name=黄金生物
+
+itemGroup.jewelrycraft2=珠宝工艺2
+itemGroup.Liquids=珠宝工艺|液体
+
+chatmessage.jewelrycraft2.molder.addedmold=添加 %s 到模具台.
+chatmessage.jewelrycraft2.molder.metaliscooling=熔融金属正在冷却中...
+chatmessage.jewelrycraft2.molder.moldisempty=模具台现在是空的.
+chatmessage.jewelrycraft2.molder.moldismissing=模具台中没有模具.
+chatmessage.jewelrycraft2.molder.hasmoltenmetal=你无法移除这个模具.它装有熔融金属!
+chatmessage.jewelrycraft2.smelter.alreadyhasingot=熔炼坩埚已经装有 %s
+chatmessage.jewelrycraft2.smelter.hasmolteningot=熔炼坩埚已经装有熔融 %s
+chatmessage.jewelrycraft2.smelter.itemneedstobeingot=物品必须为金属锭!
+chatmessage.jewelrycraft2.smelter.itemrenamedtoingot=做的不错, 但是把它重命名为金属锭并不能让它真的变为金属锭 :p 你是骗不了我的!
+chatmessage.jewelrycraft2.smelter.molderhasmoltenmetal=模具台已经装有熔融金属!
+chatmessage.jewelrycraft2.smelter.molderhasnomold=模具台中没有模具! 你也可以将它倒在地上, 恩?
+chatmessage.jewelrycraft2.smelter.modlerhasitem=模具台中装有物品. 你现在并不想将其破坏, 不是么?
+chatmessage.jewelrycraft2.smelter.molderismissing=你需要将一个模具台放置在这个方块前方, 这样你才能倾倒熔融金属!
+chatmessage.jewelrycraft2.smelter.nowsmeltingingot=熔炼坩埚正在烧炼 %s.
+chatmessage.jewelrycraft2.smelter.metalismelting=%s 正在熔化.
+chatmessage.jewelrycraft2.smelter.empty=熔炼坩埚是空的.
+chatmessage.jewelrycraft2.table.hasenditem=首先移走已合成的珠宝，然后再放入新的物品.
+chatmessage.jewelrycraft2.table.missinggem=你需要一个水晶.
+chatmessage.jewelrycraft2.table.missingjewelry=你缺少一个首饰.
+chatmessage.jewelrycraft2.table.iscrafting= %s 正在被强化.
+chatmessage.jewelrycraft2.table.jewelrymodifiedfull=这件珠宝已经被强化到最大. 你无法再次强化它了!
+chatmessage.jewelrycraft2.table.jewelrycontainsmodifier=这件珠宝已经拥有一种强化.
+chatmessage.jewelrycraft2.table.jewelrycontainsjewel=这件珠宝已经拥有一个宝石.
+
+death.attack.weak=%1$s 被珠宝削弱最终导致死亡
+death.attack.shadows=%1$s 被暗影吞噬了
+death.attack.blackHeart=%1$s 被 %2$s's 的诅咒杀死了
+
+entity.jewelrycraft2.Heart.name=心
+entity.jewelrycraft2.Half-Heart.name=半心
+
+jewelrycraft2.potion.stun=眩晕
