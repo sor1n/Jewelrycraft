@@ -25,11 +25,13 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.api.ModifierEffects;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 
 public abstract class ItemBaseJewelry extends Item
 {
@@ -192,11 +194,11 @@ public abstract class ItemBaseJewelry extends Item
     {
         if (stack.hasTagCompound() && par4){
             ItemStack ingot = JewelryNBT.ingot(stack);
-            if (ingot != null && Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) > 0) list.add("Metal: " + EnumChatFormatting.YELLOW + ingot.getDisplayName().replace("Ingot", " "));
+            if (ingot != null && Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) > 0) list.add(StatCollector.translateToLocal("info." + Variables.MODID + ".metal") +": " + EnumChatFormatting.YELLOW + ingot.getDisplayName().replace(StatCollector.translateToLocal("info." + Variables.MODID + ".ingot"), " "));
             ItemStack gem = JewelryNBT.gem(stack);
-            if (gem != null) list.add("Gem: " + EnumChatFormatting.BLUE + gem.getDisplayName());
+            if (gem != null) list.add(StatCollector.translateToLocal("info." + Variables.MODID + ".gem")+": " + EnumChatFormatting.BLUE + gem.getDisplayName());
             ArrayList<ItemStack> modifier = JewelryNBT.modifier(stack);
-            if (!modifier.isEmpty()) list.add("Modifiers: ");
+            if (!modifier.isEmpty()) list.add(StatCollector.translateToLocal("info." + Variables.MODID + ".modifiers")+": ");
             for(int i = 0; i < modifier.size(); i++)
                 list.add(EnumChatFormatting.DARK_PURPLE + modifier.get(i).getDisplayName() + " x" + modifier.get(i).stackSize);
         }
@@ -264,5 +266,11 @@ public abstract class ItemBaseJewelry extends Item
     {
         for(ModifierEffects mod: ModifierEffects.getEffects())
             mod.onPlayerDead(stack, player, source, this);
+    }
+    
+    public void onPlayerRespawn(ItemStack stack, PlayerEvent.Clone event)
+    {
+        for(ModifierEffects mod: ModifierEffects.getEffects())
+            mod.onPlayerRespawn(stack, event, this);
     }
 }

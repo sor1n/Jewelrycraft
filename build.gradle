@@ -15,21 +15,43 @@ buildscript {
     }
 }
 
+apply plugin: "curseforge"
 apply plugin: 'forge'
 
-project.ext.buildnumber = "undefined"
-if (System.getenv().BUILD_NUMBER) project.buildnumber = System.getenv().BUILD_NUMBER
+project.ext {
+	massive = "1"
+    major = "0"
+    minor = "9"
+    mcVersion = "1.7.10"
+}
 
-version = "1.7.10-build-" + project.buildnumber
+if (System.getenv().BUILD_NUMBER != null) {
+    version += "-${System.getenv().BUILD_NUMBER}"
+} else {
+    version += "-err"
+}
+
+version = "${project.ext.massive}.${project.ext.major}.${project.minor}"
 group= "darkknight.jewelrycraft2"
 archivesBaseName = "Jewelrycraft2"
 
-sourceCompatibility = JavaVersion.VERSION_1_7
-targetCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 minecraft {
     version = "1.7.10-10.13.3.1395-1710ls"
-    assetDir = "eclipse/assets"
+    assetDir = "minecraft/assets"
+
+    // replacing stuff in the source
+	replace '@MASSIVE@', project.massive
+    replace '@MAJOR@', project.major
+    replace '@MINOR@', project.minor
+    replace '@MC_VERSION@', version
+    if (System.getenv("BUILD_NUMBER") != null) {
+        replace '@BUILD_NUMBER@', System.getenv("BUILD_NUMBER")
+    } else {
+        replace '@BUILD_NUMBER@', 0
+    }
 }
 
 processResources{
@@ -47,6 +69,20 @@ processResources{
     }
 }
 
+curse {
+    apiKey = System.getenv("onyxdarkknight_curse")
+    projectId = "229927" // my project url is http://minecraft.curseforge.com/mc-mods/229927-jewelrycraft-2
+    changelog = new File('changelog.txt').text
+    releaseType = "release"
+
+    // the default obfuscated jar is uploaded by default
+    // artifact = project.file("some/jar/to/upload.jar")
+
+    // allows you to add extra compatible MC versions. The one specified in the minecraft{} block is used by default.
+    // addGameVersion "1.7.1"
+    // addGameversion "1.7.0", "1.7.4"
+}
+
 sourceSets {
     main {
         output.resourcesDir = output.classesDir
@@ -60,6 +96,7 @@ sourceSets {
 }
 
 jar {
+    appendix = "${project.ext.mcVersion}"
     classifier = 'universal'
 }
 

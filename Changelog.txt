@@ -1,3 +1,8 @@
+Version 1.0.9
+- Added EE3 EMC values, thank you to MineMarteen for providing the ThirdPartyManager code :)
+- Working on making it possible to translate every part of the mod
+- Created an interface modders can use to make an item wearable in the jewelry inventory and have special effects
+
 Version 1.0.8
 - Working on a GUI showing what curses you get with a description on them
 - Added a search bar in the Liquids Tab for easier searching

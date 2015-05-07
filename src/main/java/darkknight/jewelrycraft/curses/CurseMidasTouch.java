@@ -6,6 +6,7 @@ import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.BlockPressurePlateWeighted;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -26,7 +27,6 @@ import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
 import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 public class CurseMidasTouch extends Curse
 {
@@ -38,7 +38,7 @@ public class CurseMidasTouch extends Curse
     @Override
     public void attackedByPlayerAction(World world, EntityPlayer player, Entity target)
     {
-        if (!world.isRemote && target instanceof EntityLiving && !(target instanceof EntityHeart) && !(target instanceof EntityHalfHeart) && player.inventory.getCurrentItem() == null){
+        if (!world.isRemote && target instanceof EntityLivingBase && !(target instanceof EntityHeart) && !(target instanceof EntityHalfHeart) && player.inventory.getCurrentItem() == null){
             world.setBlock(MathHelper.floor_double(target.posX), MathHelper.floor_double(target.posY), MathHelper.floor_double(target.posZ), BlockList.midasTouchBlock, 0, 2);
             TileEntityMidasTouch midasTouchVictim = new TileEntityMidasTouch();
             midasTouchVictim.setEntity(target);

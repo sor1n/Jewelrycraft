@@ -34,7 +34,7 @@ public class GuiTabIntroduction extends GuiTab
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 3:
-                text = "the gem used. To see what modifiers are currently implemented, just look in the Modifiers tab located in this guide (it is the one with the blaze powder as an icon).";
+                text = "the gem used. To see what modifiers are currently implemented, just look in the Modifiers tab located in this guide (it is the one with the blaze powder as an icon). This mod was made by OnyxDarkKnight and the help of domi1819, pau101, Damien Hazard, boni and MineMarteen.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
         }

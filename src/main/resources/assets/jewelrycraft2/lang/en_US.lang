@@ -34,6 +34,14 @@ item.jewelrycraft2.crystal.13.name=Magenta Crystal
 item.jewelrycraft2.crystal.14.name=Orange Crystal
 item.jewelrycraft2.crystal.15.name=White Crystal
 item.jewelrycraft2.jewelryModifier.name=Jewelry Modifier (Creative Only)
+item.jewelrycraft2.goldObject.name=Golden Object
+
+item.jewelrycraft2.goldObject.info.standard=Shiny, but useless :(
+item.jewelrycraft2.goldObject.info.food=It's made of solid gold! How are you suppose to eat this?
+item.jewelrycraft2.thievingGloves.info.extra=\247oPress \247b<SHIFT>\2477\247o for more information.
+item.jewelrycraft2.thievingGloves.info.1=Right click with the gloves,
+item.jewelrycraft2.thievingGloves.info.2=while sneaking, on a villager
+item.jewelrycraft2.thievingGloves.info.3=to steal his stuff.
 
 tile.jewelrycraft2.oreShadow.name=Shadow Ore
 tile.jewelrycraft2.blockShadow.name=Shadow Block
@@ -57,6 +65,7 @@ chatmessage.jewelrycraft2.molder.metaliscooling=Molten metal is cooling...
 chatmessage.jewelrycraft2.molder.moldisempty=Mold is currently empty.
 chatmessage.jewelrycraft2.molder.moldismissing=Molder does not contain a mold.
 chatmessage.jewelrycraft2.molder.hasmoltenmetal=You can't remove the mold. It contains molten metal!
+
 chatmessage.jewelrycraft2.smelter.alreadyhasingot=The Smelter already contains %s
 chatmessage.jewelrycraft2.smelter.hasmolteningot=The Smelter contains molten %s
 chatmessage.jewelrycraft2.smelter.itemneedstobeingot=The item needs to be an ingot!
@@ -68,6 +77,9 @@ chatmessage.jewelrycraft2.smelter.molderismissing=You need a Molder in front of 
 chatmessage.jewelrycraft2.smelter.nowsmeltingingot=Smelter is now smelting a(n) %s.
 chatmessage.jewelrycraft2.smelter.metalismelting=%s is being melted.
 chatmessage.jewelrycraft2.smelter.empty=The Smelter is empty.
+chatmessage.jewelrycraft2.smelter.contentdoesnotmatch=Item does not match contents!
+chatmessage.jewelrycraft2.smelter.full=Smelter is at full capacity.
+
 chatmessage.jewelrycraft2.table.hasenditem=First take out the crafted jewel before inserting new stuff.
 chatmessage.jewelrycraft2.table.missinggem=You need a gem.
 chatmessage.jewelrycraft2.table.missingjewelry=You're missing a piece of jewelry.
@@ -75,6 +87,17 @@ chatmessage.jewelrycraft2.table.iscrafting=The %s is being modified.
 chatmessage.jewelrycraft2.table.jewelrymodifiedfull=This piece of jewelry is already modified at maximum. You can't modify it anymore!
 chatmessage.jewelrycraft2.table.jewelrycontainsmodifier=The piece of jewelry already contains a modifier.
 chatmessage.jewelrycraft2.table.jewelrycontainsjewel=The piece of jewelry already contains a jewel.
+
+chatmessage.jewelrycraft2.steal1=caught you trying to steal from him.
+chatmessage.jewelrycraft2.steal2=curses you for the attempt.
+chatmessage.jewelrycraft2.whisper=You hear a faint whisper in your ear
+chatmessage.jewelrycraft2.stealSuccess1=Those who steal but don't get caught get rewarded and do not.
+chatmessage.jewelrycraft2.stealSuccess2=Embrace the path you have gone, for the darkness will not
+chatmessage.jewelrycraft2.stealSuccess3=dwell on.
+chatmessage.jewelrycraft2.villager.confusion=Hmmm... I seem to have lost my
+chatmessage.jewelrycraft2.steal.fail=sensed a strange presence around him, making him cling on to his items. You didn't get anything.
+chatmessage.jewelrycraft2.steal.caught1=As he was passing by, a random villager caught you trying to steal from
+chatmessage.jewelrycraft2.steal.caught2=A villager nearby saw you trying to steal from
 
 death.attack.weak=%1$s was weakened by a piece of jewelry and died
 death.attack.shadows=%1$s was consumed by the shadows
@@ -84,3 +107,10 @@ entity.jewelrycraft2.Heart.name=Heart
 entity.jewelrycraft2.Half-Heart.name=Half-Heart
 
 jewelrycraft2.potion.stun=Stun
+
+info.jewelrycraft2.metal=Metal
+info.jewelrycraft2.ingot=Ingot
+info.jewelrycraft2.gem=Gem
+info.jewelrycraft2.modifiers=Modifiers
+info.jewelrycraft2.golden=Golden
+info.jewelrycraft2.villager=Villager

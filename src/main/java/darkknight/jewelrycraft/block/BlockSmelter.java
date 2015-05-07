@@ -169,9 +169,9 @@ public class BlockSmelter extends BlockContainer
                         te.isDirty = true;
                     }
                     te.isDirty = true;
-                }else if (item != null && (te.hasMetal || te.hasMoltenMetal) && !itemCoincidesWithMoltenMetal && te.quantity < .9f) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("Item does not match contents!")));
+                }else if (item != null && (te.hasMetal || te.hasMoltenMetal) && !itemCoincidesWithMoltenMetal && te.quantity < .9f) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".smelter.contentdoesnotmatch")));
                 else if (item != null && !item.getUnlocalizedName().toLowerCase().contains("ingot") && te.quantity < .9f) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".smelter.itemrenamedtoingot")));
-                else if (item != null && te.quantity >= .9f) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("Smelter is at full capacity.")));
+                else if (item != null && te.quantity >= .9f) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".smelter.full")));
             }else if (item != null && item.getItem() != null && item.getItem() instanceof ItemMoltenMetalBucket && !te.hasMoltenMetal && !te.hasMetal){
                 te.hasMoltenMetal = true;
                 ItemStack ingot = JewelryNBT.ingot(item);

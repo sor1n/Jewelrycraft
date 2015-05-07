@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
 public class ModifierEffects
 {
@@ -84,5 +85,8 @@ public class ModifierEffects
     {}
     
     public void onPlayerDead(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry)
+    {}
+    
+    public void onPlayerRespawn(ItemStack item, PlayerEvent.Clone event, Item jewelry)
     {}
 }

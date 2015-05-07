@@ -15,6 +15,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import org.lwjgl.input.Keyboard;
@@ -23,6 +24,7 @@ import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
+import darkknight.jewelrycraft.util.Variables;
 
 public class ItemThiefGloves extends Item
 {
@@ -45,6 +47,7 @@ public class ItemThiefGloves extends Item
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entity)
     {
+        String villagerString = StatCollector.translateToLocal("info." + Variables.MODID + ".villager");
         if (entity instanceof EntityVillager){
             EntityVillager villager = (EntityVillager)entity;
             int wealth = (Integer)ReflectionHelper.getPrivateValue(EntityVillager.class, villager, "wealth", "field_70956_bz");
@@ -84,37 +87,37 @@ public class ItemThiefGloves extends Item
                         if (player.inventory.addItemStackToInventory(s)) ;
                         else villager.entityDropItem(s, 0);
                         if (!player.capabilities.isCreativeMode) JewelrycraftUtil.addCursePoints(player, 5);
-                        player.addChatMessage(new ChatComponentText("Villager #" + villager.getProfession() + ": Hmmm... I seem to have lost my " + s.getDisplayName() + "!"));
+                        player.addChatMessage(new ChatComponentText(villagerString+" #" + villager.getProfession() + ": "+StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".villager.confusion") + s.getDisplayName() + "!"));
                         stack.damageItem(1, player);
                     }
                     buyingList.clear();
                     ReflectionHelper.setPrivateValue(EntityVillager.class, villager, 300, "timeUntilReset", "field_70961_j");
                     ReflectionHelper.setPrivateValue(EntityVillager.class, villager, true, "needsInitilization", "field_70959_by");
-                    player.addChatMessage(new ChatComponentText("You hear a faint whisper in your ear: "));
-                    player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "Those who steal but don't get caught get rewarded and do not."));
-                    player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "Embrace the path you have gone, for the darkness will not"));
-                    player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "dwell on."));
+                    player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".whisper")+": "));
+                    player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".stealSuccess1")));
+                    player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".stealSuccess2")));
+                    player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".stealSuccess3")));
                 }else{
                     stack.damageItem(1, player);
                     if (!player.capabilities.isCreativeMode) JewelrycraftUtil.addCursePoints(player, 25);
                     if (player.isPotionActive(Potion.invisibility)){
-                        player.addChatMessage(new ChatComponentText("Villager #" + villager.getProfession() + " sensed a strange presence around him, making him cling on to his items. You didn't get anything."));
+                        player.addChatMessage(new ChatComponentText(villagerString+" #" + villager.getProfession() + " " +StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".steal.fail")));
                     }
                     else{
                         if (areOtherVillagersAround){
                             if (!canTheySeeYou){
-                                player.addChatMessage(new ChatComponentText("As he was passing by, a random villager caught you trying to steal from Villager #" + villager.getProfession() + "."));
-                                player.addChatMessage(new ChatComponentText("Villager #" + villager.getProfession() + " curses you for the attempt."));
+                                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".steal.caught1")+" "+villagerString+" #" + villager.getProfession() + "."));
+                                player.addChatMessage(new ChatComponentText(villagerString+" #" + villager.getProfession() + " "+StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".steal2")));
                                 return true;
                             }
                             else{
-                                player.addChatMessage(new ChatComponentText("A villager nearby saw you trying to steal from Villager #" + villager.getProfession() + "."));
-                                player.addChatMessage(new ChatComponentText("Villager #" + villager.getProfession() + " curses you for the attempt."));
+                                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".steal.caught2")+" "+villagerString+" #" + villager.getProfession() + "."));
+                                player.addChatMessage(new ChatComponentText(villagerString+" #" + villager.getProfession() + " "+StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".steal2")));
                                 return true;
                             }
                         }else{
-                            player.addChatMessage(new ChatComponentText("Villager #" + villager.getProfession() + " caught you trying to steal from him."));
-                            player.addChatMessage(new ChatComponentText("Villager #" + villager.getProfession() + " curses you for the attempt."));
+                            player.addChatMessage(new ChatComponentText(villagerString+" #" + villager.getProfession() + " "+StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".steal1")));
+                            player.addChatMessage(new ChatComponentText(villagerString+" #" + villager.getProfession() + " "+StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".steal2")));
                             return true;
                         }
                     }
@@ -136,9 +139,9 @@ public class ItemThiefGloves extends Item
     {
         if (!shouldAddAdditionalInfo()) list.add(EnumChatFormatting.GRAY + additionalInfoInstructions());
         else{
-            list.add(EnumChatFormatting.GRAY + "Right click with the gloves,");
-            list.add(EnumChatFormatting.GRAY + "while sneaking, on a villager");
-            list.add(EnumChatFormatting.GRAY + "to steal his stuff.");
+            list.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal("item." + Variables.MODID + ".thievingGloves.info.1"));
+            list.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal("item." + Variables.MODID + ".thievingGloves.info.2"));
+            list.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal("item." + Variables.MODID + ".thievingGloves.info.3"));
         }
     }
     
@@ -156,7 +159,7 @@ public class ItemThiefGloves extends Item
      */
     public static String additionalInfoInstructions()
     {
-        String message = "\247oPress \247b<SHIFT>\2477\247o for more information.";
+        String message = StatCollector.translateToLocal("item." + Variables.MODID + ".thievingGloves.info.extra");
         return message;
     }
 }

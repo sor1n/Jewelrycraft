@@ -108,14 +108,10 @@ public class GuiTabItems extends GuiTab
             case 13:
                 String link = "HERE";
                 if (x >= gui.getLeft() && x <= gui.getLeft() + 30 && y >= gui.getTop() + 104 && y <= gui.getTop() + 124) link = EnumChatFormatting.DARK_BLUE + "HERE" + EnumChatFormatting.BLACK;
-                text = "installing it so you can see all the recipes. Since you are reading this, how about making a youtube video spotlighting this mod. I'd really appreciate it. After that you can share it in the main thread " + link + "." + " This mod was made by OnyxDarkKnight and the help of domi1819,";
+                text = "installing it so you can see all the recipes. Since you are reading this, how about making a youtube video spotlighting this mod. I'd really appreciate it. After that you can share it in the main thread " + link + ".";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 14:
-                text = "pau101 and Damien Hazard.";
-                Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
-                break;
-            case 15:
                 ItemStack item = new ItemStack(ItemList.bucket);
                 if (del == 0) values++;
                 del++;
@@ -125,11 +121,11 @@ public class GuiTabItems extends GuiTab
                 text = "These buckets contain molten metal. To obtain one simply Right Click a full Smelter to get a bucket. You can pour the metal, other than that it has no use. You can place the molten metal back in a Smelter by Right Clicking one with it.";
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, item, text, 40f, 0, 0, true, 45, 10, true);
                 break;
-            case 16:
+            case 15:
                 text = "This item is a creative only item! Right click it while in creative mode to open a GUI. Place a piece of jewelery inside the slot, select what you want to add, then click on 'Add Items'. If you selected Modifiers, you can select multiple";
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, new ItemStack(ItemList.jewelryModifier), text, 40f, 0, 0, true, 45, 10, true);
                 break;
-            case 17:
+            case 16:
                 text = "items at once. The 'Item' button is to add an Item to a Golden Object, which can not be obtained normally. This tool can be really useful, especially for those who want to test the mod and can't wait for the normal processes to finish (Smelter, Jewelers Table, Ritual).";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
@@ -144,7 +140,7 @@ public class GuiTabItems extends GuiTab
     @Override
     public int getMaxPages()
     {
-        return 17;
+        return 16;
     }
     
     /**

@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import darkknight.jewelrycraft.api.IJewelryItem;
 import darkknight.jewelrycraft.item.ItemBracelet;
 
 public class SlotBracelet extends Slot
@@ -27,7 +28,7 @@ public class SlotBracelet extends Slot
     @Override
     public boolean isItemValid(ItemStack stack)
     {
-        return stack.getItem() instanceof ItemBracelet;
+        return stack.getItem() instanceof ItemBracelet || (stack.getItem() instanceof IJewelryItem && ((IJewelryItem)stack.getItem()).type() == 1);
     }
     
     /**

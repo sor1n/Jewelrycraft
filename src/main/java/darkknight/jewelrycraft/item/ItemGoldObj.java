@@ -14,6 +14,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.util.JewelryNBT;
@@ -57,13 +58,13 @@ public class ItemGoldObj extends Item
     
     public String getItemStackDisplayName(ItemStack stack)
     {
-        if (stack != null && stack.hasTagCompound() && stack.getTagCompound().hasKey("target") && Item.getItemById(Integer.valueOf(stack.getTagCompound().getTag("target").toString().split(",")[0].substring(4).replace("s", ""))) != null && JewelryNBT.item(stack) != null) return "Golden " + JewelryNBT.item(stack).getDisplayName();
-        return "Golden Object";
+        if (stack != null && stack.hasTagCompound() && stack.getTagCompound().hasKey("target") && Item.getItemById(Integer.valueOf(stack.getTagCompound().getTag("target").toString().split(",")[0].substring(4).replace("s", ""))) != null && JewelryNBT.item(stack) != null) return StatCollector.translateToLocal("info." + Variables.MODID + ".golden") + " " + JewelryNBT.item(stack).getDisplayName();
+        return StatCollector.translateToLocal("item." + Variables.MODID + ".goldObject.name");
     }
     
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean displayInfo)
     {
-        if (displayInfo) if (stack != null && JewelryNBT.item(stack) != null && JewelryNBT.item(stack).getItem() instanceof ItemFood) list.add(EnumChatFormatting.DARK_PURPLE + "It's made of solid gold! How are you suppose to eat this?");
-        else list.add(EnumChatFormatting.DARK_PURPLE + "Shiny, but useless :(");
+        if (displayInfo) if (stack != null && JewelryNBT.item(stack) != null && JewelryNBT.item(stack).getItem() instanceof ItemFood) list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("item." + Variables.MODID + ".goldObject.info.food"));
+        else list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("item." + Variables.MODID + ".goldObject.info.standard"));
     }
 }

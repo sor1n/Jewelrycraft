@@ -32,6 +32,7 @@ import darkknight.jewelrycraft.network.PacketHandler;
 import darkknight.jewelrycraft.potions.PotionList;
 import darkknight.jewelrycraft.proxy.CommonProxy;
 import darkknight.jewelrycraft.recipes.CraftingRecipes;
+import darkknight.jewelrycraft.thirdparty.ThirdPartyManager;
 import darkknight.jewelrycraft.util.Variables;
 import darkknight.jewelrycraft.worldGen.village.VillageHandler;
 
@@ -69,6 +70,7 @@ public class JewelrycraftMod
     {
         dir = e.getModConfigurationDirectory();
         ConfigHandler.INSTANCE.loadConfig(e);
+        ThirdPartyManager.instance().index();
         BlockList.preInit(e);
         ItemList.preInit(e);
         CraftingRecipes.preInit(e);
@@ -78,6 +80,7 @@ public class JewelrycraftMod
         VillageHandler.preInit(e);
         EventList.preInit(e);
         PotionList.preInit(e);
+        ThirdPartyManager.instance().preInit();
     }
     
     @EventHandler
@@ -85,11 +88,13 @@ public class JewelrycraftMod
     {
         EventList.init(e);
         PotionList.init(e);
+        ThirdPartyManager.instance().init();
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {
+        ThirdPartyManager.instance().postInit();
         EventList.postInit(e);
         PotionList.postInit(e);
     }
