@@ -12,10 +12,8 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+	compile files("libs/EquivalentExchange3-1.7.10-0.3.496.jar")
     }
-}
-dependencies {
-	compile files ("libs/EquivalentExchange3-1.7.10-0.3.496.jar")
 }
 
 apply plugin: "curseforge"
