@@ -15,10 +15,6 @@ buildscript {
     }
 }
 
-dependencies {
-	compile fileTree(dir: 'libs', include: '*.jar')
-}
-
 apply plugin: "curseforge"
 apply plugin: 'forge'
 
@@ -37,7 +33,7 @@ if (System.getenv().BUILD_NUMBER != null) {
 
 version = "${project.ext.massive}.${project.ext.major}.${project.minor}"
 group= "darkknight.jewelrycraft2"
-archivesBaseName = "Jewelrycraft2"
+archivesBaseName = "[${project.ext.mcVersion}] Jewelrycraft2"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -76,11 +72,11 @@ processResources{
 curse {
     apiKey = System.getenv("onyxdarkknight_curse")
     projectId = "229927" // my project url is http://minecraft.curseforge.com/mc-mods/229927-jewelrycraft-2
-    changelog = new File('Changelog.txt').text
+    changelog = new File('changelog.txt').text
     releaseType = "release"
 
     // the default obfuscated jar is uploaded by default
-    // artifact = project.file("some/jar/to/upload.jar")
+    // artifact = project.file("build/libs/to/upload.jar")
 
     // allows you to add extra compatible MC versions. The one specified in the minecraft{} block is used by default.
     // addGameversion "1.7.0", "1.7.4"
@@ -99,7 +95,6 @@ sourceSets {
 }
 
 jar {
-    appendix = "${project.ext.mcVersion}"
     classifier = 'universal'
 }
 

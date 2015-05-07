@@ -121,7 +121,7 @@ public class EntityEventHandler
                     ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
                     if (item != null){
                         if(item.getItem() instanceof ItemBaseJewelry)((ItemBaseJewelry)item.getItem()).action(item, player);
-                        if(item.getItem() instanceof IJewelryItem)((IJewelryItem)item.getItem()).onWearAction(player);
+                        if(item.getItem() instanceof IJewelryItem)((IJewelryItem)item.getItem()).onWearAction(item, player);
                     }
                 }
             if (!player.worldObj.isRemote){
@@ -192,7 +192,7 @@ public class EntityEventHandler
                     }
                     if (item != null){
                         if(item.getItem() instanceof ItemBaseJewelry)((ItemBaseJewelry)item.getItem()).onPlayerAttacked(item, player, event.source, event.ammount);
-                        if(item.getItem() instanceof IJewelryItem)((IJewelryItem)item.getItem()).onPlayerAttackedAction(player, event.source, event.ammount);
+                        if(item.getItem() instanceof IJewelryItem)((IJewelryItem)item.getItem()).onPlayerAttackedAction(item, player, event.source, event.ammount);
                     }
                 }
             if (player.getHealth() != player.prevHealth){
@@ -253,7 +253,7 @@ public class EntityEventHandler
                     }
                     if (item != null){
                         if(item.getItem() instanceof ItemBaseJewelry)((ItemBaseJewelry)item.getItem()).onEntityAttacked(item, player, entity, event.ammount);
-                        if(item.getItem() instanceof IJewelryItem)((IJewelryItem)item.getItem()).onEntityAttackedByPlayer(player, entity, event.ammount);
+                        if(item.getItem() instanceof IJewelryItem)((IJewelryItem)item.getItem()).onEntityAttackedByPlayer(item, player, entity, event.ammount);
                     }
                 }
             for(Curse curse: Curse.getCurseList())
@@ -290,7 +290,7 @@ public class EntityEventHandler
                     ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
                     if (item != null){
                         if(item.getItem() instanceof ItemBaseJewelry)((ItemBaseJewelry)item.getItem()).onPlayerRespawn(item, event);
-                        if(item.getItem() instanceof IJewelryItem)((IJewelryItem)item.getItem()).onPlayerRespawnAction(event);
+                        if(item.getItem() instanceof IJewelryItem)((IJewelryItem)item.getItem()).onPlayerRespawnAction(item, event);
                     }
                 }
         }
@@ -404,7 +404,7 @@ public class EntityEventHandler
                     ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
                     if (item != null){
                         if(item.getItem() instanceof ItemBaseJewelry)((ItemBaseJewelry)item.getItem()).onPlayerDead(item, player, event.source);
-                        if(item.getItem() instanceof IJewelryItem)((IJewelryItem)item.getItem()).onPlayerDeadAction(player, event.source);
+                        if(item.getItem() instanceof IJewelryItem)((IJewelryItem)item.getItem()).onPlayerDeadAction(item, player, event.source);
                     }
                 }
         }
