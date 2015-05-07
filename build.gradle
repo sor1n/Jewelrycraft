@@ -16,7 +16,7 @@ buildscript {
 }
 
 dependencies {
-	compile files("libs/EquivalentExchange3-1.7.10-0.3.496.jar")
+	compile "libs/EquivalentExchange3-1.7.10-0.3.496.jar"
 }
 
 apply plugin: "curseforge"
