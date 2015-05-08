@@ -11,6 +11,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import darkknight.jewelrycraft.api.Curse;
@@ -66,6 +67,6 @@ public class CurseInfamy extends Curse
     
     public String getDescription()
     {
-        return "What have you done?!";
+        return StatCollector.translateToLocal("curse." + Variables.MODID + ".infamy.description");
     }
 }

@@ -3,14 +3,21 @@ package darkknight.jewelrycraft.client.gui;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import darkknight.jewelrycraft.client.Page;
+import darkknight.jewelrycraft.util.Variables;
 
 public class GuiTabModifiers extends GuiTab
 {
     int maxPages;
     public GuiTabModifiers(int id)
     {
-        super("Modifiers", id);
+        super(id);
+    }
+    
+    public String getName()
+    {
+        return StatCollector.translateToLocal("guide." + Variables.MODID + ".tab.modifiers");
     }
     
     /**

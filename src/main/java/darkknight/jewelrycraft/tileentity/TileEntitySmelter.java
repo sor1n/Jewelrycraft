@@ -9,6 +9,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import darkknight.jewelrycraft.config.ConfigHandler;
+import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 public class TileEntitySmelter extends TileEntity
@@ -107,7 +108,10 @@ public class TileEntitySmelter extends TileEntity
             if (melting > 0) melting--;
             if (melting == 0){
                 hasMetal = false;
-                if (!isOre) moltenMetal = metal;
+                if (!isOre){
+                    if(JewelryNBT.ingot(metal) == null) moltenMetal = metal;
+                    else moltenMetal = JewelryNBT.ingot(metal);
+                }
                 else{
                     moltenMetal = JewelrycraftUtil.getIngotFromOre(metal);
                     moltenMetal.stackSize *= 2;

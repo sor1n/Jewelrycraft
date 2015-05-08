@@ -38,7 +38,7 @@ item.jewelrycraft2.goldObject.name=Golden Object
 
 item.jewelrycraft2.goldObject.info.standard=Shiny, but useless :(
 item.jewelrycraft2.goldObject.info.food=It's made of solid gold! How are you suppose to eat this?
-item.jewelrycraft2.thievingGloves.info.extra=\247oPress \247b<SHIFT>\2477\247o for more information.
+item.jewelrycraft2.thievingGloves.info.extra=Press <SHIFT> for more information.
 item.jewelrycraft2.thievingGloves.info.1=Right click with the gloves,
 item.jewelrycraft2.thievingGloves.info.2=while sneaking, on a villager
 item.jewelrycraft2.thievingGloves.info.3=to steal his stuff.
@@ -79,6 +79,7 @@ chatmessage.jewelrycraft2.smelter.metalismelting=%s is being melted.
 chatmessage.jewelrycraft2.smelter.empty=The Smelter is empty.
 chatmessage.jewelrycraft2.smelter.contentdoesnotmatch=Item does not match contents!
 chatmessage.jewelrycraft2.smelter.full=Smelter is at full capacity.
+chatmessage.jewelrycraft2.smelter.cannotsmelt=You can not smelt this item.
 
 chatmessage.jewelrycraft2.table.hasenditem=First take out the crafted jewel before inserting new stuff.
 chatmessage.jewelrycraft2.table.missinggem=You need a gem.
@@ -99,6 +100,21 @@ chatmessage.jewelrycraft2.steal.fail=sensed a strange presence around him, makin
 chatmessage.jewelrycraft2.steal.caught1=As he was passing by, a random villager caught you trying to steal from
 chatmessage.jewelrycraft2.steal.caught2=A villager nearby saw you trying to steal from
 
+chatmessage.jewelrycraft2.endereye.1=You sense some
+chatmessage.jewelrycraft2.endereye.2=around you.
+chatmessage.jewelrycraft2.feather=The necklace protected you from taking damage!
+
+curse.jewelrycraft2.blind.description=You see the light slowly fading in front of you
+curse.jewelrycraft2.flamingsoul.description=Is it me or is it getting hot in here?
+curse.jewelrycraft2.greed.description=You might need that later
+curse.jewelrycraft2.humblebundle.description=Two at the price of one
+curse.jewelrycraft2.infamy.description=What have you done?!
+curse.jewelrycraft2.midastouch.description=Be careful what you wish for...
+curse.jewelrycraft2.pentagram.description=The Dark Lord has mysterious ways of showing you his love
+curse.jewelrycraft2.rabbitspaw.description=The Dark Lord is giving you a gift. Don't lose it.
+curse.jewelrycraft2.rottenheart.description=Your heart slowly rots inside
+curse.jewelrycraft2.vampirehunger.description=You feel the need for blood
+
 death.attack.weak=%1$s was weakened by a piece of jewelry and died
 death.attack.shadows=%1$s was consumed by the shadows
 death.attack.blackHeart=%1$s was killed by %2$s's curse
@@ -114,3 +130,19 @@ info.jewelrycraft2.gem=Gem
 info.jewelrycraft2.modifiers=Modifiers
 info.jewelrycraft2.golden=Golden
 info.jewelrycraft2.villager=Villager
+
+jeweler.jewelrycraft2.jewelerchest=Jeweler's Chest
+jeweler.jewelrycraft2.ingotchest=Ingot Chest
+jeweler.jewelrycraft2.orechest=Ores Chest
+
+guide.jewelrycraft2.tab.introduction=Introduction
+guide.jewelrycraft2.tab.introduction.1=Welcome to Jewelrycraft 2! This mod is about making jewelry that you can modify to your own will. To find out how to create a jewelry, please consult the book and look at the Smelter block. To add modifiers to it you need to perform a ritual. To see how to do that, look at the Cursed Eye
+guide.jewelrycraft2.tab.introduction.2=block in this guide. Please be aware that even if you can add anything as a modifier and can have multiple modifiers on one jewelry, this mod is still in alpha and does not have that many modifiers implemented and currently don't have any different effects depending on
+guide.jewelrycraft2.tab.introduction.3=the gem used. To see what modifiers are currently implemented, just look in the Modifiers tab located in this guide (it is the one with the blaze powder as an icon). This mod was made by OnyxDarkKnight and the help of domi1819, pau101, Damien Hazard, boni and MineMarteen.
+
+guide.jewelrycraft2.tab.blocks=Blocks
+guide.jewelrycraft2.tab.misc=Gems, Ores and Ingots
+guide.jewelrycraft2.tab.items=Items
+guide.jewelrycraft2.tab.modifiers=Modifiers
+guide.jewelrycraft2.tab.oretoingot=Ores to Ingots
+guide.jewelrycraft2.tab.ritual=Ritual

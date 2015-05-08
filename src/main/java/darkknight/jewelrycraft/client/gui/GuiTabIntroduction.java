@@ -2,20 +2,27 @@ package darkknight.jewelrycraft.client.gui;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import darkknight.jewelrycraft.client.Page;
 import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.util.Variables;
 
 public class GuiTabIntroduction extends GuiTab
 {
     public GuiTabIntroduction(int id)
     {
-        super("Introduction", id);
+        super(id);
     }
     
     @Override
     public ItemStack getIcon()
     {
         return new ItemStack(ItemList.ring);
+    }
+    
+    public String getName()
+    {
+        return StatCollector.translateToLocal("guide." + Variables.MODID + ".tab.introduction");
     }
    
     @Override
@@ -26,15 +33,15 @@ public class GuiTabIntroduction extends GuiTab
         switch(page)
         {
             case 1:
-                text = "Welcome to Jewelrycraft 2! This mod is about making jewelry that you can modify to your own will. To find out how to create a jewelry, please consult the book and look at the Smelter block. To add modifiers to it you need to perform a ritual. To see how to do that, look at the Cursed Eye";
+                text = StatCollector.translateToLocal("guide." + Variables.MODID + ".tab.introduction."+page);
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 2:
-                text = "block in this guide. Please be aware that even if you can add anything as a modifier and can have multiple modifiers on one jewelry, this mod is still in alpha and does not have that many modifiers implemented and currently don't have any different effects depending on";
+                text = StatCollector.translateToLocal("guide." + Variables.MODID + ".tab.introduction."+page);
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 3:
-                text = "the gem used. To see what modifiers are currently implemented, just look in the Modifiers tab located in this guide (it is the one with the blaze powder as an icon). This mod was made by OnyxDarkKnight and the help of domi1819, pau101, Damien Hazard, boni and MineMarteen.";
+                text = StatCollector.translateToLocal("guide." + Variables.MODID + ".tab.introduction."+page);
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
         }

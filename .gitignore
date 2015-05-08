@@ -5,3 +5,4 @@ ModelCreator/*
 bin/*
 eclipse/*
 libs/*
+gradle.properties

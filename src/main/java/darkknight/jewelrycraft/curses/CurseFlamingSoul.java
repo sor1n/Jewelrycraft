@@ -1,8 +1,10 @@
 package darkknight.jewelrycraft.curses;
 
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class CurseFlamingSoul extends Curse
@@ -19,6 +21,6 @@ public class CurseFlamingSoul extends Curse
     
     public String getDescription()
     {
-        return "Is it me or is it getting hot in here?";
+        return StatCollector.translateToLocal("curse." + Variables.MODID + ".flamingsoul.description");
     }
 }

@@ -104,8 +104,8 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                 EntityItem moltenMetal = new EntityItem(te.getWorldObj(), 0.0D, 0.0D, 0.0D, metal);
                 moltenMetal.getEntityItem().stackSize = 1;
                 moltenMetal.hoverStart = 0.0F;
-                GL11.glTranslatef(-0F, 1.38f - 0.005f * me.quantity, -0.29F);
-                GL11.glScalef(1.1F, 1.0F, 1.4F);
+                GL11.glTranslatef(-0F, 1.4f - 0.005f * me.quantity, -0.29F);
+                GL11.glScalef(1.2F, 1.0F, 1.4F);
                 GL11.glRotatef(90F, 1F, 0F, 0f);
                 RenderItem.renderInFrame = true;
                 RenderManager.instance.renderEntityWithPosYaw(moltenMetal, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);

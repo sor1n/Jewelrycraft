@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
@@ -31,6 +31,7 @@ public class JewelrycraftUtil
     public static ArrayList<String> jamcraftPlayers = new ArrayList<String>();
     private static ArrayList<ItemStack> items = new ArrayList<ItemStack>();
     public static Random rand = new Random();
+    public static EnumCreatureAttribute HEART;
     
     /**
      * Adds gems and jewelry to their appropriate list
@@ -146,10 +147,8 @@ public class JewelrycraftUtil
                     {
                         ores.add(nextStack);
                         oreToIngot.put(nextStack, ingot);
-                        JewelrycraftMod.logger.info("Original: " + nextStack);
-                        JewelrycraftMod.logger.info("Adding " + nextStack.getDisplayName() + " with damage value " + nextStack.getItemDamage() + " and with " + nextStack.stackSize + " in stack");
-                        JewelrycraftMod.logger.info("Original ingot: " + ingot);
-                        JewelrycraftMod.logger.info("Adding ingot " + ingot.getDisplayName() + " with damage value " + ingot.getItemDamage() + " and with " + ingot.stackSize + " in stack\n");
+                        JewelrycraftMod.logger.info(nextStack + " Adding " + nextStack.getDisplayName() + " with damage value " + nextStack.getItemDamage() + " and with " + nextStack.stackSize + " in stack");
+                        JewelrycraftMod.logger.info(ingot + " Adding ingot " + ingot.getDisplayName() + " with damage value " + ingot.getItemDamage() + " and with " + ingot.stackSize + " in stack\n");
                     }
                 }
             }

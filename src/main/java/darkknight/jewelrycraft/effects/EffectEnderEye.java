@@ -13,6 +13,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -23,6 +24,7 @@ import darkknight.jewelrycraft.item.ItemEarrings;
 import darkknight.jewelrycraft.item.ItemNecklace;
 import darkknight.jewelrycraft.item.ItemRing;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 
 public class EffectEnderEye extends ModifierEffects
 {
@@ -74,7 +76,7 @@ public class EffectEnderEye extends ModifierEffects
             for(int i = (int)player.posX - 2; i <= (int)player.posX + 2; i++)
                 for(int j = (int)player.posY - 2; j <= (int)player.posY + 2; j++)
                     for(int k = (int)player.posZ - 2; k <= (int)player.posZ + 2; k++)
-                        if (player.worldObj.getBlock(i, j, k) instanceof BlockOre) player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.GRAY + "You sense some " + player.worldObj.getBlock(i, j, k).getLocalizedName() + " around you."));
+                        if (player.worldObj.getBlock(i, j, k) instanceof BlockOre) player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.GRAY + StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".effect.endereye.1")+" " + player.worldObj.getBlock(i, j, k).getLocalizedName() + " "+StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".effect.endereye.2")));
         }
     }
     

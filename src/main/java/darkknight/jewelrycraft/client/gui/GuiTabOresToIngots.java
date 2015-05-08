@@ -4,9 +4,11 @@ import java.util.HashMap;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.Variables;
 
 public class GuiTabOresToIngots extends GuiTab
 {
@@ -15,7 +17,12 @@ public class GuiTabOresToIngots extends GuiTab
      */
     public GuiTabOresToIngots(int id)
     {
-        super("Ores to ingots", id);
+        super(id);
+    }
+    
+    public String getName()
+    {
+        return StatCollector.translateToLocal("guide." + Variables.MODID + ".tab.oretoingot");
     }
     
     /**

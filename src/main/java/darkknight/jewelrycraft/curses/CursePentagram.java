@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
@@ -75,6 +76,6 @@ public class CursePentagram extends Curse
     
     public String getDescription()
     {
-        return "The Dark Lord has misterious ways of showing you his love.";
+        return StatCollector.translateToLocal("curse." + Variables.MODID + ".pentagram.description");
     }
 }

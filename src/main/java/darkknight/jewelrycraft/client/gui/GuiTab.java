@@ -8,16 +8,14 @@ public abstract class GuiTab extends GuiRectangle
 {
     protected int values;
     protected int del;
-    protected String name;
     
     /**
      * @param name
      * @param id
      */
-    public GuiTab(String name, int id)
+    public GuiTab(int id)
     {
         super(-62, 10 + 19 * id, 19, 18);
-        this.name = name;
         values = 0;
         del = 0;
     }
@@ -27,7 +25,7 @@ public abstract class GuiTab extends GuiRectangle
      */
     public String getName()
     {
-        return name;
+        return "";
     }
     
     /**

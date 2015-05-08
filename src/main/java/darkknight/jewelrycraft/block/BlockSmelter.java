@@ -137,17 +137,20 @@ public class BlockSmelter extends BlockContainer
                 for(int a = 0; a < JewelrycraftUtil.jamcraftPlayers.size(); a++)
                     if (entityPlayer.getUniqueID().toString().equals(JewelrycraftUtil.jamcraftPlayers.get(a))) index = a;
                 if(entityPlayer.capabilities.isCreativeMode) index = 1;
-                boolean canPlace = item != null && (JewelrycraftUtil.isMetal(item) || JewelrycraftUtil.isOre(item) || index >= 0);
+                boolean canPlace = item != null && (JewelrycraftUtil.isMetal(item) || JewelrycraftUtil.isOre(item) || index >= 0 || JewelryNBT.ingot(item) != null);
                 boolean isOre = false, oreCoincidesWithMetal = false, itemCoincidesWithMetal = false, itemCoincidesWithMoltenMetal = false, overflow = false;
                 isOre = JewelrycraftUtil.isOre(item);
-                if (te.metal != null && te.metal.getItem() != null) itemCoincidesWithMetal = item.getItem().equals(te.metal.getItem()) && item.getItemDamage() == te.metal.getItemDamage();
+                if (te.metal != null && te.metal.getItem() != null) {
+                    if(JewelryNBT.ingot(item) == null) itemCoincidesWithMetal = item.getItem().equals(te.metal.getItem()) && item.getItemDamage() == te.metal.getItemDamage();
+                    else itemCoincidesWithMetal = item.getItem().equals(te.metal.getItem()) && item.getItemDamage() == te.metal.getItemDamage() && JewelryNBT.ingot(item).getItem().equals(JewelryNBT.ingot(te.metal).getItem()) && JewelryNBT.ingot(item).getItemDamage() == JewelryNBT.ingot(te.metal).getItemDamage();
+                }
                 if (te.moltenMetal != null && te.moltenMetal.getItem() != null){
-                    itemCoincidesWithMoltenMetal = item.getItem().equals(te.moltenMetal.getItem()) && item.getItemDamage() == te.moltenMetal.getItemDamage();
+                    if(JewelryNBT.ingot(item) == null) itemCoincidesWithMoltenMetal = item.getItem().equals(te.moltenMetal.getItem()) && item.getItemDamage() == te.moltenMetal.getItemDamage();
+                    else itemCoincidesWithMoltenMetal = JewelryNBT.ingot(item).getItem().equals(te.moltenMetal.getItem()) && JewelryNBT.ingot(item).getItemDamage() == te.moltenMetal.getItemDamage();
                     if (isOre) oreCoincidesWithMetal = te.moltenMetal.getItem().equals(JewelrycraftUtil.getIngotFromOre(item).getItem()) && te.moltenMetal.getItemDamage() == JewelrycraftUtil.getIngotFromOre(item).getItemDamage();
                 }
-                overflow = isOre ? te.metal.stackSize * 0.2f + te.quantity < 0.8f : te.metal.stackSize + te.quantity < 0.9f;
+                overflow = isOre ? te.metal.stackSize * 0.2f + te.quantity < 0.8f : te.metal.stackSize*0.1f + te.quantity < 0.9f;
                 boolean isValid = te.hasMoltenMetal ? isOre ? oreCoincidesWithMetal : itemCoincidesWithMoltenMetal : true;
-                System.out.println(te.quantity);
                 if (te.quantity < 0.9f && !te.pouring && canPlace && isValid){
                     boolean check = isOre ? oreCoincidesWithMetal && te.quantity < 0.8f : itemCoincidesWithMoltenMetal;
                     boolean check2 = isOre ? oreCoincidesWithMetal : itemCoincidesWithMetal;
@@ -170,8 +173,9 @@ public class BlockSmelter extends BlockContainer
                     }
                     te.isDirty = true;
                 }else if (item != null && (te.hasMetal || te.hasMoltenMetal) && !itemCoincidesWithMoltenMetal && te.quantity < .9f) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".smelter.contentdoesnotmatch")));
-                else if (item != null && !item.getUnlocalizedName().toLowerCase().contains("ingot") && te.quantity < .9f) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".smelter.itemrenamedtoingot")));
+                else if (item != null && !item.getUnlocalizedName().toLowerCase().contains("ingot") && item.getDisplayName().toLowerCase().contains("ingot") && te.quantity < .9f) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".smelter.itemrenamedtoingot")));
                 else if (item != null && te.quantity >= .9f) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".smelter.full")));
+                else entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".smelter.cannotsmelt")));
             }else if (item != null && item.getItem() != null && item.getItem() instanceof ItemMoltenMetalBucket && !te.hasMoltenMetal && !te.hasMetal){
                 te.hasMoltenMetal = true;
                 ItemStack ingot = JewelryNBT.ingot(item);
@@ -183,7 +187,8 @@ public class BlockSmelter extends BlockContainer
                     --item.stackSize;
                     dropItem(world, entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, new ItemStack(Items.bucket));
                 }
-            }else if (item == null && te.hasMoltenMetal && te.moltenMetal.getItem() != null) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage." + Variables.MODID + ".smelter.hasmolteningot", te.moltenMetal.getDisplayName().substring(0, te.moltenMetal.getDisplayName().indexOf(" Ingot")))));
+            }
+            else if (item == null && te.hasMoltenMetal && te.moltenMetal.getItem() != null) entityPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("chatmessage." + Variables.MODID + ".smelter.hasmolteningot", te.moltenMetal.getDisplayName().replace(" Ingot",""))));
             world.setTileEntity(i, j, k, te);
         }
         return true;

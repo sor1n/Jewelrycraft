@@ -3,8 +3,10 @@ package darkknight.jewelrycraft.client.gui;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.Variables;
 
 public class GuiTabGemsAndIngots extends GuiTab
 {
@@ -14,7 +16,12 @@ public class GuiTabGemsAndIngots extends GuiTab
      */
     public GuiTabGemsAndIngots(int id)
     {
-        super("Gems, ores and ingots", id);
+        super(id);
+    }
+    
+    public String getName()
+    {
+        return StatCollector.translateToLocal("guide." + Variables.MODID + ".tab.misc");
     }
     
     /**

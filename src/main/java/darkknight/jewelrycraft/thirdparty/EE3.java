@@ -15,7 +15,8 @@ public class EE3 implements IThirdParty
         EnergyValueRegistryProxy.addPostAssignedEnergyValue(new ItemStack(BlockList.shadowOre), 4096);
         EnergyValueRegistryProxy.addPostAssignedEnergyValue(new ItemStack(ItemList.shadowIngot), 4096);
         EnergyValueRegistryProxy.addPostAssignedEnergyValue(new ItemStack(ItemList.clayMolds), 128);
-        EnergyValueRegistryProxy.addPostAssignedEnergyValue(new ItemStack(ItemList.molds), 128);}
+        EnergyValueRegistryProxy.addPostAssignedEnergyValue(new ItemStack(ItemList.molds), 128);
+    }
     
     @Override
     public void init()

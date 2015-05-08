@@ -11,12 +11,13 @@ public class ConfigHandler
 {
     public static Configuration config;
     public static final ConfigHandler INSTANCE = new ConfigHandler();    
-    public static final String[] categories = { "Timers", "Village Generation"};
+    public static final String[] categories = {"Timers", "Village Generation"};
     
     public static int INGOT_COOLING_TIME;
     public static int INGOT_MELTING_TIME;
     public static int GEM_PLACEMENT_TIME;
     public static int RITUAL_TIME;
+    public static int HEART_DESPAWN_TIME;
     
     public static boolean GENERATE_VILLAGE_NETHERSTAR;
     public static boolean CAN_FURNACE_GENERATE_INGOTS;
@@ -43,6 +44,7 @@ public class ConfigHandler
         INGOT_MELTING_TIME = config.getInt("Ingot Melting Time", categories[0], 1500, 5, Integer.MAX_VALUE, "This sets the number of ticks you need to wait before an ingot is completely smelted.");
         GEM_PLACEMENT_TIME = config.getInt( "Jewelry Crafting Time", categories[0], 200, 5, Integer.MAX_VALUE, "This sets the number of ticks it takes for a jewel to be modified.");
         RITUAL_TIME = config.getInt( "Ritual Time", categories[0], 1000, 5, Integer.MAX_VALUE, "This sets the number of ticks it takes for the ritual to end.");
+        HEART_DESPAWN_TIME = config.getInt( "Hearts Despawn Time", categories[0], 600, 20, Integer.MAX_VALUE, "This sets the number of ticks it takes for hearts to despawn, 20=1 second");
         
         GENERATE_VILLAGE_NETHERSTAR = config.getBoolean("Netherstar Generation", categories[1], false, "If set to true Nether Stars will be able to generate in Jewelers chests.");
         CAN_FURNACE_GENERATE_INGOTS = config.getBoolean("Furnace Ingots Generation", categories[1], true, "If set to true jewelers will generate ingots in furnaces.");

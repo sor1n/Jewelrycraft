@@ -1,9 +1,11 @@
 package darkknight.jewelrycraft.curses;
 
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class CurseGreed extends Curse
@@ -26,6 +28,6 @@ public class CurseGreed extends Curse
     
     public String getDescription()
     {
-        return "You might need that later";
+        return StatCollector.translateToLocal("curse." + Variables.MODID + ".greed.description");
     }
 }

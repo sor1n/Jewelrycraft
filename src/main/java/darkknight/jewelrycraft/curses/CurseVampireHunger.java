@@ -5,8 +5,10 @@ package darkknight.jewelrycraft.curses;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.util.Variables;
 
 /**
  * @author Sorin
@@ -26,6 +28,6 @@ public class CurseVampireHunger extends Curse
     
     public String getDescription()
     {
-        return "You feel the need for blood";
+        return StatCollector.translateToLocal("curse." + Variables.MODID + ".vampirehunger.description");
     }
 }

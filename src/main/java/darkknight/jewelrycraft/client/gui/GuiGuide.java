@@ -184,7 +184,6 @@ public class GuiGuide extends GuiContainer
         GL11.glRotatef(160.0F, 1.0F, 0.0F, 0.0F);
         if (rotate) GL11.glRotatef(rot, 0.0F, 1.0F, 0.0F);
         else{
-            // GL11.glRotatef(entityitem.getEntityItem().getItemDamage() % 8 / 8F * 360, 0, 1, 0);
             GL11.glRotatef(xRot, 1, 0, 0);
             GL11.glRotatef(yRot, 0, 1, 0);
             GL11.glRotatef(zRot, 0, 0, 1);

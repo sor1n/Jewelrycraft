@@ -1,9 +1,11 @@
 package darkknight.jewelrycraft.curses;
 
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class CurseRottenHeart extends Curse
@@ -21,6 +23,6 @@ public class CurseRottenHeart extends Curse
     
     public String getDescription()
     {
-        return "Your heart slowly rots inside";
+        return StatCollector.translateToLocal("curse." + Variables.MODID + ".rottenheart.description");
     }
 }

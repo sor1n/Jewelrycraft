@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -23,6 +24,7 @@ import darkknight.jewelrycraft.tileentity.TileEntityMolder;
 import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.Variables;
 
 public class ComponentJewelry extends StructureVillagePieces.House1
 {
@@ -224,7 +226,7 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         TileEntityChest chest = (TileEntityChest)world.getTileEntity(i1, j1, k1);
         while (chest != null && t > 0 && JewelrycraftUtil.gem.size() > 0){
             ItemStack jewels = JewelrycraftUtil.gem.get(random.nextInt(JewelrycraftUtil.gem.size()));
-            chest.func_145976_a("Jeweler's Chest");
+            chest.func_145976_a(StatCollector.translateToLocal("jeweler." + Variables.MODID + ".jewelerchest"));
             if (jewels.getItem() == Items.nether_star && ConfigHandler.GENERATE_VILLAGE_NETHERSTAR) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), jewels);
             else if (random.nextBoolean() && jewels.getItem() != Items.nether_star) chest.setInventorySlotContents(random.nextInt(chest.getSizeInventory()), jewels);
             t--;
@@ -253,7 +255,7 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         placeBlockAtCurrentPosition(world, chestB, metadata, i, j, k, sbb);
         TileEntityChest chest = (TileEntityChest)world.getTileEntity(i1, j1, k1);
         while (chest != null && t > 0 && JewelrycraftUtil.metal.size() > 0){
-            chest.func_145976_a("Ingot Chest");
+            chest.func_145976_a(StatCollector.translateToLocal("jeweler." + Variables.MODID + ".ingotchest"));
             int metalID = random.nextInt(JewelrycraftUtil.metal.size());
             ItemStack metal = JewelrycraftUtil.metal.get(metalID).copy();
             metal.stackSize = 2 + random.nextInt(randomAmount);
@@ -284,7 +286,7 @@ public class ComponentJewelry extends StructureVillagePieces.House1
         placeBlockAtCurrentPosition(world, chestB, metadata, i, j, k, sbb);
         TileEntityChest chest = (TileEntityChest)world.getTileEntity(i1, j1, k1);
         while (chest != null && t > 0 && JewelrycraftUtil.ores.size() > 0){
-            chest.func_145976_a("Ores Chest");
+            chest.func_145976_a(StatCollector.translateToLocal("jeweler." + Variables.MODID + ".orechest"));
             int oreID = random.nextInt(JewelrycraftUtil.ores.size());
             ItemStack ores = JewelrycraftUtil.ores.get(oreID).copy();
             ores.stackSize = 2 + random.nextInt(randomAmount);

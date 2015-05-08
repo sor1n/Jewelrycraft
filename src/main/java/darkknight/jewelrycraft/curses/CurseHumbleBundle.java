@@ -10,9 +10,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.util.Variables;
 
 /**
  * @author Sorin
@@ -53,6 +55,6 @@ public class CurseHumbleBundle extends Curse
     
     public String getDescription()
     {
-        return "Get two for the price of one";
+        return StatCollector.translateToLocal("curse." + Variables.MODID + ".humblebundle.description");
     }
 }

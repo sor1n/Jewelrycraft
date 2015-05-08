@@ -16,6 +16,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import darkknight.jewelrycraft.api.ModifierEffects;
 import darkknight.jewelrycraft.damage.DamageSourceList;
 import darkknight.jewelrycraft.item.ItemBracelet;
@@ -86,7 +87,7 @@ public class EffectFeather extends ModifierEffects
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         // Positive necklace
         if (jewelry instanceof ItemNecklace && exists && rand.nextInt(3 + JewelryNBT.numberOfModifiers(item)) == 0 && source != DamageSourceList.weak && source != DamageSource.inFire && source != DamageSource.onFire && source != DamageSource.lava){
-            player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.GRAY + "The necklace protected you from taking damage!"));
+            player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.GRAY + StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".effect.feather")));
             playerInfo.setBoolean("negateDamage", true);
         }
         // Negative necklace

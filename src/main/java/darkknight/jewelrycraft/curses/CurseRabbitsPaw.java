@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -14,6 +16,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class CurseRabbitsPaw extends Curse
@@ -37,7 +40,7 @@ public class CurseRabbitsPaw extends Curse
     {
         String[] types = {"Red", "Blue", "White", "Black"};
         String type = types[rand.nextInt(4)];
-        if (rand.nextInt(3) == 0){
+        if (rand.nextInt(3) == 0 && target.getCreatureAttribute() != JewelrycraftUtil.HEART){
             if (type == "White"){
                 EntityHeart h = new EntityHalfHeart(world);
                 h.setType(type);
@@ -58,6 +61,6 @@ public class CurseRabbitsPaw extends Curse
     
     public String getDescription()
     {
-        return "The Dark One is giving you a gift. Don't lose it.";
+        return StatCollector.translateToLocal("curse." + Variables.MODID + ".rabbitspaw.description");
     }
 }

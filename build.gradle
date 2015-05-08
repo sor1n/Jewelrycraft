@@ -15,8 +15,8 @@ buildscript {
     }
 }
 
-apply plugin: "curseforge"
 apply plugin: 'forge'
+apply plugin: 'curseforge'
 
 project.ext {
 	massive = "1"

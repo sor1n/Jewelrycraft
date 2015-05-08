@@ -358,7 +358,7 @@ public class EntityEventHandler
         if (!entity.worldObj.isRemote && !(entity instanceof EntityPlayer) && entity instanceof EntityLiving){
             EntityLiving live = (EntityLiving)entity;
             String type = types[rand.nextInt(4)];
-            if (rand.nextInt(6) == 0){
+            if (rand.nextInt(6) == 0 && live.getCreatureAttribute() != JewelrycraftUtil.HEART){
                 if (type == "White"){
                     EntityHeart h = new EntityHalfHeart(live.worldObj);
                     h.setType(type);

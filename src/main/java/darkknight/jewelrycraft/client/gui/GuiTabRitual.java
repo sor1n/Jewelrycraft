@@ -4,14 +4,21 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.Page;
+import darkknight.jewelrycraft.util.Variables;
 
 public class GuiTabRitual extends GuiTab
 {
     public GuiTabRitual(int id)
     {
-        super("Ritual", id);
+        super(id);
+    }
+    
+    public String getName()
+    {
+        return StatCollector.translateToLocal("guide." + Variables.MODID + ".tab.ritual");
     }
     
     @Override

@@ -1,3 +1,8 @@
 - Added EE3 EMC values, thank you to MineMarteen for providing the ThirdPartyManager code :)
 - Working on making it possible to translate every part of the mod
 - Created an interface modders can use to make an item wearable in the jewelry inventory and have special effects
+- Hearts and Half-Hearts are no longer invincible and have a life span of 1 minute, this should reduce lag considerably
+- Fixed molten metal render in the molder
+- Fixed an issue with smelters detecting being as full
+- You can now smelt back jewelry to get the ingot
+- Fixed an issue where the smelter would say the item is renamed to 'Ingot' even if it is not 

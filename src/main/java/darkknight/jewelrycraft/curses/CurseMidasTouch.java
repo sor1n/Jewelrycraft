@@ -19,6 +19,7 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.block.BlockList;
@@ -27,6 +28,7 @@ import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 
 public class CurseMidasTouch extends Curse
 {
@@ -90,6 +92,6 @@ public class CurseMidasTouch extends Curse
     
     public String getDescription()
     {
-        return "Be careful what you wish for...";
+        return StatCollector.translateToLocal("curse." + Variables.MODID + ".midastouch.description");
     }
 }

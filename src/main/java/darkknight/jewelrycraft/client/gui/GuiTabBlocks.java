@@ -6,9 +6,11 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.Page;
 import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.util.Variables;
 
 public class GuiTabBlocks extends GuiTab
 {
@@ -18,7 +20,12 @@ public class GuiTabBlocks extends GuiTab
      */
     public GuiTabBlocks(int id)
     {
-        super("Blocks", id);
+        super(id);
+    }
+    
+    public String getName()
+    {
+        return StatCollector.translateToLocal("guide." + Variables.MODID + ".tab.blocks");
     }
     
     /**
