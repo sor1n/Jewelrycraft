@@ -21,7 +21,7 @@ apply plugin: 'curseforge'
 project.ext {
 	massive = "1"
     major = "0"
-    minor = "9"
+    minor = "10"
     mcVersion = "1.7.10"
 }
 
@@ -40,7 +40,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 minecraft {
     version = "1.7.10-10.13.3.1395-1710ls"
-    assetDir = "minecraft/assets"
+    runDir = "minecraft/assets"
 
     // replacing stuff in the source
 	replace '@MASSIVE@', project.massive
@@ -70,7 +70,7 @@ processResources{
 }
 
 curse {
-    apiKey = System.getenv("onyxdarkknight_curse")
+    apiKey = project.curseForgeApiKey
     projectId = "229927" // my project url is http://minecraft.curseforge.com/mc-mods/229927-jewelrycraft-2
     changelog = new File('changelog.txt').text
     releaseType = "release"
