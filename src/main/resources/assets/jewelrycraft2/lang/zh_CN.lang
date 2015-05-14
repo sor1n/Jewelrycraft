@@ -14,7 +14,7 @@ item.jewelrycraft2.ring.name=戒指
 item.jewelrycraft2.necklace.name=项链
 item.jewelrycraft2.bracelet.name=手镯
 item.jewelrycraft2.earrings.name=耳环
-item.jewelrycraft2.guide.name=珠宝工艺2 手册
+item.jewelrycraft2.guide.name=珠宝工艺2手册
 item.jewelrycraft2.bucket.name=熔融
 
 item.jewelrycraft2.crystal.0.name=黑色水晶
@@ -34,6 +34,14 @@ item.jewelrycraft2.crystal.13.name=品红色水晶
 item.jewelrycraft2.crystal.14.name=橙色水晶
 item.jewelrycraft2.crystal.15.name=白色水晶
 item.jewelrycraft2.jewelryModifier.name=珠宝强化石(创造)
+item.jewelrycraft2.goldObject.name=闪金物品
+
+item.jewelrycraft2.goldObject.info.standard=闪闪发光,但并没有什么用处 :(
+item.jewelrycraft2.goldObject.info.food=它是用金子制作的! 你想怎么吃它?
+item.jewelrycraft2.thievingGloves.info.extra=按 <SHIFT> 查看更多信息.
+item.jewelrycraft2.thievingGloves.info.1=潜行时手持护手
+item.jewelrycraft2.thievingGloves.info.2=对准村民右键来
+item.jewelrycraft2.thievingGloves.info.3=偷窃其物品
 
 tile.jewelrycraft2.oreShadow.name=暗影矿石
 tile.jewelrycraft2.blockShadow.name=暗影方块
@@ -57,6 +65,7 @@ chatmessage.jewelrycraft2.molder.metaliscooling=熔融金属正在冷却中...
 chatmessage.jewelrycraft2.molder.moldisempty=模具台现在是空的.
 chatmessage.jewelrycraft2.molder.moldismissing=模具台中没有模具.
 chatmessage.jewelrycraft2.molder.hasmoltenmetal=你无法移除这个模具.它装有熔融金属!
+
 chatmessage.jewelrycraft2.smelter.alreadyhasingot=熔炼坩埚已经装有 %s
 chatmessage.jewelrycraft2.smelter.hasmolteningot=熔炼坩埚已经装有熔融 %s
 chatmessage.jewelrycraft2.smelter.itemneedstobeingot=物品必须为金属锭!
@@ -68,6 +77,10 @@ chatmessage.jewelrycraft2.smelter.molderismissing=你需要将一个模具台放
 chatmessage.jewelrycraft2.smelter.nowsmeltingingot=熔炼坩埚正在烧炼 %s.
 chatmessage.jewelrycraft2.smelter.metalismelting=%s 正在熔化.
 chatmessage.jewelrycraft2.smelter.empty=熔炼坩埚是空的.
+chatmessage.jewelrycraft2.smelter.contentdoesnotmatch=物品不符!
+chatmessage.jewelrycraft2.smelter.full=熔炼坩埚已满.
+chatmessage.jewelrycraft2.smelter.cannotsmelt=你无法熔炼该物品.
+
 chatmessage.jewelrycraft2.table.hasenditem=首先移走已合成的珠宝，然后再放入新的物品.
 chatmessage.jewelrycraft2.table.missinggem=你需要一个水晶.
 chatmessage.jewelrycraft2.table.missingjewelry=你缺少一个首饰.
@@ -75,6 +88,32 @@ chatmessage.jewelrycraft2.table.iscrafting= %s 正在被强化.
 chatmessage.jewelrycraft2.table.jewelrymodifiedfull=这件珠宝已经被强化到最大. 你无法再次强化它了!
 chatmessage.jewelrycraft2.table.jewelrycontainsmodifier=这件珠宝已经拥有一种强化.
 chatmessage.jewelrycraft2.table.jewelrycontainsjewel=这件珠宝已经拥有一个宝石.
+
+chatmessage.jewelrycraft2.steal1=抓到你在偷他东西呢.
+chatmessage.jewelrycraft2.steal2=对你进行了恶毒的诅咒.
+chatmessage.jewelrycraft2.whisper=微弱的耳语在你耳边回荡
+chatmessage.jewelrycraft2.stealSuccess1=那些时常偷窃却逍遥法外的人总是收获颇丰但
+chatmessage.jewelrycraft2.stealSuccess2=不要在这条不归路上越走越远,黑暗终将笼罩
+chatmessage.jewelrycraft2.stealSuccess3=你的心灵.
+chatmessage.jewelrycraft2.villager.confusion=咦...我好像弄丢了我的
+chatmessage.jewelrycraft2.steal.fail=感受到一种奇怪的东西围绕着他,让他的口袋紧紧封闭.你没有获得任何东西.
+chatmessage.jewelrycraft2.steal.caught1=一个路过的村民抓到你在偷东西
+chatmessage.jewelrycraft2.steal.caught2=一个附近的村民看见你在偷东西
+
+chatmessage.jewelrycraft2.endereye.1=你感觉到一些
+chatmessage.jewelrycraft2.endereye.2=在你周围.
+chatmessage.jewelrycraft2.feather=项链能够保护你不受到伤害!
+
+curse.jewelrycraft2.blind.description=你眼前的光亮正在渐渐的消退
+curse.jewelrycraft2.flamingsoul.description=就我一个人感觉到越来越热了么?
+curse.jewelrycraft2.greed.description=你可能以后才会需要它
+curse.jewelrycraft2.humblebundle.description=买一送一
+curse.jewelrycraft2.infamy.description=你都干了些什么?!
+curse.jewelrycraft2.midastouch.description=小心事与愿违...
+curse.jewelrycraft2.pentagram.description=黑暗领主喜欢用神秘的方式来表示他对你的喜爱.
+curse.jewelrycraft2.rabbitspaw.description=这是黑暗领主赐予你的礼物.不要弄丢了.
+curse.jewelrycraft2.rottenheart.description=你的内心正在慢慢地腐烂
+curse.jewelrycraft2.vampirehunger.description=你极度的渴望鲜血
 
 death.attack.weak=%1$s 被珠宝削弱最终导致死亡
 death.attack.shadows=%1$s 被暗影吞噬了
@@ -84,3 +123,26 @@ entity.jewelrycraft2.Heart.name=心
 entity.jewelrycraft2.Half-Heart.name=半心
 
 jewelrycraft2.potion.stun=眩晕
+
+info.jewelrycraft2.metal=金属
+info.jewelrycraft2.ingot=锭
+info.jewelrycraft2.gem=宝石
+info.jewelrycraft2.modifiers=强化材料
+info.jewelrycraft2.golden=黄金
+info.jewelrycraft2.villager=村民
+
+jeweler.jewelrycraft2.jewelerchest=珠宝匠的箱子
+jeweler.jewelrycraft2.ingotchest=金属锭箱子
+jeweler.jewelrycraft2.orechest=矿物箱子
+
+guide.jewelrycraft2.tab.introduction=介绍
+guide.jewelrycraft2.tab.introduction.1=欢迎来到珠宝工艺2的世界! 通     过本模组, 你可以根据自己的     意愿来制作不同的饰品. 想要     了解如何制作首饰, 请查阅本     书中有关熔炼坩埚的部分.     珠宝首饰的强化需要通过特定     的仪式来完成. 请查阅诅咒之
+guide.jewelrycraft2.tab.introduction.2=眼来了解仪式的相关内容.需要     注意的是,尽管你可以将所有东    西当做强化材料,一个饰品可以      强化多次, 但是本模组还处于     alpha版本,并没有太多有效的  强化材料,现在不同的宝石并      没有任何不同的特效或是作用.
+guide.jewelrycraft2.tab.introduction.3=若想了解目前有效的强化材料, 请查阅本书中强化材料一栏 (以烈焰粉为图标的那一栏). 本     模组由 OnyxDarkKnight 制作. 感谢domi1819, pau101, Damien Hazard, boni 和 MineMarteen 在制作过程中提供的帮助.
+
+guide.jewelrycraft2.tab.blocks=方块
+guide.jewelrycraft2.tab.misc=宝石,矿物和金属锭
+guide.jewelrycraft2.tab.items=物品
+guide.jewelrycraft2.tab.modifiers=强化材料
+guide.jewelrycraft2.tab.oretoingot=矿物与对应金属锭
+guide.jewelrycraft2.tab.ritual=仪式相关
