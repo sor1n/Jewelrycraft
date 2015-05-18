@@ -23,6 +23,7 @@ project.ext {
     major = "0"
     minor = "10"
     mcVersion = "1.7.10"
+	ee3Version = "0.3.496"
 }
 
 if (System.getenv().BUILD_NUMBER != null) {
@@ -37,6 +38,25 @@ archivesBaseName = "[${project.ext.mcVersion}] Jewelrycraft2"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+	maven {
+		name 'forge'
+		url 'http://files.minecraftforge.net/maven/'
+	}
+	maven {
+		name 'Mobius'
+		url "http://mobiusstrip.eu/maven"
+	}
+	maven {
+		name 'ChickenBones'
+		url "http://chickenbones.net/maven/"
+	}
+}
+
+dependencies {
+	compile "com.pahimar.ee3:EquivalentExchange3:${project.mcVersion}-${project.ee3Version}:dev"
+}
 
 minecraft {
     version = "1.7.10-10.13.3.1395-1710ls"
@@ -68,6 +88,14 @@ processResources{
         exclude 'mcmod.info'
     }
 }
+
+task ensureCurseAPI {
+	if (!project.hasProperty("curseForgeApiKey")){
+	project.ext.curseForgeApiKey = null
+	}
+}
+
+curse.dependsOn ensureCurseAPI
 
 curse {
     apiKey = project.curseForgeApiKey
