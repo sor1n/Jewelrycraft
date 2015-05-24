@@ -23,7 +23,7 @@ project.ext {
     major = "0"
     minor = "10"
     mcVersion = "1.7.10"
-	ee3Version = "0.3.496"
+	ee3Version = "0.3.505"
 }
 
 if (System.getenv().BUILD_NUMBER != null) {
