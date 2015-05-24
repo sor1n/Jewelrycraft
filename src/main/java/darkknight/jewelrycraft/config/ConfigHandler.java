@@ -11,7 +11,7 @@ public class ConfigHandler
 {
     public static Configuration config;
     public static final ConfigHandler INSTANCE = new ConfigHandler();    
-    public static final String[] categories = {"Timers", "Village Generation"};
+    public static final String[] categories = {"Timers", "Village Generation", "Misc"};
     
     public static int INGOT_COOLING_TIME;
     public static int INGOT_MELTING_TIME;
@@ -21,6 +21,7 @@ public class ConfigHandler
     
     public static boolean GENERATE_VILLAGE_NETHERSTAR;
     public static boolean CAN_FURNACE_GENERATE_INGOTS;
+    public static boolean CRYSTAL_GLOW;
     public static int MAX_VILLAGE_JEWELERS;
     public static int JEWELER_WEIGHT;
     public static int INGOT_CHEST_MIN;
@@ -48,6 +49,8 @@ public class ConfigHandler
         
         GENERATE_VILLAGE_NETHERSTAR = config.getBoolean("Netherstar Generation", categories[1], false, "If set to true Nether Stars will be able to generate in Jewelers chests.");
         CAN_FURNACE_GENERATE_INGOTS = config.getBoolean("Furnace Ingots Generation", categories[1], true, "If set to true jewelers will generate ingots in furnaces.");
+        CRYSTAL_GLOW = config.getBoolean("Crystal Glow", categories[2], false, "If true, then crystal will slowly glow (can cause lag)");
+        
         MAX_VILLAGE_JEWELERS = config.getInt("Maximum Jewelers", categories[1], 1, 0, Integer.MAX_VALUE, "Sets how many jewelers can be in a village.");
         JEWELER_WEIGHT = config.getInt("Jewelers Weight", categories[1], 30, 0, Integer.MAX_VALUE, "Chance of getting a jeweler in a village. The higher the value, the higher the chance.");
         INGOT_CHEST_MIN = config.getInt("Ingot Chest Min", categories[1], 1, 0, Integer.MAX_VALUE, "Minimum number of ingots that can be found in a chest from the Jeweler. (It's the chest from the back part)");

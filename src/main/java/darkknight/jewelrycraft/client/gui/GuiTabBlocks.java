@@ -138,6 +138,14 @@ public class GuiTabBlocks extends GuiTab
                 text = "you do that simply right click the eye to activate the ritual. Be careful not to leave the premise or you'll die! When the ritual is done, Shift+Right Click on the central hand pedestal to retrieve your newly modified item!";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
+            case 22:
+                if (del == 0) values++;
+                del++;
+                if (del >= 300) del = 0;
+                if (values >= 15) values = 0;
+                text = "Crystals don't do much as of yet. They spawn naturally in caves and come in all 16 colors.";
+                Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop(), new ItemStack(BlockList.crystal, 1, values), text, 40f, true);
+                break;
             default:
                 ;
         }
@@ -149,7 +157,7 @@ public class GuiTabBlocks extends GuiTab
     @Override
     public int getMaxPages()
     {
-        return 21;
+        return 22;
     }
     
     /**

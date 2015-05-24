@@ -17,22 +17,6 @@ item.jewelrycraft2.earrings.name=Earrings
 item.jewelrycraft2.guide.name=Jewelrycraft 2 Guide
 item.jewelrycraft2.bucket.name=Bucket of Molten
 
-item.jewelrycraft2.crystal.0.name=Black Crystal
-item.jewelrycraft2.crystal.1.name=Red Crystal
-item.jewelrycraft2.crystal.2.name=Green Crystal
-item.jewelrycraft2.crystal.3.name=Brown Crystal
-item.jewelrycraft2.crystal.4.name=Blue Crystal
-item.jewelrycraft2.crystal.5.name=Purple Crystal
-item.jewelrycraft2.crystal.6.name=Cyan Crystal
-item.jewelrycraft2.crystal.7.name=Light Gray Crystal
-item.jewelrycraft2.crystal.8.name=Gray Crystal
-item.jewelrycraft2.crystal.9.name=Pink Crystal
-item.jewelrycraft2.crystal.10.name=Lime Crystal
-item.jewelrycraft2.crystal.11.name=Yellow Crystal
-item.jewelrycraft2.crystal.12.name=Light Blue Crystal
-item.jewelrycraft2.crystal.13.name=Magenta Crystal
-item.jewelrycraft2.crystal.14.name=Orange Crystal
-item.jewelrycraft2.crystal.15.name=White Crystal
 item.jewelrycraft2.jewelryModifier.name=Jewelry Modifier (Creative Only)
 item.jewelrycraft2.goldObject.name=Golden Object
 
@@ -56,6 +40,23 @@ tile.jewelrycraft2.shadowHand.name=Shadow Hand
 tile.jewelrycraft2.shadowEye.name=Cursed Eye
 tile.jewelrycraft2.handPedestal.name=Hand Pedestal
 tile.jewelrycraft2.midasTouchBlock.name=Golden Creature
+
+tile.jewelrycraft2.blockCrystal.0.name=Black Crystal
+tile.jewelrycraft2.blockCrystal.1.name=Red Crystal
+tile.jewelrycraft2.blockCrystal.2.name=Green Crystal
+tile.jewelrycraft2.blockCrystal.3.name=Brown Crystal
+tile.jewelrycraft2.blockCrystal.4.name=Blue Crystal
+tile.jewelrycraft2.blockCrystal.5.name=Purple Crystal
+tile.jewelrycraft2.blockCrystal.6.name=Cyan Crystal
+tile.jewelrycraft2.blockCrystal.7.name=Light Gray Crystal
+tile.jewelrycraft2.blockCrystal.8.name=Gray Crystal
+tile.jewelrycraft2.blockCrystal.9.name=Pink Crystal
+tile.jewelrycraft2.blockCrystal.10.name=Lime Crystal
+tile.jewelrycraft2.blockCrystal.11.name=Yellow Crystal
+tile.jewelrycraft2.blockCrystal.12.name=Light Blue Crystal
+tile.jewelrycraft2.blockCrystal.13.name=Magenta Crystal
+tile.jewelrycraft2.blockCrystal.14.name=Orange Crystal
+tile.jewelrycraft2.blockCrystal.15.name=White Crystal
 
 itemGroup.jewelrycraft2=Jewelrycraft 2
 itemGroup.Liquids=Liquids

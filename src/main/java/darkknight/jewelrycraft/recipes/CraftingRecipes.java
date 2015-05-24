@@ -28,11 +28,6 @@ public class CraftingRecipes
             GameRegistry.addRecipe(new ItemStack(ItemList.clayMolds, 1, 4), "x x", 'x', Items.clay_ball);
             GameRegistry.addRecipe(new ItemStack(BlockList.handPedestal, 1, 4), "bbb", " x ", "yxy", 'x', Blocks.stonebrick, 'y', new ItemStack(Blocks.stone_slab, 1, 5), 'b', Blocks.cobblestone_wall);
             GameRegistry.addRecipe(new ItemStack(BlockList.shadowEye, 1, 4), "bcb", "cec", "bcb", 'b', Blocks.stonebrick, 'c', new ItemStack(Blocks.stained_hardened_clay, 1, 15), 'e', Items.ender_eye);
-            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemList.crystal, 1, 15), " x ", "x x", " x ", 'x', Blocks.glass));
-            for(int i = 0; i < 15; i++){
-                GameRegistry.addShapelessRecipe(new ItemStack(ItemList.crystal, 1, i), new Object[]{new ItemStack(ItemList.crystal, 1, 15), new ItemStack(Items.dye, 1, i)});
-                GameRegistry.addShapelessRecipe(new ItemStack(ItemList.crystal, 1, 15), new Object[]{new ItemStack(ItemList.crystal, 1, i), new ItemStack(Items.dye, 1, 15)});
-            }
             GameRegistry.addShapelessRecipe(new ItemStack(ItemList.shadowIngot, 9), new Object[]{new ItemStack(BlockList.shadowBlock)});
             GameRegistry.addShapelessRecipe(new ItemStack(ItemList.guide), new Object[]{new ItemStack(Items.book), new ItemStack(ItemList.molds, 1, 0)});
             GameRegistry.addShapelessRecipe(new ItemStack(ItemList.guide), new Object[]{new ItemStack(Items.book), new ItemStack(ItemList.molds, 1, 1)});

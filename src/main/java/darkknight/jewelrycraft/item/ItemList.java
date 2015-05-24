@@ -14,7 +14,6 @@ public class ItemList
     public static Item shadowIngot;
     public static Item molds;
     public static Item clayMolds;
-    public static Item crystal;
     public static ItemRing ring;
     public static ItemNecklace necklace;
     public static ItemBracelet bracelet;
@@ -39,7 +38,6 @@ public class ItemList
         necklace = (ItemNecklace)new ItemNecklace().setUnlocalizedName(Variables.MODID + ".necklace").setTextureName(Variables.MODID + ":necklace").setCreativeTab(JewelrycraftMod.jewelrycraft);
         bracelet = (ItemBracelet)new ItemBracelet().setUnlocalizedName(Variables.MODID + ".bracelet").setTextureName(Variables.MODID + ":bracelet").setCreativeTab(JewelrycraftMod.jewelrycraft);
         earrings = (ItemEarrings)new ItemEarrings().setUnlocalizedName(Variables.MODID + ".earrings").setTextureName(Variables.MODID + ":earrings").setCreativeTab(JewelrycraftMod.jewelrycraft);
-        crystal = new ItemCrystal().setUnlocalizedName(Variables.MODID + ".crystal").setTextureName(Variables.MODID + ":crystal").setCreativeTab(JewelrycraftMod.jewelrycraft);
         guide = new ItemGuide().setUnlocalizedName(Variables.MODID + ".guide").setTextureName(Variables.MODID + ":guide").setCreativeTab(JewelrycraftMod.jewelrycraft);
         bucket = (ItemMoltenMetalBucket)new ItemMoltenMetalBucket().setUnlocalizedName(Variables.MODID + ".bucket");
         metal = (ItemMoltenMetal)new ItemMoltenMetal().setUnlocalizedName(Variables.MODID + ".bucket");
@@ -54,7 +52,6 @@ public class ItemList
         GameRegistry.registerItem(necklace, "necklace");
         GameRegistry.registerItem(bracelet, "bracelet");
         GameRegistry.registerItem(earrings, "earrings");
-        GameRegistry.registerItem(crystal, "crystal");
         GameRegistry.registerItem(guide, "guide");
         GameRegistry.registerItem(bucket, "moltenMetalBucket");
         GameRegistry.registerItem(metal, "moltenMetal");

@@ -93,18 +93,6 @@ public class GuiTabItems extends GuiTab
                 Page.addSmeltingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text, x, y, true, new ItemStack(ItemList.clayMolds, 1, values), new ItemStack(ItemList.molds, 1, values));
                 break;
             case 10:
-                text = "Crystals don't do much as of yet. They can be dyed in any color and used as gems to create a nice jewelry.";
-                Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(ItemList.crystal, 1, 15), null, new ItemStack(Blocks.glass), null, new ItemStack(Blocks.glass), null, new ItemStack(Blocks.glass), null, new ItemStack(Blocks.glass), null);
-                break;
-            case 11:
-                if (del == 0) values++;
-                del++;
-                if (del >= 300) del = 0;
-                if (values >= 15) values = 0;
-                Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), true, text, x, y, true, new ItemStack(ItemList.crystal, 1, values), new ItemStack(Items.dye, 1, values), new ItemStack(ItemList.crystal, 1, 15));
-                Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop() + 60, true, text, x, y, true, new ItemStack(ItemList.crystal, 1, 15), new ItemStack(Items.dye, 1, 15), new ItemStack(ItemList.crystal, 1, values));
-                break;
-            case 12:
                 if (del == 0) values++;
                 del++;
                 if (del >= 300) del = 0;
@@ -112,13 +100,13 @@ public class GuiTabItems extends GuiTab
                 text = "It's this exact guide. I don't even know why you're reading this. I added this recipe in case you lose the original. Even if this is more helpful than NEI, I do suggest";
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), true, text, x, y, true, new ItemStack(ItemList.guide), new ItemStack(ItemList.molds, 1, values), new ItemStack(Items.book));
                 break;
-            case 13:
+            case 11:
                 String link = "HERE";
                 if (x >= gui.getLeft() && x <= gui.getLeft() + 30 && y >= gui.getTop() + 104 && y <= gui.getTop() + 124) link = EnumChatFormatting.DARK_BLUE + "HERE" + EnumChatFormatting.BLACK;
                 text = "installing it so you can see all the recipes. Since you are reading this, how about making a youtube video spotlighting this mod. I'd really appreciate it. After that you can share it in the main thread " + link + ".";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
-            case 14:
+            case 12:
                 ItemStack item = new ItemStack(ItemList.bucket);
                 if (del == 0) values++;
                 del++;
@@ -128,11 +116,11 @@ public class GuiTabItems extends GuiTab
                 text = "These buckets contain molten metal. To obtain one simply Right Click a full Smelter to get a bucket. You can pour the metal, other than that it has no use. You can place the molten metal back in a Smelter by Right Clicking one with it.";
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, item, text, 40f, 0, 0, true, 45, 10, true);
                 break;
-            case 15:
+            case 13:
                 text = "This item is a creative only item! Right click it while in creative mode to open a GUI. Place a piece of jewelery inside the slot, select what you want to add, then click on 'Add Items'. If you selected Modifiers, you can select multiple";
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, new ItemStack(ItemList.jewelryModifier), text, 40f, 0, 0, true, 45, 10, true);
                 break;
-            case 16:
+            case 14:
                 text = "items at once. The 'Item' button is to add an Item to a Golden Object, which can not be obtained normally. This tool can be really useful, especially for those who want to test the mod and can't wait for the normal processes to finish (Smelter, Jewelers Table, Ritual).";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;

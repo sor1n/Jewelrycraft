@@ -44,6 +44,7 @@ public class GuiGuide extends GuiContainer
         activeTab = tabs[0];
         pageTexture = pageTex;
         flippedPageTexture = flipPageTex;
+        this.xSize = 240;
     }
     
     /**

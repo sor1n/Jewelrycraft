@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.tileentity.TileEntityBlockShadow;
+import darkknight.jewelrycraft.tileentity.TileEntityCrystal;
 import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
 import darkknight.jewelrycraft.tileentity.TileEntityHandPedestal;
 import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
@@ -22,7 +23,7 @@ import darkknight.jewelrycraft.util.Variables;
 
 public class BlockList
 {
-    public static Block shadowOre, smelter, molder, displayer, jewelCraftingTable, shadowBlock, shadowEye, handPedestal, shadowHand, midasTouchBlock;
+    public static Block shadowOre, smelter, molder, displayer, jewelCraftingTable, shadowBlock, shadowEye, handPedestal, shadowHand, midasTouchBlock, crystal;
     public static BlockMoltenMetal moltenMetal;
     public static Fluid moltenMetalFluid;
     private static boolean isInitialized = false;
@@ -42,6 +43,7 @@ public class BlockList
         moltenMetalFluid = new Fluid("metal.molten").setLuminosity(15).setDensity(3000).setTemperature(2000).setViscosity(6000);
         if (!FluidRegistry.registerFluid(moltenMetalFluid)) moltenMetalFluid = FluidRegistry.getFluid("metal.molten");
         moltenMetal = new BlockMoltenMetal(moltenMetalFluid, Material.lava);
+        crystal = new BlockCrystal().setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeGlass).setBlockTextureName(Variables.MODID + ":blockCrystal").setBlockName(Variables.MODID + ".blockCrystal").setCreativeTab(JewelrycraftMod.jewelrycraft);
         
         GameRegistry.registerBlock(shadowOre, "shadowOre");
         GameRegistry.registerBlock(shadowBlock, "shadowBlock");
@@ -54,6 +56,7 @@ public class BlockList
         GameRegistry.registerBlock(shadowHand, "Shadow Hand");
         GameRegistry.registerBlock(midasTouchBlock, "Midas Touch Block");
         GameRegistry.registerBlock(moltenMetal, "moltenMetalLiquid");
+        GameRegistry.registerBlock(crystal, BlockItemCrystal.class, "crystalBlock");
         
         GameRegistry.registerTileEntity(TileEntitySmelter.class, Variables.MODID + ":smelter");
         GameRegistry.registerTileEntity(TileEntityMolder.class, Variables.MODID + ":molder");
@@ -64,6 +67,7 @@ public class BlockList
         GameRegistry.registerTileEntity(TileEntityHandPedestal.class, Variables.MODID + ":handPedestal");
         GameRegistry.registerTileEntity(TileEntityShadowHand.class, Variables.MODID + ":shadowHand");
         GameRegistry.registerTileEntity(TileEntityMidasTouch.class, Variables.MODID + ":midsaTouch");
+        GameRegistry.registerTileEntity(TileEntityCrystal.class, Variables.MODID + ":crystalBlock");
         
         OreDictionary.registerOre("oreShadow", new ItemStack(BlockList.shadowOre));
     }

@@ -10,6 +10,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.block.render.BlockCrystalRenderer;
 import darkknight.jewelrycraft.client.InventoryTabVanilla;
 import darkknight.jewelrycraft.client.TabJewelry;
 import darkknight.jewelrycraft.client.TabRegistry;
@@ -52,6 +53,22 @@ import darkknight.jewelrycraft.util.Variables;
 
 public class ClientProxy extends CommonProxy
 {
+    public enum BlockRenderIDs {
+        CRYSTAL;
+        
+        private final int ID;
+        
+        BlockRenderIDs() 
+        {
+            ID = RenderingRegistry.getNextAvailableRenderId();
+        }
+
+        public int id() 
+        {
+            return ID;
+        }
+    }
+    
     @Override
     public void preInit()
     {
@@ -80,6 +97,8 @@ public class ClientProxy extends CommonProxy
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHeart.class, new HeartRender(new ModelHeart(), 0.25F));
         RenderingRegistry.registerEntityRenderingHandler(EntityHalfHeart.class, new HeartRender(new ModelHalfHeart(), 0.25F));
+        
+        RenderingRegistry.registerBlockHandler(new BlockCrystalRenderer());
 
         TabRegistry.registerTab(new InventoryTabVanilla());
         TabRegistry.registerTab(new TabJewelry());

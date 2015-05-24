@@ -1,1 +1,2 @@
-- 
+- Changed Crystal from craftable items to blocks that generate in the world
+- Fixed NEI from overlapping the guide GUI

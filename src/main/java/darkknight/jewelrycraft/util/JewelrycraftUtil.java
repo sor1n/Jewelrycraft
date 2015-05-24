@@ -18,6 +18,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.relauncher.Side;
 import darkknight.jewelrycraft.JewelrycraftMod;
+import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.item.ItemList;
 
 public class JewelrycraftUtil
@@ -40,7 +41,7 @@ public class JewelrycraftUtil
     {
         // Jewels
         for(int i = 0; i < 16; i++)
-            gem.add(new ItemStack(ItemList.crystal, 1, i));
+            gem.add(new ItemStack(BlockList.crystal, 1, i));
         gem.add(new ItemStack(Blocks.redstone_block));
         gem.add(new ItemStack(Blocks.lapis_block));
         gem.add(new ItemStack(Blocks.obsidian));

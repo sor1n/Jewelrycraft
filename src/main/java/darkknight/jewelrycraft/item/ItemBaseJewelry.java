@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -89,7 +89,7 @@ public abstract class ItemBaseJewelry extends Item
             int color = getMostCommonColour(m);
             if (JewelryNBT.ingot(stack) != null && JewelryNBT.ingot(stack).getItem().getColorFromItemStack(JewelryNBT.ingot(stack), 1) != 16777215) JewelryNBT.addIngotColor(stack, JewelryNBT.ingot(stack).getItem().getColorFromItemStack(JewelryNBT.ingot(stack), 1));
             else JewelryNBT.addIngotColor(stack, color);
-        }else if (pass == 1 && stack != null && JewelryNBT.gem(stack) != null && JewelryNBT.gem(stack).getIconIndex() != null && JewelryNBT.gem(stack) != null){
+        }else if (pass == 1 && stack != null && stack.getItem() != null && JewelryNBT.gem(stack) != null && !(Block.getBlockFromItem(JewelryNBT.gem(stack).getItem()) instanceof BlockAir) && JewelryNBT.gem(stack).getIconIndex() != null){
             ItemStack gem = JewelryNBT.gem(stack);
             icon = ImageIO.read(rm.getResource(getLocation(gem, stack, true)).getInputStream());
             int height = icon.getHeight();
