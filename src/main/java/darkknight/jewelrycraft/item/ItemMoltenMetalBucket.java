@@ -216,11 +216,18 @@ public class ItemMoltenMetalBucket extends Item
     @Override
     public String getItemStackDisplayName(ItemStack stack)
     {
-        if (JewelryNBT.ingot(stack) != null){
-            ItemStack ingot = JewelryNBT.ingot(stack);
-            if (Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_glass) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_hardened_clay) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.wool) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.carpet)) ingot.setItemDamage(15 - ingot.getItemDamage());
-            return StatCollector.translateToLocal(getUnlocalizedNameInefficiently(stack) + ".name").trim() + " " + ingot.getDisplayName().replace("Ingot", " ").trim();
+        try{
+            if (JewelryNBT.ingot(stack) != null){
+                ItemStack ingot = JewelryNBT.ingot(stack);
+                if (ingot != null){
+                    if (Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_glass) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_hardened_clay) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.wool) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.carpet)) ingot.setItemDamage(15 - ingot.getItemDamage());
+                    return StatCollector.translateToLocal(getUnlocalizedNameInefficiently(stack) + ".name").trim() + " " + ingot.getDisplayName().replace("Ingot", " ").trim();
+                }else return StatCollector.translateToLocal("bucket.unknown");
+            }
         }
-        return ("" + StatCollector.translateToLocal(getUnlocalizedNameInefficiently(stack) + ".name")).trim() + " Metal";
+        catch(Exception e){
+            System.out.println("Error: " + e);
+        }
+        return ("" + StatCollector.translateToLocal(getUnlocalizedNameInefficiently(stack) + ".name")).trim() + " " + StatCollector.translateToLocal("info.jewelrycraft2.metal");
     }
 }

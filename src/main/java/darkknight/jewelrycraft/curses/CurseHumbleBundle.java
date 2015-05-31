@@ -14,6 +14,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.Variables;
 
 /**
@@ -56,5 +57,11 @@ public class CurseHumbleBundle extends Curse
     public String getDescription()
     {
         return StatCollector.translateToLocal("curse." + Variables.MODID + ".humblebundle.description");
+    }
+
+    @Override
+    public boolean canCurseBeActivated(World world)
+    {
+        return ConfigHandler.CURSE_HUMBLE_BUNDLE;
     }
 }

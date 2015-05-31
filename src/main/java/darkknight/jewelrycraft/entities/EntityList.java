@@ -10,15 +10,13 @@ public class EntityList
 {
     public static void preInit(FMLPreInitializationEvent e)
     {        
-        createEntity(EntityHeart.class, Variables.MODID + ".Heart", 0xFF0000, 0xFF0000, false);
-        createEntity(EntityHalfHeart.class, Variables.MODID + ".Half-Heart", 0x000000, 0xFF0000, false);
+        createEntity(EntityHeart.class, Variables.MODID + ".Heart");
+        createEntity(EntityHalfHeart.class, Variables.MODID + ".Half-Heart");
     }
 
-    public static void createEntity(Class<? extends Entity> entity, String entityName, int solidColor, int spotColor, boolean hasSpawnEgg)
+    public static void createEntity(Class<? extends Entity> entity, String entityName)
     {
         int randomID = EntityRegistry.findGlobalUniqueEntityId();
-        if(hasSpawnEgg) EntityRegistry.registerGlobalEntityID(entity, entityName, randomID, solidColor, spotColor);
-        else EntityRegistry.registerGlobalEntityID(entity, entityName, randomID);
-        EntityRegistry.registerModEntity(entity, entityName, randomID, JewelrycraftMod.instance, 40, 3, true);
+        EntityRegistry.registerModEntity(entity, entityName, randomID, JewelrycraftMod.instance, 40, 3, false);
     }
 }

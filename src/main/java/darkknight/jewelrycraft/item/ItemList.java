@@ -23,6 +23,7 @@ public class ItemList
     public static ItemMoltenMetalBucket bucket;
     public static ItemMoltenMetal metal;
     public static Item goldObj;
+    public static Item structureGen;
     private static boolean isInitialized = false;
     
     /**
@@ -43,6 +44,7 @@ public class ItemList
         metal = (ItemMoltenMetal)new ItemMoltenMetal().setUnlocalizedName(Variables.MODID + ".bucket");
         jewelryModifier = new ItemJewelryModifier().setUnlocalizedName(Variables.MODID + ".jewelryModifier").setTextureName(Variables.MODID + ":jewelryModifier").setCreativeTab(JewelrycraftMod.jewelrycraft);
         goldObj = new ItemGoldObj().setUnlocalizedName(Variables.MODID + ".goldObject");
+        structureGen = new ItemStructureGen().setUnlocalizedName(Variables.MODID + ".structureGen").setTextureName(Variables.MODID + ":structureGen").setCreativeTab(JewelrycraftMod.jewelrycraft);
         
         GameRegistry.registerItem(thiefGloves, "thiefGloves");
         GameRegistry.registerItem(shadowIngot, "shadowIngot");
@@ -57,6 +59,7 @@ public class ItemList
         GameRegistry.registerItem(metal, "moltenMetal");
         GameRegistry.registerItem(jewelryModifier, "jewelryModifier");
         GameRegistry.registerItem(goldObj, "goldObject");
+        GameRegistry.registerItem(structureGen, "structureGen");
         
         OreDictionary.registerOre("ingotShadow", new ItemStack(ItemList.shadowIngot));
     }

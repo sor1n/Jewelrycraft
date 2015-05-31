@@ -17,6 +17,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.item.render.BraceletRender;
 import darkknight.jewelrycraft.item.render.EarringsRender;
 import darkknight.jewelrycraft.item.render.NecklaceRender;
@@ -50,8 +51,8 @@ public class PlayerRenderHandler
                 int ingot = -1;
                 EntityPlayer player = players.next();
                 NBTTagCompound playerInfo = (NBTTagCompound)playersInfo.getTag(player.getDisplayName());
-                for(Curse curse: Curse.getCurseList())
-                    if (playerInfo.getInteger(curse.getName()) > 0 && event.entityPlayer.getDisplayName().equals(player.getDisplayName()) && playerInfo.getInteger("cursePoints") > 0) curse.playerRender(player, event);
+                if (ConfigHandler.CURSES_ENABLED) for(Curse curse: Curse.getCurseList())
+                    if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0 && event.entityPlayer.getDisplayName().equals(player.getDisplayName()) && playerInfo.getInteger("cursePoints") > 0) curse.playerRender(player, event);
                 int no = 0;
                 ModelRenderer arm = rightArm;
                 if (player.inventory.getCurrentItem() != null && Block.getBlockFromItem(player.inventory.getCurrentItem().getItem()) instanceof BlockAir){
@@ -66,7 +67,7 @@ public class PlayerRenderHandler
                     colorBuffer.put(0.03f).put(0.03f).put(0.03f).put(1.0F);
                     colorBuffer.flip();
                     GL11.glLight(GL11.GL_LIGHT0, GL11.GL_DIFFUSE, colorBuffer);
-                    //GL11.glLight(GL11.GL_LIGHT0, GL11.GL_AMBIENT, setColorBuffer(0.0F, 0.0F, 0.0F, 1.0F)); GL11.glLight(GL11.GL_LIGHT0, GL11.GL_SPECULAR, setColorBuffer(var2, var2, var2, 1.0F));
+                    // GL11.glLight(GL11.GL_LIGHT0, GL11.GL_AMBIENT, setColorBuffer(0.0F, 0.0F, 0.0F, 1.0F)); GL11.glLight(GL11.GL_LIGHT0, GL11.GL_SPECULAR, setColorBuffer(var2, var2, var2, 1.0F));
                 }
                 for(int i = 0; i <= 9; i++)
                     if (playerInfo.hasKey("ext" + i) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())){
@@ -192,8 +193,8 @@ public class PlayerRenderHandler
             EntityPlayer player = Minecraft.getMinecraft().thePlayer;
             if (player != null){
                 NBTTagCompound playerInfo = (NBTTagCompound)playersInfo.getTag(player.getDisplayName());
-                for(Curse curse: Curse.getCurseList())
-                    if (curse != null && playerInfo != null && playerInfo.hasKey(curse.getName()) && playerInfo.getInteger(curse.getName()) > 0 && playerInfo.hasKey("cursePoints") && playerInfo.getInteger("cursePoints") > 0) curse.playerHandRender(player, event);
+                if (ConfigHandler.CURSES_ENABLED) for(Curse curse: Curse.getCurseList())
+                    if (curse.canCurseBeActivated(player.worldObj) && curse != null && playerInfo != null && playerInfo.hasKey(curse.getName()) && playerInfo.getInteger(curse.getName()) > 0 && playerInfo.hasKey("cursePoints") && playerInfo.getInteger("cursePoints") > 0) curse.playerHandRender(player, event);
             }
         }
     }

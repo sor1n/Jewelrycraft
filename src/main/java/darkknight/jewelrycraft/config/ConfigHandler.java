@@ -11,7 +11,7 @@ public class ConfigHandler
 {
     public static Configuration config;
     public static final ConfigHandler INSTANCE = new ConfigHandler();    
-    public static final String[] categories = {"Timers", "Village Generation", "Misc"};
+    public static final String[] categories = {"Timers", "Village Generation", "Misc", "Curses"};
     
     public static int INGOT_COOLING_TIME;
     public static int INGOT_MELTING_TIME;
@@ -32,6 +32,18 @@ public class ConfigHandler
     public static int FURNACE_MIN_INGOT_STACK;
     public static int FURNACE_MAX_INGOT_STACK;
     
+    public static boolean CURSES_ENABLED = true;
+    public static boolean CURSE_ROTTEN_HEART = true;
+    public static boolean CURSE_FLAMING_SOUL = true;
+    public static boolean CURSE_GREED = true;
+    public static boolean CURSE_BLIND = true;
+    public static boolean CURSE_INFAMY = true;
+    public static boolean CURSE_MIDAS_TOUCH = true;
+    public static boolean CURSE_RABBIT_PAW = true;
+    public static boolean CURSE_PENTAGRAM = true;
+    public static boolean CURSE_VAMPIRE_HUNGER = true;
+    public static boolean CURSE_HUMBLE_BUNDLE = true;
+    
     public void loadConfig(FMLPreInitializationEvent event)
     {
         config = new Configuration(event.getSuggestedConfigurationFile(),true);
@@ -49,7 +61,6 @@ public class ConfigHandler
         
         GENERATE_VILLAGE_NETHERSTAR = config.getBoolean("Netherstar Generation", categories[1], false, "If set to true Nether Stars will be able to generate in Jewelers chests.");
         CAN_FURNACE_GENERATE_INGOTS = config.getBoolean("Furnace Ingots Generation", categories[1], true, "If set to true jewelers will generate ingots in furnaces.");
-        CRYSTAL_GLOW = config.getBoolean("Crystal Glow", categories[2], false, "If true, then crystal will slowly glow (can cause lag)");
         
         MAX_VILLAGE_JEWELERS = config.getInt("Maximum Jewelers", categories[1], 1, 0, Integer.MAX_VALUE, "Sets how many jewelers can be in a village.");
         JEWELER_WEIGHT = config.getInt("Jewelers Weight", categories[1], 30, 0, Integer.MAX_VALUE, "Chance of getting a jeweler in a village. The higher the value, the higher the chance.");
@@ -60,6 +71,20 @@ public class ConfigHandler
         GEM_CHEST_MAX = config.getInt("Jewelers Chest Max", categories[1], 5, 0, Integer.MAX_VALUE, "Determines the maximum nuber of jewels/modifiers that can be generated in the front chests of a Jeweler.");
         FURNACE_MIN_INGOT_STACK = config.getInt("Ingot Furnace Min", categories[1], 2, 0, Integer.MAX_VALUE, "Determines the minimum number of ingots that can generate in a furnace.");
         FURNACE_MAX_INGOT_STACK = config.getInt("Ingot Furnace Max", categories[1], 5, 0, Integer.MAX_VALUE, "Determines the maximum number of ingots that can generate in a furnace.");
+        
+        CRYSTAL_GLOW = config.getBoolean("Crystal Glow", categories[2], false, "If true, then crystal will slowly glow (can cause lag)");
+                
+//        CURSES_ENABLED = config.getBoolean("Curses", categories[3], true, "If set to false curses will be deactivated.");
+//        CURSE_ROTTEN_HEART = config.getBoolean("Rotten Heart", categories[3], true, "If set to false this curse will be deactivated.");
+//        CURSE_FLAMING_SOUL = config.getBoolean("Flaming Soul", categories[3], true, "If set to false this curse will be deactivated.");
+//        CURSE_GREED = config.getBoolean("Greed", categories[3], true, "If set to false this curse will be deactivated.");
+//        CURSE_BLIND = config.getBoolean("Blind", categories[3], true, "If set to false this curse will be deactivated.");
+//        CURSE_INFAMY = config.getBoolean("Infamy", categories[3], true, "If set to false this curse will be deactivated.");
+//        CURSE_MIDAS_TOUCH = config.getBoolean("Midas Touch", categories[3], true, "If set to false this curse will be deactivated.");
+//        CURSE_RABBIT_PAW = config.getBoolean("Rabbit's Paw", categories[3], true, "If set to false this curse will be deactivated.");
+//        CURSE_PENTAGRAM = config.getBoolean("Pentagram", categories[3], true, "If set to false this curse will be deactivated.");
+//        CURSE_VAMPIRE_HUNGER = config.getBoolean("Vampire Hunger", categories[3], true, "If set to false this curse will be deactivated.");
+//        CURSE_HUMBLE_BUNDLE = config.getBoolean("Humble Bundle", categories[3], true, "If set to false this curse will be deactivated.");
         if (config.hasChanged()) config.save();
     }
     

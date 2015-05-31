@@ -15,6 +15,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.damage.DamageSourceList;
 import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
@@ -68,5 +69,11 @@ public class CurseInfamy extends Curse
     public String getDescription()
     {
         return StatCollector.translateToLocal("curse." + Variables.MODID + ".infamy.description");
+    }
+
+    @Override
+    public boolean canCurseBeActivated(World world)
+    {
+        return ConfigHandler.CURSE_INFAMY;
     }
 }

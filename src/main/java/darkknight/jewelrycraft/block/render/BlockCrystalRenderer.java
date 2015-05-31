@@ -28,6 +28,7 @@ public class BlockCrystalRenderer implements ISimpleBlockRenderingHandler
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
     {
         Tessellator tessellator = Tessellator.instance;
+        GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
         tessellator.startDrawingQuads();
         if (metadata < 16) tessellator.setColorRGBA_I(((BlockCrystal)block).colors[metadata], 100);
@@ -36,6 +37,7 @@ public class BlockCrystalRenderer implements ISimpleBlockRenderingHandler
         tessellator.draw();
         GL11.glTranslatef(0.5f, 0f, 0.5f);
         GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glPopMatrix();
     }
     
     @Override

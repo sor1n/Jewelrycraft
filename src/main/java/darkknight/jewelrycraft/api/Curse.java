@@ -3,6 +3,7 @@ package darkknight.jewelrycraft.api;
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -132,6 +133,11 @@ public class Curse
     public boolean itemToss()
     {
         return false;
+    }
+    
+    public boolean canCurseBeActivated(World world)
+    {
+        return true;
     }
     
     /**

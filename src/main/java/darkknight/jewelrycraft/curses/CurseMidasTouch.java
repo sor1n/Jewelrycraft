@@ -23,6 +23,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.item.ItemList;
@@ -93,5 +94,11 @@ public class CurseMidasTouch extends Curse
     public String getDescription()
     {
         return StatCollector.translateToLocal("curse." + Variables.MODID + ".midastouch.description");
+    }
+
+    @Override
+    public boolean canCurseBeActivated(World world)
+    {
+        return world.getWorldInfo().isHardcoreModeEnabled() ? false : ConfigHandler.CURSE_MIDAS_TOUCH;
     }
 }

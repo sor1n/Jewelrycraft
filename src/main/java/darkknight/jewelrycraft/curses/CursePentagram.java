@@ -4,19 +4,23 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import org.lwjgl.opengl.GL11;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.config.ConfigHandler;
+import darkknight.jewelrycraft.damage.DamageSourceList;
 import darkknight.jewelrycraft.util.Variables;
 
 public class CursePentagram extends Curse
@@ -31,9 +35,18 @@ public class CursePentagram extends Curse
     @Override
     public void action(World world, EntityPlayer player)
     {
-//        FMLInterModComms.sendMessage(modId, key, value);
-//        GameRegistry.findItem("Botania", "flower");
-//        FMLInterModComms.fetchRuntimeMessages(forMod)
+        // FMLInterModComms.sendMessage(modId, key, value);
+        // GameRegistry.findItem("Botania", "flower");
+        // FMLInterModComms.fetchRuntimeMessages(forMod)
+        if (!world.isRemote){
+            for(Object entity: world.getEntitiesWithinAABBExcludingEntity(player, AxisAlignedBB.getBoundingBox(player.boundingBox.minX - 0.5F, player.boundingBox.minY, player.boundingBox.minZ - 0.5F, player.boundingBox.maxX + 0.5F, player.boundingBox.maxY, player.boundingBox.maxZ + 0.5F))){
+                if (entity instanceof EntityLivingBase && rand.nextInt(40) == 0){
+                    ((EntityLivingBase)entity).attackEntityFrom(DamageSourceList.shadows, 2f);
+                    if (player.shouldHeal()) player.heal(2F);
+                    else player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() + 2f);
+                }
+            }
+        }
     }
     
     @Override
@@ -42,8 +55,12 @@ public class CursePentagram extends Curse
     
     @Override
     public void playerRender(EntityPlayer player, RenderPlayerEvent.Specials.Post event)
+    {}
+    
+    @SideOnly (Side.CLIENT)
+    public void playerHandRender(EntityPlayer player, RenderHandEvent event)
     {
-        ResourceLocation PENTAGRAM_TEXTURE = new ResourceLocation(Variables.MODID, "textures/gui/" + CurseList.pentagram.getTexturePack() + ".png");
+        ResourceLocation PENTAGRAM_TEXTURE = new ResourceLocation(Variables.MODID, "textures/gui/" + getTexturePack() + ".png");
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_SRC_COLOR);
@@ -51,9 +68,9 @@ public class CursePentagram extends Curse
         TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
         texturemanager.bindTexture(PENTAGRAM_TEXTURE);
         GL11.glRotatef(rot, 0F, 1F, 0F);
-        GL11.glScalef(0.1F, 0.1F, 0.1F);
-        GL11.glTranslatef(-16F, 15F, -16F);
+        GL11.glTranslatef(-0.8F, (player.isSneaking() ? 0.1625F : 0F) + -1.6F, -0.8F);
         GL11.glRotatef(90F, 1F, 0F, 0F);
+        GL11.glScalef(0.05F, 0.05F, 0.05F);
         rot += 3F;
         if (rot > 360F) rot = 0F;
         float f = 0.00390625F;
@@ -77,5 +94,11 @@ public class CursePentagram extends Curse
     public String getDescription()
     {
         return StatCollector.translateToLocal("curse." + Variables.MODID + ".pentagram.description");
+    }
+    
+    @Override
+    public boolean canCurseBeActivated(World world)
+    {
+        return ConfigHandler.CURSE_PENTAGRAM;
     }
 }

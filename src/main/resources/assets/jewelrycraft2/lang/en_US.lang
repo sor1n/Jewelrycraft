@@ -19,6 +19,7 @@ item.jewelrycraft2.bucket.name=Bucket of Molten
 
 item.jewelrycraft2.jewelryModifier.name=Jewelry Modifier (Creative Only)
 item.jewelrycraft2.goldObject.name=Golden Object
+item.jewelrycraft2.structureGen.name=Structure Generator (Creative Only)
 
 item.jewelrycraft2.goldObject.info.standard=Shiny, but useless :(
 item.jewelrycraft2.goldObject.info.food=It's made of solid gold! How are you suppose to eat this?
@@ -41,22 +42,22 @@ tile.jewelrycraft2.shadowEye.name=Cursed Eye
 tile.jewelrycraft2.handPedestal.name=Hand Pedestal
 tile.jewelrycraft2.midasTouchBlock.name=Golden Creature
 
-tile.jewelrycraft2.blockCrystal.0.name=Black Crystal
-tile.jewelrycraft2.blockCrystal.1.name=Red Crystal
-tile.jewelrycraft2.blockCrystal.2.name=Green Crystal
-tile.jewelrycraft2.blockCrystal.3.name=Brown Crystal
-tile.jewelrycraft2.blockCrystal.4.name=Blue Crystal
-tile.jewelrycraft2.blockCrystal.5.name=Purple Crystal
-tile.jewelrycraft2.blockCrystal.6.name=Cyan Crystal
-tile.jewelrycraft2.blockCrystal.7.name=Light Gray Crystal
-tile.jewelrycraft2.blockCrystal.8.name=Gray Crystal
-tile.jewelrycraft2.blockCrystal.9.name=Pink Crystal
-tile.jewelrycraft2.blockCrystal.10.name=Lime Crystal
-tile.jewelrycraft2.blockCrystal.11.name=Yellow Crystal
-tile.jewelrycraft2.blockCrystal.12.name=Light Blue Crystal
-tile.jewelrycraft2.blockCrystal.13.name=Magenta Crystal
-tile.jewelrycraft2.blockCrystal.14.name=Orange Crystal
-tile.jewelrycraft2.blockCrystal.15.name=White Crystal
+tile.jewelrycraft2.blockCrystal.0.name=Squidium Black Crystal
+tile.jewelrycraft2.blockCrystal.1.name=Pokefennum Red Crystal
+tile.jewelrycraft2.blockCrystal.2.name=Onyxium Green Crystal
+tile.jewelrycraft2.blockCrystal.3.name=XCompium Brown Crystal
+tile.jewelrycraft2.blockCrystal.4.name=Laurium Blue Crystal
+tile.jewelrycraft2.blockCrystal.5.name=Jadium Purple Crystal
+tile.jewelrycraft2.blockCrystal.6.name=Ecutruinium Cyan Crystal
+tile.jewelrycraft2.blockCrystal.7.name=Fiskium Light Gray Crystal
+tile.jewelrycraft2.blockCrystal.8.name=Pigmented Gray Crystal
+tile.jewelrycraft2.blockCrystal.9.name=Aureylium Pink Crystal
+tile.jewelrycraft2.blockCrystal.10.name=Soarynum Lime Crystal
+tile.jewelrycraft2.blockCrystal.11.name=Blorphium Yellow Crystal
+tile.jewelrycraft2.blockCrystal.12.name=Direium Light Blue Crystal
+tile.jewelrycraft2.blockCrystal.13.name=Vazkiium Magenta Crystal
+tile.jewelrycraft2.blockCrystal.14.name=Sipsium Orange Crystal
+tile.jewelrycraft2.blockCrystal.15.name=Pahium White Crystal
 
 itemGroup.jewelrycraft2=Jewelrycraft 2
 itemGroup.Liquids=Liquids
@@ -147,3 +148,5 @@ guide.jewelrycraft2.tab.items=Items
 guide.jewelrycraft2.tab.modifiers=Modifiers
 guide.jewelrycraft2.tab.oretoingot=Ores to Ingots
 guide.jewelrycraft2.tab.ritual=Ritual
+
+bucket.unknown=Bucket of Unknown Content

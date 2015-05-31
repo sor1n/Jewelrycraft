@@ -1,6 +1,7 @@
 package darkknight.jewelrycraft.curses;
 
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
@@ -29,5 +30,11 @@ public class CurseGreed extends Curse
     public String getDescription()
     {
         return StatCollector.translateToLocal("curse." + Variables.MODID + ".greed.description");
+    }
+
+    @Override
+    public boolean canCurseBeActivated(World world)
+    {
+        return ConfigHandler.CURSE_GREED;
     }
 }

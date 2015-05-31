@@ -2,6 +2,7 @@ package darkknight.jewelrycraft.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.client.TabJewelry;
@@ -36,6 +37,9 @@ public class GuiJewelry extends GuiContainer
         GL11.glColor3f(1, 1, 1);
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+        GL11.glPushMatrix();
+        GuiInventory.func_147046_a(guiLeft - 24, guiTop + 124, 60, (float)(guiLeft - 24) - mouseX, (float)(guiTop + 124 - 90) - mouseY, this.mc.thePlayer);
+        GL11.glPopMatrix();
     }
     
     /**

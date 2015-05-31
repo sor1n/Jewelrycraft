@@ -1,6 +1,7 @@
 package darkknight.jewelrycraft.curses;
 
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
@@ -24,5 +25,11 @@ public class CurseRottenHeart extends Curse
     public String getDescription()
     {
         return StatCollector.translateToLocal("curse." + Variables.MODID + ".rottenheart.description");
+    }
+    
+    @Override
+    public boolean canCurseBeActivated(World world)
+    {
+        return world.getWorldInfo().isHardcoreModeEnabled() ? false : ConfigHandler.CURSE_ROTTEN_HEART;
     }
 }

@@ -39,7 +39,16 @@ public class TabRegistry
             int ySize = 166;
             int guiLeft = (event.gui.width - xSize) / 2;
             int guiTop = (event.gui.height - ySize) / 2;
-            if (!mc.thePlayer.getActivePotionEffects().isEmpty()) guiLeft += 60;
+            if (!mc.thePlayer.getActivePotionEffects().isEmpty()) if (Loader.isModLoaded("NotEnoughItems")){
+                try{
+                    // Check whether NEI is hidden and enabled
+                    Class<?> c = Class.forName("codechicken.nei.NEIClientConfig");
+                    Object hidden = c.getMethod("isHidden").invoke(null);
+                    Object enabled = c.getMethod("isEnabled").invoke(null);
+                    if (hidden != null && hidden instanceof Boolean && enabled != null && enabled instanceof Boolean) if ((Boolean)hidden || !((Boolean)enabled)) guiLeft += 60;
+                }
+                catch(Exception e){}
+            }else guiLeft += 60;
             updateTabValues(guiLeft, guiTop, InventoryTabVanilla.class);
             addTabsToList(event.buttonList);
         }
@@ -56,13 +65,13 @@ public class TabRegistry
     
     public static void updateTabValues(int cornerX, int cornerY, Class<?> selectedButton)
     {
-        int count = 2 + (Loader.isModLoaded("TConstruct") ? 1 : 0);
+        int count = 1;
         for(int i = 0; i < tabList.size(); i++){
             AbstractTab t = tabList.get(i);
             if (t.shouldAddToList()){
                 t.id = count;
-                t.xPosition = cornerX + (count - 2) * 28;
-                t.yPosition = cornerY - 28;
+                t.xPosition = cornerX + 151 + (t.id==1?9:0);
+                t.yPosition = cornerY + 64;
                 t.enabled = !t.getClass().equals(selectedButton);
                 count++;
             }
@@ -71,8 +80,7 @@ public class TabRegistry
     
     public static void addTabsToList(List buttonList)
     {
-        for(AbstractTab tab: tabList){
-            if (tab.shouldAddToList()) if (!(Loader.isModLoaded("TConstruct") && tab instanceof InventoryTabVanilla) || !tabList.get(1).enabled) buttonList.add(tab);
-        }
+        for(AbstractTab tab: tabList)
+            if (tab.shouldAddToList() && tab.enabled) buttonList.add(tab);
     }
 }

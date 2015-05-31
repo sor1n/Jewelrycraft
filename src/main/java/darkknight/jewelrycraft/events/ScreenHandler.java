@@ -12,6 +12,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.Variables;
 
 public class ScreenHandler extends Gui
@@ -36,15 +37,15 @@ public class ScreenHandler extends Gui
             ScaledResolution resolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
             if (tagCache.hasKey("cursePoints") && tagCache.getInteger("cursePoints") > 0){
                 mc.renderEngine.bindTexture(Variables.MISC_TEXTURE);
-                for(Curse curse: Curse.getCurseList()){
-                    if (tagCache.hasKey(curse.getName()) && tagCache.getInteger(curse.getName()) > 0){
+                if (ConfigHandler.CURSES_ENABLED) for(Curse curse: Curse.getCurseList()){
+                    if (curse.canCurseBeActivated(mc.theWorld) && tagCache.hasKey(curse.getName()) && tagCache.getInteger(curse.getName()) > 0){
                         drawTexturedModalRect(-16, -16 + (size - 6) * count, 0, 32, 144, 60);
                         count++;
                     }
                 }
                 count = 0;
-                for(Curse curse: Curse.getCurseList())
-                    if (tagCache.hasKey(curse.getName()) && tagCache.getInteger(curse.getName()) > 0){
+                if (ConfigHandler.CURSES_ENABLED) for(Curse curse: Curse.getCurseList())
+                    if (curse.canCurseBeActivated(mc.theWorld) && tagCache.hasKey(curse.getName()) && tagCache.getInteger(curse.getName()) > 0){
                         mc.renderEngine.bindTexture(new ResourceLocation(Variables.MODID, "textures/gui/" + curse.getTexturePack() + ".png"));
                         int tag = curse.getTextureID();
                         GL11.glPushMatrix();
@@ -57,8 +58,8 @@ public class ScreenHandler extends Gui
                     }
                 count = 0;
                 size = 16;
-                for(Curse curse: Curse.getCurseList())
-                    if (tagCache.hasKey(curse.getName()) && tagCache.getInteger(curse.getName()) > 0){
+                if (ConfigHandler.CURSES_ENABLED) for(Curse curse: Curse.getCurseList())
+                    if (curse.canCurseBeActivated(mc.theWorld) && tagCache.hasKey(curse.getName()) && tagCache.getInteger(curse.getName()) > 0){
                         mc.fontRenderer.drawStringWithShadow(curse.getName().split(":")[1], 30, 11 + (size + 10) * count, 16777215);
                         if (tagCache.getInteger(curse.getName()) == 2){
                             mc.renderEngine.bindTexture(Variables.MISC_TEXTURE);

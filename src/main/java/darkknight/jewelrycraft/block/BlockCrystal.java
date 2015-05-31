@@ -34,6 +34,7 @@ public class BlockCrystal extends Block implements ITileEntityProvider
     {
         super(Material.glass);
         setBlockBounds(0.2F, 0F, 0.2F, 0.8F, 1.0F, 0.8F);
+        setHarvestLevel("pickaxe", 0);
     }
     
     @Override

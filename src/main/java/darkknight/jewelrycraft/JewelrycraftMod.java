@@ -10,7 +10,10 @@ import java.io.IOException;
 import java.util.logging.Logger;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -81,6 +84,11 @@ public class JewelrycraftMod
         EventList.preInit(e);
         PotionList.preInit(e);
         ThirdPartyManager.instance().preInit();
+        
+        ChestGenHooks.addItem("dungeonChest", new WeightedRandomChestContent(new ItemStack(ItemList.thiefGloves), 1, 1, 1));
+        ChestGenHooks.addItem("villageBlacksmith", new WeightedRandomChestContent(new ItemStack(ItemList.thiefGloves), 1, 1, 1));
+        ChestGenHooks.addItem("strongholdCorridor", new WeightedRandomChestContent(new ItemStack(ItemList.thiefGloves), 1, 1, 5));        
+        for(int i = 0; i < 16; i++) ChestGenHooks.addItem("mineshaftCorridor", new WeightedRandomChestContent(new ItemStack(BlockList.crystal, 1, i), 1, 4, 15));
     }
     
     @EventHandler
