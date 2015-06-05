@@ -34,9 +34,8 @@ public class EffectEnderPearl extends ModifierEffects
     @Override
     public void action(ItemStack item, EntityPlayer player, Item jewelry)
     {
-        boolean exists = JewelryNBT.doesModifierExist(item, modifier);
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
-        if (jewelry instanceof ItemEarrings && exists){
+        if (jewelry instanceof ItemEarrings){
             AxisAlignedBB axisalignedbb = player.boundingBox.expand(2.0D, 2.0D, 2.0D);
             List list = player.worldObj.getEntitiesWithinAABB(EntityArrow.class, axisalignedbb);
             if (!player.worldObj.isRemote && list != null && !list.isEmpty()){
@@ -55,20 +54,19 @@ public class EffectEnderPearl extends ModifierEffects
             }
         }
         // Negative Necklace
-        if (jewelry instanceof ItemNecklace && exists) player.addPotionEffect(new PotionEffect(Potion.resistance.id, 60, -10, true));
+        if (jewelry instanceof ItemNecklace) player.addPotionEffect(new PotionEffect(Potion.resistance.id, 60, -10, true));
         // Negative bracelet
-        if (jewelry instanceof ItemBracelet && exists && player.isInWater()) player.setPositionAndUpdate(player.posX + rand.nextInt(16) - rand.nextInt(16), player.posY + rand.nextInt(4), player.posZ + rand.nextInt(16) - rand.nextInt(16));
+        if (jewelry instanceof ItemBracelet && player.isInWater()) player.setPositionAndUpdate(player.posX + rand.nextInt(16) - rand.nextInt(16), player.posY + rand.nextInt(4), player.posZ + rand.nextInt(16) - rand.nextInt(16));
     }
     
     @Override
     public void onPlayerAttacked(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
     {
-        boolean exists = JewelryNBT.doesModifierExist(item, modifier);
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         // Positive Necklace
-        if (jewelry instanceof ItemNecklace && exists && source.getEntity() != null) source.getEntity().attackEntityFrom(source, amount);
+        if (jewelry instanceof ItemNecklace && source.getEntity() != null) source.getEntity().attackEntityFrom(source, amount);
         // Positive bracelet
-        if (jewelry instanceof ItemBracelet && exists && !player.worldObj.isRemote){
+        if (jewelry instanceof ItemBracelet && !player.worldObj.isRemote){
             int id = player.worldObj.provider.dimensionId;
             if (player.getHealth() <= 6F) if (player.getBedLocation(id) != null) player.setPositionAndUpdate(player.getBedLocation(id).posX, player.getBedLocation(id).posY, player.getBedLocation(id).posZ);
             else player.setPositionAndUpdate(player.worldObj.getSpawnPoint().posX, player.worldObj.getSpawnPoint().posY, player.worldObj.getSpawnPoint().posZ);
@@ -77,10 +75,9 @@ public class EffectEnderPearl extends ModifierEffects
     
     public void onEntityAttacked(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount)
     {
-        boolean exists = JewelryNBT.doesModifierExist(item, modifier);
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         NBTTagCompound enemyData = target.getEntityData();
-        if (jewelry instanceof ItemRing && exists){
+        if (jewelry instanceof ItemRing){
             // Negative ring
             if (target instanceof EntityEnderman) player.addPotionEffect(new PotionEffect(Potion.weakness.id, 400, 2, true));
             // Positive ring

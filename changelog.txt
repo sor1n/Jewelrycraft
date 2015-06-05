@@ -1,2 +1,26 @@
+Added:
+- Added Crystal blocks that generate in the world
+- Added a few items to generate in Dungeon chests, Blacksmith chests and Stronghold chests
+- Added a total of 5 new structures that generate in the world
+- The Pentagram now has an actual effect (takes 1 health from an entity that is right by the player and heals the player; if the player is at full health, an extra empty heart is added)
+- The player renders in the Jewelry GUI (makes it easier for you to see how the jewelry render)
+- Added different loot to chests in different places (Dungeons, Pyramids, Strongholds etc)
+- Added a new 'weight' value to the Curse api
+
+Removed:
+- Removed the Crystal item
+
+Changed:
+- The Pentagram now renders beneath your feet when you look down and no longer does it in your inventory; it is also a lot smaller
+- Changed Entity registration so it only uses 'registerModEntity' to fix potential issues
 - Changed Crystal from craftable items to blocks that generate in the world
+- Changed Jewelry Tab to not override TiCon tabs (sorry TiCon, your system is good, but not for me)
+- Some curses can no longer acquired in hardcore (such as Rotten Heart, Midas Touch etc) which would make it impossible to work with and require a total restart of the game
+- Updated the curse API so now people can specify when a curse can be activated (I believe the world is all you need :p)
+- Curses now use a random weight system in order to get chooses (this allows for different curses to have a lower chance to appear than others)
+- Midas Touch now has a lower chance of appearing
+
+Fixed:
 - Fixed NEI from overlapping the guide GUI
+- Fixed an issue with the Liquids tab crashing
+- Fixed Jewelers having only rings as jewelry options

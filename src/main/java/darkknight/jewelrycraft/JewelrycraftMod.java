@@ -7,6 +7,7 @@ package darkknight.jewelrycraft;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -37,6 +38,7 @@ import darkknight.jewelrycraft.proxy.CommonProxy;
 import darkknight.jewelrycraft.recipes.CraftingRecipes;
 import darkknight.jewelrycraft.thirdparty.ThirdPartyManager;
 import darkknight.jewelrycraft.util.Variables;
+import darkknight.jewelrycraft.worldGen.ChestGeneration;
 import darkknight.jewelrycraft.worldGen.village.VillageHandler;
 
 @Mod (modid = Variables.MODID, name = Variables.MODNAME, version = Variables.VERSION, guiFactory = Variables.CONFIG_GUI, acceptedMinecraftVersions = "[1.7.10,1.8)")
@@ -74,36 +76,49 @@ public class JewelrycraftMod
         dir = e.getModConfigurationDirectory();
         ConfigHandler.INSTANCE.loadConfig(e);
         ThirdPartyManager.instance().index();
+        logger.log(Level.INFO, "Registering Blocks");
         BlockList.preInit(e);
+        logger.log(Level.INFO, "Registering Items");
         ItemList.preInit(e);
+        logger.log(Level.INFO, "Registering Crafting Recipes");
         CraftingRecipes.preInit(e);
+        logger.log(Level.INFO, "Registering Curses");
         CurseList.preInit(e);
+        logger.log(Level.INFO, "Registering Packets");
         PacketHandler.preInit(e);
+        logger.log(Level.INFO, "Registering Entities");
         EntityList.preInit(e);
+        logger.log(Level.INFO, "Registering Village Stuff");
         VillageHandler.preInit(e);
+        logger.log(Level.INFO, "Registering Events");
         EventList.preInit(e);
+        logger.log(Level.INFO, "Registering Potions");
         PotionList.preInit(e);
+        logger.log(Level.INFO, "Loading Third Party Mods");
         ThirdPartyManager.instance().preInit();
-        
-        ChestGenHooks.addItem("dungeonChest", new WeightedRandomChestContent(new ItemStack(ItemList.thiefGloves), 1, 1, 1));
-        ChestGenHooks.addItem("villageBlacksmith", new WeightedRandomChestContent(new ItemStack(ItemList.thiefGloves), 1, 1, 1));
-        ChestGenHooks.addItem("strongholdCorridor", new WeightedRandomChestContent(new ItemStack(ItemList.thiefGloves), 1, 1, 5));        
-        for(int i = 0; i < 16; i++) ChestGenHooks.addItem("mineshaftCorridor", new WeightedRandomChestContent(new ItemStack(BlockList.crystal, 1, i), 1, 4, 15));
+        logger.log(Level.INFO, "Adding Dungeons loot");        
+        ChestGeneration.preInit(e);
     }
     
     @EventHandler
     public void init(FMLInitializationEvent e)
     {
+        logger.log(Level.INFO, "Registering Events");
         EventList.init(e);
+        logger.log(Level.INFO, "Registering Potions");
         PotionList.init(e);
+        logger.log(Level.INFO, "Loading Third Party Mods");
         ThirdPartyManager.instance().init();
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {
+        logger.log(Level.INFO, "Loading Third Party Mods");
         ThirdPartyManager.instance().postInit();
+        logger.log(Level.INFO, "Registering Events");
         EventList.postInit(e);
+        logger.log(Level.INFO, "Registering Potions");
         PotionList.postInit(e);
     }
     

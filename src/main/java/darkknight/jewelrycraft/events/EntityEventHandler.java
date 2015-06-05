@@ -21,6 +21,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.WeightedRandom;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
@@ -47,8 +48,8 @@ import darkknight.jewelrycraft.network.PacketClearColorCache;
 import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
 import darkknight.jewelrycraft.network.PacketSendServerPlayersInfo;
 import darkknight.jewelrycraft.potions.PotionList;
+import darkknight.jewelrycraft.random.WeightedRandomCurse;
 import darkknight.jewelrycraft.util.BlockUtils;
-import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
@@ -60,6 +61,7 @@ public class EntityEventHandler
 {
     int updateTime = 0, totalUnavailableCurses = 0;
     boolean addedCurses = false;
+    Random rand = new Random();
     
     /**
      * @param event
@@ -320,8 +322,7 @@ public class EntityEventHandler
     public void addCurse(EntityPlayer player, NBTTagCompound playerInfo, int curseNo)
     {
         if (ConfigHandler.CURSES_ENABLED && Curse.availableCurses.size() > 0 && curseNo > Curse.getCurseList().size() - Curse.availableCurses.size() - totalUnavailableCurses){
-            int no = JewelrycraftUtil.rand.nextInt(Curse.availableCurses.size());
-            Curse cur = Curse.availableCurses.get(no);
+            Curse cur = ((WeightedRandomCurse)WeightedRandom.getRandomItem(rand, JewelrycraftUtil.getCurses(player.worldObj, player, rand))).getCurse(rand);
             playerInfo.setInteger(cur.getName(), 1);
             Curse.availableCurses.remove(cur);
             addedCurses = true;

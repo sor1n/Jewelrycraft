@@ -194,11 +194,11 @@ public abstract class ItemBaseJewelry extends Item
     {
         if (stack.hasTagCompound() && par4){
             ItemStack ingot = JewelryNBT.ingot(stack);
-            if (ingot != null && Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) > 0) list.add(StatCollector.translateToLocal("info." + Variables.MODID + ".metal") +": " + EnumChatFormatting.YELLOW + ingot.getDisplayName().replace(StatCollector.translateToLocal("info." + Variables.MODID + ".ingot"), " "));
+            if (ingot != null && Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) > 0) list.add(StatCollector.translateToLocal("info." + Variables.MODID + ".metal") + ": " + EnumChatFormatting.YELLOW + ingot.getDisplayName().replace(StatCollector.translateToLocal("info." + Variables.MODID + ".ingot"), " "));
             ItemStack gem = JewelryNBT.gem(stack);
-            if (gem != null) list.add(StatCollector.translateToLocal("info." + Variables.MODID + ".gem")+": " + EnumChatFormatting.BLUE + gem.getDisplayName());
+            if (gem != null) list.add(StatCollector.translateToLocal("info." + Variables.MODID + ".gem") + ": " + EnumChatFormatting.BLUE + gem.getDisplayName());
             ArrayList<ItemStack> modifier = JewelryNBT.modifier(stack);
-            if (!modifier.isEmpty()) list.add(StatCollector.translateToLocal("info." + Variables.MODID + ".modifiers")+": ");
+            if (!modifier.isEmpty()) list.add(StatCollector.translateToLocal("info." + Variables.MODID + ".modifiers") + ": ");
             for(int i = 0; i < modifier.size(); i++)
                 list.add(EnumChatFormatting.DARK_PURPLE + modifier.get(i).getDisplayName() + " x" + modifier.get(i).stackSize);
         }
@@ -208,10 +208,10 @@ public abstract class ItemBaseJewelry extends Item
      * @param stack
      * @param player
      */
-    public void action(ItemStack stack, EntityPlayer player)
+    public void action(ItemStack item, EntityPlayer player)
     {
         for(ModifierEffects mod: ModifierEffects.getEffects())
-            mod.action(stack, player, this);
+            if (JewelryNBT.doesModifierExist(item, mod.getModifier())) mod.action(item, player, this);
     }
     
     /**
@@ -223,7 +223,7 @@ public abstract class ItemBaseJewelry extends Item
     public boolean onPlayerAttackedCacellable(ItemStack item, EntityPlayer player, DamageSource source, float amount)
     {
         for(ModifierEffects mod: ModifierEffects.getEffects())
-            return mod.onPlayerAttackedCacellable(item, player, source, this, amount);
+            return JewelryNBT.doesModifierExist(item, mod.getModifier()) ? mod.onPlayerAttackedCacellable(item, player, source, this, amount) : false;
         return false;
     }
     
@@ -236,7 +236,7 @@ public abstract class ItemBaseJewelry extends Item
     public boolean onEntityAttackedCacellable(ItemStack item, EntityPlayer player, Entity target, float amount)
     {
         for(ModifierEffects mod: ModifierEffects.getEffects())
-            return mod.onEntityAttackedCacellable(item, player, target, this, amount);
+            return JewelryNBT.doesModifierExist(item, mod.getModifier()) ? mod.onEntityAttackedCacellable(item, player, target, this, amount) : false;
         return false;
     }
     
@@ -248,7 +248,8 @@ public abstract class ItemBaseJewelry extends Item
      */
     public void onPlayerAttacked(ItemStack item, EntityPlayer player, DamageSource source, float amount)
     {
-        for(ModifierEffects mod: ModifierEffects.getEffects()) mod.onPlayerAttacked(item, player, source, this, amount);
+        for(ModifierEffects mod: ModifierEffects.getEffects())
+            if (JewelryNBT.doesModifierExist(item, mod.getModifier())) mod.onPlayerAttacked(item, player, source, this, amount);
     }
     
     /**
@@ -259,18 +260,19 @@ public abstract class ItemBaseJewelry extends Item
      */
     public void onEntityAttacked(ItemStack item, EntityPlayer player, Entity target, float amount)
     {
-        for(ModifierEffects mod: ModifierEffects.getEffects()) mod.onEntityAttacked(item, player, target, this, amount);
+        for(ModifierEffects mod: ModifierEffects.getEffects())
+            if (JewelryNBT.doesModifierExist(item, mod.getModifier())) mod.onEntityAttacked(item, player, target, this, amount);
     }
     
-    public void onPlayerDead(ItemStack stack, EntityPlayer player, DamageSource source)
+    public void onPlayerDead(ItemStack item, EntityPlayer player, DamageSource source)
     {
         for(ModifierEffects mod: ModifierEffects.getEffects())
-            mod.onPlayerDead(stack, player, source, this);
+            if (JewelryNBT.doesModifierExist(item, mod.getModifier())) mod.onPlayerDead(item, player, source, this);
     }
     
-    public void onPlayerRespawn(ItemStack stack, PlayerEvent.Clone event)
+    public void onPlayerRespawn(ItemStack item, PlayerEvent.Clone event)
     {
         for(ModifierEffects mod: ModifierEffects.getEffects())
-            mod.onPlayerRespawn(stack, event, this);
+            if (JewelryNBT.doesModifierExist(item, mod.getModifier())) mod.onPlayerRespawn(item, event, this);
     }
 }

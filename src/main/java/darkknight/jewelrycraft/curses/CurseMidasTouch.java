@@ -1,5 +1,6 @@
 package darkknight.jewelrycraft.curses;
 
+import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCompressed;
 import net.minecraft.block.BlockPressurePlate;
@@ -100,5 +101,11 @@ public class CurseMidasTouch extends Curse
     public boolean canCurseBeActivated(World world)
     {
         return world.getWorldInfo().isHardcoreModeEnabled() ? false : ConfigHandler.CURSE_MIDAS_TOUCH;
+    }
+    
+    @Override
+    public int weight(World world, EntityPlayer player, Random random)
+    {
+        return 2;
     }
 }

@@ -122,7 +122,7 @@ death.attack.shadows=%1$s was consumed by the shadows
 death.attack.blackHeart=%1$s was killed by %2$s's curse
 
 entity.jewelrycraft2.Heart.name=Heart
-entity.jewelrycraft2.Half-Heart.name=Half-Heart
+entity.jewelrycraft2.HalfHeart.name=Half-Heart
 
 jewelrycraft2.potion.stun=Stun
 

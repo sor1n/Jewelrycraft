@@ -1,5 +1,6 @@
 package darkknight.jewelrycraft.curses;
 
+import java.util.Random;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.Variables;
@@ -31,5 +32,11 @@ public class CurseBlind extends Curse
     public boolean canCurseBeActivated(World world)
     {
         return world.getWorldInfo().isHardcoreModeEnabled() ? false : ConfigHandler.CURSE_BLIND;
+    }
+    
+    @Override
+    public int weight(World world, EntityPlayer player, Random random)
+    {
+        return 7;
     }
 }

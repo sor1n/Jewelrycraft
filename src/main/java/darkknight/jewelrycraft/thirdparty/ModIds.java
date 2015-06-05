@@ -25,4 +25,5 @@ public class ModIds{
     public static final String OPEN_COMPUTERS = "OpenComputers|Core";
     public static final String EE3 = "EE3";
     public static final String PENUMATICRAFT = "PneumaticCraft";
+    public static final String ALPACA = "alpaca";
 }

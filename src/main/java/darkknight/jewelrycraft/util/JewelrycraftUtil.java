@@ -1,5 +1,6 @@
 package darkknight.jewelrycraft.util;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,14 +13,19 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.relauncher.Side;
 import darkknight.jewelrycraft.JewelrycraftMod;
+import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.random.WeightedRandomCurse;
+import darkknight.jewelrycraft.worldGen.Generation;
 
 public class JewelrycraftUtil
 {
@@ -31,6 +37,7 @@ public class JewelrycraftUtil
     public static HashMap<ItemStack, ItemStack> oreToIngot = new HashMap<ItemStack, ItemStack>();
     public static ArrayList<String> jamcraftPlayers = new ArrayList<String>();
     private static ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+    public static ArrayList<WorldGenerator> structures = new ArrayList<WorldGenerator>();
     public static Random rand = new Random();
     public static EnumCreatureAttribute HEART;
     
@@ -67,6 +74,24 @@ public class JewelrycraftUtil
                 JewelrycraftMod.logger.info("Error, tried to add subtypes of item " + ((Item)item).getUnlocalizedName() + "\nItem is not added in the list.");
             }
         }
+        // Structures
+        try{
+            for(Field f: Generation.class.getDeclaredFields()){
+                Object obj = f.get(null);
+                if (obj instanceof WorldGenerator) structures.add((WorldGenerator)obj);
+            }
+        }
+        catch(IllegalAccessException e){
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public static WeightedRandomCurse[] getCurses(World world, EntityPlayer player, Random random)
+    {
+        WeightedRandomCurse[] curses = new WeightedRandomCurse[Curse.availableCurses.size()];
+        for(int c = 0; c < Curse.availableCurses.size(); c++)
+            curses[c] = new WeightedRandomCurse(Curse.availableCurses.get(c), Curse.availableCurses.get(c).weight(world, player, random));
+        return curses;
     }
     
     /**
@@ -140,12 +165,10 @@ public class JewelrycraftUtil
             while (i.hasNext()){
                 ItemStack nextStack = i.next();
                 String stackName = nextStack.getItem().getUnlocalizedName().toLowerCase();
-                if ((stackName.contains("ingot") || stackName.contains("alloy")) && !metal.contains(nextStack))
-                    metal.add(nextStack);
+                if ((stackName.contains("ingot") || stackName.contains("alloy")) && !metal.contains(nextStack)) metal.add(nextStack);
                 if (nextStack.getItem().getUnlocalizedName().toLowerCase().contains("ore") && !ores.contains(nextStack)){
                     ItemStack ingot = FurnaceRecipes.smelting().getSmeltingResult(nextStack);
-                    if(ingot != null && (ingot.getItem().getUnlocalizedName().toLowerCase().contains("ingot") || ingot.getItem().getUnlocalizedName().toLowerCase().contains("alloy")))
-                    {
+                    if (ingot != null && (ingot.getItem().getUnlocalizedName().toLowerCase().contains("ingot") || ingot.getItem().getUnlocalizedName().toLowerCase().contains("alloy"))){
                         ores.add(nextStack);
                         oreToIngot.put(nextStack, ingot);
                         JewelrycraftMod.logger.info(nextStack + " Adding " + nextStack.getDisplayName() + " with damage value " + nextStack.getItemDamage() + " and with " + nextStack.stackSize + " in stack");
@@ -229,8 +252,8 @@ public class JewelrycraftUtil
      */
     public static ItemStack getIngotFromOre(ItemStack ore)
     {
-        for(ItemStack ores: JewelrycraftUtil.oreToIngot.keySet()) 
-            if(ores.getItem().equals(ore.getItem()) && ores.getItemDamage() == ore.getItemDamage()) return oreToIngot.get(ores);
+        for(ItemStack ores: JewelrycraftUtil.oreToIngot.keySet())
+            if (ores.getItem().equals(ore.getItem()) && ores.getItemDamage() == ore.getItemDamage()) return oreToIngot.get(ores);
         return null;
     }
 }

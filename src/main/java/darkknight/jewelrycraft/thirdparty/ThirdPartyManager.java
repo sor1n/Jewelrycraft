@@ -30,6 +30,7 @@ public class ThirdPartyManager implements IGuiHandler{
     public void index(){
         Map<String, Class<? extends IThirdParty>> thirdPartyClasses = new HashMap<String, Class<? extends IThirdParty>>();
         thirdPartyClasses.put(ModIds.EE3, EE3.class);
+        thirdPartyClasses.put(ModIds.ALPACA, Alpaca.class);
 
         List<String> enabledThirdParty = new ArrayList<String>();
         ConfigHandler.config.addCustomCategoryComment("third_party_enabling", "With these options you can disable third party content by mod. Useful if something in the mod changes and causes crashes.");

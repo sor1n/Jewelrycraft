@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import cpw.mods.fml.common.Loader;
 import darkknight.jewelrycraft.model.ModelBracelet;
 import darkknight.jewelrycraft.util.Variables;
 
@@ -24,7 +25,12 @@ public class BraceletRender extends TileEntitySpecialRenderer
         GL11.glPushMatrix();
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
         if ((float)z != -1) bracelet.render(entity, 0F, 0F, 0F, (float)z, f, 1.0F);
-        GL11.glTranslatef(0F, 3F, 0F);
+        if (Loader.isModLoaded("alpaca")){
+            GL11.glTranslatef(1F, 0F, -9F);
+            GL11.glRotatef(25F, 1F, 0F, 0F); 
+            GL11.glRotatef(-25F, 0F, 1F, 0F); 
+        }
+        else GL11.glTranslatef(0F, 3F, 0F);
         if ((float)x != -1) bracelet.render(entity, 0F, 0F, 0F, (float)x, (float)y, 1.0F);
         GL11.glPopMatrix();
     }

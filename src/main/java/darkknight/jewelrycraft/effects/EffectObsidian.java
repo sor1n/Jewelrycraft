@@ -29,9 +29,8 @@ public class EffectObsidian extends ModifierEffects
     @Override
     public void action(ItemStack item, EntityPlayer player, Item jewelry)
     {
-        boolean exists = JewelryNBT.doesModifierExist(item, modifier);
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
-        if (jewelry instanceof ItemNecklace && exists){
+        if (jewelry instanceof ItemNecklace){
             // Positive necklace
             player.addPotionEffect(new PotionEffect(Potion.resistance.id, 60, 2, true));
             // Negative necklace
@@ -45,9 +44,9 @@ public class EffectObsidian extends ModifierEffects
             }
         }
         // Negative bracelet
-        if (jewelry instanceof ItemBracelet && exists && playerInfo.hasKey("falls") && playerInfo.getInteger("falls") >= 300) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 60, 1, true));
+        if (jewelry instanceof ItemBracelet && playerInfo.hasKey("falls") && playerInfo.getInteger("falls") >= 300) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 60, 1, true));
         // Negative ring
-        if (jewelry instanceof ItemRing && exists && playerInfo.hasKey("strikes") && playerInfo.getInteger("strikes") >= 200){
+        if (jewelry instanceof ItemRing && playerInfo.hasKey("strikes") && playerInfo.getInteger("strikes") >= 200){
             player.addPotionEffect(new PotionEffect(Potion.weakness.id, 60, 0, true));
             player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 60, 1, true));
         }
@@ -56,16 +55,15 @@ public class EffectObsidian extends ModifierEffects
     @Override
     public void onPlayerAttacked(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
     {
-        boolean exists = JewelryNBT.doesModifierExist(item, modifier);
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
-        if (jewelry instanceof ItemEarrings && exists && (source == DamageSource.anvil || source.damageType.equals("arrow"))){
+        if (jewelry instanceof ItemEarrings && (source == DamageSource.anvil || source.damageType.equals("arrow"))){
             if (playerInfo.hasKey("protected")) playerInfo.setInteger("protected", playerInfo.getInteger("protected") + 1);
             else playerInfo.setInteger("protected", 1);
             // Positive && Negative earrings
             if (playerInfo.getInteger("protected") < 200) playerInfo.setBoolean("negateDamage", true);
             else player.attackEntityFrom(DamageSourceList.weak, player.getHealth() * 3F);
         }
-        if (jewelry instanceof ItemBracelet && exists && source == DamageSource.fall){
+        if (jewelry instanceof ItemBracelet && source == DamageSource.fall){
             if (playerInfo.hasKey("falls")) playerInfo.setInteger("falls", playerInfo.getInteger("falls") + 1);
             else playerInfo.setInteger("falls", 1);
             // Positive bracelet
@@ -83,11 +81,10 @@ public class EffectObsidian extends ModifierEffects
     
     public void onEntityAttacked(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount)
     {
-        boolean exists = JewelryNBT.doesModifierExist(item, modifier);
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         NBTTagCompound enemyData = target.getEntityData();
         // Positive ring
-        if (jewelry instanceof ItemRing && exists && playerInfo.getInteger("strikes") < 200 && !player.worldObj.isRemote){
+        if (jewelry instanceof ItemRing && playerInfo.getInteger("strikes") < 200 && !player.worldObj.isRemote){
             if (enemyData.getInteger("reAttacked") == 0){
                 if (playerInfo.hasKey("strikes")) playerInfo.setInteger("strikes", playerInfo.getInteger("strikes") + 1);
                 else playerInfo.setInteger("strikes", 1);

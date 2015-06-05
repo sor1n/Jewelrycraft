@@ -1,6 +1,3 @@
-/**
- * 
- */
 package darkknight.jewelrycraft.entities;
 
 import net.minecraft.entity.SharedMonsterAttributes;

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="main/java"/>
+	<classpathentry excluding="assets/" kind="src" path="main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Minecraft"/>
+	<classpathentry kind="lib" path="H:/Jewelrycraft/1.7.10/libs/EquivalentExchange3-1.7.10-0.3.505.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

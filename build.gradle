@@ -36,8 +36,8 @@ version = "${project.ext.massive}.${project.ext.major}.${project.minor}"
 group= "darkknight.jewelrycraft2"
 archivesBaseName = "[${project.ext.mcVersion}] Jewelrycraft2"
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
 
 repositories {
 	maven {
@@ -59,7 +59,7 @@ dependencies {
 }
 
 minecraft {
-    version = "1.7.10-10.13.3.1395-1710ls"
+    version = "1.7.10-10.13.3.1428-1.7.10"
     runDir = "minecraft/assets"
 
     // replacing stuff in the source

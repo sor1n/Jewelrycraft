@@ -217,7 +217,12 @@ public class BlockMoltenMetal extends BlockFluidClassic
             world.setBlock(x, y, z, this, meta, 3);
             JewelrycraftMod.saveData.setString(stringFromLocation(x, y, z, world.provider.dimensionId), originData);
             String[] data = originData.split(":");
-            JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, x, y, z, Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])));
+            try{
+                JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, x, y, z, Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])));
+            }
+            catch(Exception e){
+                System.out.println("The liquids file is either corrupt, missing or the metal for the liquid simply doesn't exist!");
+            }
         }
     }
     

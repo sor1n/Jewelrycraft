@@ -84,7 +84,6 @@ public class BlockSmelter extends BlockContainer
                 JewelryNBT.addMetal(item, metal);
                 try{
                     color = ItemMoltenMetalBucket.color(item, 1);
-                    System.out.println(color);
                 }
                 catch(IOException e){
                     e.printStackTrace();

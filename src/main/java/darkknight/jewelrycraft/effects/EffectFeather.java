@@ -38,10 +38,9 @@ public class EffectFeather extends ModifierEffects
     @Override
     public void action(ItemStack item, EntityPlayer player, Item jewelry)
     {
-        boolean exists = JewelryNBT.doesModifierExist(item, modifier);
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         // Positive earrings
-        if (jewelry instanceof ItemEarrings && exists){
+        if (jewelry instanceof ItemEarrings){
             AxisAlignedBB axisalignedbb = player.boundingBox.expand(1.0D, 1.0D, 1.0D);
             List list = player.worldObj.getEntitiesWithinAABB(EntityArrow.class, axisalignedbb);
             if (!player.worldObj.isRemote && list != null && !list.isEmpty()){
@@ -52,7 +51,7 @@ public class EffectFeather extends ModifierEffects
                 }
             }
         }
-        if (jewelry instanceof ItemBracelet && exists){
+        if (jewelry instanceof ItemBracelet){
             // Positive bracelet
             if (player.motionY < 0) player.motionY *= (0.6D + (JewelryNBT.numberOfModifiers(item) - 1) * 0.03D);
             if (rand.nextInt(JewelryNBT.numberOfModifiers(item)) == 0) player.fallDistance = 0F;
@@ -64,10 +63,9 @@ public class EffectFeather extends ModifierEffects
     @Override
     public void onEntityAttacked(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount)
     {
-        boolean exists = JewelryNBT.doesModifierExist(item, modifier);
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         NBTTagCompound enemyData = target.getEntityData();
-        if (jewelry instanceof ItemRing && exists){
+        if (jewelry instanceof ItemRing){
             if (enemyData.getInteger("reAttacked") == 0){
                 // Negative ring
                 enemyData.setInteger("reAttacked", enemyData.getInteger("reAttacked") + 1);
@@ -83,16 +81,15 @@ public class EffectFeather extends ModifierEffects
     @Override
     public void onPlayerAttacked(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
     {
-        boolean exists = JewelryNBT.doesModifierExist(item, modifier);
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         // Positive necklace
-        if (jewelry instanceof ItemNecklace && exists && rand.nextInt(3 + JewelryNBT.numberOfModifiers(item)) == 0 && source != DamageSourceList.weak && source != DamageSource.inFire && source != DamageSource.onFire && source != DamageSource.lava){
+        if (jewelry instanceof ItemNecklace && rand.nextInt(3 + JewelryNBT.numberOfModifiers(item)) == 0 && source != DamageSourceList.weak && source != DamageSource.inFire && source != DamageSource.onFire && source != DamageSource.lava){
             player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.GRAY + StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".effect.feather")));
             playerInfo.setBoolean("negateDamage", true);
         }
         // Negative necklace
-        if (jewelry instanceof ItemNecklace && exists && (source == DamageSource.inFire || source == DamageSource.onFire || source == DamageSource.lava) && source != DamageSourceList.weak) player.attackEntityFrom(DamageSourceList.weak, amount * (3F + (JewelryNBT.numberOfModifiers(item) - 1) * 0.1F));
+        if (jewelry instanceof ItemNecklace && (source == DamageSource.inFire || source == DamageSource.onFire || source == DamageSource.lava) && source != DamageSourceList.weak) player.attackEntityFrom(DamageSourceList.weak, amount * (3F + (JewelryNBT.numberOfModifiers(item) - 1) * 0.1F));
         // Negative earrings
-        if (jewelry instanceof ItemEarrings && exists && source.damageType.equals("arrow") && source != DamageSourceList.weak) player.attackEntityFrom(DamageSourceList.weak, amount * (2F + (JewelryNBT.numberOfModifiers(item) - 1) * 0.1F));
+        if (jewelry instanceof ItemEarrings && source.damageType.equals("arrow") && source != DamageSourceList.weak) player.attackEntityFrom(DamageSourceList.weak, amount * (2F + (JewelryNBT.numberOfModifiers(item) - 1) * 0.1F));
     }
 }

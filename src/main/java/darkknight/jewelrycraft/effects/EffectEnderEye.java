@@ -39,8 +39,7 @@ public class EffectEnderEye extends ModifierEffects
     @Override
     public void action(ItemStack item, EntityPlayer player, Item jewelry)
     {
-        boolean exists = JewelryNBT.doesModifierExist(item, modifier);
-        if (jewelry instanceof ItemEarrings && exists && !player.worldObj.isRemote){
+        if (jewelry instanceof ItemEarrings && !player.worldObj.isRemote){
             for(Object e: player.worldObj.getEntitiesWithinAABB(EntityEnderman.class, player.boundingBox.expand(100D, 0D, 100D))){
                 EntityEnderman enderman = (EntityEnderman)e;
                 ReflectionHelper.setPrivateValue(EntityEnderman.class, enderman, -1, "stareTimer", "field_70826_g");
@@ -58,7 +57,7 @@ public class EffectEnderEye extends ModifierEffects
             }
         }
         // Positive necklace
-        if (jewelry instanceof ItemNecklace && exists && !player.worldObj.isRemote){
+        if (jewelry instanceof ItemNecklace && !player.worldObj.isRemote){
             ChunkPosition chunkposition = player.worldObj.findClosestStructure("Stronghold", (int)player.posX, (int)player.posY, (int)player.posZ);
             if (chunkposition != null){
                 Minecraft.getMinecraft().thePlayer.motionX += 0.01D * Math.signum((double)chunkposition.chunkPosX - player.posX) * (rand.nextInt(JewelryNBT.numberOfModifiers(item)) == 0 ? 1 : -1);
@@ -66,13 +65,13 @@ public class EffectEnderEye extends ModifierEffects
             }
         }
         // Positive bracelet
-        if (jewelry instanceof ItemBracelet && exists && !player.worldObj.isRemote && player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == BiomeGenBase.sky && (!player.isPotionActive(Potion.moveSpeed) || player.getActivePotionEffect(Potion.moveSpeed).getDuration() < 30)) player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 150 - JewelryNBT.numberOfModifiers(item) * 10, 2 - JewelryNBT.numberOfModifiers(item) / 5));
+        if (jewelry instanceof ItemBracelet && !player.worldObj.isRemote && player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == BiomeGenBase.sky && (!player.isPotionActive(Potion.moveSpeed) || player.getActivePotionEffect(Potion.moveSpeed).getDuration() < 30)) player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 150 - JewelryNBT.numberOfModifiers(item) * 10, 2 - JewelryNBT.numberOfModifiers(item) / 5));
         // Negative bracelet
-        if (jewelry instanceof ItemBracelet && exists && !player.worldObj.isRemote && rand.nextInt(520 - JewelryNBT.numberOfModifiers(item) * 20) == 15) player.setPositionAndUpdate(player.posX + rand.nextInt(30) * (rand.nextBoolean() ? -1 : 1), player.posY, player.posZ + rand.nextInt(30) * (rand.nextBoolean() ? -1 : 1));
+        if (jewelry instanceof ItemBracelet && !player.worldObj.isRemote && rand.nextInt(520 - JewelryNBT.numberOfModifiers(item) * 20) == 15) player.setPositionAndUpdate(player.posX + rand.nextInt(30) * (rand.nextBoolean() ? -1 : 1), player.posY, player.posZ + rand.nextInt(30) * (rand.nextBoolean() ? -1 : 1));
         // Negative ring
-        if (jewelry instanceof ItemRing && exists) Minecraft.getMinecraft().gameSettings.setOptionFloatValue(Options.RENDER_DISTANCE, 2.2F - JewelryNBT.numberOfModifiers(item) * 0.1F);
+        if (jewelry instanceof ItemRing) Minecraft.getMinecraft().gameSettings.setOptionFloatValue(Options.RENDER_DISTANCE, 2.2F - JewelryNBT.numberOfModifiers(item) * 0.1F);
         // Positive ring
-        if (jewelry instanceof ItemRing && exists && rand.nextInt(180 + JewelryNBT.numberOfModifiers(item)*20) == 12){
+        if (jewelry instanceof ItemRing && rand.nextInt(180 + JewelryNBT.numberOfModifiers(item)*20) == 12){
             for(int i = (int)player.posX - 2; i <= (int)player.posX + 2; i++)
                 for(int j = (int)player.posY - 2; j <= (int)player.posY + 2; j++)
                     for(int k = (int)player.posZ - 2; k <= (int)player.posZ + 2; k++)
@@ -83,8 +82,7 @@ public class EffectEnderEye extends ModifierEffects
     @Override
     public void onPlayerAttacked(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
     {
-        boolean exists = JewelryNBT.doesModifierExist(item, modifier);
         // Negative necklace
-        if (jewelry instanceof ItemNecklace && exists && !player.worldObj.isRemote) player.addPotionEffect(new PotionEffect(Potion.blindness.id, 100 + JewelryNBT.numberOfModifiers(item)*30, 1));
+        if (jewelry instanceof ItemNecklace && !player.worldObj.isRemote) player.addPotionEffect(new PotionEffect(Potion.blindness.id, 100 + JewelryNBT.numberOfModifiers(item)*30, 1));
     }
 }

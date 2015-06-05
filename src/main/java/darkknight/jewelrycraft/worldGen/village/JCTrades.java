@@ -4,6 +4,7 @@ import java.util.Random;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
@@ -16,10 +17,7 @@ import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 public class JCTrades implements IVillageTradeHandler
 {
-    
-    /**
-     * 
-     */
+    Item[] jewelry = new Item[]{ItemList.ring, ItemList.necklace, ItemList.bracelet, ItemList.earrings};
     public JCTrades()
     {
         super();
@@ -112,7 +110,7 @@ public class JCTrades implements IVillageTradeHandler
                     break;
                 }
                 default:{
-                    result = new ItemStack(ItemList.ring, 1, 0);
+                    result = new ItemStack(jewelry[random.nextInt(4)], 1, 0);
                     int randValue = random.nextInt(4);
                     if(JewelrycraftUtil.metal.size() > 0) JewelryNBT.addMetal(result, JewelrycraftUtil.metal.get(random.nextInt(JewelrycraftUtil.metal.size())));
                     if(JewelrycraftUtil.objects.size() > 0) JewelryNBT.addModifiers(result, JewelrycraftUtil.addRandomModifiers(randValue));
