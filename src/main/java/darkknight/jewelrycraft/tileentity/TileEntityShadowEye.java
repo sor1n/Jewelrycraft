@@ -1,8 +1,7 @@
 package darkknight.jewelrycraft.tileentity;
 
 import java.util.ArrayList;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,12 +16,13 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.block.BlockHandPedestal;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.particles.EntityShadowsFX;
+import darkknight.jewelrycraft.model.ModelShadowEye;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
@@ -35,6 +35,7 @@ public class TileEntityShadowEye extends TileEntity
     public ArrayList<ItemStack> pedestalItems = new ArrayList<ItemStack>();
     ResourceLocation particleTexture = new ResourceLocation(Variables.MODID, "textures/particle/shadows.png");
     public EntityPlayer target;
+    public ModelShadowEye model = new ModelShadowEye();
     
     public TileEntityShadowEye()
     {
@@ -82,7 +83,7 @@ public class TileEntityShadowEye extends TileEntity
             timer--;
             if (canStartRitual && canChangePedestals(worldObj, xCoord, yCoord, zCoord) && opening == 4) changePedestals(worldObj, xCoord, yCoord, zCoord);
         }
-        if (active && target != null && this.getDistanceFrom(target.posX, target.posY, target.posZ) > 30D){
+        if (active && target != null && this.getDistanceFrom(target.posX, target.posY, target.posZ) > 27D){
             active = false;
             timer = -1;
             shouldAddData = false;
@@ -119,17 +120,8 @@ public class TileEntityShadowEye extends TileEntity
                 }
             }
         }
-        for(Object player: worldObj.getEntitiesWithinAABB(EntityPlayer.class, getRenderBoundingBox().expand(10D, 10D, 10D)))
-            if (player != null){
-                NBTTagCompound persistTag = PlayerUtils.getModPlayerPersistTag((EntityPlayer)player, Variables.MODID);
-                persistTag.setBoolean("nearStartedRitual", false);
-            }
         if (active && opening == 4){
-            float din = 6F;
             int i = Minecraft.getMinecraft().gameSettings.particleSetting;
-            for(float x = -din; x <= din; x += 0.2F)
-                for(float z = -din; z <= din; z += 0.2F)
-                    if (x * x + z * z >= din * din - 1 && x * x + z * z <= din * din + 1) Minecraft.getMinecraft().effectRenderer.addEffect(new EntityShadowsFX(worldObj, xCoord + x + 0.5F, yCoord - 0.5F, zCoord + z + 0.5F, 15F, 0.04F - 0.01F * i, particleTexture));
             for(int l = 0; l <= 100 - i*45; l++)
                 worldObj.spawnParticle("depthsuspend", xCoord + 6.5F - worldObj.rand.nextInt(12) - worldObj.rand.nextFloat(), yCoord - 2F + worldObj.rand.nextInt(9) - worldObj.rand.nextFloat(), zCoord + 6.5F - worldObj.rand.nextInt(12) - worldObj.rand.nextFloat(), 0, 0, 0);
         }

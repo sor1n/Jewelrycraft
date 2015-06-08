@@ -9,10 +9,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.Sphere;
+
 import darkknight.jewelrycraft.model.ModelShadowEye;
 import darkknight.jewelrycraft.tileentity.TileEntityShadowEye;
 import darkknight.jewelrycraft.util.Variables;
@@ -43,22 +46,24 @@ public class TileEntityShadowEyeRender extends TileEntitySpecialRenderer
         try{
             int block = te.getBlockMetadata();
             if (block == 0) GL11.glRotatef(90F, 0.0F, 1.0F, 0.0F);
-            else if (block == 1){
-                GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-                GL11.glRotatef(180F, 1.0F, 0.0F, 0.0F);
-            }else if (block == 2){
-                GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-                GL11.glRotatef(180F, 1.0F, 0.0F, 1.0F);
-            }
+            else if (block == 1) GL11.glRotatef(180F, 0.0F, 1.0F, 0.0F);
+            else if (block == 2) GL11.glRotatef(-90F, 0.0F, 1.0F, 0.0F);
         }
         catch(Exception e){}
-        try{
+        if (te != null && te.getWorldObj() != null) 
+        {
             EntityPlayer player = te.getWorldObj().getClosestPlayer(te.xCoord, te.yCoord, te.zCoord, 16D);
-            if (player != null) eye.render(player, te.xCoord, te.yCoord, te.zCoord, te.blockMetadata, eyeS.opening, 0.0625F);
+            if(player != null)
+            {
+            	float x1 = (float) (te.xCoord - player.posX) + 0.5F;
+            	float y1 = (float) (te.yCoord - player.posY) + 0.5F;
+            	float z1 = (float) (te.zCoord - player.posZ) + 0.5F;
+            	eyeS.model.render(player, 0, (float)(x1 >= 0 ? Math.atan(z1 / x1) : Math.PI + Math.atan(z1 / x1)), (float)(y1 >= 0 ? Math.atan(y1 / x1) : Math.atan(y1 / x1)), te.blockMetadata, eyeS.opening, 0.0625F);
+            }
+
         }
-        catch(Exception e){
-            eye.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-        }
+        else eyeS.model.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+        
         if (eyeS.opening == 4){
             GL11.glPushMatrix();
             GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -67,11 +72,10 @@ public class TileEntityShadowEyeRender extends TileEntitySpecialRenderer
             GL11.glColor4f(0.0F, 0.0F, 0.0F, 1F);
             GL11.glRotatef(eyeS.timer*10F, 0, 1, 0);
             GL11.glRotatef(90.0F, 1, 0, 0);
-            EntityPlayer player = te.getWorldObj().getClosestPlayer(te.xCoord, te.yCoord, te.zCoord, 9D);
             shadow.setNormals(GLU.GLU_NONE);
-            shadow.draw(9.5F, 6, 6);
+            shadow.draw(7.5F, 6, 6);
             GL11.glScalef(-1,-1,-1);
-            shadow.draw(9.5F, 6, 6);
+            shadow.draw(7.5F, 6, 6);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             GL11.glPopMatrix();
@@ -95,6 +99,6 @@ public class TileEntityShadowEyeRender extends TileEntitySpecialRenderer
         int modulousModifier = skyLight % 65536;
         int divModifier = skyLight / 65536;
         tess.setColorOpaque_F(brightness, brightness, brightness);
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, modulousModifier, divModifier);
-    }
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, modulousModifier, divModifier);
+	}
 }
