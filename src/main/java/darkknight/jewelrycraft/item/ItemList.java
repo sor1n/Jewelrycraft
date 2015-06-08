@@ -24,6 +24,7 @@ public class ItemList
     public static ItemMoltenMetal metal;
     public static Item goldObj;
     public static Item structureGen;
+    public static Item spawnEgg;
     private static boolean isInitialized = false;
     
     /**
@@ -45,6 +46,7 @@ public class ItemList
         jewelryModifier = new ItemJewelryModifier().setUnlocalizedName(Variables.MODID + ".jewelryModifier").setTextureName(Variables.MODID + ":jewelryModifier").setCreativeTab(JewelrycraftMod.jewelrycraft);
         goldObj = new ItemGoldObj().setUnlocalizedName(Variables.MODID + ".goldObject");
         structureGen = new ItemStructureGen().setUnlocalizedName(Variables.MODID + ".structureGen").setTextureName(Variables.MODID + ":structureGen").setCreativeTab(JewelrycraftMod.jewelrycraft);
+        spawnEgg = new ItemSpawnEgg().setUnlocalizedName(Variables.MODID + ".monsterPlacer").setTextureName("spawn_egg");
         
         GameRegistry.registerItem(thiefGloves, "thiefGloves");
         GameRegistry.registerItem(shadowIngot, "shadowIngot");
@@ -60,6 +62,7 @@ public class ItemList
         GameRegistry.registerItem(jewelryModifier, "jewelryModifier");
         GameRegistry.registerItem(goldObj, "goldObject");
         GameRegistry.registerItem(structureGen, "structureGen");
+        GameRegistry.registerItem(spawnEgg, "spawnEgg");
         
         OreDictionary.registerOre("ingotShadow", new ItemStack(ItemList.shadowIngot));
     }

@@ -9,12 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.common.ChestGenHooks;
+import net.minecraft.potion.Potion;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -63,6 +62,7 @@ public class JewelrycraftMod
     public static File liquidsConf;
     public static SimpleNetworkWrapper netWrapper;
     public static boolean fancyRender = false;
+    public static Potion alpacaPotion = null;
     
     /**
      * Pre initialization of mod stuff.

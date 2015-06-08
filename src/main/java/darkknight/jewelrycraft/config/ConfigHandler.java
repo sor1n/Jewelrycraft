@@ -11,7 +11,7 @@ public class ConfigHandler
 {
     public static Configuration config;
     public static final ConfigHandler INSTANCE = new ConfigHandler();    
-    public static final String[] categories = {"Timers", "Village Generation", "Misc", "Curses"};
+    public static final String[] categories = {"Timers", "Village Generation", "Misc"};
     
     public static int INGOT_COOLING_TIME;
     public static int INGOT_MELTING_TIME;

@@ -27,6 +27,7 @@ item.jewelrycraft2.thievingGloves.info.extra=Press <SHIFT> for more information.
 item.jewelrycraft2.thievingGloves.info.1=Right click with the gloves,
 item.jewelrycraft2.thievingGloves.info.2=while sneaking, on a villager
 item.jewelrycraft2.thievingGloves.info.3=to steal his stuff.
+item.jewelrycraft2.monsterPlacer.name=Spawn %s
 
 tile.jewelrycraft2.oreShadow.name=Shadow Ore
 tile.jewelrycraft2.blockShadow.name=Shadow Block
