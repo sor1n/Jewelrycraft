@@ -24,6 +24,7 @@ project.ext {
     minor = "10"
     mcVersion = "1.7.10"
 	ee3Version = "0.3.505"
+	alpacaVersion = "1.2"
 }
 
 if (System.getenv().BUILD_NUMBER != null) {
@@ -56,6 +57,7 @@ repositories {
 
 dependencies {
 	compile "com.pahimar.ee3:EquivalentExchange3:${project.mcVersion}-${project.ee3Version}:dev"
+	compile "com.FiskFille.alpaca:AlpacaEvolution:${project.mcVersion}-${project.alpacaVersion}:dev"
 }
 
 minecraft {
