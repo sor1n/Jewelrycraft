@@ -64,6 +64,7 @@ public class ItemMoltenMetal extends Item
      * @return
      * @throws IOException
      */
+    @SideOnly(Side.CLIENT)
     public static int color(ItemStack stack, int pass) throws IOException
     {
         IResourceManager rm = Minecraft.getMinecraft().getResourceManager();

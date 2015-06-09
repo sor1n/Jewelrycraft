@@ -192,6 +192,7 @@ public class ItemMoltenMetalBucket extends Item
      * @return
      * @throws IOException
      */
+    @SideOnly(Side.CLIENT)
     public static int color(ItemStack stack, int pass) throws IOException
     {
         if (pass == 1) return ItemMoltenMetal.color(stack, pass);
