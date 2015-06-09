@@ -57,7 +57,7 @@ repositories {
 
 dependencies {
 	compile "com.pahimar.ee3:EquivalentExchange3:${project.mcVersion}-${project.ee3Version}:dev"
-	compile "fiskfille.alpaca:AlpacaEvolution-${project.mcVersion}-${project.alpacaVersion}:dev"
+	compile "fiskfille.alpaca:alpaca:${project.mcVersion}-${project.alpacaVersion}:dev"
 }
 
 minecraft {
