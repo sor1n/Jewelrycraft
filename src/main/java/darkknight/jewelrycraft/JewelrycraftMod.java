@@ -62,7 +62,6 @@ public class JewelrycraftMod
     public static File liquidsConf;
     public static SimpleNetworkWrapper netWrapper;
     public static boolean fancyRender = false;
-    public static Potion alpacaPotion = null;
     
     /**
      * Pre initialization of mod stuff.
