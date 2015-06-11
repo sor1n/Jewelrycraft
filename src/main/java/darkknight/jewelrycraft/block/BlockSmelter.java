@@ -1,7 +1,7 @@
 package darkknight.jewelrycraft.block;
 
-import java.io.IOException;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -80,16 +80,9 @@ public class BlockSmelter extends BlockContainer
                 ItemStack metal = te.moltenMetal;
                 ItemStack item = te.moltenMetal;
                 if (Item.getIdFromItem(metal.getItem()) == Block.getIdFromBlock(Blocks.stained_glass) || Item.getIdFromItem(metal.getItem()) == Block.getIdFromBlock(Blocks.stained_hardened_clay) || Item.getIdFromItem(metal.getItem()) == Block.getIdFromBlock(Blocks.wool) || Item.getIdFromItem(metal.getItem()) == Block.getIdFromBlock(Blocks.carpet)) metal.setItemDamage(15 - metal.getItemDamage());
-                int color = 16777215;
                 JewelryNBT.addMetal(item, metal);
-                try{
-                    color = ItemMoltenMetalBucket.color(item, 1);
-                }
-                catch(IOException e){
-                    e.printStackTrace();
-                }
-                JewelrycraftMod.saveData.setString(i + " " + j + " " + k + " " + world.provider.dimensionId, Item.getIdFromItem(metal.getItem()) + ":" + metal.getItemDamage() + ":" + color);
-                JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, i, j, k, Item.getIdFromItem(metal.getItem()), metal.getItemDamage(), color));
+                JewelrycraftMod.saveData.setString(i + " " + j + " " + k + " " + world.provider.dimensionId, Item.getIdFromItem(metal.getItem()) + ":" + metal.getItemDamage());
+                JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, i, j, k, Item.getIdFromItem(metal.getItem()), metal.getItemDamage()));
                 world.setBlock(i, j, k, BlockList.moltenMetal, 0, 3);
                 int quant = (int)(te.quantity * 10);
                 if (quant == 1) world.setBlockMetadataWithNotify(i, j, k, 4, 3);

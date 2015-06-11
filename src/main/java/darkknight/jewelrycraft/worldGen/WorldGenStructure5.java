@@ -76,23 +76,11 @@ public class WorldGenStructure5 extends WorldGenerator {
 		if (rand.nextInt(5) == 0) {
 			ItemStack stack = new ItemStack(ItemList.bucket);
 			JewelryNBT.addMetal(stack, new ItemStack(Items.gold_ingot));
-			try {
-				if (stack != null && JewelryNBT.ingot(stack) != null) {
-					if (!world.isRemote) world.func_147480_a(x, y, z, true);
-					if (world.isRemote) {
-						int color = ItemMoltenMetalBucket.color(stack, 1);
-						JewelrycraftMod.saveData.setString((x + 1) + " " + (y + 2) + " " + (z - 2) + " " + world.provider.dimensionId, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) + ":" + JewelryNBT.ingot(stack).getItemDamage() + ":" + color);
-						JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, x + 1, y + 2, z - 2, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()), JewelryNBT.ingot(stack).getItemDamage(), color));
-			            JewelrycraftMod.netWrapper.sendToServer(new PacketRequestLiquidData(Minecraft.getMinecraft().theWorld.provider.dimensionId, x + 1, y + 2, z - 2));
-					}
-					else{
-						JewelrycraftMod.saveData.setString(x + " " + y + " " + z + " " + world.provider.dimensionId, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) + ":" + JewelryNBT.ingot(stack).getItemDamage() + ":" + rand.nextInt(16777216));
-						JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, x, y, z, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()), JewelryNBT.ingot(stack).getItemDamage(), rand.nextInt(16777216)));					
-					}	
-					world.setBlock(x + 1, y + 2, z - 2, BlockList.moltenMetal, 0, 3);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (stack != null && JewelryNBT.ingot(stack) != null) {
+				if (!world.isRemote) world.func_147480_a(x, y, z, true);
+				JewelrycraftMod.saveData.setString((x + 1) + " " + (y + 2) + " " + (z - 2) + " " + world.provider.dimensionId, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) + ":" + JewelryNBT.ingot(stack).getItemDamage());
+				JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, x + 1, y + 2, z - 2, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()), JewelryNBT.ingot(stack).getItemDamage()));
+				world.setBlock(x + 1, y + 2, z - 2, BlockList.moltenMetal, 0, 3);
 			}
 		} else if (rand.nextBoolean()) world.setBlock(x + 1, y + 2, z - 2, Blocks.lava, 0, 3);
 		else world.setBlock(x + 1, y + 2, z - 2, Blocks.water, 0, 3);

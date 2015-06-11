@@ -2,12 +2,14 @@ package darkknight.jewelrycraft.block;
 
 import java.io.IOException;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -18,6 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.network.PacketRequestLiquidData;
 import darkknight.jewelrycraft.network.PacketSendLiquidData;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.Variables;
 
 public class BlockMoltenMetal extends BlockFluidClassic
@@ -218,7 +221,7 @@ public class BlockMoltenMetal extends BlockFluidClassic
             JewelrycraftMod.saveData.setString(stringFromLocation(x, y, z, world.provider.dimensionId), originData);
             String[] data = originData.split(":");
             try{
-                JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, x, y, z, Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])));
+                JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, x, y, z, Integer.parseInt(data[0]), Integer.parseInt(data[1])));
             }
             catch(Exception e){
                 System.out.println("The liquids file is either corrupt, missing or the metal for the liquid simply doesn't exist!");
@@ -245,13 +248,12 @@ public class BlockMoltenMetal extends BlockFluidClassic
             return 0xFFFFFF;
         }else{
             String[] splitData = ingotData.split(":");
-            if (splitData.length == 3){
+            if (splitData.length == 2){
                 int color;
                 try{
                     Integer.parseInt(splitData[0]);
                     Integer.parseInt(splitData[1]);
-                    color = Integer.parseInt(splitData[2]);
-                    return color;
+                    return JewelrycraftUtil.getColor(new ItemStack(Item.getItemById(Integer.parseInt(splitData[0])), 1, Integer.parseInt(splitData[1])));
                 }
                 catch(Exception e){
                     e.printStackTrace();

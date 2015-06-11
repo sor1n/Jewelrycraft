@@ -25,6 +25,7 @@ import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.network.PacketRequestLiquidData;
 import darkknight.jewelrycraft.network.PacketSendLiquidData;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.Variables;
 
 public class ItemMoltenMetalBucket extends Item {
@@ -80,11 +81,7 @@ public class ItemMoltenMetalBucket extends Item {
 					if (movingobjectposition.sideHit == 4) --i;
 					if (movingobjectposition.sideHit == 5) ++i;
 					if (!par3EntityPlayer.canPlayerEdit(i, j, k, movingobjectposition.sideHit, stack)) return stack;
-					try {
-						if (tryPlaceContainedLiquid(par2World, i, j, k, stack) && !par3EntityPlayer.capabilities.isCreativeMode) return new ItemStack(Items.bucket);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					if (tryPlaceContainedLiquid(par2World, i, j, k, stack) && !par3EntityPlayer.capabilities.isCreativeMode) return new ItemStack(Items.bucket);
 				}
 			}
 			return stack;
@@ -117,7 +114,7 @@ public class ItemMoltenMetalBucket extends Item {
 	 * @return
 	 * @throws IOException
 	 */
-	public boolean tryPlaceContainedLiquid(World world, int x, int y, int z, ItemStack stack) throws IOException {
+	public boolean tryPlaceContainedLiquid(World world, int x, int y, int z, ItemStack stack) {
 		if (BlockList.moltenMetal == Blocks.air) return false;
 		else {
 			Material material = world.getBlock(x, y, z).getMaterial();
@@ -126,12 +123,8 @@ public class ItemMoltenMetalBucket extends Item {
 			else if (stack != null && JewelryNBT.ingot(stack) != null) {
 				if (!world.isRemote && flag && !material.isLiquid()) world.func_147480_a(x, y, z, true);
 				if (world.isRemote) {
-					int color = color(stack, 1);
-					JewelrycraftMod.saveData.setString(x + " " + y + " " + z + " " + world.provider.dimensionId, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) + ":" + JewelryNBT.ingot(stack).getItemDamage() + ":" + color);
-					JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, x, y, z, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()), JewelryNBT.ingot(stack).getItemDamage(), color));
-				} else {
-					JewelrycraftMod.saveData.setString(x + " " + y + " " + z + " " + world.provider.dimensionId, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) + ":" + JewelryNBT.ingot(stack).getItemDamage() + ":" + world.rand.nextInt(16777216));
-					JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, x, y, z, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()), JewelryNBT.ingot(stack).getItemDamage(), world.rand.nextInt(16777216)));
+					JewelrycraftMod.saveData.setString(x + " " + y + " " + z + " " + world.provider.dimensionId, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) + ":" + JewelryNBT.ingot(stack).getItemDamage());
+					JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, x, y, z, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()), JewelryNBT.ingot(stack).getItemDamage()));
 				}
 				world.setBlock(x, y, z, BlockList.moltenMetal, 0, 3);
 				return true;
@@ -192,7 +185,8 @@ public class ItemMoltenMetalBucket extends Item {
 	 */
 	@SideOnly(Side.CLIENT)
 	public static int color(ItemStack stack, int pass) throws IOException {
-		if (pass == 1) return ItemMoltenMetal.color(stack, pass);
+		// System.out.println(JewelrycraftUtil.getColor(stack));
+		if (pass == 1 && JewelryNBT.ingot(stack) != null) return JewelrycraftUtil.getColor(JewelryNBT.ingot(stack));
 		return 16777215;
 	}
 

@@ -60,12 +60,11 @@ public class BucketHandler
             String ingotData = JewelrycraftMod.saveData.getString(pos.blockX + " " + pos.blockY + " " + pos.blockZ + " " + world.provider.dimensionId);
             if (ingotData != null && ingotData != ""){
                 String[] splitData = ingotData.split(":");
-                if (splitData.length == 3){
+                if (splitData.length == 2){
                     int itemID, itemDamage;
                     try{
                         itemID = Integer.parseInt(splitData[0]);
                         itemDamage = Integer.parseInt(splitData[1]);
-                        Integer.parseInt(splitData[2]);
                         JewelryNBT.addMetal(item, new ItemStack(Item.getItemById(itemID), 1, itemDamage));
                     }
                     catch(Exception e){

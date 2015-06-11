@@ -41,13 +41,12 @@ public class PacketRequestLiquidData implements IMessage, IMessageHandler<Packet
         String data = JewelrycraftMod.saveData.getString(message.x + " " + message.y + " " + message.z + " " + message.dimID);
         String[] splitData = data.split(":");
         IMessage replyPacket = null;
-        if (splitData.length == 3){
-            int itemID, itemDamage, color;
+        if (splitData.length == 2){
+            int itemID, itemDamage;
             try{
                 itemID = Integer.parseInt(splitData[0]);
                 itemDamage = Integer.parseInt(splitData[1]);
-                color = Integer.parseInt(splitData[2]);
-                replyPacket = new PacketSendLiquidData(message, itemID, itemDamage, color);
+                replyPacket = new PacketSendLiquidData(message, itemID, itemDamage);
             }
             catch(Exception e){
                 e.printStackTrace();

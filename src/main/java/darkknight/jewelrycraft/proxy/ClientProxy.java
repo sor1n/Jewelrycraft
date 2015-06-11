@@ -1,5 +1,7 @@
 package darkknight.jewelrycraft.proxy;
 
+import java.util.logging.Level;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -8,13 +10,12 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.Side;
+import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.block.render.BlockCrystalRenderer;
 import darkknight.jewelrycraft.client.InventoryTabVanilla;
 import darkknight.jewelrycraft.client.TabJewelry;
 import darkknight.jewelrycraft.client.TabRegistry;
-import darkknight.jewelrycraft.client.gui.GuiHandler;
 import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.entities.renders.HeartRender;
@@ -74,7 +75,8 @@ public class ClientProxy extends CommonProxy
     {
         TileEntityHandPedestalRender pedestalRender = new TileEntityHandPedestalRender(new ModelHandPedestal(Variables.PEDESTAL_TEXTURE), Variables.PEDESTAL_TEXTURE);
         TileEntityShadowHandRender shadowHandRender = new TileEntityShadowHandRender(new ModelShadowHand(Variables.SHADOW_HAND_TEXTURE), Variables.SHADOW_HAND_TEXTURE);
-        
+
+        JewelrycraftMod.logger.log(Level.INFO, "Binding Tileentities to their Special Rendered");
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySmelter.class, new TileEntitySmelterRender());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMolder.class, new TileEntityMolderRender());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJewelrsCraftingTable.class, new TileEntityJewelrsCraftingTableRender());
@@ -84,6 +86,7 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHandPedestal.class, pedestalRender);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityShadowHand.class, shadowHandRender);
         
+        JewelrycraftMod.logger.log(Level.INFO, "Registering Item Renderes");
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.displayer), new ItemRender(new TileEntityDisplayerRender(), new TileEntityDisplayer(), new ModelDisplayer()));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.jewelCraftingTable), new ItemRender(new TileEntityJewelrsCraftingTableRender(), new TileEntityJewelrsCraftingTable(), new ModelJewlersCraftingBench()));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockList.smelter), new ItemRender(new TileEntitySmelterRender(), new TileEntitySmelter(), new ModelSmelter()));
@@ -95,6 +98,7 @@ public class ClientProxy extends CommonProxy
         
         VillagerRegistry.instance().registerVillagerSkin(3000, Variables.VILLAGER_TEXTURE);
 
+        JewelrycraftMod.logger.log(Level.INFO, "Registering Entity Renders");
         RenderingRegistry.registerEntityRenderingHandler(EntityHeart.class, new HeartRender(new ModelHeart(), 0.25F));
         RenderingRegistry.registerEntityRenderingHandler(EntityHalfHeart.class, new HeartRender(new ModelHalfHeart(), 0.25F));
         
@@ -115,6 +119,8 @@ public class ClientProxy extends CommonProxy
     
     @Override
     public void postInit()
-    {    
+    {   
+    	JewelrycraftMod.logger.log(Level.INFO, "Generating colors for each item");
+    	JewelrycraftUtil.generateColors();
     }
 }
