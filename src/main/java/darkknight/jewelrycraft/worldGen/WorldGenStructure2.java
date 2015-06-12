@@ -49,7 +49,6 @@ public class WorldGenStructure2 extends WorldGenerator {
 			if (!world.isRemote) world.func_147480_a(x, y, z, true);
 			JewelrycraftMod.saveData.setString(x + " " + y + " " + z + " " + world.provider.dimensionId, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) + ":" + JewelryNBT.ingot(stack).getItemDamage());
 			JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, x, y, z, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()), JewelryNBT.ingot(stack).getItemDamage()));
-			System.out.println(x + " " + y + " " + z);
 			world.setBlock(x, y, z, BlockList.moltenMetal, 0, 3);
 		}
 		return true;

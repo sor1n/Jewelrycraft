@@ -88,18 +88,18 @@ public class GuiJewelryModifier extends GuiContainer {
 
 	@Override
 	protected void keyTyped(char character, int key) {
-		try {
-			if (this.searchField.textboxKeyTyped(character, key)) {
+		if (this.searchField.textboxKeyTyped(character, key)) {
+			try {
 				int items = 0;
 				for (ItemStack item : JewelrycraftUtil.objects)
 					if (item != null && searchField.getText() != "" && item.getDisplayName() != null && item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase())) items++;
 				maxPages = items / 48 + 1;
 				page = 1;
 				this.pages.setText(page + "/" + maxPages);
-			} else super.keyTyped(character, key);
-		} catch (Exception e) {
-			JewelrycraftMod.logger.info("Trying to display an item but gets this error: " + e.getMessage());
-		}
+			} catch (Exception e) {
+				JewelrycraftMod.logger.info("Trying to display an item but gets this error: " + e.getMessage());
+			}
+		} else super.keyTyped(character, key);
 	}
 
 	protected void mouseClicked(int x, int y, int id) {
@@ -209,13 +209,17 @@ public class GuiJewelryModifier extends GuiContainer {
 		int i = 0;
 		List<String> list = new ArrayList<String>();
 		for (ItemStack item : JewelrycraftUtil.objects) {
-			if (item != null && item.getDisplayName() != null && (this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase()))) {
-				if (i >= (page - 1) * 48 && i < page * 48 && x >= this.guiLeft + 88 + 20 * (i % 6) && x < this.guiLeft + 108 + 20 * (i % 6) && y >= this.guiTop + 9 + 17 * (i / 6) - 136 * (page - 1) && y < this.guiTop + 25 + 17 * (i / 6) - 136 * (page - 1)) {
-					list.add(item.getDisplayName());
-					if (item.getTooltip(mc.thePlayer, mc.gameSettings.advancedItemTooltips) != null) this.renderToolTip(item, x, y);
-					else this.drawHoveringText(list, x, y, this.fontRendererObj);
+			try {
+				if (item != null && item.getDisplayName() != null && (this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase()))) {
+					if (i >= (page - 1) * 48 && i < page * 48 && x >= this.guiLeft + 88 + 20 * (i % 6) && x < this.guiLeft + 108 + 20 * (i % 6) && y >= this.guiTop + 9 + 17 * (i / 6) - 136 * (page - 1) && y < this.guiTop + 25 + 17 * (i / 6) - 136 * (page - 1)) {
+						list.add(item.getDisplayName());
+						if (item.getTooltip(mc.thePlayer, mc.gameSettings.advancedItemTooltips) != null) this.renderToolTip(item, x, y);
+						else this.drawHoveringText(list, x, y, this.fontRendererObj);
+					}
+					i++;
 				}
-				i++;
+			} catch (Exception e) {
+				JewelrycraftMod.logger.info("Trying to display an item but gets this error: " + e.getMessage());
 			}
 		}
 	}

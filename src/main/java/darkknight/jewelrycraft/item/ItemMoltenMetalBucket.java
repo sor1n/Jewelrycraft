@@ -149,11 +149,7 @@ public class ItemMoltenMetalBucket extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int pass) {
-		try {
-			return color(stack, pass);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		if (pass == 1 && JewelryNBT.ingot(stack) != null) return JewelrycraftUtil.getColor(JewelryNBT.ingot(stack));
 		return 16777215;
 	}
 
@@ -175,19 +171,6 @@ public class ItemMoltenMetalBucket extends Item {
 		if (pass == 0) return itemIcon;
 		if (pass == 1) return liquid;
 		return itemIcon;
-	}
-
-	/**
-	 * @param stack
-	 * @param pass
-	 * @return
-	 * @throws IOException
-	 */
-	@SideOnly(Side.CLIENT)
-	public static int color(ItemStack stack, int pass) throws IOException {
-		// System.out.println(JewelrycraftUtil.getColor(stack));
-		if (pass == 1 && JewelryNBT.ingot(stack) != null) return JewelrycraftUtil.getColor(JewelryNBT.ingot(stack));
-		return 16777215;
 	}
 
 	/**
