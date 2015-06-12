@@ -93,11 +93,7 @@ public class GuiJewelryModifier extends GuiContainer
         if (this.searchField.textboxKeyTyped(character, key)){
             int items = 0;
             for(ItemStack item: JewelrycraftUtil.objects)
-            {
-            	if(Minecraft.getMinecraft().thePlayer.getDisplayName().equals("OnyxDarkKnight")) Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(item.toString()));
-            	JewelrycraftMod.logger.log(Level.WARNING, item.toString() + " " + item.getDisplayName());
                 if (item != null && item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase())) items++;
-            }
             maxPages = items / 48 + 1;
             page = 1;
             this.pages.setText(page + "/" + maxPages);
@@ -215,7 +211,6 @@ public class GuiJewelryModifier extends GuiContainer
         List<String> list = new ArrayList<String>();
         for(ItemStack item: JewelrycraftUtil.objects){
             if (item != null && ( this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase()))){
-            	if(Minecraft.getMinecraft().thePlayer.getDisplayName().equals("OnyxDarkKnight")) Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(item.toString()));
                 if (i >= (page - 1) * 48 && i < page * 48 && x >= this.guiLeft + 88 + 20 * (i % 6) && x < this.guiLeft + 108 + 20 * (i % 6) && y >= this.guiTop + 9 + 17 * (i / 6) - 136 * (page - 1) && y < this.guiTop + 25 + 17 * (i / 6) - 136 * (page - 1)){
                     list.add(item.getDisplayName());
                     if (item.getTooltip(mc.thePlayer, mc.gameSettings.advancedItemTooltips) != null) this.renderToolTip(item, x, y);
