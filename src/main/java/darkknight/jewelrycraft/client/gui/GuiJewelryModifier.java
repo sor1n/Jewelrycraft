@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
@@ -11,8 +13,10 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.client.gui.container.ContainerJewelryModifier;
 import darkknight.jewelrycraft.network.PacketRequestSetSlot;
@@ -88,7 +92,10 @@ public class GuiJewelryModifier extends GuiContainer
         if (this.searchField.textboxKeyTyped(character, key)){
             int items = 0;
             for(ItemStack item: JewelrycraftUtil.objects)
+            {
+            	JewelrycraftMod.logger.log(Level.WARNING, item.toString() + " " + item.getDisplayName());
                 if (item != null && item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase())) items++;
+            }
             maxPages = items / 48 + 1;
             page = 1;
             this.pages.setText(page + "/" + maxPages);

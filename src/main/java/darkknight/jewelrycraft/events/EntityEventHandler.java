@@ -207,7 +207,7 @@ public class EntityEventHandler {
 					if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0) curse.attackedAction(player.worldObj, player);
 
 			}
-			if (!player.worldObj.isRemote && (float) player.hurtResistantTime <= (float) player.maxHurtResistantTime / 2.0F) {
+			if (!player.worldObj.isRemote && (float) player.hurtResistantTime <= (float) player.maxHurtResistantTime / 2.0F && !event.source.isUnblockable()) {
 				if (playerInfo.getFloat("WhiteHeart") > 0) {
 					playerInfo.setFloat("WhiteHeart", 0f);
 					JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());

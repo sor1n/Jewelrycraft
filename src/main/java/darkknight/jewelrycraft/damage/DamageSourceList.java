@@ -19,7 +19,7 @@ public class DamageSourceList
         if (!isInitialized){
             shadows = new DamageSource("shadows").setDamageBypassesArmor().setDamageIsAbsolute();
             blackHeart = new DamageSource("blackHeart").setDamageBypassesArmor().setDamageIsAbsolute();
-            weak = new DamageSource("weak");
+            weak = new DamageSource("weak").setDamageBypassesArmor();
             isInitialized = true;
         }
     }
