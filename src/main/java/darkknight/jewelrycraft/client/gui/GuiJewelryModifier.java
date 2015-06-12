@@ -12,6 +12,7 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -93,6 +94,7 @@ public class GuiJewelryModifier extends GuiContainer
             int items = 0;
             for(ItemStack item: JewelrycraftUtil.objects)
             {
+            	if(Minecraft.getMinecraft().thePlayer.getDisplayName().equals("OnyxDarkKnight")) Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(item.toString()));
             	JewelrycraftMod.logger.log(Level.WARNING, item.toString() + " " + item.getDisplayName());
                 if (item != null && item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase())) items++;
             }
@@ -212,7 +214,8 @@ public class GuiJewelryModifier extends GuiContainer
         int i = 0;
         List<String> list = new ArrayList<String>();
         for(ItemStack item: JewelrycraftUtil.objects){
-            if (this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase())){
+            if (item != null && ( this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase()))){
+            	if(Minecraft.getMinecraft().thePlayer.getDisplayName().equals("OnyxDarkKnight")) Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(item.toString()));
                 if (i >= (page - 1) * 48 && i < page * 48 && x >= this.guiLeft + 88 + 20 * (i % 6) && x < this.guiLeft + 108 + 20 * (i % 6) && y >= this.guiTop + 9 + 17 * (i / 6) - 136 * (page - 1) && y < this.guiTop + 25 + 17 * (i / 6) - 136 * (page - 1)){
                     list.add(item.getDisplayName());
                     if (item.getTooltip(mc.thePlayer, mc.gameSettings.advancedItemTooltips) != null) this.renderToolTip(item, x, y);

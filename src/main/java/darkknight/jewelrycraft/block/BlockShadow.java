@@ -188,6 +188,6 @@ public class BlockShadow extends BlockContainer
     @SideOnly (Side.CLIENT)
     public IIcon getIcon(int side, int meta)
     {
-        return iconArray[meta];
+        return (meta < 16) ? iconArray[meta] : iconArray[0];
     }
 }
