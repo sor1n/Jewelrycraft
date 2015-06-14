@@ -66,22 +66,18 @@ public class GuiJewelryModifier extends GuiContainer {
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		int i = 0;
 		for (ItemStack item : JewelrycraftUtil.objects) {
-			try {
-				if (item != null && item.getDisplayName() != null && (this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase()))) {
-					GL11.glDisable(GL11.GL_LIGHTING);
-					GL11.glColor3f(1F, 1F, 1F);
-					GL11.glEnable(GL11.GL_LIGHTING);
-					GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-					if (i >= (page - 1) * 48 && i < page * 48) try {
-						itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), item, 88 + 20 * (i % 6), 7 + 17 * (i / 6) - 136 * (page - 1));
-					} catch (Exception e) {
-						JewelrycraftMod.logger.info("Trying to display an item but gets this error: " + e.getMessage() + "\nThe item causing the issue is: " + item);
-					}
-					GL11.glDisable(GL11.GL_LIGHTING);
-					i++;
+			if (item != null && item.getDisplayName() != null && (this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase()))) {
+				GL11.glDisable(GL11.GL_LIGHTING);
+				GL11.glColor3f(1F, 1F, 1F);
+				GL11.glEnable(GL11.GL_LIGHTING);
+				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+				if (i >= (page - 1) * 48 && i < page * 48) try {
+					itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), item, 88 + 20 * (i % 6), 7 + 17 * (i / 6) - 136 * (page - 1));
+				} catch (Exception e) {
+					JewelrycraftMod.logger.info("Trying to display an item but gets this error: " + e.getMessage() + "\nThe item causing the issue is: " + item);
 				}
-			} catch (Exception e) {
-				JewelrycraftMod.logger.info("Trying to display an item but gets this error: " + e.getMessage() + "\nThe item causing the issue is: " + item);
+				GL11.glDisable(GL11.GL_LIGHTING);
+				i++;
 			}
 		}
 	}
@@ -89,16 +85,12 @@ public class GuiJewelryModifier extends GuiContainer {
 	@Override
 	protected void keyTyped(char character, int key) {
 		if (this.searchField.textboxKeyTyped(character, key)) {
-			try {
-				int items = 0;
-				for (ItemStack item : JewelrycraftUtil.objects)
-					if (item != null && searchField.getText() != "" && item.getDisplayName() != null && item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase())) items++;
-				maxPages = items / 48 + 1;
-				page = 1;
-				this.pages.setText(page + "/" + maxPages);
-			} catch (Exception e) {
-				JewelrycraftMod.logger.info("Trying to display an item but gets this error: " + e.getMessage());
-			}
+			int items = 0;
+			for (ItemStack item : JewelrycraftUtil.objects)
+				if (item != null && searchField.getText() != "" && item.getDisplayName() != null && item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase())) items++;
+			maxPages = items / 48 + 1;
+			page = 1;
+			this.pages.setText(page + "/" + maxPages);
 		} else super.keyTyped(character, key);
 	}
 
@@ -131,23 +123,27 @@ public class GuiJewelryModifier extends GuiContainer {
 		for (ItemStack item : JewelrycraftUtil.objects) {
 			if (item != null && item.getDisplayName() != null && (this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase()))) {
 				if (i >= (page - 1) * 48 && i < page * 48 && x >= this.guiLeft + 88 + 20 * (i % 6) && x < this.guiLeft + 108 + 20 * (i % 6) && y >= this.guiTop + 9 + 17 * (i / 6) - 136 * (page - 1) && y < this.guiTop + 25 + 17 * (i / 6) - 136 * (page - 1)) {
-					if (!((GuiButton) buttonList.get(0)).enabled || !((GuiButton) buttonList.get(1)).enabled || !((GuiButton) buttonList.get(2)).enabled) {
-						this.selectedItem = item;
-						this.selectedX = 87 + 20 * (i % 6);
-						this.selectedY = 6 + 17 * (i / 6) - 136 * (page - 1);
-						this.selectedPage = page;
-					} else if (!((GuiButton) buttonList.get(3)).enabled) {
-						Map<Integer, Map<Integer, Integer>> itemPage = new HashMap<Integer, Map<Integer, Integer>>();
-						Map<Integer, Integer> pos = new HashMap<Integer, Integer>();
-						pos.put(87 + 20 * (i % 6), 6 + 17 * (i / 6) - 136 * (page - 1));
-						itemPage.put(page, pos);
-						if (!this.selectedItems.contains(item)) {
-							this.selectedItems.add(item);
-							this.selectedItemsPos.add(itemPage);
-						} else {
-							this.selectedItems.remove(item);
-							this.selectedItemsPos.remove(itemPage);
+					try {
+						if (!((GuiButton) buttonList.get(0)).enabled || !((GuiButton) buttonList.get(1)).enabled || !((GuiButton) buttonList.get(2)).enabled) {
+							this.selectedItem = item;
+							this.selectedX = 87 + 20 * (i % 6);
+							this.selectedY = 6 + 17 * (i / 6) - 136 * (page - 1);
+							this.selectedPage = page;
+						} else if (!((GuiButton) buttonList.get(3)).enabled) {
+							Map<Integer, Map<Integer, Integer>> itemPage = new HashMap<Integer, Map<Integer, Integer>>();
+							Map<Integer, Integer> pos = new HashMap<Integer, Integer>();
+							pos.put(87 + 20 * (i % 6), 6 + 17 * (i / 6) - 136 * (page - 1));
+							itemPage.put(page, pos);
+							if (!this.selectedItems.contains(item)) {
+								this.selectedItems.add(item);
+								this.selectedItemsPos.add(itemPage);
+							} else {
+								this.selectedItems.remove(item);
+								this.selectedItemsPos.remove(itemPage);
+							}
 						}
+					} catch (Exception e) {
+						JewelrycraftMod.logger.info("Trying to display an item but gets this error: " + e.getMessage() + "\nThe item causing the issue is: " + item);
 					}
 				}
 				i++;
@@ -209,17 +205,13 @@ public class GuiJewelryModifier extends GuiContainer {
 		int i = 0;
 		List<String> list = new ArrayList<String>();
 		for (ItemStack item : JewelrycraftUtil.objects) {
-			try {
-				if (item != null && item.getDisplayName() != null && (this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase()))) {
-					if (i >= (page - 1) * 48 && i < page * 48 && x >= this.guiLeft + 88 + 20 * (i % 6) && x < this.guiLeft + 108 + 20 * (i % 6) && y >= this.guiTop + 9 + 17 * (i / 6) - 136 * (page - 1) && y < this.guiTop + 25 + 17 * (i / 6) - 136 * (page - 1)) {
-						list.add(item.getDisplayName());
-						if (item.getTooltip(mc.thePlayer, mc.gameSettings.advancedItemTooltips) != null) this.renderToolTip(item, x, y);
-						else this.drawHoveringText(list, x, y, this.fontRendererObj);
-					}
-					i++;
+			if (item != null && item.getDisplayName() != null && (this.searchField.getText() == "" || item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase()))) {
+				if (i >= (page - 1) * 48 && i < page * 48 && x >= this.guiLeft + 88 + 20 * (i % 6) && x < this.guiLeft + 108 + 20 * (i % 6) && y >= this.guiTop + 9 + 17 * (i / 6) - 136 * (page - 1) && y < this.guiTop + 25 + 17 * (i / 6) - 136 * (page - 1)) {
+					list.add(item.getDisplayName());
+					if (item.getTooltip(mc.thePlayer, mc.gameSettings.advancedItemTooltips) != null) this.renderToolTip(item, x, y);
+					else this.drawHoveringText(list, x, y, this.fontRendererObj);
 				}
-			} catch (Exception e) {
-				JewelrycraftMod.logger.info("Trying to display an item but gets this error: " + e.getMessage());
+				i++;
 			}
 		}
 	}

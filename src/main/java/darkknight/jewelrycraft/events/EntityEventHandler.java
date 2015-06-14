@@ -217,7 +217,7 @@ public class EntityEventHandler {
 					if (damage >= 0) playerInfo.setFloat("BlueHeart", damage);
 					else playerInfo.setFloat("BlueHeart", 0f);
 					JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
-					if(damage < 0){
+					if (damage < 0) {
 						System.out.println(damage);
 						player.attackEntityFrom(event.source, Math.abs(damage));
 					}
@@ -239,7 +239,7 @@ public class EntityEventHandler {
 					if (damage >= 0) playerInfo.setFloat("BlackHeart", damage);
 					else playerInfo.setFloat("BlackHeart", 0f);
 					JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
-					if(damage < 0) player.attackEntityFrom(event.source, Math.abs(damage));
+					if (damage < 0) player.attackEntityFrom(event.source, Math.abs(damage));
 					player.hurtResistantTime = player.maxHurtResistantTime;
 					player.hurtTime = player.maxHurtTime = 10;
 					player.worldObj.playSoundAtEntity(player, "game.player.hurt", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
@@ -328,6 +328,8 @@ public class EntityEventHandler {
 			playerInfo.setInteger(cur.getName(), 1);
 			Curse.availableCurses.remove(cur);
 			addedCurses = true;
+			JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+			JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
 		}
 	}
 

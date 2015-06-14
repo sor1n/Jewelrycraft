@@ -15,7 +15,9 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +27,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -133,7 +136,7 @@ public class JewelrycraftUtil {
 		BufferedImage icon;
 		if (stack != null && Item.getIdFromItem(stack.getItem()) > 0 && stack.getIconIndex() != null && stack.getItem().getColorFromItemStack(stack, pass) == 16777215) {
 			try {
-				ingot = ItemBaseJewelry.getLocation(stack, stack, false);
+				ingot = getLocation(stack, stack, false);
 			} catch (Exception e) {
 				ingot = new ResourceLocation("textures/items/apple.png");
 			}
@@ -155,6 +158,22 @@ public class JewelrycraftUtil {
 			return getMostCommonColour(m);
 		} else return stack.getItem().getColorFromItemStack(stack, pass);
 	}
+	
+    public static ResourceLocation getLocation(ItemStack item, ItemStack stack, boolean changeMeta)
+    {
+        String domain = "";
+        String texture;
+        IIcon itemIcon = item.getItem().getIcon(item, 0);
+        String iconName = itemIcon.getIconName();
+        if (iconName.substring(0, iconName.indexOf(":") + 1) != "") domain = iconName.substring(0, iconName.indexOf(":") + 1).replace(":", " ").trim();
+        else domain = "minecraft";
+        texture = iconName.substring(iconName.lastIndexOf(":") + 1) + ".png";
+        ResourceLocation textureLocation = null;
+        TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
+        if (texturemanager.getResourceLocation(item.getItemSpriteNumber()).toString().contains("items")) textureLocation = new ResourceLocation(domain.toLowerCase(), "textures/items/" + texture);
+        else textureLocation = new ResourceLocation(domain.toLowerCase(), "textures/blocks/" + texture);
+        return textureLocation;
+    }
 
 	@SideOnly(Side.CLIENT)
 	public static int getMostCommonColour(Map map) {

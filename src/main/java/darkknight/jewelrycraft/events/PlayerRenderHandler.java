@@ -29,6 +29,7 @@ import darkknight.jewelrycraft.item.render.EarringsRender;
 import darkknight.jewelrycraft.item.render.NecklaceRender;
 import darkknight.jewelrycraft.item.render.RingRender;
 import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 public class PlayerRenderHandler {
 	EarringsRender					earrings	= new EarringsRender();
@@ -60,19 +61,6 @@ public class PlayerRenderHandler {
 					if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0 && event.entityPlayer.getDisplayName().equals(player.getDisplayName()) && playerInfo.getInteger("cursePoints") > 0) curse.playerRender(player, event);
 				int no = 0;
 				ModelRenderer arm = rightArm;
-				if (player.inventory.getCurrentItem() != null && Block.getBlockFromItem(player.inventory.getCurrentItem().getItem()) instanceof BlockAir) {
-					GL11.glDisable(GL11.GL_LIGHT1);
-					FloatBuffer colorBuffer = BufferUtils.createFloatBuffer(4);
-					Vec3 lightPos = Vec3.createVectorHelper(0.0D, 2.0D, 1.0D).normalize();
-					colorBuffer.clear();
-					colorBuffer.put((float) lightPos.xCoord).put((float) lightPos.yCoord).put((float) lightPos.zCoord).put(-1F);
-					colorBuffer.flip();
-					GL11.glLight(GL11.GL_LIGHT0, GL11.GL_POSITION, colorBuffer);
-					colorBuffer.clear();
-					colorBuffer.put(0.03f).put(0.03f).put(0.03f).put(1.0F);
-					colorBuffer.flip();
-					GL11.glLight(GL11.GL_LIGHT0, GL11.GL_DIFFUSE, colorBuffer);
-				}
 				for (int i = 0; i <= 9; i++)
 					if (playerInfo.hasKey("ext" + i) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
 						gem = -1;
@@ -91,8 +79,8 @@ public class PlayerRenderHandler {
 							if (arm.rotateAngleY != 0.0F) GL11.glRotatef(arm.rotateAngleY * (180F / (float) Math.PI), 0.0F, 1.0F, 0.0F);
 							if (arm.rotateAngleX != 0.0F) GL11.glRotatef(arm.rotateAngleX * (180F / (float) Math.PI), 1.0F, 0.0F, 0.0F);
 						}
-						if (JewelryNBT.ingot(item) != null) ingot = JewelryNBT.ingotColor(item);
-						if (JewelryNBT.gem(item) != null) gem = JewelryNBT.gemColor(item);
+						if (JewelryNBT.ingot(item) != null) ingot = JewelrycraftUtil.getColor(JewelryNBT.ingot(item));
+						if (JewelryNBT.gem(item) != null) gem = JewelrycraftUtil.getColor(JewelryNBT.gem(item));
 						float scale = 0.1f;
 						if (Loader.isModLoaded("alpaca") /*&& fiskfille.alpaca.AlpacaAPI.isAlpacaClient(event.entityPlayer)*/) {
 							if (no <= 4) {
@@ -116,8 +104,8 @@ public class PlayerRenderHandler {
 					if (playerInfo.hasKey("ext" + i) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
 						NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
 						ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-						if (JewelryNBT.gem(item) != null) gemColor[i - 10] = JewelryNBT.gemColor(item);
-						if (JewelryNBT.ingot(item) != null) ingotColor[i - 10] = JewelryNBT.ingotColor(item);
+						if (JewelryNBT.ingot(item) != null) ingotColor[i - 10] = JewelrycraftUtil.getColor(JewelryNBT.ingot(item));
+						if (JewelryNBT.gem(item) != null) gemColor[i - 10] = JewelrycraftUtil.getColor(JewelryNBT.gem(item));
 					}
 				if ((playerInfo.hasKey("ext10") || playerInfo.hasKey("ext11")) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
 					GL11.glPushMatrix();
@@ -177,8 +165,8 @@ public class PlayerRenderHandler {
 						}
 						if (Loader.isModLoaded("alpaca") /*&& fiskfille.alpaca.AlpacaAPI.isAlpacaClient(event.entityPlayer)*/) GL11.glTranslatef(0.0F, 0.55F, -0.28F);
 						GL11.glScalef(0.0625f, 0.0625f, 0.0625f);
-						if (JewelryNBT.gem(item) != null) gem = JewelryNBT.gemColor(item);
-						if (JewelryNBT.ingot(item) != null) ingot = JewelryNBT.ingotColor(item);
+						if (JewelryNBT.ingot(item) != null) ingot = JewelrycraftUtil.getColor(JewelryNBT.ingot(item));
+						if (JewelryNBT.gem(item) != null) gem = JewelrycraftUtil.getColor(JewelryNBT.gem(item));
 						if (no > 0) {
 							GL11.glRotatef(no == 1 ? 25f : -25f, 0F, 0f, 1f);
 							GL11.glRotatef(no == 1 ? -5f : -10f, 1F, 0f, 0f);
@@ -206,8 +194,8 @@ public class PlayerRenderHandler {
 					if (Loader.isModLoaded("alpaca") /*&& fiskfille.alpaca.AlpacaAPI.isAlpacaClient(event.entityPlayer)*/) GL11.glTranslatef(0.0F, 0.7F, -0.2F);
 					GL11.glScalef(s, s, s);
 					GL11.glTranslatef(0.0F, 1.0F, -2.0F);
-					if (JewelryNBT.gem(item) != null) gem = JewelryNBT.gemColor(item);
-					if (JewelryNBT.ingot(item) != null) ingot = JewelryNBT.ingotColor(item);
+					if (JewelryNBT.ingot(item) != null) ingot = JewelrycraftUtil.getColor(JewelryNBT.ingot(item));
+					if (JewelryNBT.gem(item) != null) gem = JewelrycraftUtil.getColor(JewelryNBT.gem(item));
 					earrings.doRender(event.entityPlayer, 0F, 0F, (float) ingot, (float) gem, 0F);
 					GL11.glPopMatrix();
 				}
