@@ -11,7 +11,7 @@ public class ConfigHandler
 {
     public static Configuration config;
     public static final ConfigHandler INSTANCE = new ConfigHandler();    
-    public static final String[] categories = {"Timers", "Village Generation", "Misc"};
+    public static final String[] categories = {"Timers", "Village Generation", "Misc", "World Generation"};
     
     public static int INGOT_COOLING_TIME;
     public static int INGOT_MELTING_TIME;
@@ -44,6 +44,15 @@ public class ConfigHandler
     public static boolean CURSE_VAMPIRE_HUNGER = true;
     public static boolean CURSE_HUMBLE_BUNDLE = true;
     
+    public static boolean ENABLE_WORLD_GEN = true;
+    public static boolean ORE_GEN = true;
+    public static boolean CRYSTAL_GEN = true;
+    public static boolean STRUCTURE_1_GEN = true;
+    public static boolean STRUCTURE_2_GEN = true;
+    public static boolean STRUCTURE_3_GEN = true;
+    public static boolean STRUCTURE_4_GEN = true;
+    public static boolean STRUCTURE_5_GEN = true;
+    
     public void loadConfig(FMLPreInitializationEvent event)
     {
         config = new Configuration(event.getSuggestedConfigurationFile(),true);
@@ -73,6 +82,15 @@ public class ConfigHandler
         FURNACE_MAX_INGOT_STACK = config.getInt("Ingot Furnace Max", categories[1], 5, 0, Integer.MAX_VALUE, "Determines the maximum number of ingots that can generate in a furnace.");
         
         CRYSTAL_GLOW = config.getBoolean("Crystal Glow", categories[2], false, "If true, then crystal will slowly glow (can cause lag)");
+        
+        ENABLE_WORLD_GEN = config.getBoolean("World Generation", categories[3], true, "If false, nothing will generate (this includes ore)");
+        ORE_GEN = config.getBoolean("Ore Generation", categories[3], true, "If false, ores won't generate");
+        CRYSTAL_GEN = config.getBoolean("Crystal Generation", categories[3], true, "If false, crystals won't generate");
+        STRUCTURE_1_GEN = config.getBoolean("Structure 1 Generation", categories[3], true, "If false, structure no.1 won't generate");
+        STRUCTURE_2_GEN = config.getBoolean("Structure 2 Generation", categories[3], true, "If false, structure no.2 won't generate");
+        STRUCTURE_3_GEN = config.getBoolean("Structure 3 Generation", categories[3], true, "If false, structure no.3 won't generate");
+        STRUCTURE_4_GEN = config.getBoolean("Structure 4 Generation", categories[3], true, "If false, structure no.4 won't generate");
+        STRUCTURE_5_GEN = config.getBoolean("Structure 5 Generation", categories[3], true, "If false, structure no.5 won't generate");
                 
 //        CURSES_ENABLED = config.getBoolean("Curses", categories[3], true, "If set to false curses will be deactivated.");
 //        CURSE_ROTTEN_HEART = config.getBoolean("Rotten Heart", categories[3], true, "If set to false this curse will be deactivated.");
