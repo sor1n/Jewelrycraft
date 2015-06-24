@@ -21,7 +21,6 @@ public class ConfigHandler
     
     public static boolean GENERATE_VILLAGE_NETHERSTAR;
     public static boolean CAN_FURNACE_GENERATE_INGOTS;
-    public static boolean CRYSTAL_GLOW;
     public static int MAX_VILLAGE_JEWELERS;
     public static int JEWELER_WEIGHT;
     public static int INGOT_CHEST_MIN;
@@ -31,6 +30,9 @@ public class ConfigHandler
     public static int GEM_CHEST_MAX;
     public static int FURNACE_MIN_INGOT_STACK;
     public static int FURNACE_MAX_INGOT_STACK;
+
+    public static boolean CRYSTAL_GLOW;
+    public static boolean HEARTS_DESPAWN;
     
     public static boolean CURSES_ENABLED = true;
     public static boolean CURSE_ROTTEN_HEART = true;
@@ -82,6 +84,7 @@ public class ConfigHandler
         FURNACE_MAX_INGOT_STACK = config.getInt("Ingot Furnace Max", categories[1], 5, 0, Integer.MAX_VALUE, "Determines the maximum number of ingots that can generate in a furnace.");
         
         CRYSTAL_GLOW = config.getBoolean("Crystal Glow", categories[2], false, "If true, then crystal will slowly glow (can cause lag)");
+        HEARTS_DESPAWN = config.getBoolean("Hearts Despawn", categories[2], true, "If false, then Hearts and Half-hearts will no longer despawn");
         
         ENABLE_WORLD_GEN = config.getBoolean("World Generation", categories[3], true, "If false, nothing will generate (this includes ore)");
         ORE_GEN = config.getBoolean("Ore Generation", categories[3], true, "If false, ores won't generate");

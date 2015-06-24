@@ -39,13 +39,13 @@ public class EntityHeart extends EntityLiving
     @Override
     public void updateEntityActionState()
     {
-        ++this.entityAge;
+        if(ConfigHandler.HEARTS_DESPAWN) ++this.entityAge;
     }
     
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
-        if (this.entityAge > ConfigHandler.HEART_DESPAWN_TIME) this.setDead();
+        if (ConfigHandler.HEARTS_DESPAWN && this.entityAge > ConfigHandler.HEART_DESPAWN_TIME) this.setDead();
     }
     
     protected void collideWithEntity(Entity entity)
