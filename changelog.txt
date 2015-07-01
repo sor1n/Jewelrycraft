@@ -1,11 +1,15 @@
 Added:
-- A Gui for Curses
+- A Gui for Curses (default key is C)
+- Curses now have localized names
 
 Removed:
 
-
 Changed:
-
+- Changed Hearts despawn time from 30 to 45 seconds
+- Hearts now are invulnerable first 3 seconds after they spawn
+- "Humble Bundle" curse is now called "2 for 1"
 
 Fixed:
-
+- Pentagram should now be visible for everybody (aka people can now see the pentagram underneath you)
+- Hearts are no longer removed if in creative (so if you take damage in creative the extra hearts don't get removed)
+- Shadow Eye rotation
