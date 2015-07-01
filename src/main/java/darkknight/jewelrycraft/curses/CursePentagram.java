@@ -84,7 +84,7 @@ public class CursePentagram extends Curse {
 
 	@SideOnly(Side.CLIENT)
 	public void playerHandRender(EntityPlayer player, RenderHandEvent event) {
-		if (mc.gameSettings.thirdPersonView == 0) {
+		if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0) {
 			ResourceLocation PENTAGRAM_TEXTURE = new ResourceLocation(Variables.MODID, "textures/gui/" + getTexturePack() + ".png");
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);

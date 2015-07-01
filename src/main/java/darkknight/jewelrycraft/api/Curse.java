@@ -2,8 +2,8 @@ package darkknight.jewelrycraft.api;
 
 import java.util.ArrayList;
 import java.util.Random;
+
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -20,7 +20,6 @@ public abstract class Curse
     protected int textureID;
     protected String name, description, texturePackName;
     protected Random rand = new Random();
-    protected Minecraft mc = Minecraft.getMinecraft();
     private static ArrayList<Curse> curses = new ArrayList<Curse>();
     public static ArrayList<Curse> availableCurses = new ArrayList<Curse>();
     

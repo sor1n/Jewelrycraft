@@ -72,8 +72,9 @@ public class EntityHeart extends EntityLiving {
 					playerInfo.setFloat(getType() + "Heart", 0F);
 					player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() + playerInfo.getFloat("WhiteHeart"));
 					this.setDead();
-				} else if (getType().equals("Black") || getType().equals("Blue")) {
-					playerInfo.setFloat(getType() + "Heart", playerInfo.getFloat(getType() + "Heart") + getQuantity());
+				} else if (!getType().equals("Red")) {
+					if(playerInfo.hasKey(getType() + "Heart")) playerInfo.setFloat(getType() + "Heart", playerInfo.getFloat(getType() + "Heart") + getQuantity());
+					else playerInfo.setFloat(getType() + "Heart", getQuantity());
 					JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
 					this.setDead();
 				}
