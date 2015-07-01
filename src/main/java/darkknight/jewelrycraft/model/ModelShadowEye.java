@@ -119,8 +119,11 @@ public class ModelShadowEye extends ModelBase {
 		else
 		{
 			Eye.rotateAngleX = 0F;
-			Eye.rotateAngleY = 0F;
-			Eye.rotateAngleZ = 0F;			
+			Eye.rotateAngleZ = 0F;
+			if (f3 == 0) Eye.rotateAngleY = (float) (0.5F*Math.PI);
+			else if (f3 == 1) Eye.rotateAngleY = (float) (Math.PI);
+			else if (f3 == 2) Eye.rotateAngleY = (float) (1.5F*Math.PI);
+			else if (f3 == 3) Eye.rotateAngleY = (float) (0F*Math.PI);
 		}
 	}
 

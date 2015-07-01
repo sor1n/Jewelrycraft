@@ -14,6 +14,7 @@ import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.block.render.BlockCrystalRenderer;
 import darkknight.jewelrycraft.client.InventoryTabVanilla;
+import darkknight.jewelrycraft.client.TabCurses;
 import darkknight.jewelrycraft.client.TabJewelry;
 import darkknight.jewelrycraft.client.TabRegistry;
 import darkknight.jewelrycraft.entities.EntityHalfHeart;
@@ -106,6 +107,7 @@ public class ClientProxy extends CommonProxy
 
         TabRegistry.registerTab(new InventoryTabVanilla());
         TabRegistry.registerTab(new TabJewelry());
+        TabRegistry.registerTab(new TabCurses());
         MinecraftForge.EVENT_BUS.register(new TabRegistry());
         MinecraftForge.EVENT_BUS.register(new PlayerRenderHandler());
         MinecraftForge.EVENT_BUS.register(new ScreenHandler(Minecraft.getMinecraft()));

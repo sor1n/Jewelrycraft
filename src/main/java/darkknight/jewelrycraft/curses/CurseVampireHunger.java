@@ -31,6 +31,12 @@ public class CurseVampireHunger extends Curse
     {
         return StatCollector.translateToLocal("curse." + Variables.MODID + ".vampirehunger.description");
     }
+    
+	@Override
+	public String getDisplayName() 
+	{
+		return StatCollector.translateToLocal("curse." + Variables.MODID + ".vampirehunger");
+	}
 
     @Override
     public boolean canCurseBeActivated(World world)

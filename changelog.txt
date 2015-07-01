@@ -1,16 +1,11 @@
 Added:
-- Hearts now have spawn eggs
-- There is now a config option to disable structures from spawning; you can chose to disable each structure individually or every single one (note, this will disable the Shadow ore as well)
+- A Gui for Curses
 
 Removed:
-- Had to remove the better Alpaca modelling system until Fisk decides to create a page where I can find all the downloads (post it on curse already :p)
+
 
 Changed:
-- Improved molten liquids
-- Improved the Cursed Eye following the player algorithm 
-- Improved Hearts mechanics, now they should be a bit more reliable
-- Hearts now render on the right side of the hotbar rather than the left
-- Improved color detection system (should be less laggy now)
+
 
 Fixed:
-- Structures crashing servers
+

@@ -4,6 +4,7 @@
 package darkknight.jewelrycraft.curses;
 
 import java.util.ArrayList;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -58,6 +59,12 @@ public class CurseHumbleBundle extends Curse
     {
         return StatCollector.translateToLocal("curse." + Variables.MODID + ".humblebundle.description");
     }
+
+	@Override
+	public String getDisplayName() 
+	{
+		return StatCollector.translateToLocal("curse." + Variables.MODID + ".humblebundle");
+	}
 
     @Override
     public boolean canCurseBeActivated(World world)

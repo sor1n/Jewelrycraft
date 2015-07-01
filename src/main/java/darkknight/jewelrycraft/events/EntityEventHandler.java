@@ -22,7 +22,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.WeightedRandom;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -148,8 +150,7 @@ public class EntityEventHandler {
 					JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
 					if (addedCurses) {
 						JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
-						// player.openGui(JewelrycraftMod.instance, 4,
-						// player.worldObj, 0, 0, 0);
+						player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("curse." + Variables.MODID + ".activated")));
 						addedCurses = false;
 					}
 				}
@@ -184,7 +185,7 @@ public class EntityEventHandler {
 		if (entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entity;
 			NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
-			if (!(event.source.getEntity() instanceof EntityPlayer)) {
+			if (!(event.source.getEntity() instanceof EntityPlayer) && !player.capabilities.isCreativeMode) {
 				if (!player.worldObj.isRemote) for (int i = 0; i < 18; i++)
 					if (playerInfo.hasKey("ext" + i)) {
 						NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
@@ -207,7 +208,7 @@ public class EntityEventHandler {
 					if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0) curse.attackedAction(player.worldObj, player);
 
 			}
-			if (!player.worldObj.isRemote && (float) player.hurtResistantTime <= (float) player.maxHurtResistantTime / 2.0F && !event.source.isUnblockable()) {
+			if (!player.worldObj.isRemote && !player.capabilities.isCreativeMode && (float) player.hurtResistantTime <= (float) player.maxHurtResistantTime / 2.0F && !event.source.isUnblockable()) {
 				if (playerInfo.getFloat("WhiteHeart") > 0) {
 					playerInfo.setFloat("WhiteHeart", 0f);
 					JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
@@ -232,7 +233,7 @@ public class EntityEventHandler {
 						Iterator iterator = enemies.iterator();
 						while (iterator.hasNext()) {
 							Entity enemy = (Entity) iterator.next();
-							enemy.attackEntityFrom(DamageSourceList.blackHeart, 5f * event.ammount);
+							enemy.attackEntityFrom(DamageSourceList.blackHeart, 2f * event.ammount);
 						}
 					}
 					float damage = playerInfo.getFloat("BlackHeart") - event.ammount;
@@ -270,6 +271,7 @@ public class EntityEventHandler {
 				}
 			if (ConfigHandler.CURSES_ENABLED) for (Curse curse : Curse.getCurseList())
 				if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0) curse.attackedByPlayerAction(entity.worldObj, player, entity);
+			if(entity instanceof EntityHeart && entity.getAge() < 50) event.setCanceled(true);
 		}
 	}
 

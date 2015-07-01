@@ -118,6 +118,19 @@ curse.jewelrycraft2.rabbitspaw.description=The Dark Lord is giving you a gift. D
 curse.jewelrycraft2.rottenheart.description=Your heart slowly rots inside
 curse.jewelrycraft2.vampirehunger.description=You feel the need for blood
 
+curse.jewelrycraft2.blind=Blind
+curse.jewelrycraft2.flamingsoul=Flaming Soul
+curse.jewelrycraft2.greed=Greed
+curse.jewelrycraft2.humblebundle=2 for 1
+curse.jewelrycraft2.infamy=Infamy
+curse.jewelrycraft2.midastouch=Midas Touch
+curse.jewelrycraft2.pentagram=Pentagram
+curse.jewelrycraft2.rabbitspaw=Rabbit's Paw
+curse.jewelrycraft2.rottenheart=Rotten Heart
+curse.jewelrycraft2.vampirehunger=Vampire Hunger
+
+curse.jewelrycraft2.activated=You got cursed, press C to open the tab to see the active curses.
+
 death.attack.weak=%1$s was weakened by a piece of jewelry and died
 death.attack.shadows=%1$s was consumed by the shadows
 death.attack.blackHeart=%1$s was killed by %2$s's curse

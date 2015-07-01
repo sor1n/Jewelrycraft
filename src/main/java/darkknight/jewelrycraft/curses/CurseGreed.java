@@ -37,4 +37,10 @@ public class CurseGreed extends Curse
     {
         return ConfigHandler.CURSE_GREED;
     }
+
+	@Override
+	public String getDisplayName() 
+	{
+		return StatCollector.translateToLocal("curse." + Variables.MODID + ".greed");
+	}
 }

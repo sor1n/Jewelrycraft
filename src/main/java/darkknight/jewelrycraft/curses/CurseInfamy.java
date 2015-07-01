@@ -1,6 +1,7 @@
 package darkknight.jewelrycraft.curses;
 
 import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -70,6 +71,12 @@ public class CurseInfamy extends Curse
     {
         return StatCollector.translateToLocal("curse." + Variables.MODID + ".infamy.description");
     }
+    
+	@Override
+	public String getDisplayName() 
+	{
+		return StatCollector.translateToLocal("curse." + Variables.MODID + ".infamy");
+	}
 
     @Override
     public boolean canCurseBeActivated(World world)

@@ -33,6 +33,7 @@ public class ConfigHandler
 
     public static boolean CRYSTAL_GLOW;
     public static boolean HEARTS_DESPAWN;
+    public static boolean JEWELRY_INFO;
     
     public static boolean CURSES_ENABLED = true;
     public static boolean CURSE_ROTTEN_HEART = true;
@@ -68,7 +69,7 @@ public class ConfigHandler
         INGOT_MELTING_TIME = config.getInt("Ingot Melting Time", categories[0], 1500, 5, Integer.MAX_VALUE, "This sets the number of ticks you need to wait before an ingot is completely smelted.");
         GEM_PLACEMENT_TIME = config.getInt( "Jewelry Crafting Time", categories[0], 200, 5, Integer.MAX_VALUE, "This sets the number of ticks it takes for a jewel to be modified.");
         RITUAL_TIME = config.getInt( "Ritual Time", categories[0], 1000, 5, Integer.MAX_VALUE, "This sets the number of ticks it takes for the ritual to end.");
-        HEART_DESPAWN_TIME = config.getInt( "Hearts Despawn Time", categories[0], 600, 20, Integer.MAX_VALUE, "This sets the number of ticks it takes for hearts to despawn, 20=1 second");
+        HEART_DESPAWN_TIME = config.getInt( "Hearts Despawn Time", categories[0], 900, 20, Integer.MAX_VALUE, "This sets the number of ticks it takes for hearts to despawn, 20=1 second");
         
         GENERATE_VILLAGE_NETHERSTAR = config.getBoolean("Netherstar Generation", categories[1], false, "If set to true Nether Stars will be able to generate in Jewelers chests.");
         CAN_FURNACE_GENERATE_INGOTS = config.getBoolean("Furnace Ingots Generation", categories[1], true, "If set to true jewelers will generate ingots in furnaces.");
@@ -85,6 +86,7 @@ public class ConfigHandler
         
         CRYSTAL_GLOW = config.getBoolean("Crystal Glow", categories[2], false, "If true, then crystal will slowly glow (can cause lag)");
         HEARTS_DESPAWN = config.getBoolean("Hearts Despawn", categories[2], true, "If false, then Hearts and Half-hearts will no longer despawn");
+        JEWELRY_INFO = config.getBoolean("Jewelry Info", categories[2], true, "If false, then extra info won't be show when hovering over a jewelery.");
         
         ENABLE_WORLD_GEN = config.getBoolean("World Generation", categories[3], true, "If false, nothing will generate (this includes ore)");
         ORE_GEN = config.getBoolean("Ore Generation", categories[3], true, "If false, ores won't generate");

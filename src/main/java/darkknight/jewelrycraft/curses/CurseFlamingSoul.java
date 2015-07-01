@@ -30,4 +30,10 @@ public class CurseFlamingSoul extends Curse
     {
         return ConfigHandler.CURSE_FLAMING_SOUL;
     }
+
+	@Override
+	public String getDisplayName() 
+	{
+		return StatCollector.translateToLocal("curse." + Variables.MODID + ".flamingsoul");
+	}
 }

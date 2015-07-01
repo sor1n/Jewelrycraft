@@ -1,6 +1,7 @@
 package darkknight.jewelrycraft.curses;
 
 import java.util.Random;
+
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.Variables;
@@ -39,4 +40,10 @@ public class CurseBlind extends Curse
     {
         return 7;
     }
+
+	@Override
+	public String getDisplayName() 
+	{
+		return StatCollector.translateToLocal("curse." + Variables.MODID + ".blind");
+	}
 }

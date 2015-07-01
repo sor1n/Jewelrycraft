@@ -32,6 +32,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.api.ModifierEffects;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.Variables;
@@ -79,7 +80,7 @@ public abstract class ItemBaseJewelry extends Item
      */
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
     {
-        if (stack.hasTagCompound()){
+        if (stack.hasTagCompound() && ConfigHandler.JEWELRY_INFO){
             ItemStack ingot = JewelryNBT.ingot(stack);
             if (ingot != null && Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) > 0) list.add(StatCollector.translateToLocal("info." + Variables.MODID + ".metal") + ": " + EnumChatFormatting.YELLOW + ingot.getDisplayName().replace(StatCollector.translateToLocal("info." + Variables.MODID + ".ingot"), " "));
             ItemStack gem = JewelryNBT.gem(stack);

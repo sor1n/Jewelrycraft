@@ -22,6 +22,7 @@ public class GuiHandler implements IGuiHandler
     ResourceLocation flippedPageTexture = new ResourceLocation(Variables.MODID, "textures/gui/guidePageFlip.png");
     ResourceLocation chestTexture = new ResourceLocation(Variables.MODID, "textures/gui/chest_ring.png");
     ResourceLocation jewelryInvTexture = new ResourceLocation(Variables.MODID, "textures/gui/jewelry_tab.png");
+    ResourceLocation cursesInvTexture = new ResourceLocation(Variables.MODID, "textures/gui/curses_tab.png");
     ResourceLocation jewlryModTexture = new ResourceLocation(Variables.MODID, "textures/gui/jewelry_modifier.png");
     
     /**
@@ -84,7 +85,7 @@ public class GuiHandler implements IGuiHandler
             case 3:
                 return new GuiJewelryModifier((ContainerJewelryModifier)getServerGuiElement(ID, player, world, x, y, z), jewlryModTexture);
             case 4:
-                return new GuiCurseInfo((ContainerCurseInfo)getServerGuiElement(ID, player, world, x, y, z), world, player);
+                return new GuiCurseInfo((ContainerCurseInfo)getServerGuiElement(ID, player, world, x, y, z), world, player, cursesInvTexture);
             default:
                 return null;
         }

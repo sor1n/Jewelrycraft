@@ -27,6 +27,12 @@ public class CurseRottenHeart extends Curse
         return StatCollector.translateToLocal("curse." + Variables.MODID + ".rottenheart.description");
     }
     
+	@Override
+	public String getDisplayName() 
+	{
+		return StatCollector.translateToLocal("curse." + Variables.MODID + ".rottenheart");
+	}
+    
     @Override
     public boolean canCurseBeActivated(World world)
     {

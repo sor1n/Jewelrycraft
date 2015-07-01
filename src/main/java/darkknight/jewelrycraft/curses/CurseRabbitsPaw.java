@@ -4,6 +4,7 @@
 package darkknight.jewelrycraft.curses;
 
 import java.util.ArrayList;
+
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.entities.EntityHalfHeart;
@@ -64,6 +65,12 @@ public class CurseRabbitsPaw extends Curse
     {
         return StatCollector.translateToLocal("curse." + Variables.MODID + ".rabbitspaw.description");
     }
+    
+	@Override
+	public String getDisplayName() 
+	{
+		return StatCollector.translateToLocal("curse." + Variables.MODID + ".rabbitspaw");
+	}
 
     @Override
     public boolean canCurseBeActivated(World world)

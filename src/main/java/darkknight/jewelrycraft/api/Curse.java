@@ -15,11 +15,12 @@ import net.minecraftforge.event.world.BlockEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Curse
+public abstract class Curse
 {
     protected int textureID;
     protected String name, description, texturePackName;
     protected Random rand = new Random();
+    protected Minecraft mc = Minecraft.getMinecraft();
     private static ArrayList<Curse> curses = new ArrayList<Curse>();
     public static ArrayList<Curse> availableCurses = new ArrayList<Curse>();
     
@@ -44,6 +45,8 @@ public class Curse
     {
         return name;
     }
+    
+    public abstract String getDisplayName();
 
     /**
      * @return The description of the curse

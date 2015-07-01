@@ -13,6 +13,7 @@ public class KeyBindings
 {
     public static KeyBinding render = new KeyBinding("Pretty Render", Keyboard.KEY_Z, Variables.MODNAME);
     public static KeyBinding inventory = new KeyBinding("Jewelry Inventory", Keyboard.KEY_J, Variables.MODNAME);
+    public static KeyBinding curses = new KeyBinding("Curses Tab", Keyboard.KEY_C, Variables.MODNAME);
     
     /**
      * 
@@ -21,6 +22,7 @@ public class KeyBindings
     {
         ClientRegistry.registerKeyBinding(render);
         ClientRegistry.registerKeyBinding(inventory);
+        ClientRegistry.registerKeyBinding(curses);
     }
     
     /**
@@ -31,5 +33,6 @@ public class KeyBindings
     {
         if (render.isPressed()) JewelrycraftMod.fancyRender = !JewelrycraftMod.fancyRender;
         if (inventory.isPressed()) JewelrycraftMod.netWrapper.sendToServer(new PacketKeyPressEvent(0));
+        if (curses.isPressed()) JewelrycraftMod.netWrapper.sendToServer(new PacketKeyPressEvent(1));
     }
 }

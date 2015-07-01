@@ -36,6 +36,7 @@ public class PacketKeyPressEvent implements IMessage, IMessageHandler<PacketKeyP
         EntityPlayer sender = ctx.getServerHandler().playerEntity;
         // Jewelry inventory
         if (message.actionID == 0) sender.openGui(JewelrycraftMod.instance, 2, sender.worldObj, (int)sender.posX, (int)sender.posY, (int)sender.posZ);
+        if (message.actionID == 1) sender.openGui(JewelrycraftMod.instance, 4, sender.worldObj, (int)sender.posX, (int)sender.posY, (int)sender.posZ);
         return null;
     }
     
