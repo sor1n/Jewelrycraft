@@ -22,6 +22,7 @@ project.ext {
 	massive = "1"
     major = "0"
     minor = "12"
+    build = "2"
     mcVersion = "1.7.10"
 	ee3Version = "0.3.505"
 	alpacaVersion = "1.2"
@@ -33,7 +34,7 @@ if (System.getenv().BUILD_NUMBER != null) {
     version += "-err"
 }
 
-version = "${project.ext.massive}.${project.ext.major}.${project.minor}"
+version = "${project.ext.massive}.${project.ext.major}.${project.minor}.${project.build}"
 group= "darkknight.jewelrycraft2"
 archivesBaseName = "[${project.ext.mcVersion}] Jewelrycraft2"
 
@@ -68,6 +69,7 @@ minecraft {
 	replace '@MASSIVE@', project.massive
     replace '@MAJOR@', project.major
     replace '@MINOR@', project.minor
+    replace '@BUILD@', project.build
     replace '@MC_VERSION@', version
     if (System.getenv("BUILD_NUMBER") != null) {
         replace '@BUILD_NUMBER@', System.getenv("BUILD_NUMBER")
