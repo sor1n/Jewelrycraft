@@ -78,7 +78,7 @@ public class GuiCurseInfo extends GuiContainer {
 					if (playerInfo.getInteger(curse.getName()) > 0) {
 						mc.renderEngine.bindTexture(Variables.MISC_TEXTURE);
 						drawTexturedModalRect(guiLeft + 43, guiTop + 5 + (size - 8) * ind, 0, 32, 112, 22);
-						if (playerInfo.getInteger(curse.getName()) == 1) {
+						if (playerInfo.getInteger(curse.getName()) == 2) {
 							GL11.glPushMatrix();
 							GL11.glEnable(GL11.GL_BLEND);
 							GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

@@ -58,11 +58,11 @@ public class PlayerRenderHandler {
 				EntityPlayer player = players.next();
 				NBTTagCompound playerInfo = (NBTTagCompound) playersInfo.getTag(player.getDisplayName());
 				if (ConfigHandler.CURSES_ENABLED) for (Curse curse : Curse.getCurseList())
-					if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0 && event.entityPlayer.getDisplayName().equals(player.getDisplayName()) && playerInfo.getInteger("cursePoints") > 0) curse.playerRender(player, event);
+					if (curse != null && curse.canCurseBeActivated(player.worldObj) && playerInfo != null && curse.getName() != null && playerInfo.getInteger(curse.getName()) > 0 && event.entityPlayer != null && player != null && event.entityPlayer.getDisplayName().equals(player.getDisplayName()) && playerInfo.getInteger("cursePoints") > 0) curse.playerRender(player, event);	
 				int no = 0;
 				ModelRenderer arm = rightArm;
 				for (int i = 0; i <= 9; i++)
-					if (playerInfo.hasKey("ext" + i) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
+					if (playerInfo != null && event.entityPlayer != null && player != null && playerInfo.hasKey("ext" + i) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
 						gem = -1;
 						ingot = -1;
 						if (no > 4) arm = leftArm;
@@ -101,13 +101,13 @@ public class PlayerRenderHandler {
 						no++;
 					}
 				for (int i = 10; i <= 13; i++)
-					if (playerInfo.hasKey("ext" + i) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
+					if (playerInfo != null && event.entityPlayer != null && player != null && playerInfo.hasKey("ext" + i) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
 						NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
 						ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
 						if (JewelryNBT.ingot(item) != null) ingotColor[i - 10] = JewelrycraftUtil.getColor(JewelryNBT.ingot(item));
 						if (JewelryNBT.gem(item) != null) gemColor[i - 10] = JewelrycraftUtil.getColor(JewelryNBT.gem(item));
 					}
-				if ((playerInfo.hasKey("ext10") || playerInfo.hasKey("ext11")) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
+				if (playerInfo != null && event.entityPlayer != null && player != null && (playerInfo.hasKey("ext10") || playerInfo.hasKey("ext11")) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
 					GL11.glPushMatrix();
 					GL11.glColor4f(1, 1, 1, 1);
 					if (Loader.isModLoaded("alpaca") /*&& fiskfille.alpaca.AlpacaAPI.isAlpacaClient(event.entityPlayer)*/) {
@@ -127,7 +127,7 @@ public class PlayerRenderHandler {
 					bracelet.doRender(event.entityPlayer, (float) ingotColor[0], (float) gemColor[0], (float) ingotColor[1], (float) gemColor[1], 0.0F);
 					GL11.glPopMatrix();
 				}
-				if ((playerInfo.hasKey("ext12") || playerInfo.hasKey("ext13")) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
+				if (playerInfo != null && event.entityPlayer != null && player != null && (playerInfo.hasKey("ext12") || playerInfo.hasKey("ext13")) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
 					GL11.glPushMatrix();
 					GL11.glColor4f(1, 1, 1, 1);
 					if (Loader.isModLoaded("alpaca") /*&& fiskfille.alpaca.AlpacaAPI.isAlpacaClient(event.entityPlayer)*/) {
@@ -149,7 +149,7 @@ public class PlayerRenderHandler {
 				}
 				no = 0;
 				for (int i = 14; i <= 16; i++)
-					if (playerInfo.hasKey("ext" + i) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
+					if (playerInfo != null && event.entityPlayer != null && player != null && playerInfo.hasKey("ext" + i) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
 						gem = -1;
 						ingot = -1;
 						NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
@@ -175,7 +175,7 @@ public class PlayerRenderHandler {
 						GL11.glPopMatrix();
 						no++;
 					}
-				if (playerInfo.hasKey("ext17") && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
+				if (playerInfo != null && event.entityPlayer != null && player != null && playerInfo.hasKey("ext17") && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
 					gem = -1;
 					ingot = -1;
 					NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext17");

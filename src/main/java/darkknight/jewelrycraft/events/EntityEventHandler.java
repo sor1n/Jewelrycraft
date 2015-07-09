@@ -50,6 +50,7 @@ import darkknight.jewelrycraft.item.ItemBaseJewelry;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.network.PacketClearColorCache;
 import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
+import darkknight.jewelrycraft.network.PacketSendClientPlayerInfo;
 import darkknight.jewelrycraft.network.PacketSendServerPlayersInfo;
 import darkknight.jewelrycraft.potions.PotionList;
 import darkknight.jewelrycraft.random.WeightedRandomCurse;
@@ -147,7 +148,7 @@ public class EntityEventHandler {
 						playerInfo.setInteger("curseTime", 23000);
 						playerInfo.setBoolean("reselectCurses", false);
 					}
-					JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
 					if (addedCurses) {
 						JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
 						player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("curse." + Variables.MODID + ".activated")));
@@ -211,13 +212,13 @@ public class EntityEventHandler {
 			if (!player.worldObj.isRemote && !player.capabilities.isCreativeMode && (float) player.hurtResistantTime <= (float) player.maxHurtResistantTime / 2.0F && !event.source.isUnblockable()) {
 				if (playerInfo.getFloat("WhiteHeart") > 0) {
 					playerInfo.setFloat("WhiteHeart", 0f);
-					JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
 				}
 				if (playerInfo.getFloat("BlueHeart") > 0) {
 					float damage = playerInfo.getFloat("BlueHeart") - event.ammount;
 					if (damage >= 0) playerInfo.setFloat("BlueHeart", damage);
 					else playerInfo.setFloat("BlueHeart", 0f);
-					JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
 					if (damage < 0) {
 						System.out.println(damage);
 						player.attackEntityFrom(event.source, Math.abs(damage));
@@ -239,7 +240,7 @@ public class EntityEventHandler {
 					float damage = playerInfo.getFloat("BlackHeart") - event.ammount;
 					if (damage >= 0) playerInfo.setFloat("BlackHeart", damage);
 					else playerInfo.setFloat("BlackHeart", 0f);
-					JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
 					if (damage < 0) player.attackEntityFrom(event.source, Math.abs(damage));
 					player.hurtResistantTime = player.maxHurtResistantTime;
 					player.hurtTime = player.maxHurtTime = 10;
@@ -307,13 +308,12 @@ public class EntityEventHandler {
 					}
 				}
 		}
-		if (event.entity instanceof EntityPlayer && !(event.entity instanceof EntityPlayerMP)) JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+		//if (event.entity instanceof EntityPlayer && !(event.entity instanceof EntityPlayerMP)) JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
 		if (!player.worldObj.isRemote) {
-			JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+			NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
+			JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
 			if (addedCurses) {
 				JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
-				// player.openGui(JewelrycraftMod.instance, 4, player.worldObj,
-				// 0, 0, 0);
 				addedCurses = false;
 			}
 		}
@@ -330,8 +330,9 @@ public class EntityEventHandler {
 			playerInfo.setInteger(cur.getName(), 1);
 			Curse.availableCurses.remove(cur);
 			addedCurses = true;
-			JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+//			JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
 			JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
+			JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
 		}
 	}
 

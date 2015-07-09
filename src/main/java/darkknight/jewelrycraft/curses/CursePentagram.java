@@ -37,7 +37,7 @@ public class CursePentagram extends Curse {
 		if (!world.isRemote) {
 			for (Object entity : world.getEntitiesWithinAABBExcludingEntity(player, AxisAlignedBB.getBoundingBox(player.boundingBox.minX - 0.5F, player.boundingBox.minY, player.boundingBox.minZ - 0.5F, player.boundingBox.maxX + 0.5F, player.boundingBox.maxY, player.boundingBox.maxZ + 0.5F))) {
 				if (entity instanceof EntityLivingBase && rand.nextInt(40) == 0) {
-					((EntityLivingBase) entity).attackEntityFrom(DamageSourceList.shadows, 2f);
+					((EntityLivingBase) entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(((EntityLivingBase) entity).getMaxHealth() - 2f);//attackEntityFrom(DamageSourceList.shadows, 2f);
 					if (player.shouldHeal()) player.heal(2F);
 					else player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() + 2f);
 				}

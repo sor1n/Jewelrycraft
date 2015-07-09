@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -15,6 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
+import darkknight.jewelrycraft.network.PacketSendClientPlayerInfo;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
@@ -70,12 +72,14 @@ public class EntityHeart extends EntityLiving {
 					}
 				} else if (getType().equals("White") && playerInfo.getFloat("WhiteHeart") > 0.1F) {
 					playerInfo.setFloat(getType() + "Heart", 0F);
-					player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() + playerInfo.getFloat("WhiteHeart"));
+					player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() + 2f);
+					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
+//					player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() + playerInfo.getFloat("WhiteHeart"));
 					this.setDead();
 				} else if (!getType().equals("Red")) {
 					if(playerInfo.hasKey(getType() + "Heart")) playerInfo.setFloat(getType() + "Heart", playerInfo.getFloat(getType() + "Heart") + getQuantity());
-					else playerInfo.setFloat(getType() + "Heart", getQuantity());
-					JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+					else playerInfo.setFloat(getType() + "Heart", getQuantity());					
+					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
 					this.setDead();
 				}
 			}
