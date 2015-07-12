@@ -22,7 +22,7 @@ project.ext {
 	massive = "1"
     major = "0"
     minor = "12"
-    build = "2"
+    build = "3"
     mcVersion = "1.7.10"
 	ee3Version = "0.3.505"
 	alpacaVersion = "1.2"

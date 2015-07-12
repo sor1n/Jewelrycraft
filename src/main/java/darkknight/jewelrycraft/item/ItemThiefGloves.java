@@ -87,7 +87,7 @@ public class ItemThiefGloves extends Item
                         if (player.inventory.addItemStackToInventory(s)) ;
                         else villager.entityDropItem(s, 0);
                         if (!player.capabilities.isCreativeMode) JewelrycraftUtil.addCursePoints(player, 5);
-                        player.addChatMessage(new ChatComponentText(villagerString+" #" + villager.getProfession() + ": "+StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".villager.confusion") + s.getDisplayName() + "!"));
+                        player.addChatMessage(new ChatComponentText(villagerString+" #" + villager.getProfession() + ": "+StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".villager.confusion") + " " + s.getDisplayName() + "!"));
                         stack.damageItem(1, player);
                     }
                     buyingList.clear();

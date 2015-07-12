@@ -92,7 +92,7 @@ public class GuiTabBlocks extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values >= 4) values = 0;
-                Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(BlockList.jewelCraftingTable), new ItemStack(Blocks.planks, 1, values), new ItemStack(Blocks.planks, 1, values), new ItemStack(Blocks.planks, 1, values), new ItemStack(Blocks.cobblestone), null, new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.cobblestone), null, new ItemStack(Blocks.cobblestone));
+                Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(BlockList.jewelCraftingTable), new ItemStack(Blocks.planks, 1, values), new ItemStack(Blocks.planks, 1, values), new ItemStack(Blocks.planks, 1, values), new ItemStack(Blocks.stone), null, new ItemStack(Blocks.stone), new ItemStack(Blocks.stone), null, new ItemStack(Blocks.stone));
                 break;
             case 11:
                 text = "can find a list with all possible gems in this guide). Crouch + Right Click to retreive placed items. Left Click the block to see the progress the crafting has made. Once the crafting is done, Left Click the block to get the item. You are able to recraft a";

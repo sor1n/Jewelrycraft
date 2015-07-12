@@ -66,7 +66,7 @@ public class GuiTabItems extends GuiTab
                 break;
             case 4:
                 text = "In order to get the ingot back from the smelter you need a mold for it. However, this mold can't be used. It is too soft. It needs to be hardened in order for it to be used.";
-                Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), true, text, x, y, true, new ItemStack(ItemList.clayMolds, 1, 0), new ItemStack(Items.clay_ball), new ItemStack(Items.clay_ball), new ItemStack(Items.clay_ball), new ItemStack(Items.clay_ball));
+                Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), true, text, x, y, true, new ItemStack(ItemList.clayMolds, 1, 0), new ItemStack(Items.clay_ball), new ItemStack(Items.clay_ball));
                 break;
             case 5:
                 text = "To create a ring you need a mold for it. However, this one is too soft to be used. It needs to be hardened in order for it to be used.";
