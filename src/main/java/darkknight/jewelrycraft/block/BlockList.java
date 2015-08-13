@@ -1,11 +1,5 @@
 package darkknight.jewelrycraft.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
@@ -16,10 +10,17 @@ import darkknight.jewelrycraft.tileentity.TileEntityHandPedestal;
 import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
 import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
+import darkknight.jewelrycraft.tileentity.TileEntityMoltenMetal;
 import darkknight.jewelrycraft.tileentity.TileEntityShadowEye;
 import darkknight.jewelrycraft.tileentity.TileEntityShadowHand;
 import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockList
 {
@@ -68,6 +69,7 @@ public class BlockList
         GameRegistry.registerTileEntity(TileEntityShadowHand.class, Variables.MODID + ":shadowHand");
         GameRegistry.registerTileEntity(TileEntityMidasTouch.class, Variables.MODID + ":midsaTouch");
         GameRegistry.registerTileEntity(TileEntityCrystal.class, Variables.MODID + ":crystalBlock");
+        GameRegistry.registerTileEntity(TileEntityMoltenMetal.class, Variables.MODID + ":moltenMetalTE");
         
         OreDictionary.registerOre("oreShadow", new ItemStack(BlockList.shadowOre));
     }

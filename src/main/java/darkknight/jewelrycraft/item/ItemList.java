@@ -1,12 +1,12 @@
 package darkknight.jewelrycraft.item;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemList
 {
@@ -25,6 +25,7 @@ public class ItemList
     public static Item goldObj;
     public static Item structureGen;
     public static Item spawnEgg;
+    public static Item testItem;
     private static boolean isInitialized = false;
     
     /**
@@ -47,6 +48,7 @@ public class ItemList
         goldObj = new ItemGoldObj().setUnlocalizedName(Variables.MODID + ".goldObject");
         structureGen = new ItemStructureGen().setUnlocalizedName(Variables.MODID + ".structureGen").setTextureName(Variables.MODID + ":structureGen").setCreativeTab(JewelrycraftMod.jewelrycraft);
         spawnEgg = new ItemSpawnEgg().setUnlocalizedName(Variables.MODID + ".monsterPlacer").setTextureName("spawn_egg");
+        testItem = new ItemTest().setUnlocalizedName(Variables.MODID + ".test");
         
         GameRegistry.registerItem(thiefGloves, "thiefGloves");
         GameRegistry.registerItem(shadowIngot, "shadowIngot");
@@ -63,6 +65,7 @@ public class ItemList
         GameRegistry.registerItem(goldObj, "goldObject");
         GameRegistry.registerItem(structureGen, "structureGen");
         GameRegistry.registerItem(spawnEgg, "spawnEgg");
+        GameRegistry.registerItem(testItem, "testItem");
         
         OreDictionary.registerOre("ingotShadow", new ItemStack(ItemList.shadowIngot));
     }

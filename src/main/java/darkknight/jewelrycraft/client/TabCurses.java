@@ -10,7 +10,7 @@ public class TabCurses extends AbstractTab
 {
     public TabCurses()
     {
-        super(0, 0, 0, new ItemStack(Items.ender_eye));
+        super(0, 0, 0, new ItemStack(ItemList.testItem, 1, 4));
     }
 
     @Override

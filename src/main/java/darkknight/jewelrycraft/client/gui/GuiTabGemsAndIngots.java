@@ -43,32 +43,36 @@ public class GuiTabGemsAndIngots extends GuiTab
     public void drawBackground(GuiGuide gui, int x, int y, int page)
     {
         int xPos = page % 2 == 0 ? 107 : -35;
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        for(int i = (page - 1) * 9; i < page * 9; i++)
+        float scale = 0.75F;
+        for(int i = (page - 1) * 12; i < page * 12; i++)
             if (i < JewelrycraftUtil.gem.size()){
-                gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + "Gems", gui.getLeft() + xPos + 40, gui.getTop(), 0);
-                gui.renderItem(JewelrycraftUtil.gem.get(i), gui.getLeft() + xPos + 10, gui.getTop() + 22 + 16 * (i - 9 * (page - 1)), 30f, true, 0, 0, 0);
-                gui.getFont().drawString(String.format("%-1.18s", JewelrycraftUtil.gem.get(i).getDisplayName()), gui.getLeft() + xPos + 20, gui.getTop() + 12 + 16 * (i - 9 * (page - 1)), 0);
-                GL11.glDisable(GL11.GL_LIGHTING);
+            	GL11.glPushMatrix();
+                if(i==(page - 1) * 12) gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + "Gems", gui.getLeft() + xPos + 40, gui.getTop(), 0);
+            	GL11.glScalef(scale, scale, 0f);
+                gui.getFont().drawString(String.format("%-1.26s", JewelrycraftUtil.gem.get(i).getDisplayName()), (int)((gui.getLeft() + xPos + 12)/scale), (int)((gui.getTop() + 12 + 12 * (i - 12 * (page - 1)))/scale), 0);
+                GL11.glPopMatrix();
+                gui.renderItem(JewelrycraftUtil.gem.get(i), gui.getLeft() + xPos + 5, gui.getTop() + 18 + 12 * (i - 12 * (page - 1)), 24f, true, 0, 0, 0);
             }
-        page -= JewelrycraftUtil.gem.size() / 9 + 1;
-        for(int i = (page - 1) * 9; i < page * 9; i++)
+        page -= JewelrycraftUtil.gem.size() / 13 + 1;
+        for(int i = (page - 1) * 12; i < page * 12; i++)
             if (i < JewelrycraftUtil.metal.size() && page > 0){
-                gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + "Ingots", gui.getLeft() + xPos + 40, gui.getTop(), 0);
-                gui.renderItem(JewelrycraftUtil.metal.get(i).copy(), gui.getLeft() + xPos + 10, gui.getTop() + 22 + 16 * (i - 9 * (page - 1)), 30f, true, 0, 0, 0);
-                gui.getFont().drawString(String.format("%-1.18s", JewelrycraftUtil.metal.get(i).copy().getDisplayName()), gui.getLeft() + xPos + 20, gui.getTop() + 12 + 16 * (i - 9 * (page - 1)), 0);
-                GL11.glDisable(GL11.GL_LIGHTING);
+            	GL11.glPushMatrix();
+            	if(i==(page - 1) * 12) gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + "Ingots", gui.getLeft() + xPos + 40, gui.getTop(), 0);
+            	GL11.glScalef(scale, scale, 0f);
+                gui.getFont().drawString(String.format("%-1.18s", JewelrycraftUtil.metal.get(i).copy().getDisplayName()), (int)((gui.getLeft() + xPos + 12)/scale), (int)((gui.getTop() + 12 + 12 * (i - 12 * (page - 1)))/scale), 0);
+                GL11.glPopMatrix();
+                gui.renderItem(JewelrycraftUtil.metal.get(i), gui.getLeft() + xPos + 5, gui.getTop() + 18 + 12 * (i - 12 * (page - 1)), 24f, true, 0, 0, 0);
             }
-        page -= JewelrycraftUtil.metal.size() / 9 + 1;
-        for(int i = (page - 1) * 9; i < page * 9; i++)
+        page -= JewelrycraftUtil.metal.size() / 13 + 1;
+        for(int i = (page - 1) * 12; i < page * 12; i++)
             if (i < JewelrycraftUtil.ores.size() && page > 0){
-                gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + "Ores", gui.getLeft() + xPos + 40, gui.getTop(), 0);
-                gui.renderItem(JewelrycraftUtil.ores.get(i).copy(), gui.getLeft() + xPos + 10, gui.getTop() + 22 + 16 * (i - 9 * (page - 1)), 30f, true, 0, 0, 0);
-                gui.getFont().drawString(String.format("%-1.18s", JewelrycraftUtil.ores.get(i).copy().getDisplayName()), gui.getLeft() + xPos + 20, gui.getTop() + 12 + 16 * (i - 9 * (page - 1)), 0);
-                GL11.glDisable(GL11.GL_LIGHTING);
+            	GL11.glPushMatrix();
+            	if(i==(page - 1) * 12) gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + "Ores", gui.getLeft() + xPos + 40, gui.getTop(), 0);
+            	GL11.glScalef(scale, scale, 0f);
+                gui.getFont().drawString(String.format("%-1.18s", JewelrycraftUtil.ores.get(i).copy().getDisplayName()), (int)((gui.getLeft() + xPos + 12)/scale), (int)((gui.getTop() + 12 + 12 * (i - 12 * (page - 1)))/scale), 0);
+                GL11.glPopMatrix();
+                gui.renderItem(JewelrycraftUtil.ores.get(i), gui.getLeft() + xPos + 5, gui.getTop() + 18 + 12 * (i - 12 * (page - 1)), 24f, true, 0, 0, 0);
             }
-        GL11.glDisable(GL11.GL_BLEND);
     }
     
     /**
@@ -77,7 +81,7 @@ public class GuiTabGemsAndIngots extends GuiTab
     @Override
     public int getMaxPages()
     {
-        return JewelrycraftUtil.gem.size() / 9 + JewelrycraftUtil.metal.size() / 9 + JewelrycraftUtil.ores.size() / 9 + 4;
+        return (JewelrycraftUtil.gem.size() / 13) + (JewelrycraftUtil.metal.size() / 13) + (JewelrycraftUtil.ores.size() / 13) + 3;
     }
     
     /**

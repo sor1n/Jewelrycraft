@@ -180,7 +180,7 @@ public class TileEntityDisplayerRender extends TileEntitySpecialRenderer
         int t = i % 65536;
         int k = i / 65536;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, t / 1.0F, k / 1.0F);
-        fontrenderer.drawString(par2Str.replaceFirst("§0", "§r").replaceFirst("§1", "§r").replaceFirst("§2", "§r").replaceFirst("§3", "§r").replaceFirst("§4", "§r").replaceFirst("§5", "§r").replaceFirst("§6", "§r").replaceFirst("§7", "§r").replaceFirst("§8", "§r").replaceFirst("§9", "§r").replaceFirst("§a", "§r").replaceFirst("§b", "§r").replaceFirst("§c", "§r").replaceFirst("§d", "§r").replaceFirst("§e", "§r").replaceFirst("§f", "§r"), -j, 0, 65536 * (red > 170 ? red - 170 : 0) + 256 * (green > 170 ? green - 170 : 0) + (blue > 170 ? blue - 170 : 0));
+        fontrenderer.drawString(par2Str.replaceFirst("§0", "§r").replaceFirst("§1", "§r").replaceFirst("§2", "§r").replaceFirst("§3", "§r").replaceFirst("§4", "§r").replaceFirst("§5", "§r").replaceFirst("§6", "§r").replaceFirst("§7", "§r").replaceFirst("§8", "§r").replaceFirst("§9", "§r").replaceFirst("§a", "§r").replaceFirst("§b", "§r").replaceFirst("§c", "§r").replaceFirst("§d", "§r").replaceFirst("§e", "§r").replaceFirst("§f", "§r"), -j, 0, 1973790);
         GL11.glPopMatrix();
         GL11.glTranslatef((float)x - 1f, (float)y - 1f, (float)z - 1F);
         GL11.glScalef(var17 * 70F, 1F, 0F);

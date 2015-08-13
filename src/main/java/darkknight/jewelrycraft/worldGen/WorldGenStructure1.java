@@ -20,7 +20,7 @@ import darkknight.jewelrycraft.tileentity.TileEntityHandPedestal;
 /**
  * @author Sorin
  */
-public class WorldGenStructure1 extends WorldGenerator
+public class WorldGenStructure1 extends WorldGenStructure
 {
     public static final WeightedRandomItem[] items = new WeightedRandomItem[]{new WeightedRandomItem(new ItemStack(ItemList.thiefGloves), 10), new WeightedRandomItem(new ItemStack(Items.golden_apple), 8), new WeightedRandomItem(new ItemStack(Items.golden_apple, 1, 1), 1), new WeightedRandomItem(new ItemStack(ItemList.guide), 20), new WeightedRandomItem(new ItemStack(ItemList.shadowIngot), 25), new WeightedRandomItem(new ItemStack(BlockList.shadowEye), 2), new WeightedRandomItem(new ItemStack(Items.nether_star), 1), new WeightedRandomItem(new ItemStack(BlockList.shadowBlock), 2), new WeightedRandomItem(new ItemStack(BlockList.crystal), 16, 20)};
     

@@ -15,7 +15,7 @@ import net.minecraftforge.common.DungeonHooks;
 /**
  * @author Sorin
  */
-public class WorldGenStructure3 extends WorldGenerator
+public class WorldGenStructure3 extends WorldGenStructure
 {
     public boolean generate(World world, BiomeGenBase biome, Random rand, int x, int y, int z)
     {
@@ -49,7 +49,7 @@ public class WorldGenStructure3 extends WorldGenerator
         if (biome == BiomeGenBase.desert || biome == BiomeGenBase.desertHills) slabMeta = 1;
         for(int i = -1; i <= 1; i++)
             for(int k = -1; k <= 1; k++)
-                world.setBlock(x + i, y + 2, z + k, slab, slabMeta, 1);
+                world.setBlock(x + i, y + 2, z + k, slab, slabMeta, 2);
         world.setBlock(x, y, z, Blocks.mob_spawner);
         world.setBlock(x, y + 1, z, Blocks.mob_spawner);
         for(int l = 0; l < 2; l++){

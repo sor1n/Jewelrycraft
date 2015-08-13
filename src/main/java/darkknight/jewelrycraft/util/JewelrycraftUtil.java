@@ -12,26 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import javax.imageio.ImageIO;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameData;
@@ -40,24 +21,43 @@ import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.block.BlockList;
-import darkknight.jewelrycraft.item.ItemBaseJewelry;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.random.WeightedRandomCurse;
 import darkknight.jewelrycraft.worldGen.Generation;
+import darkknight.jewelrycraft.worldGen.WorldGenStructure;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.resources.IResourceManager;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.Achievement;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class JewelrycraftUtil {
-	public static ArrayList<ItemStack>			objects			= new ArrayList<ItemStack>();
-	public static ArrayList<ItemStack>			gem				= new ArrayList<ItemStack>();
-	public static ArrayList<ItemStack>			jewelry			= new ArrayList<ItemStack>();
-	public static ArrayList<ItemStack>			metal			= new ArrayList<ItemStack>();
-	public static ArrayList<ItemStack>			ores			= new ArrayList<ItemStack>();
-	public static HashMap<ItemStack, ItemStack>	oreToIngot		= new HashMap<ItemStack, ItemStack>();
-	public static HashMap<ItemStack, Integer>	colors			= new HashMap<ItemStack, Integer>();
-	public static ArrayList<String>				jamcraftPlayers	= new ArrayList<String>();
-	private static ArrayList<ItemStack>			items			= new ArrayList<ItemStack>();
-	public static ArrayList<WorldGenerator>		structures		= new ArrayList<WorldGenerator>();
-	public static Random						rand			= new Random();
-	public static EnumCreatureAttribute			HEART;
+	public static ArrayList<ItemStack> objects = new ArrayList<ItemStack>();
+	public static ArrayList<ItemStack> gem = new ArrayList<ItemStack>();
+	public static ArrayList<ItemStack> jewelry = new ArrayList<ItemStack>();
+	public static ArrayList<ItemStack> metal = new ArrayList<ItemStack>();
+	public static ArrayList<ItemStack> ores = new ArrayList<ItemStack>();
+	public static HashMap<ItemStack, ItemStack> oreToIngot = new HashMap<ItemStack, ItemStack>();
+	public static HashMap<ItemStack, Integer> colors = new HashMap<ItemStack, Integer>();
+	public static ArrayList<String> jamcraftPlayers = new ArrayList<String>();
+	private static ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+	public static ArrayList<WorldGenStructure> structures = new ArrayList<WorldGenStructure>();
+	public static Random rand = new Random();
+	public static EnumCreatureAttribute HEART;
 
 	/**
 	 * Adds gems and jewelry to their appropriate list
@@ -83,10 +83,12 @@ public class JewelrycraftUtil {
 			try {
 				if (item != null && (Item) item != null && ((Item) item).getHasSubtypes() && FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 					((Item) item).getSubItems((Item) item, null, items);
-				} else objects.add(new ItemStack((Item) item));
+				}
+				else objects.add(new ItemStack((Item) item));
 				if (!items.isEmpty()) objects.addAll(items);
 				items.removeAll(items);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				JewelrycraftMod.logger.info("Error, tried to add subtypes of item " + ((Item) item).getUnlocalizedName() + "\nItem is not added in the list.");
 			}
 		}
@@ -94,9 +96,10 @@ public class JewelrycraftUtil {
 		try {
 			for (Field f : Generation.class.getDeclaredFields()) {
 				Object obj = f.get(null);
-				if (obj instanceof WorldGenerator) structures.add((WorldGenerator) obj);
+				if (obj instanceof WorldGenStructure) structures.add((WorldGenStructure) obj);
 			}
-		} catch (IllegalAccessException e) {
+		}
+		catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -108,14 +111,16 @@ public class JewelrycraftUtil {
 			try {
 				if (item != null && (Item) item != null && ((Item) item).getHasSubtypes() && FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 					((Item) item).getSubItems((Item) item, null, items);
-				} else {
+				}
+				else {
 					ItemStack it = new ItemStack((Item) item);
 					colors.put(it, color(it, 0));
 				}
 				if (!items.isEmpty()) for (ItemStack it : items)
 					colors.put(it, color(it, 0));
 				items.removeAll(items);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				JewelrycraftMod.logger.info("Error, tried to add subtypes of item " + ((Item) item).getUnlocalizedName() + "\nItem is not added in the list.");
 			}
 		}
@@ -123,9 +128,9 @@ public class JewelrycraftUtil {
 
 	@SideOnly(Side.CLIENT)
 	public static int getColor(ItemStack item) {
+		if (Item.getIdFromItem(item.getItem()) == Block.getIdFromBlock(Blocks.stained_glass) || Item.getIdFromItem(item.getItem()) == Block.getIdFromBlock(Blocks.stained_hardened_clay) || Item.getIdFromItem(item.getItem()) == Block.getIdFromBlock(Blocks.wool) || Item.getIdFromItem(item.getItem()) == Block.getIdFromBlock(Blocks.carpet)) item.setItemDamage(15 - item.getItemDamage());
 		for (ItemStack stack : colors.keySet())
-			if (item.getItem().equals(stack.getItem()) && item.getItemDamage() == stack.getItemDamage())
-				return colors.get(stack);
+			if (item != null && item.getItem() != null && stack.getItem() != null && item.getItem().equals(stack.getItem()) && item.getItemDamage() == stack.getItemDamage()) return colors.get(stack);
 		return 0xFFFFFF;
 	}
 
@@ -136,8 +141,9 @@ public class JewelrycraftUtil {
 		BufferedImage icon;
 		if (stack != null && Item.getIdFromItem(stack.getItem()) > 0 && stack.getIconIndex() != null && stack.getItem().getColorFromItemStack(stack, pass) == 16777215) {
 			try {
-				ingot = getLocation(stack, stack, false);
-			} catch (Exception e) {
+				ingot = getLocation(stack);
+			}
+			catch (Exception e) {
 				ingot = new ResourceLocation("textures/items/apple.png");
 			}
 			icon = ImageIO.read(rm.getResource(ingot).getInputStream());
@@ -156,24 +162,24 @@ public class JewelrycraftUtil {
 					if (!isGray(rgbArr)) m.put(rgb, (Cmax + Cmin) / 2);
 				}
 			return getMostCommonColour(m);
-		} else return stack.getItem().getColorFromItemStack(stack, pass);
+		}
+		else return stack.getItem().getColorFromItemStack(stack, pass);
 	}
-	
-    public static ResourceLocation getLocation(ItemStack item, ItemStack stack, boolean changeMeta)
-    {
-        String domain = "";
-        String texture;
-        IIcon itemIcon = item.getItem().getIcon(item, 0);
-        String iconName = itemIcon.getIconName();
-        if (iconName.substring(0, iconName.indexOf(":") + 1) != "") domain = iconName.substring(0, iconName.indexOf(":") + 1).replace(":", " ").trim();
-        else domain = "minecraft";
-        texture = iconName.substring(iconName.lastIndexOf(":") + 1) + ".png";
-        ResourceLocation textureLocation = null;
-        TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
-        if (texturemanager.getResourceLocation(item.getItemSpriteNumber()).toString().contains("items")) textureLocation = new ResourceLocation(domain.toLowerCase(), "textures/items/" + texture);
-        else textureLocation = new ResourceLocation(domain.toLowerCase(), "textures/blocks/" + texture);
-        return textureLocation;
-    }
+
+	public static ResourceLocation getLocation(ItemStack item) {
+		String domain = "";
+		String texture;
+		IIcon itemIcon = item.getItem().getIcon(item, 0);
+		String iconName = itemIcon.getIconName();
+		if (iconName.substring(0, iconName.indexOf(":") + 1) != "") domain = iconName.substring(0, iconName.indexOf(":") + 1).replace(":", " ").trim();
+		else domain = "minecraft";
+		texture = iconName.substring(iconName.lastIndexOf(":") + 1) + ".png";
+		ResourceLocation textureLocation = null;
+		TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
+		if (texturemanager.getResourceLocation(item.getItemSpriteNumber()).toString().contains("items")) textureLocation = new ResourceLocation(domain.toLowerCase(), "textures/items/" + texture);
+		else textureLocation = new ResourceLocation(domain.toLowerCase(), "textures/blocks/" + texture);
+		return textureLocation;
+	}
 
 	@SideOnly(Side.CLIENT)
 	public static int getMostCommonColour(Map map) {
@@ -209,10 +215,8 @@ public class JewelrycraftUtil {
 	/**
 	 * Adds curse points to a player
 	 * 
-	 * @param player
-	 *            the player to add the points to
-	 * @param points
-	 *            amount of curse points
+	 * @param player the player to add the points to
+	 * @param points amount of curse points
 	 */
 	public static void addCursePoints(EntityPlayer player, int points) {
 		NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
@@ -251,8 +255,7 @@ public class JewelrycraftUtil {
 	/**
 	 * Adds a random amount of modifiers to a list
 	 * 
-	 * @param randValue
-	 *            maximum number of modifiers
+	 * @param randValue maximum number of modifiers
 	 * @return a list containing the random modifiers
 	 */
 	public static ArrayList<ItemStack> addRandomModifiers(int randValue) {
@@ -293,8 +296,7 @@ public class JewelrycraftUtil {
 	/**
 	 * Checks to see if the specified item is a gem
 	 * 
-	 * @param item
-	 *            ItemStack containing the item
+	 * @param item ItemStack containing the item
 	 * @return is the item a gem
 	 */
 	public static boolean isGem(ItemStack item) {
@@ -309,8 +311,7 @@ public class JewelrycraftUtil {
 	/**
 	 * Checks to see if the specified item is a metal
 	 * 
-	 * @param item
-	 *            ItemStack containing the item
+	 * @param item ItemStack containing the item
 	 * @return is the item a metal
 	 */
 	public static boolean isMetal(ItemStack item) {
@@ -325,8 +326,7 @@ public class JewelrycraftUtil {
 	/**
 	 * Checks to see if the specified item is a piece of jewelry
 	 * 
-	 * @param item
-	 *            ItemStack containing the item
+	 * @param item ItemStack containing the item
 	 * @return is the item a piece of jewelry
 	 */
 	public static boolean isJewelry(ItemStack item) {
@@ -341,8 +341,7 @@ public class JewelrycraftUtil {
 	/**
 	 * Checks to see if the specified item is an ore
 	 * 
-	 * @param item
-	 *            ItemStack containing the item
+	 * @param item ItemStack containing the item
 	 * @return is the item an ore
 	 */
 	public static boolean isOre(ItemStack item) {
@@ -357,13 +356,23 @@ public class JewelrycraftUtil {
 	/**
 	 * Gets the ingot from the ore
 	 * 
-	 * @param ore
-	 *            the ore
+	 * @param ore the ore
 	 * @return the ingot
 	 */
 	public static ItemStack getIngotFromOre(ItemStack ore) {
 		for (ItemStack ores : JewelrycraftUtil.oreToIngot.keySet())
 			if (ores.getItem().equals(ore.getItem()) && ores.getItemDamage() == ore.getItemDamage()) return oreToIngot.get(ores);
 		return null;
+	}
+
+	/**
+	 * This determines whether the player unlocked an achievement or not.
+	 * 
+	 * @param player The player to unlock the achievement
+	 * @param achievement The achievement to be unlocked
+	 * @return True or False depending if the player did unlock the achievement or not
+	 */
+	public static boolean AchievemtUnlocked(EntityPlayer player, Achievement achievement) {
+		return ((EntityPlayerMP) player).func_147099_x().hasAchievementUnlocked(achievement);
 	}
 }

@@ -159,7 +159,6 @@ public class TileEntitySmelter extends TileEntity
                 quantity = 0f;
                 hasMoltenMetal = false;
                 moltenMetal = new ItemStack(Item.getItemById(0), 0, 0);
-                // pouring = false;
                 me.cooling = ConfigHandler.INGOT_COOLING_TIME;
             }
             me.isDirty = true;

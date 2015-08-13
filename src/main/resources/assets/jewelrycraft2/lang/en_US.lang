@@ -16,10 +16,11 @@ item.jewelrycraft2.bracelet.name=Bracelet
 item.jewelrycraft2.earrings.name=Earrings
 item.jewelrycraft2.guide.name=Jewelrycraft 2 Guide
 item.jewelrycraft2.bucket.name=Bucket of Molten
+item.jewelrycraft2.test.name=Chuck TestTa
 
-item.jewelrycraft2.jewelryModifier.name=Jewelry Modifier (Creative Only)
+item.jewelrycraft2.jewelryModifier.name=Jewelry Modifier
 item.jewelrycraft2.goldObject.name=Golden Object
-item.jewelrycraft2.structureGen.name=Structure Generator (Creative Only)
+item.jewelrycraft2.structureGen.name=Structure Generator
 
 item.jewelrycraft2.goldObject.info.standard=Shiny, but useless :(
 item.jewelrycraft2.goldObject.info.food=It's made of solid gold! How are you suppose to eat this?
@@ -52,11 +53,11 @@ tile.jewelrycraft2.blockCrystal.5.name=Jadium Purple Crystal
 tile.jewelrycraft2.blockCrystal.6.name=Ecutruinium Cyan Crystal
 tile.jewelrycraft2.blockCrystal.7.name=Fiskium Light Gray Crystal
 tile.jewelrycraft2.blockCrystal.8.name=Pigmented Gray Crystal
-tile.jewelrycraft2.blockCrystal.9.name=Aureylium Pink Crystal
+tile.jewelrycraft2.blockCrystal.9.name=Razzium Pink Crystal
 tile.jewelrycraft2.blockCrystal.10.name=Soarynum Lime Crystal
 tile.jewelrycraft2.blockCrystal.11.name=Blorphium Yellow Crystal
 tile.jewelrycraft2.blockCrystal.12.name=Direium Light Blue Crystal
-tile.jewelrycraft2.blockCrystal.13.name=Vazkiium Magenta Crystal
+tile.jewelrycraft2.blockCrystal.13.name=Aureylium Magenta Crystal
 tile.jewelrycraft2.blockCrystal.14.name=Sipsium Orange Crystal
 tile.jewelrycraft2.blockCrystal.15.name=Pahium White Crystal
 
@@ -107,6 +108,11 @@ chatmessage.jewelrycraft2.endereye.1=You sense some
 chatmessage.jewelrycraft2.endereye.2=around you.
 chatmessage.jewelrycraft2.feather=The necklace protected you from taking damage!
 
+chatmessage.jewelrycraft2.heartKilled.Red=GG! You just killed something that was beneficial to you! MURDERER! Red hearts heal you if you collide with them >:c
+chatmessage.jewelrycraft2.heartKilled.White=GG! You just killed something that was beneficial to you! MURDERER! If you collect 2 halves by colliding with them you would've gained an extra heart >:c
+chatmessage.jewelrycraft2.heartKilled.Blue=GG! You just killed something that was beneficial to you! MURDERER! Blue hearts protect your red hearts, just collide with them, not kill them >:c
+chatmessage.jewelrycraft2.heartKilled.Black=GG! You just killed something that was beneficial to you! MURDERER! Black hearts are just like blue ones, but they also deal damage to the attacker >:c 
+
 curse.jewelrycraft2.blind.description=You see the light slowly fading in front of you
 curse.jewelrycraft2.flamingsoul.description=Is it me or is it getting hot in here?
 curse.jewelrycraft2.greed.description=You might need that later
@@ -133,7 +139,7 @@ curse.jewelrycraft2.activated=You got cursed, press C to open the tab to see the
 
 death.attack.weak=%1$s was weakened by a piece of jewelry and died
 death.attack.shadows=%1$s was consumed by the shadows
-death.attack.blackHeart=%1$s was killed by %2$s's curse
+death.attack.blackHeart=%1$s was killed by a nearby player's curse
 
 entity.jewelrycraft2.Heart.name=Heart
 entity.jewelrycraft2.HalfHeart.name=Half-Heart
@@ -152,9 +158,8 @@ jeweler.jewelrycraft2.ingotchest=Ingot Chest
 jeweler.jewelrycraft2.orechest=Ores Chest
 
 guide.jewelrycraft2.tab.introduction=Introduction
-guide.jewelrycraft2.tab.introduction.1=Welcome to Jewelrycraft 2! This mod is about making jewelry that you can modify to your own will. To find out how to create a jewelry, please consult the book and look at the Smelter block. To add modifiers to it you need to perform a ritual. To see how to do that, look at the Cursed Eye
-guide.jewelrycraft2.tab.introduction.2=block in this guide. Please be aware that even if you can add anything as a modifier and can have multiple modifiers on one jewelry, this mod is still in alpha and does not have that many modifiers implemented and currently don't have any different effects depending on
-guide.jewelrycraft2.tab.introduction.3=the gem used. To see what modifiers are currently implemented, just look in the Modifiers tab located in this guide (it is the one with the blaze powder as an icon). This mod was made by OnyxDarkKnight and the help of domi1819, pau101, Damien Hazard, boni and MineMarteen.
+guide.jewelrycraft2.tab.introduction.1=Welcome to Jewelrycraft 2! This mod is about making jewelry that you can modify to your own will. To find out how to create a jewelry, please consult the book and look at the Smelter block. To add modifiers to it you need to perform a ritual. To see how to do that, look at the Cursed Eye block in this guide. Please be aware that even if you can add anything as a modifier and can have multiple modifiers on one jewelry, this mod does not have that many modifiers implemented and
+guide.jewelrycraft2.tab.introduction.2=currently don't have any different effects depending on the gem used. To see what modifiers are currently implemented, just look in the Modifiers tab located in this guide (it is the one with the blaze powder as an icon). This mod was made by OnyxDarkKnight and the help of domi1819, pau101, Damien Hazard, boni and MineMarteen.
 
 guide.jewelrycraft2.tab.blocks=Blocks
 guide.jewelrycraft2.tab.misc=Gems, Ores and Ingots
@@ -162,5 +167,13 @@ guide.jewelrycraft2.tab.items=Items
 guide.jewelrycraft2.tab.modifiers=Modifiers
 guide.jewelrycraft2.tab.oretoingot=Ores to Ingots
 guide.jewelrycraft2.tab.ritual=Ritual
+guide.jewelrycraft2.tab.curses=Curses
 
 bucket.unknown=Bucket of Unknown Content
+
+achievement.jewelrycraft.openGuide=A Whole New Woooorld
+achievement.jewelrycraft.openGuide.desc=Open the Jewelrycraft 2 Guide
+achievement.jewelrycraft.pentagram=Resist Temptation
+achievement.jewelrycraft.pentagram.desc=§4Challenge:§7 Do not steal health from entities for a day when Pentagram curse is active. §aReward:§7 You permanently steal 1 extra heart from all entities when the curse is active.
+
+challenge.failed=You failed the challenge:

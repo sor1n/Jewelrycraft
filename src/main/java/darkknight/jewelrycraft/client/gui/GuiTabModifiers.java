@@ -63,12 +63,8 @@ public class GuiTabModifiers extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 10, new ItemStack(Items.ender_pearl), text, 40f, true);
                 break;
             case 6:
-                text = "Toughest stone made on Earth, falling damage is absurd. Deal more damage, more protection, anvils and arrows need inspection. But after long and hard abuse, the stone is starting to get loose. You are weak and heavy, sink like a ship, arrows need only one";
+                text = "Toughest stone made on Earth, falling damage is absurd. Deal more damage, more protection, anvils and arrows need inspection. But after long and hard abuse, the stone is starting to get loose. You are weak and heavy, sink like a ship, arrows need only one hit, deal less damage overall, don't abuse its power now.";
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 10, new ItemStack(Blocks.obsidian), text, 40f, true);
-                break;
-            case 7:
-                text = "hit, deal less damage overall, don't abuse its power now.";
-                Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
         }
     }
@@ -79,7 +75,7 @@ public class GuiTabModifiers extends GuiTab
     @Override
     public int getMaxPages()
     {
-        return 7;
+        return 6;
     }
     
     /**

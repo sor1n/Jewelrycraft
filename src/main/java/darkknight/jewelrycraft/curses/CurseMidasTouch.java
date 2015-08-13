@@ -23,6 +23,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.config.ConfigHandler;
@@ -41,7 +42,7 @@ public class CurseMidasTouch extends Curse
     }
     
     @Override
-    public void attackedByPlayerAction(World world, EntityPlayer player, Entity target)
+    public void attackedByPlayerAction(LivingAttackEvent event, World world, EntityPlayer player, Entity target)
     {
         if (!world.isRemote && target instanceof EntityLivingBase && !(target instanceof EntityHeart) && !(target instanceof EntityHalfHeart) && player.inventory.getCurrentItem() == null){
             world.setBlock(MathHelper.floor_double(target.posX), MathHelper.floor_double(target.posY), MathHelper.floor_double(target.posZ), BlockList.midasTouchBlock, 0, 2);

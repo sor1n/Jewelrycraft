@@ -87,7 +87,7 @@ public class JCTrades implements IVillageTradeHandler
                     result = JewelrycraftUtil.gem.get(end);
                     result.stackSize = 1 + random.nextInt(JewelrycraftUtil.gem.size() - end);
                     if (JewelrycraftUtil.gem.size() - 1 - end >= 1){
-                        int value = end;
+                        int value = 1 + end;
                         if (value > 64) value = 64;
                         ingredient = new ItemStack(Items.emerald, 2 + random.nextInt(value));
                         if (random.nextBoolean()) ingredient2 = new ItemStack(Items.emerald, 2 + random.nextInt(value));

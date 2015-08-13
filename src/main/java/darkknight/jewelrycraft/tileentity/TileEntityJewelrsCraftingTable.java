@@ -1,12 +1,15 @@
 package darkknight.jewelrycraft.tileentity;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
@@ -128,6 +131,73 @@ public class TileEntityJewelrsCraftingTable extends TileEntity
                 isDirty = true;
             }
         }
+    }
+    
+	public void setGemItemStack(ItemStack itemStack) 
+	{
+		if (itemStack != null && itemStack.getItem() != null) {
+			this.gem = itemStack.copy();
+			this.gem.stackSize = 1;
+			this.hasGem = true;
+			this.isDirty = true;
+		}
+	}
+    
+	public void setJewelryItemStack(ItemStack itemStack) 
+	{
+		if (itemStack != null && itemStack.getItem() != null) {
+			this.jewelry = itemStack.copy();
+			this.jewelry.stackSize = 1;
+			this.hasJewelry = true;
+			this.isDirty = true;
+		}
+	}
+    
+	public void setCrafting() 
+	{
+		carving = ConfigHandler.GEM_PLACEMENT_TIME;
+		angle = 0;
+		crafting = true;
+		isDirty = true;
+	}
+    
+	public void removeGem() 
+	{
+        dropItem(worldObj, xCoord, yCoord, zCoord, gem.copy());
+        gem = new ItemStack(Item.getItemById(0), 0, 0);
+        hasGem = false;
+        carving = -1;
+        crafting = false;
+        angle = 0F;
+        isDirty = true;
+	}
+    
+	public void removeJewelry() 
+	{
+        dropItem(worldObj, xCoord, yCoord, zCoord, jewelry.copy());
+        jewelry = new ItemStack(Item.getItemById(0), 0, 0);
+        hasJewelry = false;
+        carving = -1;
+        crafting = false;
+        angle = 0F;
+        isDirty = true;
+	}
+    
+	public void removeResult() 
+	{
+        dropItem(worldObj, xCoord, yCoord, zCoord, endItem.copy());
+        endItem = new ItemStack(Item.getItemById(0), 0, 0);
+        hasEndItem = false;
+        isDirty = true;
+	}
+    
+    public void dropItem(World world, double x, double y, double z, ItemStack stack)
+    {
+        EntityItem entityitem = new EntityItem(world, x + 0.5D, y + 1D, z + 0.5D, stack);
+        entityitem.motionX = 0;
+        entityitem.motionZ = 0;
+        entityitem.motionY = 0.21000000298023224D;
+        world.spawnEntityInWorld(entityitem);
     }
     
     /**

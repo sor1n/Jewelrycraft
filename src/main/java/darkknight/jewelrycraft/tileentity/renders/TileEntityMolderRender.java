@@ -99,7 +99,6 @@ public class TileEntityMolderRender extends TileEntitySpecialRenderer
                 }
                 ItemStack metal = new ItemStack(ItemList.metal);
                 ItemStack ingot = me.moltenMetal.copy();
-                if (Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_glass) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.stained_hardened_clay) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.wool) || Item.getIdFromItem(ingot.getItem()) == Block.getIdFromBlock(Blocks.carpet)) ingot.setItemDamage(15 - ingot.getItemDamage());
                 JewelryNBT.addMetal(metal, ingot);
                 EntityItem moltenMetal = new EntityItem(te.getWorldObj(), 0.0D, 0.0D, 0.0D, metal);
                 moltenMetal.getEntityItem().stackSize = 1;

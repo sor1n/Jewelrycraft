@@ -61,8 +61,8 @@ public class BlockCrystalRenderer implements ISimpleBlockRenderingHandler
         crystal(tessellator, umin, vmin, umax, vmax, 0.8D, 0.2D, 0D, 0D, 0D, 0.0D, 0.0D);
         for(int i = 0; i < crystals; i++){
             double rotation = Math.PI * 2.0f / (float)crystals * (float)i;
-            double xp1 = Math.sin(rotation) * 0.2f;
-            double zp1 = Math.cos(rotation) * 0.2f;
+            double xp1 = Math.sin(rotation) * (rnd.nextFloat()/2f);
+            double zp1 = Math.cos(rotation) * (rnd.nextFloat()/2f);
             double height = 0.2f + rnd.nextFloat();
             double topHeight = 0.1f + rnd.nextFloat() / 2f;
             crystal(tessellator, umin, vmin, umax, vmax, height, topHeight, -xp1, 0D, zp1, xp1, zp1);
@@ -71,12 +71,12 @@ public class BlockCrystalRenderer implements ISimpleBlockRenderingHandler
             crystals = 4;
             for(int i = 0; i < crystals; i++){
                 double rotation = Math.PI * 2.0f / (float)crystals * (float)i;
-                double xp1 = Math.sin(rotation) * 0.2f;
-                double zp1 = Math.cos(rotation) * 0.2f;
+                double xp1 = Math.sin(rotation) * (rnd.nextFloat()/2f);
+                double zp1 = Math.cos(rotation) * (rnd.nextFloat()/2f);
                 double height = 0.2f + rnd.nextFloat();
                 double topHeight = 0.1f + rnd.nextFloat() / 2f;
-                float xOff = (rnd.nextFloat() * 1.5f - 0.5f) * 0.2f;
-                float zOff = (rnd.nextFloat() * 1.5f - 0.5f) * 0.2f;
+                float xOff = (rnd.nextFloat() * 1.5f - 0.5f) * (rnd.nextFloat()/2f);
+                float zOff = (rnd.nextFloat() * 1.5f - 0.5f) * (rnd.nextFloat()/2f);
                 crystal(tessellator, umin, vmin, umax, vmax, height, topHeight, xOff, 0D, zOff, xp1, zp1);
             }
         }

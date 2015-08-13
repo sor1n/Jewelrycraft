@@ -1,26 +1,21 @@
 package darkknight.jewelrycraft.worldGen;
 
-import java.io.IOException;
 import java.util.Random;
+import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.block.BlockMoltenMetal;
+import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import darkknight.jewelrycraft.JewelrycraftMod;
-import darkknight.jewelrycraft.block.BlockList;
-import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.item.ItemMoltenMetalBucket;
-import darkknight.jewelrycraft.network.PacketSendLiquidData;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 /**
  * @author Sorin
  */
-public class WorldGenStructure2 extends WorldGenerator {
+public class WorldGenStructure2 extends WorldGenStructure {
 	public boolean generate(World world, BiomeGenBase biome, Random rand, int x, int y, int z) {
 		Block block = Blocks.stonebrick;
 		Block stair = Blocks.stone_brick_stairs;
@@ -47,9 +42,8 @@ public class WorldGenStructure2 extends WorldGenerator {
 		JewelryNBT.addMetal(stack, JewelrycraftUtil.metal.get(rand.nextInt(JewelrycraftUtil.metal.size())));
 		if (stack != null && JewelryNBT.ingot(stack) != null) {
 			if (!world.isRemote) world.func_147480_a(x, y, z, true);
-			JewelrycraftMod.saveData.setString(x + " " + y + " " + z + " " + world.provider.dimensionId, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()) + ":" + JewelryNBT.ingot(stack).getItemDamage());
-			JewelrycraftMod.netWrapper.sendToAll(new PacketSendLiquidData(world.provider.dimensionId, x, y, z, Item.getIdFromItem(JewelryNBT.ingot(stack).getItem()), JewelryNBT.ingot(stack).getItemDamage()));
 			world.setBlock(x, y, z, BlockList.moltenMetal, 0, 3);
+			if(BlockMoltenMetal.getTileEntity(world, x, y, z) != null) BlockMoltenMetal.getTileEntity(world, x, y, z).setMetal(JewelryNBT.ingot(stack));
 		}
 		return true;
 	}

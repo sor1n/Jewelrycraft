@@ -40,17 +40,13 @@ public class GuiTabIntroduction extends GuiTab
                 text = StatCollector.translateToLocal("guide." + Variables.MODID + ".tab.introduction."+page);
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
-            case 3:
-                text = StatCollector.translateToLocal("guide." + Variables.MODID + ".tab.introduction."+page);
-                Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
-                break;
         }
     }
     
     @Override
     public int getMaxPages()
     {
-        return 4;
+        return 2;
     }
     
     @Override

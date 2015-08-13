@@ -1,41 +1,8 @@
 package darkknight.jewelrycraft.events;
 
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.WeightedRandom;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.item.ItemTossEvent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.world.WorldEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -48,31 +15,46 @@ import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.item.ItemBaseJewelry;
 import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.network.PacketClearColorCache;
 import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
 import darkknight.jewelrycraft.network.PacketSendClientPlayerInfo;
 import darkknight.jewelrycraft.network.PacketSendServerPlayersInfo;
+import darkknight.jewelrycraft.potions.PotionBase;
 import darkknight.jewelrycraft.potions.PotionList;
 import darkknight.jewelrycraft.random.WeightedRandomCurse;
 import darkknight.jewelrycraft.util.BlockUtils;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.WeightedRandom;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
-/**
- * Code taken from OpenBlocks
- */
 public class EntityEventHandler {
-	int		updateTime	= 0, totalUnavailableCurses = 0;
-	boolean	addedCurses	= false;
-	Random	rand		= new Random();
+	int updateTime = 0, totalUnavailableCurses = 0;
+	boolean addedCurses = false;
+	Random rand = new Random();
 
-	/**
-	 * @param event
-	 */
 	@SubscribeEvent
 	public void onEntityJoinWorld(EntityJoinWorldEvent event) {
-		if (event.entity instanceof EntityPlayerMP) JewelrycraftMod.netWrapper.sendTo(new PacketClearColorCache(), (EntityPlayerMP) event.entity);
 		if (event.entity instanceof EntityPlayer && !(event.entity instanceof EntityPlayerMP)) JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
 		final Entity entity = event.entity;
 		if (!event.world.isRemote && entity instanceof EntityPlayer) {
@@ -93,7 +75,8 @@ public class EntityEventHandler {
 					Curse.availableCurses.remove(curse);
 					persistTag.setInteger(curse.getName(), 0);
 					totalUnavailableCurses++;
-				} else if (!Curse.availableCurses.contains(curse)) Curse.availableCurses.add(curse);
+				}
+				else if (!Curse.availableCurses.contains(curse)) Curse.availableCurses.add(curse);
 			persistTag.setBoolean("sendInfo", true);
 		}
 	}
@@ -105,22 +88,8 @@ public class EntityEventHandler {
 	public void onEntityUpdate(LivingUpdateEvent event) {
 		Entity entity = event.entity;
 		EntityLivingBase entityLiving = event.entityLiving;
-		if (entityLiving.isPotionActive(PotionList.stun)) {
-			entityLiving.motionX *= 0D;
-			entityLiving.motionZ *= 0D;
-			entityLiving.motionY *= 0D;
-			entityLiving.isSwingInProgress = false;
-			entityLiving.moveForward = 0F;
-			entityLiving.moveStrafing = 0F;
-			entityLiving.setAIMoveSpeed(0F);
-			entityLiving.limbSwing = 0F;
-			entityLiving.limbSwingAmount = 0F;
-			entityLiving.swingProgressInt = 0;
-			entityLiving.rotationPitch = entity.prevRotationPitch;
-			entityLiving.rotationYaw = entity.prevRotationYaw;
-			entityLiving.worldObj.spawnParticle("spell", entityLiving.posX, entityLiving.posY + entityLiving.getEyeHeight(), entityLiving.posZ, 0.0D, 0.3D, 0.0D);
-		}
-		if (entityLiving.isPotionActive(PotionList.stun) && entityLiving.getActivePotionEffect(PotionList.stun).getDuration() == 0) entityLiving.removePotionEffect(PotionList.stun.id);
+		for (PotionBase potion : PotionBase.getPotionList())
+			if(entityLiving.isPotionActive(potion)) potion.action(entityLiving);
 		if (entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entity;
 			NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
@@ -142,13 +111,16 @@ public class EntityEventHandler {
 				}
 				if (playerInfo.hasKey("playerCursePointsChanged") && playerInfo.getBoolean("playerCursePointsChanged")) {
 					int points = playerInfo.getInteger("cursePoints");
-					for (int i = 1; i <= Variables.MAX_CURSES; i++)
-						if (points > (i - 1) * 1750) addCurse(player, playerInfo, i);
+					int maxCurses = playerInfo.getInteger("cursePoints") / 1750 + 1;
+					if (points > 0 && playerInfo.getInteger("activeCurses") < maxCurses) while (playerInfo.getInteger("activeCurses") < maxCurses && Curse.availableCurses.size() > 0 && playerInfo.getInteger("activeCurses") < Curse.getCurseList().size()) {
+						addCurse(player, playerInfo);
+						System.out.println("Curse added");
+					}
 					if (!playerInfo.hasKey("curseTime") || !playerInfo.hasKey("reselectCurses") || playerInfo.getBoolean("reselectCurses")) {
 						playerInfo.setInteger("curseTime", 23000);
 						playerInfo.setBoolean("reselectCurses", false);
 					}
-					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
+					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP) player);
 					if (addedCurses) {
 						JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
 						player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("curse." + Variables.MODID + ".activated")));
@@ -176,9 +148,6 @@ public class EntityEventHandler {
 		}
 	}
 
-	/**
-	 * @param event
-	 */
 	@SubscribeEvent
 	public void onEntityAttacked(LivingAttackEvent event) {
 		EntityLivingBase entity = event.entityLiving;
@@ -191,63 +160,20 @@ public class EntityEventHandler {
 					if (playerInfo.hasKey("ext" + i)) {
 						NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
 						ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-						if (item != null && item.getItem() instanceof ItemBaseJewelry && ((ItemBaseJewelry) item.getItem()).onPlayerAttackedCacellable(item, player, event.source, event.ammount)) {
-							event.setCanceled(true);
-							break;
-						}
-						if (playerInfo.getBoolean("negateDamage")) {
-							playerInfo.setBoolean("negateDamage", false);
-							event.setCanceled(true);
-							break;
-						}
 						if (item != null) {
-							if (item.getItem() instanceof ItemBaseJewelry) ((ItemBaseJewelry) item.getItem()).onPlayerAttacked(item, player, event.source, event.ammount);
+							if (item.getItem() instanceof ItemBaseJewelry) {
+								((ItemBaseJewelry) item.getItem()).onPlayerAttacked(item, player, event.source, event.ammount);
+								if (((ItemBaseJewelry) item.getItem()).onPlayerAttackedCacellable(item, player, event.source, event.ammount)) event.setCanceled(true);
+							}
 							if (item.getItem() instanceof IJewelryItem) ((IJewelryItem) item.getItem()).onPlayerAttackedAction(item, player, event.source, event.ammount);
 						}
 					}
 				if (ConfigHandler.CURSES_ENABLED) for (Curse curse : Curse.getCurseList())
 					if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0) curse.attackedAction(player.worldObj, player);
-
 			}
-			if (!player.worldObj.isRemote && !player.capabilities.isCreativeMode && (float) player.hurtResistantTime <= (float) player.maxHurtResistantTime / 2.0F && !event.source.isUnblockable()) {
-				if (playerInfo.getFloat("WhiteHeart") > 0) {
-					playerInfo.setFloat("WhiteHeart", 0f);
-					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
-				}
-				if (playerInfo.getFloat("BlueHeart") > 0) {
-					float damage = playerInfo.getFloat("BlueHeart") - event.ammount;
-					if (damage >= 0) playerInfo.setFloat("BlueHeart", damage);
-					else playerInfo.setFloat("BlueHeart", 0f);
-					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
-					if (damage < 0) {
-						System.out.println(damage);
-						player.attackEntityFrom(event.source, Math.abs(damage));
-					}
-					player.hurtResistantTime = player.maxHurtResistantTime;
-					player.hurtTime = player.maxHurtTime = 10;
-					player.worldObj.playSoundAtEntity(player, "game.player.hurt", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-					event.setCanceled(true);
-				} else if (playerInfo.getFloat("BlackHeart") > 0) {
-					AxisAlignedBB axisalignedbb = player.boundingBox.expand(2.0D, 0.0D, 2.0D);
-					List enemies = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, axisalignedbb);
-					if (enemies != null && !enemies.isEmpty()) {
-						Iterator iterator = enemies.iterator();
-						while (iterator.hasNext()) {
-							Entity enemy = (Entity) iterator.next();
-							enemy.attackEntityFrom(DamageSourceList.blackHeart, 2f * event.ammount);
-						}
-					}
-					float damage = playerInfo.getFloat("BlackHeart") - event.ammount;
-					if (damage >= 0) playerInfo.setFloat("BlackHeart", damage);
-					else playerInfo.setFloat("BlackHeart", 0f);
-					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
-					if (damage < 0) player.attackEntityFrom(event.source, Math.abs(damage));
-					player.hurtResistantTime = player.maxHurtResistantTime;
-					player.hurtTime = player.maxHurtTime = 10;
-					player.worldObj.playSoundAtEntity(player, "game.player.hurt", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-					event.setCanceled(true);
-				}
-			}
+			removeHearts(event, player, playerInfo);
+			JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
+			JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP) player);
 		}
 		if (event.source.getEntity() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.source.getEntity();
@@ -256,29 +182,67 @@ public class EntityEventHandler {
 				if (playerInfo.hasKey("ext" + i)) {
 					NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
 					ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-					if (item != null && item.getItem() instanceof ItemBaseJewelry && ((ItemBaseJewelry) item.getItem()).onEntityAttackedCacellable(item, player, entity, event.ammount)) {
-						event.setCanceled(true);
-						break;
-					}
-					if (playerInfo.getBoolean("weakDamage")) {
-						playerInfo.setBoolean("weakDamage", false);
-						event.setCanceled(true);
-						break;
-					}
 					if (item != null) {
-						if (item.getItem() instanceof ItemBaseJewelry) ((ItemBaseJewelry) item.getItem()).onEntityAttacked(item, player, entity, event.ammount);
+						if (item.getItem() instanceof ItemBaseJewelry) {
+							((ItemBaseJewelry) item.getItem()).onEntityAttacked(item, player, entity, event.ammount);
+							if (((ItemBaseJewelry) item.getItem()).onEntityAttackedCacellable(item, player, entity, event.ammount)) event.setCanceled(true);
+						}
 						if (item.getItem() instanceof IJewelryItem) ((IJewelryItem) item.getItem()).onEntityAttackedByPlayer(item, player, entity, event.ammount);
 					}
 				}
 			if (ConfigHandler.CURSES_ENABLED) for (Curse curse : Curse.getCurseList())
-				if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0) curse.attackedByPlayerAction(entity.worldObj, player, entity);
-			if(entity instanceof EntityHeart && entity.getAge() < 50) event.setCanceled(true);
+				if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0) {
+					curse.attackedByPlayerAction(event, entity.worldObj, player, entity);
+					if (curse.attackedByPlayerActionCancelable(event, player.worldObj, player, entity)) event.setCanceled(true);
+				}
+			if (entity instanceof EntityHeart && entity.getAge() < 30) event.setCanceled(true);
+			if (event.source.getEntity() instanceof EntityPlayerMP) {
+				JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
+				JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP) player);
+			}
 		}
 	}
 
-	/**
-	 * @param event
-	 */
+	public void removeHearts(LivingAttackEvent event, EntityPlayer player, NBTTagCompound playerInfo) {
+		if (!player.worldObj.isRemote && !player.capabilities.isCreativeMode && (float) player.hurtResistantTime <= (float) player.maxHurtResistantTime / 2.0F) {
+			if (playerInfo.getFloat("WhiteHeart") > 0) {
+				playerInfo.setFloat("WhiteHeart", 0f);
+			}
+			if (playerInfo.getFloat("BlueHeart") > 0) {
+				float damage = playerInfo.getFloat("BlueHeart") - event.ammount;
+				if (damage >= 0) playerInfo.setFloat("BlueHeart", damage);
+				else playerInfo.setFloat("BlueHeart", 0f);
+				if (damage < 0) {
+					System.out.println(damage);
+					player.attackEntityFrom(event.source, Math.abs(damage));
+				}
+				player.hurtResistantTime = player.maxHurtResistantTime;
+				player.hurtTime = player.maxHurtTime = 10;
+				player.worldObj.playSoundAtEntity(player, "game.player.hurt", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+				event.setCanceled(true);
+			}
+			else if (playerInfo.getFloat("BlackHeart") > 0) {
+				AxisAlignedBB axisalignedbb = player.boundingBox.expand(3.0D, 0.0D, 3.0D);
+				List enemies = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, axisalignedbb);
+				if (enemies != null && !enemies.isEmpty()) {
+					Iterator iterator = enemies.iterator();
+					while (iterator.hasNext()) {
+						Entity enemy = (Entity) iterator.next();
+						enemy.attackEntityFrom(DamageSourceList.blackHeart, 0.5f * event.ammount);
+					}
+				}
+				float damage = playerInfo.getFloat("BlackHeart") - event.ammount;
+				if (damage >= 0) playerInfo.setFloat("BlackHeart", damage);
+				else playerInfo.setFloat("BlackHeart", 0f);
+				if (damage < 0) player.attackEntityFrom(event.source, Math.abs(damage));
+				player.hurtResistantTime = player.maxHurtResistantTime;
+				player.hurtTime = player.maxHurtTime = 10;
+				player.worldObj.playSoundAtEntity(player, "game.player.hurt", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+				event.setCanceled(true);
+			}
+		}
+	}
+
 	@SubscribeEvent
 	public void onPlayerRespawn(PlayerEvent.Clone event) {
 		EntityPlayer player = event.entityPlayer;
@@ -286,8 +250,9 @@ public class EntityEventHandler {
 			NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
 			if (playerInfo.hasKey("cursePoints")) {
 				int points = playerInfo.getInteger("cursePoints");
-				for (int i = 1; i <= Variables.MAX_CURSES; i++)
-					if (points > (i - 1) * 1750) addCurse(player, playerInfo, i);
+				int maxCurses = playerInfo.getInteger("cursePoints") / 1750 + 1;
+				if (points > 0 && playerInfo.getInteger("activeCurses") < maxCurses) while (playerInfo.getInteger("activeCurses") < maxCurses && Curse.availableCurses.size() > 0 && playerInfo.getInteger("activeCurses") < Curse.getCurseList().size())
+					addCurse(player, playerInfo);
 				if (!playerInfo.hasKey("curseTime") || !playerInfo.hasKey("reselectCurses") || playerInfo.getBoolean("reselectCurses")) {
 					playerInfo.setInteger("curseTime", 23000);
 					playerInfo.setBoolean("reselectCurses", false);
@@ -307,11 +272,7 @@ public class EntityEventHandler {
 						if (item.getItem() instanceof IJewelryItem) ((IJewelryItem) item.getItem()).onPlayerRespawnAction(item, event);
 					}
 				}
-		}
-		//if (event.entity instanceof EntityPlayer && !(event.entity instanceof EntityPlayerMP)) JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
-		if (!player.worldObj.isRemote) {
-			NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
-			JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
+			JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP) player);
 			if (addedCurses) {
 				JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
 				addedCurses = false;
@@ -319,20 +280,16 @@ public class EntityEventHandler {
 		}
 	}
 
-	/**
-	 * @param player
-	 * @param playerInfo
-	 * @param curse
-	 */
-	public void addCurse(EntityPlayer player, NBTTagCompound playerInfo, int curseNo) {
-		if (ConfigHandler.CURSES_ENABLED && Curse.availableCurses.size() > 0 && curseNo > Curse.getCurseList().size() - Curse.availableCurses.size() - totalUnavailableCurses) {
+	public void addCurse(EntityPlayer player, NBTTagCompound playerInfo) {
+		if (ConfigHandler.CURSES_ENABLED && Curse.availableCurses.size() > 0) {
 			Curse cur = ((WeightedRandomCurse) WeightedRandom.getRandomItem(rand, JewelrycraftUtil.getCurses(player.worldObj, player, rand))).getCurse(rand);
 			playerInfo.setInteger(cur.getName(), 1);
 			Curse.availableCurses.remove(cur);
 			addedCurses = true;
-//			JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
+			if (playerInfo.getInteger("activeCurses") == 0) playerInfo.setInteger("activeCurses", 1);
+			else playerInfo.setInteger("activeCurses", playerInfo.getInteger("activeCurses") + 1);
 			JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
-			JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
+			JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP) player);
 		}
 	}
 
@@ -340,28 +297,24 @@ public class EntityEventHandler {
 	public void itemToss(ItemTossEvent event) {
 		NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(event.player, Variables.MODID);
 		if (ConfigHandler.CURSES_ENABLED) for (Curse curse : Curse.getCurseList())
-			if (curse.canCurseBeActivated(event.player.worldObj) && playerInfo.getInteger(curse.getName()) > 0 && curse.itemToss()) {
+			if (event.player != null && curse.canCurseBeActivated(event.player.worldObj) && playerInfo.getInteger(curse.getName()) > 0 && curse.itemToss()) {
 				EntityItem entityitem = new EntityItem(event.player.worldObj, event.player.posX + 0.5D, event.player.posY + 0.5D, event.player.posZ + 0.5D, event.entityItem.getEntityItem());
-				entityitem.motionX = 0;
-				entityitem.motionZ = 0;
-				entityitem.motionY = 0.11000000298023224D;
-				event.player.worldObj.spawnEntityInWorld(entityitem);
-				MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText("<" + event.player.getDisplayName() + "> This is MY item! MINE! I will NEVER give it to you! Mine! Mine! MINE!"));
-				event.setCanceled(true);
+				if (entityitem != null) {
+					entityitem.motionX = 0;
+					entityitem.motionZ = 0;
+					entityitem.motionY = 0.11000000298023224D;
+					event.player.worldObj.spawnEntityInWorld(entityitem);
+					MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText("<" + event.player.getDisplayName() + "> I shouldn't drop this. I might need it later."));
+					event.setCanceled(true);
+				}
 			}
 	}
 
-	/**
-	 * @param event
-	 */
 	@SubscribeEvent
 	public void playerFileSave(PlayerEvent.SaveToFile event) {
 		if (event.entity instanceof EntityPlayer && !(event.entity instanceof EntityPlayerMP)) JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
 	}
 
-	/**
-	 * @param event
-	 */
 	@SubscribeEvent
 	public void onEntityDead(LivingDeathEvent event) {
 		final Entity entity = event.entity;
@@ -376,7 +329,8 @@ public class EntityEventHandler {
 					h.setType(type);
 					h.setLocationAndAngles(live.posX, live.posY, live.posZ, MathHelper.wrapAngleTo180_float(rand.nextFloat() * 360.0F), 0.0F);
 					live.worldObj.spawnEntityInWorld(h);
-				} else {
+				}
+				else {
 					for (int i = 1; i <= 1 + rand.nextInt(1 + (int) (live.getMaxHealth() / 2)); i++) {
 						EntityHeart[] hearts = { new EntityHeart(live.worldObj), new EntityHalfHeart(entity.worldObj) };
 						EntityHeart h = hearts[rand.nextInt(2)];
@@ -400,11 +354,14 @@ public class EntityEventHandler {
 			playerInfo.setFloat("BlackHeart", 0f);
 			playerInfo.setFloat("WhiteHeart", 0f);
 			if (playerInfo.hasKey("reselectCurses") && playerInfo.getBoolean("reselectCurses")) {
+				playerInfo.setInteger("activeCurses", 0);
 				if (ConfigHandler.CURSES_ENABLED) for (Curse l : Curse.getCurseList()) {
 					if (l.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(l.getName()) == 1) {
 						playerInfo.setInteger(l.getName(), 0);
+						l.setTicksActive(0);
 						if (!Curse.availableCurses.contains(l)) Curse.availableCurses.add(l);
-					} else if (l.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(l.getName()) >= 2) playerInfo.setInteger(l.getName(), 1);
+					}
+					else if (l.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(l.getName()) >= 2) playerInfo.setInteger(l.getName(), 1);
 				}
 				if (entity.worldObj.isRemote) JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
 			}
@@ -423,64 +380,15 @@ public class EntityEventHandler {
 		if (event.entity instanceof EntityPlayer && !(event.entity instanceof EntityPlayerMP)) JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
 	}
 
-	/**
-	 * @param event
-	 */
-	@SubscribeEvent
-	public void onWorldLoad(WorldEvent.Load event) {
-		if (!event.world.isRemote) {
-			new File(JewelrycraftMod.dir + File.separator + Variables.MODID).mkdirs();
-			JewelrycraftMod.liquidsConf = new File(JewelrycraftMod.dir + File.separator + Variables.MODID, "JLP" + event.world.getWorldInfo().getWorldName() + ".cfg");
-			try {
-				if (!JewelrycraftMod.liquidsConf.exists()) JewelrycraftMod.liquidsConf.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		if (FMLCommonHandler.instance().getEffectiveSide().isServer()) try {
-			if (JewelrycraftMod.liquidsConf.exists()) JewelrycraftMod.saveData = CompressedStreamTools.readCompressed(new FileInputStream(JewelrycraftMod.liquidsConf));
-		} catch (EOFException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * @param event
-	 */
-	@SubscribeEvent
-	public void onWorldSave(WorldEvent.Save event) {
-		if (FMLCommonHandler.instance().getEffectiveSide().isServer()) try {
-			if (JewelrycraftMod.liquidsConf.exists()) CompressedStreamTools.writeCompressed(JewelrycraftMod.saveData, new FileOutputStream(JewelrycraftMod.liquidsConf));
-		} catch (EOFException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * @param event
-	 */
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void fogColors(EntityViewRenderEvent.FogColors event) {
-	}
+	public void fogColors(EntityViewRenderEvent.FogColors event) {}
 
-	/**
-	 * @param event
-	 */
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void fogDensity(EntityViewRenderEvent.FogDensity event) {
-	}
+	public void fogDensity(EntityViewRenderEvent.FogDensity event) {}
 
-	/**
-	 * @param event
-	 */
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void renderFog(EntityViewRenderEvent.RenderFogEvent event) {
-	}
+	public void renderFog(EntityViewRenderEvent.RenderFogEvent event) {}
 }

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
+
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -46,7 +48,7 @@ public class ThirdPartyManager implements IGuiHandler{
                 try {
                     thirdPartyMods.add(entry.getValue().newInstance());
                 } catch(Exception e) {
-                    JewelrycraftMod.logger.log(Level.SEVERE, "Failed to instantiate third party handler!");
+                    JewelrycraftMod.logger.log(Level.ERROR, "Failed to instantiate third party handler!");
                     e.printStackTrace();
                 }
             }
@@ -70,7 +72,7 @@ public class ThirdPartyManager implements IGuiHandler{
             try {
                 thirdParty.preInit();
             } catch(Throwable e) {
-                JewelrycraftMod.logger.log(Level.SEVERE, "Jewelrycraft wasn't able to load third party content from the third party class " + thirdParty.getClass() + " in the PreInit phase!");
+                JewelrycraftMod.logger.log(Level.ERROR, "Jewelrycraft wasn't able to load third party content from the third party class " + thirdParty.getClass() + " in the PreInit phase!");
                 e.printStackTrace();
             }
         }
@@ -81,7 +83,7 @@ public class ThirdPartyManager implements IGuiHandler{
             try {
                 thirdParty.init();
             } catch(Throwable e) {
-                JewelrycraftMod.logger.log(Level.SEVERE, "Jewelrycraft wasn't able to load third party content from the third party class " + thirdParty.getClass() + " in the Init phase!");
+                JewelrycraftMod.logger.log(Level.ERROR, "Jewelrycraft wasn't able to load third party content from the third party class " + thirdParty.getClass() + " in the Init phase!");
                 e.printStackTrace();
             }
         }
@@ -92,7 +94,7 @@ public class ThirdPartyManager implements IGuiHandler{
             try {
                 thirdParty.postInit();
             } catch(Throwable e) {
-                JewelrycraftMod.logger.log(Level.SEVERE, "Jewelrycraft wasn't able to load third party content from the third party class " + thirdParty.getClass() + " in the PostInit phase!");
+                JewelrycraftMod.logger.log(Level.ERROR, "Jewelrycraft wasn't able to load third party content from the third party class " + thirdParty.getClass() + " in the PostInit phase!");
                 e.printStackTrace();
             }
         }
@@ -103,7 +105,7 @@ public class ThirdPartyManager implements IGuiHandler{
             try {
                 thirdParty.clientSide();
             } catch(Throwable e) {
-                JewelrycraftMod.logger.log(Level.SEVERE, "Jewelrycraft wasn't able to load third party content from the third party class " + thirdParty.getClass() + " client side!");
+                JewelrycraftMod.logger.log(Level.ERROR, "Jewelrycraft wasn't able to load third party content from the third party class " + thirdParty.getClass() + " client side!");
                 e.printStackTrace();
             }
         }
@@ -114,7 +116,7 @@ public class ThirdPartyManager implements IGuiHandler{
             try {
                 thirdParty.clientInit();
             } catch(Throwable e) {
-                JewelrycraftMod.logger.log(Level.SEVERE, "Jewelrycraft wasn't able to load third party content from the third party class " + thirdParty.getClass() + " client side on the init!");
+                JewelrycraftMod.logger.log(Level.ERROR, "Jewelrycraft wasn't able to load third party content from the third party class " + thirdParty.getClass() + " client side on the init!");
                 e.printStackTrace();
             }
         }

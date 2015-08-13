@@ -14,7 +14,7 @@ import darkknight.jewelrycraft.block.BlockList;
 /**
  * @author Sorin
  */
-public class WorldGenStructure4 extends WorldGenerator
+public class WorldGenStructure4 extends WorldGenStructure
 {
     public boolean generate(World world, BiomeGenBase biome, Random rand, int x, int y, int z)
     {
@@ -34,7 +34,7 @@ public class WorldGenStructure4 extends WorldGenerator
                     world.setBlock(x + i, y + j, z + k, Blocks.air);
         for(int i = -1; i <= 1; i++)
             for(int k = -1; k <= 1; k++)
-                world.setBlock(x + i, y, z + k, Blocks.stone_slab, slabMeta, 1);
+                world.setBlock(x + i, y, z + k, Blocks.stone_slab, slabMeta, 2);
         world.setBlock(x, y, z, block, metadata, 2);
         world.setBlock(x, y, z - 1, stair, 3, 1);
         world.setBlock(x, y, z + 1, stair, 2, 1);
@@ -49,7 +49,7 @@ public class WorldGenStructure4 extends WorldGenerator
         if (biome == BiomeGenBase.desert || biome == BiomeGenBase.desertHills) slabMeta = 1;
         for(int i = -1; i <= 1; i++)
             for(int k = -1; k <= 1; k++)
-                if (i == 0 || k == 0) world.setBlock(x + i, y + 2, z + k, Blocks.stone_slab, slabMeta, 1);
+                if (i == 0 || k == 0) world.setBlock(x + i, y + 2, z + k, Blocks.stone_slab, slabMeta, 2);
         world.setBlock(x, y + 2, z, block, metadata, 2);
         world.setBlock(x, y + 3, z, BlockList.crystal);
         return true;

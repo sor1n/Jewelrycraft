@@ -32,6 +32,7 @@ public class ConfigHandler
     public static int FURNACE_MAX_INGOT_STACK;
 
     public static boolean CRYSTAL_GLOW;
+    public static boolean CRYSTAL_PARTICLES;
     public static boolean HEARTS_DESPAWN;
     public static boolean JEWELRY_INFO;
     
@@ -50,11 +51,7 @@ public class ConfigHandler
     public static boolean ENABLE_WORLD_GEN = true;
     public static boolean ORE_GEN = true;
     public static boolean CRYSTAL_GEN = true;
-    public static boolean STRUCTURE_1_GEN = true;
-    public static boolean STRUCTURE_2_GEN = true;
-    public static boolean STRUCTURE_3_GEN = true;
-    public static boolean STRUCTURE_4_GEN = true;
-    public static boolean STRUCTURE_5_GEN = true;
+    public static boolean STRUCTURES[] = {true, true, true, true, true, true};
     
     public void loadConfig(FMLPreInitializationEvent event)
     {
@@ -85,17 +82,15 @@ public class ConfigHandler
         FURNACE_MAX_INGOT_STACK = config.getInt("Ingot Furnace Max", categories[1], 5, 0, Integer.MAX_VALUE, "Determines the maximum number of ingots that can generate in a furnace.");
         
         CRYSTAL_GLOW = config.getBoolean("Crystal Glow", categories[2], false, "If true, then crystal will slowly glow (can cause lag)");
+        CRYSTAL_PARTICLES = config.getBoolean("Crystal Particles", categories[2], true, "If false, then crystal will no longer spawn particles");
         HEARTS_DESPAWN = config.getBoolean("Hearts Despawn", categories[2], true, "If false, then Hearts and Half-hearts will no longer despawn");
         JEWELRY_INFO = config.getBoolean("Jewelry Info", categories[2], true, "If false, then extra info won't be show when hovering over a jewelery.");
         
         ENABLE_WORLD_GEN = config.getBoolean("World Generation", categories[3], true, "If false, nothing will generate (this includes ore)");
         ORE_GEN = config.getBoolean("Ore Generation", categories[3], true, "If false, ores won't generate");
         CRYSTAL_GEN = config.getBoolean("Crystal Generation", categories[3], true, "If false, crystals won't generate");
-        STRUCTURE_1_GEN = config.getBoolean("Structure 1 Generation", categories[3], true, "If false, structure no.1 won't generate");
-        STRUCTURE_2_GEN = config.getBoolean("Structure 2 Generation", categories[3], true, "If false, structure no.2 won't generate");
-        STRUCTURE_3_GEN = config.getBoolean("Structure 3 Generation", categories[3], true, "If false, structure no.3 won't generate");
-        STRUCTURE_4_GEN = config.getBoolean("Structure 4 Generation", categories[3], true, "If false, structure no.4 won't generate");
-        STRUCTURE_5_GEN = config.getBoolean("Structure 5 Generation", categories[3], true, "If false, structure no.5 won't generate");
+        for(int i = 0; i < STRUCTURES.length; i++)
+        	STRUCTURES[i] = config.getBoolean("Structure "+(i+1)+" Generation", categories[3], true, "If false, structure no."+(i+1)+" won't generate");
                 
 //        CURSES_ENABLED = config.getBoolean("Curses", categories[3], true, "If set to false curses will be deactivated.");
 //        CURSE_ROTTEN_HEART = config.getBoolean("Rotten Heart", categories[3], true, "If set to false this curse will be deactivated.");

@@ -10,6 +10,9 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -73,8 +76,8 @@ public class EntityHeart extends EntityLiving {
 				} else if (getType().equals("White") && playerInfo.getFloat("WhiteHeart") > 0.1F) {
 					playerInfo.setFloat(getType() + "Heart", 0F);
 					player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() + 2f);
+	                player.setHealth(player.getHealth() + 2f);
 					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
-//					player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() + playerInfo.getFloat("WhiteHeart"));
 					this.setDead();
 				} else if (!getType().equals("Red")) {
 					if(playerInfo.hasKey(getType() + "Heart")) playerInfo.setFloat(getType() + "Heart", playerInfo.getFloat(getType() + "Heart") + getQuantity());
@@ -85,6 +88,13 @@ public class EntityHeart extends EntityLiving {
 			}
 		}
 	}
+	
+    public void onDeath(DamageSource source)
+    {
+    	super.onDeath(source);
+    	if(source.getEntity() != null && source.getEntity() instanceof EntityPlayer)
+    		((EntityPlayer)source.getEntity()).addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".heartKilled."+this.getType())));
+    }
 
 	@SideOnly(Side.CLIENT)
 	public boolean canRenderOnFire() {

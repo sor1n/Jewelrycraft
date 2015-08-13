@@ -5,6 +5,7 @@ package darkknight.jewelrycraft.curses;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import darkknight.jewelrycraft.api.Curse;
@@ -24,7 +25,13 @@ public class CurseVampireHunger extends Curse
     
     public void attackedByPlayerAction(World world, EntityPlayer player, Entity target)
     {
-        if(player.shouldHeal() && rand.nextInt(5) == 0) player.heal(1F);
+        if(player.shouldHeal() && rand.nextBoolean()) player.heal(1F);
+    }
+    
+    public void action(World world, EntityPlayer player)
+    {
+        if(!player.capabilities.isCreativeMode && world.isDaytime() && !world.isRaining() && world.canBlockSeeTheSky(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY + 1F), MathHelper.floor_double(player.posZ)))
+        	player.setFire(8);
     }
     
     public String getDescription()

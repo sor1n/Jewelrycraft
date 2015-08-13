@@ -53,22 +53,23 @@ public class EffectObsidian extends ModifierEffects
     }
     
     @Override
-    public void onPlayerAttacked(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
+    public boolean onPlayerAttackedCacellable(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
     {
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         if (jewelry instanceof ItemEarrings && (source == DamageSource.anvil || source.damageType.equals("arrow"))){
             if (playerInfo.hasKey("protected")) playerInfo.setInteger("protected", playerInfo.getInteger("protected") + 1);
             else playerInfo.setInteger("protected", 1);
             // Positive && Negative earrings
-            if (playerInfo.getInteger("protected") < 200) playerInfo.setBoolean("negateDamage", true);
+            if (playerInfo.getInteger("protected") < 2000) return true;
             else player.attackEntityFrom(DamageSourceList.weak, player.getHealth() * 3F);
         }
         if (jewelry instanceof ItemBracelet && source == DamageSource.fall){
             if (playerInfo.hasKey("falls")) playerInfo.setInteger("falls", playerInfo.getInteger("falls") + 1);
             else playerInfo.setInteger("falls", 1);
             // Positive bracelet
-            if (playerInfo.getInteger("falls") < 300) playerInfo.setBoolean("negateDamage", true);
+            if (playerInfo.getInteger("falls") < 3000) return true;
         }
+        return false;
     }
     
     public void onPlayerDead(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry)
@@ -79,21 +80,22 @@ public class EffectObsidian extends ModifierEffects
         playerInfo.setInteger("protected", 0);
     }
     
-    public void onEntityAttacked(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount)
+    public boolean onEntityAttackedCacellable(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount)
     {
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         NBTTagCompound enemyData = target.getEntityData();
         // Positive ring
-        if (jewelry instanceof ItemRing && playerInfo.getInteger("strikes") < 200 && !player.worldObj.isRemote){
+        if (jewelry instanceof ItemRing && playerInfo.getInteger("strikes") < 2000 && !player.worldObj.isRemote){
             if (enemyData.getInteger("reAttacked") == 0){
                 if (playerInfo.hasKey("strikes")) playerInfo.setInteger("strikes", playerInfo.getInteger("strikes") + 1);
                 else playerInfo.setInteger("strikes", 1);
                 // Negative ring
                 enemyData.setInteger("reAttacked", enemyData.getInteger("reAttacked") + 1);
-                target.attackEntityFrom(DamageSource.causePlayerDamage(player), amount * 2F);
-                playerInfo.setBoolean("weakDamage", true);
+                target.attackEntityFrom(DamageSource.causePlayerDamage(player), amount * 1.5F);
+                return true;
             }
             if (enemyData.getInteger("reAttacked") == 1) enemyData.setInteger("reAttacked", 0);
         }
+        return false;
     }
 }

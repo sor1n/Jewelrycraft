@@ -21,7 +21,7 @@ public class VillageHandler
             MapGenStructureIO.func_143031_a(ComponentJewelry.class, Variables.MODID + ":Jewelry");
         }
         catch(Throwable e2){
-            JewelrycraftMod.logger.severe("Error registering Jewelrycraft Structures with Vanilla Minecraft: this is expected in versions earlier than 1.7.10");
+            JewelrycraftMod.logger.error("Error registering Jewelrycraft Structures with Vanilla Minecraft: this is expected in versions earlier than 1.7.10");
         }
     }
 }

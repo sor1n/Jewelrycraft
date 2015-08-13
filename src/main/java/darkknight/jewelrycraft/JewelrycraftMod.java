@@ -7,13 +7,10 @@ package darkknight.jewelrycraft;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -24,7 +21,16 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import darkknight.jewelrycraft.achievements.AchievementsList;
 import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.client.gui.GuiTab;
+import darkknight.jewelrycraft.client.gui.GuiTabBlocks;
+import darkknight.jewelrycraft.client.gui.GuiTabGemsAndIngots;
+import darkknight.jewelrycraft.client.gui.GuiTabIntroduction;
+import darkknight.jewelrycraft.client.gui.GuiTabItems;
+import darkknight.jewelrycraft.client.gui.GuiTabModifiers;
+import darkknight.jewelrycraft.client.gui.GuiTabOresToIngots;
+import darkknight.jewelrycraft.client.gui.GuiTabRitual;
 import darkknight.jewelrycraft.commands.JewelrycraftCommands;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.curses.CurseList;
@@ -39,6 +45,9 @@ import darkknight.jewelrycraft.thirdparty.ThirdPartyManager;
 import darkknight.jewelrycraft.util.Variables;
 import darkknight.jewelrycraft.worldGen.ChestGeneration;
 import darkknight.jewelrycraft.worldGen.village.VillageHandler;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 
 @Mod (modid = Variables.MODID, name = Variables.MODNAME, version = Variables.VERSION, guiFactory = Variables.CONFIG_GUI, acceptedMinecraftVersions = "[1.7.10,1.8)")
 public class JewelrycraftMod
@@ -47,7 +56,7 @@ public class JewelrycraftMod
     public static JewelrycraftMod instance;
     @SidedProxy (clientSide = Variables.CLIENT_PROXY, serverSide = Variables.SERVER_PROXY)
     public static CommonProxy proxy;
-    public static final Logger logger = Logger.getLogger(Variables.MODNAME);
+    public static Logger logger;
     public static File dir;
     public static CreativeTabs jewelrycraft = new CreativeTabs(Variables.MODID){
         @Override
@@ -57,11 +66,12 @@ public class JewelrycraftMod
         }
     };
     public static CreativeTabs liquids = new CreativeTabLiquids("Liquids").setBackgroundImageName("item_search.png");
-    public static NBTTagCompound saveData = new NBTTagCompound();
-    public static NBTTagCompound clientData = new NBTTagCompound();
-    public static File liquidsConf;
     public static SimpleNetworkWrapper netWrapper;
     public static boolean fancyRender = false;
+    
+    //GUIDE
+    public static GuiTab prevActive = new GuiTabIntroduction(0);
+    public static int prevPage = 1;
     
     /**
      * Pre initialization of mod stuff.
@@ -73,6 +83,7 @@ public class JewelrycraftMod
     public void preInit(FMLPreInitializationEvent e) throws IOException
     {
         dir = e.getModConfigurationDirectory();
+        logger = e.getModLog();
         ConfigHandler.INSTANCE.loadConfig(e);
         ThirdPartyManager.instance().index();
         logger.log(Level.INFO, "Registering Blocks");
@@ -119,6 +130,8 @@ public class JewelrycraftMod
         EventList.postInit(e);
         logger.log(Level.INFO, "Registering Potions");
         PotionList.postInit(e);
+        logger.log(Level.INFO, "Registering Achievements");
+        AchievementsList.addAchievements();
     }
     
     @EventHandler

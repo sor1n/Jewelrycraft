@@ -2,8 +2,8 @@ package darkknight.jewelrycraft.api;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import net.minecraft.client.Minecraft;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -11,14 +11,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class Curse
 {
-    protected int textureID;
-    protected String name, description, texturePackName;
+    protected int textureID, ticksActive;
+	protected String name, description, texturePackName;
     protected Random rand = new Random();
     private static ArrayList<Curse> curses = new ArrayList<Curse>();
     public static ArrayList<Curse> availableCurses = new ArrayList<Curse>();
@@ -33,6 +32,7 @@ public abstract class Curse
         this.name = name;
         this.texturePackName = texturepack;
         this.textureID = txtID;
+        this.ticksActive = 0;
         curses.add(this);
         availableCurses.add(this);
     }
@@ -87,7 +87,19 @@ public abstract class Curse
      * @param player The cursed player
      */
     public void action(World world, EntityPlayer player)
-    {}
+    {
+    	ticksActive++;
+    }
+    
+    public int getTicksActive() 
+    {
+		return ticksActive;
+	}
+
+	public void setTicksActive(int ticksActive) 
+	{
+		this.ticksActive = ticksActive;
+	}
 
     /**
      * This runs when the player dies
@@ -128,8 +140,19 @@ public abstract class Curse
      * @param player The player that caused the damage
      * @param target The entity damaged
      */
-    public void attackedByPlayerAction(World world, EntityPlayer player, Entity target)
+    public void attackedByPlayerAction(LivingAttackEvent event, World world, EntityPlayer player, Entity target)
     {}
+    
+    /**
+     * This runs when an entity is attacked by a player (this includes other players). This can cancel the damaging event.
+     * @param world The world the player is in
+     * @param player The player that caused the damage
+     * @param target The entity damaged
+     */
+    public boolean attackedByPlayerActionCancelable(LivingAttackEvent event, World world, EntityPlayer player, Entity target)
+    {
+    	return false;
+    }
     
     /**
      * This runs when an item is dropped by an entity

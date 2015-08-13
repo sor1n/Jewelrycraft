@@ -1,5 +1,15 @@
 package darkknight.jewelrycraft.curses;
 
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import darkknight.jewelrycraft.achievements.AchievementsList;
+import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.config.ConfigHandler;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.PlayerUtils;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -7,26 +17,18 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import darkknight.jewelrycraft.api.Curse;
-import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.damage.DamageSourceList;
-import darkknight.jewelrycraft.util.Variables;
-
 public class CursePentagram extends Curse {
-	float	rot	= 0F;
+	float rot = 0F;
 
 	public CursePentagram(String name, int txtID, String pack) {
 		super(name, txtID, pack);
@@ -34,19 +36,29 @@ public class CursePentagram extends Curse {
 
 	@Override
 	public void action(World world, EntityPlayer player) {
+		super.action(world, player);
 		if (!world.isRemote) {
+			NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
 			for (Object entity : world.getEntitiesWithinAABBExcludingEntity(player, AxisAlignedBB.getBoundingBox(player.boundingBox.minX - 0.5F, player.boundingBox.minY, player.boundingBox.minZ - 0.5F, player.boundingBox.maxX + 0.5F, player.boundingBox.maxY, player.boundingBox.maxZ + 0.5F))) {
-				if (entity instanceof EntityLivingBase && rand.nextInt(40) == 0) {
-					((EntityLivingBase) entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(((EntityLivingBase) entity).getMaxHealth() - 2f);//attackEntityFrom(DamageSourceList.shadows, 2f);
-					if (player.shouldHeal()) player.heal(2F);
-					else player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() + 2f);
+				if (entity instanceof EntityLivingBase) {
+					NBTTagCompound target = ((EntityLivingBase) entity).getEntityData();
+					if (target.getInteger("stolenHealth") < (JewelrycraftUtil.AchievemtUnlocked(player, AchievementsList.pentagram) ? 3 : 2) && rand.nextInt(40) == 0) {
+						((EntityLivingBase) entity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(((EntityLivingBase) entity).getMaxHealth() - 2f);
+						target.setInteger("stolenHealth", target.hasKey("stolenHealth") ? target.getInteger("stolenHealth") + 1 : 1);
+						playerInfo.setInteger("heartsStolen", playerInfo.hasKey("heartsStolen") ? playerInfo.getInteger("heartsStolen") + 1 : 1);
+						if (player.shouldHeal()) player.heal(2F);
+						else player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() + 2f);
+					}
+				}
+			}
+			if (!playerInfo.getBoolean(AchievementsList.pentagram.statId)) {
+				if (ticksActive > 24000 && playerInfo.getInteger("heartsStolen") <= 0) player.addStat(AchievementsList.pentagram, 1);
+				else {
+					player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + StatCollector.translateToLocal("challenge.failed") + " " + EnumChatFormatting.GOLD + StatCollector.translateToLocal(AchievementsList.pentagram.statId)));
+					playerInfo.setBoolean(AchievementsList.pentagram.statId, true);
 				}
 			}
 		}
-	}
-
-	@Override
-	public void attackedByPlayerAction(World world, EntityPlayer player, Entity target) {
 	}
 
 	@Override

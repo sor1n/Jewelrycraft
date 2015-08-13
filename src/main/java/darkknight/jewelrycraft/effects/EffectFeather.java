@@ -61,35 +61,37 @@ public class EffectFeather extends ModifierEffects
     }
     
     @Override
-    public void onEntityAttacked(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount)
+    public boolean onEntityAttackedCacellable(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount)
     {
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         NBTTagCompound enemyData = target.getEntityData();
-        if (jewelry instanceof ItemRing){
+        if (jewelry instanceof ItemRing && !player.worldObj.isRemote){
             if (enemyData.getInteger("reAttacked") == 0){
                 // Negative ring
                 enemyData.setInteger("reAttacked", enemyData.getInteger("reAttacked") + 1);
-                target.attackEntityFrom(DamageSource.causePlayerDamage(player), amount / (2F + (JewelryNBT.numberOfModifiers(item) - 1) * 0.1F));
+                target.attackEntityFrom(DamageSource.causePlayerDamage(player), amount / (2F + (JewelryNBT.numberOfModifiers(item) - 1) * 0.3F));
                 // Positive ring
                 if (rand.nextInt(2) == 0 && target instanceof EntityLivingBase) ((EntityLivingBase)target).addPotionEffect(new PotionEffect(PotionList.stun.id, (51 - JewelryNBT.numberOfModifiers(item))*2, 0, false));
-                playerInfo.setBoolean("weakDamage", true);
+                return true;
             }
-            if (enemyData.getInteger("reAttacked") == 1) enemyData.setInteger("reAttacked", 0);
+            else enemyData.setInteger("reAttacked", 0);
         }
+        return false;
     }
     
     @Override
-    public void onPlayerAttacked(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
+    public boolean onPlayerAttackedCacellable(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
     {
         NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         // Positive necklace
         if (jewelry instanceof ItemNecklace && rand.nextInt(3 + JewelryNBT.numberOfModifiers(item)) == 0 && source != DamageSourceList.weak && source != DamageSource.inFire && source != DamageSource.onFire && source != DamageSource.lava){
             player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.GRAY + StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".effect.feather")));
-            playerInfo.setBoolean("negateDamage", true);
+            return true;
         }
         // Negative necklace
         if (jewelry instanceof ItemNecklace && (source == DamageSource.inFire || source == DamageSource.onFire || source == DamageSource.lava) && source != DamageSourceList.weak) player.attackEntityFrom(DamageSourceList.weak, amount * (3F + (JewelryNBT.numberOfModifiers(item) - 1) * 0.1F));
         // Negative earrings
-        if (jewelry instanceof ItemEarrings && source.damageType.equals("arrow") && source != DamageSourceList.weak) player.attackEntityFrom(DamageSourceList.weak, amount * (2F + (JewelryNBT.numberOfModifiers(item) - 1) * 0.1F));
+        if (jewelry instanceof ItemEarrings && source.damageType.equals("arrow")) player.attackEntityFrom(DamageSourceList.weak, amount * (2F + (JewelryNBT.numberOfModifiers(item) - 1) * 0.1F));
+        return false;
     }
 }

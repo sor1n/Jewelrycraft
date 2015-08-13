@@ -57,11 +57,11 @@ public class GuiTabItems extends GuiTab
                 Page.addSmeltingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text, x, y, true, new ItemStack(BlockList.shadowOre), new ItemStack(ItemList.shadowIngot));
                 break;
             case 2:
-                text = "These gloves give you the chance to steal the trades those pesky Testificates have to offer. To use these simply open their gui at least once, then Crouch and";
+                text = "These gloves give you the chance to steal the trades those pesky Testificates have to offer. To use these simply open their gui at least once, then Crouch and right click on the them to hopefully steal the trades. If you traded with him before, then you have a chance of getting the traded";
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(ItemList.thiefGloves), new ItemStack(ItemList.shadowIngot), null, new ItemStack(ItemList.shadowIngot), new ItemStack(Blocks.wool, 1, 15), new ItemStack(ItemList.shadowIngot), new ItemStack(Blocks.wool, 1, 15), new ItemStack(Blocks.wool, 1, 15), new ItemStack(ItemList.shadowIngot), new ItemStack(Blocks.wool, 1, 15));
                 break;
             case 3:
-                text = "right click on the them to hopefully steal the trades. If you traded with him before, then you have a chance of getting the traded emeralds back as well. This has a maximum of 10 uses before it breaks.";
+                text = "emeralds back as well. This has a maximum of 10 uses before it breaks.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 4:
@@ -97,32 +97,36 @@ public class GuiTabItems extends GuiTab
                 del++;
                 if (del >= 300) del = 0;
                 if (values > 4) values = 0;
-                text = "It's this exact guide. I don't even know why you're reading this. I added this recipe in case you lose the original. Even if this is more helpful than NEI, I do suggest";
+                text = "It's this exact guide. I don't even know why you're reading this. I added this recipe in case you lose the original. Even if this is more helpful than NEI, I do suggest installing it so you can see all the recipes. Since you are reading this, how about making a youtube video spotlighting this mod. I'd really";
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), true, text, x, y, true, new ItemStack(ItemList.guide), new ItemStack(ItemList.molds, 1, values), new ItemStack(Items.book));
                 break;
             case 11:
                 String link = "HERE";
-                if (x >= gui.getLeft() && x <= gui.getLeft() + 30 && y >= gui.getTop() + 104 && y <= gui.getTop() + 124) link = EnumChatFormatting.DARK_BLUE + "HERE" + EnumChatFormatting.BLACK;
-                text = "installing it so you can see all the recipes. Since you are reading this, how about making a youtube video spotlighting this mod. I'd really appreciate it. After that you can share it in the main thread " + link + ".";
+                if (x >= gui.getLeft() - 7 && x <= gui.getLeft() + 10 && y >= gui.getTop() + 20 && y <= gui.getTop() + 34) link = EnumChatFormatting.DARK_BLUE + "HERE" + EnumChatFormatting.BLACK;
+                text = "appreciate it. After that you can share it in the main thread " + link + ".";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 12:
                 ItemStack item = new ItemStack(ItemList.bucket);
                 if (del == 0) values++;
                 del++;
-                if (del >= 300) del = 0;
+                if (del >= 50) del = 0;
                 if (values > JewelrycraftUtil.metal.size() - 1) values = 0;
                 JewelryNBT.addMetal(item, JewelrycraftUtil.metal.get(values).copy());
                 text = "These buckets contain molten metal. To obtain one simply Right Click a full Smelter to get a bucket. You can pour the metal, other than that it has no use. You can place the molten metal back in a Smelter by Right Clicking one with it.";
-                Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, item, text, 40f, 0, 0, true, 45, 10, true);
+                Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, item, text, 40f, 0, 0, true, 45, 10, false);
                 break;
             case 13:
-                text = "This item is a creative only item! Right click it while in creative mode to open a GUI. Place a piece of jewelery inside the slot, select what you want to add, then click on 'Add Items'. If you selected Modifiers, you can select multiple";
-                Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, new ItemStack(ItemList.jewelryModifier), text, 40f, 0, 0, true, 45, 10, true);
+                text = "This item is a creative only item! Right click it while in creative mode to open a GUI. Place a piece of jewelery inside the slot, select what you want to add, then click on 'Add Items'. If you selected Modifiers, you can select multiple items at once. The 'Item' button is to add an Item to a Golden Object, which can not be obtained normally. This tool can be really useful, especially for those";
+                Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, new ItemStack(ItemList.jewelryModifier), text, 40f, 0, 0, true, 45, 10, false);
                 break;
             case 14:
-                text = "items at once. The 'Item' button is to add an Item to a Golden Object, which can not be obtained normally. This tool can be really useful, especially for those who want to test the mod and can't wait for the normal processes to finish (Smelter, Jewelers Table, Ritual).";
+                text = "who want to test the mod and can't wait for the normal processes to finish (Smelter, Jewelers Table, Ritual).";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
+                break;
+            case 15:
+                text = "This item is a creative only item! If you right click in the air while holding this item you'll increment the number of the structure to spawn. Crouch and right click to go backwards. To spawn a structure simply right click on a block with this.";
+                Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, new ItemStack(ItemList.structureGen), text, 40f, 0, 0, true, 45, 10, false);
                 break;
             default:
                 ;
@@ -147,8 +151,8 @@ public class GuiTabItems extends GuiTab
     @Override
     public void mouseClick(GuiGuide gui, int x, int y, int button)
     {
-        if (gui.page == 13 && x >= gui.getLeft() && x <= gui.getLeft() + 30 && y >= gui.getTop() + 104 && y <= gui.getTop() + 124) try{
-            Desktop.getDesktop().browse(new URL("http://www.minecraftforum.net/forums/topics/2414865").toURI());
+        if (gui.page == 11 && x >= gui.getLeft() - 7 && x <= gui.getLeft() + 10 && y >= gui.getTop() + 20 && y <= gui.getTop() + 34) try{
+            Desktop.getDesktop().browse(new URL("http://minecraft.curseforge.com/mc-mods/229927-jewelrycraft-2").toURI());
         }
         catch(Exception e){}
     }

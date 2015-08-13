@@ -4,8 +4,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import darkknight.jewelrycraft.config.ConfigHandler;
+import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.Variables;
 
 public class ItemStructureGen extends Item
 {
@@ -19,7 +28,7 @@ public class ItemStructureGen extends Item
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
-        if (!world.isRemote){
+        if (!world.isRemote && player.capabilities.isCreativeMode){
             if (!player.isSneaking()){
                 if (no < JewelrycraftUtil.structures.size() - 1) no++;
                 else no = 0;
@@ -36,7 +45,12 @@ public class ItemStructureGen extends Item
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par1, float par2, float par3, float par4)
     {
-        JewelrycraftUtil.structures.get(no).generate(world, itemRand, x, y + 1, z);
+        if(player.capabilities.isCreativeMode) JewelrycraftUtil.structures.get(no).generate(world, world.getBiomeGenForCoords(x, z), itemRand, x, y + 1, z);
         return true;
+    }
+    
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
+    {
+       list.add(EnumChatFormatting.GRAY + "Creative Only");
     }
 }

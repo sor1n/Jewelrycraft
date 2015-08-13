@@ -11,10 +11,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.damage.DamageSourceList;
@@ -22,6 +25,8 @@ import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.entities.renders.RenderHelper;
 import darkknight.jewelrycraft.item.render.MaskRender;
+import darkknight.jewelrycraft.network.PacketSendClientPlayerInfo;
+import darkknight.jewelrycraft.network.PacketSendServerPlayersInfo;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
@@ -34,7 +39,7 @@ public class CurseInfamy extends Curse
     }
     
     @Override
-    public void attackedByPlayerAction(World world, EntityPlayer player, Entity target)
+    public void attackedByPlayerAction(LivingAttackEvent event, World world, EntityPlayer player, Entity target)
     {
         if (rand.nextInt(5) == 0 && !world.isRemote && !(target instanceof EntityMob) && target instanceof EntityLiving && !(target instanceof EntityHeart) && !(target instanceof EntityHalfHeart) && target.canAttackWithItem()){
             NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
@@ -44,6 +49,8 @@ public class CurseInfamy extends Curse
                 player.setHealth(player.getHealth() - 1.0F);
             }
             JewelrycraftUtil.addCursePoints(player, 10);
+			JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
+			JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
         }
     }
     

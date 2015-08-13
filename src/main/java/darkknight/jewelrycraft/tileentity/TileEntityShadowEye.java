@@ -30,7 +30,7 @@ import darkknight.jewelrycraft.util.Variables;
 
 public class TileEntityShadowEye extends TileEntity
 {
-    public int opening, timer, t = 20;
+    public int opening, timer, t = 20, soundTimer;
     public boolean active, shouldAddData;
     public ArrayList<ItemStack> pedestalItems = new ArrayList<ItemStack>();
     ResourceLocation particleTexture = new ResourceLocation(Variables.MODID, "textures/particle/shadows.png");
@@ -107,6 +107,7 @@ public class TileEntityShadowEye extends TileEntity
             if (opening < 4){
                 opening++;
                 timer = 20;
+            	soundTimer = 0;
             }
             if (canStartRitual && opening == 4) timer = ConfigHandler.RITUAL_TIME;
             else if (!canStartRitual){
@@ -124,6 +125,9 @@ public class TileEntityShadowEye extends TileEntity
             int i = Minecraft.getMinecraft().gameSettings.particleSetting;
             for(int l = 0; l <= 100 - i*45; l++)
                 worldObj.spawnParticle("depthsuspend", xCoord + 6.5F - worldObj.rand.nextInt(12) - worldObj.rand.nextFloat(), yCoord - 2F + worldObj.rand.nextInt(9) - worldObj.rand.nextFloat(), zCoord + 6.5F - worldObj.rand.nextInt(12) - worldObj.rand.nextFloat(), 0, 0, 0);
+        	if(soundTimer == 0) worldObj.playSound(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, "jewelrycraft2:Ritual", 1.0F, 1.0F, false);
+        	if(soundTimer < 20*14) soundTimer++;
+        	else soundTimer = 0;
         }
     }
     

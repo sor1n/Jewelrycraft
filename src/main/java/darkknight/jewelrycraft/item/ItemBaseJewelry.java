@@ -111,7 +111,7 @@ public abstract class ItemBaseJewelry extends Item
     public boolean onPlayerAttackedCacellable(ItemStack item, EntityPlayer player, DamageSource source, float amount)
     {
         for(ModifierEffects mod: ModifierEffects.getEffects())
-            return JewelryNBT.doesModifierExist(item, mod.getModifier()) ? mod.onPlayerAttackedCacellable(item, player, source, this, amount) : false;
+            if(JewelryNBT.doesModifierExist(item, mod.getModifier())) return mod.onPlayerAttackedCacellable(item, player, source, this, amount);
         return false;
     }
     
@@ -124,7 +124,7 @@ public abstract class ItemBaseJewelry extends Item
     public boolean onEntityAttackedCacellable(ItemStack item, EntityPlayer player, Entity target, float amount)
     {
         for(ModifierEffects mod: ModifierEffects.getEffects())
-            return JewelryNBT.doesModifierExist(item, mod.getModifier()) ? mod.onEntityAttackedCacellable(item, player, target, this, amount) : false;
+            if(JewelryNBT.doesModifierExist(item, mod.getModifier())) return mod.onEntityAttackedCacellable(item, player, target, this, amount);
         return false;
     }
     

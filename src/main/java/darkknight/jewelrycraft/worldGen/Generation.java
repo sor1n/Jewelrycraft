@@ -1,28 +1,24 @@
 package darkknight.jewelrycraft.worldGen;
 
 import java.util.Random;
-
+import cpw.mods.fml.common.IWorldGenerator;
+import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.config.ConfigHandler;
+import net.minecraft.client.multiplayer.ChunkProviderClient;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
-import cpw.mods.fml.common.IWorldGenerator;
-import darkknight.jewelrycraft.block.BlockList;
-import darkknight.jewelrycraft.config.ConfigHandler;
+import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 
 public class Generation implements IWorldGenerator {
-	public static WorldGenStructure1	STRUCTURE_1	= new WorldGenStructure1();
-	public static WorldGenStructure2	STRUCTURE_2	= new WorldGenStructure2();
-	public static WorldGenStructure3	STRUCTURE_3	= new WorldGenStructure3();
-	public static WorldGenStructure4	STRUCTURE_4	= new WorldGenStructure4();
-	public static WorldGenStructure5	STRUCTURE_5	= new WorldGenStructure5();
+	public static WorldGenStructure STRUCTURE_1 = new WorldGenStructure1();
+	public static WorldGenStructure STRUCTURE_2 = new WorldGenStructure2();
+	public static WorldGenStructure STRUCTURE_3 = new WorldGenStructure3();
+	public static WorldGenStructure STRUCTURE_4 = new WorldGenStructure4();
+	public static WorldGenStructure STRUCTURE_5 = new WorldGenStructure5();
+	public static WorldGenStructure STRUCTURE_6 = new WorldGenStructure6();
 
-	// public static WorldGenerator STRUCTURE_6 = new WorldGenStructure6();
-	// public static WorldGenerator STRUCTURE_7 = new WorldGenStructure7();
-	// public static WorldGenerator STRUCTURE_8 = new WorldGenStructure8();
-	// public static WorldGenerator STRUCTURE_9 = new WorldGenStructure9();
-	// public static WorldGenerator STRUCTURE_10 = new WorldGenStructure10();
-	// public static WorldGenerator STRUCTURE_11 = new WorldGenStructure11();
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
 		switch (world.provider.dimensionId) {
@@ -38,23 +34,22 @@ public class Generation implements IWorldGenerator {
 		}
 	}
 
-	private void generateEnd(World world, Random random, int i, int j) {
-	}
+	private void generateEnd(World world, Random random, int i, int j) {}
 
 	private void generateSurface(World world, Random random, int i, int j) {
 		if (ConfigHandler.ENABLE_WORLD_GEN) {
-			if(ConfigHandler.ORE_GEN) generateShadowOre(world, random, i, j);
-			if(ConfigHandler.CRYSTAL_GEN) generateCrystals(world, random, i, j);
-			if(ConfigHandler.STRUCTURE_1_GEN) generateStructure1(world, random, i, j);
-			if(ConfigHandler.STRUCTURE_2_GEN) generateStructure2(world, random, i, j);
-			if(ConfigHandler.STRUCTURE_3_GEN) generateStructure3(world, random, i, j);
-			if(ConfigHandler.STRUCTURE_4_GEN) generateStructure4(world, random, i, j);
-			if(ConfigHandler.STRUCTURE_5_GEN) generateStructure5(world, random, i, j);
+			if (ConfigHandler.ORE_GEN) generateShadowOre(world, random, i, j);
+			if (ConfigHandler.CRYSTAL_GEN) generateCrystals(world, random, i, j);
+			if (ConfigHandler.STRUCTURES[0]) generateStructureOverground(STRUCTURE_1, world, random, i, j, 1, false, true);
+			if (ConfigHandler.STRUCTURES[1]) generateStructureUnderground(STRUCTURE_2, world, random, i, j, 3, false, true);
+			if (ConfigHandler.STRUCTURES[2]) generateStructureUnderground(STRUCTURE_3, world, random, i, j, 3, false, true);
+			if (ConfigHandler.STRUCTURES[3]) generateStructureOverground(STRUCTURE_4, world, random, i, j, 5, false, true);
+			if (ConfigHandler.STRUCTURES[4]) generateStructureUnderground(STRUCTURE_5, world, random, i, j, 3, false, true);
+			if (ConfigHandler.STRUCTURES[5]) generateStructureOverground(STRUCTURE_6, world, random, i, j, 3, false, true);
 		}
 	}
 
-	private void generateNether(World world, Random random, int i, int j) {
-	}
+	private void generateNether(World world, Random random, int i, int j) {}
 
 	private void generateShadowOre(World world, Random random, int i, int j) {
 		for (int k = 0; k < 1; k++) {
@@ -81,51 +76,47 @@ public class Generation implements IWorldGenerator {
 		}
 	}
 
-	private void generateStructure1(World world, Random random, int i, int j) {
+	private void generateStructureUnderground(WorldGenStructure structure, World world, Random random, int i, int j, int maxAttempts, boolean noOfAttempts, boolean chanceOfSpawning) {
 		BiomeGenBase biomeBase = world.getBiomeGenForCoords(i, j);
-		int x = i + random.nextInt(16);
-		int y = random.nextInt(100);
-		int z = j + random.nextInt(16);
-		if (world.getBlock(x, y, z) == Blocks.air && (world.getBlock(x, y - 1, z) == Blocks.stone || world.getBlock(x, y - 1, z) == Blocks.sand || world.getBlock(x, y - 1, z) == Blocks.grass)) STRUCTURE_1.generate(world, biomeBase, random, x, y, z);
-	}
-
-	private void generateStructure2(World world, Random random, int i, int j) {
-		BiomeGenBase biomeBase = world.getBiomeGenForCoords(i, j);
-		if (random.nextInt(3) == 0) {
-			int x = i + random.nextInt(16);
-			int y = random.nextInt(100);
-			int z = j + random.nextInt(16);
-			if (world.getBlock(x, y, z) == Blocks.stone) STRUCTURE_2.generate(world, biomeBase, random, x, y, z);
+		if (noOfAttempts) {
+			for (int k = 0; k < maxAttempts; k++) {
+				int x = i + random.nextInt(16);
+				int y = random.nextInt(64);
+				int z = j + random.nextInt(16);
+				if (world.getBlock(x, y, z) == Blocks.stone) structure.generate(world, biomeBase, random, x, y, z);
+			}
+		}
+		else if (chanceOfSpawning) {
+			if (random.nextInt(maxAttempts) == 0) {
+				int x = i + random.nextInt(16);
+				int y = random.nextInt(64);
+				int z = j + random.nextInt(16);
+				if (world.getBlock(x, y, z) == Blocks.stone) structure.generate(world, biomeBase, random, x, y, z);
+			}
 		}
 	}
 
-	private void generateStructure3(World world, Random random, int i, int j) {
+	private void generateStructureOverground(WorldGenStructure structure, World world, Random random, int i, int j, int maxAttempts, boolean noOfAttempts, boolean chanceOfSpawning) {
 		BiomeGenBase biomeBase = world.getBiomeGenForCoords(i, j);
-		if (random.nextInt(3) == 0) {
-			int x = i + random.nextInt(16);
-			int y = random.nextInt(100);
-			int z = j + random.nextInt(16);
-			if (world.getBlock(x, y, z) == Blocks.stone) STRUCTURE_3.generate(world, biomeBase, random, x, y, z);
+		if (noOfAttempts) {
+			for (int k = 0; k < maxAttempts; k++) {
+				int x = i + random.nextInt(16);
+				int y = (world.getChunkHeightMapMinimum(i, j) > 0 ? world.getChunkHeightMapMinimum(i, j): world.getChunkFromChunkCoords(i, j).heightMapMinimum - 16) + random.nextInt(4);
+				int z = j + random.nextInt(16);
+				if (world.getBlock(x, y, z) == Blocks.air && (world.getBlock(x, y - 1, z) == Blocks.stone || world.getBlock(x, y - 1, z) == Blocks.sand || world.getBlock(x, y - 1, z) == Blocks.grass)) structure.generate(world, biomeBase, random, x, y, z);
+			}
 		}
-	}
-
-	private void generateStructure4(World world, Random random, int i, int j) {
-		BiomeGenBase biomeBase = world.getBiomeGenForCoords(i, j);
-		if (random.nextInt(5) == 0) {
-			int x = i + random.nextInt(16);
-			int y = random.nextInt(100);
-			int z = j + random.nextInt(16);
-			if (world.getBlock(x, y, z) == Blocks.air && (world.getBlock(x, y - 1, z) == Blocks.stone || world.getBlock(x, y - 1, z) == Blocks.sand || world.getBlock(x, y - 1, z) == Blocks.grass)) STRUCTURE_4.generate(world, biomeBase, random, x, y, z);
-		}
-	}
-
-	private void generateStructure5(World world, Random random, int i, int j) {
-		BiomeGenBase biomeBase = world.getBiomeGenForCoords(i, j);
-		if (random.nextInt(3) == 0) {
-			int x = i + random.nextInt(16);
-			int y = random.nextInt(100);
-			int z = j + random.nextInt(16);
-			if (world.getBlock(x, y, z) == Blocks.stone) STRUCTURE_5.generate(world, biomeBase, random, x, y, z);
+		else if (chanceOfSpawning) {
+			if (random.nextInt(maxAttempts) == 0) {
+				int x = i + random.nextInt(16);
+				int y = (world.getChunkHeightMapMinimum(i, j) > 0 ? world.getChunkHeightMapMinimum(i, j): world.getChunkFromChunkCoords(i, j).heightMapMinimum - 16) + random.nextInt(4);
+				int z = j + random.nextInt(16);
+				if (world.getBlock(x, y, z) == Blocks.air && (world.getBlock(x, y - 1, z) == Blocks.stone 
+						|| world.getBlock(x, y - 1, z) == Blocks.sand 
+						|| world.getBlock(x, y - 1, z) == Blocks.grass)){ structure.generate(world, biomeBase, random, x, y, z);
+							System.out.println(x + " " + z);
+						}
+			}
 		}
 	}
 }

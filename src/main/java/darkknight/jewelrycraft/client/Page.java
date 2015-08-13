@@ -1,30 +1,21 @@
 package darkknight.jewelrycraft.client;
 
 import java.util.ArrayList;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import darkknight.jewelrycraft.client.gui.GuiGuide;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import darkknight.jewelrycraft.client.gui.GuiGuide;
-import darkknight.jewelrycraft.util.Variables;
 
 public class Page
 {
     static ResourceLocation pageFlipped = new ResourceLocation(Variables.MODID, "textures/gui/guidePageFlip.png");
     
-    /**
-     * @param gui
-     * @param x
-     * @param y
-     * @param isSmall
-     * @param text
-     * @param mouseX
-     * @param mouseY
-     * @param items
-     */
     public static void addCraftingRecipeTextPage(GuiGuide gui, int x, int y, boolean isSmall, String text, int mouseX, int mouseY, boolean rotate, ItemStack ... items)
     {
         y += 5;
@@ -67,15 +58,6 @@ public class Page
         GL11.glDisable(GL11.GL_BLEND);
     }
     
-    /**
-     * @param gui
-     * @param x
-     * @param y
-     * @param text
-     * @param mouseX
-     * @param mouseY
-     * @param items
-     */
     public static void addSmeltingRecipeTextPage(GuiGuide gui, int x, int y, String text, int mouseX, int mouseY, boolean rotate, ItemStack ... items)
     {
         ArrayList<String> name = new ArrayList<String>();
@@ -96,14 +78,6 @@ public class Page
         GL11.glDisable(GL11.GL_BLEND);
     }
     
-    /**
-     * @param gui
-     * @param x
-     * @param y
-     * @param item
-     * @param text
-     * @param size
-     */
     public static void addImageTextPage(GuiGuide gui, int x, int y, ItemStack item, String text, float size, boolean rotate)
     {
         y += 5;
@@ -135,19 +109,6 @@ public class Page
         GL11.glDisable(GL11.GL_BLEND);
     }
     
-    /**
-     * @param gui
-     * @param x
-     * @param y
-     * @param item
-     * @param text
-     * @param size
-     * @param txtX
-     * @param txtY
-     * @param showName
-     * @param imgX
-     * @param imgY
-     */
     public static void addImageTextPage(GuiGuide gui, int x, int y, ItemStack item, String text, float size, int txtX, int txtY, boolean showName, int imgX, int imgY, boolean rotate)
     {
         y += 5;
@@ -161,12 +122,19 @@ public class Page
         GL11.glDisable(GL11.GL_BLEND);
     }
     
-    /**
-     * @param gui
-     * @param x
-     * @param y
-     * @param text
-     */
+    public static void addImageTextPage(GuiGuide gui, int x, int y, ItemStack item, String text, float size, int txtX, int txtY, String title, int imgX, int imgY, boolean rotate)
+    {
+        y += 5;
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        gui.getFont().drawString(EnumChatFormatting.DARK_BLUE + "\u00a7n" + title.substring(0, item.getDisplayName().length() > 23?23:title.length()), x + Math.abs(70 - gui.getFont().getStringWidth(title) / 2) - 10, y + 2, 0);
+        GL11.glColor4f(1, 1, 1, 1);
+        gui.renderItem(item, x + 13 + imgX, y + 18 + imgY, size, rotate, 0, 0, 0);
+        drawText(gui, text, x + txtX, y + txtY);
+        GL11.glDisable(GL11.GL_BLEND);
+    }
+    
     public static void addTextPage(GuiGuide gui, int x, int y, String text)
     {
         y -= 25;
@@ -174,25 +142,25 @@ public class Page
         GL11.glColor4f(1, 1, 1, 1);
     }
     
-    /**
-     * @param gui
-     * @param text
-     * @param x
-     * @param y
-     */
     public static void drawText(GuiGuide gui, String text, int x, int y)
     {
         String[] s = text.split(" ");
         String displayText = "";
+        float scale = 0.75F;
         ArrayList<String> textLines = new ArrayList<String>();
         for(String element: s)
-            if ((displayText + element + " ").length() <= 24) displayText += element + " ";
+            if ((displayText + element + " ").length() <= 31) displayText += element + " ";
             else{
                 textLines.add(displayText.trim());
                 displayText = element + " ";
             }
         textLines.add(displayText.trim());
         for(int i = 0; i < textLines.size(); i++)
-            gui.getFont().drawString(textLines.get(i), x, y + 30 + i * 12, 0);
+        {
+        	GL11.glPushMatrix();
+        	GL11.glScalef(scale, scale, 0f);
+            gui.getFont().drawString(textLines.get(i), (int)(x/scale), (int)((y + 32 + i * 9)/scale), 0);
+            GL11.glPopMatrix();
+        }
     }
 }

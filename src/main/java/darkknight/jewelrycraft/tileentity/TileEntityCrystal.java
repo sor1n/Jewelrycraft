@@ -3,6 +3,7 @@
  */
 package darkknight.jewelrycraft.tileentity;
 
+import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import net.minecraft.tileentity.TileEntity;
 
@@ -32,11 +33,13 @@ public class TileEntityCrystal extends TileEntity
                 timer = 0;
             }
         }
+        if(ConfigHandler.CRYSTAL_PARTICLES) 
+        	worldObj.spawnParticle("instantSpell", xCoord + worldObj.rand.nextFloat(), yCoord + worldObj.rand.nextFloat(), zCoord + worldObj.rand.nextFloat(), 0.0D, -1.0D, 0.0D);
     }
     
     public boolean canUpdate()
     {
-        return ConfigHandler.CRYSTAL_GLOW;
+        return ConfigHandler.CRYSTAL_GLOW || ConfigHandler.CRYSTAL_PARTICLES;
     }
 
 }

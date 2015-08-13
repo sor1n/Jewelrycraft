@@ -37,18 +37,18 @@ public class ScreenHandler extends Gui {
 		count = 0;
 		size = 16;
 		if (tagCache.getFloat("BlueHeart") > 0) {
-			drawTexturedModalRect(resolution.getScaledWidth() / 2 + 90 + 35 * count, resolution.getScaledHeight() - 20, 0 * size, 0 * size, size, size);
-			mc.fontRenderer.drawStringWithShadow("x" + (MathHelper.ceiling_float_int(tagCache.getFloat("BlueHeart")) / 2.0F), resolution.getScaledWidth() / 2 + 105 + 35 * count, resolution.getScaledHeight() - 16, 16777215);
+			drawTexturedModalRect(resolution.getScaledWidth() / 2 + 90 + 35 * count, resolution.getScaledHeight() - 40, 0 * size, 0 * size, size, size);
+			mc.fontRenderer.drawStringWithShadow("x" + (MathHelper.ceiling_float_int(tagCache.getFloat("BlueHeart")) / 2.0F), resolution.getScaledWidth() / 2 + 105 + 35 * count, resolution.getScaledHeight() - 36, 16777215);
 		}
 		count++;
 		mc.renderEngine.bindTexture(Variables.MISC_TEXTURE);
 		if (tagCache.getFloat("BlackHeart") > 0) {
-			drawTexturedModalRect(resolution.getScaledWidth() / 2 + 90 + (mc.fontRenderer.getStringWidth(String.valueOf((MathHelper.ceiling_float_int(tagCache.getFloat("BlueHeart")) / 2.0F))) - 14) + 35 * count, resolution.getScaledHeight() - 20, 1 * size, 0 * size, size, size);
-			mc.fontRenderer.drawStringWithShadow("x" + (MathHelper.ceiling_float_int(tagCache.getFloat("BlackHeart")) / 2.0F), resolution.getScaledWidth() / 2 + 105 + (mc.fontRenderer.getStringWidth(String.valueOf((MathHelper.ceiling_float_int(tagCache.getFloat("BlueHeart")) / 2.0F))) - 14) + 35 * count, resolution.getScaledHeight() - 16, 16777215);
+			drawTexturedModalRect(resolution.getScaledWidth() / 2 + 90 + (mc.fontRenderer.getStringWidth(String.valueOf((MathHelper.ceiling_float_int(tagCache.getFloat("BlueHeart")) / 2.0F))) - 14) + 35 * count, resolution.getScaledHeight() - 40, 1 * size, 0 * size, size, size);
+			mc.fontRenderer.drawStringWithShadow("x" + (MathHelper.ceiling_float_int(tagCache.getFloat("BlackHeart")) / 2.0F), resolution.getScaledWidth() / 2 + 105 + (mc.fontRenderer.getStringWidth(String.valueOf((MathHelper.ceiling_float_int(tagCache.getFloat("BlueHeart")) / 2.0F))) - 14) + 35 * count, resolution.getScaledHeight() - 36, 16777215);
 		}
 		count++;
 		mc.renderEngine.bindTexture(Variables.MISC_TEXTURE);
-		if (tagCache.getFloat("WhiteHeart") > 0) drawTexturedModalRect(resolution.getScaledWidth() / 2 + 90 + (mc.fontRenderer.getStringWidth(String.valueOf((MathHelper.ceiling_float_int(tagCache.getFloat("BlueHeart")) / 2.0F))) - 14) + (mc.fontRenderer.getStringWidth(String.valueOf((MathHelper.ceiling_float_int(tagCache.getFloat("BlackHeart")) / 2.0F))) - 14) + 35 * count, resolution.getScaledHeight() - 20, 2 * size, 1 * size, size, size);
+		if (tagCache.getFloat("WhiteHeart") > 0) drawTexturedModalRect(resolution.getScaledWidth() / 2 + 90 + (mc.fontRenderer.getStringWidth(String.valueOf((MathHelper.ceiling_float_int(tagCache.getFloat("BlueHeart")) / 2.0F))) - 14) + (mc.fontRenderer.getStringWidth(String.valueOf((MathHelper.ceiling_float_int(tagCache.getFloat("BlackHeart")) / 2.0F))) - 14) + 35 * count, resolution.getScaledHeight() - 40, 2 * size, 1 * size, size, size);
 		GL11.glPopMatrix();
 	}
 }
