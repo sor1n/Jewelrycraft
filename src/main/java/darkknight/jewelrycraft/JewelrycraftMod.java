@@ -21,6 +21,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.achievements.AchievementsList;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.gui.GuiTab;
@@ -68,10 +70,6 @@ public class JewelrycraftMod
     public static CreativeTabs liquids = new CreativeTabLiquids("Liquids").setBackgroundImageName("item_search.png");
     public static SimpleNetworkWrapper netWrapper;
     public static boolean fancyRender = false;
-    
-    //GUIDE
-    public static GuiTab prevActive = new GuiTabIntroduction(0);
-    public static int prevPage = 1;
     
     /**
      * Pre initialization of mod stuff.

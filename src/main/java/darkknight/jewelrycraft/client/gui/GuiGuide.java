@@ -15,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.block.BlockShadowEye;
@@ -27,14 +29,18 @@ public class GuiGuide extends GuiContainer {
 	private final GuiTab[] tabs = new GuiTab[] { new GuiTabIntroduction(0), new GuiTabBlocks(1), new GuiTabItems(2), new GuiTabGemsAndIngots(3), new GuiTabCurses(4), new GuiTabModifiers(5), new GuiTabRitual(6) };
 	private GuiTab activeTab;
 	ResourceLocation pageTexture, flippedPageTexture;
+    
+    //GUIDE
+    public static GuiTab prevActive = new GuiTabIntroduction(0);
+    public static int prevPage = 1;
 
 	public GuiGuide(Container container, World world, ResourceLocation pageTex, ResourceLocation flipPageTex) {
 		super(container);
-		page = JewelrycraftMod.prevPage;
+		page = prevPage;
 		rot = 0;
 		del = 0;
 		this.world = world;
-		activeTab = JewelrycraftMod.prevActive;
+		activeTab = prevActive;
 		pageTexture = pageTex;
 		flippedPageTexture = flipPageTex;
 		this.xSize = 240;
@@ -93,19 +99,19 @@ public class GuiGuide extends GuiContainer {
 	protected void mouseClicked(int x, int y, int button) {
 		if (nextHover && page + 2 <= activeTab.getMaxPages()) {
 			page += 2;
-			JewelrycraftMod.prevPage = page;
+			prevPage = page;
 		}
 		else if (prevHover && page > 1) {
 			page -= 2;
-			JewelrycraftMod.prevPage = page;
+			prevPage = page;
 		}
 		activeTab.mouseClick(this, x, y, button);
 		for (GuiTab tab : tabs)
 			if (activeTab != tab) if (tab.inRect(this, x, y)) {
 				activeTab = tab;
-				JewelrycraftMod.prevActive = tab;
+				prevActive = tab;
 				page = 1;
-				JewelrycraftMod.prevPage = page;
+				prevPage = page;
 				break;
 			}
 	}
