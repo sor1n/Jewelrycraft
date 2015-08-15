@@ -68,7 +68,6 @@ minecraft {
 	replace '@MASSIVE@', project.massive
     replace '@MAJOR@', project.major
     replace '@MINOR@', project.minor
-    replace '@BUILD@', project.build
     replace '@MC_VERSION@', version
     if (System.getenv("BUILD_NUMBER") != null) {
         replace '@BUILD_NUMBER@', System.getenv("BUILD_NUMBER")
