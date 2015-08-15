@@ -73,7 +73,7 @@ public class CurseRabbitsPaw extends Curse
 	}
 
     @Override
-    public boolean canCurseBeActivated(World world)
+    public boolean canCurseBeActivated()
     {
         return ConfigHandler.CURSE_RABBIT_PAW;
     }

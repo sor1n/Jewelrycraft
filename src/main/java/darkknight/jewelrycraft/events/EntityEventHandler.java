@@ -89,45 +89,20 @@ public class EntityEventHandler {
 		Entity entity = event.entity;
 		EntityLivingBase entityLiving = event.entityLiving;
 		for (PotionBase potion : PotionBase.getPotionList())
-			if(entityLiving.isPotionActive(potion)) potion.action(entityLiving);
+			if (entityLiving.isPotionActive(potion)) potion.action(entityLiving);
 		if (entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entity;
 			NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
 			playerInfo.setBoolean("fancyRender", JewelrycraftMod.fancyRender);
 			if (updateTime > 0) updateTime--;
 			for (int i = 0; i < 18; i++)
-				if (playerInfo.hasKey("ext" + i)) {
-					NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
-					ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-					if (item != null) {
-						if (item.getItem() instanceof ItemBaseJewelry) ((ItemBaseJewelry) item.getItem()).action(item, player);
-						if (item.getItem() instanceof IJewelryItem) ((IJewelryItem) item.getItem()).onWearAction(item, player);
-					}
+				if (getJewelryItems(playerInfo, i) != null) {
+					if (getJewelryItems(playerInfo, i).getItem() instanceof ItemBaseJewelry) ((ItemBaseJewelry) getJewelryItems(playerInfo, i).getItem()).action(getJewelryItems(playerInfo, i), player);
+					if (getJewelryItems(playerInfo, i).getItem() instanceof IJewelryItem) ((IJewelryItem) getJewelryItems(playerInfo, i).getItem()).onWearAction(getJewelryItems(playerInfo, i), player);
 				}
 			if (!player.worldObj.isRemote) {
-				if (playerInfo.hasKey("reselectCurses") && !playerInfo.getBoolean("reselectCurses")) {
-					playerInfo.setInteger("curseTime", playerInfo.getInteger("curseTime") - 10000);
-					if (playerInfo.getInteger("curseTime") <= 0) playerInfo.setBoolean("reselectCurses", true);
-				}
-				if (playerInfo.hasKey("playerCursePointsChanged") && playerInfo.getBoolean("playerCursePointsChanged")) {
-					int points = playerInfo.getInteger("cursePoints");
-					int maxCurses = playerInfo.getInteger("cursePoints") / 1750 + 1;
-					if (points > 0 && playerInfo.getInteger("activeCurses") < maxCurses) while (playerInfo.getInteger("activeCurses") < maxCurses && Curse.availableCurses.size() > 0 && playerInfo.getInteger("activeCurses") < Curse.getCurseList().size()) {
-						addCurse(player, playerInfo);
-						System.out.println("Curse added");
-					}
-					if (!playerInfo.hasKey("curseTime") || !playerInfo.hasKey("reselectCurses") || playerInfo.getBoolean("reselectCurses")) {
-						playerInfo.setInteger("curseTime", 23000);
-						playerInfo.setBoolean("reselectCurses", false);
-					}
-					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP) player);
-					if (addedCurses) {
-						JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
-						player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("curse." + Variables.MODID + ".activated")));
-						addedCurses = false;
-					}
-				}
-				if (playerInfo.getBoolean("playerCursePointsChanged")) playerInfo.setBoolean("playerCursePointsChanged", false);
+				timeUntilYouCanResetCurses(playerInfo);
+				updateCurses(playerInfo, player);
 				if (updateTime == 0) {
 					JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
 					updateTime = 200;
@@ -136,6 +111,42 @@ public class EntityEventHandler {
 					if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0) curse.action(player.worldObj, player);
 			}
 		}
+	}
+
+	public void updateCurses(NBTTagCompound playerInfo, EntityPlayer player) {
+		if (playerInfo.hasKey("playerCursePointsChanged") && playerInfo.getBoolean("playerCursePointsChanged")) {
+			int points = playerInfo.getInteger("cursePoints");
+			int maxCurses = playerInfo.getInteger("cursePoints") / 1750 + 1;
+			if (points > 0 && playerInfo.getInteger("activeCurses") < maxCurses) while (playerInfo.getInteger("activeCurses") < maxCurses && Curse.availableCurses.size() > 0 && playerInfo.getInteger("activeCurses") < Curse.getCurseList().size())
+				addCurse(player, playerInfo);
+			if (!playerInfo.hasKey("curseTime") || !playerInfo.hasKey("reselectCurses") || playerInfo.getBoolean("reselectCurses")) {
+				playerInfo.setInteger("curseTime", 23000);
+				playerInfo.setBoolean("reselectCurses", false);
+			}
+			JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP) player);
+			if (addedCurses) {
+				JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("curse." + Variables.MODID + ".activated")));
+				addedCurses = false;
+			}
+		}
+		if (playerInfo.getBoolean("playerCursePointsChanged")) playerInfo.setBoolean("playerCursePointsChanged", false);
+	}
+
+	public void timeUntilYouCanResetCurses(NBTTagCompound playerInfo) {
+		if (playerInfo.hasKey("reselectCurses") && !playerInfo.getBoolean("reselectCurses")) {
+			playerInfo.setInteger("curseTime", playerInfo.getInteger("curseTime") - 10000);
+			if (playerInfo.getInteger("curseTime") <= 0) playerInfo.setBoolean("reselectCurses", true);
+		}
+	}
+
+	public ItemStack getJewelryItems(NBTTagCompound playerInfo, int i) {
+		if (playerInfo.hasKey("ext" + i)) {
+			NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
+			ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
+			if (item != null) return item;
+		}
+		return null;
 	}
 
 	@SubscribeEvent
@@ -157,16 +168,12 @@ public class EntityEventHandler {
 			NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
 			if (!(event.source.getEntity() instanceof EntityPlayer) && !player.capabilities.isCreativeMode) {
 				if (!player.worldObj.isRemote) for (int i = 0; i < 18; i++)
-					if (playerInfo.hasKey("ext" + i)) {
-						NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
-						ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-						if (item != null) {
-							if (item.getItem() instanceof ItemBaseJewelry) {
-								((ItemBaseJewelry) item.getItem()).onPlayerAttacked(item, player, event.source, event.ammount);
-								if (((ItemBaseJewelry) item.getItem()).onPlayerAttackedCacellable(item, player, event.source, event.ammount)) event.setCanceled(true);
-							}
-							if (item.getItem() instanceof IJewelryItem) ((IJewelryItem) item.getItem()).onPlayerAttackedAction(item, player, event.source, event.ammount);
+					if (getJewelryItems(playerInfo, i) != null) {
+						if (getJewelryItems(playerInfo, i).getItem() instanceof ItemBaseJewelry) {
+							((ItemBaseJewelry) getJewelryItems(playerInfo, i).getItem()).onPlayerAttacked(getJewelryItems(playerInfo, i), player, event.source, event.ammount);
+							if (((ItemBaseJewelry) getJewelryItems(playerInfo, i).getItem()).onPlayerAttackedCacellable(getJewelryItems(playerInfo, i), player, event.source, event.ammount)) event.setCanceled(true);
 						}
+						if (getJewelryItems(playerInfo, i).getItem() instanceof IJewelryItem) ((IJewelryItem) getJewelryItems(playerInfo, i).getItem()).onPlayerAttackedAction(getJewelryItems(playerInfo, i), player, event.source, event.ammount);
 					}
 				if (ConfigHandler.CURSES_ENABLED) for (Curse curse : Curse.getCurseList())
 					if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0) curse.attackedAction(player.worldObj, player);
@@ -179,16 +186,12 @@ public class EntityEventHandler {
 			EntityPlayer player = (EntityPlayer) event.source.getEntity();
 			NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
 			for (int i = 0; i < 18; i++)
-				if (playerInfo.hasKey("ext" + i)) {
-					NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
-					ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-					if (item != null) {
-						if (item.getItem() instanceof ItemBaseJewelry) {
-							((ItemBaseJewelry) item.getItem()).onEntityAttacked(item, player, entity, event.ammount);
-							if (((ItemBaseJewelry) item.getItem()).onEntityAttackedCacellable(item, player, entity, event.ammount)) event.setCanceled(true);
-						}
-						if (item.getItem() instanceof IJewelryItem) ((IJewelryItem) item.getItem()).onEntityAttackedByPlayer(item, player, entity, event.ammount);
+				if (getJewelryItems(playerInfo, i) != null) {
+					if (getJewelryItems(playerInfo, i).getItem() instanceof ItemBaseJewelry) {
+						((ItemBaseJewelry) getJewelryItems(playerInfo, i).getItem()).onEntityAttacked(getJewelryItems(playerInfo, i), player, entity, event.ammount);
+						if (((ItemBaseJewelry) getJewelryItems(playerInfo, i).getItem()).onEntityAttackedCacellable(getJewelryItems(playerInfo, i), player, entity, event.ammount)) event.setCanceled(true);
 					}
+					if (getJewelryItems(playerInfo, i).getItem() instanceof IJewelryItem) ((IJewelryItem) getJewelryItems(playerInfo, i).getItem()).onEntityAttackedByPlayer(getJewelryItems(playerInfo, i), player, entity, event.ammount);
 				}
 			if (ConfigHandler.CURSES_ENABLED) for (Curse curse : Curse.getCurseList())
 				if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0) {
@@ -264,13 +267,9 @@ public class EntityEventHandler {
 			if (ConfigHandler.CURSES_ENABLED) for (Curse curse : Curse.getCurseList())
 				if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0) curse.respawnAction(player.worldObj, player);
 			for (int i = 0; i < 18; i++)
-				if (playerInfo.hasKey("ext" + i)) {
-					NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
-					ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-					if (item != null) {
-						if (item.getItem() instanceof ItemBaseJewelry) ((ItemBaseJewelry) item.getItem()).onPlayerRespawn(item, event);
-						if (item.getItem() instanceof IJewelryItem) ((IJewelryItem) item.getItem()).onPlayerRespawnAction(item, event);
-					}
+				if (getJewelryItems(playerInfo, i) != null) {
+					if (getJewelryItems(playerInfo, i).getItem() instanceof ItemBaseJewelry) ((ItemBaseJewelry) getJewelryItems(playerInfo, i).getItem()).onPlayerRespawn(getJewelryItems(playerInfo, i), event);
+					if (getJewelryItems(playerInfo, i).getItem() instanceof IJewelryItem) ((IJewelryItem) getJewelryItems(playerInfo, i).getItem()).onPlayerRespawnAction(getJewelryItems(playerInfo, i), event);
 				}
 			JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP) player);
 			if (addedCurses) {
@@ -368,27 +367,11 @@ public class EntityEventHandler {
 			if (ConfigHandler.CURSES_ENABLED) for (Curse curse : Curse.getCurseList())
 				if (curse.canCurseBeActivated(player.worldObj) && playerInfo.getInteger(curse.getName()) > 0) curse.playerDeathAction(player.worldObj, player);
 			for (int i = 0; i < 18; i++)
-				if (playerInfo.hasKey("ext" + i)) {
-					NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
-					ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
-					if (item != null) {
-						if (item.getItem() instanceof ItemBaseJewelry) ((ItemBaseJewelry) item.getItem()).onPlayerDead(item, player, event.source);
-						if (item.getItem() instanceof IJewelryItem) ((IJewelryItem) item.getItem()).onPlayerDeadAction(item, player, event.source);
-					}
+				if (getJewelryItems(playerInfo, i) != null) {
+					if (getJewelryItems(playerInfo, i).getItem() instanceof ItemBaseJewelry) ((ItemBaseJewelry) getJewelryItems(playerInfo, i).getItem()).onPlayerDead(getJewelryItems(playerInfo, i), player, event.source);
+					if (getJewelryItems(playerInfo, i).getItem() instanceof IJewelryItem) ((IJewelryItem) getJewelryItems(playerInfo, i).getItem()).onPlayerDeadAction(getJewelryItems(playerInfo, i), player, event.source);
 				}
 		}
 		if (event.entity instanceof EntityPlayer && !(event.entity instanceof EntityPlayerMP)) JewelrycraftMod.netWrapper.sendToServer(new PacketRequestPlayerInfo());
 	}
-
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void fogColors(EntityViewRenderEvent.FogColors event) {}
-
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void fogDensity(EntityViewRenderEvent.FogDensity event) {}
-
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void renderFog(EntityViewRenderEvent.RenderFogEvent event) {}
 }

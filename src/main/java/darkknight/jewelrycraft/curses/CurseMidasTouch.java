@@ -110,6 +110,12 @@ public class CurseMidasTouch extends Curse
     {
         return world.getWorldInfo().isHardcoreModeEnabled() ? false : ConfigHandler.CURSE_MIDAS_TOUCH;
     }
+
+    @Override
+    public boolean canCurseBeActivated()
+    {
+        return ConfigHandler.CURSE_MIDAS_TOUCH;
+    }
     
     @Override
     public int weight(World world, EntityPlayer player, Random random)

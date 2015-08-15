@@ -75,13 +75,17 @@ public class GuiTabCurses extends GuiTab
 			text = "Any mob you kill or block you destroy(eg. Diamond Ore, Redstone Ore, stuff that drops items not the block itself) drops double the amount of items it normally would.";
 			Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, new ItemStack(ItemList.testItem, 1, 9), text, 40f, 0, 0, Curse.getCurseList().get(page-1).getDisplayName(), 45, 10, false);
 			break;
+		case 11:
+			text = "All the damage you do pierces through armor or any other type of defense, but creatures no longer drop XP.";
+			Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, new ItemStack(ItemList.testItem, 1, 10), text, 40f, 0, 0, Curse.getCurseList().get(page-1).getDisplayName(), 45, 10, false);
+			break;
 		default:;
 		}
 	}
 
 	@Override
 	public int getMaxPages() {
-		return 10;
+		return 11;
 	}
 
 	@Override

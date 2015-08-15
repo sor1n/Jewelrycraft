@@ -36,6 +36,12 @@ public class CurseBlind extends Curse
     }
     
     @Override
+    public boolean canCurseBeActivated()
+    {
+        return ConfigHandler.CURSE_BLIND;
+    }
+    
+    @Override
     public int weight(World world, EntityPlayer player, Random random)
     {
         return 7;

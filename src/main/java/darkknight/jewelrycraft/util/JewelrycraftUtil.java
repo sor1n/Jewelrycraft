@@ -230,26 +230,26 @@ public class JewelrycraftUtil {
 	}
 
 	/**
-	 * Adds the UUID's of the jamcrafters in a list
+	 * Adds the UUID's of the jamcrafters in a list (+ special people)
 	 */
 	public static void jamcrafters() {
-		jamcraftPlayers.add("d3214311-7550-4c9c-a372-d9292c10b8a6");
-		jamcraftPlayers.add("a690119f-c4a2-4bd6-a99d-d63679abb328");
-		jamcraftPlayers.add("de7c9903-51fa-4a24-88cd-48faf122ca36");
-		jamcraftPlayers.add("70aeb298-3a7b-46da-a393-ab10df9359f2");
-		jamcraftPlayers.add("6fbe603c-14bf-4085-afdd-abe592c26e7c");
-		jamcraftPlayers.add("b0d21306-36bf-4d85-84df-a956d183c45a");
-		jamcraftPlayers.add("1733a31f-01f9-4f4d-82aa-7de30ca810d3");
-		jamcraftPlayers.add("4833eacf-1d94-49a7-9f89-4cf88d69dcf9");
-		jamcraftPlayers.add("718cf671-9084-4e78-b91f-033e80aa11bf");
-		jamcraftPlayers.add("bea5e0c4-85c4-454d-a081-e1eaae6895ee");
-		jamcraftPlayers.add("7ecf3e2f-fedf-4f7e-8d24-6731d078db4f");
-		jamcraftPlayers.add("1b11ad3a-f0ca-4695-a019-2d7e5d83a5fd");
-		jamcraftPlayers.add("3ec9ac58-2f1b-4d3f-b4eb-3b875da877ae");
-		jamcraftPlayers.add("cf9fa23f-205e-4eed-aba3-9f2848cd6a4d");
-		jamcraftPlayers.add("91880caa-b032-48e3-bfe8-c2c7ed31824e");
-		jamcraftPlayers.add("8d0b3804-f71c-4219-897b-8c315448ea7c");
-		jamcraftPlayers.add("bbb87dbe-690f-4205-bdc5-72ffb8ebc29d");
+		jamcraftPlayers.add("d3214311-7550-4c9c-a372-d9292c10b8a6"); //allout58
+		jamcraftPlayers.add("a690119f-c4a2-4bd6-a99d-d63679abb328"); //ChewBaker
+		jamcraftPlayers.add("de7c9903-51fa-4a24-88cd-48faf122ca36"); //domi1819
+		jamcraftPlayers.add("70aeb298-3a7b-46da-a393-ab10df9359f2"); //founderio
+		jamcraftPlayers.add("6fbe603c-14bf-4085-afdd-abe592c26e7c"); //GerbShert
+		jamcraftPlayers.add("b0d21306-36bf-4d85-84df-a956d183c45a"); //isomgirls6
+		jamcraftPlayers.add("1733a31f-01f9-4f4d-82aa-7de30ca810d3"); //TH3N00B
+		jamcraftPlayers.add("4833eacf-1d94-49a7-9f89-4cf88d69dcf9"); //Joban
+		jamcraftPlayers.add("718cf671-9084-4e78-b91f-033e80aa11bf"); //KJ4IPS
+		jamcraftPlayers.add("bea5e0c4-85c4-454d-a081-e1eaae6895ee"); //Mitchellbrine
+		jamcraftPlayers.add("7ecf3e2f-fedf-4f7e-8d24-6731d078db4f"); //MrComputerGhost
+		jamcraftPlayers.add("1b11ad3a-f0ca-4695-a019-2d7e5d83a5fd"); //Resinresin
+		jamcraftPlayers.add("3ec9ac58-2f1b-4d3f-b4eb-3b875da877ae"); //sci4me
+		jamcraftPlayers.add("cf9fa23f-205e-4eed-aba3-9f2848cd6a4d"); //OnyxDarkKnight
+		jamcraftPlayers.add("91880caa-b032-48e3-bfe8-c2c7ed31824e"); //theminecoder
+		jamcraftPlayers.add("8d0b3804-f71c-4219-897b-8c315448ea7c"); //YSPilot
+		jamcraftPlayers.add("bbb87dbe-690f-4205-bdc5-72ffb8ebc29d"); //direwolf20
 	}
 
 	/**

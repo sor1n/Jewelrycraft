@@ -9,6 +9,7 @@ import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.client.TabCurses;
 import darkknight.jewelrycraft.client.TabRegistry;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.events.KeyBindings;
 import darkknight.jewelrycraft.network.PacketSendClientPlayerInfo;
 import darkknight.jewelrycraft.network.PacketSendServerPlayerInfo;
@@ -124,7 +125,8 @@ public class GuiCurseInfo extends GuiContainer {
 					GL11.glPushMatrix();
 					GL11.glEnable(GL11.GL_BLEND);
 					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-					GL11.glColor4f(1f, 1f, 1f, 0.5f);
+					if(!curse.canCurseBeActivated() || !ConfigHandler.CURSES_ENABLED) GL11.glColor4f(1f, 0f, 0f, 0.5f);
+					else GL11.glColor4f(1f, 1f, 1f, 0.5f);
 				}
 				mc.renderEngine.bindTexture(Variables.MISC_TEXTURE);
 				drawTexturedModalRect(guiLeft + 43, guiTop + 8 + (size - 8) * (ind - page * 5), 0, 32, 112, 22);
@@ -196,7 +198,7 @@ public class GuiCurseInfo extends GuiContainer {
 							Curse.availableCurses.add(curse);
 							JewelrycraftMod.netWrapper.sendToServer(new PacketSendServerPlayerInfo("remove", curse.getName(), playerInfo));
 							JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
-						} else if (player.capabilities.isCreativeMode && isCtrlKeyDown() && playerInfo.getInteger(curse.getName()) <= 0) {
+						} else if (player.capabilities.isCreativeMode && isCtrlKeyDown() && playerInfo.getInteger(curse.getName()) <= 0 && curse.canCurseBeActivated() && ConfigHandler.CURSES_ENABLED) {
 							playerInfo.setInteger(curse.getName(), 1);
 							playerInfo.setInteger("activeCurses", playerInfo.getInteger("activeCurses") + 1);
 							Curse.availableCurses.remove(curse);

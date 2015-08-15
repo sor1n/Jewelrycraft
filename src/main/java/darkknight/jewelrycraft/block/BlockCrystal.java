@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.proxy.ClientProxy.BlockRenderIDs;
 import darkknight.jewelrycraft.tileentity.TileEntityCrystal;
 import darkknight.jewelrycraft.tileentity.TileEntityShadowEye;
@@ -35,6 +36,7 @@ public class BlockCrystal extends Block implements ITileEntityProvider
         super(Material.glass);
         setBlockBounds(0.2F, 0F, 0.2F, 0.8F, 1.0F, 0.8F);
         setHarvestLevel("pickaxe", 0);
+        this.setTickRandomly(true);
     }
     
     @Override
@@ -96,5 +98,11 @@ public class BlockCrystal extends Block implements ITileEntityProvider
         super.onBlockEventReceived(world, x, y, z, eventNo, arg);
         TileEntity tileentity = world.getTileEntity(x, y, z);
         return tileentity != null ? tileentity.receiveClientEvent(eventNo, arg) : false;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(World world, int x, int y, int z, Random rand)
+    {
+    	if(ConfigHandler.CRYSTAL_PARTICLES) world.spawnParticle("instantSpell", x + rand.nextFloat(), y + rand.nextFloat(), z + rand.nextFloat(), 0.0D, -1.0D, 0.0D);
     }
 }

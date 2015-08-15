@@ -33,13 +33,11 @@ public class TileEntityCrystal extends TileEntity
                 timer = 0;
             }
         }
-        if(ConfigHandler.CRYSTAL_PARTICLES) 
-        	worldObj.spawnParticle("instantSpell", xCoord + worldObj.rand.nextFloat(), yCoord + worldObj.rand.nextFloat(), zCoord + worldObj.rand.nextFloat(), 0.0D, -1.0D, 0.0D);
     }
     
     public boolean canUpdate()
     {
-        return ConfigHandler.CRYSTAL_GLOW || ConfigHandler.CRYSTAL_PARTICLES;
+        return ConfigHandler.CRYSTAL_GLOW;
     }
 
 }

@@ -29,51 +29,21 @@ import darkknight.jewelrycraft.util.Variables;
 public class ComponentJewelry extends StructureVillagePieces.House1 {
 	private int	averageGroundLevel	= -1;
 
-	/**
-     * 
-     */
 	public ComponentJewelry() {
 	}
 
-	/**
-	 * @param par1ComponentVillageStartPiece
-	 * @param par2
-	 * @param par3Random
-	 * @param par4StructureBoundingBox
-	 * @param par5
-	 */
 	public ComponentJewelry(Start par1ComponentVillageStartPiece, int par2, Random par3Random, StructureBoundingBox par4StructureBoundingBox, int par5) {
 		super();
 		coordBaseMode = par5;
 		boundingBox = par4StructureBoundingBox;
 	}
 
-	/**
-	 * @param villagePiece
-	 * @param pieces
-	 * @param random
-	 * @param p1
-	 * @param p2
-	 * @param p3
-	 * @param p4
-	 * @param p5
-	 * @return
-	 */
 	@SuppressWarnings("rawtypes")
 	public static ComponentJewelry buildComponent(Start villagePiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5) {
 		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p1, p2, p3, 0, 0, 0, 11, 5, 12, p4);
 		return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(pieces, structureboundingbox) == null ? new ComponentJewelry(villagePiece, p5, random, structureboundingbox, p4) : null;
 	}
 
-	/**
-	 * second Part of Structure generating, this for example places Spiderwebs,
-	 * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-	 *
-	 * @param world
-	 * @param random
-	 * @param sbb
-	 * @return
-	 */
 	@Override
 	public boolean addComponentParts(World world, Random random, StructureBoundingBox sbb) {
 		if (averageGroundLevel < 0) {
@@ -81,11 +51,6 @@ public class ComponentJewelry extends StructureVillagePieces.House1 {
 			if (averageGroundLevel < 0) return true;
 			boundingBox.offset(0, averageGroundLevel - boundingBox.maxY + 3, 0);
 		}
-		/**
-		 * arguments: (World worldObj, StructureBoundingBox structBB, int minX,
-		 * int minY, int minZ, int maxX, int maxY, int maxZ, int placeBlockId,
-		 * int replaceBlockId, boolean alwaysreplace)
-		 */
 		fillWithBlocks(world, sbb, 0, 0, 6, 10, 5, 11, Block.getBlockById(0), Block.getBlockById(0), false);
 		fillWithBlocks(world, sbb, 2, 0, 0, 8, 5, 5, Block.getBlockById(0), Block.getBlockById(0), false);
 		// Pillars
@@ -204,17 +169,6 @@ public class ComponentJewelry extends StructureVillagePieces.House1 {
 		return true;
 	}
 
-	/**
-	 * @param world
-	 * @param i
-	 * @param j
-	 * @param k
-	 * @param metadata
-	 * @param random
-	 * @param sbb
-	 * @param min
-	 * @param max
-	 */
 	public void generateChest(World world, int i, int j, int k, int metadata, Random random, StructureBoundingBox sbb, int min, int max) {
 		int i1 = getXWithOffset(i, k);
 		int j1 = getYWithOffset(j);
@@ -235,19 +189,6 @@ public class ComponentJewelry extends StructureVillagePieces.House1 {
 		}
 	}
 
-	/**
-	 * @param world
-	 * @param i
-	 * @param j
-	 * @param k
-	 * @param metadata
-	 * @param random
-	 * @param sbb
-	 * @param min
-	 * @param max
-	 * @param chestB
-	 * @param randomAmount
-	 */
 	public void generateIngotChest(World world, int i, int j, int k, int metadata, Random random, StructureBoundingBox sbb, int min, int max, Block chestB, int randomAmount) {
 		int i1 = getXWithOffset(i, k);
 		int j1 = getYWithOffset(j);
@@ -269,19 +210,6 @@ public class ComponentJewelry extends StructureVillagePieces.House1 {
 		}
 	}
 
-	/**
-	 * @param world
-	 * @param i
-	 * @param j
-	 * @param k
-	 * @param metadata
-	 * @param random
-	 * @param sbb
-	 * @param min
-	 * @param max
-	 * @param chestB
-	 * @param randomAmount
-	 */
 	public void generateOresChest(World world, int i, int j, int k, int metadata, Random random, StructureBoundingBox sbb, int min, int max, Block chestB, int randomAmount) {
 		int i1 = getXWithOffset(i, k);
 		int j1 = getYWithOffset(j);
@@ -303,15 +231,6 @@ public class ComponentJewelry extends StructureVillagePieces.House1 {
 		}
 	}
 
-	/**
-	 * @param world
-	 * @param i
-	 * @param j
-	 * @param k
-	 * @param metadata
-	 * @param random
-	 * @param sbb
-	 */
 	public void generateDisplayer(World world, int i, int j, int k, int metadata, Random random, StructureBoundingBox sbb) {
 		int i1 = getXWithOffset(i, k);
 		int j1 = getYWithOffset(j);
@@ -332,16 +251,6 @@ public class ComponentJewelry extends StructureVillagePieces.House1 {
 		}
 	}
 
-	/**
-	 * @param world
-	 * @param i
-	 * @param j
-	 * @param k
-	 * @param metadata
-	 * @param random
-	 * @param sbb
-	 * @param isEmpty
-	 */
 	public void generateSmelter(World world, int i, int j, int k, int metadata, Random random, StructureBoundingBox sbb, boolean isEmpty) {
 		int i1 = getXWithOffset(i, k);
 		int j1 = getYWithOffset(j);
@@ -359,17 +268,6 @@ public class ComponentJewelry extends StructureVillagePieces.House1 {
 		}
 	}
 
-	/**
-	 * @param world
-	 * @param i
-	 * @param j
-	 * @param k
-	 * @param metadata
-	 * @param random
-	 * @param sbb
-	 * @param hasMold
-	 * @param hasStuff
-	 */
 	public void generateMolder(World world, int i, int j, int k, int metadata, Random random, StructureBoundingBox sbb, boolean hasMold, boolean hasStuff) {
 		int i1 = getXWithOffset(i, k);
 		int j1 = getYWithOffset(j);
@@ -401,18 +299,6 @@ public class ComponentJewelry extends StructureVillagePieces.House1 {
 		}
 	}
 
-	/**
-	 * @param world
-	 * @param i
-	 * @param j
-	 * @param k
-	 * @param metadata
-	 * @param random
-	 * @param sbb
-	 * @param min
-	 * @param max
-	 * @param hasMetal
-	 */
 	public void generateFurnace(World world, int i, int j, int k, int metadata, Random random, StructureBoundingBox sbb, int min, int max, boolean hasMetal) {
 		int i1 = getXWithOffset(i, k);
 		int j1 = getYWithOffset(j);
@@ -432,13 +318,6 @@ public class ComponentJewelry extends StructureVillagePieces.House1 {
 		}
 	}
 
-	/**
-	 * Returns the villager type to spawn in this component, based on the number
-	 * of villagers already spawned.
-	 *
-	 * @param par1
-	 * @return
-	 */
 	@Override
 	protected int getVillagerType(int par1) {
 		return 3000;

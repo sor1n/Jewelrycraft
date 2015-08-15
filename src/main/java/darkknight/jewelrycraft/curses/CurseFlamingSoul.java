@@ -26,7 +26,7 @@ public class CurseFlamingSoul extends Curse
     }
 
     @Override
-    public boolean canCurseBeActivated(World world)
+    public boolean canCurseBeActivated()
     {
         return ConfigHandler.CURSE_FLAMING_SOUL;
     }

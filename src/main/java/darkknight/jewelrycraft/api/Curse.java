@@ -214,6 +214,14 @@ public abstract class Curse
      */
     public boolean canCurseBeActivated(World world)
     {
+        return canCurseBeActivated();
+    }
+    /**
+     * This controls whether a curse can be activated or not (makes it easy to do things like disable certain curses if in hardcore)
+     * @return True for curses to be used; False otherwise (by default true)
+     */
+    public boolean canCurseBeActivated()
+    {
         return true;
     }
 

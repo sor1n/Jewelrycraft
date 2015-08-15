@@ -139,7 +139,7 @@ public class CursePentagram extends Curse {
 	}
 
 	@Override
-	public boolean canCurseBeActivated(World world) {
+	public boolean canCurseBeActivated() {
 		return ConfigHandler.CURSE_PENTAGRAM;
 	}
 }

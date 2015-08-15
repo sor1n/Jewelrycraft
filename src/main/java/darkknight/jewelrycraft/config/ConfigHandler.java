@@ -11,7 +11,7 @@ public class ConfigHandler
 {
     public static Configuration config;
     public static final ConfigHandler INSTANCE = new ConfigHandler();    
-    public static final String[] categories = {"Timers", "Village Generation", "Misc", "World Generation"};
+    public static final String[] categories = {"Timers", "Village Generation", "Misc", "World Generation", "Curses"};
     
     public static int INGOT_COOLING_TIME;
     public static int INGOT_MELTING_TIME;
@@ -47,6 +47,7 @@ public class ConfigHandler
     public static boolean CURSE_PENTAGRAM = true;
     public static boolean CURSE_VAMPIRE_HUNGER = true;
     public static boolean CURSE_HUMBLE_BUNDLE = true;
+    public static boolean CURSE_DEATHS_TOUCH = true;
     
     public static boolean ENABLE_WORLD_GEN = true;
     public static boolean ORE_GEN = true;
@@ -92,17 +93,18 @@ public class ConfigHandler
         for(int i = 0; i < STRUCTURES.length; i++)
         	STRUCTURES[i] = config.getBoolean("Structure "+(i+1)+" Generation", categories[3], true, "If false, structure no."+(i+1)+" won't generate");
                 
-//        CURSES_ENABLED = config.getBoolean("Curses", categories[3], true, "If set to false curses will be deactivated.");
-//        CURSE_ROTTEN_HEART = config.getBoolean("Rotten Heart", categories[3], true, "If set to false this curse will be deactivated.");
-//        CURSE_FLAMING_SOUL = config.getBoolean("Flaming Soul", categories[3], true, "If set to false this curse will be deactivated.");
-//        CURSE_GREED = config.getBoolean("Greed", categories[3], true, "If set to false this curse will be deactivated.");
-//        CURSE_BLIND = config.getBoolean("Blind", categories[3], true, "If set to false this curse will be deactivated.");
-//        CURSE_INFAMY = config.getBoolean("Infamy", categories[3], true, "If set to false this curse will be deactivated.");
-//        CURSE_MIDAS_TOUCH = config.getBoolean("Midas Touch", categories[3], true, "If set to false this curse will be deactivated.");
-//        CURSE_RABBIT_PAW = config.getBoolean("Rabbit's Paw", categories[3], true, "If set to false this curse will be deactivated.");
-//        CURSE_PENTAGRAM = config.getBoolean("Pentagram", categories[3], true, "If set to false this curse will be deactivated.");
-//        CURSE_VAMPIRE_HUNGER = config.getBoolean("Vampire Hunger", categories[3], true, "If set to false this curse will be deactivated.");
-//        CURSE_HUMBLE_BUNDLE = config.getBoolean("Humble Bundle", categories[3], true, "If set to false this curse will be deactivated.");
+        CURSES_ENABLED = config.getBoolean("Curses", categories[4], true, "If set to false curses will be deactivated.");
+        CURSE_ROTTEN_HEART = config.getBoolean("Rotten Heart", categories[4], true, "If set to false this curse will be deactivated.");
+        CURSE_FLAMING_SOUL = config.getBoolean("Flaming Soul", categories[4], true, "If set to false this curse will be deactivated.");
+        CURSE_GREED = config.getBoolean("Greed", categories[4], true, "If set to false this curse will be deactivated.");
+        CURSE_BLIND = config.getBoolean("Blind", categories[4], true, "If set to false this curse will be deactivated.");
+        CURSE_INFAMY = config.getBoolean("Infamy", categories[4], true, "If set to false this curse will be deactivated.");
+        CURSE_MIDAS_TOUCH = config.getBoolean("Midas Touch", categories[4], true, "If set to false this curse will be deactivated.");
+        CURSE_RABBIT_PAW = config.getBoolean("Rabbit's Paw", categories[4], true, "If set to false this curse will be deactivated.");
+        CURSE_PENTAGRAM = config.getBoolean("Pentagram", categories[4], true, "If set to false this curse will be deactivated.");
+        CURSE_VAMPIRE_HUNGER = config.getBoolean("Vampire Hunger", categories[4], true, "If set to false this curse will be deactivated.");
+        CURSE_HUMBLE_BUNDLE = config.getBoolean("Humble Bundle", categories[4], true, "If set to false this curse will be deactivated.");
+        CURSE_DEATHS_TOUCH = config.getBoolean("Deaths Touch", categories[4], true, "If set to false this curse will be deactivated.");
         if (config.hasChanged()) config.save();
     }
     

@@ -20,9 +20,8 @@ apply plugin: 'curseforge'
 
 project.ext {
 	massive = "1"
-    major = "0"
-    minor = "12"
-    build = "4"
+    major = "1"
+    minor = "0"
     mcVersion = "1.7.10"
 	ee3Version = "0.3.505"
 	alpacaVersion = "1.2"
@@ -34,7 +33,7 @@ if (System.getenv().BUILD_NUMBER != null) {
     version += "-err"
 }
 
-version = "${project.ext.massive}.${project.ext.major}.${project.minor}.${project.build}"
+version = "${project.ext.massive}.${project.ext.major}.${project.ext.minor}"
 group= "darkknight.jewelrycraft2"
 archivesBaseName = "[${project.ext.mcVersion}] Jewelrycraft2"
 

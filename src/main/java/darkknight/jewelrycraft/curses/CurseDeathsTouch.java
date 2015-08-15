@@ -2,6 +2,7 @@ package darkknight.jewelrycraft.curses;
 
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.network.PacketSendClientPlayerInfo;
@@ -45,5 +46,11 @@ public class CurseDeathsTouch extends Curse
 	{
 		return StatCollector.translateToLocal("curse." + Variables.MODID + ".deathsTouch");
 	}
+
+    @Override
+    public boolean canCurseBeActivated()
+    {
+        return ConfigHandler.CURSE_DEATHS_TOUCH;
+    }
 	
 }

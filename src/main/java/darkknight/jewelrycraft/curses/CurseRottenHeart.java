@@ -38,4 +38,10 @@ public class CurseRottenHeart extends Curse
     {
         return world.getWorldInfo().isHardcoreModeEnabled() ? false : ConfigHandler.CURSE_ROTTEN_HEART;
     }
+    
+    @Override
+    public boolean canCurseBeActivated()
+    {
+        return ConfigHandler.CURSE_ROTTEN_HEART;
+    }
 }
