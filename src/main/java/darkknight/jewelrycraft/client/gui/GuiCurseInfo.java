@@ -1,5 +1,6 @@
 package darkknight.jewelrycraft.client.gui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.input.Keyboard;
@@ -7,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.client.Page;
 import darkknight.jewelrycraft.client.TabCurses;
 import darkknight.jewelrycraft.client.TabRegistry;
 import darkknight.jewelrycraft.config.ConfigHandler;
@@ -14,14 +16,17 @@ import darkknight.jewelrycraft.events.KeyBindings;
 import darkknight.jewelrycraft.network.PacketSendClientPlayerInfo;
 import darkknight.jewelrycraft.network.PacketSendServerPlayerInfo;
 import darkknight.jewelrycraft.network.PacketSendServerPlayersInfo;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import scala.swing.event.Key;
@@ -59,10 +64,35 @@ public class GuiCurseInfo extends GuiContainer {
 			else creativeCurses(playerInfo);
 			if (playerInfo.hasKey("cursePoints")) this.drawString(fontRendererObj, "Curse points: " + playerInfo.getInteger("cursePoints") + " | Active curses: " + playerInfo.getInteger("activeCurses"), guiLeft, guiTop - 10, 0xffffff);
 		}
-		this.drawString(fontRendererObj, page + "/" + maxPages, guiLeft + 90, guiTop + 153, 0xffffff);
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 		drawTexturedModalRect(guiLeft + 5, guiTop + ySize - 14, 0, ySize, 13, 11);
 		drawTexturedModalRect(guiLeft + xSize - 38, guiTop + ySize - 14, 13, ySize, 13, 11);
+		this.drawString(fontRendererObj, page + "/" + maxPages, guiLeft + 90, guiTop + 153, 0xffffff);
+		this.drawString(fontRendererObj, "Click on an active curse to see its description", guiLeft, guiTop + 170, 0xffffff);
+		if(player.capabilities.isCreativeMode){
+			drawText(this, "To enable or disable a curse simply hold the CTRL key and click on one.", guiLeft - 100, guiTop, 20, 0xff0000);
+			drawText(this, "If you do not have any curse points you need to type the command '/jw addCursePoints [playerUsername] [no of curse points]'. If you don't do this any curse you activate won't have any effect.", guiLeft - 100, guiTop + 50, 20, 0xff0000);
+		}
+	}
+    
+    public static void drawText(GuiCurseInfo gui, String text, int x, int y, int characters, int color)
+    {
+        String[] s = text.split(" ");
+        String displayText = "";
+        ArrayList<String> textLines = new ArrayList<String>();
+        for(String element: s)
+            if ((displayText + element + " ").length() <= characters) displayText += element + " ";
+            else{
+                textLines.add(displayText.trim());
+                displayText = element + " ";
+            }
+        textLines.add(displayText.trim());
+        for(int i = 0; i < textLines.size(); i++)
+        	gui.drawString(gui.getFont(), textLines.get(i), x, y + i * 9, color);
+    }
+
+	public FontRenderer getFont() {
+		return fontRendererObj;
 	}
 
 	private void survivalCurses(NBTTagCompound playerInfo) {
