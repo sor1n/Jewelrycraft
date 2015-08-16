@@ -44,9 +44,6 @@ public class TileEntityShadowEye extends TileEntity
         active = false;
     }
     
-    /**
-     * @param nbt
-     */
     @Override
     public void writeToNBT(NBTTagCompound nbt)
     {
@@ -57,9 +54,6 @@ public class TileEntityShadowEye extends TileEntity
         nbt.setBoolean("shouldAddData", shouldAddData);
     }
     
-    /**
-     * @param nbt
-     */
     @Override
     public void readFromNBT(NBTTagCompound nbt)
     {
@@ -70,9 +64,6 @@ public class TileEntityShadowEye extends TileEntity
         shouldAddData = nbt.getBoolean("shouldAddData");
     }
     
-    /**
-     * 
-     */
     @Override
     public void updateEntity()
     {
@@ -122,8 +113,7 @@ public class TileEntityShadowEye extends TileEntity
             }
         }
         if (active && opening == 4){
-            int i = Minecraft.getMinecraft().gameSettings.particleSetting;
-            for(int l = 0; l <= 100 - i*45; l++)
+            for(int l = 0; l <= 100; l++)
                 worldObj.spawnParticle("depthsuspend", xCoord + 6.5F - worldObj.rand.nextInt(12) - worldObj.rand.nextFloat(), yCoord - 2F + worldObj.rand.nextInt(9) - worldObj.rand.nextFloat(), zCoord + 6.5F - worldObj.rand.nextInt(12) - worldObj.rand.nextFloat(), 0, 0, 0);
         	if(soundTimer == 0) worldObj.playSound(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, "jewelrycraft2:Ritual", 1.0F, 1.0F, false);
         	if(soundTimer < 20*14) soundTimer++;
@@ -131,14 +121,6 @@ public class TileEntityShadowEye extends TileEntity
         }
     }
     
-    /**
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     * @param metadata
-     * @return
-     */
     public boolean isValidStructure(World world, int x, int y, int z, int metadata)
     {
         if (world.getBlockMetadata(x, y, z) == 0 || world.getBlockMetadata(x, y, z) == 2){
@@ -215,12 +197,6 @@ public class TileEntityShadowEye extends TileEntity
         return true;
     }
     
-    /**
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     */
     public void addData(World world, int x, int y, int z)
     {
         pedestalItems.clear();
@@ -336,9 +312,6 @@ public class TileEntityShadowEye extends TileEntity
         }
     }
     
-    /**
-     * @param pedestal
-     */
     public void addPedestalInfo(TileEntityHandPedestal pedestal)
     {
         ItemStack heldItemStack;
@@ -372,9 +345,6 @@ public class TileEntityShadowEye extends TileEntity
         return bb;
     }
     
-    /**
-     * @return
-     */
     @Override
     public Packet getDescriptionPacket()
     {
@@ -383,10 +353,6 @@ public class TileEntityShadowEye extends TileEntity
         return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbttagcompound);
     }
     
-    /**
-     * @param net
-     * @param packet
-     */
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
     {
