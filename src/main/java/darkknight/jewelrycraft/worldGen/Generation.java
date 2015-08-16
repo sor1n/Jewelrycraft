@@ -30,6 +30,9 @@ public class Generation implements IWorldGenerator {
 		case 1:
 			generateEnd(world, random, chunkX << 4, chunkZ << 4);
 			break;
+		default:
+			generateSurface(world, random, chunkX << 4, chunkZ << 4);
+			break;
 		}
 	}
 
