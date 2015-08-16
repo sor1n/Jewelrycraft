@@ -2,10 +2,8 @@ package darkknight.jewelrycraft.client.gui;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
-
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.client.Page;
@@ -32,11 +30,11 @@ import net.minecraft.world.World;
 import scala.swing.event.Key;
 
 public class GuiCurseInfo extends GuiContainer {
-	World				world;
-	EntityPlayer		player;
-	ResourceLocation	texture;
-	int					page			= 0, maxPages = 1;
-	String				selectedCurse	= "";
+	World world;
+	EntityPlayer player;
+	ResourceLocation texture;
+	int page = 0, maxPages = 1;
+	String selectedCurse = "";
 
 	public GuiCurseInfo(Container container, World world, EntityPlayer player, ResourceLocation texture) {
 		super(container);
@@ -67,29 +65,28 @@ public class GuiCurseInfo extends GuiContainer {
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 		drawTexturedModalRect(guiLeft + 5, guiTop + ySize - 14, 0, ySize, 13, 11);
 		drawTexturedModalRect(guiLeft + xSize - 38, guiTop + ySize - 14, 13, ySize, 13, 11);
-		this.drawString(fontRendererObj, page + "/" + maxPages, guiLeft + 90, guiTop + 153, 0xffffff);
+		this.drawString(fontRendererObj, (page + 1) + "/" + (maxPages + 1), guiLeft + 90, guiTop + 153, 0xffffff);
 		this.drawString(fontRendererObj, "Click on an active curse to see its description", guiLeft, guiTop + 170, 0xffffff);
-		if(player.capabilities.isCreativeMode){
+		if (player.capabilities.isCreativeMode) {
 			drawText(this, "To enable or disable a curse simply hold the CTRL key and click on one.", guiLeft - 100, guiTop, 20, 0xff0000);
 			drawText(this, "If you do not have any curse points you need to type the command '/jw addCursePoints [playerUsername] [no of curse points]'. If you don't do this any curse you activate won't have any effect.", guiLeft - 100, guiTop + 50, 20, 0xff0000);
 		}
 	}
-    
-    public static void drawText(GuiCurseInfo gui, String text, int x, int y, int characters, int color)
-    {
-        String[] s = text.split(" ");
-        String displayText = "";
-        ArrayList<String> textLines = new ArrayList<String>();
-        for(String element: s)
-            if ((displayText + element + " ").length() <= characters) displayText += element + " ";
-            else{
-                textLines.add(displayText.trim());
-                displayText = element + " ";
-            }
-        textLines.add(displayText.trim());
-        for(int i = 0; i < textLines.size(); i++)
-        	gui.drawString(gui.getFont(), textLines.get(i), x, y + i * 9, color);
-    }
+
+	public static void drawText(GuiCurseInfo gui, String text, int x, int y, int characters, int color) {
+		String[] s = text.split(" ");
+		String displayText = "";
+		ArrayList<String> textLines = new ArrayList<String>();
+		for (String element : s)
+			if ((displayText + element + " ").length() <= characters) displayText += element + " ";
+			else {
+				textLines.add(displayText.trim());
+				displayText = element + " ";
+			}
+		textLines.add(displayText.trim());
+		for (int i = 0; i < textLines.size(); i++)
+			gui.drawString(gui.getFont(), textLines.get(i), x, y + i * 9, color);
+	}
 
 	public FontRenderer getFont() {
 		return fontRendererObj;
@@ -155,7 +152,7 @@ public class GuiCurseInfo extends GuiContainer {
 					GL11.glPushMatrix();
 					GL11.glEnable(GL11.GL_BLEND);
 					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-					if(!curse.canCurseBeActivated() || !ConfigHandler.CURSES_ENABLED) GL11.glColor4f(1f, 0f, 0f, 0.5f);
+					if (!curse.canCurseBeActivated() || !ConfigHandler.CURSES_ENABLED) GL11.glColor4f(1f, 0f, 0f, 0.5f);
 					else GL11.glColor4f(1f, 1f, 1f, 0.5f);
 				}
 				mc.renderEngine.bindTexture(Variables.MISC_TEXTURE);
@@ -194,8 +191,7 @@ public class GuiCurseInfo extends GuiContainer {
 	}
 
 	@Override
-	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-	}
+	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {}
 
 	@Override
 	protected void keyTyped(char charecter, int key) {
@@ -228,16 +224,19 @@ public class GuiCurseInfo extends GuiContainer {
 							Curse.availableCurses.add(curse);
 							JewelrycraftMod.netWrapper.sendToServer(new PacketSendServerPlayerInfo("remove", curse.getName(), playerInfo));
 							JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
-						} else if (player.capabilities.isCreativeMode && isCtrlKeyDown() && playerInfo.getInteger(curse.getName()) <= 0 && curse.canCurseBeActivated() && ConfigHandler.CURSES_ENABLED) {
+						}
+						else if (player.capabilities.isCreativeMode && isCtrlKeyDown() && playerInfo.getInteger(curse.getName()) <= 0 && curse.canCurseBeActivated() && ConfigHandler.CURSES_ENABLED) {
 							playerInfo.setInteger(curse.getName(), 1);
 							playerInfo.setInteger("activeCurses", playerInfo.getInteger("activeCurses") + 1);
 							Curse.availableCurses.remove(curse);
 							JewelrycraftMod.netWrapper.sendToServer(new PacketSendServerPlayerInfo("add", curse.getName(), playerInfo));
 							JewelrycraftMod.netWrapper.sendToAll(new PacketSendServerPlayersInfo());
-						} else selectedCurse = curse.getName();
+						}
+						else selectedCurse = curse.getName();
 					}
 					ind++;
-				} else if (playerInfo.getInteger(curse.getName()) > 0) {
+				}
+				else if (playerInfo.getInteger(curse.getName()) > 0) {
 					if (x > (guiLeft + 43) && y > (guiTop + 8 + (size - 8) * (ind - page * 5)) && x < (guiLeft + 43 + 112) && y < (guiTop + 40 + (size - 8) * (ind - page * 5)) && ind >= page * 5 && ind < (page + 1) * 5) selectedCurse = curse.getName();
 					ind++;
 				}

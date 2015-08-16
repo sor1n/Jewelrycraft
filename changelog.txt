@@ -1,2 +1,8 @@
 Fixed:
-- A bug where servers would crash
+- A bug where the ritual would crash on a server
+
+Change:
+- Reduced spawnrate of structures
+- Curses starts from page 1, instead of 0
+- Structures will no longer spawn in a flat world
+- Secrety secret

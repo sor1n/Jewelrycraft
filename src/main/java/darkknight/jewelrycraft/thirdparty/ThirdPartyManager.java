@@ -32,6 +32,7 @@ public class ThirdPartyManager implements IGuiHandler{
     public void index(){
         Map<String, Class<? extends IThirdParty>> thirdPartyClasses = new HashMap<String, Class<? extends IThirdParty>>();
         thirdPartyClasses.put(ModIds.EE3, EE3.class);
+        thirdPartyClasses.put(ModIds.NEI, NEI.class);
         thirdPartyClasses.put(ModIds.ALPACA, Alpaca.class);
 
         List<String> enabledThirdParty = new ArrayList<String>();
