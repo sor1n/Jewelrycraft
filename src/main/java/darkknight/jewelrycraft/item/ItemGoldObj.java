@@ -17,6 +17,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.Variables;
 
@@ -64,7 +65,7 @@ public class ItemGoldObj extends Item
     
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean displayInfo)
     {
-        if (displayInfo) if (stack != null && JewelryNBT.item(stack) != null && JewelryNBT.item(stack).getItem() instanceof ItemFood) list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("item." + Variables.MODID + ".goldObject.info.food"));
+        if (ConfigHandler.JEWELRY_INFO) if (stack != null && JewelryNBT.item(stack) != null && JewelryNBT.item(stack).getItem() instanceof ItemFood) list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("item." + Variables.MODID + ".goldObject.info.food"));
         else list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("item." + Variables.MODID + ".goldObject.info.standard"));
     }
 }

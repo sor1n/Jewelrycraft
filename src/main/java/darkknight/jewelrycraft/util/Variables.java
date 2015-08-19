@@ -4,9 +4,11 @@ import net.minecraft.util.ResourceLocation;
 
 public class Variables
 {
+    public static final int CURSE_POINTS_PER_LEVEL = 7000;
+    
     public static final String MODID = "jewelrycraft2";
     public static final String MODNAME = "Jewelrycraft 2";
-    public static final String VERSION = "1.1.2";
+    public static final String VERSION = "1.1.3";
     public static final String PACKET_CHANNEL = "jewelrycraft2";
     
     public static final String CONFIG_GUI = "darkknight.jewelrycraft.config.ConfigGuiFactory";

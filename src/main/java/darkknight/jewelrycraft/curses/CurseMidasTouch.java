@@ -90,8 +90,8 @@ public class CurseMidasTouch extends Curse
     {
         return item.equals(Items.gold_ingot) || item.equals(Items.gold_nugget) || item.equals(Items.golden_helmet) || item.equals(Items.golden_chestplate) || 
             item.equals(Items.golden_leggings) || item.equals(Items.golden_boots) || item.equals(Items.golden_sword) || item.equals(Items.golden_shovel) || 
-            item.equals(Items.golden_pickaxe) || item.equals(Items.golden_axe) || item.equals(Items.golden_hoe) || item.equals(Items.golden_horse_armor) || 
-            Block.getBlockFromItem(item).equals(Blocks.gold_block) || Block.getBlockFromItem(item).equals(Blocks.light_weighted_pressure_plate);
+            item.equals(Items.golden_pickaxe) || item.equals(Items.golden_axe) || item.equals(Items.golden_apple) || item.equals(Items.golden_hoe) || 
+            item.equals(Items.golden_horse_armor) || Block.getBlockFromItem(item).equals(Blocks.gold_block) || Block.getBlockFromItem(item).equals(Blocks.light_weighted_pressure_plate);
     }
     
     public String getDescription()

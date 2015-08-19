@@ -116,7 +116,7 @@ public class EntityEventHandler {
 	public void updateCurses(NBTTagCompound playerInfo, EntityPlayer player) {
 		if (playerInfo.hasKey("playerCursePointsChanged") && playerInfo.getBoolean("playerCursePointsChanged")) {
 			int points = playerInfo.getInteger("cursePoints");
-			int maxCurses = playerInfo.getInteger("cursePoints") / 1750 + 1;
+			int maxCurses = playerInfo.getInteger("cursePoints") / Variables.CURSE_POINTS_PER_LEVEL + 1;
 			if (points > 0 && playerInfo.getInteger("activeCurses") < maxCurses) while (playerInfo.getInteger("activeCurses") < maxCurses && Curse.availableCurses.size() > 0 && playerInfo.getInteger("activeCurses") < Curse.getCurseList().size())
 				addCurse(player, playerInfo);
 			if (!playerInfo.hasKey("curseTime") || !playerInfo.hasKey("reselectCurses") || playerInfo.getBoolean("reselectCurses")) {
@@ -253,7 +253,7 @@ public class EntityEventHandler {
 			NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
 			if (playerInfo.hasKey("cursePoints")) {
 				int points = playerInfo.getInteger("cursePoints");
-				int maxCurses = playerInfo.getInteger("cursePoints") / 1750 + 1;
+				int maxCurses = playerInfo.getInteger("cursePoints") / Variables.CURSE_POINTS_PER_LEVEL + 1;
 				if (points > 0 && playerInfo.getInteger("activeCurses") < maxCurses) while (playerInfo.getInteger("activeCurses") < maxCurses && Curse.availableCurses.size() > 0 && playerInfo.getInteger("activeCurses") < Curse.getCurseList().size())
 					addCurse(player, playerInfo);
 				if (!playerInfo.hasKey("curseTime") || !playerInfo.hasKey("reselectCurses") || playerInfo.getBoolean("reselectCurses")) {
