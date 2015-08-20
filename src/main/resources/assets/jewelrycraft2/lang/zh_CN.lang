@@ -16,25 +16,11 @@ item.jewelrycraft2.bracelet.name=手镯
 item.jewelrycraft2.earrings.name=耳环
 item.jewelrycraft2.guide.name=珠宝工艺2手册
 item.jewelrycraft2.bucket.name=熔融
+item.jewelrycraft2.test.name=Chuck TestTa
 
-item.jewelrycraft2.crystal.0.name=黑色水晶
-item.jewelrycraft2.crystal.1.name=红色水晶
-item.jewelrycraft2.crystal.2.name=绿色水晶
-item.jewelrycraft2.crystal.3.name=棕色水晶
-item.jewelrycraft2.crystal.4.name=蓝色水晶
-item.jewelrycraft2.crystal.5.name=紫色水晶
-item.jewelrycraft2.crystal.6.name=青色水晶
-item.jewelrycraft2.crystal.7.name=浅灰色水晶
-item.jewelrycraft2.crystal.8.name=灰色水晶
-item.jewelrycraft2.crystal.9.name=粉色水晶
-item.jewelrycraft2.crystal.10.name=黄绿色水晶
-item.jewelrycraft2.crystal.11.name=黄色水晶
-item.jewelrycraft2.crystal.12.name=淡蓝色水晶
-item.jewelrycraft2.crystal.13.name=品红色水晶
-item.jewelrycraft2.crystal.14.name=橙色水晶
-item.jewelrycraft2.crystal.15.name=白色水晶
 item.jewelrycraft2.jewelryModifier.name=珠宝强化石(创造)
 item.jewelrycraft2.goldObject.name=闪金物品
+item.jewelrycraft2.structureGen.name=Structure Generator
 
 item.jewelrycraft2.goldObject.info.standard=闪闪发光,但并没有什么用处 :(
 item.jewelrycraft2.goldObject.info.food=它是用金子制作的! 你想怎么吃它?
@@ -42,6 +28,7 @@ item.jewelrycraft2.thievingGloves.info.extra=按 <SHIFT> 查看更多信息.
 item.jewelrycraft2.thievingGloves.info.1=潜行时手持护手
 item.jewelrycraft2.thievingGloves.info.2=对准村民右键来
 item.jewelrycraft2.thievingGloves.info.3=偷窃其物品
+item.jewelrycraft2.monsterPlacer.name=生成 %s
 
 tile.jewelrycraft2.oreShadow.name=暗影矿石
 tile.jewelrycraft2.blockShadow.name=暗影方块
@@ -56,6 +43,23 @@ tile.jewelrycraft2.shadowHand.name=暗影之手
 tile.jewelrycraft2.shadowEye.name=诅咒之眼
 tile.jewelrycraft2.handPedestal.name=石手基座
 tile.jewelrycraft2.midasTouchBlock.name=黄金生物
+
+tile.jewelrycraft2.blockCrystal.0.name=黑色水晶
+tile.jewelrycraft2.blockCrystal.1.name=红色水晶
+tile.jewelrycraft2.blockCrystal.2.name=绿色水晶
+tile.jewelrycraft2.blockCrystal.3.name=棕色水晶
+tile.jewelrycraft2.blockCrystal.4.name=蓝色水晶
+tile.jewelrycraft2.blockCrystal.5.name=紫色水晶
+tile.jewelrycraft2.blockCrystal.6.name=青色水晶
+tile.jewelrycraft2.blockCrystal.7.name=浅灰色水晶
+tile.jewelrycraft2.blockCrystal.8.name=灰色水晶
+tile.jewelrycraft2.blockCrystal.9.name=粉色水晶
+tile.jewelrycraft2.blockCrystal.10.name=黄绿色水晶
+tile.jewelrycraft2.blockCrystal.11.name=黄色水晶
+tile.jewelrycraft2.blockCrystal.12.name=淡蓝色水晶
+tile.jewelrycraft2.blockCrystal.13.name=品红色水晶
+tile.jewelrycraft2.blockCrystal.14.name=橙色水晶
+tile.jewelrycraft2.blockCrystal.15.name=白色水晶
 
 itemGroup.jewelrycraft2=珠宝工艺2
 itemGroup.Liquids=珠宝工艺|液体
@@ -104,23 +108,43 @@ chatmessage.jewelrycraft2.endereye.1=你感觉到一些
 chatmessage.jewelrycraft2.endereye.2=在你周围.
 chatmessage.jewelrycraft2.feather=项链能够保护你不受到伤害!
 
+chatmessage.jewelrycraft2.heartKilled.Red=GG!你刚刚击杀了价值很高的生物! MURDERER! 当你走上去时红心会治疗你 >:c
+chatmessage.jewelrycraft2.heartKilled.White=GG!你刚刚击杀了价值很高的生物! MURDERER! 如果你收集到两颗半心你会得到一颗心的额外生命 >:c
+chatmessage.jewelrycraft2.heartKilled.Blue=GG!你刚刚击杀了价值很高的生物! MURDERER! 蓝心将会保护红心, 走上前即可, 不要杀了他们 >:c
+chatmessage.jewelrycraft2.heartKilled.Black=GG!你刚刚击杀了价值很高的生物! MURDERER! 黑心同蓝心一样, 但它们会对攻击者造成伤害 >:c 
+
 curse.jewelrycraft2.blind.description=你眼前的光亮正在渐渐的消退
 curse.jewelrycraft2.flamingsoul.description=就我一个人感觉到越来越热了么?
 curse.jewelrycraft2.greed.description=你可能以后才会需要它
-curse.jewelrycraft2.humblebundle.description=买一送一
+curse.jewelrycraft2.humblebundle.description=两份的价格和一份一样
 curse.jewelrycraft2.infamy.description=你都干了些什么?!
 curse.jewelrycraft2.midastouch.description=小心事与愿违...
-curse.jewelrycraft2.pentagram.description=黑暗领主喜欢用神秘的方式来表示他对你的喜爱.
-curse.jewelrycraft2.rabbitspaw.description=这是黑暗领主赐予你的礼物.不要弄丢了.
+curse.jewelrycraft2.pentagram.description=黑暗领主喜欢用神秘的方式来表示他对你的喜爱
+curse.jewelrycraft2.rabbitspaw.description=这是黑暗领主赐予你的礼物.不要弄丢了
 curse.jewelrycraft2.rottenheart.description=你的内心正在慢慢地腐烂
 curse.jewelrycraft2.vampirehunger.description=你极度的渴望鲜血
+curse.jewelrycraft2.deathsTouch.description=死亡的来临势不可挡
+
+curse.jewelrycraft2.blind=致盲
+curse.jewelrycraft2.flamingsoul=灵魂灼烧
+curse.jewelrycraft2.greed=贪婪之心
+curse.jewelrycraft2.humblebundle=买一送一
+curse.jewelrycraft2.infamy=声名狼藉
+curse.jewelrycraft2.midastouch=点石成金
+curse.jewelrycraft2.pentagram=五芒星
+curse.jewelrycraft2.rabbitspaw=兔脚
+curse.jewelrycraft2.rottenheart=腐朽之心
+curse.jewelrycraft2.vampirehunger=嗜血成性
+curse.jewelrycraft2.deathsTouch=死亡之触
+
+curse.jewelrycraft2.activated=你受到了诅咒, 按住C键查看激活的诅咒.
 
 death.attack.weak=%1$s 被珠宝削弱最终导致死亡
 death.attack.shadows=%1$s 被暗影吞噬了
 death.attack.blackHeart=%1$s 被 %2$s's 的诅咒杀死了
 
 entity.jewelrycraft2.Heart.name=心
-entity.jewelrycraft2.Half-Heart.name=半心
+entity.jewelrycraft2.HalfHeart.name=半心
 
 jewelrycraft2.potion.stun=眩晕
 
@@ -146,3 +170,13 @@ guide.jewelrycraft2.tab.items=物品
 guide.jewelrycraft2.tab.modifiers=强化材料
 guide.jewelrycraft2.tab.oretoingot=矿物与对应金属锭
 guide.jewelrycraft2.tab.ritual=仪式相关
+guide.jewelrycraft2.tab.curses=诅咒
+
+bucket.unknown=一桶未知液体
+
+achievement.jewelrycraft.openGuide=一个全新的世界
+achievement.jewelrycraft.openGuide.desc=打开珠宝工艺2指南
+achievement.jewelrycraft.pentagram=拒绝诱惑
+achievement.jewelrycraft.pentagram.desc=§4挑战:§7 当五芒星诅咒激活时, 一天之内不偷取生物生命. §a奖励:§7 在五芒星诅咒激活时, 你将能够从生物处永久偷取一颗心.
+
+challenge.failed=挑战失败:
