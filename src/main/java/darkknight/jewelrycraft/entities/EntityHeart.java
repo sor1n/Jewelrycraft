@@ -53,8 +53,6 @@ public class EntityHeart extends EntityLiving {
 		super.collideWithEntity(entity);
 		if (!this.worldObj.isRemote && entity instanceof EntityHeart && getType().equals(((EntityHeart) entity).getType())) {
 			setQuantity(getQuantity() + ((EntityHeart) entity).getQuantity());
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getQuantity() + ((EntityHeart) entity).getQuantity());
-			this.heal(getQuantity());
 			entity.setDead();
 		}
 	}
@@ -76,10 +74,10 @@ public class EntityHeart extends EntityLiving {
 				} else if (getType().equals("White") && playerInfo.getFloat("WhiteHeart") > 0.1F) {
 					playerInfo.setFloat(getType() + "Heart", 0F);
 					player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(player.getMaxHealth() + 2f);
-	                player.setHealth(player.getHealth() + 2f);
+	                		player.setHealth(player.getHealth() + 2f);
 					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
 					this.setDead();
-				} else if (!getType().equals("Red")) {
+				} else if (!getType().equals("Red") && ((getType().equals("Black") && playerInfo.getFloat("BlackHeart") <= ConfigHandler.MAX_BLACK_HEARTS_PICKUP) || (getType().equals("Blue") && playerInfo.getFloat("BlueHeart") <= ConfigHandler.MAX_BLUE_HEARTS_PICKUP))) {
 					if(playerInfo.hasKey(getType() + "Heart")) playerInfo.setFloat(getType() + "Heart", playerInfo.getFloat(getType() + "Heart") + getQuantity());
 					else playerInfo.setFloat(getType() + "Heart", getQuantity());					
 					JewelrycraftMod.netWrapper.sendTo(new PacketSendClientPlayerInfo(playerInfo), (EntityPlayerMP)player);
