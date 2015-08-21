@@ -55,7 +55,7 @@ public class ConfigHandler
     public static boolean ENABLE_WORLD_GEN = true;
     public static boolean ORE_GEN = true;
     public static boolean CRYSTAL_GEN = true;
-    public static boolean STRUCTURES[] = {tr   ue, true, true, true, true, true};
+    public static boolean STRUCTURES[] = {true, true, true, true, true, true};
     
     public void loadConfig(FMLPreInitializationEvent event)
     {
