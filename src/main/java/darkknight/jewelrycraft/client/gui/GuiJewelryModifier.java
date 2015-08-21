@@ -87,7 +87,7 @@ public class GuiJewelryModifier extends GuiContainer {
 		if (this.searchField.textboxKeyTyped(character, key)) {
 			int items = 0;
 			for (ItemStack item : JewelrycraftUtil.objects)
-				if (item != null && searchField.getText() != "" && item.getItem() != null && item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase())) items++;
+				if (item != null && searchField != null && searchField.getText() != "" && item.getItem() != null && item.getDisplayName().toLowerCase().contains(this.searchField.getText().toLowerCase())) items++;
 			maxPages = items / 48 + 1;
 			page = 1;
 			this.pages.setText(page + "/" + maxPages);
