@@ -97,11 +97,7 @@ public class BlockSmelter extends BlockContainer {
 				te.isDirty = true;
 			}
 			if (item != null && item.getItem() != null && !(item.getItem() instanceof ItemMoltenMetalBucket)) {
-				int index = -1;
-				for (int a = 0; a < JewelrycraftUtil.jamcraftPlayers.size(); a++)
-					if (entityPlayer.getUniqueID().toString().equals(JewelrycraftUtil.jamcraftPlayers.get(a))) index = a;
-				if (entityPlayer.capabilities.isCreativeMode) index = 1;
-				boolean canPlace = item != null && (JewelrycraftUtil.isMetal(item) || JewelrycraftUtil.isOre(item) || index >= 0 || JewelryNBT.ingot(item) != null);
+				boolean canPlace = item != null;
 				boolean isOre = false, oreCoincidesWithMetal = false, itemCoincidesWithMetal = false, itemCoincidesWithMoltenMetal = false, overflow = false;
 				isOre = JewelrycraftUtil.isOre(item);
 				if (te.metal != null && te.metal.getItem() != null) {
