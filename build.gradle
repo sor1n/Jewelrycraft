@@ -21,7 +21,7 @@ apply plugin: 'curseforge'
 project.ext {
 	massive = "1"
     major = "1"
-    minor = "2"
+    minor = "3"
     mcVersion = "1.7.10"
 	ee3Version = "0.3.505"
 	alpacaVersion = "1.2"
@@ -104,6 +104,7 @@ curse {
     projectId = "229927" // my project url is http://minecraft.curseforge.com/mc-mods/229927-jewelrycraft-2
     changelog = new File('changelog.txt').text
     releaseType = "release"
+	displayName = "Jewelrycraft 2 v$project.version"
 
     // the default obfuscated jar is uploaded by default
     // artifact = project.file("build/libs/to/upload.jar")

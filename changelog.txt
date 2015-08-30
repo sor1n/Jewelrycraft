@@ -1,8 +1,15 @@
+Added:
+- All the structures should be able to spawn in other non-vanilla dimensions as well
+
 Fixed:
-- A bug where the ritual would crash on a server
+- Crystals Position in inventory
+- Game no longer crashes when opening the book if curses are disabled
+- Midas touch no longer turns Golden Apples to "Golden Golden Apples"
+- Golden Objects should now display its info
 
 Change:
-- Reduced spawnrate of structures
-- Curses starts from page 1, instead of 0
-- Structures will no longer spawn in a flat world
-- Secrety secret
+- Increased the amount of curse points required to get to the next curse to 7000
+- Thieving gloves now have a higher chance of stealing from villagers (provided you are not being seen)
+
+Removed:
+- Herobrine
