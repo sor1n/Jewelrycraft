@@ -30,6 +30,9 @@ public class ConfigHandler
     public static int GEM_CHEST_MAX;
     public static int FURNACE_MIN_INGOT_STACK;
     public static int FURNACE_MAX_INGOT_STACK;
+ 
+    public static int MAX_BLACK_HEARTS_PICKUP;
+    public static int MAX_BLUE_HEARTS_PICKUP;
 
     public static boolean CRYSTAL_GLOW;
     public static boolean CRYSTAL_PARTICLES;
@@ -86,6 +89,8 @@ public class ConfigHandler
         CRYSTAL_PARTICLES = config.getBoolean("Crystal Particles", categories[2], true, "If false, then crystal will no longer spawn particles");
         HEARTS_DESPAWN = config.getBoolean("Hearts Despawn", categories[2], true, "If false, then Hearts and Half-hearts will no longer despawn");
         JEWELRY_INFO = config.getBoolean("Jewelry Info", categories[2], true, "If false, then extra info won't be show when hovering over a jewelery.");
+        MAX_BLACK_HEARTS_PICKUP = config.getInt("Max Black Hearts Pickup", categories[2], Integer.MAX_VALUE, 0, Integer.MAX_VALUE, "Determines how many black hearts can a player pick up.");
+        MAX_BLUE_HEARTS_PICKUP = config.getInt("Max Blue Hearts Pickup", categories[2], Integer.MAX_VALUE, 0, Integer.MAX_VALUE, "Determines how many blue hearts can a player pick up.");
         
         ENABLE_WORLD_GEN = config.getBoolean("World Generation", categories[3], true, "If false, nothing will generate (this includes ore)");
         ORE_GEN = config.getBoolean("Ore Generation", categories[3], true, "If false, ores won't generate");

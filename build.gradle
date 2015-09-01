@@ -21,7 +21,7 @@ apply plugin: 'curseforge'
 project.ext {
 	massive = "1"
     major = "1"
-    minor = "3"
+    minor = "4"
     mcVersion = "1.7.10"
 	ee3Version = "0.3.505"
 	alpacaVersion = "1.2"

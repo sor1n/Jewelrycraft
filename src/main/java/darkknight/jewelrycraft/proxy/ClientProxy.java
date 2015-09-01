@@ -1,12 +1,6 @@
 package darkknight.jewelrycraft.proxy;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
-
 import org.apache.logging.log4j.Level;
-
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -24,6 +18,7 @@ import darkknight.jewelrycraft.entities.renders.HeartRender;
 import darkknight.jewelrycraft.events.KeyBindings;
 import darkknight.jewelrycraft.events.PlayerRenderHandler;
 import darkknight.jewelrycraft.events.ScreenHandler;
+import darkknight.jewelrycraft.events.TextureEvent;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.item.render.ItemRender;
 import darkknight.jewelrycraft.model.ModelDisplayer;
@@ -53,6 +48,10 @@ import darkknight.jewelrycraft.tileentity.renders.TileEntityShadowHandRender;
 import darkknight.jewelrycraft.tileentity.renders.TileEntitySmelterRender;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
 {
@@ -118,6 +117,7 @@ public class ClientProxy extends CommonProxy
     public void init()
     {
         FMLCommonHandler.instance().bus().register(new KeyBindings());
+        MinecraftForge.EVENT_BUS.register(new TextureEvent());
     }
     
     @Override

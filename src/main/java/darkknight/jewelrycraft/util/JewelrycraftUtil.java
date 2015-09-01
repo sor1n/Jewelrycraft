@@ -121,7 +121,7 @@ public class JewelrycraftUtil {
 				items.removeAll(items);
 			}
 			catch (Exception e) {
-				JewelrycraftMod.logger.info("Error, tried to add subtypes of item " + ((Item) item).getUnlocalizedName() + "\nItem is not added in the list.");
+				JewelrycraftMod.logger.info("Error, tried to add color of the item " + ((Item) item).getUnlocalizedName() + " but it failed.");
 			}
 		}
 	}

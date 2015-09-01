@@ -44,6 +44,7 @@ public class BlockList
         moltenMetalFluid = new Fluid("metal.molten").setLuminosity(15).setDensity(3000).setTemperature(2000).setViscosity(6000);
         if (!FluidRegistry.registerFluid(moltenMetalFluid)) moltenMetalFluid = FluidRegistry.getFluid("metal.molten");
         moltenMetal = new BlockMoltenMetal(moltenMetalFluid, Material.lava);
+        moltenMetalFluid.setBlock(moltenMetal);
         crystal = new BlockCrystal().setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeGlass).setBlockTextureName(Variables.MODID + ":blockCrystal").setBlockName(Variables.MODID + ".blockCrystal").setCreativeTab(JewelrycraftMod.jewelrycraft);
         
         GameRegistry.registerBlock(shadowOre, "shadowOre");

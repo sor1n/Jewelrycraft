@@ -227,7 +227,7 @@ public class EntityEventHandler {
 			else if (playerInfo.getFloat("BlackHeart") > 0) {
 				AxisAlignedBB axisalignedbb = player.boundingBox.expand(3.0D, 0.0D, 3.0D);
 				List enemies = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, axisalignedbb);
-				if (enemies != null && !enemies.isEmpty()) {
+				if (enemies != null && !enemies.isEmpty() && event.source != DamageSourceList.blackHeart) {
 					Iterator iterator = enemies.iterator();
 					while (iterator.hasNext()) {
 						Entity enemy = (Entity) iterator.next();

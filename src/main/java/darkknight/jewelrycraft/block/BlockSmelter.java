@@ -64,7 +64,7 @@ public class BlockSmelter extends BlockContainer {
 				int quant = (int) (te.quantity * 10);
 				ItemStack metalBucket = new ItemStack(ItemList.bucket);
 				JewelryNBT.addMetal(metalBucket, te.moltenMetal.copy());
-				if (quant == 9){
+				if (quant == 9) {
 					dropItem(world, i, j, k, new ItemStack(Blocks.cobblestone, 6));
 					dropItem(world, i, j, k, new ItemStack(Items.lava_bucket));
 					dropItem(world, i, j, k, metalBucket);
@@ -73,7 +73,7 @@ public class BlockSmelter extends BlockContainer {
 			world.removeTileEntity(i, j, k);
 		}
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9) {
 		TileEntitySmelter te = (TileEntitySmelter) world.getTileEntity(i, j, k);

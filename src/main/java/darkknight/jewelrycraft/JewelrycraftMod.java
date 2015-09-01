@@ -7,10 +7,8 @@ package darkknight.jewelrycraft;
 
 import java.io.File;
 import java.io.IOException;
-
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -21,18 +19,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.achievements.AchievementsList;
 import darkknight.jewelrycraft.block.BlockList;
-import darkknight.jewelrycraft.client.gui.GuiTab;
-import darkknight.jewelrycraft.client.gui.GuiTabBlocks;
-import darkknight.jewelrycraft.client.gui.GuiTabGemsAndIngots;
-import darkknight.jewelrycraft.client.gui.GuiTabIntroduction;
-import darkknight.jewelrycraft.client.gui.GuiTabItems;
-import darkknight.jewelrycraft.client.gui.GuiTabModifiers;
-import darkknight.jewelrycraft.client.gui.GuiTabOresToIngots;
-import darkknight.jewelrycraft.client.gui.GuiTabRitual;
 import darkknight.jewelrycraft.commands.JewelrycraftCommands;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.curses.CurseList;
@@ -44,12 +32,17 @@ import darkknight.jewelrycraft.potions.PotionList;
 import darkknight.jewelrycraft.proxy.CommonProxy;
 import darkknight.jewelrycraft.recipes.CraftingRecipes;
 import darkknight.jewelrycraft.thirdparty.ThirdPartyManager;
+import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.Variables;
 import darkknight.jewelrycraft.worldGen.ChestGeneration;
 import darkknight.jewelrycraft.worldGen.village.VillageHandler;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 @Mod (modid = Variables.MODID, name = Variables.MODNAME, version = Variables.VERSION, guiFactory = Variables.CONFIG_GUI, acceptedMinecraftVersions = "[1.7.10,1.8)")
 public class JewelrycraftMod
@@ -116,7 +109,8 @@ public class JewelrycraftMod
         logger.log(Level.INFO, "Registering Potions");
         PotionList.init(e);
         logger.log(Level.INFO, "Loading Third Party Mods");
-        ThirdPartyManager.instance().init();
+        ThirdPartyManager.instance().init();      
+        FMLInterModComms.sendMessage("Waila", "register", "darkknight.jewelrycraft.thirdparty.WailaHandler.registration");      
     }
     
     @EventHandler
