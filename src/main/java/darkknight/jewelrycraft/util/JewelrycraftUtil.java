@@ -26,6 +26,7 @@ import darkknight.jewelrycraft.random.WeightedRandomCurse;
 import darkknight.jewelrycraft.worldGen.Generation;
 import darkknight.jewelrycraft.worldGen.WorldGenStructure;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.IResourceManager;
@@ -35,6 +36,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -42,7 +44,6 @@ import net.minecraft.stats.Achievement;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class JewelrycraftUtil {
@@ -121,14 +122,13 @@ public class JewelrycraftUtil {
 				items.removeAll(items);
 			}
 			catch (Exception e) {
-				JewelrycraftMod.logger.info("Error, tried to add color of the item " + ((Item) item).getUnlocalizedName() + " but it failed.");
+				JewelrycraftMod.logger.info("Error, tried to add the color of the item " + ((Item) item).getUnlocalizedName() + " but something went wrong.");
 			}
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	public static int getColor(ItemStack item) {
-		if (Item.getIdFromItem(item.getItem()) == Block.getIdFromBlock(Blocks.stained_glass) || Item.getIdFromItem(item.getItem()) == Block.getIdFromBlock(Blocks.stained_hardened_clay) || Item.getIdFromItem(item.getItem()) == Block.getIdFromBlock(Blocks.wool) || Item.getIdFromItem(item.getItem()) == Block.getIdFromBlock(Blocks.carpet)) item.setItemDamage(15 - item.getItemDamage());
 		for (ItemStack stack : colors.keySet())
 			if (item != null && item.getItem() != null && stack.getItem() != null && item.getItem().equals(stack.getItem()) && item.getItemDamage() == stack.getItemDamage()) return colors.get(stack);
 		return 0xFFFFFF;
@@ -139,7 +139,7 @@ public class JewelrycraftUtil {
 		IResourceManager rm = Minecraft.getMinecraft().getResourceManager();
 		ResourceLocation ingot;
 		BufferedImage icon;
-		if (stack != null && Item.getIdFromItem(stack.getItem()) > 0 && stack.getIconIndex() != null && stack.getItem().getColorFromItemStack(stack, pass) == 16777215) {
+		if (stack != null && Item.getIdFromItem(stack.getItem()) > 0 && stack.getItem().getColorFromItemStack(stack, pass) == 16777215) {
 			try {
 				ingot = getLocation(stack);
 			}
@@ -170,6 +170,7 @@ public class JewelrycraftUtil {
 		String domain = "";
 		String texture;
 		IIcon itemIcon = item.getItem().getIcon(item, 0);
+		if (!(Block.getBlockFromItem(item.getItem()) instanceof BlockAir) && !Block.getBlockFromItem(item.getItem()).getIcon(0, item.getItemDamage()).getIconName().equals("soul_sand")) itemIcon = Block.getBlockFromItem(item.getItem()).getIcon(0, item.getItemDamage());
 		String iconName = itemIcon.getIconName();
 		if (iconName.substring(0, iconName.indexOf(":") + 1) != "") domain = iconName.substring(0, iconName.indexOf(":") + 1).replace(":", " ").trim();
 		else domain = "minecraft";
@@ -285,7 +286,7 @@ public class JewelrycraftUtil {
 						ores.add(nextStack);
 						oreToIngot.put(nextStack, ingot);
 						JewelrycraftMod.logger.info(nextStack + " Adding " + nextStack.getDisplayName() + " with damage value " + nextStack.getItemDamage() + " and with " + nextStack.stackSize + " in stack");
-						JewelrycraftMod.logger.info(ingot + " Adding ingot " + ingot.getDisplayName() + " with damage value " + ingot.getItemDamage() + " and with " + ingot.stackSize + " in stack\n");
+						JewelrycraftMod.logger.info(ingot + " Adding ingot " + ingot.getDisplayName() + " with damage value " + ingot.getItemDamage() + " and with " + ingot.stackSize + " in stack");
 					}
 				}
 			}

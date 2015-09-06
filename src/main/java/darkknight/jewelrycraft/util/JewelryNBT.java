@@ -43,9 +43,11 @@ public class JewelryNBT
             itemStackData = new NBTTagCompound();
             item.setTagCompound(itemStackData);
         }
-        NBTTagCompound ingotNBT = new NBTTagCompound();
-        metal.writeToNBT(ingotNBT);
-        itemStackData.setTag("ingot", ingotNBT);
+        if(metal != null){
+            NBTTagCompound ingotNBT = new NBTTagCompound(); 
+        	metal.writeToNBT(ingotNBT);
+        	itemStackData.setTag("ingot", ingotNBT);
+        }
     }
     
     /**

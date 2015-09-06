@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class WailaHandler implements IWailaDataProvider{
@@ -29,7 +30,7 @@ public class WailaHandler implements IWailaDataProvider{
 	@Override
 	public List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,	IWailaConfigHandler config) {
 		TileEntityMoltenMetal te = (TileEntityMoltenMetal)accessor.getTileEntity();
-		String metalName =  SpecialChars.WHITE + "Molten " + te.getMetal().getDisplayName();
+		String metalName =  SpecialChars.WHITE + StatCollector.translateToLocal("tile.jewelrycraft2.moltenMetal.name") + " " + te.getMetal().getDisplayName();
 		currenttip.remove(0);
 		currenttip.add(0, metalName);
 		return currenttip;

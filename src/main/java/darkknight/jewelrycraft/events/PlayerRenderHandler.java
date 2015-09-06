@@ -65,7 +65,7 @@ public class PlayerRenderHandler {
 					if (playerInfo != null && event.entityPlayer != null && player != null && playerInfo.hasKey("ext" + i) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
 						gem = -1;
 						ingot = -1;
-						if (no > 4) arm = leftArm;
+						if (i > 4) arm = leftArm;
 						float s = 0.055F;
 						NBTTagCompound nbt = (NBTTagCompound) playerInfo.getTag("ext" + i);
 						ItemStack item = ItemStack.loadItemStackFromNBT(nbt);
@@ -83,22 +83,22 @@ public class PlayerRenderHandler {
 						if (JewelryNBT.gem(item) != null) gem = JewelrycraftUtil.getColor(JewelryNBT.gem(item));
 						float scale = 0.1f;
 						if (Loader.isModLoaded("alpaca") /*&& fiskfille.alpaca.AlpacaAPI.isAlpacaClient(event.entityPlayer)*/) {
-							if (no <= 4) {
-								GL11.glTranslatef(0.35F, -4.35F, -2.8F + 0.15F * no);
+							if (i <= 4) {
+								GL11.glTranslatef(0.35F, -4.35F, -2.8F + 0.15F * i);
 								GL11.glRotatef(90f, 0F, 1F, 0F);
 							} else {
-								GL11.glTranslatef(-0.35F, -4.35F, 1.48F + 0.15F * no);
+								GL11.glTranslatef(-0.35F, -4.35F, 1.48F + 0.15F * i);
 								GL11.glRotatef(-90f, 0F, 1F, 0F);
 							}
 							scale = 0.3F;
 						} else {
-							if (no <= 4) GL11.glTranslatef(0.64F + 0.05F * no, -1.15F, 0.07F);
-							else GL11.glTranslatef(0.59F + 0.05F * no, -1.15F, 0.07F);
+							if (i <= 4) GL11.glTranslatef(0.64F + 0.05F * i, -1.15F, 0.07F);
+							else GL11.glTranslatef(0.59F + 0.05F * i, -1.15F, 0.07F);
 						}
 						GL11.glScalef(scale, scale + scale / 2, scale);
 						ring.doRender(event.entityPlayer, 0F, 0F, (float) ingot, (float) gem, 0F);
 						GL11.glPopMatrix();
-						no++;
+//						no++;
 					}
 				for (int i = 10; i <= 13; i++)
 					if (playerInfo != null && event.entityPlayer != null && player != null && playerInfo.hasKey("ext" + i) && event.entityPlayer.getDisplayName().equals(player.getDisplayName())) {
