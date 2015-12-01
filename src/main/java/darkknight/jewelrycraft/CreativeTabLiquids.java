@@ -1,10 +1,10 @@
 package darkknight.jewelrycraft;
 
 import java.util.List;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 /**
  * The Class CreativeTabLiquids.

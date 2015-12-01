@@ -5,11 +5,8 @@ import darkknight.jewelrycraft.api.ModifierEffects;
 
 public class EffectsList
 {
-    private static ModifierEffects blazePowder, enderEye, feather, enderPearl, obsidian;
+    public static ModifierEffects blazePowder, enderEye, feather, enderPearl, obsidian;
     
-    /**
-     * @param e
-     */
     public static void postInit(FMLPostInitializationEvent e)
     {
         blazePowder = new EffectBlazePowder();

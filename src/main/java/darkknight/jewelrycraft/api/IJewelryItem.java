@@ -60,4 +60,16 @@ public interface IJewelryItem
      * @param event The clone event that runs whenever a player respawns, either because he died or switched dimensions
      */
     public void onPlayerRespawnAction(ItemStack item, PlayerEvent.Clone event);
+
+    /**
+     * This runs when the item is equipped
+     * @param item The item stack of the item (allows for fine item search, like metadata and nbt)
+     */
+    public void onJewelryEquipped(ItemStack item);
+
+    /**
+     * This runs when the item is unequipped
+     * @param item The item stack of the item (allows for fine item search, like metadata and nbt)
+     */
+    public void onJewelryUnequipped(ItemStack item);
 }

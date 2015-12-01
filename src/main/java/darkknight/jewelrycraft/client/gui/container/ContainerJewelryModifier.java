@@ -1,14 +1,11 @@
 package darkknight.jewelrycraft.client.gui.container;
 
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import darkknight.jewelrycraft.JewelrycraftMod;
-import darkknight.jewelrycraft.client.gui.container.slots.SlotRing;
 
 public class ContainerJewelryModifier extends Container
 {    

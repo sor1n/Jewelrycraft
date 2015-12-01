@@ -1,17 +1,14 @@
 package darkknight.jewelrycraft.item.render;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.common.Loader;
 import darkknight.jewelrycraft.model.ModelBracelet;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 public class BraceletRender extends TileEntitySpecialRenderer
 {

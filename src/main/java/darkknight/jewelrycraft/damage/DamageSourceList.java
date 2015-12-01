@@ -1,7 +1,7 @@
 package darkknight.jewelrycraft.damage;
 
-import net.minecraft.util.DamageSource;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import net.minecraft.util.DamageSource;
 
 /**
  * @author Sorin

@@ -1,27 +1,9 @@
 package darkknight.jewelrycraft.events;
 
-import java.nio.FloatBuffer;
 import java.util.Iterator;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.Vec3;
-import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.event.RenderPlayerEvent;
-
-import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.item.render.BraceletRender;
@@ -30,6 +12,13 @@ import darkknight.jewelrycraft.item.render.NecklaceRender;
 import darkknight.jewelrycraft.item.render.RingRender;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 
 public class PlayerRenderHandler {
 	EarringsRender					earrings	= new EarringsRender();
@@ -42,7 +31,6 @@ public class PlayerRenderHandler {
 	@SubscribeEvent
 	public void renderScreen(RenderPlayerEvent.Specials.Post event) {
 		GL11.glPushMatrix();
-		ModelBiped main = event.renderer.modelBipedMain;
 		ModelRenderer rightArm = event.renderer.modelBipedMain.bipedRightArm;
 		ModelRenderer leftArm = event.renderer.modelBipedMain.bipedLeftArm;
 		ModelRenderer head = event.renderer.modelBipedMain.bipedHead;

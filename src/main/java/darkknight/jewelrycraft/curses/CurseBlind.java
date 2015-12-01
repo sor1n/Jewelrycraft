@@ -1,7 +1,6 @@
 package darkknight.jewelrycraft.curses;
 
 import java.util.Random;
-
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.Variables;

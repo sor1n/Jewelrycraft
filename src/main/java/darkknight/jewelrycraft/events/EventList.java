@@ -3,13 +3,11 @@
  */
 package darkknight.jewelrycraft.events;
 
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.gui.GuiHandler;
@@ -19,6 +17,7 @@ import darkknight.jewelrycraft.effects.EffectsList;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.worldGen.Generation;
+import net.minecraftforge.common.MinecraftForge;
 
 public class EventList
 {

@@ -32,17 +32,11 @@ import darkknight.jewelrycraft.potions.PotionList;
 import darkknight.jewelrycraft.proxy.CommonProxy;
 import darkknight.jewelrycraft.recipes.CraftingRecipes;
 import darkknight.jewelrycraft.thirdparty.ThirdPartyManager;
-import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.Variables;
 import darkknight.jewelrycraft.worldGen.ChestGeneration;
 import darkknight.jewelrycraft.worldGen.village.VillageHandler;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
 
 @Mod (modid = Variables.MODID, name = Variables.MODNAME, version = Variables.VERSION, guiFactory = Variables.CONFIG_GUI, acceptedMinecraftVersions = "[1.7.10,1.8)")
 public class JewelrycraftMod

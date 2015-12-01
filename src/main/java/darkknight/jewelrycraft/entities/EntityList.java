@@ -1,12 +1,11 @@
 package darkknight.jewelrycraft.entities;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.item.ItemSpawnEgg;
-import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 
 public class EntityList
 {

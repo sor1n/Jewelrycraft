@@ -1,7 +1,6 @@
 package darkknight.jewelrycraft.random;
 
 import java.util.Random;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 

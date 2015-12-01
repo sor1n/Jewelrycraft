@@ -3,7 +3,6 @@
  */
 package darkknight.jewelrycraft.tileentity;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

@@ -1,11 +1,11 @@
 package darkknight.jewelrycraft.tileentity.renders;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.model.ModelHandPedestal;
 import darkknight.jewelrycraft.tileentity.TileEntityHandPedestal;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Paul Fulham (pau101)

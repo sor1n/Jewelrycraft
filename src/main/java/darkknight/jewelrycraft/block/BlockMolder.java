@@ -1,6 +1,10 @@
 package darkknight.jewelrycraft.block;
 
 import java.util.Random;
+import darkknight.jewelrycraft.config.ConfigHandler;
+import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.tileentity.TileEntityMolder;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -16,56 +20,29 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.tileentity.TileEntityMolder;
-import darkknight.jewelrycraft.util.Variables;
 
 public class BlockMolder extends BlockContainer
 {
     Random rand = new Random();
     
-    /**
-     * @param par2Material
-     */
     protected BlockMolder(Material par2Material)
     {
         super(par2Material);
         setBlockBounds(0.1F, 0F, 0.1F, 0.9F, 0.2F, 0.9F);
     }
     
-    /**
-     * @param world
-     * @param var2
-     * @return
-     */
     @Override
     public TileEntity createNewTileEntity(World world, int var2)
     {
         return new TileEntityMolder();
     }
     
-    /**
-     * @return
-     */
     @Override
     public boolean renderAsNormalBlock()
     {
         return false;
     }
     
-    /**
-     * @param world
-     * @param i
-     * @param j
-     * @param k
-     * @param entityPlayer
-     * @param par6
-     * @param par7
-     * @param par8
-     * @param par9
-     * @return
-     */
     @Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
     {
@@ -89,13 +66,6 @@ public class BlockMolder extends BlockContainer
         return true;
     }
     
-    /**
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     * @param stack
-     */
     public void dropItem(World world, double x, double y, double z, ItemStack stack)
     {
         EntityItem entityitem = new EntityItem(world, x + 0.5D, y + 0.5D, z + 0.5D, stack);
@@ -105,14 +75,6 @@ public class BlockMolder extends BlockContainer
         world.spawnEntityInWorld(entityitem);
     }
     
-    /**
-     * @param world
-     * @param i
-     * @param j
-     * @param k
-     * @param par5
-     * @param par6
-     */
     @Override
     public void breakBlock(World world, int i, int j, int k, Block par5, int par6)
     {
@@ -125,14 +87,6 @@ public class BlockMolder extends BlockContainer
         super.breakBlock(world, i, j, k, par5, par6);
     }
     
-    /**
-     * @param world
-     * @param i
-     * @param j
-     * @param k
-     * @param entityLiving
-     * @param par6ItemStack
-     */
     @Override
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityLiving, ItemStack par6ItemStack)
     {
@@ -140,13 +94,6 @@ public class BlockMolder extends BlockContainer
         world.setBlockMetadataWithNotify(i, j, k, rotation, 2);
     }
     
-    /**
-     * @param world
-     * @param i
-     * @param j
-     * @param k
-     * @param player
-     */
     @Override
     public void onBlockClicked(World world, int i, int j, int k, EntityPlayer player)
     {
@@ -163,44 +110,27 @@ public class BlockMolder extends BlockContainer
         }
     }
     
-    /**
-     * @param iblockaccess
-     * @param i
-     * @param j
-     * @param k
-     * @param l
-     * @return
-     */
     @Override
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         return false;
     }
     
-    /**
-     * @return
-     */
     @Override
     public boolean isOpaqueCube()
     {
         return false;
     }
     
-    /**
-     * @return
-     */
     @Override
     public int getRenderType()
     {
         return -1;
     }
     
-    /**
-     * @param icon
-     */
     @Override
     public void registerBlockIcons(IIconRegister icon)
     {
-        blockIcon = icon.registerIcon(Variables.MODID + ":molder");
+        blockIcon = icon.registerIcon("minecraft:cobblestone");
     }
 }

@@ -1,7 +1,6 @@
 package darkknight.jewelrycraft.thirdparty;
 
 import java.util.List;
-
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.tileentity.TileEntityMoltenMetal;
 import darkknight.jewelrycraft.util.JewelryNBT;

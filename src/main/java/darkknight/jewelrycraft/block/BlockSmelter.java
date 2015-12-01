@@ -5,7 +5,6 @@ import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.item.ItemMoltenMetalBucket;
 import darkknight.jewelrycraft.tileentity.TileEntityMolder;
-import darkknight.jewelrycraft.tileentity.TileEntityMoltenMetal;
 import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
@@ -21,7 +20,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
@@ -208,9 +206,10 @@ public class BlockSmelter extends BlockContainer {
 	public int getRenderType() {
 		return -1;
 	}
-
-	@Override
-	public void registerBlockIcons(IIconRegister icon) {
-		blockIcon = icon.registerIcon(Variables.MODID + ":smelter");
-	}
+    
+    @Override
+    public void registerBlockIcons(IIconRegister icon)
+    {
+        blockIcon = icon.registerIcon("minecraft:iron_block");
+    }
 }

@@ -1,9 +1,16 @@
 package darkknight.jewelrycraft.tileentity;
 
 import java.util.ArrayList;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import darkknight.jewelrycraft.block.BlockHandPedestal;
+import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.config.ConfigHandler;
+import darkknight.jewelrycraft.model.ModelShadowEye;
+import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -17,16 +24,6 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import darkknight.jewelrycraft.block.BlockHandPedestal;
-import darkknight.jewelrycraft.block.BlockList;
-import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.model.ModelShadowEye;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
-import darkknight.jewelrycraft.util.PlayerUtils;
-import darkknight.jewelrycraft.util.Variables;
 
 public class TileEntityShadowEye extends TileEntity
 {

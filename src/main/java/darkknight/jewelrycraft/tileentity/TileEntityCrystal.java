@@ -3,7 +3,6 @@
  */
 package darkknight.jewelrycraft.tileentity;
 
-import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import net.minecraft.tileentity.TileEntity;
 

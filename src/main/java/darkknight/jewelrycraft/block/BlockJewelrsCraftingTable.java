@@ -1,6 +1,10 @@
 package darkknight.jewelrycraft.block;
 
 import java.util.Random;
+import darkknight.jewelrycraft.config.ConfigHandler;
+import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -8,7 +12,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
@@ -16,10 +19,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
-import darkknight.jewelrycraft.util.Variables;
 
 public class BlockJewelrsCraftingTable extends BlockContainer {
 	Random rand = new Random();
@@ -111,9 +110,10 @@ public class BlockJewelrsCraftingTable extends BlockContainer {
 	public int getRenderType() {
 		return -1;
 	}
-
-	@Override
-	public void registerBlockIcons(IIconRegister icon) {
-		blockIcon = icon.registerIcon(Variables.MODID + ":jewelrsCraftingTable");
-	}
+	
+    @Override
+    public void registerBlockIcons(IIconRegister icon)
+    {
+        blockIcon = icon.registerIcon("minecraft:planks_spruce");
+    }
 }

@@ -4,12 +4,11 @@
 package darkknight.jewelrycraft.worldGen;
 
 import java.util.Random;
+import darkknight.jewelrycraft.block.BlockList;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import darkknight.jewelrycraft.block.BlockList;
 
 /**
  * @author Sorin
@@ -18,7 +17,6 @@ public class WorldGenStructure4 extends WorldGenStructure
 {
     public boolean generate(World world, BiomeGenBase biome, Random rand, int x, int y, int z)
     {
-        Block slab = Blocks.stone_slab;
         Block stair = Blocks.stone_brick_stairs;
         Block block = Blocks.stonebrick;
         int metadata = 0, slabMeta = 5;        
@@ -59,5 +57,10 @@ public class WorldGenStructure4 extends WorldGenStructure
     public boolean generate(World world, Random rand, int x, int y, int z)
     {
         return generate(world, BiomeGenBase.plains, rand, x, y, z);
+    }
+    
+    public int structureNo()
+    {
+        return 4;
     }
 }

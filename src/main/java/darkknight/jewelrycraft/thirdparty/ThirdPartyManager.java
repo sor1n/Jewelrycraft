@@ -4,18 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.logging.log4j.Level;
-
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.network.IGuiHandler;
+import darkknight.jewelrycraft.JewelrycraftMod;
+import darkknight.jewelrycraft.config.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.network.IGuiHandler;
-import darkknight.jewelrycraft.JewelrycraftMod;
-import darkknight.jewelrycraft.config.ConfigHandler;
 
 /** 
  * @author MineMarteen from Pneumaticraft

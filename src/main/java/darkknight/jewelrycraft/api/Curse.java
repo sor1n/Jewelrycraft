@@ -245,4 +245,12 @@ public abstract class Curse
     {
         return 10;
     }
+    
+    /*
+     * This stat is used to determine the chance of certain actions happening
+     */
+    public int luck()
+    {
+        return 0;
+    }
 }

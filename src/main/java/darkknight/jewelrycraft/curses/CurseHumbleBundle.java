@@ -4,19 +4,17 @@
 package darkknight.jewelrycraft.curses;
 
 import java.util.ArrayList;
-
+import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.config.ConfigHandler;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
-import darkknight.jewelrycraft.api.Curse;
-import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.util.Variables;
 
 /**
  * @author Sorin

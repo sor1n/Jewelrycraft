@@ -3,11 +3,7 @@
  */
 package darkknight.jewelrycraft.network;
 
-import io.netty.buffer.ByteBuf;
 import java.util.Iterator;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -15,6 +11,10 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import darkknight.jewelrycraft.events.PlayerRenderHandler;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 
 /**
  * @author Sorin
@@ -58,7 +58,6 @@ public class PacketSendServerPlayersInfo implements IMessage, IMessageHandler<Pa
     public void toBytes(ByteBuf buf)
     {
         Iterator<EntityPlayer> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList.iterator();
-        String infamyPlayers = "";
         NBTTagCompound nbt = new NBTTagCompound();
         while (players.hasNext())
         {

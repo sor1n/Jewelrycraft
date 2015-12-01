@@ -26,7 +26,6 @@ public class ItemList
     public static Item structureGen;
     public static Item spawnEgg;
     public static Item testItem;
-    private static boolean isInitialized = false;
     
     /**
      * @param e

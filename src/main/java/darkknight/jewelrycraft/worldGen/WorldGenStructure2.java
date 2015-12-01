@@ -19,7 +19,7 @@ public class WorldGenStructure2 extends WorldGenStructure {
 	public boolean generate(World world, BiomeGenBase biome, Random rand, int x, int y, int z) {
 		Block block = Blocks.stonebrick;
 		Block stair = Blocks.stone_brick_stairs;
-		int metadata = 0, slabMeta = 5;
+		int metadata = 0;
 		if (biome == BiomeGenBase.desert || biome == BiomeGenBase.desertHills) {
 			block = Blocks.sandstone;
 			stair = Blocks.sandstone_stairs;
@@ -52,4 +52,14 @@ public class WorldGenStructure2 extends WorldGenStructure {
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		return generate(world, BiomeGenBase.plains, rand, x, y, z);
 	}
+	
+    public boolean isUnderground()
+    {
+        return true;
+    }
+    
+    public int structureNo()
+    {
+        return 2;
+    }
 }

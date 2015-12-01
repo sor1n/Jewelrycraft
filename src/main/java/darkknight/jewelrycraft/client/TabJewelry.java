@@ -1,9 +1,9 @@
 package darkknight.jewelrycraft.client;
 
-import net.minecraft.item.ItemStack;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.network.PacketKeyPressEvent;
+import net.minecraft.item.ItemStack;
 
 public class TabJewelry extends AbstractTab
 {

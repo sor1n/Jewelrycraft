@@ -1,5 +1,7 @@
 package darkknight.jewelrycraft.model;
 
+import com.pau101.util.CubicBezier;
+import darkknight.jewelrycraft.tileentity.TileEntityHandPedestal;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.item.Item;
@@ -7,8 +9,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import com.pau101.util.CubicBezier;
-import darkknight.jewelrycraft.tileentity.TileEntityHandPedestal;
 
 /**
  * @author Paul Fulham (pau101)

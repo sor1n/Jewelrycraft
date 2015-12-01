@@ -1,13 +1,13 @@
 package darkknight.jewelrycraft.item.render;
 
+import org.lwjgl.opengl.GL11;
+import darkknight.jewelrycraft.model.ModelRing;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-import darkknight.jewelrycraft.model.ModelRing;
-import darkknight.jewelrycraft.util.Variables;
 
 public class RingRender extends TileEntitySpecialRenderer
 {

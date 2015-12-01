@@ -1,5 +1,12 @@
 package darkknight.jewelrycraft.tileentity.renders;
 
+import org.lwjgl.opengl.GL11;
+import darkknight.jewelrycraft.JewelrycraftMod;
+import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.model.ModelMolder;
+import darkknight.jewelrycraft.tileentity.TileEntityMolder;
+import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -15,13 +22,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import org.lwjgl.opengl.GL11;
-import darkknight.jewelrycraft.JewelrycraftMod;
-import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.model.ModelMolder;
-import darkknight.jewelrycraft.tileentity.TileEntityMolder;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.Variables;
 
 public class TileEntityMolderRender extends TileEntitySpecialRenderer
 {

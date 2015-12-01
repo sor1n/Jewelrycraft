@@ -4,31 +4,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import darkknight.jewelrycraft.JewelrycraftMod;
+import darkknight.jewelrycraft.client.gui.container.ContainerJewelryModifier;
+import darkknight.jewelrycraft.network.PacketRequestSetSlot;
+import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import darkknight.jewelrycraft.JewelrycraftMod;
-import darkknight.jewelrycraft.client.gui.container.ContainerJewelryModifier;
-import darkknight.jewelrycraft.network.PacketRequestSetSlot;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 public class GuiJewelryModifier extends GuiContainer {
 	private ResourceLocation							texture;
-	private GuiButton									addItems;
 	private GuiTextField								searchField, pages;
-	private boolean										clicked;
 	private int											page				= 1, maxPages = 1, selectedX = 0, selectedY = 0, selectedPage = 0, enabled = 0;
 	private ItemStack									selectedItem;
 	private ArrayList<ItemStack>						selectedItems		= new ArrayList<ItemStack>();

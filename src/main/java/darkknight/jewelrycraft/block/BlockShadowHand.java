@@ -1,5 +1,6 @@
 package darkknight.jewelrycraft.block;
 
+import darkknight.jewelrycraft.tileentity.TileEntityShadowHand;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -11,7 +12,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import darkknight.jewelrycraft.tileentity.TileEntityShadowHand;
 
 public class BlockShadowHand extends BlockContainer
 {

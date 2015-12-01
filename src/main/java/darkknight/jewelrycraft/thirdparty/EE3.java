@@ -1,6 +1,5 @@
 package darkknight.jewelrycraft.thirdparty;
 
-import net.minecraft.item.ItemStack;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.reference.Names;
@@ -10,6 +9,7 @@ import darkknight.jewelrycraft.item.ItemClayMolds;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.item.ItemMolds;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import net.minecraft.item.ItemStack;
 
 public class EE3 implements IThirdParty
 {

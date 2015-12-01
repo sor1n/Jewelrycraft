@@ -1,21 +1,16 @@
 package darkknight.jewelrycraft.block;
 
-import java.util.ArrayList;
 import java.util.Random;
-import net.minecraft.block.Block;
+import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
-import darkknight.jewelrycraft.tileentity.TileEntityMolder;
 
 public class BlockMidasTouch extends BlockContainer
 {

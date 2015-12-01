@@ -1,5 +1,9 @@
 package darkknight.jewelrycraft.tileentity.renders;
 
+import org.lwjgl.opengl.GL11;
+import darkknight.jewelrycraft.model.ModelJewlersCraftingBench;
+import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -11,10 +15,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import org.lwjgl.opengl.GL11;
-import darkknight.jewelrycraft.model.ModelJewlersCraftingBench;
-import darkknight.jewelrycraft.tileentity.TileEntityJewelrsCraftingTable;
-import darkknight.jewelrycraft.util.Variables;
 
 public class TileEntityJewelrsCraftingTableRender extends TileEntitySpecialRenderer
 {

@@ -4,8 +4,6 @@ import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 

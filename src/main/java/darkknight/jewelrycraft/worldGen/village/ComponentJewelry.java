@@ -2,6 +2,16 @@ package darkknight.jewelrycraft.worldGen.village;
 
 import java.util.List;
 import java.util.Random;
+import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.config.ConfigHandler;
+import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.item.ItemMolds;
+import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
+import darkknight.jewelrycraft.tileentity.TileEntityMolder;
+import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
+import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,16 +25,6 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
-import darkknight.jewelrycraft.block.BlockList;
-import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.item.ItemMolds;
-import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
-import darkknight.jewelrycraft.tileentity.TileEntityMolder;
-import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
-import darkknight.jewelrycraft.util.Variables;
 
 public class ComponentJewelry extends StructureVillagePieces.House1 {
 	private int	averageGroundLevel	= -1;

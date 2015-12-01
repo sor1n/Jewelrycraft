@@ -1,15 +1,16 @@
 package darkknight.jewelrycraft.client;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.*;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import darkknight.jewelrycraft.util.Variables;
 
 /**
  * @author TinkersCOnstruct

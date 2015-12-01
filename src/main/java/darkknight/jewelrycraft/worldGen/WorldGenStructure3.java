@@ -9,7 +9,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.DungeonHooks;
 
 /**
@@ -64,5 +63,15 @@ public class WorldGenStructure3 extends WorldGenStructure
     public boolean generate(World world, Random rand, int x, int y, int z)
     {
         return generate(world, BiomeGenBase.plains, rand, x, y, z);
+    }
+    
+    public boolean isUnderground()
+    {
+        return true;
+    }
+    
+    public int structureNo()
+    {
+        return 3;
     }
 }

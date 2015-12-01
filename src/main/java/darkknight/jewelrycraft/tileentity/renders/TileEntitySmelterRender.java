@@ -1,6 +1,12 @@
 package darkknight.jewelrycraft.tileentity.renders;
 
-import net.minecraft.block.Block;
+import org.lwjgl.opengl.GL11;
+import darkknight.jewelrycraft.JewelrycraftMod;
+import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.model.ModelSmelter;
+import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
+import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -9,17 +15,9 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-import darkknight.jewelrycraft.JewelrycraftMod;
-import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.model.ModelSmelter;
-import darkknight.jewelrycraft.tileentity.TileEntitySmelter;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.Variables;
 
 public class TileEntitySmelterRender extends TileEntitySpecialRenderer
 {

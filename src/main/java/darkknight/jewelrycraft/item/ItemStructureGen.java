@@ -1,20 +1,13 @@
 package darkknight.jewelrycraft.item;
 
+import java.util.List;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
-import darkknight.jewelrycraft.util.Variables;
 
 public class ItemStructureGen extends Item
 {

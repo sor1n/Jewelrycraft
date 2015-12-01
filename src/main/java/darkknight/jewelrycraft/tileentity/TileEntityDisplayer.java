@@ -103,7 +103,7 @@ public class TileEntityDisplayer extends TileEntity
         if (rotAngle < 360F) rotAngle += 3F;
         if (rotAngle >= 360F) rotAngle = 0F;
         timer++;
-        if (timer >= 20){
+        if (timer >= 40){
             infoIndex++;
             timer = 0;
         }

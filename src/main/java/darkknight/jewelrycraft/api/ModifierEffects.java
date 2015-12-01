@@ -42,6 +42,7 @@ public class ModifierEffects
     
     /**
      * This runs every tick
+     * 
      * @param item The ItemStack representing the jewelry that runs the effect
      * @param player The player wearing the jewelry wearing a jewelry with this modifier on it
      * @param jewelry The actual jewelry item (used by me to determine the type of jewelry so I don't have to call item.getItem() blah blah blah)
@@ -51,6 +52,7 @@ public class ModifierEffects
     
     /**
      * This runs when an entity is attacked. This event can be canceled.
+     * 
      * @param item The ItemStack representing the jewelry that runs the effect
      * @param player The player wearing the jewelry wearing a jewelry with this modifier on it
      * @param target The attacked entity
@@ -65,6 +67,7 @@ public class ModifierEffects
     
     /**
      * This runs when a player gets damaged. This event can be canceled.
+     * 
      * @param item The ItemStack representing the jewelry that runs the effect
      * @param player The attacked player wearing a jewelry with this modifier on it
      * @param source The source of the damage
@@ -78,8 +81,8 @@ public class ModifierEffects
     }
     
     /**
-     * This is the same as onEntityAttackedCacellable, but this can not be canceled.
-     * I recommend using this over onEntityAttackedCacellable, as it is more reliable.
+     * This is the same as onEntityAttackedCacellable, but this can not be canceled. I recommend using this over onEntityAttackedCacellable, as it is more reliable.
+     * 
      * @param item The ItemStack representing the jewelry that runs the effect
      * @param player The player wearing the jewelry wearing a jewelry with this modifier on it
      * @param target The attacked entity
@@ -90,8 +93,8 @@ public class ModifierEffects
     {}
     
     /**
-     * This is just like onPlayerAttackedCacellable, only that this can not be canceled.
-     * I recommend using this over onPlayerAttackedCacellable, as it is more reliable.
+     * This is just like onPlayerAttackedCacellable, only that this can not be canceled. I recommend using this over onPlayerAttackedCacellable, as it is more reliable.
+     * 
      * @param item The ItemStack representing the jewelry that runs the effect
      * @param player The attacked player wearing a jewelry with this modifier on it
      * @param source The source of the damage
@@ -103,6 +106,7 @@ public class ModifierEffects
     
     /**
      * This runs when the player dies
+     * 
      * @param item The ItemStack representing the jewelry that runs the effect
      * @param player The player that died wearing a jewelry with this modifier on it
      * @param source The source of the killing blow
@@ -113,10 +117,29 @@ public class ModifierEffects
     
     /**
      * This runs when the player respawns
+     * 
      * @param item The ItemStack representing the jewelry that runs the effect
      * @param event The PlayerEvent that runs when the player respawns (this is also called when a player moves between dimensions)
      * @param jewelry The actual jewelry item (aka item.getItem(), almost)
      */
     public void onPlayerRespawn(ItemStack item, PlayerEvent.Clone event, Item jewelry)
+    {}
+    
+    /**
+     * This runs when the item containing this modifier is equipped
+     * 
+     * @param item The ItemStack representing the jewelry that runs the effect
+     * @param jewelry The actual jewelry item (aka item.getItem(), almost)
+     */
+    public void onJewelryEquipped(ItemStack item, Item jewelry)
+    {}
+    
+    /**
+     * This runs when the item containing this modifier is unquipped
+     * 
+     * @param item The ItemStack representing the jewelry that runs the effect
+     * @param jewelry The actual jewelry item (aka item.getItem(), almost)
+     */
+    public void onJewelryUnequipped(ItemStack item, Item jewelry)
     {}
 }

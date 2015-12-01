@@ -1,13 +1,14 @@
 package darkknight.jewelrycraft.client;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-
 import darkknight.jewelrycraft.client.gui.GuiGuide;
 import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
@@ -143,24 +144,11 @@ public class Page
     }
     
     public static void drawText(GuiGuide gui, String text, int x, int y)
-    {
-        String[] s = text.split(" ");
-        String displayText = "";
-        float scale = 0.75F;
-        ArrayList<String> textLines = new ArrayList<String>();
-        for(String element: s)
-            if ((displayText + element + " ").length() <= 31) displayText += element + " ";
-            else{
-                textLines.add(displayText.trim());
-                displayText = element + " ";
-            }
-        textLines.add(displayText.trim());
-        for(int i = 0; i < textLines.size(); i++)
-        {
-        	GL11.glPushMatrix();
-        	GL11.glScalef(scale, scale, 0f);
-            gui.getFont().drawString(textLines.get(i), (int)(x/scale), (int)((y + 32 + i * 9)/scale), 0);
-            GL11.glPopMatrix();
-        }
+    {        
+//        String displayText = "";
+//        int i = 0;
+        gui.getFont().drawSplitString(text, x, y + 32, 118, 0);
+//        for(Object element: gui.getFont().listFormattedStringToWidth(text, 158))
+//            gui.getFont().drawString((String)element, x, y + 32 + (i++)*9, 0);
     }
 }

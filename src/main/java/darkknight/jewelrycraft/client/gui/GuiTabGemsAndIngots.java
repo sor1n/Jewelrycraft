@@ -1,12 +1,12 @@
 package darkknight.jewelrycraft.client.gui;
 
+import org.lwjgl.opengl.GL11;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
-import org.lwjgl.opengl.GL11;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
-import darkknight.jewelrycraft.util.Variables;
 
 public class GuiTabGemsAndIngots extends GuiTab
 {

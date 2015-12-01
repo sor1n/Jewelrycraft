@@ -1,22 +1,19 @@
 package darkknight.jewelrycraft.effects;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import darkknight.jewelrycraft.api.ModifierEffects;
 import darkknight.jewelrycraft.item.ItemBracelet;
 import darkknight.jewelrycraft.item.ItemEarrings;
 import darkknight.jewelrycraft.item.ItemNecklace;
 import darkknight.jewelrycraft.item.ItemRing;
 import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.PlayerUtils;
-import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 
 public class EffectBlazePowder extends ModifierEffects {
 	public EffectBlazePowder() {
@@ -55,7 +52,6 @@ public class EffectBlazePowder extends ModifierEffects {
 	}
 
 	public boolean onPlayerAttackedCacellable(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount) {
-		NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
 		if (jewelry instanceof ItemEarrings && rand.nextInt(4) == 0 && source == DamageSource.lava || source == DamageSource.inFire || source == DamageSource.onFire) {
 			// Positive for earrings
 			int stackSize = JewelryNBT.modifierSize(item, modifier);

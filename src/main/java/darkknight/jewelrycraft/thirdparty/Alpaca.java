@@ -1,7 +1,5 @@
 package darkknight.jewelrycraft.thirdparty;
 
-import darkknight.jewelrycraft.JewelrycraftMod;
-
 /**
  * @author Sorin
  */

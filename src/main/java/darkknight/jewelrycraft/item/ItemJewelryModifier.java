@@ -1,14 +1,12 @@
 package darkknight.jewelrycraft.item;
 
 import java.util.List;
-
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
+import darkknight.jewelrycraft.JewelrycraftMod;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-import darkknight.jewelrycraft.JewelrycraftMod;
 
 public class ItemJewelryModifier extends Item
 {

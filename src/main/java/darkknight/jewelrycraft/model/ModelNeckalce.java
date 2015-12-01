@@ -1,9 +1,9 @@
 package darkknight.jewelrycraft.model;
 
+import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import org.lwjgl.opengl.GL11;
 
 /**
  * ModelNeckalce - OnyxDarkKnight Created using Tabula 4.1.1
