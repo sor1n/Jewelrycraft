@@ -4,11 +4,11 @@
 package darkknight.jewelrycraft.worldGen.village;
 
 import java.io.IOException;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 
 public class VillageHandler
 {

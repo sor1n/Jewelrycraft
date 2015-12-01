@@ -2,10 +2,10 @@ package darkknight.jewelrycraft.worldGen.village;
 
 import java.util.List;
 import java.util.Random;
-import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
-import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import darkknight.jewelrycraft.config.ConfigHandler;
+import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
+import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 
 public class VillageJewelryHandler implements IVillageCreationHandler
 {

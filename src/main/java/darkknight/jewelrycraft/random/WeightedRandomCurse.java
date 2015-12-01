@@ -2,8 +2,6 @@ package darkknight.jewelrycraft.random;
 
 import java.util.Random;
 import darkknight.jewelrycraft.api.Curse;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 
 public class WeightedRandomCurse extends WeightedRandom.Item

@@ -1,10 +1,5 @@
 package darkknight.jewelrycraft.client.gui;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import darkknight.jewelrycraft.JewelrycraftMod;
@@ -15,6 +10,11 @@ import darkknight.jewelrycraft.client.gui.container.ContainerJewelryModifier;
 import darkknight.jewelrycraft.client.gui.container.ContainerJewelryTab;
 import darkknight.jewelrycraft.client.gui.container.ContainerRingChest;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 public class GuiHandler implements IGuiHandler
 {

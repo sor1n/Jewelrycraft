@@ -1,19 +1,15 @@
 package darkknight.jewelrycraft.events;
 
+import org.lwjgl.opengl.GL11;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-import org.lwjgl.opengl.GL11;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import darkknight.jewelrycraft.api.Curse;
-import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.util.Variables;
 
 public class ScreenHandler extends Gui {
 	private Minecraft				mc;

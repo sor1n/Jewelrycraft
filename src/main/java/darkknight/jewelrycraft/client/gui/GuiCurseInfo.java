@@ -2,32 +2,25 @@ package darkknight.jewelrycraft.client.gui;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.api.Curse;
-import darkknight.jewelrycraft.client.Page;
 import darkknight.jewelrycraft.client.TabCurses;
 import darkknight.jewelrycraft.client.TabRegistry;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.events.KeyBindings;
-import darkknight.jewelrycraft.network.PacketSendClientPlayerInfo;
 import darkknight.jewelrycraft.network.PacketSendServerPlayerInfo;
 import darkknight.jewelrycraft.network.PacketSendServerPlayersInfo;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import scala.swing.event.Key;
 
 public class GuiCurseInfo extends GuiContainer {
 	World world;
@@ -125,7 +118,6 @@ public class GuiCurseInfo extends GuiContainer {
 							GL11.glDisable(GL11.GL_BLEND);
 							GL11.glPopMatrix();
 						}
-						int halfDescrSize = fontRendererObj.getStringWidth(curse.getDescription()) / 2;
 						mc.renderEngine.bindTexture(new ResourceLocation(Variables.MODID, "textures/gui/" + curse.getTexturePack() + ".png"));
 						int tag = curse.getTextureID();
 						GL11.glPushMatrix();
@@ -170,7 +162,6 @@ public class GuiCurseInfo extends GuiContainer {
 						this.drawString(fontRendererObj, descr.get(i).toString(), (int) (guiLeft / 0.75F) + 12, (int) (guiTop / 0.75F) + 184 + i * 12 - (descr.size() > 1 ? 6 : 0), 0xffffff);
 					GL11.glPopMatrix();
 				}
-				int halfDescrSize = fontRendererObj.getStringWidth(curse.getDescription()) / 2;
 				mc.renderEngine.bindTexture(new ResourceLocation(Variables.MODID, "textures/gui/" + curse.getTexturePack() + ".png"));
 				int tag = curse.getTextureID();
 				GL11.glPushMatrix();

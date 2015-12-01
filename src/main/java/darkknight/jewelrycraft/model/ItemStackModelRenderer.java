@@ -1,5 +1,6 @@
 package darkknight.jewelrycraft.model;
 
+import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -9,7 +10,6 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 /**
  * @author Paul Fulham (pau101)

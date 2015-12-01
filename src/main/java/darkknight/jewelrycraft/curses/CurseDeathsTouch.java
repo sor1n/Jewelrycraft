@@ -1,22 +1,10 @@
 package darkknight.jewelrycraft.curses;
 
-import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.entities.EntityHalfHeart;
-import darkknight.jewelrycraft.entities.EntityHeart;
-import darkknight.jewelrycraft.network.PacketSendClientPlayerInfo;
-import darkknight.jewelrycraft.network.PacketSendServerPlayersInfo;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
-import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;

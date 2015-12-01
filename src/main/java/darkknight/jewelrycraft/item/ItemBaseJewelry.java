@@ -1,33 +1,7 @@
 package darkknight.jewelrycraft.item;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-
-import javax.imageio.ImageIO;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.JewelrycraftMod;
@@ -36,6 +10,14 @@ import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
 public abstract class ItemBaseJewelry extends Item
 {
@@ -162,5 +144,17 @@ public abstract class ItemBaseJewelry extends Item
     {
         for(ModifierEffects mod: ModifierEffects.getEffects())
             if (JewelryNBT.doesModifierExist(item, mod.getModifier())) mod.onPlayerRespawn(item, event, this);
+    }
+    
+    public void onJewelryEquipped(ItemStack item)
+    {
+        for(ModifierEffects mod: ModifierEffects.getEffects())
+            if (JewelryNBT.doesModifierExist(item, mod.getModifier())) mod.onJewelryEquipped(item, this);
+    }
+    
+    public void onJewelryUnequipped(ItemStack item)
+    {
+        for(ModifierEffects mod: ModifierEffects.getEffects())
+            if (JewelryNBT.doesModifierExist(item, mod.getModifier())) mod.onJewelryUnequipped(item, this);
     }
 }

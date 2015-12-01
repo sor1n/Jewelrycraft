@@ -12,7 +12,6 @@ import java.util.Map;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import darkknight.jewelrycraft.block.BlockMoltenMetal;
-import darkknight.jewelrycraft.tileentity.TileEntityMoltenMetal;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

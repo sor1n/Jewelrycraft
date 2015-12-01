@@ -1,13 +1,12 @@
 package darkknight.jewelrycraft.client.gui;
 
-import org.lwjgl.opengl.GL11;
+import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.client.Page;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
-import darkknight.jewelrycraft.block.BlockList;
-import darkknight.jewelrycraft.client.Page;
-import darkknight.jewelrycraft.util.Variables;
 
 public class GuiTabRitual extends GuiTab
 {

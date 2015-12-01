@@ -1,11 +1,11 @@
 package darkknight.jewelrycraft.particles;
 
+import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import org.lwjgl.opengl.GL11;
 
 public class EntityFlatShadowFX extends EntityFX
 {

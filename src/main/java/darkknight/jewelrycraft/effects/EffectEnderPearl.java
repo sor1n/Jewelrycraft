@@ -2,6 +2,11 @@ package darkknight.jewelrycraft.effects;
 
 import java.util.Iterator;
 import java.util.List;
+import darkknight.jewelrycraft.api.ModifierEffects;
+import darkknight.jewelrycraft.item.ItemBracelet;
+import darkknight.jewelrycraft.item.ItemEarrings;
+import darkknight.jewelrycraft.item.ItemNecklace;
+import darkknight.jewelrycraft.item.ItemRing;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -10,19 +15,10 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import darkknight.jewelrycraft.api.ModifierEffects;
-import darkknight.jewelrycraft.item.ItemBracelet;
-import darkknight.jewelrycraft.item.ItemEarrings;
-import darkknight.jewelrycraft.item.ItemNecklace;
-import darkknight.jewelrycraft.item.ItemRing;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.PlayerUtils;
-import darkknight.jewelrycraft.util.Variables;
 
 public class EffectEnderPearl extends ModifierEffects
 {
@@ -34,7 +30,6 @@ public class EffectEnderPearl extends ModifierEffects
     @Override
     public void action(ItemStack item, EntityPlayer player, Item jewelry)
     {
-        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         if (jewelry instanceof ItemEarrings){
             AxisAlignedBB axisalignedbb = player.boundingBox.expand(2.0D, 2.0D, 2.0D);
             List list = player.worldObj.getEntitiesWithinAABB(EntityArrow.class, axisalignedbb);
@@ -62,7 +57,6 @@ public class EffectEnderPearl extends ModifierEffects
     @Override
     public void onPlayerAttacked(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
     {
-        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         // Positive Necklace
         if (jewelry instanceof ItemNecklace && source.getEntity() != null) source.getEntity().attackEntityFrom(source, amount);
         // Positive bracelet
@@ -75,8 +69,6 @@ public class EffectEnderPearl extends ModifierEffects
     
     public void onEntityAttacked(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount)
     {
-        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
-        NBTTagCompound enemyData = target.getEntityData();
         if (jewelry instanceof ItemRing){
             // Negative ring
             if (target instanceof EntityEnderman) player.addPotionEffect(new PotionEffect(Potion.weakness.id, 400, 2, true));

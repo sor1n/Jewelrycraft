@@ -1,10 +1,8 @@
 package darkknight.jewelrycraft.client;
 
 import java.util.ArrayList;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-
 import darkknight.jewelrycraft.client.gui.GuiGuide;
 import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.client.Minecraft;

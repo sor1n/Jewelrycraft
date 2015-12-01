@@ -78,4 +78,14 @@ public class WorldGenStructure5 extends WorldGenStructure {
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		return generate(world, BiomeGenBase.plains, rand, x, y, z);
 	}
+	
+    public boolean isUnderground()
+    {
+        return true;
+    }
+    
+    public int structureNo()
+    {
+        return 5;
+    }
 }

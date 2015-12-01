@@ -3,12 +3,8 @@
  */
 package darkknight.jewelrycraft.potions;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 
 /**
  * @author Sorin

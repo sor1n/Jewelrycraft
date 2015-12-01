@@ -3,7 +3,6 @@
  */
 package darkknight.jewelrycraft.block;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
@@ -11,9 +10,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import darkknight.jewelrycraft.config.ConfigHandler;
 import darkknight.jewelrycraft.proxy.ClientProxy.BlockRenderIDs;
 import darkknight.jewelrycraft.tileentity.TileEntityCrystal;
-import darkknight.jewelrycraft.tileentity.TileEntityShadowEye;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;

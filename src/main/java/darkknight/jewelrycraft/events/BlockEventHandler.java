@@ -3,20 +3,19 @@
  */
 package darkknight.jewelrycraft.events;
 
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemPickaxe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
-import net.minecraftforge.event.world.BlockEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.block.BlockMidasTouch;
 import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraftforge.event.world.BlockEvent;
 
 /**
  * @author Sorin

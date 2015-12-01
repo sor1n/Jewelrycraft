@@ -1,15 +1,15 @@
 package darkknight.jewelrycraft.client;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import darkknight.jewelrycraft.item.ItemBracelet;
 import darkknight.jewelrycraft.item.ItemEarrings;
 import darkknight.jewelrycraft.item.ItemNecklace;
 import darkknight.jewelrycraft.item.ItemRing;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class JewelryInventory implements IInventory
 {

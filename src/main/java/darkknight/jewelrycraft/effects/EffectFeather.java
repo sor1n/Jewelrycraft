@@ -2,6 +2,15 @@ package darkknight.jewelrycraft.effects;
 
 import java.util.Iterator;
 import java.util.List;
+import darkknight.jewelrycraft.api.ModifierEffects;
+import darkknight.jewelrycraft.damage.DamageSourceList;
+import darkknight.jewelrycraft.item.ItemBracelet;
+import darkknight.jewelrycraft.item.ItemEarrings;
+import darkknight.jewelrycraft.item.ItemNecklace;
+import darkknight.jewelrycraft.item.ItemRing;
+import darkknight.jewelrycraft.potions.PotionList;
+import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,16 +26,6 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
-import darkknight.jewelrycraft.api.ModifierEffects;
-import darkknight.jewelrycraft.damage.DamageSourceList;
-import darkknight.jewelrycraft.item.ItemBracelet;
-import darkknight.jewelrycraft.item.ItemEarrings;
-import darkknight.jewelrycraft.item.ItemNecklace;
-import darkknight.jewelrycraft.item.ItemRing;
-import darkknight.jewelrycraft.potions.PotionList;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.PlayerUtils;
-import darkknight.jewelrycraft.util.Variables;
 
 public class EffectFeather extends ModifierEffects
 {
@@ -38,7 +37,6 @@ public class EffectFeather extends ModifierEffects
     @Override
     public void action(ItemStack item, EntityPlayer player, Item jewelry)
     {
-        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         // Positive earrings
         if (jewelry instanceof ItemEarrings){
             AxisAlignedBB axisalignedbb = player.boundingBox.expand(1.0D, 1.0D, 1.0D);
@@ -63,7 +61,6 @@ public class EffectFeather extends ModifierEffects
     @Override
     public boolean onEntityAttackedCacellable(ItemStack item, EntityPlayer player, Entity target, Item jewelry, float amount)
     {
-        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         NBTTagCompound enemyData = target.getEntityData();
         if (jewelry instanceof ItemRing && !player.worldObj.isRemote){
             if (enemyData.getInteger("reAttacked") == 0){
@@ -82,7 +79,6 @@ public class EffectFeather extends ModifierEffects
     @Override
     public boolean onPlayerAttackedCacellable(ItemStack item, EntityPlayer player, DamageSource source, Item jewelry, float amount)
     {
-        NBTTagCompound playerInfo = PlayerUtils.getModPlayerPersistTag(player, Variables.MODID);
         // Positive necklace
         if (jewelry instanceof ItemNecklace && rand.nextInt(3 + JewelryNBT.numberOfModifiers(item)) == 0 && source != DamageSourceList.weak && source != DamageSource.inFire && source != DamageSource.onFire && source != DamageSource.lava){
             player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.GRAY + StatCollector.translateToLocal("chatmessage." + Variables.MODID + ".effect.feather")));

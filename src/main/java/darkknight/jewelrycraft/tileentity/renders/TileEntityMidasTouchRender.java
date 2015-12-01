@@ -1,12 +1,12 @@
 package darkknight.jewelrycraft.tileentity.renders;
 
+import org.lwjgl.opengl.GL11;
+import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.tileentity.TileEntity;
-import org.lwjgl.opengl.GL11;
-import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
 
 public class TileEntityMidasTouchRender extends TileEntitySpecialRenderer
 {

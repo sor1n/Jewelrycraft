@@ -1,6 +1,7 @@
 package darkknight.jewelrycraft.block;
 
 import java.util.Random;
+import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -14,8 +15,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import darkknight.jewelrycraft.tileentity.TileEntityDisplayer;
-import darkknight.jewelrycraft.util.Variables;
 
 public class BlockDisplayer extends BlockContainer
 {
@@ -240,6 +239,6 @@ public class BlockDisplayer extends BlockContainer
     @Override
     public void registerBlockIcons(IIconRegister icon)
     {
-        blockIcon = icon.registerIcon(Variables.MODID + ":displayer");
+        blockIcon = icon.registerIcon("minecraft:emerald_block");
     }
 }

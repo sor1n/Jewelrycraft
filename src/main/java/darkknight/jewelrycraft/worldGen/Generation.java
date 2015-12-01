@@ -1,5 +1,6 @@
 package darkknight.jewelrycraft.worldGen;
 
+import java.lang.reflect.Field;
 import java.util.Random;
 import cpw.mods.fml.common.IWorldGenerator;
 import darkknight.jewelrycraft.block.BlockList;
@@ -43,12 +44,17 @@ public class Generation implements IWorldGenerator {
 			if (!world.getWorldInfo().getTerrainType().equals(WorldType.FLAT)) {
 				if (ConfigHandler.ORE_GEN) generateShadowOre(world, random, i, j);
 				if (ConfigHandler.CRYSTAL_GEN) generateCrystals(world, random, i, j);
-				if (ConfigHandler.STRUCTURES[0]) generateStructureOverground(STRUCTURE_1, world, random, i, j, 6, false, true);
-				if (ConfigHandler.STRUCTURES[1]) generateStructureUnderground(STRUCTURE_2, world, random, i, j, 5, false, true);
-				if (ConfigHandler.STRUCTURES[2]) generateStructureUnderground(STRUCTURE_3, world, random, i, j, 7, false, true);
-				if (ConfigHandler.STRUCTURES[3]) generateStructureOverground(STRUCTURE_4, world, random, i, j, 10, false, true);
-				if (ConfigHandler.STRUCTURES[4]) generateStructureUnderground(STRUCTURE_5, world, random, i, j, 6, false, true);
-				if (ConfigHandler.STRUCTURES[5]) generateStructureOverground(STRUCTURE_6, world, random, i, j, 10, false, true);
+		        try{
+		            for(Field f: this.getClass().getDeclaredFields()){
+		                Object obj = f.get(null);
+		                if (obj instanceof WorldGenStructure && ConfigHandler.STRUCTURES[((WorldGenStructure)obj).structureNo() - 1])
+		                    if(((WorldGenStructure)obj).isUnderground()) generateStructureUnderground((WorldGenStructure)obj, world, random, i, j, ConfigHandler.STRUCTURES_SPAWN_CHANCE[((WorldGenStructure)obj).structureNo()-1], false, true);
+		                    else generateStructureOverground((WorldGenStructure)obj, world, random, i, j, ConfigHandler.STRUCTURES_SPAWN_CHANCE[((WorldGenStructure)obj).structureNo()-1], false, true);
+		            }
+		        }
+		        catch(IllegalAccessException e){
+		            throw new RuntimeException(e);
+		        }
 			}
 		}
 	}

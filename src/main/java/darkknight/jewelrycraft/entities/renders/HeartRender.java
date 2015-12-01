@@ -2,15 +2,13 @@ package darkknight.jewelrycraft.entities.renders;
 
 import java.util.Random;
 import org.lwjgl.opengl.GL11;
-import net.minecraft.client.Minecraft;
+import darkknight.jewelrycraft.entities.EntityHeart;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import darkknight.jewelrycraft.entities.EntityHeart;
-import darkknight.jewelrycraft.util.Variables;
 
 /**
  * @author Sorin
@@ -33,8 +31,6 @@ public class HeartRender extends RenderLiving
             for(int i = 0; i < ((EntityHeart)entity).getQuantity() / 10f; i++){
                 float posX = rnd.nextFloat() * 0.2f * (rnd.nextBoolean()?1:-1);
                 float posY = rnd.nextFloat() * 0.2f * (rnd.nextBoolean()?1:-1);
-                float posZ = rnd.nextFloat() * 0.2f * (rnd.nextBoolean()?1:-1);
-                float rotX = rnd.nextFloat() * 35f * (rnd.nextBoolean()?1:-1);
                 float rotY = rnd.nextFloat() * 35f * (rnd.nextBoolean()?1:-1);
                 float rotZ = rnd.nextFloat() * 35f * (rnd.nextBoolean()?1:-1);
                 GL11.glTranslatef(-0.15F, 0.0F, 0.0F);

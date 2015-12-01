@@ -1,10 +1,10 @@
 package darkknight.jewelrycraft.client.gui;
 
+import org.lwjgl.opengl.GL11;
+import darkknight.jewelrycraft.client.gui.container.ContainerRingChest;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-import darkknight.jewelrycraft.client.gui.container.ContainerRingChest;
 
 public class GuiRingChest extends GuiContainer
 {

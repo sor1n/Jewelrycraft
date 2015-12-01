@@ -1,6 +1,12 @@
 package darkknight.jewelrycraft.worldGen.village;
 
 import java.util.Random;
+import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
+import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.item.ItemMolds;
+import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -8,12 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
-import darkknight.jewelrycraft.block.BlockList;
-import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.item.ItemMolds;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
 
 public class JCTrades implements IVillageTradeHandler
 {

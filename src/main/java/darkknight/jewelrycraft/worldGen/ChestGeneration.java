@@ -1,15 +1,15 @@
 package darkknight.jewelrycraft.worldGen;
 
 import java.util.Random;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.common.ChestGenHooks;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 
 /**
  * @author Sorin
@@ -24,7 +24,7 @@ public class ChestGeneration
         addItemToDifferentPlaces(new WeightedRandomChestContent(new ItemStack(ItemList.thiefGloves), 1, 1, 2), true, true, false, false, true);
         addItemToDifferentPlaces(new WeightedRandomChestContent(new ItemStack(ItemList.guide), 1, 1, 7), true, true, true, true, true, false, true, true);
         addVillageBlacksmithLoot(new WeightedRandomChestContent(new ItemStack(ItemList.shadowIngot), 1, 4, 5));
-        for(int i = 0; i < 16; i++) addItemToDifferentPlaces(new WeightedRandomChestContent(new ItemStack(BlockList.crystal, 1, i), 1, 4, 4), true, true, true, true);
+        for(int i = 0; i < 16 && i%3==0; i++) addItemToDifferentPlaces(new WeightedRandomChestContent(new ItemStack(BlockList.crystal, 1, i), 1, 3, 3), true, true, true, true);
         
         ItemStack special = new ItemStack(jewelry[random.nextInt(4)]);
         int randValue = random.nextInt(4);

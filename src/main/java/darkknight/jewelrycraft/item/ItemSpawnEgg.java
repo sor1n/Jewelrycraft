@@ -3,7 +3,10 @@ package darkknight.jewelrycraft.item;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import darkknight.jewelrycraft.entities.EntityHeart;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,10 +22,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import darkknight.jewelrycraft.entities.EntityHeart;
-import darkknight.jewelrycraft.util.Variables;
 
 /**
  * @author Betweenlands

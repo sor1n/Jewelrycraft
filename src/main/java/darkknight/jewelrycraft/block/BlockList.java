@@ -27,7 +27,6 @@ public class BlockList
     public static Block shadowOre, smelter, molder, displayer, jewelCraftingTable, shadowBlock, shadowEye, handPedestal, shadowHand, midasTouchBlock, crystal;
     public static BlockMoltenMetal moltenMetal;
     public static Fluid moltenMetalFluid;
-    private static boolean isInitialized = false;
     
     public static void preInit(FMLPreInitializationEvent e)
     {

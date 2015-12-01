@@ -1,7 +1,7 @@
 package darkknight.jewelrycraft.tileentity.renders;
 
-import net.minecraft.util.ResourceLocation;
 import darkknight.jewelrycraft.model.ModelHandPedestal;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Paul Fulham (pau101)

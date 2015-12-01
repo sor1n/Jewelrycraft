@@ -10,25 +10,13 @@ package darkknight.jewelrycraft.commands;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
-import darkknight.jewelrycraft.JewelrycraftMod;
-import darkknight.jewelrycraft.api.Curse;
-import darkknight.jewelrycraft.events.EntityEventHandler;
-import darkknight.jewelrycraft.network.PacketRequestPlayerInfo;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.JewelrycraftUtil;
-import darkknight.jewelrycraft.util.PlayerUtils;
 
 public class JewelrycraftCommands extends CommandBase
 {

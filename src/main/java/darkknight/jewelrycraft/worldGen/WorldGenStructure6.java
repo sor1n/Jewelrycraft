@@ -91,4 +91,9 @@ public class WorldGenStructure6 extends WorldGenStructure {
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		return generate(world, BiomeGenBase.plains, rand, x, y, z);
 	}
+    
+    public int structureNo()
+    {
+        return 6;
+    }
 }

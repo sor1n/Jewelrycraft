@@ -2,17 +2,17 @@ package darkknight.jewelrycraft.client.gui;
 
 import java.awt.Desktop;
 import java.net.URL;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.Page;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
 public class GuiTabItems extends GuiTab
 {
@@ -81,7 +81,7 @@ public class GuiTabItems extends GuiTab
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(ItemList.clayMolds, 1, 3), new ItemStack(Items.clay_ball), new ItemStack(Items.clay_ball), new ItemStack(Items.clay_ball), new ItemStack(Items.clay_ball), null, new ItemStack(Items.clay_ball), new ItemStack(Items.clay_ball), new ItemStack(Items.clay_ball), new ItemStack(Items.clay_ball));
                 break;
             case 8:
-                text = "To create a necklace you need a mold for it. However, this one can't be used. It is too soft. It needs to be hardened in order for it to be used.";
+                text = "To create earrings you need a mold for them. However, this one can't be used. It is too soft. It needs to be hardened in order for it to be used.";
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(ItemList.clayMolds, 1, 4), null, null, null, new ItemStack(Items.clay_ball), null, new ItemStack(Items.clay_ball), null, null, null);
                 break;
             case 9:
@@ -121,7 +121,7 @@ public class GuiTabItems extends GuiTab
                 Page.addImageTextPage(gui, gui.getLeft() + xPos, gui.getTop() - 5, new ItemStack(ItemList.jewelryModifier), text, 40f, 0, 0, true, 45, 10, false);
                 break;
             case 14:
-                text = "who want to test the mod and can't wait for the normal processes to finish (Smelter, Jewelers Table, Ritual).";
+                text = "who want to test the mod and can't wait for the normal processes to finish (Smelter, Jeweler's Table, Ritual).";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 15:
@@ -139,7 +139,7 @@ public class GuiTabItems extends GuiTab
     @Override
     public int getMaxPages()
     {
-        return 16;
+        return 15;
     }
     
     /**

@@ -1,13 +1,20 @@
 package darkknight.jewelrycraft.curses;
 
 import java.util.Random;
-
+import darkknight.jewelrycraft.api.Curse;
+import darkknight.jewelrycraft.block.BlockList;
+import darkknight.jewelrycraft.config.ConfigHandler;
+import darkknight.jewelrycraft.entities.EntityHalfHeart;
+import darkknight.jewelrycraft.entities.EntityHeart;
+import darkknight.jewelrycraft.item.ItemList;
+import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
+import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCompressed;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.BlockPressurePlateWeighted;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -24,15 +31,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import darkknight.jewelrycraft.api.Curse;
-import darkknight.jewelrycraft.block.BlockList;
-import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.entities.EntityHalfHeart;
-import darkknight.jewelrycraft.entities.EntityHeart;
-import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.tileentity.TileEntityMidasTouch;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.Variables;
 
 public class CurseMidasTouch extends Curse
 {

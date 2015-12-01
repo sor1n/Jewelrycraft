@@ -1,11 +1,11 @@
 package darkknight.jewelrycraft.network;
 
-import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
+import io.netty.buffer.ByteBuf;
 
 public class PacketRequestPlayerInfo implements IMessage, IMessageHandler<PacketRequestPlayerInfo, IMessage>
 {

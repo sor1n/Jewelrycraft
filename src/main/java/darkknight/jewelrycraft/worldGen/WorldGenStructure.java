@@ -22,4 +22,14 @@ public class WorldGenStructure extends WorldGenerator
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		return false;
 	}
+	
+	public boolean isUnderground()
+	{
+	    return false;
+	}
+	
+	public int structureNo()
+	{
+	    return -1;
+	}
 }

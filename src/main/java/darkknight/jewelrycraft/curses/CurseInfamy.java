@@ -1,26 +1,9 @@
 package darkknight.jewelrycraft.curses;
 
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import darkknight.jewelrycraft.JewelrycraftMod;
 import darkknight.jewelrycraft.api.Curse;
 import darkknight.jewelrycraft.config.ConfigHandler;
-import darkknight.jewelrycraft.damage.DamageSourceList;
 import darkknight.jewelrycraft.entities.EntityHalfHeart;
 import darkknight.jewelrycraft.entities.EntityHeart;
 import darkknight.jewelrycraft.entities.renders.RenderHelper;
@@ -30,6 +13,17 @@ import darkknight.jewelrycraft.network.PacketSendServerPlayersInfo;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.PlayerUtils;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 public class CurseInfamy extends Curse
 {

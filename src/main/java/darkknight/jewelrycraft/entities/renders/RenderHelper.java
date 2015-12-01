@@ -1,9 +1,8 @@
 package darkknight.jewelrycraft.entities.renders;
 
+import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import org.lwjgl.opengl.GL11;
-import cpw.mods.fml.common.Loader;
 
 public class RenderHelper
 {

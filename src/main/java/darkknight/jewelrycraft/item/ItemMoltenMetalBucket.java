@@ -1,6 +1,5 @@
 package darkknight.jewelrycraft.item;
 
-import java.io.IOException;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -9,7 +8,6 @@ import darkknight.jewelrycraft.tileentity.TileEntityMoltenMetal;
 import darkknight.jewelrycraft.util.JewelryNBT;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.Variables;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;

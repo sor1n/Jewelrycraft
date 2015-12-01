@@ -1,7 +1,6 @@
 package darkknight.jewelrycraft.achievements;
 
 import darkknight.jewelrycraft.item.ItemList;
-import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.init.Items;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;

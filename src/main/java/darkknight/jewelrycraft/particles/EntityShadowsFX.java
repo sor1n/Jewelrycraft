@@ -2,6 +2,8 @@ package darkknight.jewelrycraft.particles;
 
 import java.util.Iterator;
 import java.util.List;
+import org.lwjgl.opengl.GL11;
+import darkknight.jewelrycraft.damage.DamageSourceList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
@@ -10,8 +12,6 @@ import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import org.lwjgl.opengl.GL11;
-import darkknight.jewelrycraft.damage.DamageSourceList;
 
 public class EntityShadowsFX extends EntityFX
 {

@@ -1,10 +1,10 @@
 package darkknight.jewelrycraft.item;
 
+import darkknight.jewelrycraft.util.JewelryNBT;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import darkknight.jewelrycraft.util.JewelryNBT;
-import darkknight.jewelrycraft.util.Variables;
 
 public class ItemNecklace extends ItemBaseJewelry
 {

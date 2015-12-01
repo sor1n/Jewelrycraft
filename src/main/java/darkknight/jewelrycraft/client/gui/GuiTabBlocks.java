@@ -1,16 +1,13 @@
 package darkknight.jewelrycraft.client.gui;
 
-import java.awt.Desktop;
-import java.net.URL;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.client.Page;
 import darkknight.jewelrycraft.item.ItemList;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class GuiTabBlocks extends GuiTab
 {
@@ -63,11 +60,11 @@ public class GuiTabBlocks extends GuiTab
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(BlockList.smelter), new ItemStack(Blocks.cobblestone), new ItemStack(Items.bucket), new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.cobblestone), null, new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.cobblestone), new ItemStack(Items.lava_bucket), new ItemStack(Blocks.cobblestone));
                 break;
             case 4:
-                text = "is right click on it with any ore or ingot. It can melt multimple ingots/ores at a time. Crouch (default: Shift) + Right Click will remove all items added. If right clicked when done smelting, it will say what the block contains.";
+                text = "is right click on it with any ore or ingot. It can melt multiple ingots/ores at a time. Crouch (default: Shift) + Right Click will remove all items added. If right clicked when done smelting, it will say what the block contains.";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 5:
-                text = "The molder is a key piece in creating jewellery. You need to pour the molten metal out of the smelter somewhere. That somewhere is the molder. But before pouring the molten metal in it, you must first add a mold. You can do that by simply right clicking the block with the mold of your";
+                text = "The molder is a key piece in creating jewelry. You need to pour the molten metal out of the smelter somewhere. That somewhere is the molder. But before pouring the molten metal in it, you must first add a mold. You can do that by simply right clicking the block with the mold of your";
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(BlockList.molder), new ItemStack(Blocks.cobblestone), null, new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.cobblestone));
                 break;
             case 6:
@@ -75,7 +72,7 @@ public class GuiTabBlocks extends GuiTab
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 7:
-                text = "This table allows you to add a gem to a piece of jewellery. Right click the block while holding a jewellery to add it in. Then do the same with a gem (you can find a list with all possible gems in this guide). Crouch + Right Click to retreive placed items. Left Click the block to see the";
+                text = "This table allows you to add a gem to a piece of jewelry. Right click the block while holding jewelry to add it in. Then do the same with a gem (you can find a list with all possible gems in this guide). Crouch + Right Click to retreive placed items. Left Click the block to see the";
                 if (del == 0) values++;
                 del++;
                 if (del >= 300) del = 0;
@@ -107,7 +104,7 @@ public class GuiTabBlocks extends GuiTab
                 Page.addCraftingRecipeTextPage(gui, gui.getLeft() + xPos, gui.getTop(), false, text, x, y, true, new ItemStack(BlockList.shadowEye), new ItemStack(Blocks.stonebrick), new ItemStack(Blocks.stained_hardened_clay, 1, 15), new ItemStack(Blocks.stonebrick), new ItemStack(Blocks.stained_hardened_clay, 1, 15), new ItemStack(Items.ender_eye), new ItemStack(Blocks.stained_hardened_clay, 1, 15), new ItemStack(Blocks.stonebrick), new ItemStack(Blocks.stained_hardened_clay, 1, 15), new ItemStack(Blocks.stonebrick));
                 break;
             case 14:
-                text = "piece of jewelery in the middle pedestal and your modifiers of choice in the other ones (you don't need to put an item in every single pedestal). After you do that simply right click the eye to activate the ritual. Be careful not to leave the premise or you'll die! When the ritual is done, Shift+Right Click on the central hand pedestal to retrieve your newly modified item!";
+                text = "piece of jewelry in the middle pedestal and your modifiers of choice in the other ones (you don't need to put an item in every single pedestal). After you do that simply right click the eye to activate the ritual. Be careful not to leave the premise or you'll die! When the ritual is done, Shift+Right Click on the central hand pedestal to retrieve your newly modified item!";
                 Page.addTextPage(gui, gui.getLeft() + xPos, gui.getTop(), text);
                 break;
             case 15:
@@ -129,7 +126,7 @@ public class GuiTabBlocks extends GuiTab
     @Override
     public int getMaxPages()
     {
-        return 16;
+        return 15;
     }
     
     /**

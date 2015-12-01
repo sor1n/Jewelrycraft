@@ -1,11 +1,11 @@
 package darkknight.jewelrycraft.client.gui;
 
+import darkknight.jewelrycraft.client.Page;
+import darkknight.jewelrycraft.util.Variables;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import darkknight.jewelrycraft.client.Page;
-import darkknight.jewelrycraft.util.Variables;
 
 public class GuiTabModifiers extends GuiTab
 {

@@ -1,11 +1,10 @@
 package darkknight.jewelrycraft.config;
 
-import java.io.File;
-import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraftforge.common.config.Configuration;
 
 public class ConfigHandler
 {
@@ -33,6 +32,10 @@ public class ConfigHandler
  
     public static int MAX_BLACK_HEARTS_PICKUP;
     public static int MAX_BLUE_HEARTS_PICKUP;
+    public static boolean CAN_BLUE_HEARTS_SPAWN;
+    public static boolean CAN_BLACK_HEARTS_SPAWN;
+    public static boolean CAN_HOLY_HEARTS_SPAWN;
+    public static boolean CAN_RED_HEARTS_SPAWN;
 
     public static boolean CRYSTAL_GLOW;
     public static boolean CRYSTAL_PARTICLES;
@@ -56,7 +59,8 @@ public class ConfigHandler
     public static boolean ORE_GEN = true;
     public static boolean CRYSTAL_GEN = true;
     public static boolean STRUCTURES[] = {true, true, true, true, true, true};
-    
+    public static int STRUCTURES_SPAWN_CHANCE[] = {6, 5, 7, 10, 6, 10};
+        
     public void loadConfig(FMLPreInitializationEvent event)
     {
         config = new Configuration(event.getSuggestedConfigurationFile(),true);
@@ -69,7 +73,7 @@ public class ConfigHandler
         INGOT_COOLING_TIME = config.getInt("Molder Ingot Cooling Time", categories[0], 100, 5, Integer.MAX_VALUE, "This sets the number of ticks you need to wait before the mold is cooled.");
         INGOT_MELTING_TIME = config.getInt("Ingot Melting Time", categories[0], 1500, 5, Integer.MAX_VALUE, "This sets the number of ticks you need to wait before an ingot is completely smelted.");
         GEM_PLACEMENT_TIME = config.getInt( "Jewelry Crafting Time", categories[0], 200, 5, Integer.MAX_VALUE, "This sets the number of ticks it takes for a jewel to be modified.");
-        RITUAL_TIME = config.getInt( "Ritual Time", categories[0], 1000, 5, Integer.MAX_VALUE, "This sets the number of ticks it takes for the ritual to end.");
+        RITUAL_TIME = config.getInt( "Ritual Time", categories[0], 500, 5, Integer.MAX_VALUE, "This sets the number of ticks it takes for the ritual to end.");
         HEART_DESPAWN_TIME = config.getInt( "Hearts Despawn Time", categories[0], 900, 20, Integer.MAX_VALUE, "This sets the number of ticks it takes for hearts to despawn, 20=1 second");
         
         GENERATE_VILLAGE_NETHERSTAR = config.getBoolean("Netherstar Generation", categories[1], false, "If set to true Nether Stars will be able to generate in Jewelers chests.");
@@ -91,12 +95,18 @@ public class ConfigHandler
         JEWELRY_INFO = config.getBoolean("Jewelry Info", categories[2], true, "If false, then extra info won't be show when hovering over a jewelery.");
         MAX_BLACK_HEARTS_PICKUP = config.getInt("Max Black Hearts Pickup", categories[2], Integer.MAX_VALUE, 0, Integer.MAX_VALUE, "Determines how many black hearts can a player pick up.");
         MAX_BLUE_HEARTS_PICKUP = config.getInt("Max Blue Hearts Pickup", categories[2], Integer.MAX_VALUE, 0, Integer.MAX_VALUE, "Determines how many blue hearts can a player pick up.");
+        CAN_BLUE_HEARTS_SPAWN = config.getBoolean("Can Blue Hearts Spawn", categories[2], true, "Determines if blue hearts can spawn.");
+        CAN_BLACK_HEARTS_SPAWN = config.getBoolean("Can Black Hearts Spawn", categories[2], true, "Determines if black hearts can spawn.");
+        CAN_HOLY_HEARTS_SPAWN = config.getBoolean("Can Holy Hearts Spawn", categories[2], true, "Determines if holy hearts can spawn.");
+        CAN_RED_HEARTS_SPAWN = config.getBoolean("Can Red Hearts Spawn", categories[2], true, "Determines if red hearts can spawn.");
         
         ENABLE_WORLD_GEN = config.getBoolean("World Generation", categories[3], true, "If false, nothing will generate (this includes ore)");
         ORE_GEN = config.getBoolean("Ore Generation", categories[3], true, "If false, ores won't generate");
         CRYSTAL_GEN = config.getBoolean("Crystal Generation", categories[3], true, "If false, crystals won't generate");
         for(int i = 0; i < STRUCTURES.length; i++)
         	STRUCTURES[i] = config.getBoolean("Structure "+(i+1)+" Generation", categories[3], true, "If false, structure no."+(i+1)+" won't generate");
+        for(int i = 0; i < STRUCTURES.length; i++)
+            STRUCTURES_SPAWN_CHANCE[i] = config.getInt("Structure "+(i+1)+" Spawn Chance", categories[3], STRUCTURES_SPAWN_CHANCE[i], 1, Integer.MAX_VALUE, "Determines the chance for structure no."+(i+1)+" to generate. Lower = higher chance and vice versa.");
                 
         CURSES_ENABLED = config.getBoolean("Curses", categories[4], true, "If set to false curses will be deactivated.");
         CURSE_ROTTEN_HEART = config.getBoolean("Rotten Heart", categories[4], true, "If set to false this curse will be deactivated.");

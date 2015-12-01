@@ -1,14 +1,14 @@
 package darkknight.jewelrycraft.client.gui;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.client.TabJewelry;
 import darkknight.jewelrycraft.client.TabRegistry;
 import darkknight.jewelrycraft.client.gui.container.ContainerJewelryTab;
 import darkknight.jewelrycraft.events.KeyBindings;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiJewelry extends GuiContainer
 {

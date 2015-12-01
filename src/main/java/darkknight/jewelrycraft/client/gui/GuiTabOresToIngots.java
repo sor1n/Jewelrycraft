@@ -1,14 +1,11 @@
 package darkknight.jewelrycraft.client.gui;
 
-import java.util.HashMap;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 import darkknight.jewelrycraft.block.BlockList;
 import darkknight.jewelrycraft.util.JewelrycraftUtil;
 import darkknight.jewelrycraft.util.Variables;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class GuiTabOresToIngots extends GuiTab
 {
